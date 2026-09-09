@@ -15,7 +15,7 @@
 | P2-MAP | mappings YAML | `feature/P2-map` | yaml валиден `mapping.schema.json` | COMPLETE |
 | P3-CHECK | `scripts/check.py` | `feature/P3-check` | exit 0/10/2; JSON; pytest без сети | COMPLETE |
 | P4-SYNC | `scripts/sync.py` upsert/deprecate | `feature/P4-sync` | фикстура 2→3; delete не стирает | COMPLETE |
-| P5-VAL | `scripts/validate.py` + CI | `feature/P5-val` | ломаный CSV падает; дерево = 0 | PENDING |
+| P5-VAL | `scripts/validate.py` + CI | `feature/P5-val` | ломаный CSV падает; дерево = 0 | COMPLETE |
 | P6-INDEX | `scripts/index.py` FTS5 | `feature/P6-index` | MATCH «Волга» и «МВД» | PENDING |
 | P7-ONT | `ontology/ontology.json` | `feature/P7-ont` | DEC-REG-001 + Source на каждый catalog id | PENDING |
 | P8-DOCS | README 5 мин, CHANGELOG, daily | `feature/P8-docs` | команды README копируются; daily → check.py | PENDING |
