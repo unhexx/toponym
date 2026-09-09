@@ -1,20 +1,19 @@
 # .agent/TODO.md — Task Backlog
 
 **Initiative:** toponym v1 local registries
-**Status:** P5-VAL complete; next P6-INDEX
+**Status:** P6-INDEX complete; next P7-ONT
 
 ## In progress
 
-- [ ] P6-INDEX-01: scripts/index.py SQLite FTS; search Волга / МВД
+- [ ] P7-ONT-01: ontology/ontology.json with DEC-REG-001 and Source list
 
 ## Pending
-
-- [ ] P7-ONT-01: ontology/ontology.json with DEC-REG-001 and Source list
 - [ ] P8-DOCS-01: README quick start, CHANGELOG 2026.09.09, DAILY_UPDATE → check.py
 - [ ] P9-DONE-01: Reviewer gate, no vendor >10MB, tag/release 2026.09.09
 
 ## Done
 
+- [x] P6-INDEX-01: scripts/index.py SQLite FTS; search Волга / МВД
 - [x] P5-VAL-01: scripts/validate.py + frictionless; broken CSV fails
 - [x] P4-SYNC-01: scripts/sync.py upsert/deprecate + pytest fixture 2→3
 - [x] P3-CHECK-01: scripts/check.py + pytest (exit 0 no-op, JSON report)
