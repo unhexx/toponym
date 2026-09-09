@@ -2,7 +2,7 @@
 
 **Initiative:** toponym v1 local registries
 **Template Version:** 3.13.0
-**Last Update:** 2026-09-09 (P8-DOCS)
+**Last Update:** 2026-09-09 (P9-DONE)
 
 ## Phase Status
 
@@ -17,7 +17,7 @@
 | P6-INDEX scripts/index.py | COMPLETE |
 | P7-ONT ontology.json | COMPLETE |
 | P8-DOCS README / CHANGELOG / daily | COMPLETE |
-| P9-DONE Reviewer + release 2026.09.09 | PENDING |
+| P9-DONE Reviewer + release 2026.09.09 | COMPLETE |
 
 ## Gate
 

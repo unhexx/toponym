@@ -5,7 +5,9 @@
 
 ## [Unreleased]
 
-Сиды канона, схемы, скрипты и онтология **есть в дереве** (P0–P7). Календарная секция `[2026.09.09]` появится при теге релиза.
+## [2026.09.09] - 2026-09-09
+
+Первый релиз локального реестра: канон CSV, детекторы, upsert, FTS, онтология.
 
 ### Added
 - Каркас репозитория, таксономия типов, каталог источников.
@@ -23,9 +25,13 @@
 - `scripts/index.py`: derived SQLite FTS5 (`knowledge/registry.db`); MATCH «Волга», «МВД».
 - `ontology/ontology.json`: Outpost v1, DEC-REG-001, Source на каждый id каталога.
 - `docs/SOURCES.md`: лицензии и границы вендора.
+- Пятиминутный старт в README.
 
 ### Changed
 - Каталог источников: обязательные `vendor` и `detector.kind`.
 - В `types.csv` у `oikonym` восстановлены `example_ru=Москва` и класс GeoNames `P`.
 - GeoNames id: Москва `524901`, Волга `472776`.
 - Склонения: `review=gold` / `needs_review` (не boolean).
+
+[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.09...HEAD
+[2026.09.09]: https://github.com/unhexx/toponym/releases/tag/2026.09.09
