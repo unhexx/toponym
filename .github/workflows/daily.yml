@@ -45,31 +45,43 @@ jobs:
 
       - name: Daily refresh (DAILY_UPDATE mechanical path)
         id: refresh
-        env:
-          TODAY: ${{ github.event_name == 'schedule' && '' || '' }}
         run: |
           set -euo pipefail
           TODAY=$(date -u +%Y-%m-%d)
+          AS_OF=$(date -u +%Y-%m-%dT%H:%M:%SZ)
           echo "today=$TODAY" >> "$GITHUB_OUTPUT"
           mkdir -p data/sources/runs
+
+          write_journal() {
+            local check_exit="$1"
+            local changed_count="$2"
+            local notes="${3:-}"
+            python - "$TODAY" "$AS_OF" "$check_exit" "$changed_count" "$notes" <<'PY'
+          import json, sys
+          from pathlib import Path
+          today, as_of, check_exit, changed_count, notes = sys.argv[1:6]
+          path = Path("data/sources/runs") / f"{today}.json"
+          payload = {
+              "as_of": as_of,
+              "changed_count": int(changed_count),
+              "error_count": 0,
+              "sources": [],
+              "records_upserted": 0,
+              "records_deprecated": 0,
+              "commit": None,
+              "check_exit": int(check_exit) if str(check_exit).isdigit() else check_exit,
+          }
+          if notes:
+              payload["notes"] = notes
+          path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          PY
+          }
 
           if [[ ! -f scripts/check.py ]]; then
             echo "check_exit=missing" >> "$GITHUB_OUTPUT"
             echo "changed_count=0" >> "$GITHUB_OUTPUT"
             echo "validate=skip" >> "$GITHUB_OUTPUT"
-            cat > "data/sources/runs/${TODAY}.json" <<EOF
-          {
-            "as_of": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "changed_count": 0,
-            "error_count": 0,
-            "sources": [],
-            "records_upserted": 0,
-            "records_deprecated": 0,
-            "commit": null,
-            "check_exit": "missing",
-            "notes": "scripts/check.py отсутствует (до P3); механический daily soft-skip без патча CSV"
-          }
-          EOF
+            write_journal missing 0 "scripts/check.py отсутствует (до P3); механический daily soft-skip без патча CSV"
             echo "Soft-skip: scripts/check.py missing — journal only, no CSV patches."
             exit 0
           fi
@@ -91,7 +103,6 @@ jobs:
               echo "check reported changes but scripts/sync.py missing" >&2
               exit 1
             fi
-            # Prefer applying all changed sources when supported; else require --apply
             if python scripts/sync.py --help 2>&1 | grep -q -- '--apply'; then
               python scripts/sync.py --apply
             else
@@ -116,28 +127,16 @@ jobs:
             if [[ -f scripts/index.py ]]; then
               python scripts/index.py || true
             fi
+            echo "changed_count=1" >> "$GITHUB_OUTPUT"
           else
-            # 0 = no delta
             echo "validate=skip" >> "$GITHUB_OUTPUT"
             echo "changed_count=0" >> "$GITHUB_OUTPUT"
           fi
 
-          # Ensure journal exists (scripts may already have written it)
           if [[ ! -f "data/sources/runs/${TODAY}.json" ]]; then
             CHANGED=0
             if [[ "$CHECK_EXIT" -eq 10 ]]; then CHANGED=1; fi
-            cat > "data/sources/runs/${TODAY}.json" <<EOF
-          {
-            "as_of": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "changed_count": ${CHANGED},
-            "error_count": 0,
-            "sources": [],
-            "records_upserted": 0,
-            "records_deprecated": 0,
-            "commit": null,
-            "check_exit": ${CHECK_EXIT}
-          }
-          EOF
+            write_journal "$CHECK_EXIT" "$CHANGED"
           fi
 
       - name: Commit if there is a real diff
@@ -154,23 +153,26 @@ jobs:
             exit 0
           fi
 
-          git add -A data/sources/runs data/sources/catalog.yaml data/curated knowledge CHANGELOG.md || true
-          # Only stage paths that exist / changed; avoid adding secrets
           git add -u
-          if [[ -n "$(git ls-files --others --exclude-standard data/sources/runs)" ]]; then
+          if [[ -d data/sources/runs ]]; then
             git add data/sources/runs/
           fi
+          # Stage known data paths only when they change
+          for p in data/sources/catalog.yaml data/curated knowledge CHANGELOG.md; do
+            if [[ -e "$p" ]]; then
+              git add -A "$p" || true
+            fi
+          done
 
           if git diff --cached --quiet; then
             echo "Staged empty — skip commit."
             exit 0
           fi
 
-          # Rough N from journal if present
           N=0
           JOURNAL="data/sources/runs/${TODAY}.json"
-          if [[ -f "$JOURNAL" ]] && command -v python >/dev/null; then
-            N=$(python -c "import json; print(json.load(open('$JOURNAL')).get('records_upserted',0))" || echo 0)
+          if [[ -f "$JOURNAL" ]]; then
+            N=$(python -c "import json; print(json.load(open('$JOURNAL', encoding='utf-8')).get('records_upserted', 0))" || echo 0)
           fi
 
           if [[ "$N" -gt 0 ]]; then
