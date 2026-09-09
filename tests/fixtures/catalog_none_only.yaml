@@ -1,0 +1,11 @@
+updated: 2026-09-09
+sources:
+  - id: wikidata
+    url: https://query.wikidata.org/
+    license: CC0
+    vendor: false
+    checked_at: 2026-09-09
+    detector:
+      kind: none
+      note: fixture
+watchlist_github: []

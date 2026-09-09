@@ -1,0 +1,21 @@
+updated: 2026-09-09
+sources:
+  - id: geonames-ru
+    url: https://download.geonames.org/export/dump/RU.zip
+    license: CC-BY-4.0
+    vendor: false
+    checked_at: 2026-09-09
+    cursor: "2026-09-08"
+    detector:
+      kind: http_dated
+      urls:
+        - https://download.geonames.org/export/dump/modifications-{yesterday}.txt
+  - id: wikidata
+    url: https://query.wikidata.org/
+    license: CC0
+    vendor: false
+    checked_at: 2026-09-09
+    detector:
+      kind: none
+      note: fixture
+watchlist_github: []

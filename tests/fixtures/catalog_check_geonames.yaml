@@ -1,0 +1,16 @@
+updated: 2026-09-09
+sources:
+  - id: geonames-ru
+    url: https://download.geonames.org/export/dump/RU.zip
+    license: CC-BY-4.0
+    vendor: false
+    max_vendor_bytes: 10485760
+    checked_at: 2026-09-09
+    cursor: "2026-09-08"
+    detector:
+      kind: http_dated
+      urls:
+        - https://download.geonames.org/export/dump/modifications-{yesterday}.txt
+        - https://download.geonames.org/export/dump/deletes-{yesterday}.txt
+      also: last_modified_header
+watchlist_github: []
