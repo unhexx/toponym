@@ -1,4 +1,6 @@
 {
+  "primaryKey": "id",
+  "missingValues": [""],
   "fields": [
     { "name": "id", "type": "string", "constraints": { "required": true, "unique": true } },
     { "name": "id_scheme", "type": "string", "constraints": { "required": true, "enum": ["wikidata", "geonames", "iso3166-2", "fias", "gkgn", "foiv", "fo", "local"] } },

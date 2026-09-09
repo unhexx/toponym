@@ -17,6 +17,7 @@
 - Маппинги источников: GeoNames, ГКГН, ФИАС-указатель, hflabs/region, указ № 326.
 - `scripts/check.py`: детекторы http_head / http_dated / github_commits / page_fingerprint / none.
 - `scripts/sync.py`: upsert по id, deprecate без удаления строк, GeoNames только match колонки `geonames`.
+- `scripts/validate.py`: frictionless и инварианты канона; CI на Python 3.12.
 
 ### Changed
 - Каталог источников: обязательные `vendor` и `detector.kind`.

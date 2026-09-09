@@ -9,6 +9,7 @@
     {
       "name": "types",
       "path": "data/curated/types.csv",
+      "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
       "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
@@ -17,6 +18,7 @@
     {
       "name": "federal-districts",
       "path": "data/curated/federal-districts.csv",
+      "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
       "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
@@ -25,6 +27,7 @@
     {
       "name": "regions",
       "path": "data/curated/regions.csv",
+      "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
       "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
@@ -33,6 +36,7 @@
     {
       "name": "cities-major",
       "path": "data/curated/cities-major.csv",
+      "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
       "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
@@ -41,6 +45,7 @@
     {
       "name": "hydronyms-major",
       "path": "data/curated/hydronyms-major.csv",
+      "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
       "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
@@ -49,6 +54,7 @@
     {
       "name": "oronyms-major",
       "path": "data/curated/oronyms-major.csv",
+      "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
       "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
@@ -57,6 +63,7 @@
     {
       "name": "agencies-foiv",
       "path": "data/curated/agencies-foiv.csv",
+      "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
       "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
@@ -65,6 +72,7 @@
     {
       "name": "agencies-other",
       "path": "data/curated/agencies-other.csv",
+      "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
       "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
@@ -73,6 +81,7 @@
     {
       "name": "declensions-regions",
       "path": "data/declensions/regions.csv",
+      "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
       "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
@@ -81,6 +90,7 @@
     {
       "name": "declensions-cities",
       "path": "data/declensions/cities-major.csv",
+      "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
       "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
@@ -89,6 +99,7 @@
     {
       "name": "declensions-agencies",
       "path": "data/declensions/agencies.csv",
+      "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",
       "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
