@@ -2,57 +2,91 @@
 
 Открытый структурированный реестр топонимов Российской Федерации: населённые пункты, субъекты, гидронимы, оронимы, урбанонимы, ведомства и службы, таблицы склонений.
 
-Лицензия репозитория: [MIT](LICENSE). Импортированные сырьё данные хранят лицензии источников — см. [`data/sources/catalog.yaml`](data/sources/catalog.yaml) и [`docs/SOURCES.md`](docs/SOURCES.md).
+Канон — UTF-8 CSV в git (Frictionless Tabular Data Package). Индекс SQLite FTS5 собирается локально и в git не кладётся.
 
-## Быстрый старт
+Лицензия репозитория: [MIT](LICENSE). Сырьё источников хранит свои лицензии — см. [`docs/SOURCES.md`](docs/SOURCES.md) и [`data/sources/catalog.yaml`](data/sources/catalog.yaml).
+
+## Пятиминутный старт
+
+```bash
+git clone https://github.com/unhexx/toponym.git
+cd toponym
+bash Agent-Init.sh
+source .venv/bin/activate
+pip install -e ".[dev]"
+python scripts/validate.py
+python scripts/check.py --json
+python scripts/index.py
+```
+
+Альтернатива установке: `uv pip install -e ".[dev]"` в том же `.venv`.
+
+Ожидаемо: `validate.py` печатает `ok` и выходит 0. `check.py --json` ходит в сеть (коды 0 / 10 / 2). `index.py` пишет `knowledge/registry.db` (gitignored).
+
+## Дерево
 
 ```
 data/
   curated/          # канонические таблицы (UTF-8 CSV)
   declensions/      # склонения: nom gen dat acc ins pre loc2
-  raw/              # снимки источников + SOURCE.md (не смешивать с curated)
+  raw/              # указатели источников + SOURCE.md (не смешивать с curated)
   sources/          # каталог источников и даты проверок
 schema/             # JSON Schema колонок
-scripts/            # импорт и валидация
+scripts/            # check, sync, validate, index
+ontology/           # overlay DEC-REG-001, Source, Mapping
 docs/               # методология, таксономия, лицензии
-agents/             # промпты ежедневных агентов
+agents/             # промпт ежедневного обновления
 ```
 
-Канонический формат хранения: **CSV UTF-8, LF, заголовок обязателен**. Идентификаторы стабильны. Крупные дампы (ГАР/ФИАС, GeoNames RU.zip) **не вендорятся** — только скрипты импорта.
+Канонический формат: **CSV UTF-8, LF, заголовок обязателен**. Идентификаторы стабильны. Крупные дампы (ГАР/ФИАС, GeoNames `RU.zip`) **не вендорятся**.
 
 ## Типы топонимов
 
-См. [`data/curated/types.csv`](data/curated/types.csv) и [`docs/TAXONOMY.md`](docs/TAXONOMY.md).
+См. [`data/curated/types.csv`](data/curated/types.csv) и [`docs/taxonomy.md`](docs/taxonomy.md).
 
 Основные классы: хоронимы · ойконимы · гидронимы · оронимы · годонимы · урбанонимы · инсулонимы · ведомства.
 
-## Официальные и открытые источники
+Верхний уровень типов — `toponym` (не «Торопум»).
 
-| Источник | Что даёт | Лицензия |
-|---|---|---|
-| ГКГН (Росреестр / Роскадастр) | официальные наименования ~800 тыс. объектов | официальные открытые данные |
-| ФИАС / ГАР (ФНС) | адресная иерархия | официальные открытые данные |
-| GeoNames `RU.zip` | ~260k+ объектов, ежедневный дамп | CC BY 4.0 |
-| OSM / OSMNames / streetmangler | улицы, места, иерархия | ODbL 1.0 |
-| epogrebnyak/ru-cities | 1117 городов + коды | производные Росстат/Википедия |
-| hflabs/region, hflabs/city | регионы и города + ФИАС/ОКТМО | CC BY-SA 4.0 |
-| mfursov/russian-cities | склонения городов | Apache-2.0 |
-| Указ Президента №326 от 11.05.2024 | структура ФОИВ | официальный текст |
-| Wikidata | Q-id, алиасы | CC0 |
+## Источники
+
+Сводка лицензий и правил вендора: [`docs/SOURCES.md`](docs/SOURCES.md). Каталог с детекторами: [`data/sources/catalog.yaml`](data/sources/catalog.yaml).
+
+| Источник | Что даёт | Лицензия | В каноне |
+|---|---|---|---|
+| Wikidata | Q-id, имена, P625 | CC0 | сиды мест |
+| Указ № 326 / № 522 | структура ФОИВ | официальный текст | `agencies-foiv.csv` |
+| ISO 3166-2:RU | коды субъектов | ISO | `regions.csv` |
+| GeoNames | идентификаторы, mods | CC BY 4.0 | id, не `RU.zip` |
+| ГКГН | официальные названия | открытые данные | указатель |
+| ФИАС / ГАР | адресная иерархия | открытые данные | указатель, без дампа |
+| hflabs/region, hflabs/city | регионы и города + ФИАС | CC BY-SA 4.0 | только `data/raw/` |
 
 ## Склонения
 
 Золотые таблицы в `data/declensions/`. Правила — [`docs/DECLENSIONS.md`](docs/DECLENSIONS.md).
 
-Поля: `nom,gen,dat,acc,ins,pre,loc2,gender,number,indeclinable,paradigm,review`.
+Поля: `id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,review,source`.
 
-Автогенерация (pymorphy2 / Natasha) только с `review=true`.
+`review`: `gold` (не перезаписывать), `needs_review` (авто без ручной проверки), `auto`.
+
+## Скрипты
+
+```bash
+python scripts/check.py --json          # детекторы; 0 / 10 / 2
+python scripts/sync.py --source ID      # dry-run; --apply пишет
+python scripts/validate.py              # frictionless + инварианты
+python scripts/index.py                 # knowledge/registry.db FTS5
+```
+
+Поиск по индексу: `MATCH 'Волга'` (гидроним), `MATCH 'МВД'` (`foiv:mvd`).
 
 ## Автоматизация
 
-- GitHub Actions: [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — механический импорт + валидация.
-- Агент: [`agents/DAILY_UPDATE.md`](agents/DAILY_UPDATE.md) — исследование дельты и курация.
+- GitHub Actions: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — pytest, ruff, validate.
+- Daily: [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — механический refresh.
+- Куратор: [`agents/DAILY_UPDATE.md`](agents/DAILY_UPDATE.md) — check → sync → validate → index; без пустого коммита.
 
 ## Цитирование
 
-См. [`CITATION.cff`](CITATION.cff).
+См. [`CITATION.cff`](CITATION.cff). Версия: `2026.09.09`.

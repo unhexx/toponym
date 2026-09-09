@@ -9,7 +9,7 @@
 3. Не удалять строки: `status=deprecated` + `replaced_by`.
 4. Не вендорить дампы > 10 МБ и полный ГАР/ФИАС.
 5. CC BY-SA и ODbL — только в `data/raw/<source>/`.
-6. Склонения без ручной проверки — только с `review=true`.
+6. Склонения без ручной проверки — только с `review=needs_review`.
 7. Хранить `ё` в `name_yo`; нормализованная форма — `name_ru` (`ё`→`е` только там).
 8. Кодировка файлов: UTF-8, LF, запятая как CSV-delimiter.
 
@@ -19,7 +19,7 @@
 
 ## Current Status
 
-Каркас + таксономия `types.csv` + `catalog.yaml`. Сиды и скрипты v1 — циклы P0–P9, см. `TASK_SPECIFICATION.md`, `.agent/PLAN.md`, `.agent/TODO.md`.
+P0–P7 на `main`: схемы, сиды, маппинги, check/sync/validate/index, онтология. Документация и релиз — P8–P9, см. `TASK_SPECIFICATION.md`, `.agent/PLAN.md`, `.agent/TODO.md`.
 
 ## Recommended Stack (do not deviate without an ADR)
 
@@ -76,7 +76,7 @@ Roadmap ADR: [`LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`](LOCAL_REGISTRIES_DESIGN_
 - Переписывать CSV целиком или удалять строки
 - Вендорить `RU.zip`, ГАР/ФИАС, любой файл >10 МБ
 - Класть CC BY-SA / ODbL в `data/curated/`
-- Автосклонения без `review=true` в золотые таблицы
+- Автосклонения без `review=needs_review` в золотые таблицы
 - Ломать верхний уровень типов (`toponym`, не «Торопум»)
 - Пустой коммит при нулевой дельте
 - Копировать дерево `agentic_loop_template` в продукт (только sibling symlink)
