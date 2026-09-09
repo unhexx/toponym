@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "toponym"
+version = "2026.09.09"
+description = "Local registry of Russian toponyms and agencies"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+  "frictionless>=5.18,<6",
+  "jsonschema>=4.18,<5",
+  "pyyaml>=6.0,<7",
+  "requests>=2.32,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0,<9", "ruff>=0.6,<1"]
+
+[tool.setuptools.packages.find]
+include = ["scripts*"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["scripts", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "W"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

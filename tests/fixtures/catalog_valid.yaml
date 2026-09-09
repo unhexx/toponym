@@ -1,0 +1,11 @@
+updated: 2026-09-09
+sources:
+  - id: example-src
+    url: https://example.invalid/catalog
+    license: MIT
+    vendor: false
+    checked_at: 2026-09-09
+    detector:
+      kind: none
+      note: fixture
+watchlist_github: []

@@ -1,0 +1,42 @@
+# CYCLE_PLAN.md — toponym v1 (2026.09.09)
+
+Исполняемый план циклов. Детали интерфейсов: `docs/design/2026-09-09-v1-local-registries.md`.
+Спека: `TASK_SPECIFICATION.md`. ADR: `LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`.
+
+**Правило оператора:** в конце каждого цикла — merge в `main` и `git push origin main`.
+Коммиты на русском, от лица разработчика. Пустой коммит запрещён.
+
+Параллель: только P2 ∥ P6 после P1. Синхроточка: после P5.
+
+| ID | Слайс | Ветка | Acceptance | Status |
+|---|---|---|---|---|
+| P0-BOOT | схемы, pyproject, catalog detectors, Agentix-файлы | `feature/P0-boot` | jsonschema catalog; pytest `tests/test_schema.py`; datapackage schema paths существуют | IN_PROGRESS |
+| P1-SEED | сиды ФО / 89 субъектов / города / гидро / оро / ФОИВ / склонения | `feature/P1-seed` | все resources datapackage ≥1 строка; types.oikonym починен | PENDING |
+| P2-MAP | mappings YAML | `feature/P2-map` | yaml валиден `mapping.schema.json` | PENDING |
+| P3-CHECK | `scripts/check.py` | `feature/P3-check` | exit 0/10/2; JSON; pytest без сети | PENDING |
+| P4-SYNC | `scripts/sync.py` upsert/deprecate | `feature/P4-sync` | фикстура 2→3; delete не стирает | PENDING |
+| P5-VAL | `scripts/validate.py` + CI | `feature/P5-val` | ломаный CSV падает; дерево = 0 | PENDING |
+| P6-INDEX | `scripts/index.py` FTS5 | `feature/P6-index` | MATCH «Волга» и «МВД» | PENDING |
+| P7-ONT | `ontology/ontology.json` | `feature/P7-ont` | DEC-REG-001 + Source на каждый catalog id | PENDING |
+| P8-DOCS | README 5 мин, CHANGELOG, daily | `feature/P8-docs` | команды README копируются; daily → check.py | PENDING |
+| P9-DONE | reviewer + tag `2026.09.09` | `feature/P9-release` | pytest+ruff+validate; нет файлов >10 МБ; GitHub Release | PENDING |
+
+## Definition of Done v1
+
+- Все 11 resources из `datapackage.json` на диске.
+- `python scripts/check.py --json` без секретов.
+- `python scripts/validate.py` = 0.
+- Daily: дельта или `data/sources/runs/YYYY-MM-DD.json`, без пустого commit.
+- Онтология содержит DEC-REG-001.
+- Тип верхнего уровня `toponym` цел.
+
+## После каждого цикла
+
+```bash
+pytest -q
+git checkout main
+git merge --no-ff feature/P{n}-*
+git push origin main
+```
+
+Daily-промпт: [`agents/DAILY_UPDATE.md`](agents/DAILY_UPDATE.md).

@@ -6,16 +6,93 @@
   "license": "MIT",
   "homepage": "https://github.com/unhexx/toponym",
   "resources": [
-    {"name": "types", "path": "data/curated/types.csv", "format": "csv", "encoding": "utf-8"},
-    {"name": "federal-districts", "path": "data/curated/federal-districts.csv", "format": "csv", "encoding": "utf-8"},
-    {"name": "regions", "path": "data/curated/regions.csv", "format": "csv", "encoding": "utf-8"},
-    {"name": "cities-major", "path": "data/curated/cities-major.csv", "format": "csv", "encoding": "utf-8"},
-    {"name": "hydronyms-major", "path": "data/curated/hydronyms-major.csv", "format": "csv", "encoding": "utf-8"},
-    {"name": "oronyms-major", "path": "data/curated/oronyms-major.csv", "format": "csv", "encoding": "utf-8"},
-    {"name": "agencies-foiv", "path": "data/curated/agencies-foiv.csv", "format": "csv", "encoding": "utf-8"},
-    {"name": "agencies-other", "path": "data/curated/agencies-other.csv", "format": "csv", "encoding": "utf-8"},
-    {"name": "declensions-regions", "path": "data/declensions/regions.csv", "format": "csv", "encoding": "utf-8"},
-    {"name": "declensions-cities", "path": "data/declensions/cities-major.csv", "format": "csv", "encoding": "utf-8"},
-    {"name": "declensions-agencies", "path": "data/declensions/agencies.csv", "format": "csv", "encoding": "utf-8"}
+    {
+      "name": "types",
+      "path": "data/curated/types.csv",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/types.schema.json"
+    },
+    {
+      "name": "federal-districts",
+      "path": "data/curated/federal-districts.csv",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/places.schema.json"
+    },
+    {
+      "name": "regions",
+      "path": "data/curated/regions.csv",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/places.schema.json"
+    },
+    {
+      "name": "cities-major",
+      "path": "data/curated/cities-major.csv",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/places.schema.json"
+    },
+    {
+      "name": "hydronyms-major",
+      "path": "data/curated/hydronyms-major.csv",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/places.schema.json"
+    },
+    {
+      "name": "oronyms-major",
+      "path": "data/curated/oronyms-major.csv",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/places.schema.json"
+    },
+    {
+      "name": "agencies-foiv",
+      "path": "data/curated/agencies-foiv.csv",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/agencies.schema.json"
+    },
+    {
+      "name": "agencies-other",
+      "path": "data/curated/agencies-other.csv",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/agencies.schema.json"
+    },
+    {
+      "name": "declensions-regions",
+      "path": "data/declensions/regions.csv",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/declensions.schema.json"
+    },
+    {
+      "name": "declensions-cities",
+      "path": "data/declensions/cities-major.csv",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/declensions.schema.json"
+    },
+    {
+      "name": "declensions-agencies",
+      "path": "data/declensions/agencies.csv",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/declensions.schema.json"
+    }
   ]
 }

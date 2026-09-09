@@ -1,0 +1,26 @@
+{
+  "fields": [
+    { "name": "id", "type": "string", "constraints": { "required": true, "unique": true } },
+    { "name": "id_scheme", "type": "string", "constraints": { "required": true, "enum": ["wikidata", "geonames", "iso3166-2", "fias", "gkgn", "foiv", "fo", "local"] } },
+    { "name": "type_id", "type": "string", "constraints": { "required": true } },
+    { "name": "name_ru", "type": "string", "constraints": { "required": true } },
+    { "name": "name_yo", "type": "string" },
+    { "name": "name_en", "type": "string" },
+    { "name": "abbr", "type": "string" },
+    { "name": "parent_id", "type": "string" },
+    { "name": "admin1", "type": "string" },
+    { "name": "lat", "type": "number" },
+    { "name": "lon", "type": "number" },
+    { "name": "wd", "type": "string" },
+    { "name": "geonames", "type": "string" },
+    { "name": "fias", "type": "string" },
+    { "name": "oktmo", "type": "string" },
+    { "name": "iso", "type": "string" },
+    { "name": "status", "type": "string", "constraints": { "required": true, "enum": ["active", "deprecated"] } },
+    { "name": "replaced_by", "type": "string" },
+    { "name": "source_id", "type": "string", "constraints": { "required": true } },
+    { "name": "source_rev", "type": "string" },
+    { "name": "updated_at", "type": "date", "constraints": { "required": true } },
+    { "name": "notes", "type": "string" }
+  ]
+}

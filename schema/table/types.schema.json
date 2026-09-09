@@ -1,0 +1,13 @@
+{
+  "fields": [
+    { "name": "id", "type": "string", "constraints": { "required": true, "unique": true } },
+    { "name": "level", "type": "string", "constraints": { "required": true, "enum": ["root", "primary", "secondary", "adjacent"] } },
+    { "name": "parent_id", "type": "string" },
+    { "name": "name_ru", "type": "string", "constraints": { "required": true } },
+    { "name": "name_en", "type": "string", "constraints": { "required": true } },
+    { "name": "name_en_alt", "type": "string" },
+    { "name": "example_ru", "type": "string" },
+    { "name": "geonames_class", "type": "string" },
+    { "name": "notes", "type": "string" }
+  ]
+}
