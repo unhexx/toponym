@@ -1,5 +1,5 @@
 id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
-wd:Q626,wikidata,potamonym,Волга,,Volga,,,,,,Q626,,,,,active,,wikidata,,2026-09-09,
+wd:Q626,wikidata,potamonym,Волга,,Volga,,,,,,Q626,472776,,,,active,,wikidata,,2026-09-09,
 wd:Q973,wikidata,potamonym,Обь,,Ob,,,,,,Q973,,,,,active,,wikidata,,2026-09-09,
 wd:Q78707,wikidata,potamonym,Енисей,,Yenisey,,,,,,Q78707,,,,,active,,wikidata,,2026-09-09,
 wd:Q46841,wikidata,potamonym,Лена,,Lena,,,,,,Q46841,,,,,active,,wikidata,,2026-09-09,
