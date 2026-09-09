@@ -1,0 +1,15 @@
+source_id: gkgn-opendata
+stable_id: "gkgn:{reg_number}"
+fields:
+  name: name_ru
+  latin_name: name_en
+  object_type: type_id
+  subject_rf: admin1
+  latitude: lat
+  longitude: lon
+  reg_number: notes
+delete_policy: deprecate
+notes: >
+  Выгрузка ГКГН не вендорится в git (лимит 10 МБ). v1 sync для этого
+  источника — указатель: обновляет только checked_at. Имена в каноне
+  набираются из официального каталога, не из дампа в дереве.

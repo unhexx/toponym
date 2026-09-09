@@ -1,0 +1,15 @@
+source_id: ukase-326
+stable_id: "foiv:{slug}"
+fields:
+  name_ru: name_ru
+  name_en: name_en
+  abbr: abbr
+  type_id: type_id
+  parent_id: parent_id
+delete_policy: ignore
+notes: >
+  Юридический текст — Указ Президента № 326 / № 522 на pravo.gov.ru.
+  URL в каталоге — Wikipedia-отпечаток (page_fingerprint), не источник
+  официальных названий. --apply обновляет только checked_at, пока не
+  передан --manual-file с каноническим 22-колоночным заголовком.
+  Слаг foiv:{slug} назначает оператор, sync его не выводит из HTML.

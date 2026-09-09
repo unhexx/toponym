@@ -1,0 +1,15 @@
+source_id: hflabs-region
+stable_id: "iso:{iso_3166-2}"
+fields:
+  name: name_ru
+  iso_3166-2: iso
+  fias_id: fias
+  oktmo: oktmo
+  kladr_id: notes
+  federal_district: admin1
+  geoname_code: geonames
+delete_policy: pointer
+notes: >
+  CC-BY-SA-4.0: не копировать строки в data/curated/. Локальный join по
+  iso / fias. Производный датасет — только в data/raw/. v1 sync обновляет
+  cursor/checked_at и не переносит поля hflabs в канон.

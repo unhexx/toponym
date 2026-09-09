@@ -1,0 +1,29 @@
+source_id: geonames-ru
+stable_id: "gn:{geonameId}"
+fields:
+  name: name
+  asciiname: name_en
+  latitude: lat
+  longitude: lon
+  geonameId: geonames
+  featureClass: class
+class_map:
+  P: oikonym/city
+  A: choronym
+  H: hydronym
+  T: oronym
+  L: microtoponym
+filter:
+  country_code: RU
+  feature_class:
+    - A
+    - P
+    - H
+    - T
+    - L
+delete_policy: deprecate
+notes: >
+  Mapping documents gn:{geonameId} as the GeoNames join key, but v1 sync
+  matches the curated geonames column (digits) and never inserts unknown
+  gn: rows (no-insert). Incoming geonameId updates lat/lon on the existing
+  wd: (or other) row; unmapped ids are skipped_unmapped.
