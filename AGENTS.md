@@ -19,7 +19,7 @@
 
 ## Current Status
 
-v1 `2026.09.09` на `main`: схемы, сиды, маппинги, check/sync/validate/index, онтология, документация. См. `TASK_SPECIFICATION.md`, `.agent/PLAN.md`, `.agent/TODO.md`.
+v1 `2026.09.09` на `main`: схемы, сиды, маппинги, check/sync/validate/index, онтология, документация. Дизайн v1 совпадает с тегом (не «P6 next»). См. `TASK_SPECIFICATION.md`, `.agent/PLAN.md`, `.agent/TODO.md`.
 
 ## Recommended Stack (do not deviate without an ADR)
 

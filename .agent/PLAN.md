@@ -2,7 +2,7 @@
 
 **Initiative:** toponym v1 local registries
 **Template Version:** 3.13.0
-**Last Update:** 2026-09-09 (v1.1-http-dated)
+**Last Update:** 2026-09-09 (v1.1-docs-drift)
 
 ## Phase Status
 
@@ -19,6 +19,7 @@
 | P8-DOCS README / CHANGELOG / daily | COMPLETE |
 | P9-DONE Reviewer + release 2026.09.09 | COMPLETE |
 | v1.1 http_dated RU-only vs dump Last-Modified | COMPLETE |
+| v1.1 docs-drift design snapshot | COMPLETE |
 
 ## Gate
 

@@ -5,6 +5,9 @@
 
 ## [Unreleased]
 
+### Changed
+- Дизайн v1 описывает выпущенный контур (P0–P9, geonames Москва `524901` / Волга `472776`), а не «следующий цикл P6».
+
 ### Fixed
 - `http_dated`: `changed` только по RU-строкам mods/deletes; `also: last_modified_header` не сравнивает Last-Modified дампа с датой-курсором и не подменяет cursor.
 

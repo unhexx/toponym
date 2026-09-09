@@ -5,14 +5,14 @@
 | **Document** | Implementation design and full-cycle plan for `unhexx/toponym` v1 |
 | **Author** | Engineering (product repo) |
 | **Date** | 2026-09-09 |
-| **Revised** | 2026-09-09 (review 2: align to landed P0–P5 `3c16dbf`; `(id, lemma)` declensions; `http_dated` RU-rows only) |
-| **Status** | Active |
+| **Revised** | 2026-09-09 (review 3: P0–P9 tagged `2026.09.09`; v1.1 `http_dated` RU-only; live `geonames` on Москва/Волга) |
+| **Status** | Active (v1 released; living snapshot matches `main`) |
 | **CalVer target** | `2026.09.09` |
 | **ADR** | [`LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`](../../LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md) (DEC-REG-001) |
 | **Spec** | [`TASK_SPECIFICATION.md`](../../TASK_SPECIFICATION.md) |
 | **Operational plan** | [`CYCLE_PLAN.md`](../../CYCLE_PLAN.md) (repo root; execute from here) |
 
-This is not a greenfield vision. DEC-REG-001 already chose Frictionless CSV in git, derived SQLite FTS, and an Outpost ontology overlay. This document freezes interfaces, seed policy, CLI, tests, and one independently mergeable PR per INVEST cycle P0–P9 so an engineer can implement without guessing.
+This is not a greenfield vision. DEC-REG-001 already chose Frictionless CSV in git, derived SQLite FTS, and an Outpost ontology overlay. This document freezes the landed v1 interfaces (P0–P9, tag `2026.09.09`) so an engineer can read the tree without guessing.
 
 **SSOT for this design:** this file under `docs/design/`. Do not keep a parallel copy with `file://` ADR links.
 
@@ -22,49 +22,46 @@ Operator overrides of the ADR (binding):
 2. All development cycles are planned; the executable plan lives at repo root as `CYCLE_PLAN.md`.
 3. After each completed INVEST cycle: merge to `main` and `git push origin main` (overrides ADR §9.1 “do not merge until operator accepts Reviewer DONE”).
 4. Commits in natural Russian, as a human mid/senior developer. Never mention models, agents, LLM, Grok, Claude, or AI.
-5. Continue until a full v1 release (tag `2026.09.09` / GitHub Release). Empty commits forbidden.
-6. Keep **ten** cycles P0–P9. Do **not** split P1 into P1a–e.
+5. v1 is released (tag `2026.09.09` / GitHub Release). Empty commits forbidden.
+6. Keep **ten** cycles P0–P9. Do **not** split P1 into P1a–e. Do not start streets / GAR / `RU.zip` / `serve.py` unless `CYCLE_PLAN.md` lists them.
 
 ---
 
 ## Overview
 
-`unhexx/toponym` on `main` @ `3c16dbf` has P0–P5 landed: schemas, 11 datapackage CSVs, mappings, `check.py` / `sync.py` / `validate.py`, CI, `missingValues: [""]` on places/agencies. Remaining v1 work is P6 FTS, P7 ontology, P8 docs, P9 tag.
+`unhexx/toponym` on `main` is **v1 tagged `2026.09.09`**: schemas, 11 datapackage CSVs, mappings, `check.py` / `sync.py` / `validate.py` / `index.py`, ontology, docs, CI. P0–P9 are COMPLETE. v1.1 (`http_dated` RU-rows only; dump Last-Modified does not flip `changed`) is on `main`.
 
 Canon stays UTF-8 CSV in git. Dumps larger than 10 MB and full ГАР/ФИАС are never vendored. CC BY-SA and ODbL stay in `data/raw/<source>/`. Curated rows are typed from official names, ISO 3166-2, Wikidata (CC0), and GeoNames **identifiers** — not copied wholesale from ShareAlike repos.
 
-**Next cycle is P6-INDEX.** Do not reopen P0–P5 except the documented `http_dated` Last-Modified bugfix (ride with P6 or a one-line follow-up: `also: last_modified_header` must not flip `changed`).
+**v1 is released.** Do not reopen P0–P9. Live `geonames` is filled for Москва `wd:Q649`=`524901` and Волга `wd:Q626`=`472776`. Further GeoNames digits remain optional. Streets / GAR / `RU.zip` / `serve.py` stay out of scope unless `CYCLE_PLAN.md` lists them.
 
 ---
 
 ## Background & Motivation
 
-### Current state (verified 2026-09-09, after P5 merge `3c16dbf`)
+### Current state (verified 2026-09-09, after tag `2026.09.09` and v1.1-http-dated)
 
 | Claim | Reality |
 |---|---|
-| P0–P5 | **Landed on `main`.** P0 `2330f94`, P1 `4b321c7`, P2 `ab462b8`, P3 `94e76ac`, P4 `a275f42`, P5 `3c16dbf`. `CYCLE_PLAN.md` marks P0–P5 COMPLETE, P6 PENDING. |
+| P0–P9 | **COMPLETE on `main`.** Tag `2026.09.09`. P0 `2330f94`, P1 `4b321c7`, P2 `ab462b8`, P3 `94e76ac`, P4 `a275f42`, P5 `3c16dbf`, P6 `5a6a06a`, P7 `c57a8c8`, P8 `3633de7`, P9 `e95ea0b`. v1.1-http-dated `b1bb72f`. `CYCLE_PLAN.md` marks P0–P9 and v1.1 COMPLETE. |
 | `datapackage.json` 11 resources | **All CSV paths exist.** `python scripts/validate.py` exit 0. |
 | Curated seeds | 8 FO, 89 subjects (83 ISO + 6 `local:*`), **197** cities-major (all `parent_id=iso:RU-XX`), ≥40 hydronyms, ≥25 oronyms, ≥69 FOIV, ≥10 other (`source_id=wikidata`). oikonym `example_ru=Москва`. |
 | Declensions | Landed uniqueness is **`(id, lemma)`**. `data/declensions/agencies.csv` has 158 rows / 79 duplicate ids (abbr `indecl` + full-name `agency-head`). `tests/test_seeds.py` asserts `(id, lemma)`. |
-| `geonames` column | **Empty on every curated row**, including `wd:Q649`. P4 fixtures carry `524901`; live match-only sync is a no-op (`skipped_unmapped`). |
+| `geonames` column | **Filled on fixtures:** `wd:Q649` Москва `524901`, `wd:Q626` Волга `472776`. Other curated rows still empty (optional further backfill). P4 fixtures also carry `524901`. Live match-only sync can update those two ids. |
 | `schema/` | Present. P5 added `primaryKey: id` and `missingValues: [""]` on places/agencies. |
-| Scripts | `check.py`, `sync.py`, `validate.py` present. **No** `index.py` yet. |
+| Scripts | `check.py`, `sync.py`, `validate.py`, `index.py` present. |
 | `.github/workflows/` | `ci.yml` (P5, Python 3.12) and `daily.yml` present. |
-| `docs/SOURCES.md` | **Missing.** |
-| `docs/TAXONOMY.md` (README) | File on disk is `docs/taxonomy.md` (Linux is case-sensitive). |
-| Catalog detectors | All 10 sources. `geonames-ru` `kind: http_dated`, `cursor: "2026-09-08"`, `also: last_modified_header`. Landed `detect_http_dated` still ORs dump Last-Modified against that date cursor (daily false `changed`) — **v1 freeze below ignores `also` for `changed`**. |
+| `docs/SOURCES.md` | Present (P8). |
+| `docs/TAXONOMY.md` (README) | File on disk is `docs/taxonomy.md` (Linux is case-sensitive). README links the lowercase path. |
+| Catalog detectors | All 10 sources. `geonames-ru` `kind: http_dated`, `cursor` is a mods date, `also: last_modified_header`. v1.1 `detect_http_dated` does **not** OR dump Last-Modified into `changed` and does not rewrite the date cursor from dump LM. |
 | Agentix full | Present. `.venv` CPython 3.14.7, symlink gitignored. |
-| Git | `main` @ `3c16dbf`. Origin `https://github.com/unhexx/toponym.git`. |
-| `agents/DAILY_UPDATE.md` | Already rewritten (step 1 = `check.py`). P8 must not rewrite it from the old sketch. |
+| Git | `main` tagged `2026.09.09`. Origin `https://github.com/unhexx/toponym.git`. |
+| `agents/DAILY_UPDATE.md` | Step 1 = `check.py`. Do not rewrite it from the old sketch. |
 
-### Pain (remaining after P5)
+### Pain (remaining after v1)
 
-- No FTS index (`scripts/index.py` / `knowledge/registry.db`) — P6.
-- No `ontology/ontology.json` — P7.
-- Review language still disagrees: AGENTS.md / README `review=true`; CONTRIBUTING `review=false` for gold. P8 aligns to `gold\|auto\|needs_review`.
-- Empty curated `geonames` cells: daily GeoNames `--apply` cannot update coords until an optional P6/P8 backfill.
-- Landed `http_dated` dump Last-Modified vs date `cursor` can force daily exit 10. V1 freeze: `changed` is **only** RU rows in mods/deletes.
+- Further `geonames` digits beyond Москва/Волга (optional; live join already works for `524901` / `472776`).
+- Streets / municipalities / GAR import / `RU.zip` / `serve.py` stay **out of scope** unless `CYCLE_PLAN.md` lists them.
 
 ### Why this shape (DEC-REG-001, unchanged)
 
@@ -256,7 +253,7 @@ sequenceDiagram
   end
 ```
 
-Until P3, missing `check.py` is treated as `changed_count=0` (DAILY_UPDATE §1). Do not invent a CSV delta.
+Until P3 (historical; P3 landed), missing `check.py` is treated as `changed_count=0` (DAILY_UPDATE §1). Do not invent a CSV delta.
 
 ### Frozen canonical record (places + agencies)
 
@@ -454,7 +451,7 @@ Timeouts: 15 s per URL. User-Agent: `toponym-check/2026.09.09 (+https://github.c
 
 **v1 freeze:** for `kind: http_dated`, `changed` is **only** RU rows in the small mods/deletes files. `also: last_modified_header` does **not** set `changed`. Do not GET/download `RU.zip`. Do not store dump LM in the date `cursor`. `http_head` sources may keep LM/ETag in `cursor`; `http_dated` must not.
 
-Landed P3 `detect_http_dated` still ORs dump LM into `changed` (and writes `cursor_new = dump_lm`). **Patch on P6 (or a one-line follow-up):** ignore `also` when deciding `changed`; keep `cursor` as the mods date. Do not add a `dump_url` key (`catalog.schema.json` has none).
+v1.1 `detect_http_dated` ignores `also` when deciding `changed` and keeps `cursor` as the mods date. Do not add a `dump_url` key (`catalog.schema.json` has none). Do not GET/download `RU.zip`.
 
 CLI:
 
@@ -505,7 +502,7 @@ Rules:
 2. If `vendor: true` and remote `Content-Length` > `max_vendor_bytes` (default 10485760) → refuse, exit `2`.
 3. If `vendor: false` → do not download the dump. For GeoNames, fetch only `modifications-{date}.txt` and `deletes-{date}.txt` (small). For pointer sources, update `checked_at`/`cursor` only.
 4. **Generic upsert** (manual-file / library): match on canonical `id`; incoming delete → `status=deprecated`; do not drop the row; set `replaced_by` only if the incoming record supplies a successor.
-5. **GeoNames backend (v1, frozen):** parse TSV mods/deletes, country `RU` only. Match `geonameId` (digits) to curated **`geonames` column**. On match: update `lat`/`lon`/`source_rev`/`updated_at` (and `notes=coords from geonames-ru` if coords change) on the **existing** `wd:` (or other) row. On a deletes-file hit for a mapped id: `status=deprecated`; `replaced_by` stays empty unless a successor is in the mapping. **Refuse insert** of unknown `gn:` ids (count them as `skipped_unmapped`; do not create `id=gn:{id}`). v1 never publishes a new curated place from GeoNames. **Landed P1 left every `geonames` cell empty**, including `wd:Q649`. Until an optional P6/P8 backfill, live `--apply` is `skipped_unmapped` plus cursor/`checked_at` only. P4 unit tests use `tests/fixtures/places_wd_moscow.csv` (`geonames=524901`), **not** live `cities-major.csv`.
+5. **GeoNames backend (v1, frozen):** parse TSV mods/deletes, country `RU` only. Match `geonameId` (digits) to curated **`geonames` column**. On match: update `lat`/`lon`/`source_rev`/`updated_at` (and `notes=coords from geonames-ru` if coords change) on the **existing** `wd:` (or other) row. On a deletes-file hit for a mapped id: `status=deprecated`; `replaced_by` stays empty unless a successor is in the mapping. **Refuse insert** of unknown `gn:` ids (count them as `skipped_unmapped`; do not create `id=gn:{id}`). v1 never publishes a new curated place from GeoNames. Live `geonames` is filled for `wd:Q649`=`524901` and `wd:Q626`=`472776`. Other curated rows stay empty; live `--apply` is match-only for those two plus `skipped_unmapped` for the rest. P4 unit tests use `tests/fixtures/places_wd_moscow.csv` (`geonames=524901`) as well as the live Москва row.
 6. Skip writes into `data/declensions/*` when the existing row has `review=gold`.
 7. Set `source_id`, `source_rev`, `updated_at=today` only for backends that own the row. GeoNames coord updates do **not** overwrite `source_id=wikidata` on a Wikidata-seeded city (put the GeoNames attribution in `notes`).
 8. After apply: do not call validate internally (caller does); but refuse to write a row missing required columns.
@@ -927,19 +924,19 @@ Include a city if **any** of:
 
 **Exclude:** settlements whose subject would be one of the six `local:*` (Севастополь `wd:Q7525`, Симферополь `wd:Q19566`, Керчь `wd:Q157065`, Евпатория `wd:Q33345`, …). v1.
 
-**Do not** copy `hflabs/city`, `epogrebnyak/ru-cities`, or Wikipedia city lists. Build rows as: official Russian name + Wikidata Q-id (CC0) + GeoNames id if looked up from Wikidata P1566 + ISO `admin1`. `source_id=wikidata`. `parent_id=iso:RU-XX`. `lat`/`lon` empty unless P625. `geonames` may stay empty (landed P1); optional P6/P8 backfill of verified digits.
+**Do not** copy `hflabs/city`, `epogrebnyak/ru-cities`, or Wikipedia city lists. Build rows as: official Russian name + Wikidata Q-id (CC0) + GeoNames id if looked up from Wikidata P1566 + ISO `admin1`. `source_id=wikidata`. `parent_id=iso:RU-XX`. `lat`/`lon` empty unless P625. `geonames` on Москва is `524901`; remaining cities may stay empty (optional further backfill of verified digits).
 
 **Normative membership is the landed P1 table** `data/curated/cities-major.csv` (**197** rows as of `4b321c7` / `3c16dbf`). Tests (`tests/test_seeds.py`): `>= 150` **and** the named fixtures below (Пермь `wd:Q915`, Сочи `wd:Q39420`, …). SPARQL is provenance only (`data/raw/wikidata/cities-major.sparql`). Wikipedia city lists stay forbidden.
 
 Do **not** fail v1 because six ids from an unused harvest appendix were never seeded: `wd:Q133075` Видное, `wd:Q135394` Долгопрудный, `wd:Q159112` Михайловск, `wd:Q176325` Октябрьский, `wd:Q1978797` Мурино, `wd:Q76493` Дзержинск. Adding them later is optional. Landed extras beyond any earlier 173-id draft are in-scope.
 
-Live `geonames` cells are empty (including Москва). Do not treat the fixture table as if `524901` were already on the curated row.
+Live `geonames` is filled for Москва (`524901`) and Волга (`472776`). Do not treat other curated rows as if they already had digits.
 
 **Required fixtures** (landed; one id per row; Q-ids verified). `wd:Q268` is Poznań, not Пермь. `wd:Q7525` is Севастополь, not Сочи.
 
 | id | name_ru | parent_id | admin1 | notes |
 |---|---|---|---|---|
-| `wd:Q649` | Москва | `iso:RU-MOW` | RU-MOW | also a subject; city row is the oikonym. Live `geonames` empty; P4 fixture uses `524901` |
+| `wd:Q649` | Москва | `iso:RU-MOW` | RU-MOW | also a subject; city row is the oikonym. Live `geonames=524901` (same as P4 fixture) |
 | `wd:Q656` | Санкт-Петербург | `iso:RU-SPE` | RU-SPE | |
 | `wd:Q883` | Новосибирск | `iso:RU-NVS` | RU-NVS | |
 | `wd:Q887` | Екатеринбург | `iso:RU-SVE` | RU-SVE | |
@@ -1126,12 +1123,12 @@ If an implementer needs FIAS GUIDs: look them up from the official ФИАС down
 
 CC-BY-4.0. `vendor: false`. `data/raw/geonames-ru/SOURCE.md` explains RU.zip (~tens of MB, not stored) and daily mods. v1 sync **updates existing rows only** via the `geonames` column. **Do not** create `gn:` place ids in v1.
 
-Landed P1 did **not** fill `geonames` (0 cells). Match-only `--apply` is therefore a production no-op until digits exist. **Do not rewrite P1.** Optional **P6 or P8 backfill** of well-known verified ids (not a cycle split):
+P1 left `geonames` empty. Later backfill (not a cycle split) filled the two verified fixtures. Match-only `--apply` can update those rows; other ids stay `skipped_unmapped` until more digits exist. **Do not rewrite P1.**
 
-| id | name_ru | geonames | verified 2026-09-09 |
-|---|---|---|---|
-| `wd:Q649` | Москва | `524901` | GeoNames feature Moscow (`sws.geonames.org/524901`) |
-| `wd:Q626` | Волга | `472776` | GeoNames `H.STM` Volga, country RU. **Not** `2022226` (that id is Khrustal’naya Kaskada, a P.PPL) |
+| id | name_ru | geonames | verified 2026-09-09 | live |
+|---|---|---|---|---|
+| `wd:Q649` | Москва | `524901` | GeoNames feature Moscow (`sws.geonames.org/524901`) | **filled** |
+| `wd:Q626` | Волга | `472776` | GeoNames `H.STM` Volga, country RU. **Not** `2022226` (that id is Khrustal’naya Kaskada, a P.PPL) | **filled** |
 
 Further digits: Wikidata P1566, then confirm the GeoNames feature is the same object before writing the cell. P4 tests already use `places_wd_moscow.csv` with `524901`.
 
@@ -1145,11 +1142,11 @@ No existing place rows. First write is an insert, not a migration. `types.csv` i
 
 Operator policy, every cycle: work on `feature/P{n}-{slug}` from latest `main` → tests green → merge to `main` → `git push origin main`. Commit messages in Russian, conventional prefix, no mention of models/agents. Empty commits forbidden.
 
-**Single-loop remaining work:** P6 → P7 → P8 → P9.
+**v1 remaining work:** none. P0–P9 are COMPLETE (tag `2026.09.09`). Post-v1 `http_dated` RU-only (v1.1) is on `main`.
 
-**Two-worker exception (TASK_SPEC / CYCLE_PLAN):** only P2 ∥ P6 after P1 — P2 already merged, so P6 is next even with two workers. Sync point after P5 (passed).
+**Two-worker exception (TASK_SPEC / CYCLE_PLAN):** only P2 ∥ P6 after P1 — both merged. Sync point after P5 (passed).
 
-P0–P5 are **DONE** on `main` (`3c16dbf`). Do not reopen those PRs.
+P0–P9 are **DONE** on `main`. Do not reopen those PRs.
 
 ### P0-BOOT — LANDED (`2330f94`)
 
@@ -1169,29 +1166,29 @@ Do not re-implement. `delete_policy: pointer` on FIAS/hflabs; GeoNames mapping i
 
 ### P3-CHECK — LANDED (`94e76ac`)
 
-Do not re-implement detectors from scratch. **Follow-up (ride with P6):** `detect_http_dated` must not set `changed` from dump Last-Modified / `also: last_modified_header`. `changed` = RU rows in mods/deletes only. Keep `cursor` as the mods date string. Never GET `RU.zip`.
+Do not re-implement detectors from scratch. **v1.1 landed:** `detect_http_dated` does not set `changed` from dump Last-Modified / `also: last_modified_header`. `changed` = RU rows in mods/deletes only. Keep `cursor` as the mods date string. Never GET `RU.zip`.
 
 ### P4-SYNC — LANDED (`a275f42`)
 
-Do not re-implement. GeoNames match-only is proven on **fixtures** (`places_wd_moscow.csv` `geonames=524901`), not live CSVs. Do not treat empty live `geonames` as a P4 defect.
+Do not re-implement. GeoNames match-only is proven on **fixtures** (`places_wd_moscow.csv` `geonames=524901`) and on live `wd:Q649` / `wd:Q626`. Empty cells on other rows are not a P4 defect.
 
 ### P5-VAL — LANDED (`3c16dbf`)
 
 Do not re-implement. `missingValues: [""]` + `primaryKey: id` are on places/agencies. `validate.py` exit 0 on the tree. Declension uniqueness in validate currently uses `(id, paradigm)`; contract is `(id, lemma)` — align only if they diverge; **do not** assert unique declension `id`.
 
-### P6-INDEX — SQLite FTS5  (**next**)
+### P6-INDEX — SQLite FTS5  (**LANDED**, merge `5a6a06a`)
 
 **Depends on:** P1 seeds (for Волга / МВД). P5 is on `main`.
 
 **Creates:** `scripts/index.py`, `tests/test_index.py`, `knowledge/.gitkeep` optional (dir created at runtime). Include the three FTS triggers verbatim.
 
-**Optional in the same PR (not required for MATCH tests):**
-1. Patch `detect_http_dated` so `also: last_modified_header` does not flip `changed`.
+Landed follow-ups (not required for MATCH tests, both done):
+1. v1.1: `detect_http_dated` so `also: last_modified_header` does not flip `changed`.
 2. Backfill `geonames=524901` on `wd:Q649` and `geonames=472776` on `wd:Q626` (Волга) — verified GeoNames features; **not** `2022226`.
 
 **Acceptance:** `python scripts/index.py` then pytest MATCH `Волга` and `МВД`; db path gitignored; file size of testdb well under 10 MB.
 
-### P7-ONT — ontology overlay
+### P7-ONT — ontology overlay  (**LANDED**, merge `c57a8c8`)
 
 **Depends on:** P0 catalog (source list). One-loop after P6.
 
@@ -1199,7 +1196,7 @@ Do not re-implement. `missingValues: [""]` + `primaryKey: id` are on places/agen
 
 **Acceptance:** JSON valid; schema valid; `DEC-REG-001` type Decision; Source count = catalog sources count; Risk `RSK-FIAS-VENDOR` present; Check id is `CHK-DETECTOR` (class), not a dated instance.
 
-### P8-DOCS — human 5-minute start + CalVer
+### P8-DOCS — human 5-minute start + CalVer  (**LANDED**, merge `3633de7`)
 
 **Depends on:** P3–P7 so commands in README actually work.
 
@@ -1219,7 +1216,7 @@ Do not re-implement. `missingValues: [""]` + `primaryKey: id` are on places/agen
 
 **Out of cycle:** GitHub Release (P9).
 
-### P9-DONE — reviewer gate + release
+### P9-DONE — reviewer gate + release  (**LANDED**, tag `2026.09.09`, merge `e95ea0b`)
 
 **Depends on:** P0–P8 on `main`.
 
@@ -1252,7 +1249,7 @@ Do not re-implement. `missingValues: [""]` + `primaryKey: id` are on places/agen
 
 ### C. Delay seeds and ship scripts first (rejected)
 
-The current daily no-op exists **because** seed CSVs were not in git (now they are). Scripts without Волга/МВД cannot pass P6. P6 is the next cycle.
+The current daily no-op exists **because** seed CSVs were not in git (now they are). Scripts without Волга/МВД cannot pass P6. P6 is landed.
 
 ### D. Boolean `review` column (rejected)
 
@@ -1272,7 +1269,7 @@ P1 landed **two rows** per FOIV (abbr `indecl` + full-name `agency-head`) with u
 
 ### H. FTS5 without external content (not chosen)
 
-External content + three triggers keeps MATCH joined to `records.rowid` as specified. Documented so P6 does not guess trigger SQL.
+External content + three triggers keeps MATCH joined to `records.rowid` as specified. Documented so the FTS rebuild does not guess trigger SQL.
 
 ---
 
@@ -1312,16 +1309,17 @@ Logging: scripts log to stderr at INFO (one line per source). No Python `logging
 ## Rollout Plan
 
 1. **P0–P5 on `main` (`3c16dbf`):** schemas, seeds, mappings, check/sync/validate, CI. Done.
-2. **P6:** FTS index; optional `http_dated` `also` patch; optional `geonames` backfill on Q649/Q626.
-3. **P7:** ontology.
-4. **P8:** docs tell the truth; AGENTS.md review enum; DAILY_UPDATE left as-is if it still matches.
-5. **P9:** tag `2026.09.09`, GitHub Release. No empty commit if nothing changed.
+2. **P6 (`5a6a06a`):** FTS index. Done.
+3. **P7 (`c57a8c8`):** ontology. Done.
+4. **P8 (`3633de7`):** docs tell the truth; AGENTS.md review enum; DAILY_UPDATE left as-is. Done.
+5. **P9 (`e95ea0b`):** tag `2026.09.09`, GitHub Release. Done.
+6. **v1.1 (`b1bb72f`):** `http_dated` ignores dump Last-Modified; live `geonames` on Q649/Q626. Done.
 
 **Feature flags:** none. Detector `kind: none` is the “off” switch for a source.
 
 **Rollback:** revert the cycle’s merge commit on `main`. Data rollback is the same: git history of CSVs. Derived `registry.db` is rebuilt. Do not force-push `main` after a cycle has been pushed (operator merge policy).
 
-**Partial failure:** do not block P6 on empty `geonames` cells or the six never-seeded harvest city ids.
+**Partial failure:** do not block post-v1 work on empty `geonames` cells beyond Q649/Q626 or the six never-seeded harvest city ids.
 
 ---
 
@@ -1329,8 +1327,8 @@ Logging: scripts log to stderr at INFO (one line per source). No Python `logging
 
 | Risk | Sev | Mitigation |
 |---|---|---|
-| Empty curated `geonames` → daily GeoNames no-op | Med | Optional P6/P8 backfill of verified digits; P4 fixtures already prove the join |
-| `http_dated` dump LM vs date cursor | High | v1: ignore `also` for `changed`; patch `detect_http_dated` on P6 |
+| Empty curated `geonames` → daily GeoNames no-op | Low | Fixtures Q649=`524901` and Q626=`472776` are filled; remaining cells optional; P4 fixtures prove the join |
+| `http_dated` dump LM vs date cursor | Low | v1.1: ignore `also` for `changed`; cursor stays the mods date |
 | 89 vs 83 subject politics / ISO gap | Med | Document both code systems in `notes`; cities excluded from the six; no slogans in `notes`; GOST codes not copied into `iso` |
 | Wikipedia FOIV fingerprint flips daily | Med | `ukase-326` sync is `--manual-file`; check.py may exit 10; daily commit is runs+cursor only |
 | Frictionless 5.x vs Python 3.14 in the current venv | Med | `requires-python >=3.12`; CI uses 3.12; if 3.14 fails, pin frictionless or document 3.12 in README |
@@ -1402,7 +1400,7 @@ Logging: scripts log to stderr at INFO (one line per source). No Python `logging
 
 12. **Agentix stays a gitignored sibling symlink.** Rationale: already installed; AGENTS.md NEVER copy the tree.
 
-13. **P0–P5 are on `main`; P6 is next; P9 is the only release tag.** Rationale: do not fight git. Residual: `http_dated` ignore `also` for `changed`; optional `geonames` backfill.
+13. **P0–P9 are on `main`; tag `2026.09.09` is the v1 release.** Rationale: do not fight git. Residual: further `geonames` digits beyond Москва/Волга (optional). `http_dated` ignore-`also` is v1.1.
 
 14. **`data/sources/catalog.yaml` is the only catalog file** (no root `catalog.yaml`). Rationale: the repo already chose this path; a duplicate SSOT is how catalogs rot. Detector keys are the landed schema, not ADR sketches with `dump_url` / `stale_after_days`.
 
@@ -1420,7 +1418,7 @@ Logging: scripts log to stderr at INFO (one line per source). No Python `logging
 
 ## PR Plan
 
-One PR per **remaining** cycle, from `feature/P{n}-{slug}` against `main`. Remaining: P6 → P7 → P8 → P9.
+One PR per cycle, from `feature/P{n}-{slug}` (or `feature/v1.1-*`) against `main`. v1 P0–P9 and v1.1-http-dated are merged. Remaining listed work: none unless `CYCLE_PLAN.md` adds a post-v1 slice.
 
 ### PR 1 — P0-BOOT — MERGED (`2330f94`)
 
@@ -1436,40 +1434,40 @@ Skip.
 
 ### PR 4 — P3-CHECK — MERGED (`94e76ac`)
 
-Skip as a cycle. Residual: stop ORing dump Last-Modified into `http_dated` `changed` (ride with P6).
+Skip as a cycle. Residual `http_dated` dump-LM (v1.1) is merged.
 
 ### PR 5 — P4-SYNC — MERGED (`a275f42`)
 
-Skip. GeoNames join is fixture-only until `geonames` backfill.
+Skip. GeoNames join is proven on fixtures and live Q649/Q626.
 
 ### PR 6 — P5-VAL — MERGED (`3c16dbf`)
 
 Skip. `missingValues` / `primaryKey` already on disk.
 
-### PR 7 — `feat(index): SQLite FTS5 по каноническим таблицам`
+### PR 7 — `feat(index): SQLite FTS5 по каноническим таблицам` — MERGED (`5a6a06a`)
 
-- **Cycle:** P6-INDEX  (**next**)
+- **Cycle:** P6-INDEX  (**LANDED**)
 - **Files:** `scripts/index.py`; `tests/test_index.py`; optionally `scripts/lib/detectors.py` (`http_dated` ignore `also`); optionally `geonames` digits on Q649 / Q626
 - **Depends on:** P1–P5 on `main`
-- **Description:** Rebuild `knowledge/registry.db` with the three FTS triggers; MATCH Волга and МВД; db gitignored. After merge: push `main`.
+- **Description:** Rebuild `knowledge/registry.db` with the three FTS triggers; MATCH Волга and МВД; db gitignored. After merge: push `main`. `geonames` backfill and `http_dated` ignore-`also` landed as follow-ups.
 
-### PR 8 — `feat(ontology): Outpost ontology.json с DEC-REG-001 и источниками`
+### PR 8 — `feat(ontology): Outpost ontology.json с DEC-REG-001 и источниками` — MERGED (`c57a8c8`)
 
-- **Cycle:** P7-ONT
+- **Cycle:** P7-ONT  (**LANDED**)
 - **Files:** `ontology/ontology.json`; `ontology/ontology.schema.json`; `tests/test_ontology.py`
 - **Depends on:** P0 (catalog source list); one-loop after PR 7
 - **Description:** Outpost v1 JSON; Decision DEC-REG-001; one Source per catalog id; Check `CHK-DETECTOR`; risks for vendor/SA/empty-commit. After merge: push `main`.
 
-### PR 9 — `docs: пятиминутный старт, источники, календарный CHANGELOG`
+### PR 9 — `docs: пятиминутный старт, источники, календарный CHANGELOG` — MERGED (`3633de7`)
 
-- **Cycle:** P8-DOCS
+- **Cycle:** P8-DOCS  (**LANDED**)
 - **Files:** `README.md`; `docs/SOURCES.md`; `docs/taxonomy.md` (if needed); `CHANGELOG.md`; **`AGENTS.md`**; `CONTRIBUTING.md`; `CYCLE_PLAN.md` status; `agents/DAILY_UPDATE.md` only if drifted; `docs/DECLENSIONS.md` only if a cross-link is wrong
 - **Depends on:** PR 4–PR 8 so documented commands work
 - **Description:** Fix TAXONOMY casing link; add SOURCES.md; align review enum in AGENTS.md / CONTRIBUTING; do **not** rewrite DAILY_UPDATE from the old sketch. After merge: push `main`.
 
-### PR 10 — `chore(release): 2026.09.09`
+### PR 10 — `chore(release): 2026.09.09` — MERGED (`e95ea0b`, tag `2026.09.09`)
 
-- **Cycle:** P9-DONE
+- **Cycle:** P9-DONE  (**LANDED**)
 - **Files:** possibly `CHANGELOG.md` compare-link; **no feature code**; **skip the PR entirely if no file changes**
 - **Depends on:** P0–P8 on `main`
 - **Description:** Reviewer evidence (pytest, ruff, validate, no file >10 MB, types top-level intact). Annotated tag `2026.09.09`. GitHub Release. Push tag and `main`.
