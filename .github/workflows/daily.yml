@@ -56,26 +56,34 @@ jobs:
             local check_exit="$1"
             local changed_count="$2"
             local notes="${3:-}"
-            python - "$TODAY" "$AS_OF" "$check_exit" "$changed_count" "$notes" <<'PY'
-          import json, sys
+            CHECK_EXIT="$check_exit" CHANGED_COUNT="$changed_count" NOTES="$notes" TODAY="$TODAY" AS_OF="$AS_OF" python - <<'PY'
+          import json, os
           from pathlib import Path
-          today, as_of, check_exit, changed_count, notes = sys.argv[1:6]
+
+          today = os.environ["TODAY"]
+          as_of = os.environ["AS_OF"]
+          check_exit = os.environ["CHECK_EXIT"]
+          changed_count = int(os.environ["CHANGED_COUNT"])
+          notes = os.environ.get("NOTES") or ""
           path = Path("data/sources/runs") / f"{today}.json"
           payload = {
               "as_of": as_of,
-              "changed_count": int(changed_count),
+              "changed_count": changed_count,
               "error_count": 0,
               "sources": [],
               "records_upserted": 0,
               "records_deprecated": 0,
               "commit": None,
-              "check_exit": int(check_exit) if str(check_exit).isdigit() else check_exit,
+              "check_exit": int(check_exit) if check_exit.isdigit() else check_exit,
           }
           if notes:
               payload["notes"] = notes
           path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
           PY
           }
+
+          # Dedent the embedded Python: strip common leading spaces from the heredoc body
+          # (GitHub Actions YAML indents the run block; env-based script avoids argv quoting issues.)
 
           if [[ ! -f scripts/check.py ]]; then
             echo "check_exit=missing" >> "$GITHUB_OUTPUT"
@@ -157,7 +165,6 @@ jobs:
           if [[ -d data/sources/runs ]]; then
             git add data/sources/runs/
           fi
-          # Stage known data paths only when they change
           for p in data/sources/catalog.yaml data/curated knowledge CHANGELOG.md; do
             if [[ -e "$p" ]]; then
               git add -A "$p" || true
