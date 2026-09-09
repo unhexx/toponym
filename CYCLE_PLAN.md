@@ -26,6 +26,7 @@
 | ID | Слайс | Ветка | Acceptance | Status |
 |---|---|---|---|---|
 | v1.1-HTTP-DATED | `http_dated`: `changed` только RU-строки; `also` не флипает | `feature/v1.1-http-dated` | non-RU + dump Last-Modified → exit 0; cursor остаётся датой mods | COMPLETE |
+| v1.1-DOCS-DRIFT | дизайн v1 = выпущенный контур; geonames Москва/Волга | `feature/v1.1-docs-drift` | design не говорит «P6 next»; Q649=524901, Q626=472776 | COMPLETE |
 
 ## Definition of Done v1
 

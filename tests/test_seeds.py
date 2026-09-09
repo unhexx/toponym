@@ -97,6 +97,16 @@ def test_volga_and_mvd_present() -> None:
     assert any(row["id"] == "foiv:mvd" and row["abbr"] == "МВД" for row in foiv)
 
 
+def test_geonames_fixtures_moscow_and_volga() -> None:
+    _, cities = _read_csv(ROOT / "data/curated/cities-major.csv")
+    moscow = next(row for row in cities if row["id"] == "wd:Q649")
+    assert moscow["geonames"] == "524901"
+    _, hydros = _read_csv(ROOT / "data/curated/hydronyms-major.csv")
+    volga = next(row for row in hydros if row["id"] == "wd:Q626")
+    assert volga["geonames"] == "472776"
+    assert volga["geonames"] != "2022226"
+
+
 def test_required_city_fixtures() -> None:
     _, cities = _read_csv(ROOT / "data/curated/cities-major.csv")
     names = {row["name_ru"] for row in cities}
