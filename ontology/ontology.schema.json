@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/unhexx/toponym/ontology/ontology.schema.json",
+  "title": "Outpost ontology v1",
+  "type": "object",
+  "required": ["schema", "project", "entities"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "outpost-ontology/v1" },
+    "project": {
+      "type": "object",
+      "required": ["id", "name", "calver", "canon"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 3 },
+        "name": { "type": "string", "minLength": 1 },
+        "calver": { "type": "string", "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}$" },
+        "canon": { "type": "string", "minLength": 1 }
+      }
+    },
+    "entities": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/entity" }
+    }
+  },
+  "$defs": {
+    "entity": {
+      "type": "object",
+      "required": ["id", "type", "title"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 3 },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Project",
+            "Artifact",
+            "Decision",
+            "Source",
+            "Mapping",
+            "Check",
+            "Risk",
+            "Lesson",
+            "Registry"
+          ]
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "status": { "type": "string" },
+        "date": { "type": "string" },
+        "refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "catalog_id": { "type": "string" },
+        "license": { "type": "string" },
+        "path": { "type": "string" },
+        "vendor": { "type": "boolean" },
+        "pointer": { "type": "boolean" },
+        "notes": { "type": "string" },
+        "summary": { "type": "string" }
+      }
+    }
+  }
+}
