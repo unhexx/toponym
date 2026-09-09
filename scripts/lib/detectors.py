@@ -4,7 +4,6 @@ import hashlib
 import os
 import re
 from datetime import UTC, datetime, timedelta
-from email.utils import parsedate_to_datetime
 from typing import Any
 from urllib.parse import urlparse
 
@@ -82,24 +81,6 @@ def header_cursor(headers: Any) -> str:
     last_modified = _header(headers, "Last-Modified")
     length = _header(headers, "Content-Length")
     return "|".join((etag, last_modified, length))
-
-
-def last_modified_changed(cursor: str | None, last_modified: str | None) -> bool:
-    if not last_modified:
-        return False
-    token = (cursor or "").strip()
-    if not token:
-        return True
-    if token == last_modified.strip():
-        return False
-    try:
-        parsed = parsedate_to_datetime(last_modified)
-        if parsed.tzinfo is None:
-            parsed = parsed.replace(tzinfo=UTC)
-        lm_date = parsed.astimezone(UTC).date().isoformat()
-    except (TypeError, ValueError, OverflowError):
-        return True
-    return token != lm_date
 
 
 def row_is_ru(line: str) -> bool:
@@ -238,14 +219,13 @@ def detect_http_dated(
     if not urls:
         return _err_result(reason="http_dated: нет urls", cursor_old=cursor_old)
 
+    # `also: last_modified_header` is informational. Dump Last-Modified
+    # must not flip `changed` and must not replace the mods-date cursor.
     ru_total = 0
     mods_ru = 0
-    bodies_empty = True
     try:
         for url in urls:
             _status, body = _fetch_dated_body(session, url)
-            if body.strip():
-                bodies_empty = False
             n_ru = count_ru_rows(body)
             ru_total += n_ru
             if "modifications-" in url:
@@ -253,23 +233,6 @@ def detect_http_dated(
     except requests.RequestException as exc:
         return _err_result(reason=f"http_dated: {exc}", cursor_old=cursor_old)
 
-    dump_changed = False
-    dump_lm = ""
-    if detector.get("also") == "last_modified_header" and source.get("url"):
-        try:
-            head = _request(session, "HEAD", source["url"])
-            if head.status_code in {405, 501}:
-                head = _request(session, "GET", source["url"], stream=True)
-                if getattr(head, "raw", None) is not None:
-                    head.close()
-            if head.status_code < 400:
-                dump_lm = _header(head.headers, "Last-Modified")
-                dump_changed = last_modified_changed(cursor_old, dump_lm)
-        except requests.RequestException:
-            dump_lm = ""
-            dump_changed = False
-
-    cursor_new = dump_lm or cursor_old
     if ru_total > 0:
         target = "mods" if mods_ru or ru_total == mods_ru else "mods/deletes"
         word = "row" if ru_total == 1 else "rows"
@@ -277,20 +240,13 @@ def detect_http_dated(
             changed=True,
             reason=f"{ru_total} RU {word} in {target}",
             cursor_old=cursor_old,
-            cursor_new=cursor_new,
+            cursor_new=yesterday_utc(now),
         )
-    if dump_changed:
-        return _ok_result(
-            changed=True,
-            reason="dump Last-Modified changed",
-            cursor_old=cursor_old,
-            cursor_new=cursor_new,
-        )
-    reason = "0 RU rows in mods"
-    if bodies_empty:
-        reason = "0 RU rows in mods"
     return _ok_result(
-        changed=False, reason=reason, cursor_old=cursor_old, cursor_new=cursor_old
+        changed=False,
+        reason="0 RU rows in mods",
+        cursor_old=cursor_old,
+        cursor_new=cursor_old,
     )
 
 

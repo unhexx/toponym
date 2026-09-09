@@ -131,8 +131,9 @@ def test_non_ru_mods_exit_0(monkeypatch, capsys) -> None:
     assert report["sources"][0]["changed"] is False
     assert report["sources"][0]["error"] is False
     assert "0 RU rows in mods" in report["sources"][0]["reason"]
+    assert report["sources"][0]["cursor_new"] == "2026-09-08"
     assert any("modifications-2026-09-08.txt" in call["url"] for call in session.calls)
-    assert not any("RU.zip" in call["url"] and call["method"] == "GET" for call in session.calls)
+    assert not any("RU.zip" in call["url"] for call in session.calls)
 
 
 def test_ru_mods_exit_10(monkeypatch, capsys) -> None:
@@ -145,6 +146,8 @@ def test_ru_mods_exit_10(monkeypatch, capsys) -> None:
     assert report["error_count"] == 0
     assert report["sources"][0]["changed"] is True
     assert "RU" in report["sources"][0]["reason"]
+    assert report["sources"][0]["cursor_new"] == "2026-09-08"
+    assert not any("RU.zip" in call["url"] for call in session.calls)
 
 
 def test_offline_mixed_catalog_exit_2(monkeypatch, capsys) -> None:
@@ -305,7 +308,7 @@ def test_json_shape_keys(monkeypatch, capsys) -> None:
     assert report["as_of"].endswith("Z")
 
 
-def test_dump_last_modified_change_without_ru(monkeypatch, capsys) -> None:
+def test_dump_last_modified_does_not_flip_changed(monkeypatch, capsys) -> None:
     session = FakeSession(
         _geonames_handler(
             mods_body=_mods("geonames_mods_non_ru.tsv"),
@@ -319,6 +322,12 @@ def test_dump_last_modified_change_without_ru(monkeypatch, capsys) -> None:
         session,
     )
     report = json.loads(capsys.readouterr().out)
-    assert code == 10
-    assert report["sources"][0]["changed"] is True
-    assert "Last-Modified" in report["sources"][0]["reason"]
+    row = report["sources"][0]
+    assert code == 0
+    assert report["changed_count"] == 0
+    assert row["changed"] is False
+    assert "0 RU rows in mods" in row["reason"]
+    assert "Last-Modified" not in row["reason"]
+    assert row["cursor_old"] == "2026-09-08"
+    assert row["cursor_new"] == "2026-09-08"
+    assert not any("RU.zip" in call["url"] for call in session.calls)

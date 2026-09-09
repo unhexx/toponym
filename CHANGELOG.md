@@ -5,6 +5,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- `http_dated`: `changed` только по RU-строкам mods/deletes; `also: last_modified_header` не сравнивает Last-Modified дампа с датой-курсором и не подменяет cursor.
+
 ## [2026.09.09] - 2026-09-09
 
 Первый релиз локального реестра: канон CSV, детекторы, upsert, FTS, онтология.
