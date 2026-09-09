@@ -10,8 +10,8 @@
 
 | ID | Слайс | Ветка | Acceptance | Status |
 |---|---|---|---|---|
-| P0-BOOT | схемы, pyproject, catalog detectors, Agentix-файлы | `feature/P0-boot` | jsonschema catalog; pytest `tests/test_schema.py`; datapackage schema paths существуют | IN_PROGRESS |
-| P1-SEED | сиды ФО / 89 субъектов / города / гидро / оро / ФОИВ / склонения | `feature/P1-seed` | все resources datapackage ≥1 строка; types.oikonym починен | PENDING |
+| P0-BOOT | схемы, pyproject, catalog detectors, Agentix-файлы | `feature/P0-boot` | jsonschema catalog; pytest `tests/test_schema.py`; datapackage schema paths существуют | COMPLETE |
+| P1-SEED | сиды ФО / 89 субъектов / города / гидро / оро / ФОИВ / склонения | `feature/P1-seed` | все resources datapackage ≥1 строка; types.oikonym починен | COMPLETE |
 | P2-MAP | mappings YAML | `feature/P2-map` | yaml валиден `mapping.schema.json` | PENDING |
 | P3-CHECK | `scripts/check.py` | `feature/P3-check` | exit 0/10/2; JSON; pytest без сети | PENDING |
 | P4-SYNC | `scripts/sync.py` upsert/deprecate | `feature/P4-sync` | фикстура 2→3; delete не стирает | PENDING |

@@ -1,0 +1,9 @@
+id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
+fo:cfo,fo,federal-district,Центральный федеральный округ,,Central Federal District,ЦФО,,,,,Q190778,,,,,active,,wikidata,,2026-09-09,центр: Москва
+fo:szfo,fo,federal-district,Северо-Западный федеральный округ,,Northwestern Federal District,СЗФО,,,,,Q383093,,,,,active,,wikidata,,2026-09-09,центр: Санкт-Петербург
+fo:ufo,fo,federal-district,Южный федеральный округ,,Southern Federal District,ЮФО,,,,,Q483599,,,,,active,,wikidata,,2026-09-09,центр: Ростов-на-Дону
+fo:skfo,fo,federal-district,Северо-Кавказский федеральный округ,,North Caucasian Federal District,СКФО,,,,,Q485161,,,,,active,,wikidata,,2026-09-09,центр: Пятигорск
+fo:pfo,fo,federal-district,Приволжский федеральный округ,,Volga Federal District,ПФО,,,,,Q202317,,,,,active,,wikidata,,2026-09-09,центр: Нижний Новгород
+fo:urfo,fo,federal-district,Уральский федеральный округ,,Ural Federal District,УрФО,,,,,Q41964,,,,,active,,wikidata,,2026-09-09,центр: Екатеринбург
+fo:sfo,fo,federal-district,Сибирский федеральный округ,,Siberian Federal District,СФО,,,,,Q41979,,,,,active,,wikidata,,2026-09-09,центр: Новосибирск
+fo:dfo,fo,federal-district,Дальневосточный федеральный округ,,Far Eastern Federal District,ДФО,,,,,Q41968,,,,,active,,wikidata,,2026-09-09,центр: Владивосток
