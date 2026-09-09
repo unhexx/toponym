@@ -1,0 +1,33 @@
+updated: 2026-09-09
+sources:
+  - id: geonames-ru
+    url: https://download.geonames.org/export/dump/RU.zip
+    license: CC-BY-4.0
+    vendor: false
+    max_vendor_bytes: 10485760
+    checked_at: 2026-09-09
+    cursor: "2026-09-08"
+    detector:
+      kind: http_dated
+      urls:
+        - https://download.geonames.org/export/dump/modifications-{yesterday}.txt
+        - https://download.geonames.org/export/dump/deletes-{yesterday}.txt
+      also: last_modified_header
+  - id: ukase-326
+    title: Указ Президента № 326
+    url: https://example.invalid/ukase
+    license: official-text
+    vendor: false
+    checked_at: 2026-09-09
+    detector:
+      kind: none
+  - id: fias-gar
+    url: https://fias.nalog.ru/
+    license: official-open-data
+    vendor: false
+    max_vendor_bytes: 10485760
+    checked_at: 2026-09-09
+    detector:
+      kind: http_head
+      note: указатель
+watchlist_github: []

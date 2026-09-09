@@ -30,6 +30,9 @@ src = ["scripts", "tests"]
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "W"]
 
+[tool.ruff.lint.isort]
+known-first-party = ["scripts"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"

@@ -2,7 +2,7 @@
 
 **Initiative:** toponym v1 local registries
 **Template Version:** 3.13.0
-**Last Update:** 2026-09-09 (P3-CHECK)
+**Last Update:** 2026-09-09 (P4-SYNC)
 
 ## Phase Status
 
@@ -12,7 +12,7 @@
 | P1-SEED curated + declensions | COMPLETE |
 | P2-MAP source mappings | COMPLETE |
 | P3-CHECK scripts/check.py | COMPLETE |
-| P4-SYNC scripts/sync.py | PENDING |
+| P4-SYNC scripts/sync.py | COMPLETE |
 | P5-VAL scripts/validate.py | PENDING |
 | P6-INDEX scripts/index.py | PENDING |
 | P7-ONT ontology.json | PENDING |

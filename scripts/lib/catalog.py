@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -42,3 +43,63 @@ def iter_sources(
     if source_id is None:
         return sources
     return [get_source(catalog, source_id)]
+
+
+def load_mapping(root: Path, source_id: str) -> dict[str, Any] | None:
+    mappings_dir = Path(root) / "data" / "mappings"
+    if not mappings_dir.is_dir():
+        return None
+    for path in sorted(mappings_dir.glob("*.yaml")):
+        payload = stringify_dates(yaml.safe_load(path.read_text(encoding="utf-8")) or {})
+        if isinstance(payload, dict) and payload.get("source_id") == source_id:
+            return payload
+    return None
+
+
+def _yaml_quote(value: str) -> str:
+    return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def _replace_or_insert_field(body: str, field: str, value: str) -> str:
+    pattern = re.compile(rf"^([ \t]*){re.escape(field)}:.*$", re.M)
+    match = pattern.search(body)
+    if match:
+        return pattern.sub(rf"\1{field}: {value}", body, count=1)
+    checked = re.search(r"^([ \t]*)checked_at:.*$", body, re.M)
+    line = f"{field}: {value}"
+    if checked:
+        indent = checked.group(1)
+        insert_at = checked.end()
+        return body[:insert_at] + f"\n{indent}{line}" + body[insert_at:]
+    indent = "    "
+    if not body.endswith("\n"):
+        body += "\n"
+    return body + f"{indent}{line}\n"
+
+
+def patch_catalog_source(
+    path: Path | str,
+    source_id: str,
+    *,
+    checked_at: str | None = None,
+    cursor: str | None = None,
+) -> bool:
+    path = Path(path)
+    text = path.read_text(encoding="utf-8")
+    pattern = re.compile(
+        rf"(^[ \t]*- id: {re.escape(source_id)}\n)(.*?)(?=^[ \t]*- id: |\nwatchlist_github:|\Z)",
+        re.M | re.S,
+    )
+    match = pattern.search(text)
+    if not match:
+        raise KeyError(source_id)
+    prefix, body = match.group(1), match.group(2)
+    if checked_at is not None:
+        body = _replace_or_insert_field(body, "checked_at", checked_at)
+    if cursor is not None:
+        body = _replace_or_insert_field(body, "cursor", _yaml_quote(cursor))
+    new = text[: match.start()] + prefix + body + text[match.end() :]
+    if new == text:
+        return False
+    path.write_text(new, encoding="utf-8")
+    return True

@@ -1,15 +1,14 @@
 # .agent/TODO.md — Task Backlog
 
 **Initiative:** toponym v1 local registries
-**Status:** P3-CHECK complete; next P4-SYNC
+**Status:** P4-SYNC complete; next P5-VAL
 
 ## In progress
 
-- [ ] P4-SYNC-01: scripts/sync.py upsert/deprecate + pytest fixture 2→3
+- [ ] P5-VAL-01: scripts/validate.py + frictionless; broken CSV fails
 
 ## Pending
 
-- [ ] P5-VAL-01: scripts/validate.py + frictionless; broken CSV fails
 - [ ] P6-INDEX-01: scripts/index.py SQLite FTS; search Волга / МВД
 - [ ] P7-ONT-01: ontology/ontology.json with DEC-REG-001 and Source list
 - [ ] P8-DOCS-01: README quick start, CHANGELOG 2026.09.09, DAILY_UPDATE → check.py
@@ -17,6 +16,7 @@
 
 ## Done
 
+- [x] P4-SYNC-01: scripts/sync.py upsert/deprecate + pytest fixture 2→3
 - [x] P3-CHECK-01: scripts/check.py + pytest (exit 0 no-op, JSON report)
 - [x] P2-MAP-01: data/mappings/{geonames,gkgn,fias-pointer,hflabs-region,ukase-326}.yaml
 - [x] P1-SEED-01: federal-districts.csv, regions.csv, cities-major.csv
