@@ -1,0 +1,236 @@
+{
+  "schema": "outpost-ontology/v1",
+  "project": {
+    "id": "PRJ-TOPONYM",
+    "name": "toponym",
+    "calver": "2026.09.09",
+    "canon": "frictionless-tabular-data-package"
+  },
+  "entities": [
+    {
+      "id": "PRJ-TOPONYM",
+      "type": "Project",
+      "title": "Реестр российских топонимов и ведомств",
+      "status": "active",
+      "date": "2026-09-09",
+      "refs": ["LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md", "datapackage.json"]
+    },
+    {
+      "id": "DEC-REG-001",
+      "type": "Decision",
+      "title": "Canon = git + Frictionless Tabular Data Package",
+      "status": "accepted",
+      "date": "2026-09-09",
+      "refs": ["LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md"],
+      "summary": "Канон — UTF-8 CSV в git; индекс — derived SQLite FTS; ODbL/CC-BY-SA только в data/raw/; дампы >10 МБ и полный ГАР не вендорятся."
+    },
+    {
+      "id": "ART-CATALOG",
+      "type": "Artifact",
+      "title": "Каталог источников",
+      "path": "data/sources/catalog.yaml",
+      "refs": ["schema/catalog.schema.json"]
+    },
+    {
+      "id": "ART-DATAPACKAGE",
+      "type": "Artifact",
+      "title": "Frictionless Tabular Data Package",
+      "path": "datapackage.json"
+    },
+    {
+      "id": "ART-SCHEMA",
+      "type": "Artifact",
+      "title": "JSON Schema и Table Schema канона",
+      "path": "schema/"
+    },
+    {
+      "id": "REG-TYPES",
+      "type": "Registry",
+      "title": "Таксономия типов",
+      "path": "data/curated/types.csv"
+    },
+    {
+      "id": "REG-PLACES",
+      "type": "Registry",
+      "title": "Места: округа, субъекты, города, гидронимы, оронимы",
+      "path": "data/curated/"
+    },
+    {
+      "id": "REG-AGENCIES",
+      "type": "Registry",
+      "title": "ФОИВ и смежные ведомства",
+      "path": "data/curated/agencies-foiv.csv"
+    },
+    {
+      "id": "REG-DECLENSIONS",
+      "type": "Registry",
+      "title": "Золотые склонения",
+      "path": "data/declensions/"
+    },
+    {
+      "id": "SRC-GKGN-OPENDATA",
+      "type": "Source",
+      "title": "ГКГН (Росреестр / Роскадастр)",
+      "catalog_id": "gkgn-opendata",
+      "license": "official-open-data",
+      "vendor": false,
+      "pointer": true
+    },
+    {
+      "id": "SRC-FIAS-GAR",
+      "type": "Source",
+      "title": "ФИАС / ГАР (ФНС)",
+      "catalog_id": "fias-gar",
+      "license": "official-open-data",
+      "vendor": false,
+      "pointer": true,
+      "notes": "Полный дамп не вендорится."
+    },
+    {
+      "id": "SRC-GEONAMES-RU",
+      "type": "Source",
+      "title": "GeoNames RU dump",
+      "catalog_id": "geonames-ru",
+      "license": "CC-BY-4.0",
+      "vendor": false,
+      "pointer": true,
+      "notes": "RU.zip не кладётся в git; ежедневные mods/deletes."
+    },
+    {
+      "id": "SRC-UKASE-326",
+      "type": "Source",
+      "title": "Указ Президента № 326 (ред. № 522)",
+      "catalog_id": "ukase-326",
+      "license": "official-text",
+      "vendor": false
+    },
+    {
+      "id": "SRC-HFLABS-REGION",
+      "type": "Source",
+      "title": "hflabs/region",
+      "catalog_id": "hflabs-region",
+      "license": "CC-BY-SA-4.0",
+      "vendor": false,
+      "pointer": true,
+      "notes": "ShareAlike — только data/raw/, не curated."
+    },
+    {
+      "id": "SRC-HFLABS-CITY",
+      "type": "Source",
+      "title": "hflabs/city",
+      "catalog_id": "hflabs-city",
+      "license": "CC-BY-SA-4.0",
+      "vendor": false,
+      "pointer": true
+    },
+    {
+      "id": "SRC-EPOGREBNYAK-RU-CITIES",
+      "type": "Source",
+      "title": "epogrebnyak/ru-cities",
+      "catalog_id": "epogrebnyak-ru-cities",
+      "license": "unknown",
+      "vendor": false,
+      "pointer": true
+    },
+    {
+      "id": "SRC-MFURSOV-RUSSIAN-CITIES",
+      "type": "Source",
+      "title": "mfursov/russian-cities",
+      "catalog_id": "mfursov-russian-cities",
+      "license": "Apache-2.0",
+      "vendor": false,
+      "pointer": true
+    },
+    {
+      "id": "SRC-NICKYX3-SETTLEMENTS",
+      "type": "Source",
+      "title": "NickyX3/russia_settlements",
+      "catalog_id": "nickyx3-settlements",
+      "license": "unknown",
+      "vendor": false,
+      "pointer": true
+    },
+    {
+      "id": "SRC-WIKIDATA",
+      "type": "Source",
+      "title": "Wikidata",
+      "catalog_id": "wikidata",
+      "license": "CC0",
+      "vendor": false
+    },
+    {
+      "id": "MAP-GN-CANON",
+      "type": "Mapping",
+      "title": "GeoNames → канон",
+      "path": "data/mappings/geonames.yaml",
+      "catalog_id": "geonames-ru"
+    },
+    {
+      "id": "MAP-GKGN",
+      "type": "Mapping",
+      "title": "ГКГН → канон",
+      "path": "data/mappings/gkgn.yaml",
+      "catalog_id": "gkgn-opendata",
+      "pointer": true
+    },
+    {
+      "id": "MAP-FIAS-POINTER",
+      "type": "Mapping",
+      "title": "ФИАС/ГАР указатель",
+      "path": "data/mappings/fias-pointer.yaml",
+      "catalog_id": "fias-gar",
+      "pointer": true
+    },
+    {
+      "id": "MAP-HFLABS-REGION",
+      "type": "Mapping",
+      "title": "hflabs/region указатель",
+      "path": "data/mappings/hflabs-region.yaml",
+      "catalog_id": "hflabs-region",
+      "pointer": true,
+      "notes": "Не копировать строки в curated."
+    },
+    {
+      "id": "MAP-UKASE-326",
+      "type": "Mapping",
+      "title": "Указ № 326 → ФОИВ",
+      "path": "data/mappings/ukase-326.yaml",
+      "catalog_id": "ukase-326"
+    },
+    {
+      "id": "CHK-DETECTOR",
+      "type": "Check",
+      "title": "Детекторы обновлений check.py",
+      "path": "scripts/check.py",
+      "notes": "Экземпляры прогонов живут в data/sources/runs/, не в онтологии."
+    },
+    {
+      "id": "RSK-FIAS-VENDOR",
+      "type": "Risk",
+      "title": "Случайный вендор полного ГАР/ФИАС",
+      "status": "mitigated",
+      "summary": "vendor: false, max_vendor_bytes, test_no_vendor, CI find -size +10M."
+    },
+    {
+      "id": "RSK-CCBYSA-CURATED",
+      "type": "Risk",
+      "title": "CC-BY-SA в MIT curated",
+      "status": "mitigated",
+      "summary": "hflabs — pointer; ShareAlike только data/raw/<source>/."
+    },
+    {
+      "id": "RSK-EMPTY-COMMIT",
+      "type": "Risk",
+      "title": "Пустой коммит при daily no-op",
+      "status": "mitigated",
+      "summary": "Писать runs/YYYY-MM-DD.json; не commit --allow-empty; git diff --cached --quiet."
+    },
+    {
+      "id": "LSN-SEEDS-MISSING",
+      "type": "Lesson",
+      "title": "Daily no-op из-за сидов, которых не было в git",
+      "date": "2026-09-09",
+      "summary": "CHANGELOG заявлял сиды ФО/субъектов/ФОИВ, пока в дереве был только types.csv. Daily не мог патчить канон. Сиды заведены в P1; календарная секция CHANGELOG — в релизе."
+    }
+  ]
+}
