@@ -21,6 +21,12 @@
 | P8-DOCS | README 5 мин, CHANGELOG, daily | `feature/P8-docs` | команды README копируются; daily → check.py | COMPLETE |
 | P9-DONE | reviewer + tag `2026.09.09` | `feature/P9-release` | pytest+ruff+validate; нет файлов >10 МБ; GitHub Release | COMPLETE |
 
+## Post-v1
+
+| ID | Слайс | Ветка | Acceptance | Status |
+|---|---|---|---|---|
+| v1.1-HTTP-DATED | `http_dated`: `changed` только RU-строки; `also` не флипает | `feature/v1.1-http-dated` | non-RU + dump Last-Modified → exit 0; cursor остаётся датой mods | COMPLETE |
+
 ## Definition of Done v1
 
 - Все 11 resources из `datapackage.json` на диске.

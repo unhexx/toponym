@@ -1,14 +1,17 @@
 # .agent/TODO.md — Task Backlog
 
 **Initiative:** toponym v1 local registries
-**Status:** P9-DONE complete; v1 tagged 2026.09.09
+**Status:** P9-DONE complete; v1 tagged 2026.09.09; v1.1-http-dated landed
 
 ## In progress
 
 ## Pending
 
+- [ ] docs-drift: design v1 всё ещё описывает P6 как next и пустые `geonames` (Москва/Волга уже заполнены)
+
 ## Done
 
+- [x] v1.1-HTTP-DATED: `http_dated` ignores dump Last-Modified; cursor stays mods date
 - [x] P9-DONE-01: Reviewer gate, no vendor >10MB, tag/release 2026.09.09
 - [x] P8-DOCS-01: README quick start, CHANGELOG honest Unreleased, SOURCES.md, review=gold/needs_review
 - [x] P7-ONT-01: ontology/ontology.json with DEC-REG-001 and Source list
