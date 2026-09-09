@@ -1,0 +1,20 @@
+{
+  "fields": [
+    { "name": "id", "type": "string", "constraints": { "required": true } },
+    { "name": "type_code", "type": "string", "constraints": { "required": true } },
+    { "name": "lemma", "type": "string", "constraints": { "required": true } },
+    { "name": "yo", "type": "string" },
+    { "name": "gender", "type": "string", "constraints": { "enum": ["m", "f", "n", "pl"] } },
+    { "name": "paradigm", "type": "string", "constraints": { "enum": ["noun_m2", "noun_f1", "noun_f3", "noun_n_ovo", "adj_m", "mixed_phrase", "pl_tantum", "indecl", "agency-head"] } },
+    { "name": "declinable", "type": "string", "constraints": { "enum": ["always", "never", "optional", "not_with_generic"] } },
+    { "name": "nom", "type": "string" },
+    { "name": "gen", "type": "string" },
+    { "name": "dat", "type": "string" },
+    { "name": "acc", "type": "string" },
+    { "name": "ins", "type": "string" },
+    { "name": "pre", "type": "string" },
+    { "name": "loc2", "type": "string" },
+    { "name": "review", "type": "string", "constraints": { "required": true, "enum": ["gold", "auto", "needs_review"] } },
+    { "name": "source", "type": "string" }
+  ]
+}

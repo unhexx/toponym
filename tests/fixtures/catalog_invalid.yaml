@@ -1,0 +1,8 @@
+updated: 2026-09-09
+sources:
+  - url: https://example.invalid/missing-id
+    license: MIT
+    vendor: false
+    checked_at: 2026-09-09
+    detector:
+      kind: none

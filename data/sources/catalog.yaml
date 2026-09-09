@@ -4,43 +4,99 @@ sources:
     url: https://rosreestr.gov.ru/opendata/7706560536svedeniyaizgosudarstvennogokatalogageograficheskikhnazvaniy/
     license: official-open-data
     vendor: false
+    max_vendor_bytes: 10485760
     checked_at: 2026-09-09
+    detector:
+      kind: http_head
+      urls:
+        - https://rosreestr.gov.ru/opendata/7706560536svedeniyaizgosudarstvennogokatalogageograficheskikhnazvaniy/
   - id: fias-gar
     url: https://fias.nalog.ru/
     license: official-open-data
     vendor: false
+    max_vendor_bytes: 10485760
     checked_at: 2026-09-09
+    detector:
+      kind: http_head
+      note: указатель; полный ГАР не вендорится
   - id: geonames-ru
     url: https://download.geonames.org/export/dump/RU.zip
     license: CC-BY-4.0
+    vendor: false
+    max_vendor_bytes: 10485760
     checked_at: 2026-09-09
+    cursor: "2026-09-08"
+    detector:
+      kind: http_dated
+      urls:
+        - https://download.geonames.org/export/dump/modifications-{yesterday}.txt
+        - https://download.geonames.org/export/dump/deletes-{yesterday}.txt
+      also: last_modified_header
   - id: ukase-326
     title: Указ Президента № 326 от 11.05.2024 (ред. № 522)
+    url: https://ru.wikipedia.org/wiki/Структура_федеральных_органов_исполнительной_власти_России_(с_2024)
     license: official-text
+    vendor: false
     last_updated: 2024-06-17
     checked_at: 2026-09-09
+    detector:
+      kind: page_fingerprint
+      urls:
+        - https://ru.wikipedia.org/wiki/Структура_федеральных_органов_исполнительной_власти_России_(с_2024)
+      note: структурный указ после №522 — ручной gate в curated
   - id: hflabs-region
     url: https://github.com/hflabs/region
     license: CC-BY-SA-4.0
+    vendor: false
     checked_at: 2026-09-09
+    detector:
+      kind: github_commits
+      repo: hflabs/region
+      since: checked_at
   - id: hflabs-city
     url: https://github.com/hflabs/city
     license: CC-BY-SA-4.0
+    vendor: false
     checked_at: 2026-09-09
+    detector:
+      kind: github_commits
+      repo: hflabs/city
+      since: checked_at
   - id: epogrebnyak-ru-cities
     url: https://github.com/epogrebnyak/ru-cities
+    license: unknown
+    vendor: false
     checked_at: 2026-09-09
+    detector:
+      kind: github_commits
+      repo: epogrebnyak/ru-cities
+      since: checked_at
   - id: mfursov-russian-cities
     url: https://github.com/mfursov/russian-cities
     license: Apache-2.0
+    vendor: false
     checked_at: 2026-09-09
+    detector:
+      kind: github_commits
+      repo: mfursov/russian-cities
+      since: checked_at
   - id: nickyx3-settlements
     url: https://github.com/NickyX3/russia_settlements
+    license: unknown
+    vendor: false
     checked_at: 2026-09-09
+    detector:
+      kind: github_commits
+      repo: NickyX3/russia_settlements
+      since: checked_at
   - id: wikidata
     url: https://query.wikidata.org/
     license: CC0
+    vendor: false
     checked_at: 2026-09-09
+    detector:
+      kind: none
+      note: SPARQL по уже известным Q-id; не массовый дамп
 watchlist_github:
   - epogrebnyak/ru-cities
   - NickyX3/russia_settlements

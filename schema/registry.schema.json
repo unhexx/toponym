@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/unhexx/toponym/schema/registry.schema.json",
+  "title": "canonical place or agency record",
+  "type": "object",
+  "required": [
+    "id", "id_scheme", "type_id", "name_ru", "status", "source_id", "updated_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "minLength": 3 },
+    "id_scheme": {
+      "type": "string",
+      "enum": ["wikidata", "geonames", "iso3166-2", "fias", "gkgn", "foiv", "fo", "local"]
+    },
+    "type_id": { "type": "string", "minLength": 1 },
+    "name_ru": { "type": "string", "minLength": 1 },
+    "name_yo": { "type": "string" },
+    "name_en": { "type": "string" },
+    "abbr": { "type": "string" },
+    "parent_id": { "type": "string" },
+    "admin1": { "type": "string" },
+    "lat": { "type": ["number", "null", "string"] },
+    "lon": { "type": ["number", "null", "string"] },
+    "wd": { "type": "string" },
+    "geonames": { "type": "string" },
+    "fias": { "type": "string" },
+    "oktmo": { "type": "string" },
+    "iso": { "type": "string" },
+    "status": { "type": "string", "enum": ["active", "deprecated"] },
+    "replaced_by": { "type": "string" },
+    "source_id": { "type": "string", "minLength": 2 },
+    "source_rev": { "type": "string" },
+    "updated_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "notes": { "type": "string" }
+  }
+}
