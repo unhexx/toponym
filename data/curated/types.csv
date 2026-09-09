@@ -1,0 +1,20 @@
+id,level,parent_id,name_ru,name_en,name_en_alt,example_ru,geonames_class,notes
+toponym,root,,топоним,toponym,place-name,Москва,,общий класс любого географического объекта; на слайде опечатка «Торопум»
+oikonym,primary,toponym,ойконим,oikonym,settlement name|село|деревня,P,населённый пункт
+hydronym,primary,toponym,гидроним,hydronym,,Волга|Байкал|Чёрное море,H,водный объект
+oronym,primary,toponym,ороним,oronym,,Эльбрус|Урал,T,рельеф
+urbanonym,primary,toponym,урбаноним,urbanonym,,Красная площадь,S,внутригородской объект
+hodonym,secondary,urbanonym,годоним,hodonym,odonym,Тверская улица,R,улица; в EN чаще hodonym чем urbanonym
+dromonym,primary,toponym,дромоним,dromonym,,Транссиб|М-11 Нева,R,пути сообщения: шоссе трассы исторические дороги
+microtoponym,primary,toponym,микротопоним,microtoponym,,урочище Синие камни,L,мелкий локальный объект: поле овраг урочище
+choronym,secondary,toponym,хороним,choronym,,Сибирь|Поволжье,A,территория / историческая область
+federal-district,secondary,choronym,федеральный округ,federal district,,ЦФО,A,не субъект РФ
+subject,secondary,choronym,субъект РФ,federal subject,,Республика Татарстан,A,
+municipality,secondary,choronym,муниципалитет,municipality,,городской округ Самара,A,
+city,secondary,oikonym,город,city,,Новосибирск,P,
+village,secondary,oikonym,сельский НП,village,,Бородино,P,село деревня станица хутор аул
+potamonym,secondary,hydronym,потамоним,potamonym,,Обь,H,STM река
+limnonym,secondary,hydronym,лимноним,limnonym,,Байкал,H,LK озеро
+insulonym,secondary,oronym,инсулоним,insulonym,,Сахалин,T,остров архипелаг полуостров
+agoronym,secondary,urbanonym,агороним,agoronym,,Красная площадь,S,площадь
+agency,adjacent,,ведомство,agency,,МВД России,,не топоним; включено по ТЗ

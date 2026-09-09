@@ -1,0 +1,52 @@
+updated: 2026-09-09
+sources:
+  - id: gkgn-opendata
+    url: https://rosreestr.gov.ru/opendata/7706560536svedeniyaizgosudarstvennogokatalogageograficheskikhnazvaniy/
+    license: official-open-data
+    vendor: false
+    checked_at: 2026-09-09
+  - id: fias-gar
+    url: https://fias.nalog.ru/
+    license: official-open-data
+    vendor: false
+    checked_at: 2026-09-09
+  - id: geonames-ru
+    url: https://download.geonames.org/export/dump/RU.zip
+    license: CC-BY-4.0
+    checked_at: 2026-09-09
+  - id: ukase-326
+    title: Указ Президента № 326 от 11.05.2024 (ред. № 522)
+    license: official-text
+    last_updated: 2024-06-17
+    checked_at: 2026-09-09
+  - id: hflabs-region
+    url: https://github.com/hflabs/region
+    license: CC-BY-SA-4.0
+    checked_at: 2026-09-09
+  - id: hflabs-city
+    url: https://github.com/hflabs/city
+    license: CC-BY-SA-4.0
+    checked_at: 2026-09-09
+  - id: epogrebnyak-ru-cities
+    url: https://github.com/epogrebnyak/ru-cities
+    checked_at: 2026-09-09
+  - id: mfursov-russian-cities
+    url: https://github.com/mfursov/russian-cities
+    license: Apache-2.0
+    checked_at: 2026-09-09
+  - id: nickyx3-settlements
+    url: https://github.com/NickyX3/russia_settlements
+    checked_at: 2026-09-09
+  - id: wikidata
+    url: https://query.wikidata.org/
+    license: CC0
+    checked_at: 2026-09-09
+watchlist_github:
+  - epogrebnyak/ru-cities
+  - NickyX3/russia_settlements
+  - mfursov/russian-cities
+  - arbaev/russia-cities
+  - AMDmi3/streetmangler
+  - hflabs/region
+  - hflabs/city
+  - OSMNames/OSMNames
