@@ -15,6 +15,7 @@
 - Золотые склонения фикстур из `docs/DECLENSIONS.md`, округов, субъектов и аббревиатур ФОИВ.
 - Указатели `data/raw/*/SOURCE.md` (hflabs, GeoNames, ФИАС/ГАР, ГКГН, Wikidata) без вендора дампов.
 - Маппинги источников: GeoNames, ГКГН, ФИАС-указатель, hflabs/region, указ № 326.
+- `scripts/check.py`: детекторы http_head / http_dated / github_commits / page_fingerprint / none.
 
 ### Changed
 - Каталог источников: обязательные `vendor` и `detector.kind`.
