@@ -19,7 +19,7 @@
 
 ## Current Status
 
-P0–P7 на `main`: схемы, сиды, маппинги, check/sync/validate/index, онтология. Документация и релиз — P8–P9, см. `TASK_SPECIFICATION.md`, `.agent/PLAN.md`, `.agent/TODO.md`.
+v1 `2026.09.09` на `main`: схемы, сиды, маппинги, check/sync/validate/index, онтология, документация. См. `TASK_SPECIFICATION.md`, `.agent/PLAN.md`, `.agent/TODO.md`.
 
 ## Recommended Stack (do not deviate without an ADR)
 

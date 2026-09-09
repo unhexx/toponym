@@ -1,16 +1,15 @@
 # .agent/TODO.md — Task Backlog
 
 **Initiative:** toponym v1 local registries
-**Status:** P8-DOCS complete; next P9-DONE
+**Status:** P9-DONE complete; v1 tagged 2026.09.09
 
 ## In progress
-
-- [ ] P9-DONE-01: Reviewer gate, no vendor >10MB, tag/release 2026.09.09
 
 ## Pending
 
 ## Done
 
+- [x] P9-DONE-01: Reviewer gate, no vendor >10MB, tag/release 2026.09.09
 - [x] P8-DOCS-01: README quick start, CHANGELOG honest Unreleased, SOURCES.md, review=gold/needs_review
 - [x] P7-ONT-01: ontology/ontology.json with DEC-REG-001 and Source list
 - [x] P6-INDEX-01: scripts/index.py SQLite FTS; search Волга / МВД
