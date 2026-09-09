@@ -1,15 +1,14 @@
 # .agent/TODO.md — Task Backlog
 
 **Initiative:** toponym v1 local registries
-**Status:** P1-SEED complete; next P2-MAP
+**Status:** P2-MAP complete; next P3-CHECK
 
 ## In progress
 
-- [ ] P2-MAP-01: data/mappings/{geonames,gkgn,fias-pointer,hflabs-region,ukase-326}.yaml
+- [ ] P3-CHECK-01: scripts/check.py + pytest (exit 0 no-op, JSON report)
 
 ## Pending
 
-- [ ] P3-CHECK-01: scripts/check.py + pytest (exit 0 no-op, JSON report)
 - [ ] P4-SYNC-01: scripts/sync.py upsert/deprecate + pytest fixture 2→3
 - [ ] P5-VAL-01: scripts/validate.py + frictionless; broken CSV fails
 - [ ] P6-INDEX-01: scripts/index.py SQLite FTS; search Волга / МВД
@@ -19,6 +18,7 @@
 
 ## Done
 
+- [x] P2-MAP-01: data/mappings/{geonames,gkgn,fias-pointer,hflabs-region,ukase-326}.yaml
 - [x] P1-SEED-01: federal-districts.csv, regions.csv, cities-major.csv
 - [x] P1-SEED-02: hydronyms-major.csv, oronyms-major.csv
 - [x] P1-SEED-03: agencies-foiv.csv, agencies-other.csv

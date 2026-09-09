@@ -1,0 +1,13 @@
+source_id: fias-gar
+stable_id: "fias:{aoguid}"
+fields:
+  aoguid: fias
+  formalname: name_ru
+  shortname: abbr
+  parentguid: parent_id
+  oktmo: oktmo
+delete_policy: pointer
+notes: >
+  Полный ГАР/ФИАС не вендорится. Это указатель: GUID в каноне при
+  необходимости снимать из официальной выгрузки вне дерева репозитория.
+  v1 sync обновляет только checked_at, строки в curated не копирует.
