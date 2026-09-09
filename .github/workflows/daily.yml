@@ -1,0 +1,183 @@
+name: Daily registry refresh
+
+on:
+  schedule:
+    # 06:00 UTC ≈ 09:00 Europe/Moscow
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-registry-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: check → sync → validate → journal
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          if [[ -f Agent-Init.sh ]]; then
+            bash Agent-Init.sh
+            # shellcheck disable=SC1091
+            source .venv/bin/activate
+            echo "$VIRTUAL_ENV/bin" >> "$GITHUB_PATH"
+          else
+            pip install -e ".[dev]"
+          fi
+
+      - name: Daily refresh (DAILY_UPDATE mechanical path)
+        id: refresh
+        env:
+          TODAY: ${{ github.event_name == 'schedule' && '' || '' }}
+        run: |
+          set -euo pipefail
+          TODAY=$(date -u +%Y-%m-%d)
+          echo "today=$TODAY" >> "$GITHUB_OUTPUT"
+          mkdir -p data/sources/runs
+
+          if [[ ! -f scripts/check.py ]]; then
+            echo "check_exit=missing" >> "$GITHUB_OUTPUT"
+            echo "changed_count=0" >> "$GITHUB_OUTPUT"
+            echo "validate=skip" >> "$GITHUB_OUTPUT"
+            cat > "data/sources/runs/${TODAY}.json" <<EOF
+          {
+            "as_of": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "changed_count": 0,
+            "error_count": 0,
+            "sources": [],
+            "records_upserted": 0,
+            "records_deprecated": 0,
+            "commit": null,
+            "check_exit": "missing",
+            "notes": "scripts/check.py отсутствует (до P3); механический daily soft-skip без патча CSV"
+          }
+          EOF
+            echo "Soft-skip: scripts/check.py missing — journal only, no CSV patches."
+            exit 0
+          fi
+
+          set +e
+          python scripts/check.py --json | tee /tmp/check.json
+          CHECK_EXIT=$?
+          set -e
+          echo "check_exit=$CHECK_EXIT" >> "$GITHUB_OUTPUT"
+
+          if [[ "$CHECK_EXIT" -eq 2 ]]; then
+            echo "validate=skip" >> "$GITHUB_OUTPUT"
+            echo "check.py failed (exit 2); refusing sync/commit" >&2
+            exit 1
+          fi
+
+          if [[ "$CHECK_EXIT" -eq 10 ]]; then
+            if [[ ! -f scripts/sync.py ]]; then
+              echo "check reported changes but scripts/sync.py missing" >&2
+              exit 1
+            fi
+            # Prefer applying all changed sources when supported; else require --apply
+            if python scripts/sync.py --help 2>&1 | grep -q -- '--apply'; then
+              python scripts/sync.py --apply
+            else
+              python scripts/sync.py
+            fi
+
+            if [[ -f scripts/validate.py ]]; then
+              set +e
+              python scripts/validate.py
+              VAL=$?
+              set -e
+              echo "validate=$VAL" >> "$GITHUB_OUTPUT"
+              if [[ "$VAL" -ne 0 ]]; then
+                git checkout -- data || true
+                echo "validate failed; reverted data/, no commit" >&2
+                exit 1
+              fi
+            else
+              echo "validate=skip" >> "$GITHUB_OUTPUT"
+            fi
+
+            if [[ -f scripts/index.py ]]; then
+              python scripts/index.py || true
+            fi
+          else
+            # 0 = no delta
+            echo "validate=skip" >> "$GITHUB_OUTPUT"
+            echo "changed_count=0" >> "$GITHUB_OUTPUT"
+          fi
+
+          # Ensure journal exists (scripts may already have written it)
+          if [[ ! -f "data/sources/runs/${TODAY}.json" ]]; then
+            CHANGED=0
+            if [[ "$CHECK_EXIT" -eq 10 ]]; then CHANGED=1; fi
+            cat > "data/sources/runs/${TODAY}.json" <<EOF
+          {
+            "as_of": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "changed_count": ${CHANGED},
+            "error_count": 0,
+            "sources": [],
+            "records_upserted": 0,
+            "records_deprecated": 0,
+            "commit": null,
+            "check_exit": ${CHECK_EXIT}
+          }
+          EOF
+          fi
+
+      - name: Commit if there is a real diff
+        env:
+          TODAY: ${{ steps.refresh.outputs.today }}
+        run: |
+          set -euo pipefail
+          TODAY=${TODAY:-$(date -u +%Y-%m-%d)}
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet && git diff --cached --quiet && [[ -z "$(git ls-files --others --exclude-standard)" ]]; then
+            echo "No changes — skip commit (empty commit forbidden)."
+            exit 0
+          fi
+
+          git add -A data/sources/runs data/sources/catalog.yaml data/curated knowledge CHANGELOG.md || true
+          # Only stage paths that exist / changed; avoid adding secrets
+          git add -u
+          if [[ -n "$(git ls-files --others --exclude-standard data/sources/runs)" ]]; then
+            git add data/sources/runs/
+          fi
+
+          if git diff --cached --quiet; then
+            echo "Staged empty — skip commit."
+            exit 0
+          fi
+
+          # Rough N from journal if present
+          N=0
+          JOURNAL="data/sources/runs/${TODAY}.json"
+          if [[ -f "$JOURNAL" ]] && command -v python >/dev/null; then
+            N=$(python -c "import json; print(json.load(open('$JOURNAL')).get('records_upserted',0))" || echo 0)
+          fi
+
+          if [[ "$N" -gt 0 ]]; then
+            MSG="chore(data): daily refresh ${TODAY} (${N} records)"
+          else
+            MSG="chore(data): daily refresh ${TODAY} (0 records)"
+          fi
+
+          git commit -m "$MSG"
+          git push origin HEAD:main
