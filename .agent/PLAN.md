@@ -2,14 +2,14 @@
 
 **Initiative:** toponym v1 local registries
 **Template Version:** 3.13.0
-**Last Update:** 2026-09-09 (bootstrap)
+**Last Update:** 2026-09-09 (P1-SEED)
 
 ## Phase Status
 
 | Phase | Status |
 |-------|--------|
 | P0-BOOT Agentix + schemas | COMPLETE |
-| P1-SEED curated + declensions | PENDING |
+| P1-SEED curated + declensions | COMPLETE |
 | P2-MAP source mappings | PENDING |
 | P3-CHECK scripts/check.py | PENDING |
 | P4-SYNC scripts/sync.py | PENDING |

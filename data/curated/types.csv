@@ -1,6 +1,6 @@
 id,level,parent_id,name_ru,name_en,name_en_alt,example_ru,geonames_class,notes
 toponym,root,,топоним,toponym,place-name,Москва,,общий класс любого географического объекта; на слайде опечатка «Торопум»
-oikonym,primary,toponym,ойконим,oikonym,settlement name|село|деревня,P,населённый пункт
+oikonym,primary,toponym,ойконим,oikonym,settlement name,Москва,P,населённый пункт; EN also place-name
 hydronym,primary,toponym,гидроним,hydronym,,Волга|Байкал|Чёрное море,H,водный объект
 oronym,primary,toponym,ороним,oronym,,Эльбрус|Урал,T,рельеф
 urbanonym,primary,toponym,урбаноним,urbanonym,,Красная площадь,S,внутригородской объект

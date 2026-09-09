@@ -1,0 +1,11 @@
+id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
+foiv:genproc,foiv,agency,Генеральная прокуратура Российской Федерации,,,Генпрокуратура,,,,,,,,,,active,,wikidata,,2026-09-09,
+foiv:skr,foiv,agency,Следственный комитет Российской Федерации,,,СК России,,,,,,,,,,active,,wikidata,,2026-09-09,
+foiv:cbr,foiv,agency,Центральный банк Российской Федерации,,,Банк России,,,,,,,,,,active,,wikidata,,2026-09-09,
+foiv:ach,foiv,agency,Счетная палата Российской Федерации,Счётная палата Российской Федерации,,Счётная палата,,,,,,,,,,active,,wikidata,,2026-09-09,
+foiv:ksrf,foiv,agency,Конституционный Суд Российской Федерации,,,КС РФ,,,,,,,,,,active,,wikidata,,2026-09-09,
+foiv:vsrf,foiv,agency,Верховный Суд Российской Федерации,,,ВС РФ,,,,,,,,,,active,,wikidata,,2026-09-09,
+foiv:cik,foiv,agency,Центральная избирательная комиссия Российской Федерации,,,ЦИК России,,,,,,,,,,active,,wikidata,,2026-09-09,
+foiv:ap,foiv,agency,Администрация Президента Российской Федерации,,,АП,,,,,,,,,,active,,wikidata,,2026-09-09,
+foiv:govstaff,foiv,agency,Аппарат Правительства Российской Федерации,,,Аппарат Правительства,,,,,,,,,,active,,wikidata,,2026-09-09,
+foiv:sovbez,foiv,agency,Совет Безопасности Российской Федерации,,,Совбез,,,,,,,,,,active,,wikidata,,2026-09-09,

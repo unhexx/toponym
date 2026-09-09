@@ -1,0 +1,18 @@
+# Cities in Russia with a stored population ≥ 100000.
+# P31/P279* city (Q515); country P17 = Russia (Q159).
+# Run at https://query.wikidata.org/ — do not dump the result into git.
+
+SELECT DISTINCT ?city ?iso ?pop ?ru ?en WHERE {
+  ?city wdt:P17 wd:Q159 .
+  ?city wdt:P31/wdt:P279* wd:Q515 .
+  ?city wdt:P1082 ?pop .
+  FILTER(?pop >= 100000)
+  OPTIONAL {
+    ?city wdt:P131* ?subj .
+    ?subj wdt:P300 ?iso .
+    FILTER(STRSTARTS(?iso, "RU-"))
+  }
+  OPTIONAL { ?city rdfs:label ?ru FILTER(LANG(?ru) = "ru") }
+  OPTIONAL { ?city rdfs:label ?en FILTER(LANG(?en) = "en") }
+}
+ORDER BY DESC(?pop)

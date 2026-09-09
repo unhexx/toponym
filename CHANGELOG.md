@@ -11,9 +11,10 @@
 - Детекторы обновлений в `data/sources/catalog.yaml`.
 - Исполняемый ежедневный промпт `agents/DAILY_UPDATE.md` (check → sync → validate → index; журнал `data/sources/runs/`).
 - План циклов `CYCLE_PLAN.md` и дизайн v1.
+- Сиды канона: 8 федеральных округов, 89 субъектов, крупные города, гидронимы, оронимы, ФОИВ (указ № 326 / № 522) и смежные ведомства.
+- Золотые склонения фикстур из `docs/DECLENSIONS.md`, округов, субъектов и аббревиатур ФОИВ.
+- Указатели `data/raw/*/SOURCE.md` (hflabs, GeoNames, ФИАС/ГАР, ГКГН, Wikidata) без вендора дампов.
 
 ### Changed
 - Каталог источников: обязательные `vendor` и `detector.kind`.
-
-### Note
-- Сиды curated-таблиц ещё не в git; появятся в цикле P1.
+- В `types.csv` у `oikonym` восстановлены `example_ru=Москва` и класс GeoNames `P`.
