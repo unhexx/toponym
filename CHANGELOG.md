@@ -16,6 +16,7 @@
 - Указатели `data/raw/*/SOURCE.md` (hflabs, GeoNames, ФИАС/ГАР, ГКГН, Wikidata) без вендора дампов.
 - Маппинги источников: GeoNames, ГКГН, ФИАС-указатель, hflabs/region, указ № 326.
 - `scripts/check.py`: детекторы http_head / http_dated / github_commits / page_fingerprint / none.
+- `scripts/sync.py`: upsert по id, deprecate без удаления строк, GeoNames только match колонки `geonames`.
 
 ### Changed
 - Каталог источников: обязательные `vendor` и `detector.kind`.

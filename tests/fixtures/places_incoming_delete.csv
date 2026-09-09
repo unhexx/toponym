@@ -1,0 +1,2 @@
+id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
+iso:RU-MOS,iso3166-2,subject,Московская область,,Moscow Oblast,RU-MOS,fo:cfo,RU-MOS,,,Q1697,,,,RU-MOS,deprecated,iso:RU-ME,wikidata,,2026-09-09,

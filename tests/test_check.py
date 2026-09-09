@@ -5,8 +5,9 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import requests
-import scripts.check as check_mod
 import yaml
+
+import scripts.check as check_mod
 from scripts.lib.catalog import load_catalog
 from scripts.lib.detectors import (
     check_catalog,
