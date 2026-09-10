@@ -1,11 +1,11 @@
-updated: 2026-09-09
+updated: 2026-09-10
 sources:
   - id: gkgn-opendata
     url: https://rosreestr.gov.ru/opendata/7706560536svedeniyaizgosudarstvennogokatalogageograficheskikhnazvaniy/
     license: official-open-data
     vendor: false
     max_vendor_bytes: 10485760
-    checked_at: 2026-09-09
+    checked_at: 2026-09-10
     detector:
       kind: http_head
       urls:
@@ -15,7 +15,7 @@ sources:
     license: official-open-data
     vendor: false
     max_vendor_bytes: 10485760
-    checked_at: 2026-09-09
+    checked_at: 2026-09-10
     detector:
       kind: http_head
       note: указатель; полный ГАР не вендорится
@@ -24,7 +24,7 @@ sources:
     license: CC-BY-4.0
     vendor: false
     max_vendor_bytes: 10485760
-    checked_at: 2026-09-09
+    checked_at: 2026-09-10
     cursor: "2026-09-08"
     detector:
       kind: http_dated
@@ -38,7 +38,7 @@ sources:
     license: official-text
     vendor: false
     last_updated: 2024-06-17
-    checked_at: 2026-09-09
+    checked_at: 2026-09-10
     detector:
       kind: page_fingerprint
       urls:
@@ -48,7 +48,7 @@ sources:
     url: https://github.com/hflabs/region
     license: CC-BY-SA-4.0
     vendor: false
-    checked_at: 2026-09-09
+    checked_at: 2026-09-10
     detector:
       kind: github_commits
       repo: hflabs/region
@@ -57,7 +57,7 @@ sources:
     url: https://github.com/hflabs/city
     license: CC-BY-SA-4.0
     vendor: false
-    checked_at: 2026-09-09
+    checked_at: 2026-09-10
     detector:
       kind: github_commits
       repo: hflabs/city
@@ -66,7 +66,7 @@ sources:
     url: https://github.com/epogrebnyak/ru-cities
     license: unknown
     vendor: false
-    checked_at: 2026-09-09
+    checked_at: 2026-09-10
     detector:
       kind: github_commits
       repo: epogrebnyak/ru-cities
@@ -75,7 +75,7 @@ sources:
     url: https://github.com/mfursov/russian-cities
     license: Apache-2.0
     vendor: false
-    checked_at: 2026-09-09
+    checked_at: 2026-09-10
     detector:
       kind: github_commits
       repo: mfursov/russian-cities
@@ -84,7 +84,7 @@ sources:
     url: https://github.com/NickyX3/russia_settlements
     license: unknown
     vendor: false
-    checked_at: 2026-09-09
+    checked_at: 2026-09-10
     detector:
       kind: github_commits
       repo: NickyX3/russia_settlements
@@ -93,7 +93,7 @@ sources:
     url: https://query.wikidata.org/
     license: CC0
     vendor: false
-    checked_at: 2026-09-09
+    checked_at: 2026-09-10
     detector:
       kind: none
       note: SPARQL по уже известным Q-id; не массовый дамп

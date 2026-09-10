@@ -1,0 +1,90 @@
+{
+  "as_of": "2026-09-10T03:36:07Z",
+  "changed_count": 0,
+  "error_count": 0,
+  "sources": [
+    {
+      "id": "gkgn-opendata",
+      "changed": false,
+      "reason": "http_head timeout/no reliable headers; pointer only",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "fias-gar",
+      "changed": false,
+      "reason": "pointer; full GAR not vendored",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "geonames-ru",
+      "changed": false,
+      "reason": "0 RU rows in mods",
+      "cursor_old": "2026-09-08",
+      "cursor_new": "2026-09-08",
+      "error": false
+    },
+    {
+      "id": "ukase-326",
+      "changed": false,
+      "reason": "page_fingerprint present; structural change requires manual gate",
+      "cursor_old": "",
+      "cursor_new": "77c8b5ffeac5f672930ec97134e69aa91ff4049a75dd242cc29fb847ee7736da",
+      "error": false
+    },
+    {
+      "id": "hflabs-region",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-09",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "hflabs-city",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-09",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "epogrebnyak-ru-cities",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-09",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "mfursov-russian-cities",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-09",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "nickyx3-settlements",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-09",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "wikidata",
+      "changed": false,
+      "reason": "kind=none",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    }
+  ],
+  "records_upserted": 0,
+  "records_deprecated": 0,
+  "commit": null
+}
