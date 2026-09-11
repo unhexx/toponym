@@ -7,12 +7,12 @@
 
 ## Pending
 
-- [ ] NR-I: hflabs CC-BY-SA только `data/raw/`, не curated
 - [ ] NR-J: население / полигоны / GeoJSON / PostGIS вне канона; указатель в docs опционален
 - [ ] NR-K: малые сиды муниципалитетов, годонимов, микротопонимов + datapackage resource
 
 ## Done
 
+- [x] NR-I: hflabs CC-BY-SA только `data/raw/`, не curated (DEC-HFLABS-001)
 - [x] NR-H: Agentix — sibling symlink SSOT, дерево не копировать (DEC-AGENTIX-001)
 - [x] NR-G: только Outpost `ontology/ontology.json`; DEC-* на keep-out A–J, L (DEC-ONT-001)
 - [x] NR-F: публичный HTTP вне scope; loopback `127.0.0.1:8099` (DEC-SERVE-002)

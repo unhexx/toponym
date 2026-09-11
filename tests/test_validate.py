@@ -49,6 +49,21 @@ def test_empty_lat_lon_accepted_on_seeds() -> None:
     assert errors == []
 
 
+def test_hflabs_source_id_fails_validate(tmp_path: Path) -> None:
+    dest = tmp_path / "pkg"
+    dest.mkdir()
+    shutil.copy(ROOT / "datapackage.json", dest / "datapackage.json")
+    shutil.copytree(ROOT / "schema", dest / "schema")
+    shutil.copytree(ROOT / "data", dest / "data")
+    path = dest / "data/curated/regions.csv"
+    text = path.read_text(encoding="utf-8")
+    assert ",wikidata," in text
+    path.write_text(text.replace(",wikidata,", ",hflabs-region,", 1), encoding="utf-8")
+    code, errors = validate_mod.validate_tree(dest / "datapackage.json", root=dest)
+    assert code == 1
+    assert any(row["check"] == "sharealike" for row in errors)
+
+
 def test_renamed_taxonomy_root_fails_validate(tmp_path: Path) -> None:
     dest = tmp_path / "pkg"
     dest.mkdir()
