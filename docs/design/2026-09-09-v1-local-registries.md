@@ -95,7 +95,7 @@ CSV + Table Schema is the interchange any app can read (Python, Go, Excel, DuckD
 - A second ontology format besides Outpost `ontology/ontology.json` (**DEC-ONT-001**, frozen).
 - Vendoring the Agentix template tree (symlink SSOT only) (**DEC-AGENTIX-001**, frozen). Sibling `../agentic_loop_template`; do not copy the tree into the product or image.
 - Copying hflabs CC-BY-SA tables into `data/curated/` (**DEC-HFLABS-001**, frozen).
-- Population time-series, polygons, GeoJSON, PostGIS (**DEC-GEO-001**).
+- Population time-series, polygons, GeoJSON, PostGIS (**DEC-GEO-001**, frozen). Point `lat`/`lon` stay; no geom columns. Pointer: `docs/SOURCES.md`.
 - Municipalities, streets (hodonyms), microtoponyms as populated tables (types exist; seed tables do not).
 - Splitting P1 into sub-cycles P1a–e (**DEC-P1-001**).
 

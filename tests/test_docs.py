@@ -37,6 +37,7 @@ def test_design_snapshot_is_released_v1() -> None:
     assert "DEC-ONT-001" in text
     assert "DEC-AGENTIX-001" in text
     assert "DEC-HFLABS-001" in text
+    assert "DEC-GEO-001" in text
 
 
 def test_readme_has_compose_one_shot() -> None:

@@ -12,6 +12,7 @@
 - 2026-09-11: обновление Compose-ящика одной строкой: `git pull && docker compose up --build`.
 
 ### Changed
+- Геометрия: DEC-GEO-001 — население / полигоны / GeoJSON / PostGIS вне канона; указатель в `docs/SOURCES.md`; `lat`/`lon` остаются точками.
 - hflabs: DEC-HFLABS-001 — CC-BY-SA только `data/raw/`; `validate.py` отклоняет `source_id=hflabs-*` в каноне.
 - Agentix: DEC-AGENTIX-001 — шаблон только sibling-symlink `../agentic_loop_template`, дерево не в git.
 - Онтология: DEC-ONT-001 — только Outpost `ontology/ontology.json`; keep-out A–J, L закрыты DEC-* (дамп, Agentix, hflabs, гео, P1).

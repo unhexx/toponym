@@ -37,3 +37,13 @@ SSOT каталога: [`data/sources/catalog.yaml`](../data/sources/catalog.yam
 - **ODbL (OSM / OSMNames)** — производные остаются в `data/raw/`; в v1 в curated нет.
 
 Маппинги: [`data/mappings/`](../data/mappings/). Онтология источников: `SRC-*` в [`ontology/ontology.json`](../ontology/ontology.json).
+
+## Вне канона (DEC-GEO-001)
+
+Население (ряды по годам), полигоны, GeoJSON и PostGIS **не входят** в CSV-канон.
+Точки `lat`/`lon` допустимы (Wikidata P625 / GeoNames mods). Контуры и численность
+смотреть во внешних источниках, **не** копируя дампы в git:
+
+- население: Росстат; Wikidata P1082
+- границы МО / улиц: Росреестр, OSM (ODbL — только вне `data/curated/`)
+

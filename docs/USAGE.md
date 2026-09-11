@@ -217,7 +217,8 @@ sqlite3 knowledge/registry.db \
 
 Нет в этом релизе: улицы, муниципалитеты, полный ГАР/ФИАС, GeoNames `RU.zip`,
 склонения **каждого** ойконима (только золотые/черновые таблицы выше),
-публичный Internet/LAN API (host publish не `0.0.0.0`; DEC-SERVE-002).
+публичный Internet/LAN API (host publish не `0.0.0.0`; DEC-SERVE-002),
+население / полигоны / GeoJSON / PostGIS (DEC-GEO-001).
 Нет строки — нет падежей; не выдумывайте формы из морфоанализатора как канон.
 
 Нормы склонения: [`docs/DECLENSIONS.md`](DECLENSIONS.md). Таксономия типов: [`docs/taxonomy.md`](taxonomy.md).
