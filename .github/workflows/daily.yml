@@ -34,14 +34,7 @@ jobs:
       - name: Install package
         run: |
           python -m pip install --upgrade pip
-          if [[ -f Agent-Init.sh ]]; then
-            bash Agent-Init.sh
-            # shellcheck disable=SC1091
-            source .venv/bin/activate
-            echo "$VIRTUAL_ENV/bin" >> "$GITHUB_PATH"
-          else
-            pip install -e ".[dev]"
-          fi
+          pip install -e ".[dev]"
 
       - name: Daily refresh (DAILY_UPDATE mechanical path)
         id: refresh
@@ -51,27 +44,6 @@ jobs:
           AS_OF=$(date -u +%Y-%m-%dT%H:%M:%SZ)
           echo "today=$TODAY" >> "$GITHUB_OUTPUT"
           mkdir -p data/sources/runs
-
-          write_journal() {
-            local check_exit="$1"
-            local changed_count="$2"
-            local notes="${3:-}"
-            python .github/scripts/write_run_journal.py \
-              --today "$TODAY" \
-              --as-of "$AS_OF" \
-              --check-exit "$check_exit" \
-              --changed-count "$changed_count" \
-              --notes "$notes"
-          }
-
-          if [[ ! -f scripts/check.py ]]; then
-            echo "check_exit=missing" >> "$GITHUB_OUTPUT"
-            echo "changed_count=0" >> "$GITHUB_OUTPUT"
-            echo "validate=skip" >> "$GITHUB_OUTPUT"
-            write_journal missing 0 "scripts/check.py отсутствует (до P3); механический daily soft-skip без патча CSV"
-            echo "Soft-skip: scripts/check.py missing — journal only, no CSV patches."
-            exit 0
-          fi
 
           set +e
           python scripts/check.py --json | tee /tmp/check.json
@@ -86,45 +58,33 @@ jobs:
           fi
 
           if [[ "$CHECK_EXIT" -eq 10 ]]; then
-            if [[ ! -f scripts/sync.py ]]; then
-              echo "check reported changes but scripts/sync.py missing" >&2
+            python scripts/sync.py --apply
+            set +e
+            python scripts/validate.py
+            VAL=$?
+            set -e
+            echo "validate=$VAL" >> "$GITHUB_OUTPUT"
+            if [[ "$VAL" -ne 0 ]]; then
+              git checkout -- data || true
+              echo "validate failed; reverted data/, no commit" >&2
               exit 1
             fi
-            if python scripts/sync.py --help 2>&1 | grep -q -- '--apply'; then
-              python scripts/sync.py --apply
-            else
-              python scripts/sync.py
-            fi
-
-            if [[ -f scripts/validate.py ]]; then
-              set +e
-              python scripts/validate.py
-              VAL=$?
-              set -e
-              echo "validate=$VAL" >> "$GITHUB_OUTPUT"
-              if [[ "$VAL" -ne 0 ]]; then
-                git checkout -- data || true
-                echo "validate failed; reverted data/, no commit" >&2
-                exit 1
-              fi
-            else
-              echo "validate=skip" >> "$GITHUB_OUTPUT"
-            fi
-
-            if [[ -f scripts/index.py ]]; then
-              python scripts/index.py || true
-            fi
+            python scripts/index.py || true
             echo "changed_count=1" >> "$GITHUB_OUTPUT"
           else
             echo "validate=skip" >> "$GITHUB_OUTPUT"
             echo "changed_count=0" >> "$GITHUB_OUTPUT"
           fi
 
-          if [[ ! -f "data/sources/runs/${TODAY}.json" ]]; then
-            CHANGED=0
-            if [[ "$CHECK_EXIT" -eq 10 ]]; then CHANGED=1; fi
-            write_journal "$CHECK_EXIT" "$CHANGED"
-          fi
+          CHANGED=0
+          if [[ "$CHECK_EXIT" -eq 10 ]]; then CHANGED=1; fi
+          python .github/scripts/write_run_journal.py \
+            --today "$TODAY" \
+            --as-of "$AS_OF" \
+            --check-exit "$CHECK_EXIT" \
+            --changed-count "$CHANGED" \
+            --check-json /tmp/check.json \
+            --stamp-catalog
 
       - name: Commit if there is a real diff
         env:
