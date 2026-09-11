@@ -44,6 +44,7 @@
 | P17-README | world-class README + shields.io | `feature/P17-readme` | бейджи MIT/CalVer/CI/python/compose; `docker compose up --build`; `127.0.0.1:8099` healthz/search | COMPLETE |
 | P18-USAGE | user guide search + declensions | `feature/P18-usage` | `docs/USAGE.md`: healthz, GET search/records, CSV join по id, офлайн; README ссылается | COMPLETE |
 | P19-DEPLOY | min first-run / update | `feature/P19-deploy` | README: первый запуск `docker compose up --build`; обновление `git pull && docker compose up --build`; хост Agent-Init + serve.py | COMPLETE |
+| P20-CHANGELOG | Unreleased USAGE + min-update | `feature/P20-changelog` | CHANGELOG Unreleased датирует USAGE и `git pull && docker compose up --build`; тег `2026.09.11` не двигается | COMPLETE |
 
 ## Definition of Done v1
 

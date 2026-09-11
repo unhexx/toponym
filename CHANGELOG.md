@@ -5,8 +5,12 @@
 
 ## [Unreleased]
 
+### Added
+- 2026-09-11: руководство [`docs/USAGE.md`](docs/USAGE.md) — `GET /healthz`, `/v1/search`, `/v1/records` (только loopback); склонения через CSV join по `id` (HTTP падежей не отдаёт); офлайн CSV/SQLite; сеть только для `check.py` / `sync.py`.
+- 2026-09-11: обновление Compose-ящика одной строкой: `git pull && docker compose up --build`.
+
 ### Changed
-- README: бейджи shields.io (MIT, CalVer `2026.09.11`, CI `ci.yml`, Python 3.12+, Docker Compose), ссылки на `docs/`, CHANGELOG, SOURCES, презентацию и релиз; старт хоста (`.venv`) и `docker compose up --build` с `127.0.0.1:8099/healthz`.
+- README: бейджи shields.io (MIT, CalVer `2026.09.11`, CI `ci.yml`, Python 3.12+, Docker Compose), ссылки на `docs/USAGE.md`, CHANGELOG, SOURCES, презентацию и релиз; старт хоста (`.venv`) и `docker compose up --build` с `127.0.0.1:8099/healthz`.
 
 ## [2026.09.11] - 2026-09-11
 
