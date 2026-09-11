@@ -6,10 +6,10 @@ Living snapshot of DEC-SERVE-001. Executable plan: `CYCLE_PLAN.md`. Do not keep 
 |---|---|
 | **Document** | MVP design for loop 2 (post-v1) |
 | **Date** | 2026-09-11 |
-| **Status** | Active (P10–P12 landed; living snapshot matches the tree) |
-| **CalVer** | v1 stays `2026.09.09`. Loop 2 lands under `[Unreleased]` until the operator tags |
+| **Status** | Released — tag `2026.09.11` (P10–P15 landed) |
+| **CalVer** | Loop 2 is `2026.09.11`. v1 remains `2026.09.09`. |
 | **ADR parent** | `LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md` DEC-REG-001; new overlay decision `DEC-SERVE-001` |
-| **Executable plan** | `CYCLE_PLAN.md` (add Loop 2 table in P10) |
+| **Executable plan** | `CYCLE_PLAN.md` (Loop 2 table P10–P15 COMPLETE) |
 
 This brief is the SSOT for loop 2. v1 (`docs/design/2026-09-09-v1-local-registries.md`, tag `2026.09.09`) is frozen. Do not reopen P0–P9. Do not rewrite CSV canon, detectors, or FTS schema.
 
@@ -173,13 +173,13 @@ Liveness + index presence. Used by Compose healthcheck. Does not run FTS.
 {
   "ok": true,
   "name": "toponym",
-  "version": "2026.09.09",
+  "version": "2026.09.11",
   "records": 447,
   "sources": 10
 }
 ```
 
-`records` / `sources` from `SELECT COUNT(*)` on `records` and `sync_meta`. `version` is the constant in `pyproject.toml` / serve module (do **not** bump CalVer in P10).
+`records` / `sources` from `SELECT COUNT(*)` on `records` and `sync_meta`. `version` follows package CalVer (`pyproject.toml`; tagged `2026.09.11`).
 
 **503** if the DB file is missing or `records` cannot be read:
 
@@ -270,7 +270,7 @@ Discovery JSON so a human hitting the port is not confused:
 {
   "ok": true,
   "name": "toponym",
-  "version": "2026.09.09",
+  "version": "2026.09.11",
   "endpoints": ["/healthz", "/v1/search", "/v1/records"]
 }
 ```
@@ -611,10 +611,12 @@ Add this table to `CYCLE_PLAN.md` in P10. Sequential. No parallel (unlike P2∥P
 
 | ID | Slice | Branch | Acceptance | Status |
 |---|---|---|---|---|
-| P10-SERVE | stdlib loopback JSON over FTS | `feature/P10-serve` | `handle()` search `Волга`/`МВД`; bind default `127.0.0.1`; non-loopback refused; `fts_match` tests still green | PENDING |
-| P11-BOX | Dockerfile + `compose.yaml` + entrypoint | `feature/P11-compose` | file-contract tests in §8.2 green; image is 3.12; `cap_drop: ALL`; entrypoint validate→index→serve; `.dockerignore` excludes template | PENDING |
-| P12-DOCS | README docker 5-min, ontology `DEC-SERVE-001`, CHANGELOG | `feature/P12-docs` | README copy-paste `docker compose up --build`; reserved-port table; v1 host path intact | PENDING |
-| P13-DONE | Reviewer gate | `feature/P13-release` optional | pytest + ruff + validate; no file >10 MB; no empty commit; **no new git tag unless operator asks** | PENDING |
+| P10-SERVE | stdlib loopback JSON over FTS | `feature/P10-serve` | `handle()` search `Волга`/`МВД`; bind default `127.0.0.1`; non-loopback refused; `fts_match` tests still green | COMPLETE |
+| P11-BOX | Dockerfile + `compose.yaml` + entrypoint | `feature/P11-compose` | file-contract tests in §8.2 green; image is 3.12; `cap_drop: ALL`; entrypoint validate→index→serve; `.dockerignore` excludes template | COMPLETE |
+| P12-DOCS | README docker 5-min, ontology `DEC-SERVE-001`, CHANGELOG | `feature/P12-docs` | README copy-paste `docker compose up --build`; reserved-port table; v1 host path intact | COMPLETE |
+| P13-DONE | Reviewer gate | `feature/P13-release` optional | pytest + ruff + validate; no file >10 MB; no empty commit; **no new git tag unless operator asks** | COMPLETE |
+| P14-REL | CalVer tag `2026.09.11` | `feature/P14-release` | CHANGELOG dated section; pyproject/CITATION; annotated tag + GitHub Release | COMPLETE |
+| P15-DOCS | docs match tag `2026.09.11` | `feature/P15-docs` | README, CYCLE_PLAN, this snapshot | COMPLETE |
 
 ### P10-SERVE
 
@@ -746,13 +748,13 @@ Threat model is still a **local appliance**, now with an inbound loopback port. 
 
 ## 14. Definition of Done (loop 2)
 
-- [ ] `python scripts/serve.py` on the host binds `127.0.0.1:8099` and answers Волга/МВД
-- [ ] `docker compose up --build` on a clone does the same without host CPython 3.12
-- [ ] Handler tests green without a daemon; compose file-contract green without Docker; smoke skipif
-- [ ] No new runtime dependency; no template tree in the image
-- [ ] Ports 8080/8100/8110/8112 unpublished
-- [ ] Ontology has `DEC-SERVE-001`; CHANGELOG Unreleased updated
-- [ ] v1 CSV canon, detectors, and `fts_match` tests untouched in spirit (no schema rewrite)
+- [x] `python scripts/serve.py` on the host binds `127.0.0.1:8099` and answers Волга/МВД
+- [x] `docker compose up --build` on a clone does the same without host CPython 3.12
+- [x] Handler tests green without a daemon; compose file-contract green without Docker; smoke skipif
+- [x] No new runtime dependency; no template tree in the image
+- [x] Ports 8080/8100/8110/8112 unpublished
+- [x] Ontology has `DEC-SERVE-001`; CHANGELOG `[2026.09.11]` dated
+- [x] v1 CSV canon, detectors, and `fts_match` tests untouched in spirit (no schema rewrite)
 
 ---
 

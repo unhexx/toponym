@@ -1,7 +1,7 @@
 # .agent/TODO.md — Task Backlog
 
 **Initiative:** toponym v1 local registries
-**Status:** Loop 2 P10–P13 COMPLETE on `feature/P10-serve` (DEC-SERVE-001)
+**Status:** Loop 2 tagged `2026.09.11` (P10–P15 COMPLETE)
 
 ## In progress
 
@@ -9,6 +9,8 @@
 
 ## Done
 
+- [x] P15-DOCS-01: README, CYCLE_PLAN, design snapshot match tag 2026.09.11
+- [x] P14-REL-01: CHANGELOG dated, pyproject/CITATION, annotated tag 2026.09.11
 - [x] P13-DONE-01: reviewer gate (ruff, pytest, validate, compose smoke Волга/МВД); no tag
 - [x] P12-DOCS-01: README docker path, ontology DEC-SERVE-001, CHANGELOG
 - [x] P11-BOX-01: Dockerfile + compose.yaml + entrypoint + file-contract tests

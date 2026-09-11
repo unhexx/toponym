@@ -19,7 +19,7 @@
 
 ## Current Status
 
-v1 `2026.09.09` на `main`: схемы, сиды, маппинги, check/sync/validate/index, онтология, документация. Loop 2: loopback `scripts/serve.py` + Docker Compose one-shot (`127.0.0.1:8099`, DEC-SERVE-001). См. `TASK_SPECIFICATION.md`, `CYCLE_PLAN.md`, `.agent/PLAN.md`.
+v1 `2026.09.09` на `main`: схемы, сиды, маппинги, check/sync/validate/index, онтология, документация. Loop 2 tagged `2026.09.11`: loopback `scripts/serve.py` + Docker Compose one-shot (`127.0.0.1:8099`, DEC-SERVE-001). См. `TASK_SPECIFICATION.md`, `CYCLE_PLAN.md`, `.agent/PLAN.md`.
 
 ## Recommended Stack (do not deviate without an ADR)
 
