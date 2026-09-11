@@ -39,6 +39,8 @@ python scripts/index.py
 python scripts/serve.py
 ```
 
+После `pip install` те же команды на PATH: `toponym-validate`, `toponym-check`, `toponym-index`, `toponym-serve`. `python scripts/*.py` не ломается.
+
 Альтернатива: `uv venv .venv && source .venv/bin/activate && uv pip install -e ".[dev]"`.
 
 Полный harness-цикл — только если рядом sibling `../agentic_loop_template`: `bash Agent-Init.sh`. Без шаблона тот же скрипт ставит `.[dev]` и не падает.
@@ -73,7 +75,7 @@ git pull && docker compose up --build
 
 Не стартует SearXNG, Ollama и pxpipe. Порты 8080 / 8100 / 8110 / 8112 на хосте свободны.
 
-На хосте без Docker: `python3 -m venv .venv && source .venv/bin/activate && pip install -e ".[dev]"`, затем `python scripts/validate.py && python scripts/index.py && python scripts/serve.py` (bind `127.0.0.1:8099`).
+На хосте без Docker: `python3 -m venv .venv && source .venv/bin/activate && pip install -e ".[dev]"`, затем `toponym-validate && toponym-index && toponym-serve` (или `python scripts/validate.py && python scripts/index.py && python scripts/serve.py`; bind `127.0.0.1:8099`).
 
 ## Дерево
 
@@ -136,6 +138,8 @@ python scripts/index.py                 # knowledge/registry.db FTS5
 python scripts/serve.py                 # loopback JSON, 127.0.0.1:8099
 python scripts/fetch_dump.py --source geonames-ru   # RU.zip в tmp, не в git
 ```
+
+Console scripts (после `pip install -e .`): `toponym-check`, `toponym-validate`, `toponym-index`, `toponym-serve`.
 
 Поиск по индексу: `MATCH 'Волга'` (гидроним), `MATCH 'МВД'` (`foiv:mvd`).
 
