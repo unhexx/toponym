@@ -38,7 +38,7 @@
 | H Agentix symlink SSOT | PENDING |
 | I hflabs CC-BY-SA in raw only | PENDING |
 | J no population/polygons/PostGIS canon | PENDING |
-| K municipality/hodonym/microtoponym seeds | PENDING |
+| K municipality/hodonym/microtoponym seeds | COMPLETE |
 | L P1 stays closed (no P1a–e) | COMPLETE |
 
 ## Gate

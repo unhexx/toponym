@@ -7,10 +7,9 @@
 
 ## Pending
 
-- [ ] NR-K: малые сиды муниципалитетов, годонимов, микротопонимов + datapackage resource
-
 ## Done
 
+- [x] NR-K: малые сиды муниципалитетов, годонимов, микротопонимов + datapackage resource (DEC-SEED-001)
 - [x] NR-J: население / полигоны / GeoJSON / PostGIS вне канона (DEC-GEO-001)
 - [x] NR-I: hflabs CC-BY-SA только `data/raw/`, не curated (DEC-HFLABS-001)
 - [x] NR-H: Agentix — sibling symlink SSOT, дерево не копировать (DEC-AGENTIX-001)

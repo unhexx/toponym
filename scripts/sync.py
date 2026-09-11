@@ -44,6 +44,9 @@ PLACE_RELPATHS = [
     "data/curated/cities-major.csv",
     "data/curated/hydronyms-major.csv",
     "data/curated/oronyms-major.csv",
+    "data/curated/municipalities.csv",
+    "data/curated/hodonyms.csv",
+    "data/curated/microtoponyms.csv",
 ]
 POINTER_IDS = {
     "fias-gar",

@@ -52,7 +52,7 @@
     {
       "id": "REG-PLACES",
       "type": "Registry",
-      "title": "Места: округа, субъекты, города, гидронимы, оронимы",
+      "title": "Места: округа, субъекты, города, гидронимы, оронимы, МО, годонимы, микротопонимы",
       "path": "data/curated/"
     },
     {
@@ -379,6 +379,20 @@
       "date": "2026-09-11",
       "refs": ["datapackage.json", "schema/table/places.schema.json"],
       "summary": "Keep-out J: CSV-канон не расширять геометрией и time-series населения. Указатель в docs допустим."
+    },
+    {
+      "id": "DEC-SEED-001",
+      "type": "Decision",
+      "title": "Малые сиды МО, годонимов и микротопонимов без дампа ГАР",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": [
+        "data/curated/municipalities.csv",
+        "data/curated/hodonyms.csv",
+        "data/curated/microtoponyms.csv",
+        "datapackage.json"
+      ],
+      "summary": "Слайс K: типы municipality/hodonym/microtoponym уже в types.csv. Малые сиды (≥1 строка) в curated + datapackage, схема places.schema.json. Полный ГАР не вендорится."
     },
     {
       "id": "DEC-P1-001",

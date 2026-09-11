@@ -1,0 +1,3 @@
+id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
+wd:Q27577214,wikidata,municipality,городской округ Самара,,Samara Urban Okrug,,iso:RU-SAM,RU-SAM,,,Q27577214,,,36701000,,active,,wikidata,,2026-09-11,пример types.csv; ойконим города wd:Q894
+local:mun:kazan-go,local,municipality,городской округ Казань,,Kazan Urban Okrug,,iso:RU-TA,RU-TA,,,,,,92701000,,active,,wikidata,,2026-09-11,муниципальное образование города Казань; ойконим wd:Q900
