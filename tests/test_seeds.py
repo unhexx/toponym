@@ -131,6 +131,22 @@ def test_geonames_fixtures_moscow_and_volga() -> None:
     assert moscow["geonames"] == "524901"
 
 
+def test_geonames_backfill_match_only() -> None:
+    _, cities = _read_csv(ROOT / "data/curated/cities-major.csv")
+    _, hydros = _read_csv(ROOT / "data/curated/hydronyms-major.csv")
+    filled_cities = [row for row in cities if row["geonames"]]
+    filled_hydros = [row for row in hydros if row["geonames"]]
+    assert len(filled_cities) >= 150
+    assert len(filled_hydros) >= 40
+    assert all(row["geonames"].isdigit() for row in filled_cities)
+    assert all(not row["id"].startswith("gn:") for row in cities)
+    assert all(not row["id"].startswith("gn:") for row in hydros)
+    moscow = next(row for row in cities if row["id"] == "wd:Q649")
+    assert moscow["geonames"] == "524901"
+    volga = next(row for row in hydros if row["id"] == "wd:Q626")
+    assert volga["geonames"] == "472776"
+
+
 def test_cities_major_have_wikidata_points() -> None:
     _, cities = _read_csv(ROOT / "data/curated/cities-major.csv")
     moscow = next(row for row in cities if row["id"] == "wd:Q649")
