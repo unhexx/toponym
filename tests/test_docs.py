@@ -49,6 +49,8 @@ def test_readme_has_compose_one_shot() -> None:
     text = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "docker compose up --build" in text
     assert "git pull && docker compose up --build" in text
+    assert "docker compose pull && docker compose up" in text
+    assert "ghcr.io/unhexx/toponym:2026.09.12" in text
     assert "127.0.0.1:8099" in text
     assert "python scripts/serve.py" in text
     assert "toponym-serve" in text
@@ -79,6 +81,8 @@ def test_readme_has_shields_badges_and_docs_links() -> None:
         "github/actions/workflow/status/unhexx/toponym/ci.yml",
         "python-3.12%2B",
         "docker-compose",
+        "ghcr.io-unhexx%2Ftoponym",
+        "pkgs/container/toponym",
         "CHANGELOG.md",
         "docs/USAGE.md",
         "docs/SOURCES.md",
@@ -142,6 +146,8 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
     assert "pending" not in before_loop2.split("## [2026.09.12]", 1)[0]
     assert "docs/USAGE.md" in before_loop2
     assert "git pull && docker compose up --build" in before_loop2
+    assert "docker compose pull && docker compose up" in before_loop2
+    assert "ghcr.io/unhexx/toponym:2026.09.12" in before_loop2
     assert "municipalities.csv" in before_loop2
     assert "DEC-SEED-001" in before_loop2
     assert "PACKAGE_VERSION" in before_loop2
