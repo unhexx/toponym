@@ -28,7 +28,43 @@ jobs:
         run: ruff check scripts tests
 
       - name: Pytest
-        run: pytest -q
+        run: pytest -q -m "not compose"
 
       - name: Validate canon
         run: python scripts/validate.py
+
+  compose:
+    name: compose smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compose up
+        run: docker compose up --build -d --wait
+
+      - name: Healthz and search
+        run: |
+          set -euo pipefail
+          curl -fsS http://127.0.0.1:8099/healthz
+          python3 - <<'PY'
+          import json
+          import urllib.parse
+          import urllib.request
+
+          with urllib.request.urlopen("http://127.0.0.1:8099/healthz", timeout=10) as resp:
+              health = json.load(resp)
+          assert health.get("ok") is True, health
+          assert int(health.get("records") or 0) > 0, health
+          for query, expected in (("Волга", "wd:Q626"), ("МВД", "foiv:mvd")):
+              url = "http://127.0.0.1:8099/v1/search?" + urllib.parse.urlencode({"q": query})
+              with urllib.request.urlopen(url, timeout=10) as resp:
+                  payload = json.load(resp)
+              assert expected in payload.get("ids", []), payload
+          print("compose-smoke ok")
+          PY
+
+      - name: Compose down
+        if: always()
+        run: docker compose down -v

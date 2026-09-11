@@ -9,6 +9,7 @@
 - Ручная приёмка высокочастотных склонений в `gold`: 15 городов-миллионников плюс Тольятти/Улан-Удэ (нескл.) и Ярославль, Саратов, Иркутск, Владивосток, Томск, Тюмень; творительный Воронежа — **Воронежем**. Аббревиатуры КС РФ, ВС РФ, АП, Совбез, Генпрокуратура, СК России, Банк России, ЦИК России, Счётная палата. Норма в `source` (`Розенталь; Грамота.ру`). Остаток городов/полных имён ФОИВ — `needs_review`. Фикстуры DECLENSIONS.md не переписывались.
 
 ### Added
+- CI: отдельный job `compose` (`docker compose up --build --wait`, curl `/healthz` и поиск Волга/МВД, timeout 20 мин). Unit-job `pytest -m "not compose"` без Docker.
 - Указатель [`data/mappings/wikidata.yaml`](data/mappings/wikidata.yaml): Q-id → `wd`, label ru/en, P625 → `lat`/`lon` (точки, DEC-GEO-001). SPARQL-дамп не вендорится; `delete_policy=pointer`.
 - Указатель [`data/mappings/hflabs-city.yaml`](data/mappings/hflabs-city.yaml): join по FIAS GUID; `city`/`name` в curated не копируются (DEC-HFLABS-001). Таблица hflabs в git не кладётся.
 - Сиды МО / годонимов / микротопонимов расширены из Wikidata (CC0): десятки городских округов, улиц и урочищ/пещер. Стабильные `wd:` id, `parent_id` на субъект или город. Склонения новых строк — `review=needs_review` (только `nom`), без pymorphy. ГАР/`RU.zip` и hflabs в curated не копировались.
