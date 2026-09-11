@@ -5,6 +5,10 @@
 
 ## [Unreleased]
 
+## [2026.09.11] - 2026-09-11
+
+Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-SERVE-001). Включает v1.1: `http_dated` только по RU-строкам.
+
 ### Added
 - Loopback JSON-поиск `scripts/serve.py` на `127.0.0.1:8099` (`/healthz`, `/v1/search`, `/v1/records`).
 - One-shot Docker Compose: `docker compose up --build`, Python 3.12, `validate → index → serve`.
@@ -44,5 +48,6 @@
 - GeoNames id: Москва `524901`, Волга `472776`.
 - Склонения: `review=gold` / `needs_review` (не boolean).
 
-[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.09...HEAD
+[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.11...HEAD
+[2026.09.11]: https://github.com/unhexx/toponym/releases/tag/2026.09.11
 [2026.09.09]: https://github.com/unhexx/toponym/releases/tag/2026.09.09
