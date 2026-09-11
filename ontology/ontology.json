@@ -287,6 +287,19 @@
       "title": "Дубли wd: городов как gn:{id}",
       "status": "mitigated",
       "summary": "DEC-GN-001; skipped_unmapped; validate gn_id; тесты wd:Q649 / 524901."
+    },
+    {
+      "id": "DEC-DECL-001",
+      "type": "Decision",
+      "title": "pymorphy/Natasha не золото",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": [
+        "docs/DECLENSIONS.md",
+        "data/declensions/queue.csv",
+        "scripts/lib/declensions.py"
+      ],
+      "summary": "Автосклонения только review=needs_review в каноне или data/declensions/queue.csv (не datapackage). gold не перезаписывать. Морфоанализаторы не в зависимостях."
     }
   ]
 }

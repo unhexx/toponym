@@ -37,6 +37,7 @@ REQUIRED_IDS = {
     "RSK-PORT-COLLISION",
     "DEC-GN-001",
     "RSK-GN-INSERT",
+    "DEC-DECL-001",
 }
 
 
@@ -95,3 +96,6 @@ def test_required_entities_present() -> None:
     assert "gn:" in summary
     assert "skipped_unmapped" in summary
     assert by_id["RSK-GN-INSERT"]["type"] == "Risk"
+    assert by_id["DEC-DECL-001"]["type"] == "Decision"
+    assert by_id["DEC-DECL-001"]["status"] == "accepted"
+    assert "queue.csv" in by_id["DEC-DECL-001"]["summary"]

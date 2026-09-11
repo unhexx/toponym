@@ -120,6 +120,8 @@ agents/             # промпт ежедневного обновления
 
 `review`: `gold` (не перезаписывать), `needs_review` (авто без ручной проверки), `auto`.
 
+Очередь автоформ (не канон): [`data/declensions/queue.csv`](data/declensions/queue.csv). pymorphy/Natasha не пишут `gold` (DEC-DECL-001).
+
 ## Скрипты
 
 ```bash

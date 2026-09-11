@@ -49,6 +49,21 @@ def test_empty_lat_lon_accepted_on_seeds() -> None:
     assert errors == []
 
 
+def test_gold_pymorphy_fails_validate(tmp_path: Path) -> None:
+    dest = tmp_path / "pkg"
+    dest.mkdir()
+    shutil.copy(ROOT / "datapackage.json", dest / "datapackage.json")
+    shutil.copytree(ROOT / "schema", dest / "schema")
+    shutil.copytree(ROOT / "data", dest / "data")
+    path = dest / "data/declensions/cities-major.csv"
+    text = path.read_text(encoding="utf-8")
+    assert ",gold,manual" in text
+    path.write_text(text.replace(",gold,manual", ",gold,pymorphy3", 1), encoding="utf-8")
+    code, errors = validate_mod.validate_tree(dest / "datapackage.json", root=dest)
+    assert code == 1
+    assert any(row["check"] == "gold_auto" for row in errors)
+
+
 def test_gn_place_id_fails_validate(tmp_path: Path) -> None:
     dest = tmp_path / "pkg"
     dest.mkdir()
