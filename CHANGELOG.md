@@ -38,6 +38,7 @@ Next-release A–L на `main`. Annotated tag `2026.09.12` не раньше 202
 - README: бейджи shields.io (MIT, CalVer `2026.09.11`, CI `ci.yml`, Python 3.12+, Docker Compose), ссылки на `docs/USAGE.md`, CHANGELOG, SOURCES, презентацию и релиз; старт хоста (`.venv`) и `docker compose up --build` с `127.0.0.1:8099/healthz`.
 
 ### Fixed
+- `Agent-Init.sh`: без sibling `../agentic_loop_template` — понятное сообщение и fallback `pip install -e ".[dev]"` (не exit 1, дерево шаблона не копируется). README: дефолт «только реестр» — venv + pip, без шаблона. Daily GHA уже ставит пакет без Agent-Init.
 - Золото «Волга» (`wd:Q626`): родительный падеж **Волги**, не «Волгы» (Розенталь; `docs/DECLENSIONS.md`). Ручной патч по id, без автосклонения.
 - Daily GHA: установка `pip install -e ".[dev]"` без `Agent-Init.sh` (на `ubuntu-latest` нет sibling-шаблона). Журнал `data/sources/runs/YYYY-MM-DD.json` пишется при check 0/10; `checked_at` сдвигается, если устарел. Dead-ветки «нет check.py» убраны.
 - SSOT: CYCLE_PLAN DoD — 14 resources; онтология `calver` = `2026.09.11`; ADR помечен историческим снимком v1; SYSTEM_PROMPT/AGENTS — тег `2026.09.11` и backlog #13. `PROJECT_CONTEXT.md` не продукт-SSOT.
