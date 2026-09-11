@@ -46,6 +46,27 @@
 | P19-DEPLOY | min first-run / update | `feature/P19-deploy` | README: первый запуск `docker compose up --build`; обновление `git pull && docker compose up --build`; хост Agent-Init + serve.py | COMPLETE |
 | P20-CHANGELOG | Unreleased USAGE + min-update | `feature/P20-changelog` | CHANGELOG Unreleased датирует USAGE и `git pull && docker compose up --build`; тег `2026.09.11` не двигается | COMPLETE |
 
+## Next release (после `2026.09.11`)
+
+Non-goals v1 → явные строки. Исполнять **по одному** PENDING. Канон v1 не переписывать.
+Keep-out закрывается онтологией `DEC-*` в `ontology/ontology.json` (формат только Outpost).
+Основной build-слайс — **K** (малые сиды МО / годонимов / микротопонимов). Дампы >10 МБ, полный ГАР/`RU.zip` — вне git.
+
+| ID | Слайс | Ветка | Acceptance | Status |
+|---|---|---|---|---|
+| A | `RU.zip` / ГАР вне git: SOURCE.md + fetch в tmp | `feature/nr-a-dump` | указатели `data/raw/*/SOURCE.md`; опциональный fetch пишет вне репо; size gate; дамп не коммитится | PENDING |
+| B | Немаппленные `gn:{id}` не вставлять в curated | `feature/nr-b-geonames` | дизайн + DEC: GeoNames sync только match существующих строк; без `gn:{id}` insert | PENDING |
+| C | pymorphy/Natasha не золото | `feature/nr-c-declensions` | автосклонения только `review=needs_review` или `data/declensions/queue.csv`; gold не трогать | PENDING |
+| D | Уникальность склонений `(id, lemma)` | `feature/nr-d-decl-key` | DEC: не форсировать unique `id`; золото не переписывать | PENDING |
+| E | Таксономия верхнего уровня | `feature/nr-e-taxonomy` | DEC: `toponym` / `oikonym` / `hydronym` без переименования | PENDING |
+| F | Публичный HTTP вне scope | `feature/nr-f-loopback` | loopback `127.0.0.1:8099`; host publish не `0.0.0.0`; публичный Internet API нет | PENDING |
+| G | Один формат онтологии | `feature/nr-g-ontology` | только Outpost `ontology/ontology.json`; DEC-* на keep-out A–J, L | PENDING |
+| H | Agentix — symlink SSOT | `feature/nr-h-agentix` | DEC: дерево шаблона не копировать; sibling `../agentic_loop_template` | PENDING |
+| I | hflabs CC-BY-SA не в curated | `feature/nr-i-hflabs` | DEC + `data/raw/`: ShareAlike только raw; curated без копий таблиц | PENDING |
+| J | Население / полигоны / GeoJSON / PostGIS | `feature/nr-j-geo` | вне канона; опциональный указатель в docs; CSV-канон не расширять геометрией | PENDING |
+| K | Сиды муниципалитетов, годонимов, микротопонимов | `feature/nr-k-seeds` | новые curated CSV + resource datapackage + schema; ≥1 строка каждый; типы уже есть; без дампа ГАР | PENDING |
+| L | Не дробить P1 на P1a–e | — | P1 COMPLETE; подциклы не открывать | COMPLETE |
+
 ## Definition of Done v1
 
 - Все 11 resources из `datapackage.json` на диске.

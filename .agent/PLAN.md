@@ -2,7 +2,7 @@
 
 **Initiative:** toponym v1 local registries
 **Template Version:** 3.13.0
-**Last Update:** 2026-09-11 (loop 2 tagged 2026.09.11)
+**Last Update:** 2026-09-11 (next release A–L after tag 2026.09.11)
 
 ## Phase Status
 
@@ -27,6 +27,19 @@
 | P14-REL tag 2026.09.11 | COMPLETE |
 | P15-DOCS docs match 2026.09.11 | COMPLETE |
 | P16-PRES product deck docs/presentation | COMPLETE |
+| Next release A–L (CYCLE_PLAN table) | IN PROGRESS |
+| A RU.zip/ГАР pointer+fetch-out | PENDING |
+| B no gn:{id} curated inserts | PENDING |
+| C no pymorphy gold | PENDING |
+| D declension uniqueness (id, lemma) | PENDING |
+| E keep toponym/oikonym/hydronym | PENDING |
+| F loopback only, no public bind | PENDING |
+| G Outpost ontology only + DEC-* | PENDING |
+| H Agentix symlink SSOT | PENDING |
+| I hflabs CC-BY-SA in raw only | PENDING |
+| J no population/polygons/PostGIS canon | PENDING |
+| K municipality/hodonym/microtoponym seeds | PENDING |
+| L P1 stays closed (no P1a–e) | COMPLETE |
 
 ## Gate
 
