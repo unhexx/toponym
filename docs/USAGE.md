@@ -1,7 +1,7 @@
 # Как пользоваться реестром Toponym
 
 Инструкция для того, кто **уже развернул** актуальную версию из этого репозитория
-(`docker compose up --build` или `python scripts/serve.py`) и ищет топонимы и склонения.
+(`docker compose up --build`, `python scripts/serve.py` или `toponym-serve`) и ищет топонимы и склонения.
 Сеть наружу **не нужна** для поиска по канону: все имена и падежи лежат в git-CSV.
 Сеть нужна только для `check.py` / `sync.py` (есть ли обновление у источников).
 
@@ -33,6 +33,7 @@ docker compose ps
 python scripts/validate.py    # канон CSV; сеть не нужна
 python scripts/index.py       # пересобрать FTS
 python scripts/serve.py       # 127.0.0.1:8099
+# то же после pip install: toponym-validate / toponym-index / toponym-serve
 ```
 
 ---

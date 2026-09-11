@@ -19,6 +19,12 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8.0,<9", "ruff>=0.6,<1"]
 
+[project.scripts]
+toponym-serve = "scripts.serve:main"
+toponym-index = "scripts.index:main"
+toponym-validate = "scripts.validate:main"
+toponym-check = "scripts.check:main"
+
 [tool.setuptools.packages.find]
 include = ["scripts*"]
 

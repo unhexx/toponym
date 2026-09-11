@@ -12,6 +12,7 @@
 Next-release A–L на `main`. Annotated tag `2026.09.12` не раньше 2026-09-12.
 
 ### Added
+- Console scripts: `toponym-serve`, `toponym-index`, `toponym-validate`, `toponym-check` после `pip install .`. `python scripts/*.py` по-прежнему работает.
 - FTS: `lemma`/`yo`/заполненные падежи из `data/declensions/*.csv` — поисковые алиасы (канон CSV не дублируется в `records`). USAGE: раздел про сиды МО/улиц/микротопонимов (по 2 строки, не ГАР).
 - FTS `records` и HTTP-карточка: `lat`/`lon`/`fias`/`oktmo` (координаты не токенизируются в FTS5).
 - `GET /v1/declensions?id=…` — падежи из `data/declensions/*.csv` (не FTS). Несколько лемм на id — массив hits. USAGE: curl вместо grep.
