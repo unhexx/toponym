@@ -1,7 +1,7 @@
 # Toponym — реестр российских топонимов
 
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![CalVer](https://img.shields.io/badge/CalVer-2026.09.11-informational.svg)](https://github.com/unhexx/toponym/releases/tag/2026.09.11)
+[![CalVer](https://img.shields.io/badge/CalVer-2026.09.12-informational.svg)](https://github.com/unhexx/toponym/releases/tag/2026.09.12)
 [![CI](https://img.shields.io/github/actions/workflow/status/unhexx/toponym/ci.yml?branch=main&label=CI)](https://github.com/unhexx/toponym/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
 [![Docker Compose](https://img.shields.io/badge/docker-compose-2496ED.svg?logo=docker&logoColor=white)](compose.yaml)
@@ -10,7 +10,7 @@
 
 Канон — UTF-8 CSV в git (Frictionless Tabular Data Package). Индекс SQLite FTS5 собирается локально и в git не кладётся. Поиск — только loopback `127.0.0.1:8099`.
 
-Релиз: [`2026.09.11`](https://github.com/unhexx/toponym/releases/tag/2026.09.11). Лицензия репозитория: [MIT](LICENSE). Сырьё источников хранит свои лицензии — [`docs/SOURCES.md`](docs/SOURCES.md), [`data/sources/catalog.yaml`](data/sources/catalog.yaml).
+Релиз: [`2026.09.12`](https://github.com/unhexx/toponym/releases/tag/2026.09.12). Лицензия репозитория: [MIT](LICENSE). Сырьё источников хранит свои лицензии — [`docs/SOURCES.md`](docs/SOURCES.md), [`data/sources/catalog.yaml`](data/sources/catalog.yaml).
 
 ## Документация
 
@@ -21,7 +21,7 @@
 | [CHANGELOG.md](CHANGELOG.md) | история релизов (CalVer `YYYY.MM.DD`) |
 | [docs/SOURCES.md](docs/SOURCES.md) | лицензии источников и границы вендора |
 | [Презентация 2026.09.11](docs/presentation/toponym-2026.09.11.md) | продуктовая колода |
-| [Релиз 2026.09.11](https://github.com/unhexx/toponym/releases/tag/2026.09.11) | тег и GitHub Release |
+| [Релиз 2026.09.12](https://github.com/unhexx/toponym/releases/tag/2026.09.12) | тег и GitHub Release |
 
 ## Пятиминутный старт (хост)
 
@@ -153,4 +153,4 @@ HTTP (только GET, только loopback): `/healthz`, `/v1/search?q=…`, 
 
 ## Цитирование
 
-См. [`CITATION.cff`](CITATION.cff). Версия: `2026.09.11`.
+См. [`CITATION.cff`](CITATION.cff). Версия: `2026.09.12`.

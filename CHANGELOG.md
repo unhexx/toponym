@@ -5,11 +5,9 @@
 
 ## [Unreleased]
 
-Следующий annotated CalVer — `2026.09.12` (blocked-until-tomorrow: тег `2026.09.11` уже есть в этот календарный день). `pyproject.toml`, `CITATION.cff` и бейджи README остаются `2026.09.11`, пока тег не поставлен.
+## [2026.09.12] - 2026-09-12
 
-## [2026.09.12] - pending (ship 2026-09-11)
-
-Next-release A–L на `main`. Annotated tag `2026.09.12` не раньше 2026-09-12.
+Next-release A–L на `main`. Annotated tag `2026.09.12`.
 
 ### Added
 - Console scripts: `toponym-serve`, `toponym-index`, `toponym-validate`, `toponym-check` после `pip install .`. `python scripts/*.py` по-прежнему работает.
@@ -36,13 +34,14 @@ Next-release A–L на `main`. Annotated tag `2026.09.12` не раньше 202
 - Склонения: DEC-DECL-002 — уникальность `(id, lemma)`; `id` не unique; золото ФОИВ с двумя леммами не переписывать.
 - Склонения: DEC-DECL-001 — pymorphy/Natasha не золото; `validate.py` отклоняет `review=gold` с источником-морфоанализатором; канон не переписывается.
 - GeoNames: DEC-GN-001 — sync только match колонки `geonames`; `validate.py` отклоняет `id=gn:…` в местах; немаппленные mods остаются `skipped_unmapped`.
-- README: бейджи shields.io (MIT, CalVer `2026.09.11`, CI `ci.yml`, Python 3.12+, Docker Compose), ссылки на `docs/USAGE.md`, CHANGELOG, SOURCES, презентацию и релиз; старт хоста (`.venv`) и `docker compose up --build` с `127.0.0.1:8099/healthz`.
+- README: бейджи shields.io (MIT, CalVer `2026.09.12`, CI `ci.yml`, Python 3.12+, Docker Compose), ссылки на `docs/USAGE.md`, CHANGELOG, SOURCES, презентацию и релиз; старт хоста (`.venv`) и `docker compose up --build` с `127.0.0.1:8099/healthz`.
+- `scripts/serve.py`: `PACKAGE_VERSION` = `2026.09.12` (`GET /healthz` больше не отдаёт `2026.09.09`).
 
 ### Fixed
 - `Agent-Init.sh`: без sibling `../agentic_loop_template` — понятное сообщение и fallback `pip install -e ".[dev]"` (не exit 1, дерево шаблона не копируется). README: дефолт «только реестр» — venv + pip, без шаблона. Daily GHA уже ставит пакет без Agent-Init.
 - Золото «Волга» (`wd:Q626`): родительный падеж **Волги**, не «Волгы» (Розенталь; `docs/DECLENSIONS.md`). Ручной патч по id, без автосклонения.
 - Daily GHA: установка `pip install -e ".[dev]"` без `Agent-Init.sh` (на `ubuntu-latest` нет sibling-шаблона). Журнал `data/sources/runs/YYYY-MM-DD.json` пишется при check 0/10; `checked_at` сдвигается, если устарел. Dead-ветки «нет check.py» убраны.
-- SSOT: CYCLE_PLAN DoD — 14 resources; онтология `calver` = `2026.09.11`; ADR помечен историческим снимком v1; SYSTEM_PROMPT/AGENTS — тег `2026.09.11` и backlog #13. `PROJECT_CONTEXT.md` не продукт-SSOT.
+- SSOT: CYCLE_PLAN DoD — 19 resources; онтология `calver` = `2026.09.12`; ADR помечен историческим снимком v1; SYSTEM_PROMPT/AGENTS — тег `2026.09.12` и backlog #13. `PROJECT_CONTEXT.md` не продукт-SSOT.
 
 ## [2026.09.11] - 2026-09-11
 
@@ -87,7 +86,7 @@ Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-S
 - GeoNames id: Москва `524901`, Волга `472776`.
 - Склонения: `review=gold` / `needs_review` (не boolean).
 
-[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.11...HEAD
-[2026.09.12]: https://github.com/unhexx/toponym/compare/2026.09.11...HEAD
+[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.12...HEAD
+[2026.09.12]: https://github.com/unhexx/toponym/releases/tag/2026.09.12
 [2026.09.11]: https://github.com/unhexx/toponym/releases/tag/2026.09.11
 [2026.09.09]: https://github.com/unhexx/toponym/releases/tag/2026.09.09

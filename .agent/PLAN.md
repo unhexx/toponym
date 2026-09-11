@@ -2,7 +2,7 @@
 
 **Initiative:** toponym v1 local registries
 **Template Version:** 3.13.0
-**Last Update:** 2026-09-11 (next release A–L after tag 2026.09.11)
+**Last Update:** 2026-09-12 (tag 2026.09.12)
 
 ## Phase Status
 
@@ -40,7 +40,7 @@
 | J no population/polygons/PostGIS canon | COMPLETE |
 | K municipality/hodonym/microtoponym seeds | COMPLETE |
 | L P1 stays closed (no P1a–e) | COMPLETE |
-| Tag 2026.09.12 | BLOCKED until 2026-09-12 |
+| Tag 2026.09.12 | COMPLETE |
 
 ## Gate
 
