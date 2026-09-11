@@ -334,6 +334,60 @@
         "docs/taxonomy.md"
       ],
       "summary": "Корни канона: toponym (root), oikonym и hydronym (primary, parent=toponym). Не «Торопум». Не переименовывать."
+    },
+    {
+      "id": "DEC-DUMP-001",
+      "type": "Decision",
+      "title": "RU.zip и полный ГАР вне git",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": ["scripts/fetch_dump.py", "data/raw/", "tests/test_no_vendor.py"],
+      "summary": "Keep-out A: дампы >10 МБ и полный ГАР/RU.zip не вендорятся. Fetch только вне репозитория."
+    },
+    {
+      "id": "DEC-ONT-001",
+      "type": "Decision",
+      "title": "Один формат онтологии — Outpost",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": ["ontology/ontology.json", "ontology/ontology.schema.json"],
+      "summary": "Keep-out G: только ontology/ontology.json (schema outpost-ontology/v1). Без OWL/SKOS/JSON-LD второго канона."
+    },
+    {
+      "id": "DEC-AGENTIX-001",
+      "type": "Decision",
+      "title": "Agentix — sibling symlink SSOT",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": ["Agent-Init.sh", ".gitignore"],
+      "summary": "Keep-out H: дерево agentic_loop_template не копировать в продукт; только symlink ../agentic_loop_template."
+    },
+    {
+      "id": "DEC-HFLABS-001",
+      "type": "Decision",
+      "title": "hflabs CC-BY-SA только data/raw/",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": ["data/raw/hflabs-region/SOURCE.md", "docs/SOURCES.md"],
+      "summary": "Keep-out I: ShareAlike не копировать в data/curated/. Стыковка по iso/FIAS, не по name."
+    },
+    {
+      "id": "DEC-GEO-001",
+      "type": "Decision",
+      "title": "Население, полигоны, GeoJSON, PostGIS вне канона",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": ["datapackage.json", "schema/table/places.schema.json"],
+      "summary": "Keep-out J: CSV-канон не расширять геометрией и time-series населения. Указатель в docs допустим."
+    },
+    {
+      "id": "DEC-P1-001",
+      "type": "Decision",
+      "title": "P1 не дробить на P1a–e",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": ["CYCLE_PLAN.md"],
+      "summary": "Keep-out L: P1 COMPLETE; подциклы P1a–e не открывать."
     }
   ]
 }

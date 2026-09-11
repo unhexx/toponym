@@ -41,6 +41,26 @@ REQUIRED_IDS = {
     "DEC-DECL-002",
     "DEC-TAX-001",
     "DEC-SERVE-002",
+    "DEC-DUMP-001",
+    "DEC-ONT-001",
+    "DEC-AGENTIX-001",
+    "DEC-HFLABS-001",
+    "DEC-GEO-001",
+    "DEC-P1-001",
+}
+
+KEEP_OUT_DECS = {
+    "A": "DEC-DUMP-001",
+    "B": "DEC-GN-001",
+    "C": "DEC-DECL-001",
+    "D": "DEC-DECL-002",
+    "E": "DEC-TAX-001",
+    "F": "DEC-SERVE-002",
+    "G": "DEC-ONT-001",
+    "H": "DEC-AGENTIX-001",
+    "I": "DEC-HFLABS-001",
+    "J": "DEC-GEO-001",
+    "L": "DEC-P1-001",
 }
 
 
@@ -112,3 +132,22 @@ def test_required_entities_present() -> None:
     assert by_id["DEC-SERVE-002"]["type"] == "Decision"
     assert by_id["DEC-SERVE-002"]["status"] == "accepted"
     assert "0.0.0.0" in by_id["DEC-SERVE-002"]["summary"]
+
+
+def test_keep_out_decisions_cover_a_to_l() -> None:
+    payload = _load_json(ONT_PATH)
+    by_id = {row["id"]: row for row in payload["entities"]}
+    for slice_id, dec_id in KEEP_OUT_DECS.items():
+        row = by_id[dec_id]
+        assert row["type"] == "Decision", slice_id
+        assert row["status"] == "accepted", dec_id
+    assert payload["schema"] == "outpost-ontology/v1"
+
+
+def test_only_outpost_ontology_format() -> None:
+    ont_dir = ROOT / "ontology"
+    names = sorted(path.name for path in ont_dir.iterdir() if path.is_file())
+    assert names == ["ontology.json", "ontology.schema.json"]
+    for suffix in (".ttl", ".owl", ".rdf", ".jsonld", ".n3"):
+        assert not list(ont_dir.glob(f"*{suffix}"))
+        assert not (ROOT / f"ontology{suffix}").exists()

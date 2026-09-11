@@ -7,7 +7,6 @@
 
 ## Pending
 
-- [ ] NR-G: только Outpost `ontology/ontology.json`; DEC-* на keep-out решения
 - [ ] NR-H: Agentix — sibling symlink SSOT, дерево не копировать
 - [ ] NR-I: hflabs CC-BY-SA только `data/raw/`, не curated
 - [ ] NR-J: население / полигоны / GeoJSON / PostGIS вне канона; указатель в docs опционален
@@ -15,6 +14,7 @@
 
 ## Done
 
+- [x] NR-G: только Outpost `ontology/ontology.json`; DEC-* на keep-out A–J, L (DEC-ONT-001)
 - [x] NR-F: публичный HTTP вне scope; loopback `127.0.0.1:8099` (DEC-SERVE-002)
 - [x] NR-E: верхний уровень `toponym` / `oikonym` / `hydronym` без переименования (DEC-TAX-001)
 - [x] NR-D: уникальность склонений `(id, lemma)`; золото не переписывать (DEC-DECL-002)
