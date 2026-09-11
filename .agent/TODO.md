@@ -7,7 +7,6 @@
 
 ## Pending
 
-- [ ] NR-A: RU.zip / ГАР вне git — дописать `data/raw/*/SOURCE.md`, опциональный fetch в tmp, size gate
 - [ ] NR-B: немаппленные `gn:{id}` запрещены; GeoNames sync только match существующих строк
 - [ ] NR-C: pymorphy/Natasha не золото; авто только `review=needs_review` или queue.csv
 - [ ] NR-D: уникальность склонений `(id, lemma)`; золото не переписывать
@@ -21,6 +20,7 @@
 
 ## Done
 
+- [x] NR-A: RU.zip / ГАР вне git — `data/raw/*/SOURCE.md`, `scripts/fetch_dump.py` пишет только вне репо
 - [x] NR-L: P1 не дробить на P1a–e (P1 COMPLETE)
 - [x] NR-PLAN: таблица Next release A–L в `CYCLE_PLAN.md`
 

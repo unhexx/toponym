@@ -246,3 +246,8 @@ blackbox_start_prompt.txt
 # Derived local index (rebuild with scripts/index.py)
 knowledge/*.db
 knowledge/LAST_INDEX
+
+# Dump archives must never enter git
+/data/**/*.zip
+/data/**/*.7z
+/RU.zip

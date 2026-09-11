@@ -10,6 +10,7 @@ SSOT каталога: [`data/sources/catalog.yaml`](../data/sources/catalog.yam
 2. CC BY-SA и ODbL — только `data/raw/<source>/` + `SOURCE.md`. Не копировать в `data/curated/`.
 3. `vendor: false` в каталоге: детектор смотрит HEAD/курсор/dated-mods, сам дамп не качается.
 4. Атрибуция GeoNames (CC BY 4.0): идентификаторы и, если появятся, координаты из mods — с `source_id=geonames-ru` или пометкой в `notes`.
+5. Локальный архив — только вне git: `python scripts/fetch_dump.py --source geonames-ru` (ГАР/ГКГН — с `--url`). `--dest` внутри репозитория отвергается.
 
 ## Каталог v1
 
@@ -26,7 +27,7 @@ SSOT каталога: [`data/sources/catalog.yaml`](../data/sources/catalog.yam
 | `mfursov-russian-cities` | Apache-2.0 | нет | watchlist склонений |
 | `nickyx3-settlements` | unknown | нет | watchlist |
 
-Указатели: `data/raw/*/SOURCE.md`.
+Указатели: `data/raw/*/SOURCE.md`. Fetch в tmp: [`scripts/fetch_dump.py`](../scripts/fetch_dump.py).
 
 ## Совместимость с MIT-каноном
 
