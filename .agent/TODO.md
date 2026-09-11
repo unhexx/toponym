@@ -1,7 +1,7 @@
 # .agent/TODO.md — Task Backlog
 
 **Initiative:** toponym v1 local registries
-**Status:** Loop 2 tagged `2026.09.11` (P10–P15 COMPLETE)
+**Status:** Loop 2 tagged `2026.09.11` (P10–P16 COMPLETE)
 
 ## In progress
 
@@ -9,6 +9,7 @@
 
 ## Done
 
+- [x] P16-PRES-01: docs/presentation product deck (CSV, pipeline, :8099, compose)
 - [x] P15-DOCS-01: README, CYCLE_PLAN, design snapshot match tag 2026.09.11
 - [x] P14-REL-01: CHANGELOG dated, pyproject/CITATION, annotated tag 2026.09.11
 - [x] P13-DONE-01: reviewer gate (ruff, pytest, validate, compose smoke Волга/МВД); no tag

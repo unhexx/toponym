@@ -40,6 +40,7 @@
 | P13-DONE | reviewer gate | `feature/P13-release` | pytest+ruff+validate; без файлов >10 МБ; тег только по запросу оператора | COMPLETE |
 | P14-REL | tag `2026.09.11` + GitHub Release | `feature/P14-release` | CHANGELOG dated; pyproject/CITATION; annotated tag | COMPLETE |
 | P15-DOCS | docs match `2026.09.11` | `feature/P15-docs` | README, CYCLE_PLAN, design snapshot | COMPLETE |
+| P16-PRES | продуктовая колода | `feature/P16-presentation` | `docs/presentation/`: CSV, check/sync/validate/index, :8099, compose | COMPLETE |
 
 ## Definition of Done v1
 

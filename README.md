@@ -51,7 +51,7 @@ data/
 schema/             # JSON Schema колонок
 scripts/            # check, sync, validate, index, serve
 ontology/           # overlay DEC-REG-001, Source, Mapping
-docs/               # методология, таксономия, лицензии
+docs/               # методология, таксономия, лицензии, презентация
 agents/             # промпт ежедневного обновления
 ```
 
@@ -104,6 +104,10 @@ python scripts/serve.py                 # loopback JSON, 127.0.0.1:8099
 - GitHub Actions: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — pytest, ruff, validate.
 - Daily: [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — механический refresh.
 - Куратор: [`agents/DAILY_UPDATE.md`](agents/DAILY_UPDATE.md) — check → sync → validate → index; без пустого коммита.
+
+## Презентация
+
+Продуктовая колода: [`docs/presentation/toponym-2026.09.11.md`](docs/presentation/toponym-2026.09.11.md).
 
 ## Цитирование
 
