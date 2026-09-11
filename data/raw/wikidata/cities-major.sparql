@@ -16,3 +16,11 @@ SELECT DISTINCT ?city ?iso ?pop ?ru ?en WHERE {
   OPTIONAL { ?city rdfs:label ?en FILTER(LANG(?en) = "en") }
 }
 ORDER BY DESC(?pop)
+
+# Coordinates (P625) and OKTMO (P764, CC0) for already curated Q-ids.
+# VALUES — id из data/curated/cities-major.csv; не массовый дамп.
+# SELECT ?city ?lat ?lon ?oktmo WHERE {
+#   VALUES ?city { wd:Q649 wd:Q656 }
+#   OPTIONAL { ?city p:P625/psv:P625 [ wikibase:geoLatitude ?lat; wikibase:geoLongitude ?lon ] }
+#   OPTIONAL { ?city wdt:P764 ?oktmo }
+# }

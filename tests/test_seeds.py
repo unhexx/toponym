@@ -129,6 +129,22 @@ def test_geonames_fixtures_moscow_and_volga() -> None:
     _, cities = _read_csv(ROOT / "data/curated/cities-major.csv")
     moscow = next(row for row in cities if row["id"] == "wd:Q649")
     assert moscow["geonames"] == "524901"
+
+
+def test_cities_major_have_wikidata_points() -> None:
+    _, cities = _read_csv(ROOT / "data/curated/cities-major.csv")
+    moscow = next(row for row in cities if row["id"] == "wd:Q649")
+    assert moscow["lat"]
+    assert moscow["lon"]
+    assert 55.0 < float(moscow["lat"]) < 56.0
+    assert 37.0 < float(moscow["lon"]) < 38.0
+    assert moscow["oktmo"] == "45000000"
+    assert moscow["fias"] == ""
+    with_point = [row for row in cities if row["lat"] and row["lon"]]
+    assert len(with_point) == len(cities)
+    for row in cities:
+        assert "polygon" not in row
+        assert "geojson" not in row
     _, hydros = _read_csv(ROOT / "data/curated/hydronyms-major.csv")
     volga = next(row for row in hydros if row["id"] == "wd:Q626")
     assert volga["geonames"] == "472776"

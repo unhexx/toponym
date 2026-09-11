@@ -21,6 +21,7 @@ Next-release A–L на `main`. Annotated tag `2026.09.12` не раньше 202
 - Обновление Compose-ящика одной строкой: `git pull && docker compose up --build`.
 
 ### Changed
+- `cities-major.csv`: `lat`/`lon` из Wikidata P625 (CC0) и `oktmo` из P764 для всех 197 строк; `fias` пуст (нет CC0 GUID без дампа ГАР). Полигоны не добавлялись (DEC-GEO-001).
 - Геометрия: DEC-GEO-001 — население / полигоны / GeoJSON / PostGIS вне канона; указатель в `docs/SOURCES.md`; `lat`/`lon` остаются точками.
 - hflabs: DEC-HFLABS-001 — CC-BY-SA только `data/raw/`; `validate.py` отклоняет `source_id=hflabs-*` в каноне.
 - Agentix: DEC-AGENTIX-001 — шаблон только sibling-symlink `../agentic_loop_template`, дерево не в git.
