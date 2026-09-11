@@ -243,6 +243,15 @@
       "summary": "stdlib loopback JSON over existing FTS5; one python:3.12-slim service; not Datasette/FastAPI/CKAN; not Agentix SearXNG/pxpipe stack; not a public API."
     },
     {
+      "id": "DEC-SERVE-002",
+      "type": "Decision",
+      "title": "Публичный HTTP вне scope",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": ["compose.yaml", "scripts/serve.py", "docs/USAGE.md"],
+      "summary": "Host publish только 127.0.0.1:8099:8099, никогда 0.0.0.0. Internet/LAN API нет. 0.0.0.0 внутри контейнера — NAT, не публикация."
+    },
+    {
       "id": "ART-SERVE",
       "type": "Artifact",
       "title": "Loopback JSON search",

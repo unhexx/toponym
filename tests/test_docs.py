@@ -33,6 +33,7 @@ def test_design_snapshot_is_released_v1() -> None:
     assert "DEC-DECL-001" in text
     assert "DEC-DECL-002" in text
     assert "DEC-TAX-001" in text
+    assert "DEC-SERVE-002" in text
 
 
 def test_readme_has_compose_one_shot() -> None:
@@ -65,6 +66,13 @@ def test_readme_has_shields_badges_and_docs_links() -> None:
         "https://github.com/unhexx/toponym/releases/tag/2026.09.11",
     ):
         assert needle in text, needle
+
+
+def test_docs_do_not_publish_all_interfaces() -> None:
+    for rel in ("README.md", "docs/USAGE.md"):
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        assert "0.0.0.0:8099" not in text, rel
+        assert "127.0.0.1:8099" in text, rel
 
 
 def test_usage_guide_covers_search_and_declensions() -> None:

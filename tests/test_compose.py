@@ -51,6 +51,16 @@ def test_compose_ports_are_loopback_only() -> None:
                 ports_block = False
 
 
+def test_compose_host_publish_never_all_interfaces() -> None:
+    data = yaml.safe_load((ROOT / "compose.yaml").read_text(encoding="utf-8"))
+    svc = data["services"]["toponym"]
+    assert svc.get("network_mode") != "host"
+    for port in svc["ports"]:
+        mapping = str(port)
+        assert mapping.startswith("127.0.0.1:")
+        assert not mapping.startswith("0.0.0.0:")
+
+
 def test_dockerfile_python_312() -> None:
     text = (ROOT / "Dockerfile").read_text(encoding="utf-8")
     assert "python:3.12-slim" in text

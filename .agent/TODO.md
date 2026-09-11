@@ -7,7 +7,6 @@
 
 ## Pending
 
-- [ ] NR-F: публичный HTTP вне scope; loopback `127.0.0.1:8099`, не bind `0.0.0.0` на host publish
 - [ ] NR-G: только Outpost `ontology/ontology.json`; DEC-* на keep-out решения
 - [ ] NR-H: Agentix — sibling symlink SSOT, дерево не копировать
 - [ ] NR-I: hflabs CC-BY-SA только `data/raw/`, не curated
@@ -16,6 +15,7 @@
 
 ## Done
 
+- [x] NR-F: публичный HTTP вне scope; loopback `127.0.0.1:8099` (DEC-SERVE-002)
 - [x] NR-E: верхний уровень `toponym` / `oikonym` / `hydronym` без переименования (DEC-TAX-001)
 - [x] NR-D: уникальность склонений `(id, lemma)`; золото не переписывать (DEC-DECL-002)
 - [x] NR-C: pymorphy/Natasha не золото; очередь `data/declensions/queue.csv` (DEC-DECL-001)
