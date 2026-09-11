@@ -22,7 +22,12 @@ DATAPACKAGE = ROOT / "datapackage.json"
 CATALOG_PATH = ROOT / "data" / "sources" / "catalog.yaml"
 MAX_BYTES = 10 * 1024 * 1024
 STATUS_ENUM = {"active", "deprecated"}
-TOROPUM = "торопум"
+TOROPUM_NAMES = frozenset({"торопум", "toropum"})
+FROZEN_TAXONOMY = {
+    "toponym": {"level": "root", "parent_id": ""},
+    "oikonym": {"level": "primary", "parent_id": "toponym"},
+    "hydronym": {"level": "primary", "parent_id": "toponym"},
+}
 PLACE_SCHEMAS = {
     "schema/table/places.schema.json",
     "schema/table/agencies.schema.json",
@@ -175,7 +180,7 @@ def validate_tree(dp_path: Path, *, root: Path | None = None) -> tuple[int, list
                 if status not in STATUS_ENUM:
                     _issue(errors, "status", f"{row.get('id')}: status={status}", name)
             for col in ("id", "name_ru", "name_en"):
-                if col in header and (row.get(col) or "").casefold() == TOROPUM:
+                if col in header and (row.get(col) or "").casefold() in TOROPUM_NAMES:
                     _issue(errors, "toropum", f"{col}={row.get(col)}", name)
             if "name_ru" in header:
                 name_ru = row.get("name_ru") or ""
@@ -192,6 +197,26 @@ def validate_tree(dp_path: Path, *, root: Path | None = None) -> tuple[int, list
 
     if "types" in tables:
         _, type_rows = tables["types"]
+        by_type = {row.get("id"): row for row in type_rows if row.get("id")}
+        for tid, expect in FROZEN_TAXONOMY.items():
+            row = by_type.get(tid)
+            if row is None:
+                _issue(errors, "taxonomy", f"нет типа {tid} (DEC-TAX-001)", "types")
+                continue
+            if (row.get("level") or "") != expect["level"]:
+                _issue(
+                    errors,
+                    "taxonomy",
+                    f"{tid}: level={row.get('level')} (DEC-TAX-001)",
+                    "types",
+                )
+            if (row.get("parent_id") or "") != expect["parent_id"]:
+                _issue(
+                    errors,
+                    "taxonomy",
+                    f"{tid}: parent_id={row.get('parent_id')} (DEC-TAX-001)",
+                    "types",
+                )
         for row in type_rows:
             parent = row.get("parent_id") or ""
             if parent and parent not in type_ids:

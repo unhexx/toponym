@@ -12,6 +12,7 @@
 - 2026-09-11: обновление Compose-ящика одной строкой: `git pull && docker compose up --build`.
 
 ### Changed
+- Таксономия: DEC-TAX-001 — `toponym` / `oikonym` / `hydronym` не переименовывать; `validate.py` держит корень.
 - Склонения: DEC-DECL-002 — уникальность `(id, lemma)`; `id` не unique; золото ФОИВ с двумя леммами не переписывать.
 - Склонения: DEC-DECL-001 — pymorphy/Natasha не золото; `validate.py` отклоняет `review=gold` с источником-морфоанализатором; канон не переписывается.
 - GeoNames: DEC-GN-001 — sync только match колонки `geonames`; `validate.py` отклоняет `id=gn:…` в местах; немаппленные mods остаются `skipped_unmapped`.

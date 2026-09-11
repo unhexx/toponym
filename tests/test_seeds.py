@@ -173,14 +173,28 @@ def test_oikonym_example_is_moscow() -> None:
     assert oikonym["geonames_class"] == "P"
 
 
+def test_taxonomy_root_frozen() -> None:
+    _header, rows = _read_csv(TYPES_CSV)
+    by_id = {row["id"]: row for row in rows}
+    assert by_id["toponym"]["level"] == "root"
+    assert (by_id["toponym"]["parent_id"] or "") == ""
+    assert by_id["toponym"]["name_en"] == "toponym"
+    assert by_id["toponym"]["name_ru"] == "топоним"
+    for tid in ("oikonym", "hydronym"):
+        assert by_id[tid]["level"] == "primary"
+        assert by_id[tid]["parent_id"] == "toponym"
+    assert "торопум" not in {row["id"] for row in rows}
+
+
 def test_no_toropum_in_id_or_names() -> None:
     pkg = _load_json(DATAPACKAGE)
+    forbidden = {"торопум", "toropum"}
     for resource in pkg["resources"]:
         _header, rows = _read_csv(ROOT / resource["path"])
         for row in rows:
             for key in ("id", "name_ru", "name_en", "lemma"):
-                value = row.get(key, "")
-                assert value.casefold() != "торопум", (resource["name"], key, value)
+                value = (row.get(key, "") or "").casefold()
+                assert value not in forbidden, (resource["name"], key, row.get(key))
 
 
 def test_declension_fixtures_are_gold() -> None:
