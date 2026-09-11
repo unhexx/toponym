@@ -92,6 +92,7 @@ def test_usage_guide_covers_search_and_declensions() -> None:
         "/healthz",
         "/v1/search",
         "/v1/records",
+        "/v1/declensions",
         "127.0.0.1:8099",
         "data/declensions",
         "nom/gen/dat/acc/ins/pre/loc2",
@@ -102,8 +103,7 @@ def test_usage_guide_covers_search_and_declensions() -> None:
     ):
         assert needle in text, needle
     assert "data/curated" in text
-    # HTTP does not serve case forms; join is on id.
-    assert "HTTP **не** отдаёт" in text or "HTTP не отдаёт" in text
+    assert "GET /v1/declensions" in text
 
 
 def test_changelog_unreleased_mentions_usage_and_min_update() -> None:

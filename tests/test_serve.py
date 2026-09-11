@@ -100,6 +100,50 @@ def test_record_lookup(tmp_path: Path) -> None:
     assert payload["error"] == "missing_id"
 
 
+def test_declensions_moscow(tmp_path: Path) -> None:
+    db_path = _build(tmp_path)
+    status, _headers, payload = _get("/v1/declensions", db_path, id="wd:Q649")
+    assert status == 200, payload
+    assert payload["ok"] is True
+    assert payload["count"] == 1
+    hit = payload["hits"][0]
+    assert hit["id"] == "wd:Q649"
+    assert hit["lemma"] == "Москва"
+    assert hit["gen"] == "Москвы"
+    assert "nom" in hit and "pre" in hit
+    assert "loc2" in hit
+    assert hit["table_name"] == "cities-major"
+    search_status, _h, search = _get("/v1/search", db_path, q="Москва")
+    assert search_status == 200
+    card = next(row for row in search["hits"] if row["id"] == "wd:Q649")
+    assert "gen" not in card
+
+
+def test_declensions_mvd_two_lemmas(tmp_path: Path) -> None:
+    db_path = _build(tmp_path)
+    status, _headers, payload = _get("/v1/declensions", db_path, id="foiv:mvd")
+    assert status == 200, payload
+    lemmas = {row["lemma"] for row in payload["hits"]}
+    assert lemmas == {"МВД", "Министерство внутренних дел"}
+    keys = [(row["id"], row["lemma"]) for row in payload["hits"]]
+    assert len(keys) == len(set(keys))
+    assert payload["count"] == 2
+
+
+def test_declensions_unknown_and_missing(tmp_path: Path) -> None:
+    db_path = _build(tmp_path)
+    status, _headers, payload = _get("/v1/declensions", db_path, id="no-such-id")
+    assert status == 404
+    assert payload["error"] == "not_found"
+    status, _headers, payload = _get("/v1/declensions", db_path)
+    assert status == 400
+    assert payload["error"] == "missing_id"
+    missing = tmp_path / "missing.db"
+    status, _headers, payload = _get("/v1/declensions", missing, id="wd:Q649")
+    assert status == 200, payload
+    assert payload["hits"][0]["gen"] == "Москвы"
+
+
 def test_unknown_path_and_post(tmp_path: Path) -> None:
     db_path = _build(tmp_path)
     status, _headers, payload = _get("/nope", db_path)
@@ -153,3 +197,4 @@ def test_root_discovery(tmp_path: Path) -> None:
     status, _headers, payload = _get("/", db_path)
     assert status == 200
     assert "/v1/search" in payload["endpoints"]
+    assert "/v1/declensions" in payload["endpoints"]

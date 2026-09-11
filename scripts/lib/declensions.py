@@ -51,6 +51,26 @@ def uniqueness_key(row: dict[str, Any]) -> tuple[str, str]:
     return (str(row.get("id") or ""), str(row.get("lemma") or ""))
 
 
+def rows_for_id(root: Path, record_id: str) -> list[dict[str, str]]:
+    """Read canon declension CSVs (not queue) and return rows with matching id."""
+    hits: list[dict[str, str]] = []
+    wanted = str(record_id or "")
+    if not wanted:
+        return hits
+    for rel in GOLD_RELPATHS:
+        path = Path(root) / rel
+        if not path.is_file():
+            continue
+        _header, rows = read_csv(path)
+        for row in rows:
+            if (row.get("id") or "") != wanted:
+                continue
+            hit = {key: str(row.get(key) or "") for key in DECLENSIONS_HEADER}
+            hit["table_name"] = path.stem
+            hits.append(hit)
+    return hits
+
+
 def prepare_queue_row(row: dict[str, Any]) -> dict[str, str]:
     out = {key: str(row.get(key) or "") for key in DECLENSIONS_HEADER}
     if not out["id"] or not out["lemma"]:

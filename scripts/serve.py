@@ -21,6 +21,7 @@ if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
 from scripts.index import DEFAULT_OUT, ROOT, fts_search, get_record, index_counts  # noqa: E402
+from scripts.lib.declensions import rows_for_id  # noqa: E402
 
 PACKAGE_VERSION = "2026.09.09"
 DEFAULT_BIND = "127.0.0.1"
@@ -105,7 +106,8 @@ def _is_loopback(bind: str) -> bool:
     return False
 
 
-def handle(req: Request, db_path: Path) -> Response:
+def handle(req: Request, db_path: Path, *, root: Path | None = None) -> Response:
+    canon = Path(root) if root is not None else ROOT
     method = req.method.upper()
     if method == "HEAD" and req.path == "/healthz":
         response = _healthz(db_path)
@@ -121,7 +123,7 @@ def handle(req: Request, db_path: Path) -> Response:
                 "ok": True,
                 "name": "toponym",
                 "version": PACKAGE_VERSION,
-                "endpoints": ["/healthz", "/v1/search", "/v1/records"],
+                "endpoints": ["/healthz", "/v1/search", "/v1/records", "/v1/declensions"],
             },
             200,
         )
@@ -131,6 +133,8 @@ def handle(req: Request, db_path: Path) -> Response:
         return _search(req, db_path)
     if req.path == "/v1/records":
         return _record(req, db_path)
+    if req.path == "/v1/declensions":
+        return _declensions(req, canon)
     return _error(404, "not_found", "нет такого пути")
 
 
@@ -211,8 +215,22 @@ def _record(req: Request, db_path: Path) -> Response:
     return _json_response({"ok": True, "hit": hit}, 200)
 
 
+def _declensions(req: Request, root: Path) -> Response:
+    record_id = _first(req.query, "id").strip()
+    if not record_id:
+        return _error(400, "missing_id", "нужен параметр id")
+    hits = rows_for_id(root, record_id)
+    if not hits:
+        return _error(404, "not_found", "id not in declensions")
+    return _json_response(
+        {"ok": True, "id": record_id, "count": len(hits), "hits": hits},
+        200,
+    )
+
+
 class RegistryHandler(BaseHTTPRequestHandler):
     db_path: Path = DEFAULT_OUT
+    root_path: Path = ROOT
 
     def version_string(self) -> str:
         return "toponym"
@@ -237,7 +255,7 @@ class RegistryHandler(BaseHTTPRequestHandler):
             path=parsed.path,
             query=parse_qs(parsed.query, keep_blank_values=True),
         )
-        response = handle(req, self.db_path)
+        response = handle(req, self.db_path, root=self.root_path)
         self.send_response(response.status)
         for key, value in response.headers.items():
             self.send_header(key, value)
@@ -267,16 +285,17 @@ class RegistryHandler(BaseHTTPRequestHandler):
         self._dispatch()
 
 
-def make_handler(db_path: Path) -> type[RegistryHandler]:
+def make_handler(db_path: Path, root: Path | None = None) -> type[RegistryHandler]:
     class BoundHandler(RegistryHandler):
         pass
 
     BoundHandler.db_path = db_path
+    BoundHandler.root_path = root or ROOT
     return BoundHandler
 
 
-def serve(bind: str, port: int, db_path: Path) -> None:
-    handler = make_handler(db_path)
+def serve(bind: str, port: int, db_path: Path, root: Path | None = None) -> None:
+    handler = make_handler(db_path, root=root)
     httpd = ThreadingHTTPServer((bind, port), handler)
     httpd.daemon_threads = True
 
@@ -310,7 +329,7 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 2
     try:
-        serve(args.bind, args.port, db_path)
+        serve(args.bind, args.port, db_path, root=Path(args.root))
     except OSError as exc:
         print(str(exc), file=sys.stderr)
         return 2
