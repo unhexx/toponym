@@ -159,6 +159,9 @@ def fetch_dump(
     dump_url, filename = resolve_dump(source, url_override=url)
     dest_dir = assert_dest_outside_repo(dest if dest is not None else default_dest_dir(), root)
     dest_file = dest_dir / filename
+    # dest_dir вне дерева не спасает, если dest_file — симлинк внутрь репозитория (resolve).
+    if is_inside_repo(dest_file, root):
+        raise FetchError(f"dest внутри репозитория запрещён: {dest_file}")
     result = {
         "id": source_id,
         "url": dump_url,

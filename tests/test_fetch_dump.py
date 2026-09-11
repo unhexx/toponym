@@ -146,6 +146,7 @@ def test_fetch_geonames_writes_outside_repo(tmp_path: Path) -> None:
     assert not fetch_mod.is_inside_repo(written, ROOT)
     assert not (ROOT / "data" / "raw" / "geonames-ru" / "RU.zip").exists()
     assert session.calls and session.calls[0]["kwargs"].get("stream") is True
+    assert session.calls[0]["kwargs"].get("timeout") == fetch_mod.TIMEOUT_SEC
 
 
 def test_fetch_dry_run_does_not_write(tmp_path: Path) -> None:
