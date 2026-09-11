@@ -75,6 +75,31 @@ def test_fts_mvd_hits_foiv(tmp_path: Path) -> None:
     assert "foiv:mvd" in ids
 
 
+def test_records_store_coords_outside_fts(tmp_path: Path) -> None:
+    db_path = _build(tmp_path)
+    rec = index_mod.get_record(db_path, "wd:Q649")
+    assert rec is not None
+    assert isinstance(rec["lat"], float)
+    assert isinstance(rec["lon"], float)
+    assert 55.0 < rec["lat"] < 56.0
+    assert rec["oktmo"] == "45000000"
+    assert rec["fias"] == ""
+    conn = sqlite3.connect(db_path)
+    try:
+        cols = [row[1] for row in conn.execute("PRAGMA table_info(records)").fetchall()]
+        fts_sql = conn.execute(
+            "SELECT sql FROM sqlite_master WHERE name = 'records_fts'"
+        ).fetchone()[0]
+    finally:
+        conn.close()
+    assert "lat" in cols and "lon" in cols and "fias" in cols and "oktmo" in cols
+    assert "lat" not in fts_sql
+    assert "lon" not in fts_sql
+    assert "oktmo" not in fts_sql
+    assert "fias" not in fts_sql
+    assert "name_ru" in fts_sql
+
+
 def test_fts_tverskaya_hits_hodonym(tmp_path: Path) -> None:
     db_path = _build(tmp_path)
     ids = index_mod.fts_match(db_path, "Тверская")

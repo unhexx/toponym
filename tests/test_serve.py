@@ -92,6 +92,22 @@ def test_record_lookup(tmp_path: Path) -> None:
     status, _headers, payload = _get("/v1/records", db_path, id="wd:Q626")
     assert status == 200, payload
     assert payload["hit"]["id"] == "wd:Q626"
+
+
+def test_record_card_includes_coord_number(tmp_path: Path) -> None:
+    db_path = _build(tmp_path)
+    status, _headers, payload = _get("/v1/records", db_path, id="wd:Q649")
+    assert status == 200, payload
+    hit = payload["hit"]
+    assert isinstance(hit["lat"], float)
+    assert isinstance(hit["lon"], float)
+    assert 55.0 < hit["lat"] < 56.0
+    assert hit["oktmo"] == "45000000"
+    assert "fias" in hit
+    status, _headers, search = _get("/v1/search", db_path, q="Москва")
+    assert status == 200
+    card = next(row for row in search["hits"] if row["id"] == "wd:Q649")
+    assert isinstance(card["lat"], float)
     status, _headers, payload = _get("/v1/records", db_path, id="no-such-id")
     assert status == 404
     assert payload["error"] == "not_found"

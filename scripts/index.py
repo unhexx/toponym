@@ -5,6 +5,7 @@ import argparse
 import sqlite3
 import sys
 from pathlib import Path
+from typing import Any
 
 _ROOT = Path(__file__).resolve().parents[1]
 if str(_ROOT) not in sys.path:
@@ -28,12 +29,17 @@ RECORD_FIELDS = (
     "abbr",
     "parent_id",
     "admin1",
+    "lat",
+    "lon",
     "wd",
     "geonames",
+    "fias",
+    "oktmo",
     "iso",
     "status",
     "source_id",
 )
+COORD_FIELDS = frozenset({"lat", "lon"})
 
 SCHEMA_SQL = """
 CREATE TABLE records (
@@ -46,8 +52,12 @@ CREATE TABLE records (
   abbr TEXT,
   parent_id TEXT,
   admin1 TEXT,
+  lat TEXT,
+  lon TEXT,
   wd TEXT,
   geonames TEXT,
+  fias TEXT,
+  oktmo TEXT,
   iso TEXT,
   status TEXT,
   source_id TEXT
@@ -112,8 +122,12 @@ def load_records(root: Path) -> list[dict[str, str]]:
                     "abbr": _cell(row, "abbr"),
                     "parent_id": _cell(row, "parent_id"),
                     "admin1": _cell(row, "admin1"),
+                    "lat": _cell(row, "lat"),
+                    "lon": _cell(row, "lon"),
                     "wd": _cell(row, "wd"),
                     "geonames": _cell(row, "geonames"),
+                    "fias": _cell(row, "fias"),
+                    "oktmo": _cell(row, "oktmo"),
                     "iso": _cell(row, "iso"),
                     "status": _cell(row, "status"),
                     "source_id": _cell(row, "source_id"),
@@ -200,11 +214,21 @@ def fts_match(db_path: Path, query: str) -> list[str]:
     return [row[0] for row in rows]
 
 
-def _row_to_record(row: tuple[object, ...]) -> dict[str, str]:
-    return {
-        key: "" if value is None else str(value)
-        for key, value in zip(RECORD_FIELDS, row, strict=True)
-    }
+def _coord_value(raw: object) -> float | str:
+    text = "" if raw is None else str(raw).strip()
+    if not text:
+        return ""
+    return float(text)
+
+
+def _row_to_record(row: tuple[object, ...]) -> dict[str, Any]:
+    out: dict[str, Any] = {}
+    for key, value in zip(RECORD_FIELDS, row, strict=True):
+        if key in COORD_FIELDS:
+            out[key] = _coord_value(value)
+        else:
+            out[key] = "" if value is None else str(value)
+    return out
 
 
 def _connect_ro(db_path: Path) -> sqlite3.Connection:
@@ -212,7 +236,7 @@ def _connect_ro(db_path: Path) -> sqlite3.Connection:
     return sqlite3.connect(uri, uri=True)
 
 
-def get_record(db_path: Path, record_id: str) -> dict[str, str] | None:
+def get_record(db_path: Path, record_id: str) -> dict[str, Any] | None:
     conn = _connect_ro(db_path)
     try:
         row = conn.execute(
@@ -233,7 +257,7 @@ def fts_search(
     limit: int = 20,
     status: str | None = None,
     table_name: str | None = None,
-) -> list[dict[str, str]]:
+) -> list[dict[str, Any]]:
     conn = _connect_ro(db_path)
     try:
         rows = conn.execute(
