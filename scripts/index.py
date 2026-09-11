@@ -13,6 +13,7 @@ if str(_ROOT) not in sys.path:
 
 from scripts.lib.catalog import load_catalog  # noqa: E402
 from scripts.lib.csvio import read_csv  # noqa: E402
+from scripts.lib.declensions import load_lemma_aliases  # noqa: E402
 from scripts.lib.detectors import utcnow  # noqa: E402
 from scripts.lib.places import INDEX_RELPATHS  # noqa: E402
 
@@ -63,7 +64,7 @@ CREATE TABLE records (
   source_id TEXT
 );
 CREATE VIRTUAL TABLE records_fts USING fts5(
-  name_ru, name_yo, name_en, abbr, wd,
+  name_ru, name_yo, name_en, abbr, wd, lemma,
   tokenize='unicode61'
 );
 CREATE TABLE sync_meta (
@@ -163,6 +164,7 @@ def write_last_index(db_path: Path, n_records: int, stamp: str | None = None) ->
 
 def rebuild_index(root: Path, out_path: Path) -> dict[str, int]:
     records = load_records(root)
+    aliases = load_lemma_aliases(root)
     meta = load_sync_meta(root)
     _unlink_db(out_path)
     conn = sqlite3.connect(out_path)
@@ -171,8 +173,8 @@ def rebuild_index(root: Path, out_path: Path) -> dict[str, int]:
         placeholders = ",".join("?" for _ in RECORD_FIELDS)
         insert_sql = f"INSERT INTO records ({','.join(RECORD_FIELDS)}) VALUES ({placeholders})"
         fts_sql = (
-            "INSERT INTO records_fts(rowid, name_ru, name_yo, name_en, abbr, wd) "
-            "VALUES (?,?,?,?,?,?)"
+            "INSERT INTO records_fts(rowid, name_ru, name_yo, name_en, abbr, wd, lemma) "
+            "VALUES (?,?,?,?,?,?,?)"
         )
         for row in records:
             cur = conn.execute(insert_sql, [row[key] for key in RECORD_FIELDS])
@@ -185,6 +187,7 @@ def rebuild_index(root: Path, out_path: Path) -> dict[str, int]:
                     row["name_en"],
                     row["abbr"],
                     row["wd"],
+                    aliases.get(row["id"], ""),
                 ),
             )
         conn.executemany(

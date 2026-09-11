@@ -98,6 +98,8 @@ def test_records_store_coords_outside_fts(tmp_path: Path) -> None:
     assert "oktmo" not in fts_sql
     assert "fias" not in fts_sql
     assert "name_ru" in fts_sql
+    assert "lemma" in fts_sql
+    assert "lemma" not in cols
 
 
 def test_fts_yo_hits_orel_and_black_sea(tmp_path: Path) -> None:
@@ -115,6 +117,12 @@ def test_fts_tverskaya_hits_hodonym(tmp_path: Path) -> None:
     db_path = _build(tmp_path)
     ids = index_mod.fts_match(db_path, "Тверская")
     assert "wd:Q1644209" in ids
+    assert "wd:Q1644209" in index_mod.fts_match(db_path, "Тверской")
+    rec = index_mod.get_record(db_path, "wd:Q1644209")
+    assert rec is not None
+    assert rec["name_ru"] == "Тверская улица"
+    assert "lemma" not in rec
+    assert "wd:Q649" in index_mod.fts_match(db_path, "Москвы")
     conn = sqlite3.connect(db_path)
     try:
         row = conn.execute(

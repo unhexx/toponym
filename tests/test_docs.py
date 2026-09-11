@@ -104,6 +104,12 @@ def test_usage_guide_covers_search_and_declensions() -> None:
         assert needle in text, needle
     assert "data/curated" in text
     assert "GET /v1/declensions" in text
+    assert "municipalities.csv" in text
+    assert "hodonyms.csv" in text
+    assert "microtoponyms.csv" in text
+    assert "DEC-SEED-001" in text
+    assert "Тверской" in text
+    assert "queue.csv" in text
 
 
 def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
