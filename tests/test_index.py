@@ -4,6 +4,7 @@ import sqlite3
 from pathlib import Path
 
 import scripts.index as index_mod
+import scripts.sync as sync_mod
 from scripts.lib.places import INDEX_RELPATHS, PLACE_RELPATHS
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -11,14 +12,23 @@ MAX_BYTES = 10 * 1024 * 1024
 
 
 def test_place_relpaths_exclude_agencies() -> None:
-    assert "data/curated/hodonyms.csv" in PLACE_RELPATHS
-    assert "data/curated/agencies-foiv.csv" not in PLACE_RELPATHS
-    assert "data/curated/agencies-other.csv" not in PLACE_RELPATHS
+    assert PLACE_RELPATHS == [
+        "data/curated/federal-districts.csv",
+        "data/curated/regions.csv",
+        "data/curated/cities-major.csv",
+        "data/curated/hydronyms-major.csv",
+        "data/curated/oronyms-major.csv",
+        "data/curated/municipalities.csv",
+        "data/curated/hodonyms.csv",
+        "data/curated/microtoponyms.csv",
+    ]
     assert INDEX_RELPATHS == PLACE_RELPATHS + [
         "data/curated/agencies-foiv.csv",
         "data/curated/agencies-other.csv",
     ]
     assert index_mod.INDEX_RELPATHS is INDEX_RELPATHS
+    assert sync_mod.PLACE_RELPATHS is PLACE_RELPATHS
+    assert "data/curated/agencies-foiv.csv" not in sync_mod.PLACE_RELPATHS
 
 
 def _build(tmp_path: Path) -> Path:
