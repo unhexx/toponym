@@ -1,14 +1,17 @@
 # .agent/TODO.md — Task Backlog
 
 **Initiative:** toponym v1 local registries
-**Status:** Loop 2 tagged `2026.09.11`; next release A–L (после 2026.09.11)
+**Status:** Loop 2 tagged `2026.09.11`; next release A–L COMPLETE; tag `2026.09.12` blocked-until-tomorrow
 
 ## In progress
 
 ## Pending
 
+- [ ] NR-TAG: annotated CalVer `2026.09.12` не раньше 2026-09-12 (тот же день, что `2026.09.11`, retag запрещён)
+
 ## Done
 
+- [x] NR-CHANGELOG: Unreleased A–L датирован как ship `2026.09.12` pending; тег сегодня не ставится
 - [x] NR-K: малые сиды муниципалитетов, годонимов, микротопонимов + datapackage resource (DEC-SEED-001)
 - [x] NR-J: население / полигоны / GeoJSON / PostGIS вне канона (DEC-GEO-001)
 - [x] NR-I: hflabs CC-BY-SA только `data/raw/`, не curated (DEC-HFLABS-001)

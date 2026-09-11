@@ -67,6 +67,8 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | K | Сиды муниципалитетов, годонимов, микротопонимов | `feature/nr-k-seeds` | новые curated CSV + resource datapackage + schema; ≥1 строка каждый; типы уже есть; без дампа ГАР | COMPLETE |
 | L | Не дробить P1 на P1a–e | — | P1 COMPLETE; подциклы не открывать | COMPLETE |
 
+A–L COMPLETE на `main`. Следующий annotated CalVer — `2026.09.12` (blocked-until-tomorrow: тег `2026.09.11` уже есть).
+
 ## Definition of Done v1
 
 - Все 11 resources из `datapackage.json` на диске.
