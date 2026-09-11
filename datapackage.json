@@ -2,7 +2,7 @@
   "name": "toponym",
   "title": "Реестр российских топонимов",
   "profile": "tabular-data-package",
-  "version": "2026.09.09",
+  "version": "2026.09.11",
   "license": "MIT",
   "homepage": "https://github.com/unhexx/toponym",
   "resources": [
