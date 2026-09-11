@@ -46,7 +46,11 @@ def test_datapackage_excludes_hflabs_csv() -> None:
 
 
 def test_hflabs_mapping_is_pointer() -> None:
-    text = (ROOT / "data" / "mappings" / "hflabs-region.yaml").read_text(encoding="utf-8")
-    assert "delete_policy: pointer" in text
-    assert "CC-BY-SA" in text
-    assert "не копировать" in text
+    for name in ("hflabs-region.yaml", "hflabs-city.yaml"):
+        text = (ROOT / "data" / "mappings" / name).read_text(encoding="utf-8")
+        assert "delete_policy: pointer" in text, name
+        assert "CC-BY-SA" in text, name
+        assert "не копировать" in text, name
+    city = (ROOT / "data" / "mappings" / "hflabs-city.yaml").read_text(encoding="utf-8")
+    assert "name_ru" not in city.split("notes:", 1)[0]
+    assert "fias_id" in city

@@ -17,6 +17,7 @@ EXPECTED_FILES = (
     "gkgn.yaml",
     "fias-pointer.yaml",
     "hflabs-region.yaml",
+    "hflabs-city.yaml",
     "ukase-326.yaml",
     "wikidata.yaml",
 )
@@ -75,9 +76,28 @@ def test_source_id_in_catalog() -> None:
 
 
 def test_pointer_sources_use_delete_policy_pointer() -> None:
-    for name in ("fias-pointer.yaml", "hflabs-region.yaml", "wikidata.yaml"):
+    for name in (
+        "fias-pointer.yaml",
+        "hflabs-region.yaml",
+        "hflabs-city.yaml",
+        "wikidata.yaml",
+    ):
         payload = _load_yaml(MAPPINGS_DIR / name)
         assert payload["delete_policy"] == "pointer", name
+
+
+def test_hflabs_city_mapping_is_fias_join_pointer() -> None:
+    payload = _load_yaml(MAPPINGS_DIR / "hflabs-city.yaml")
+    notes = payload["notes"].casefold()
+    assert payload["source_id"] == "hflabs-city"
+    assert payload["stable_id"] == "fias:{fias_id}"
+    assert payload["delete_policy"] == "pointer"
+    assert payload["fields"]["fias_id"] == "fias"
+    assert payload["fields"]["oktmo"] == "oktmo"
+    assert "name_ru" not in payload["fields"].values()
+    assert "city" not in payload["fields"]
+    assert "cc-by-sa" in notes or "sharealike" in notes or "не копировать" in payload["notes"]
+    assert "dec-hflabs-001" in notes
 
 
 def test_wikidata_mapping_points_and_no_sparql_dump() -> None:

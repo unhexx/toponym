@@ -22,7 +22,7 @@ SSOT каталога: [`data/sources/catalog.yaml`](../data/sources/catalog.yam
 | `gkgn-opendata` | official-open-data | нет | указатель официальных названий |
 | `fias-gar` | official-open-data | нет | указатель; полный ГАР запрещён |
 | `hflabs-region` | CC-BY-SA-4.0 | нет | указатель; не в curated |
-| `hflabs-city` | CC-BY-SA-4.0 | нет | указатель; не в curated |
+| `hflabs-city` | CC-BY-SA-4.0 | нет | указатель `data/mappings/hflabs-city.yaml`; не в curated |
 | `epogrebnyak-ru-cities` | unknown | нет | watchlist, не импорт |
 | `mfursov-russian-cities` | Apache-2.0 | нет | watchlist склонений |
 | `nickyx3-settlements` | unknown | нет | watchlist |
