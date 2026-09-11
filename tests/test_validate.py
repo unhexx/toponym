@@ -73,6 +73,21 @@ def test_hflabs_source_id_fails_validate(tmp_path: Path) -> None:
     assert any(row["check"] == "sharealike" for row in errors)
 
 
+def test_hflabs_city_source_id_fails_validate(tmp_path: Path) -> None:
+    dest = tmp_path / "pkg"
+    dest.mkdir()
+    shutil.copy(ROOT / "datapackage.json", dest / "datapackage.json")
+    shutil.copytree(ROOT / "schema", dest / "schema")
+    shutil.copytree(ROOT / "data", dest / "data")
+    path = dest / "data/curated/cities-major.csv"
+    text = path.read_text(encoding="utf-8")
+    assert "active,,wikidata," in text
+    path.write_text(text.replace("active,,wikidata,", "active,,hflabs-city,", 1), encoding="utf-8")
+    code, errors = validate_mod.validate_tree(dest / "datapackage.json", root=dest)
+    assert code == 1
+    assert any(row["check"] == "sharealike" and "hflabs-city" in row["message"] for row in errors)
+
+
 def test_renamed_taxonomy_root_fails_validate(tmp_path: Path) -> None:
     dest = tmp_path / "pkg"
     dest.mkdir()
@@ -145,9 +160,13 @@ def test_check_gn_id_rejects_prefix() -> None:
 
 def test_check_sharealike_rejects_hflabs() -> None:
     assert "hflabs-region" in SHAREALIKE_SOURCE_IDS
+    assert "hflabs-city" in SHAREALIKE_SOURCE_IDS
     errors: list[dict] = []
     check_sharealike({"id": "wd:Q1", "source_id": "hflabs-region"}, "regions", errors)
     assert errors[0]["check"] == "sharealike"
+    city_errors: list[dict] = []
+    check_sharealike({"id": "wd:Q1", "source_id": "hflabs-city"}, "cities-major", city_errors)
+    assert city_errors[0]["check"] == "sharealike"
     ok: list[dict] = []
     check_sharealike({"id": "wd:Q1", "source_id": "wikidata"}, "regions", ok)
     assert ok == []

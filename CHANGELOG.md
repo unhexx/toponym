@@ -10,6 +10,7 @@
 
 ### Added
 - Указатель [`data/mappings/wikidata.yaml`](data/mappings/wikidata.yaml): Q-id → `wd`, label ru/en, P625 → `lat`/`lon` (точки, DEC-GEO-001). SPARQL-дамп не вендорится; `delete_policy=pointer`.
+- Указатель [`data/mappings/hflabs-city.yaml`](data/mappings/hflabs-city.yaml): join по FIAS GUID; `city`/`name` в curated не копируются (DEC-HFLABS-001). Таблица hflabs в git не кладётся.
 - Сиды МО / годонимов / микротопонимов расширены из Wikidata (CC0): десятки городских округов, улиц и урочищ/пещер. Стабильные `wd:` id, `parent_id` на субъект или город. Склонения новых строк — `review=needs_review` (только `nom`), без pymorphy. ГАР/`RU.zip` и hflabs в curated не копировались.
 - Сиды дромонимов, сёл и агоронимов (DEC-SEED-002): [`data/curated/dromonyms.csv`](data/curated/dromonyms.csv), [`villages.csv`](data/curated/villages.csv), [`agoronyms.csv`](data/curated/agoronyms.csv) + ресурсы datapackage и склонения `needs_review`. Типы уже были в `types.csv`. Улица ≠ площадь. Без ГАР.
 - CLI очереди автосклонений: `python scripts/declensions_queue.py --id … --lemma …` пишет только [`data/declensions/queue.csv`](data/declensions/queue.csv), `review=needs_review`. `--review gold` — отказ (DEC-DECL-001); золотые таблицы не трогает.

@@ -1,0 +1,13 @@
+source_id: hflabs-city
+stable_id: "fias:{fias_id}"
+fields:
+  fias_id: fias
+  oktmo: oktmo
+  kladr_id: notes
+delete_policy: pointer
+notes: >
+  CC-BY-SA-4.0: не копировать city/address/population в data/curated/
+  (DEC-HFLABS-001). Локальный join по FIAS GUID на уже существующих
+  wd: строках; name hflabs в MIT-канон не переносится. Таблицу city.csv
+  в git не класть — только data/raw/hflabs-city/SOURCE.md. v1 sync
+  обновляет cursor/checked_at и не пишет поля hflabs в канон.

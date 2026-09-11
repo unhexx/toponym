@@ -192,6 +192,15 @@
       "notes": "Не копировать строки в curated."
     },
     {
+      "id": "MAP-HFLABS-CITY",
+      "type": "Mapping",
+      "title": "hflabs/city указатель",
+      "path": "data/mappings/hflabs-city.yaml",
+      "catalog_id": "hflabs-city",
+      "pointer": true,
+      "notes": "Join по FIAS GUID; name не копировать в curated (DEC-HFLABS-001)."
+    },
+    {
       "id": "MAP-UKASE-326",
       "type": "Mapping",
       "title": "Указ № 326 → ФОИВ",
