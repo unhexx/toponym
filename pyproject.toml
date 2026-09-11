@@ -42,3 +42,6 @@ known-first-party = ["scripts"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+markers = [
+  "compose: docker compose smoke (CI job compose; unit job uses -m 'not compose')",
+]

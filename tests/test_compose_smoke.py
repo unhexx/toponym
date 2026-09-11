@@ -42,6 +42,7 @@ def _port_free(port: int) -> bool:
         return sock.connect_ex(("127.0.0.1", port)) != 0
 
 
+@pytest.mark.compose
 @pytest.mark.skipif(not docker_ok(), reason="docker unavailable")
 def test_compose_up_search() -> None:
     if not _port_free(8099):

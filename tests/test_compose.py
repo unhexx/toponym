@@ -5,6 +5,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
+
 FORBIDDEN_SERVICES = {
     "searxng",
     "ollama",
@@ -83,3 +84,33 @@ def test_entrypoint_sequence() -> None:
     assert "check.py" not in text
     assert "sync.py" not in text
     assert "fetch_dump.py" not in text
+
+
+def test_ci_compose_job_separate_from_unit() -> None:
+    ci = yaml.safe_load((ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8"))
+    jobs = ci["jobs"]
+    assert "test" in jobs
+    assert "compose" in jobs
+    test_job = jobs["test"]
+    compose_job = jobs["compose"]
+    assert test_job["timeout-minutes"] == 15
+    assert compose_job["timeout-minutes"] == 20
+    test_text = "\n".join(
+        str(step.get("run") or "") for step in test_job["steps"]
+    )
+    compose_text = "\n".join(
+        str(step.get("run") or "") for step in compose_job["steps"]
+    )
+    assert '-m "not compose"' in test_text
+    assert "docker compose" not in test_text
+    assert "docker compose up --build" in compose_text
+    assert "--wait" in compose_text
+    assert "127.0.0.1:8099/healthz" in compose_text
+    assert "Волга" in compose_text
+    assert "МВД" in compose_text
+    assert "wd:Q626" in compose_text
+    assert "foiv:mvd" in compose_text
+    assert ":8080" not in compose_text
+    assert ":8100" not in compose_text
+    assert ":8110" not in compose_text
+    assert "pip install" not in compose_text
