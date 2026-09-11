@@ -30,6 +30,7 @@ def test_design_snapshot_is_released_v1() -> None:
     assert "`index.py` present" in text or "scripts/index.py" in text
     assert "DEC-GN-001" in text
     assert "never insert" in text.lower() or "Do not create `gn:`" in text
+    assert "DEC-DECL-001" in text
 
 
 def test_readme_has_compose_one_shot() -> None:
@@ -39,6 +40,7 @@ def test_readme_has_compose_one_shot() -> None:
     assert "127.0.0.1:8099" in text
     assert "python scripts/serve.py" in text
     assert "python scripts/fetch_dump.py" in text
+    assert "data/declensions/queue.csv" in text
     assert "http://127.0.0.1:8099/healthz" in text
     assert "http://127.0.0.1:8099/v1/search" in text
     assert "bash Agent-Init.sh" in text

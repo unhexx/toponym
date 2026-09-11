@@ -15,6 +15,7 @@ from frictionless import Package  # noqa: E402
 
 from scripts.lib.catalog import catalog_source_ids, load_catalog  # noqa: E402
 from scripts.lib.csvio import read_csv  # noqa: E402
+from scripts.lib.declensions import is_auto_source  # noqa: E402
 
 ROOT = _ROOT
 DATAPACKAGE = ROOT / "datapackage.json"
@@ -180,6 +181,14 @@ def validate_tree(dp_path: Path, *, root: Path | None = None) -> tuple[int, list
                 name_ru = row.get("name_ru") or ""
                 if "ё" in name_ru or "Ё" in name_ru:
                     _issue(errors, "yo", f"{row.get('id')}: ё в name_ru", name)
+            if "review" in header and (row.get("review") or "") == "gold":
+                if is_auto_source(row.get("source") or ""):
+                    _issue(
+                        errors,
+                        "gold_auto",
+                        f"{row.get('id')}: pymorphy/Natasha не золото (DEC-DECL-001)",
+                        name,
+                    )
 
     if "types" in tables:
         _, type_rows = tables["types"]
