@@ -167,6 +167,56 @@ def test_cities_major_have_wikidata_points() -> None:
     assert volga["geonames"] != "2022226"
 
 
+def _deyo(value: str) -> str:
+    return value.replace("ё", "е").replace("Ё", "Е")
+
+
+def test_name_yo_attested_fixtures() -> None:
+    """Wikidata ru-label / норма: ё только в name_yo, без угадывания."""
+    _, cities = _read_csv(ROOT / "data/curated/cities-major.csv")
+    _, hydros = _read_csv(ROOT / "data/curated/hydronyms-major.csv")
+    _, foiv = _read_csv(ROOT / "data/curated/agencies-foiv.csv")
+    _, other = _read_csv(ROOT / "data/curated/agencies-other.csv")
+    by_id = {row["id"]: row for row in cities + hydros + foiv + other}
+    expected = {
+        "wd:Q3118": ("Орел", "Орёл"),
+        "wd:Q198369": ("Щелково", "Щёлково"),
+        "wd:Q103993": ("Артем", "Артём"),
+        "wd:Q155309": ("Королев", "Королёв"),
+        "wd:Q153663": ("Киселевск", "Киселёвск"),
+        "wd:Q166": ("Черное море", "Чёрное море"),
+        "foiv:fadm": (
+            "Федеральное агентство по делам молодежи",
+            "Федеральное агентство по делам молодёжи",
+        ),
+        "foiv:ach": (
+            "Счетная палата Российской Федерации",
+            "Счётная палата Российской Федерации",
+        ),
+    }
+    for rid, (name_ru, name_yo) in expected.items():
+        row = by_id[rid]
+        assert row["name_ru"] == name_ru, rid
+        assert row["name_yo"] == name_yo, rid
+        assert "ё" not in row["name_ru"] and "Ё" not in row["name_ru"]
+        assert _deyo(row["name_yo"]) == row["name_ru"]
+
+
+def test_name_yo_no_guessing_on_empty() -> None:
+    pkg = _load_json(DATAPACKAGE)
+    for resource in pkg["resources"]:
+        header, rows = _read_csv(ROOT / resource["path"])
+        if "name_yo" not in header:
+            continue
+        for row in rows:
+            yo = row.get("name_yo") or ""
+            ru = row.get("name_ru") or ""
+            assert "ё" not in ru and "Ё" not in ru, (resource["name"], row.get("id"))
+            if yo:
+                assert "ё" in yo or "Ё" in yo, (resource["name"], row.get("id"))
+                assert _deyo(yo) == ru, (resource["name"], row.get("id"))
+
+
 def test_required_city_fixtures() -> None:
     _, cities = _read_csv(ROOT / "data/curated/cities-major.csv")
     names = {row["name_ru"] for row in cities}
@@ -196,6 +246,7 @@ def test_required_city_fixtures() -> None:
         assert name in names, name
     by_name = {row["name_ru"]: row for row in cities}
     assert by_name["Москва"]["id"] == "wd:Q649"
+    assert by_name["Орел"]["id"] == "wd:Q3118"
     assert by_name["Орел"]["name_yo"] == "Орёл"
     iso_subjects = {
         row["iso"]

@@ -64,6 +64,29 @@ def check_gold_auto(
         )
 
 
+def yo_to_e(value: str) -> str:
+    return value.replace("ё", "е").replace("Ё", "Е")
+
+
+def check_name_yo(
+    row: dict[str, str],
+    resource: str,
+    errors: list[dict[str, Any]],
+) -> None:
+    name_ru = row.get("name_ru") or ""
+    name_yo = row.get("name_yo") or ""
+    rid = row.get("id") or ""
+    if "ё" in name_ru or "Ё" in name_ru:
+        issue(errors, "yo", f"{rid}: ё в name_ru", resource)
+    if not name_yo:
+        return
+    if "ё" not in name_yo and "Ё" not in name_yo:
+        issue(errors, "yo", f"{rid}: name_yo без ё", resource)
+        return
+    if yo_to_e(name_yo) != name_ru:
+        issue(errors, "yo", f"{rid}: name_ru не нормализация name_yo", resource)
+
+
 def check_frozen_taxonomy(
     type_rows: list[dict[str, str]],
     errors: list[dict[str, Any]],

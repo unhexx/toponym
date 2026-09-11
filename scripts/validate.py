@@ -20,6 +20,7 @@ from scripts.lib.invariants import (  # noqa: E402
     check_frozen_taxonomy,
     check_gn_id,
     check_gold_auto,
+    check_name_yo,
     check_sharealike,
     issue,
 )
@@ -173,9 +174,7 @@ def validate_tree(dp_path: Path, *, root: Path | None = None) -> tuple[int, list
                 if col in header and (row.get(col) or "").casefold() in TOROPUM_NAMES:
                     issue(errors, "toropum", f"{col}={row.get(col)}", name)
             if "name_ru" in header:
-                name_ru = row.get("name_ru") or ""
-                if "ё" in name_ru or "Ё" in name_ru:
-                    issue(errors, "yo", f"{row.get('id')}: ё в name_ru", name)
+                check_name_yo(row, name, errors)
             if "review" in header:
                 check_gold_auto(row, name, errors)
 

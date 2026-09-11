@@ -27,3 +27,13 @@ ORDER BY DESC(?pop)
 #   OPTIONAL { ?city p:P625/psv:P625 [ wikibase:geoLatitude ?lat; wikibase:geoLongitude ?lon ] }
 #   OPTIONAL { ?city wdt:P764 ?oktmo }
 # }
+
+# name_yo: ru-label / P1448 / P1705 на уже известных Q-id. Заполнять name_yo
+# только если каноническое русское имя само содержит ё; алиасы (Кёнигсберг,
+# Ёбург, Кремлёв, Чёрный Иртыш) не копировать. Не массовый дамп, не hflabs.
+# SELECT ?item ?ru ?official ?native WHERE {
+#   VALUES ?item { wd:Q3118 wd:Q166 wd:Q198369 wd:Q103993 wd:Q155309 wd:Q153663 }
+#   OPTIONAL { ?item rdfs:label ?ru FILTER(LANG(?ru) = "ru") }
+#   OPTIONAL { ?item wdt:P1448 ?official FILTER(LANG(?official) = "ru") }
+#   OPTIONAL { ?item wdt:P1705 ?native FILTER(LANG(?native) = "ru") }
+# }
