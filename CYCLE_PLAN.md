@@ -59,7 +59,7 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | C | pymorphy/Natasha не золото | `feature/nr-c-declensions` | автосклонения только `review=needs_review` или `data/declensions/queue.csv`; gold не трогать | COMPLETE |
 | D | Уникальность склонений `(id, lemma)` | `feature/nr-d-decl-key` | DEC: не форсировать unique `id`; золото не переписывать | COMPLETE |
 | E | Таксономия верхнего уровня | `feature/nr-e-taxonomy` | DEC: `toponym` / `oikonym` / `hydronym` без переименования | COMPLETE |
-| F | Публичный HTTP вне scope | `feature/nr-f-loopback` | loopback `127.0.0.1:8099`; host publish не `0.0.0.0`; публичный Internet API нет | PENDING |
+| F | Публичный HTTP вне scope | `feature/nr-f-loopback` | loopback `127.0.0.1:8099`; host publish не `0.0.0.0`; публичный Internet API нет | COMPLETE |
 | G | Один формат онтологии | `feature/nr-g-ontology` | только Outpost `ontology/ontology.json`; DEC-* на keep-out A–J, L | PENDING |
 | H | Agentix — symlink SSOT | `feature/nr-h-agentix` | DEC: дерево шаблона не копировать; sibling `../agentic_loop_template` | PENDING |
 | I | hflabs CC-BY-SA не в curated | `feature/nr-i-hflabs` | DEC + `data/raw/`: ShareAlike только raw; curated без копий таблиц | PENDING |

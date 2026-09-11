@@ -40,6 +40,7 @@ REQUIRED_IDS = {
     "DEC-DECL-001",
     "DEC-DECL-002",
     "DEC-TAX-001",
+    "DEC-SERVE-002",
 }
 
 
@@ -108,3 +109,6 @@ def test_required_entities_present() -> None:
     assert by_id["DEC-TAX-001"]["status"] == "accepted"
     summary = by_id["DEC-TAX-001"]["summary"]
     assert "toponym" in summary and "oikonym" in summary and "hydronym" in summary
+    assert by_id["DEC-SERVE-002"]["type"] == "Decision"
+    assert by_id["DEC-SERVE-002"]["status"] == "accepted"
+    assert "0.0.0.0" in by_id["DEC-SERVE-002"]["summary"]
