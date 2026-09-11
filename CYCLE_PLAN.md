@@ -57,7 +57,7 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | A | `RU.zip` / ГАР вне git: SOURCE.md + fetch в tmp | `feature/nr-a-dump` | указатели `data/raw/*/SOURCE.md`; опциональный fetch пишет вне репо; size gate; дамп не коммитится | COMPLETE |
 | B | Немаппленные `gn:{id}` не вставлять в curated | `feature/nr-b-geonames` | дизайн + DEC: GeoNames sync только match существующих строк; без `gn:{id}` insert | COMPLETE |
 | C | pymorphy/Natasha не золото | `feature/nr-c-declensions` | автосклонения только `review=needs_review` или `data/declensions/queue.csv`; gold не трогать | COMPLETE |
-| D | Уникальность склонений `(id, lemma)` | `feature/nr-d-decl-key` | DEC: не форсировать unique `id`; золото не переписывать | PENDING |
+| D | Уникальность склонений `(id, lemma)` | `feature/nr-d-decl-key` | DEC: не форсировать unique `id`; золото не переписывать | COMPLETE |
 | E | Таксономия верхнего уровня | `feature/nr-e-taxonomy` | DEC: `toponym` / `oikonym` / `hydronym` без переименования | PENDING |
 | F | Публичный HTTP вне scope | `feature/nr-f-loopback` | loopback `127.0.0.1:8099`; host publish не `0.0.0.0`; публичный Internet API нет | PENDING |
 | G | Один формат онтологии | `feature/nr-g-ontology` | только Outpost `ontology/ontology.json`; DEC-* на keep-out A–J, L | PENDING |

@@ -49,6 +49,21 @@ def test_empty_lat_lon_accepted_on_seeds() -> None:
     assert errors == []
 
 
+def test_duplicate_declension_id_lemma_fails(tmp_path: Path) -> None:
+    dest = tmp_path / "pkg"
+    dest.mkdir()
+    shutil.copy(ROOT / "datapackage.json", dest / "datapackage.json")
+    shutil.copytree(ROOT / "schema", dest / "schema")
+    shutil.copytree(ROOT / "data", dest / "data")
+    path = dest / "data/declensions/agencies.csv"
+    text = path.read_text(encoding="utf-8")
+    first = next(line for line in text.splitlines() if line.startswith("foiv:mvd,"))
+    path.write_text(text + first + "\n", encoding="utf-8")
+    code, errors = validate_mod.validate_tree(dest / "datapackage.json", root=dest)
+    assert code == 1
+    assert any(row["check"] == "unique" and "foiv:mvd" in row["message"] for row in errors)
+
+
 def test_gold_pymorphy_fails_validate(tmp_path: Path) -> None:
     dest = tmp_path / "pkg"
     dest.mkdir()

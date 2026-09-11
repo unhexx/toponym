@@ -122,6 +122,8 @@ agents/             # промпт ежедневного обновления
 
 Очередь автоформ (не канон): [`data/declensions/queue.csv`](data/declensions/queue.csv). pymorphy/Natasha не пишут `gold` (DEC-DECL-001).
 
+Уникальность склонений — `(id, lemma)` (DEC-DECL-002); `id` в файле может повторяться.
+
 ## Скрипты
 
 ```bash

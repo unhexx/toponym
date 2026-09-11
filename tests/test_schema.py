@@ -101,7 +101,11 @@ def test_declensions_header_frozen() -> None:
         "review",
         "source",
     ]
-    assert [f["name"] for f in _load_json(DECL_SCHEMA)["fields"]] == expected
+    schema = _load_json(DECL_SCHEMA)
+    assert [f["name"] for f in schema["fields"]] == expected
+    assert schema.get("primaryKey") == ["id", "lemma"]
+    id_field = next(field for field in schema["fields"] if field["name"] == "id")
+    assert id_field.get("constraints", {}).get("unique") is not True
 
 
 def test_datapackage_schema_paths_exist() -> None:

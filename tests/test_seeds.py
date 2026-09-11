@@ -76,6 +76,18 @@ def test_seed_counts() -> None:
     assert len(other) >= 10
 
 
+def test_declension_ids_may_repeat() -> None:
+    _, rows = _read_csv(ROOT / "data/declensions/agencies.csv")
+    mvd = [row for row in rows if row["id"] == "foiv:mvd"]
+    assert len(mvd) == 2
+    assert {row["lemma"] for row in mvd} == {"МВД", "Министерство внутренних дел"}
+    ids = [row["id"] for row in rows]
+    assert len(ids) > len(set(ids))
+    keys = [(row["id"], row["lemma"]) for row in rows]
+    assert len(keys) == len(set(keys))
+    assert all(not row["id"].endswith("#head") for row in rows)
+
+
 def test_unique_ids_per_curated_file() -> None:
     pkg = _load_json(DATAPACKAGE)
     for resource in pkg["resources"]:

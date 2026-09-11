@@ -38,6 +38,7 @@ REQUIRED_IDS = {
     "DEC-GN-001",
     "RSK-GN-INSERT",
     "DEC-DECL-001",
+    "DEC-DECL-002",
 }
 
 
@@ -99,3 +100,6 @@ def test_required_entities_present() -> None:
     assert by_id["DEC-DECL-001"]["type"] == "Decision"
     assert by_id["DEC-DECL-001"]["status"] == "accepted"
     assert "queue.csv" in by_id["DEC-DECL-001"]["summary"]
+    assert by_id["DEC-DECL-002"]["type"] == "Decision"
+    assert by_id["DEC-DECL-002"]["status"] == "accepted"
+    assert "(id, lemma)" in by_id["DEC-DECL-002"]["title"]
