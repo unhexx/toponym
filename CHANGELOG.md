@@ -30,6 +30,9 @@ Next-release A–L на `main`. Annotated tag `2026.09.12` не раньше 202
 - GeoNames: DEC-GN-001 — sync только match колонки `geonames`; `validate.py` отклоняет `id=gn:…` в местах; немаппленные mods остаются `skipped_unmapped`.
 - README: бейджи shields.io (MIT, CalVer `2026.09.11`, CI `ci.yml`, Python 3.12+, Docker Compose), ссылки на `docs/USAGE.md`, CHANGELOG, SOURCES, презентацию и релиз; старт хоста (`.venv`) и `docker compose up --build` с `127.0.0.1:8099/healthz`.
 
+### Fixed
+- Золото «Волга» (`wd:Q626`): родительный падеж **Волги**, не «Волгы» (Розенталь; `docs/DECLENSIONS.md`). Ручной патч по id, без автосклонения.
+
 ## [2026.09.11] - 2026-09-11
 
 Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-SERVE-001). Включает v1.1: `http_dated` только по RU-строкам.
