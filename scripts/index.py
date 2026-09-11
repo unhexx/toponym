@@ -209,6 +209,67 @@ def fts_match(db_path: Path, query: str) -> list[str]:
     return [row[0] for row in rows]
 
 
+def _row_to_record(row: tuple[object, ...]) -> dict[str, str]:
+    return {
+        key: "" if value is None else str(value)
+        for key, value in zip(RECORD_FIELDS, row, strict=True)
+    }
+
+
+def get_record(db_path: Path, record_id: str) -> dict[str, str] | None:
+    conn = sqlite3.connect(db_path)
+    try:
+        row = conn.execute(
+            f"SELECT {','.join(RECORD_FIELDS)} FROM records WHERE id = ?",
+            (record_id,),
+        ).fetchone()
+    finally:
+        conn.close()
+    if row is None:
+        return None
+    return _row_to_record(row)
+
+
+def fts_search(
+    db_path: Path,
+    query: str,
+    *,
+    limit: int = 20,
+    status: str | None = None,
+    table_name: str | None = None,
+) -> list[dict[str, str]]:
+    conn = sqlite3.connect(db_path)
+    try:
+        rows = conn.execute(
+            f"""
+            SELECT {", ".join("r." + field for field in RECORD_FIELDS)}
+            FROM records_fts AS f
+            JOIN records AS r ON r.rowid = f.rowid
+            WHERE records_fts MATCH ?
+              AND (? IS NULL OR r.status = ?)
+              AND (? IS NULL OR r.table_name = ?)
+            LIMIT ?
+            """,
+            (query, status, status, table_name, table_name, limit),
+        ).fetchall()
+    finally:
+        conn.close()
+    return [_row_to_record(row) for row in rows]
+
+
+def index_counts(db_path: Path) -> dict[str, int]:
+    conn = sqlite3.connect(db_path)
+    try:
+        records = conn.execute("SELECT COUNT(*) FROM records").fetchone()
+        sources = conn.execute("SELECT COUNT(*) FROM sync_meta").fetchone()
+    finally:
+        conn.close()
+    return {
+        "records": int(records[0]) if records else 0,
+        "sources": int(sources[0]) if sources else 0,
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     out_path = Path(args.out)

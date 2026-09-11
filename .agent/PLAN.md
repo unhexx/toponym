@@ -2,7 +2,7 @@
 
 **Initiative:** toponym v1 local registries
 **Template Version:** 3.13.0
-**Last Update:** 2026-09-09 (v1.1-docs-drift)
+**Last Update:** 2026-09-11 (loop 2 P10-SERVE)
 
 ## Phase Status
 
@@ -20,6 +20,10 @@
 | P9-DONE Reviewer + release 2026.09.09 | COMPLETE |
 | v1.1 http_dated RU-only vs dump Last-Modified | COMPLETE |
 | v1.1 docs-drift design snapshot | COMPLETE |
+| P10-SERVE loopback JSON over FTS | IN PROGRESS |
+| P11-BOX compose one-shot | PENDING |
+| P12-DOCS DEC-SERVE-001 | PENDING |
+| P13-DONE reviewer | PENDING |
 
 ## Gate
 

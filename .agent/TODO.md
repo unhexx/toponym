@@ -1,11 +1,17 @@
 # .agent/TODO.md — Task Backlog
 
 **Initiative:** toponym v1 local registries
-**Status:** P9-DONE complete; v1 tagged 2026.09.09; v1.1-http-dated and docs-drift landed
+**Status:** Loop 2 — P10-SERVE in progress (DEC-SERVE-001)
 
 ## In progress
 
+- [ ] P10-SERVE-01: `scripts/serve.py` handle() JSON; bind 127.0.0.1:8099; `fts_search`
+
 ## Pending
+
+- [ ] P11-BOX-01: Dockerfile + compose.yaml + entrypoint + file-contract tests
+- [ ] P12-DOCS-01: README docker path, ontology DEC-SERVE-001, CHANGELOG
+- [ ] P13-DONE-01: reviewer gate, no tag unless operator asks
 
 ## Done
 
