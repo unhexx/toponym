@@ -44,9 +44,11 @@ python scripts/serve.py       # 127.0.0.1:8099
 | `GET /healthz` | число записей в индексе |
 | `GET /v1/search?q=…` | карточки мест и ведомств |
 | `GET /v1/records?id=…` | одна карточка по стабильному id |
+| `GET /v1/declensions?id=…` | падежи из CSV (массив hits, ключ `(id, lemma)`) |
 
 В индекс **не входят** склонения, `types.csv` и сырьё `data/raw/`.
-Падежи читают из CSV (раздел 4). Только GET; POST/PUT — 405.
+Падежи **не** кладутся в FTS: `/v1/declensions` читает `data/declensions/*.csv` по `id`.
+Только GET; POST/PUT — 405.
 
 Поля карточки: `id`, `table_name`, `type_id`, `name_ru`, `name_yo`, `name_en`,
 `abbr`, `parent_id`, `admin1`, `wd`, `geonames`, `iso`, `status`, `source_id`.
@@ -106,9 +108,19 @@ curl -sSG http://127.0.0.1:8099/v1/records --data-urlencode 'id=wd:Q626'   # В�
 
 ---
 
-## 4. Склонения (падежи) — только CSV
+## 4. Склонения (падежи)
 
-HTTP **не** отдаёт `nom/gen/dat/acc/ins/pre/loc2`. Золото:
+`GET /v1/declensions?id=…` стыкует падежи с карточкой поиска по **`id`**.
+Несколько строк на один id (аббревиатура и полное имя ФОИВ) — массив `hits`.
+Падежи **не** пишутся в SQLite FTS.
+
+```bash
+curl -sSG http://127.0.0.1:8099/v1/declensions --data-urlencode 'id=wd:Q649'
+curl -sSG http://127.0.0.1:8099/v1/declensions --data-urlencode 'id=foiv:mvd'
+curl -sSG http://127.0.0.1:8099/v1/declensions --data-urlencode 'id=wd:Q626'
+```
+
+Офлайн те же CSV (без HTTP). Золото:
 
 | Файл | Что там |
 |---|---|
@@ -123,7 +135,7 @@ HTTP **не** отдаёт `nom/gen/dat/acc/ins/pre/loc2`. Золото:
 
 Ключ стыковки с поиском — поле **`id`**.
 
-Колонки: `id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,review,source`.
+Колонки: `id,type_code,lemma,yo,gender,paradigm,declinable,nom/gen/dat/acc/ins/pre/loc2,review,source`.
 
 | Падеж | Колонка | Пример (Москва) |
 |---|---|---|
