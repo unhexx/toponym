@@ -33,6 +33,7 @@ Next-release A–L на `main`. Annotated tag `2026.09.12` не раньше 202
 ### Fixed
 - Золото «Волга» (`wd:Q626`): родительный падеж **Волги**, не «Волгы» (Розенталь; `docs/DECLENSIONS.md`). Ручной патч по id, без автосклонения.
 - Daily GHA: установка `pip install -e ".[dev]"` без `Agent-Init.sh` (на `ubuntu-latest` нет sibling-шаблона). Журнал `data/sources/runs/YYYY-MM-DD.json` пишется при check 0/10; `checked_at` сдвигается, если устарел. Dead-ветки «нет check.py» убраны.
+- SSOT: CYCLE_PLAN DoD — 14 resources; онтология `calver` = `2026.09.11`; ADR помечен историческим снимком v1; SYSTEM_PROMPT/AGENTS — тег `2026.09.11` и backlog #13. `PROJECT_CONTEXT.md` не продукт-SSOT.
 
 ## [2026.09.11] - 2026-09-11
 

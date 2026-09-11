@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -116,6 +117,37 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
     assert "git pull && docker compose up --build" in before_loop2
     assert "municipalities.csv" in before_loop2
     assert "DEC-SEED-001" in before_loop2
+
+
+def test_cycle_plan_dod_counts_fourteen_resources() -> None:
+    text = (ROOT / "CYCLE_PLAN.md").read_text(encoding="utf-8")
+    assert "14 resources" in text
+    assert "11 resources" not in text
+    package = json.loads((ROOT / "datapackage.json").read_text(encoding="utf-8"))
+    assert len(package["resources"]) == 14
+
+
+def test_ontology_calver_matches_tagged_release() -> None:
+    ont = json.loads((ROOT / "ontology" / "ontology.json").read_text(encoding="utf-8"))
+    assert ont["project"]["calver"] == "2026.09.11"
+
+
+def test_ssot_does_not_require_project_context() -> None:
+    sys_prompt = (ROOT / "SYSTEM_PROMPT.md").read_text(encoding="utf-8")
+    assert "PROJECT_CONTEXT.md" not in sys_prompt
+    agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    assert "2026.09.11" in agents
+    assert "#13" in agents
+    spec = (ROOT / "TASK_SPECIFICATION.md").read_text(encoding="utf-8")
+    assert "2026.09.11" in spec
+    assert "A–L" in spec
+
+
+def test_adr_is_historical_v1_snapshot() -> None:
+    text = (ROOT / "LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md").read_text(encoding="utf-8")
+    assert "исторический снимок" in text
+    assert "сиды не закоммичены" not in text
+    assert "GitHub #13" in text
 
 
 def test_product_presentation_exists() -> None:

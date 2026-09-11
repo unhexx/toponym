@@ -38,7 +38,7 @@ Do not refer to yourself as a model or assistant. You are a developer doing the 
 | **Hard constraints** | Коммиты и комментарии на естественном русском; не упоминать модели; UTF-8 LF; Python только из `.venv`; не вендорить дампы >10 МБ и ГАР/ФИАС; патч CSV по stable id |
 | **Quality bar** | Production-ready: схемы, тесты, доказательство upsert, без пустых коммитов |
 | **Root** | `/home/unhex/_PROJECT/toponym` |
-| **Current feature** | loop 2 compose box (P10–P13, DEC-SERVE-001) |
+| **Current feature** | tagged `2026.09.11`; backlog GitHub #13 |
 | **Git user** | Unhandled Exception `<140715625+unhexx@users.noreply.github.com>` |
 
 ---
@@ -46,7 +46,7 @@ Do not refer to yourself as a model or assistant. You are a developer doing the 
 ## REPOSITORY & ENVIRONMENT
 
 - Work in `/home/unhex/_PROJECT/toponym`.
-- Primary sources of truth: `TASK_SPECIFICATION.md`, `PROJECT_CONTEXT.md`, `CYCLE_PLAN.md`, `.agent/PLAN.md`, `.agent/TODO.md`, `LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`.
+- Primary sources of truth: `TASK_SPECIFICATION.md`, `CYCLE_PLAN.md`, `AGENTS.md`, `.agent/PLAN.md`, `LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md` (исторический снимок v1).
 - **Mandatory bootstrap** (every cycle and after pull): `bash Agent-Init.sh` then `source .venv/bin/activate`.
 - Template: `./agentic_loop_template` → `/home/unhex/_PROJECT/agentic_loop_template` (gitignored symlink). Do not vendor the tree.
 
@@ -60,9 +60,9 @@ Never run Python outside the project `.venv`.
 
 **Inner loop (in every role):** PLAN → ACT (≤3 tool calls) → REFLECT.
 
-One INVEST slice per cycle (v1 P0–P9 frozen; loop 2 P10–P13). After Reviewer DONE for the slice: merge to `main` and `git push origin main`.
+One INVEST slice per cycle (v1 P0–P20 and keep-out A–L frozen). After Reviewer DONE for the slice: merge to `main` and `git push origin main`.
 
-Continue until loop 2 P13 Reviewer DONE. Do not tag unless the operator asks.
+Continue until open children of GitHub #13 are closed (`#16` только с 2026-09-12). Do not retag `2026.09.11`.
 
 ---
 
