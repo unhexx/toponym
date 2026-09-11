@@ -72,3 +72,4 @@ def test_entrypoint_sequence() -> None:
     assert text.index("validate.py") < text.index("index.py") < text.index("serve.py")
     assert "check.py" not in text
     assert "sync.py" not in text
+    assert "fetch_dump.py" not in text

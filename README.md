@@ -82,7 +82,7 @@ data/
   raw/              # указатели источников + SOURCE.md (не смешивать с curated)
   sources/          # каталог источников и даты проверок
 schema/             # JSON Schema колонок
-scripts/            # check, sync, validate, index, serve
+scripts/            # check, sync, validate, index, serve, fetch_dump
 ontology/           # overlay DEC-REG-001, Source, Mapping
 docs/               # методология, таксономия, лицензии, презентация
 agents/             # промпт ежедневного обновления
@@ -128,6 +128,7 @@ python scripts/sync.py --source ID      # dry-run; --apply пишет
 python scripts/validate.py              # frictionless + инварианты
 python scripts/index.py                 # knowledge/registry.db FTS5
 python scripts/serve.py                 # loopback JSON, 127.0.0.1:8099
+python scripts/fetch_dump.py --source geonames-ru   # RU.zip в tmp, не в git
 ```
 
 Поиск по индексу: `MATCH 'Волга'` (гидроним), `MATCH 'МВД'` (`foiv:mvd`).

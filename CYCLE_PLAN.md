@@ -54,7 +54,7 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 
 | ID | Слайс | Ветка | Acceptance | Status |
 |---|---|---|---|---|
-| A | `RU.zip` / ГАР вне git: SOURCE.md + fetch в tmp | `feature/nr-a-dump` | указатели `data/raw/*/SOURCE.md`; опциональный fetch пишет вне репо; size gate; дамп не коммитится | PENDING |
+| A | `RU.zip` / ГАР вне git: SOURCE.md + fetch в tmp | `feature/nr-a-dump` | указатели `data/raw/*/SOURCE.md`; опциональный fetch пишет вне репо; size gate; дамп не коммитится | COMPLETE |
 | B | Немаппленные `gn:{id}` не вставлять в curated | `feature/nr-b-geonames` | дизайн + DEC: GeoNames sync только match существующих строк; без `gn:{id}` insert | PENDING |
 | C | pymorphy/Natasha не золото | `feature/nr-c-declensions` | автосклонения только `review=needs_review` или `data/declensions/queue.csv`; gold не трогать | PENDING |
 | D | Уникальность склонений `(id, lemma)` | `feature/nr-d-decl-key` | DEC: не форсировать unique `id`; золото не переписывать | PENDING |
