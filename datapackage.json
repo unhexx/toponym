@@ -61,6 +61,33 @@
       "schema": "schema/table/places.schema.json"
     },
     {
+      "name": "municipalities",
+      "path": "data/curated/municipalities.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/places.schema.json"
+    },
+    {
+      "name": "hodonyms",
+      "path": "data/curated/hodonyms.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/places.schema.json"
+    },
+    {
+      "name": "microtoponyms",
+      "path": "data/curated/microtoponyms.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/places.schema.json"
+    },
+    {
       "name": "agencies-foiv",
       "path": "data/curated/agencies-foiv.csv",
       "profile": "tabular-data-resource",

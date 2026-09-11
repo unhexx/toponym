@@ -16,4 +16,6 @@
 
 Соседние / подтипы: хороним (ФО, субъект, МО), инсулоним, потамоним, лимноним, агороним, **agency** (ведомства — не топонимы, но в реестре по ТЗ).
 
-Полная таблица: `data/curated/types.csv`.
+Малые сиды (DEC-SEED-001, не дамп ГАР): `data/curated/municipalities.csv`, `hodonyms.csv`, `microtoponyms.csv`.
+
+Полная таблица типов: `data/curated/types.csv`.

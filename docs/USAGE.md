@@ -87,7 +87,7 @@ curl -sSG http://127.0.0.1:8099/v1/search \
 |---|---|---|
 | `q` | да | 1–200 символов |
 | `limit` | нет | 1–100, по умолчанию 20 |
-| `table_name` | нет | `federal-districts`, `regions`, `cities-major`, `hydronyms-major`, `oronyms-major`, `agencies-foiv`, `agencies-other` |
+| `table_name` | нет | `federal-districts`, `regions`, `cities-major`, `hydronyms-major`, `oronyms-major`, `municipalities`, `hodonyms`, `microtoponyms`, `agencies-foiv`, `agencies-other` |
 | `status` | нет | `all` (по умолчанию), `active`, `deprecated` |
 
 Ноль совпадений — HTTP 200, `"count": 0`, пустые `ids`/`hits` (не 404).
@@ -213,9 +213,10 @@ sqlite3 knowledge/registry.db \
 ## 6. Что есть в каноне, чего нет
 
 Есть: 8 федеральных округов, 89 субъектов, крупные города, крупные гидронимы и оронимы,
-ФОИВ и смежные ведомства, золотые склонения к части из них.
+ФОИВ и смежные ведомства, золотые склонения к части из них,
+малые сиды муниципалитетов, годонимов и микротопонимов (DEC-SEED-001).
 
-Нет в этом релизе: улицы, муниципалитеты, полный ГАР/ФИАС, GeoNames `RU.zip`,
+Нет в этом релизе: полный ГАР/ФИАС, GeoNames `RU.zip`, полный список улиц и МО,
 склонения **каждого** ойконима (только золотые/черновые таблицы выше),
 публичный Internet/LAN API (host publish не `0.0.0.0`; DEC-SERVE-002),
 население / полигоны / GeoJSON / PostGIS (DEC-GEO-001).

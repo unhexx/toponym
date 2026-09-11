@@ -53,6 +53,25 @@ def test_fts_mvd_hits_foiv(tmp_path: Path) -> None:
     assert "foiv:mvd" in ids
 
 
+def test_fts_tverskaya_hits_hodonym(tmp_path: Path) -> None:
+    db_path = _build(tmp_path)
+    ids = index_mod.fts_match(db_path, "Тверская")
+    assert "wd:Q1644209" in ids
+    conn = sqlite3.connect(db_path)
+    try:
+        row = conn.execute(
+            "SELECT type_id, name_ru, table_name FROM records WHERE id = ?",
+            ("wd:Q1644209",),
+        ).fetchone()
+    finally:
+        conn.close()
+    assert row is not None
+    type_id, name_ru, table_name = row
+    assert name_ru == "Тверская улица"
+    assert type_id == "hodonym"
+    assert table_name == "hodonyms"
+
+
 def test_sync_meta_from_catalog(tmp_path: Path) -> None:
     db_path = _build(tmp_path)
     conn = sqlite3.connect(db_path)

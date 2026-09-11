@@ -63,6 +63,9 @@ def test_seed_counts() -> None:
     _, oros = _read_csv(ROOT / "data/curated/oronyms-major.csv")
     _, foiv = _read_csv(ROOT / "data/curated/agencies-foiv.csv")
     _, other = _read_csv(ROOT / "data/curated/agencies-other.csv")
+    _, mun = _read_csv(ROOT / "data/curated/municipalities.csv")
+    _, hod = _read_csv(ROOT / "data/curated/hodonyms.csv")
+    _, micro = _read_csv(ROOT / "data/curated/microtoponyms.csv")
     assert len(fo) == 8
     assert len(regions) == 89
     iso = [row["iso"] for row in regions if row["iso"]]
@@ -74,6 +77,9 @@ def test_seed_counts() -> None:
     assert len(oros) >= 25
     assert len(foiv) >= 69
     assert len(other) >= 10
+    assert len(mun) >= 1
+    assert len(hod) >= 1
+    assert len(micro) >= 1
 
 
 def test_declension_ids_may_repeat() -> None:
@@ -225,6 +231,9 @@ def test_name_ru_has_no_yo() -> None:
         "data/curated/oronyms-major.csv",
         "data/curated/agencies-foiv.csv",
         "data/curated/agencies-other.csv",
+        "data/curated/municipalities.csv",
+        "data/curated/hodonyms.csv",
+        "data/curated/microtoponyms.csv",
     ):
         _header, rows = _read_csv(ROOT / rel)
         for row in rows:
@@ -244,6 +253,51 @@ def test_baikal_is_hydronym_not_oronym() -> None:
     assert all(row["name_ru"] != "Байкал" for row in oros)
     assert any(row["name_ru"] == "Эльбрус" for row in oros)
     assert any(row["name_ru"] == "Сахалин" and row["type_id"] == "insulonym" for row in oros)
+
+
+def test_k_seed_types_and_parents() -> None:
+    type_ids = {row["id"] for row in _read_csv(TYPES_CSV)[1]}
+    assert {"municipality", "hodonym", "microtoponym"} <= type_ids
+    _, mun = _read_csv(ROOT / "data/curated/municipalities.csv")
+    _, hod = _read_csv(ROOT / "data/curated/hodonyms.csv")
+    _, micro = _read_csv(ROOT / "data/curated/microtoponyms.csv")
+    assert any(
+        row["name_ru"] == "городской округ Самара" and row["type_id"] == "municipality"
+        for row in mun
+    )
+    assert any(
+        row["name_ru"] == "Тверская улица" and row["type_id"] == "hodonym" for row in hod
+    )
+    assert any(
+        row["name_ru"] == "урочище Синие камни" and row["type_id"] == "microtoponym"
+        for row in micro
+    )
+    assert all(row["type_id"] == "municipality" for row in mun)
+    assert all(row["type_id"] == "hodonym" for row in hod)
+    assert all(row["type_id"] == "microtoponym" for row in micro)
+    union_ids = set()
+    for rel in (
+        "data/curated/federal-districts.csv",
+        "data/curated/regions.csv",
+        "data/curated/cities-major.csv",
+        "data/curated/hydronyms-major.csv",
+        "data/curated/oronyms-major.csv",
+        "data/curated/municipalities.csv",
+        "data/curated/hodonyms.csv",
+        "data/curated/microtoponyms.csv",
+        "data/curated/agencies-foiv.csv",
+        "data/curated/agencies-other.csv",
+    ):
+        union_ids.update(row["id"] for row in _read_csv(ROOT / rel)[1])
+    for row in (*mun, *hod, *micro):
+        parent = row["parent_id"]
+        assert parent, row["id"]
+        assert parent in union_ids, (row["id"], parent)
+    assert all(not row["id"].startswith("gn:") for row in (*mun, *hod, *micro))
+    raw_dir = ROOT / "data"
+    for path in raw_dir.rglob("*"):
+        if path.is_file():
+            assert path.stat().st_size < MAX_BYTES, path
 
 
 def test_cities_not_seeded_in_local_subjects() -> None:

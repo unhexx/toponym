@@ -6,6 +6,7 @@
 ## [Unreleased]
 
 ### Added
+- 2026-09-11: малые сиды [`data/curated/municipalities.csv`](data/curated/municipalities.csv), [`hodonyms.csv`](data/curated/hodonyms.csv), [`microtoponyms.csv`](data/curated/microtoponyms.csv) (DEC-SEED-001): типы уже в `types.csv`; схема `places.schema.json`; ≥1 строка; без дампа ГАР.
 - 2026-09-11: очередь автосклонений [`data/declensions/queue.csv`](data/declensions/queue.csv) (не ресурс datapackage).
 - 2026-09-11: `scripts/fetch_dump.py` — опциональная выгрузка GeoNames `RU.zip` / ГАР / ГКГН **вне** дерева git (`--dest` внутри репозитория — ошибка; указатели ГАР/ГКГН требуют `--url`). Size gate `data/` и tracked-файлов не снимается.
 - 2026-09-11: руководство [`docs/USAGE.md`](docs/USAGE.md) — `GET /healthz`, `/v1/search`, `/v1/records` (только loopback); склонения через CSV join по `id` (HTTP падежей не отдаёт); офлайн CSV/SQLite; сеть только для `check.py` / `sync.py`.

@@ -96,7 +96,7 @@ CSV + Table Schema is the interchange any app can read (Python, Go, Excel, DuckD
 - Vendoring the Agentix template tree (symlink SSOT only) (**DEC-AGENTIX-001**, frozen). Sibling `../agentic_loop_template`; do not copy the tree into the product or image.
 - Copying hflabs CC-BY-SA tables into `data/curated/` (**DEC-HFLABS-001**, frozen).
 - Population time-series, polygons, GeoJSON, PostGIS (**DEC-GEO-001**, frozen). Point `lat`/`lon` stay; no geom columns. Pointer: `docs/SOURCES.md`.
-- Municipalities, streets (hodonyms), microtoponyms as populated tables (types exist; seed tables do not).
+- Full GAR dump of municipalities, streets (hodonyms), microtoponyms. Small next-release seeds (**DEC-SEED-001**): `data/curated/municipalities.csv`, `hodonyms.csv`, `microtoponyms.csv` (≥1 row; types existed in v1; `places.schema.json`).
 - Splitting P1 into sub-cycles P1a–e (**DEC-P1-001**).
 
 ---
@@ -122,6 +122,9 @@ toponym/
 │   │   ├── cities-major.csv
 │   │   ├── hydronyms-major.csv
 │   │   ├── oronyms-major.csv
+│   │   ├── municipalities.csv     # next-release K; small seed
+│   │   ├── hodonyms.csv
+│   │   ├── microtoponyms.csv
 │   │   ├── agencies-foiv.csv
 │   │   └── agencies-other.csv
 │   ├── declensions/
@@ -683,7 +686,7 @@ There is no HTTP API in v1. The interface is files + four CLIs.
 
 Keep existing resource names/paths. P0 already added `schema` + `dialect` on every resource. Do not re-patch in P1 except if a resource path is wrong (it is not).
 
-`places.schema.json` is shared by federal-districts, regions, cities-major, hydronyms-major, oronyms-major. `agencies.schema.json` shared by agencies-foiv and agencies-other. `declensions.schema.json` shared by the three declension resources.
+`places.schema.json` is shared by federal-districts, regions, cities-major, hydronyms-major, oronyms-major, municipalities, hodonyms, microtoponyms. `agencies.schema.json` shared by agencies-foiv and agencies-other. `declensions.schema.json` shared by the three declension resources.
 
 P0 tests validate JSON Schema of `schema/*.json` and catalog.yaml against `catalog.schema.json`, not the full package. P5 **landed**: `validate.py` exit 0 on the real package.
 
