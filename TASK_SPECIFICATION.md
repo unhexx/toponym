@@ -50,6 +50,10 @@ ADR и исследование: [`LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`](LOCA
 - Верхний уровень типов цел (`toponym`, не «Торопум»).
 - Reviewer: тесты зелёные, нет вендора >10 МБ.
 
+## Loop 2 (after v1)
+
+Executable list: `CYCLE_PLAN.md` (P10–P13). Design SSOT: `docs/design/2026-09-11-loop2-compose-box.md` (DEC-SERVE-001). v1 non-goals above stay true for the tagged release; loop 2 adds loopback `scripts/serve.py` and a one-service Compose box on `127.0.0.1:8099`. Do not retcon v1.
+
 ## Cycles (INVEST)
 
 | ID | Slice | Acceptance |

@@ -28,3 +28,10 @@ def test_design_snapshot_is_released_v1() -> None:
     assert "wd:Q649" in text and "524901" in text
     assert "wd:Q626" in text and "472776" in text
     assert "`index.py` present" in text or "scripts/index.py" in text
+
+
+def test_readme_has_compose_one_shot() -> None:
+    text = (ROOT / "README.md").read_text(encoding="utf-8")
+    assert "docker compose up --build" in text
+    assert "127.0.0.1:8099" in text
+    assert "python scripts/serve.py" in text

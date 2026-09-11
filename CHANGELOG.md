@@ -5,6 +5,11 @@
 
 ## [Unreleased]
 
+### Added
+- Loopback JSON-поиск `scripts/serve.py` на `127.0.0.1:8099` (`/healthz`, `/v1/search`, `/v1/records`).
+- One-shot Docker Compose: `docker compose up --build`, Python 3.12, `validate → index → serve`.
+- Решение `DEC-SERVE-001`: stdlib HTTP, не Datasette/FastAPI и не стек Agentix.
+
 ### Changed
 - Дизайн v1 описывает выпущенный контур (P0–P9, geonames Москва `524901` / Волга `472776`), а не «следующий цикл P6».
 

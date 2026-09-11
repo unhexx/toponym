@@ -36,7 +36,7 @@
 |---|---|---|---|---|
 | P10-SERVE | stdlib loopback JSON над FTS | `feature/P10-serve` | `handle()` поиск «Волга»/«МВД»; bind `127.0.0.1:8099`; не-loopback отказ; `fts_match` зелёный | COMPLETE |
 | P11-BOX | Dockerfile + compose.yaml + entrypoint | `feature/P11-compose` | file-contract: 3.12, `cap_drop: ALL`, `127.0.0.1:8099`; `.dockerignore` без шаблона | COMPLETE |
-| P12-DOCS | README docker, ontology DEC-SERVE-001, CHANGELOG | `feature/P12-docs` | `docker compose up --build` в README; v1 host-путь цел | PENDING |
+| P12-DOCS | README docker, ontology DEC-SERVE-001, CHANGELOG | `feature/P12-docs` | `docker compose up --build` в README; v1 host-путь цел | COMPLETE |
 | P13-DONE | reviewer gate | `feature/P13-release` | pytest+ruff+validate; без файлов >10 МБ; тег только по запросу оператора | PENDING |
 
 ## Definition of Done v1

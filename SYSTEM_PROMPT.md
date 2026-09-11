@@ -32,13 +32,13 @@ Do not refer to yourself as a model or assistant. You are a developer doing the 
 
 | Field | Value |
 |---|---|
-| **Goal** | v1 local registry of Russian toponyms and agencies (Frictionless CSV + check/sync/validate/index + ontology) |
+| **Goal** | Local registry of Russian toponyms and agencies (Frictionless CSV + check/sync/validate/index + loopback serve + Compose box) |
 | **Tech stack** | Python 3.12+, uv/pip, Frictionless Table Schema, UTF-8 CSV, SQLite FTS5, pytest, ruff |
 | **Specification (source of truth)** | `TASK_SPECIFICATION.md` |
 | **Hard constraints** | Коммиты и комментарии на естественном русском; не упоминать модели; UTF-8 LF; Python только из `.venv`; не вендорить дампы >10 МБ и ГАР/ФИАС; патч CSV по stable id |
 | **Quality bar** | Production-ready: схемы, тесты, доказательство upsert, без пустых коммитов |
 | **Root** | `/home/unhex/_PROJECT/toponym` |
-| **Current feature** | v1-local-registries (P0–P9) |
+| **Current feature** | loop 2 compose box (P10–P13, DEC-SERVE-001) |
 | **Git user** | Unhandled Exception `<140715625+unhexx@users.noreply.github.com>` |
 
 ---
@@ -60,9 +60,9 @@ Never run Python outside the project `.venv`.
 
 **Inner loop (in every role):** PLAN → ACT (≤3 tool calls) → REFLECT.
 
-One INVEST slice per cycle (P0–P9). After Reviewer DONE for the slice: merge to `main` and `git push origin main`.
+One INVEST slice per cycle (v1 P0–P9 frozen; loop 2 P10–P13). After Reviewer DONE for the slice: merge to `main` and `git push origin main`.
 
-Continue until P9 release `2026.09.09` is tagged and pushed.
+Continue until loop 2 P13 Reviewer DONE. Do not tag unless the operator asks.
 
 ---
 

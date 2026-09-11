@@ -22,7 +22,7 @@
 | v1.1 docs-drift design snapshot | COMPLETE |
 | P10-SERVE loopback JSON over FTS | COMPLETE |
 | P11-BOX compose one-shot | COMPLETE |
-| P12-DOCS DEC-SERVE-001 | PENDING |
+| P12-DOCS DEC-SERVE-001 | COMPLETE |
 | P13-DONE reviewer | PENDING |
 
 ## Gate

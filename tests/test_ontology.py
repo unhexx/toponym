@@ -30,6 +30,11 @@ REQUIRED_IDS = {
     "RSK-CCBYSA-CURATED",
     "RSK-EMPTY-COMMIT",
     "LSN-SEEDS-MISSING",
+    "DEC-SERVE-001",
+    "ART-SERVE",
+    "ART-COMPOSE",
+    "RSK-PUBLIC-BIND",
+    "RSK-PORT-COLLISION",
 }
 
 
@@ -76,3 +81,9 @@ def test_required_entities_present() -> None:
     assert by_id["RSK-EMPTY-COMMIT"]["type"] == "Risk"
     assert by_id["LSN-SEEDS-MISSING"]["type"] == "Lesson"
     assert by_id["PRJ-TOPONYM"]["type"] == "Project"
+    assert by_id["DEC-SERVE-001"]["type"] == "Decision"
+    assert by_id["DEC-SERVE-001"]["status"] == "accepted"
+    assert by_id["ART-SERVE"]["type"] == "Artifact"
+    assert by_id["ART-COMPOSE"]["type"] == "Artifact"
+    assert by_id["RSK-PUBLIC-BIND"]["type"] == "Risk"
+    assert by_id["RSK-PORT-COLLISION"]["type"] == "Risk"
