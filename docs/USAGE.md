@@ -51,7 +51,9 @@ python scripts/serve.py       # 127.0.0.1:8099
 Только GET; POST/PUT — 405.
 
 Поля карточки: `id`, `table_name`, `type_id`, `name_ru`, `name_yo`, `name_en`,
-`abbr`, `parent_id`, `admin1`, `wd`, `geonames`, `iso`, `status`, `source_id`.
+`abbr`, `parent_id`, `admin1`, `lat`, `lon`, `wd`, `geonames`, `fias`, `oktmo`,
+`iso`, `status`, `source_id`. `lat`/`lon` — числа JSON, если заполнены; в FTS
+не входят.
 
 Идентификаторы стабильны: `wd:Q649` (Москва), `iso:RU-MOS`, `foiv:mvd`, `fo:cfo`.
 
