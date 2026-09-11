@@ -12,6 +12,7 @@
 - 2026-09-11: обновление Compose-ящика одной строкой: `git pull && docker compose up --build`.
 
 ### Changed
+- Онтология: DEC-ONT-001 — только Outpost `ontology/ontology.json`; keep-out A–J, L закрыты DEC-* (дамп, Agentix, hflabs, гео, P1).
 - HTTP: DEC-SERVE-002 — публичный Internet API вне scope; host publish только `127.0.0.1:8099`, не `0.0.0.0`.
 - Таксономия: DEC-TAX-001 — `toponym` / `oikonym` / `hydronym` не переименовывать; `validate.py` держит корень.
 - Склонения: DEC-DECL-002 — уникальность `(id, lemma)`; `id` не unique; золото ФОИВ с двумя леммами не переписывать.
