@@ -35,6 +35,27 @@ def test_readme_has_compose_one_shot() -> None:
     assert "docker compose up --build" in text
     assert "127.0.0.1:8099" in text
     assert "python scripts/serve.py" in text
+    assert "http://127.0.0.1:8099/healthz" in text
+    assert "http://127.0.0.1:8099/v1/search" in text
+    assert "bash Agent-Init.sh" in text
+    assert "source .venv/bin/activate" in text
+
+
+def test_readme_has_shields_badges_and_docs_links() -> None:
+    text = (ROOT / "README.md").read_text(encoding="utf-8")
+    assert "img.shields.io" in text
+    for needle in (
+        "license-MIT",
+        "CalVer-2026.09.11",
+        "github/actions/workflow/status/unhexx/toponym/ci.yml",
+        "python-3.12%2B",
+        "docker-compose",
+        "CHANGELOG.md",
+        "docs/SOURCES.md",
+        "docs/presentation/toponym-2026.09.11.md",
+        "https://github.com/unhexx/toponym/releases/tag/2026.09.11",
+    ):
+        assert needle in text, needle
 
 
 def test_product_presentation_exists() -> None:
