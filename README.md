@@ -1,12 +1,30 @@
 # Toponym — реестр российских топонимов
 
+[![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![CalVer](https://img.shields.io/badge/CalVer-2026.09.11-informational.svg)](https://github.com/unhexx/toponym/releases/tag/2026.09.11)
+[![CI](https://img.shields.io/github/actions/workflow/status/unhexx/toponym/ci.yml?branch=main&label=CI)](https://github.com/unhexx/toponym/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
+[![Docker Compose](https://img.shields.io/badge/docker-compose-2496ED.svg?logo=docker&logoColor=white)](compose.yaml)
+
 Открытый структурированный реестр топонимов Российской Федерации: населённые пункты, субъекты, гидронимы, оронимы, урбанонимы, ведомства и службы, таблицы склонений.
 
-Канон — UTF-8 CSV в git (Frictionless Tabular Data Package). Индекс SQLite FTS5 собирается локально и в git не кладётся.
+Канон — UTF-8 CSV в git (Frictionless Tabular Data Package). Индекс SQLite FTS5 собирается локально и в git не кладётся. Поиск — только loopback `127.0.0.1:8099`.
 
-Лицензия репозитория: [MIT](LICENSE). Сырьё источников хранит свои лицензии — см. [`docs/SOURCES.md`](docs/SOURCES.md) и [`data/sources/catalog.yaml`](data/sources/catalog.yaml).
+Релиз: [`2026.09.11`](https://github.com/unhexx/toponym/releases/tag/2026.09.11). Лицензия репозитория: [MIT](LICENSE). Сырьё источников хранит свои лицензии — [`docs/SOURCES.md`](docs/SOURCES.md), [`data/sources/catalog.yaml`](data/sources/catalog.yaml).
 
-## Пятиминутный старт
+## Документация
+
+| | |
+|---|---|
+| [docs/](docs/) | методология, таксономия, дизайн, презентация |
+| [CHANGELOG.md](CHANGELOG.md) | история релизов (CalVer `YYYY.MM.DD`) |
+| [docs/SOURCES.md](docs/SOURCES.md) | лицензии источников и границы вендора |
+| [Презентация 2026.09.11](docs/presentation/toponym-2026.09.11.md) | продуктовая колода |
+| [Релиз 2026.09.11](https://github.com/unhexx/toponym/releases/tag/2026.09.11) | тег и GitHub Release |
+
+## Пятиминутный старт (хост)
+
+CPython 3.12+, venv проекта:
 
 ```bash
 git clone https://github.com/unhexx/toponym.git
@@ -17,11 +35,17 @@ pip install -e ".[dev]"
 python scripts/validate.py
 python scripts/check.py --json
 python scripts/index.py
+python scripts/serve.py
 ```
 
 Альтернатива установке: `uv pip install -e ".[dev]"` в том же `.venv`.
 
-Ожидаемо: `validate.py` печатает `ok` и выходит 0. `check.py --json` ходит в сеть (коды 0 / 10 / 2). `index.py` пишет `knowledge/registry.db` (gitignored).
+Ожидаемо: `validate.py` печатает `ok` и выходит 0. `check.py --json` ходит в сеть (коды 0 / 10 / 2). `index.py` пишет `knowledge/registry.db` (gitignored). `serve.py` слушает `127.0.0.1:8099`.
+
+Проверка:
+
+- http://127.0.0.1:8099/healthz
+- http://127.0.0.1:8099/v1/search?q=Волга
 
 ## One-shot (Docker Compose)
 
@@ -99,15 +123,13 @@ python scripts/serve.py                 # loopback JSON, 127.0.0.1:8099
 
 Поиск по индексу: `MATCH 'Волга'` (гидроним), `MATCH 'МВД'` (`foiv:mvd`).
 
+HTTP (только GET, только loopback): `/healthz`, `/v1/search?q=…`, `/v1/records?id=…`.
+
 ## Автоматизация
 
 - GitHub Actions: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — pytest, ruff, validate.
 - Daily: [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — механический refresh.
 - Куратор: [`agents/DAILY_UPDATE.md`](agents/DAILY_UPDATE.md) — check → sync → validate → index; без пустого коммита.
-
-## Презентация
-
-Продуктовая колода: [`docs/presentation/toponym-2026.09.11.md`](docs/presentation/toponym-2026.09.11.md).
 
 ## Цитирование
 
