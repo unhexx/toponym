@@ -20,8 +20,8 @@
 | P9-DONE Reviewer + release 2026.09.09 | COMPLETE |
 | v1.1 http_dated RU-only vs dump Last-Modified | COMPLETE |
 | v1.1 docs-drift design snapshot | COMPLETE |
-| P10-SERVE loopback JSON over FTS | IN PROGRESS |
-| P11-BOX compose one-shot | PENDING |
+| P10-SERVE loopback JSON over FTS | COMPLETE |
+| P11-BOX compose one-shot | COMPLETE |
 | P12-DOCS DEC-SERVE-001 | PENDING |
 | P13-DONE reviewer | PENDING |
 

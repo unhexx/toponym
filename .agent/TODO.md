@@ -5,7 +5,7 @@
 
 ## In progress
 
-- [ ] P10-SERVE-01: `scripts/serve.py` handle() JSON; bind 127.0.0.1:8099; `fts_search`
+- [x] P10-SERVE-01: `scripts/serve.py` handle() JSON; bind 127.0.0.1:8099; `fts_search`
 
 ## Pending
 
