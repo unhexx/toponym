@@ -135,6 +135,7 @@ def apply_geonames(
             continue
         indexes = by_gn.get(parsed["geonames"]) or []
         if not indexes:
+            # DEC-GN-001: never insert id=gn:{geonameId}
             counts.skipped_unmapped += 1
             continue
         for idx in indexes:

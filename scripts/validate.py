@@ -136,6 +136,8 @@ def validate_tree(dp_path: Path, *, root: Path | None = None) -> tuple[int, list
             if not rid:
                 _issue(errors, "id", "пустой id", name)
                 continue
+            if rid.startswith("gn:"):
+                _issue(errors, "gn_id", f"{rid}: gn: id запрещён (DEC-GN-001)", name)
             if rid in seen:
                 _issue(errors, "unique", f"повтор id {rid}", name)
             seen.add(rid)

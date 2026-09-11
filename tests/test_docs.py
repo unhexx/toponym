@@ -28,6 +28,8 @@ def test_design_snapshot_is_released_v1() -> None:
     assert "wd:Q649" in text and "524901" in text
     assert "wd:Q626" in text and "472776" in text
     assert "`index.py` present" in text or "scripts/index.py" in text
+    assert "DEC-GN-001" in text
+    assert "never insert" in text.lower() or "Do not create `gn:`" in text
 
 
 def test_readme_has_compose_one_shot() -> None:

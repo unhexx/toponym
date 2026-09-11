@@ -47,3 +47,18 @@ def test_empty_lat_lon_accepted_on_seeds() -> None:
     code, errors = validate_mod.validate_tree(ROOT / "datapackage.json", root=ROOT)
     assert code == 0
     assert errors == []
+
+
+def test_gn_place_id_fails_validate(tmp_path: Path) -> None:
+    dest = tmp_path / "pkg"
+    dest.mkdir()
+    shutil.copy(ROOT / "datapackage.json", dest / "datapackage.json")
+    shutil.copytree(ROOT / "schema", dest / "schema")
+    shutil.copytree(ROOT / "data", dest / "data")
+    path = dest / "data/curated/hydronyms-major.csv"
+    text = path.read_text(encoding="utf-8")
+    assert "wd:Q626," in text
+    path.write_text(text.replace("wd:Q626,", "gn:472776,", 1), encoding="utf-8")
+    code, errors = validate_mod.validate_tree(dest / "datapackage.json", root=dest)
+    assert code == 1
+    assert any(row["check"] == "gn_id" for row in errors)
