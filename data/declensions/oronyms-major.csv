@@ -1,0 +1,35 @@
+id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,review,source
+wd:Q43105,oronym,Эльбрус,,m,noun_m2,always,Эльбрус,Эльбруса,Эльбрусу,Эльбрус,Эльбрусом,Эльбрусе,,needs_review,manual
+wd:Q207680,oronym,Казбек,,m,noun_m2,always,Казбек,Казбека,Казбеку,Казбек,Казбеком,Казбеке,,needs_review,manual
+wd:Q724367,oronym,Белуха,,f,noun_f1,always,Белуха,Белухи,Белухе,Белуху,Белухой,Белухе,,needs_review,manual
+wd:Q1142817,oronym,Народная,,f,adj_m,always,Народная,Народной,Народной,Народную,Народной,Народной,,needs_review,manual
+wd:Q210252,oronym,Ключевская Сопка,,,mixed_phrase,always,Ключевская Сопка,,,,,,,needs_review,manual
+wd:Q35600,oronym,Уральские горы,,,mixed_phrase,always,Уральские горы,,,,,,,needs_review,manual
+wd:Q486986,oronym,Большой Кавказ,,,mixed_phrase,always,Большой Кавказ,,,,,,,needs_review,manual
+wd:Q5955,oronym,Алтайские горы,,,mixed_phrase,always,Алтайские горы,,,,,,,needs_review,manual
+wd:Q1974954,oronym,Западный Саян,,,mixed_phrase,always,Западный Саян,,,,,,,needs_review,manual
+wd:Q2373883,oronym,Восточный Саян,,,mixed_phrase,always,Восточный Саян,,,,,,,needs_review,manual
+wd:Q155322,oronym,Сихотэ-Алинь,,,mixed_phrase,always,Сихотэ-Алинь,,,,,,,needs_review,manual
+wd:Q215917,oronym,Верхоянский хребет,,,mixed_phrase,always,Верхоянский хребет,,,,,,,needs_review,manual
+wd:Q683923,oronym,хребет Черского,,,mixed_phrase,always,хребет Черского,,,,,,,needs_review,manual
+wd:Q214284,oronym,Становой хребет,,,mixed_phrase,always,Становой хребет,,,,,,,needs_review,manual
+wd:Q38131,oronym,Хибины,,pl,pl_tantum,always,Хибины,,,,,,,needs_review,manual
+wd:Q277576,oronym,плато Путорана,,,mixed_phrase,always,плато Путорана,,,,,,,needs_review,manual
+wd:Q194196,oronym,Валдайская возвышенность,,,mixed_phrase,always,Валдайская возвышенность,,,,,,,needs_review,manual
+wd:Q1126906,oronym,Среднерусская возвышенность,,,mixed_phrase,always,Среднерусская возвышенность,,,,,,,needs_review,manual
+wd:Q5477,oronym,Кавказские горы,,,mixed_phrase,always,Кавказские горы,,,,,,,needs_review,manual
+wd:Q203239,oronym,Саяны,,pl,pl_tantum,always,Саяны,,,,,,,needs_review,manual
+wd:Q476313,oronym,Дыхтау,,,mixed_phrase,always,Дыхтау,,,,,,,needs_review,manual
+wd:Q217457,oronym,Шхара,,f,noun_f1,always,Шхара,Шхары,Шхаре,Шхару,Шхарой,Шхаре,,needs_review,manual
+wd:Q925592,oronym,Коштантау,,,mixed_phrase,always,Коштантау,,,,,,,needs_review,manual
+wd:Q392246,oronym,Мунку-Сардык,,,mixed_phrase,always,Мунку-Сардык,,,,,,,needs_review,manual
+wd:Q2641506,oronym,Полярный Урал,,,mixed_phrase,always,Полярный Урал,,,,,,,needs_review,manual
+wd:Q7792,insulonym,Сахалин,,m,noun_m2,always,Сахалин,Сахалина,Сахалину,Сахалин,Сахалином,Сахалине,,needs_review,manual
+wd:Q80389,insulonym,Курильские острова,,,mixed_phrase,always,Курильские острова,,,,,,,needs_review,manual
+wd:Q80413,insulonym,Новая Земля,,,mixed_phrase,always,Новая Земля,,,,,,,needs_review,manual
+wd:Q185018,insulonym,Земля Франца-Иосифа,,,mixed_phrase,always,Земля Франца-Иосифа,,,,,,,needs_review,manual
+wd:Q208268,insulonym,Командорские острова,,,mixed_phrase,always,Командорские острова,,,,,,,needs_review,manual
+wd:Q993,insulonym,полуостров Камчатка,,,mixed_phrase,always,полуостров Камчатка,,,,,,,needs_review,manual
+wd:Q37056,insulonym,полуостров Таймыр,,,mixed_phrase,always,полуостров Таймыр,,,,,,,needs_review,manual
+wd:Q488266,insulonym,полуостров Ямал,,,mixed_phrase,always,полуостров Ямал,,,,,,,needs_review,manual
+wd:Q165608,insulonym,Кольский полуостров,,,mixed_phrase,always,Кольский полуостров,,,,,,,needs_review,manual

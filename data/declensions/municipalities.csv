@@ -1,0 +1,3 @@
+id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,review,source
+wd:Q27577214,municipality,городской округ Самара,,,mixed_phrase,always,городской округ Самара,,,,,,,needs_review,manual
+local:mun:kazan-go,municipality,городской округ Казань,,,mixed_phrase,always,городской округ Казань,,,,,,,needs_review,manual

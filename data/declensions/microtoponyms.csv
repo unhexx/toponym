@@ -1,0 +1,3 @@
+id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,review,source
+wd:Q4420279,microtoponym,Синий камень,,,mixed_phrase,always,Синий камень,,,,,,,needs_review,manual
+local:micro:sinie-kamni,microtoponym,урочище Синие камни,,,mixed_phrase,always,урочище Синие камни,,,,,,,needs_review,manual

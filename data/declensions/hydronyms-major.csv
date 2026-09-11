@@ -1,0 +1,58 @@
+id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,review,source
+wd:Q626,potamonym,Волга,,f,noun_f1,always,Волга,Волги,Волге,Волгу,Волгой,Волге,,gold,manual
+wd:Q973,potamonym,Обь,,f,noun_f3,always,Обь,Оби,Оби,Обь,Обью,Оби,,needs_review,manual
+wd:Q78707,potamonym,Енисей,,m,noun_m2,always,Енисей,Енисея,Енисею,Енисей,Енисеем,Енисее,,needs_review,manual
+wd:Q46841,potamonym,Лена,,f,noun_f1,always,Лена,Лены,Лене,Лену,Леной,Лене,,needs_review,manual
+wd:Q6862,potamonym,Амур,,m,noun_m2,always,Амур,Амура,Амуру,Амур,Амуром,Амуре,,needs_review,manual
+wd:Q128102,potamonym,Иртыш,,m,noun_m2,always,Иртыш,Иртыша,Иртышу,Иртыш,Иртышом,Иртыше,,needs_review,manual
+wd:Q1229,potamonym,Дон,,m,noun_m2,always,Дон,Дона,Дону,Дон,Доном,Доне,Дону,gold,manual
+wd:Q79082,potamonym,Кама,,f,noun_f1,always,Кама,Камы,Каме,Каму,Камой,Каме,,needs_review,manual
+wd:Q172089,potamonym,Ока,,f,noun_f1,always,Ока,Оки,Оке,Оку,Окой,Оке,,needs_review,manual
+wd:Q162737,potamonym,Ангара,,f,noun_f1,always,Ангара,Ангары,Ангаре,Ангару,Ангарой,Ангаре,,needs_review,manual
+wd:Q8168,potamonym,Печора,,f,noun_f1,always,Печора,Печоры,Печоре,Печору,Печорой,Печоре,,needs_review,manual
+wd:Q8187,potamonym,Северная Двина,,,mixed_phrase,always,Северная Двина,,,,,,,needs_review,manual
+wd:Q82308,potamonym,Кубань,,f,noun_f3,always,Кубань,Кубани,Кубани,Кубань,Кубанью,Кубани,,needs_review,manual
+wd:Q82776,potamonym,Терек,,m,noun_m2,always,Терек,Терека,Тереку,Терек,Тереком,Тереке,,needs_review,manual
+wd:Q80240,potamonym,Урал,,m,noun_m2,always,Урал,Урала,Уралу,Урал,Уралом,Урале,,needs_review,manual
+wd:Q645,potamonym,Нева,,f,noun_f1,always,Нева,Невы,Неве,Неву,Невой,Неве,,needs_review,manual
+wd:Q175117,potamonym,Москва,,f,noun_f1,always,Москва,Москвы,Москве,Москву,Москвой,Москве,,needs_review,manual
+wd:Q78879,potamonym,Колыма,,f,noun_f1,always,Колыма,Колымы,Колыме,Колыму,Колымой,Колыме,,needs_review,manual
+wd:Q82207,potamonym,Индигирка,,f,noun_f1,always,Индигирка,Индигирки,Индигирке,Индигирку,Индигиркой,Индигирке,,needs_review,manual
+wd:Q78861,potamonym,Яна,,f,noun_f1,always,Яна,Яны,Яне,Яну,Яной,Яне,,needs_review,manual
+wd:Q210220,potamonym,Зея,,f,noun_f1,always,Зея,Зеи,Зее,Зею,Зеей,Зее,,needs_review,manual
+wd:Q216188,potamonym,Томь,,f,noun_f3,always,Томь,Томи,Томи,Томь,Томью,Томи,,needs_review,manual
+wd:Q192157,potamonym,Белая,,f,adj_m,always,Белая,Белой,Белой,Белую,Белой,Белой,,needs_review,manual
+wd:Q192495,potamonym,Вятка,,f,noun_f1,always,Вятка,Вятки,Вятке,Вятку,Вяткой,Вятке,,needs_review,manual
+wd:Q191832,potamonym,Алдан,,m,noun_m2,always,Алдан,Алдана,Алдану,Алдан,Алданом,Алдане,,needs_review,manual
+wd:Q26433,potamonym,Вилюй,,m,noun_m2,always,Вилюй,Вилюя,Вилюю,Вилюй,Вилюем,Вилюе,,needs_review,manual
+wd:Q75745,potamonym,Селенга,,f,noun_f1,always,Селенга,Селенги,Селенге,Селенгу,Селенгой,Селенге,,needs_review,manual
+wd:Q115456,potamonym,Шилка,,f,noun_f1,always,Шилка,Шилки,Шилке,Шилку,Шилкой,Шилке,,needs_review,manual
+wd:Q26439,potamonym,Аргунь,,f,noun_f3,always,Аргунь,Аргуни,Аргуни,Аргунь,Аргунью,Аргуни,,needs_review,manual
+wd:Q65383,potamonym,Вычегда,,f,noun_f1,always,Вычегда,Вычегды,Вычегде,Вычегду,Вычегдой,Вычегде,,needs_review,manual
+wd:Q79106,potamonym,Мезень,,f,noun_f3,always,Мезень,Мезени,Мезени,Мезень,Мезенью,Мезени,,needs_review,manual
+wd:Q81555,potamonym,Таз,,m,noun_m2,always,Таз,Таза,Тазу,Таз,Тазом,Тазе,,needs_review,manual
+wd:Q81528,potamonym,Пур,,m,noun_m2,always,Пур,Пура,Пуру,Пур,Пуром,Пуре,,needs_review,manual
+wd:Q82175,potamonym,Хатанга,,f,noun_f1,always,Хатанга,Хатанги,Хатанге,Хатангу,Хатангой,Хатанге,,needs_review,manual
+wd:Q26390,potamonym,Анадырь,,m,noun_m2,always,Анадырь,Анадыря,Анадырю,Анадырь,Анадырем,Анадыре,,needs_review,manual
+wd:Q723864,potamonym,Катунь,,f,noun_f3,always,Катунь,Катуни,Катуни,Катунь,Катунью,Катуни,,needs_review,manual
+wd:Q859934,potamonym,Бия,,f,noun_f1,always,Бия,Бии,Бие,Бию,Бией,Бие,,needs_review,manual
+wd:Q214768,potamonym,Чулым,,m,noun_m2,always,Чулым,Чулыма,Чулыму,Чулым,Чулымом,Чулыме,,needs_review,manual
+wd:Q874369,potamonym,Исеть,,f,noun_f3,always,Исеть,Исети,Исети,Исеть,Исетью,Исети,,needs_review,manual
+wd:Q756091,potamonym,Чусовая,,f,adj_m,always,Чусовая,Чусовой,Чусовой,Чусовую,Чусовой,Чусовой,,needs_review,manual
+wd:Q5513,limnonym,Байкал,,m,noun_m2,always,Байкал,Байкала,Байкалу,Байкал,Байкалом,Байкале,,needs_review,manual
+wd:Q15288,limnonym,Ладожское озеро,,,mixed_phrase,always,Ладожское озеро,,,,,,,needs_review,manual
+wd:Q166162,limnonym,Онежское озеро,,,mixed_phrase,always,Онежское озеро,,,,,,,needs_review,manual
+wd:Q845868,limnonym,Таймыр,,m,noun_m2,always,Таймыр,Таймыра,Таймыру,Таймыр,Таймыром,Таймыре,,needs_review,manual
+wd:Q201843,limnonym,Ханка,,f,noun_f1,always,Ханка,Ханки,Ханке,Ханку,Ханкой,Ханке,,needs_review,manual
+wd:Q203462,limnonym,Ильмень,,f,noun_f3,always,Ильмень,Ильмени,Ильмени,Ильмень,Ильменью,Ильмени,,needs_review,manual
+wd:Q19253,limnonym,Чудско-Псковское озеро,,,mixed_phrase,always,Чудско-Псковское озеро,,,,,,,needs_review,manual
+wd:Q217109,limnonym,Телецкое озеро,,,mixed_phrase,always,Телецкое озеро,,,,,,,needs_review,manual
+wd:Q5484,hydronym,Каспийское море,,,mixed_phrase,always,Каспийское море,,,,,,,needs_review,manual
+wd:Q166,hydronym,Черное море,Чёрное море,,mixed_phrase,always,Черное море,,,,,,,needs_review,manual
+wd:Q35000,hydronym,Азовское море,,,mixed_phrase,always,Азовское море,,,,,,,needs_review,manual
+wd:Q545,hydronym,Балтийское море,,,mixed_phrase,always,Балтийское море,,,,,,,needs_review,manual
+wd:Q44133,hydronym,Белое море,,,mixed_phrase,always,Белое море,,,,,,,needs_review,manual
+wd:Q45823,hydronym,Баренцево море,,,mixed_phrase,always,Баренцево море,,,,,,,needs_review,manual
+wd:Q33629,hydronym,Карское море,,,mixed_phrase,always,Карское море,,,,,,,needs_review,manual
+wd:Q41602,hydronym,Охотское море,,,mixed_phrase,always,Охотское море,,,,,,,needs_review,manual
+wd:Q44725,hydronym,Берингово море,,,mixed_phrase,always,Берингово море,,,,,,,needs_review,manual
