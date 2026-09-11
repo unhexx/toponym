@@ -32,6 +32,7 @@ PLACE_SCHEMAS = {
     "schema/table/places.schema.json",
     "schema/table/agencies.schema.json",
 }
+SHAREALIKE_SOURCE_IDS = frozenset({"hflabs-region", "hflabs-city"})
 
 
 class ValidateCrash(Exception):
@@ -175,6 +176,13 @@ def validate_tree(dp_path: Path, *, root: Path | None = None) -> tuple[int, list
                 sid = row.get("source_id") or ""
                 if catalog_ids and sid not in catalog_ids:
                     _issue(errors, "source_id", f"{row.get('id')}: source_id={sid}", name)
+                if sid in SHAREALIKE_SOURCE_IDS:
+                    _issue(
+                        errors,
+                        "sharealike",
+                        f"{row.get('id')}: source_id={sid} (DEC-HFLABS-001)",
+                        name,
+                    )
             if "status" in header:
                 status = row.get("status") or ""
                 if status not in STATUS_ENUM:
