@@ -13,22 +13,10 @@ if str(_ROOT) not in sys.path:
 from scripts.lib.catalog import load_catalog  # noqa: E402
 from scripts.lib.csvio import read_csv  # noqa: E402
 from scripts.lib.detectors import utcnow  # noqa: E402
+from scripts.lib.places import INDEX_RELPATHS  # noqa: E402
 
 ROOT = _ROOT
 DEFAULT_OUT = ROOT / "knowledge" / "registry.db"
-
-PLACE_RELPATHS = [
-    "data/curated/federal-districts.csv",
-    "data/curated/regions.csv",
-    "data/curated/cities-major.csv",
-    "data/curated/hydronyms-major.csv",
-    "data/curated/oronyms-major.csv",
-    "data/curated/municipalities.csv",
-    "data/curated/hodonyms.csv",
-    "data/curated/microtoponyms.csv",
-    "data/curated/agencies-foiv.csv",
-    "data/curated/agencies-other.csv",
-]
 
 RECORD_FIELDS = (
     "id",
@@ -102,7 +90,7 @@ def _cell(row: dict[str, str], key: str) -> str:
 def load_records(root: Path) -> list[dict[str, str]]:
     records: list[dict[str, str]] = []
     seen: set[str] = set()
-    for rel in PLACE_RELPATHS:
+    for rel in INDEX_RELPATHS:
         path = root / rel
         if not path.is_file():
             raise FileNotFoundError(f"нет таблицы {rel}")
