@@ -97,6 +97,15 @@ def test_volga_and_mvd_present() -> None:
     assert any(row["id"] == "foiv:mvd" and row["abbr"] == "МВД" for row in foiv)
 
 
+def test_no_gn_place_ids() -> None:
+    pkg = _load_json(DATAPACKAGE)
+    for resource in pkg["resources"]:
+        _header, rows = _read_csv(ROOT / resource["path"])
+        for row in rows:
+            rid = row.get("id") or ""
+            assert not rid.startswith("gn:"), (resource["name"], rid)
+
+
 def test_geonames_fixtures_moscow_and_volga() -> None:
     _, cities = _read_csv(ROOT / "data/curated/cities-major.csv")
     moscow = next(row for row in cities if row["id"] == "wd:Q649")

@@ -35,6 +35,8 @@ REQUIRED_IDS = {
     "ART-COMPOSE",
     "RSK-PUBLIC-BIND",
     "RSK-PORT-COLLISION",
+    "DEC-GN-001",
+    "RSK-GN-INSERT",
 }
 
 
@@ -87,3 +89,9 @@ def test_required_entities_present() -> None:
     assert by_id["ART-COMPOSE"]["type"] == "Artifact"
     assert by_id["RSK-PUBLIC-BIND"]["type"] == "Risk"
     assert by_id["RSK-PORT-COLLISION"]["type"] == "Risk"
+    assert by_id["DEC-GN-001"]["type"] == "Decision"
+    assert by_id["DEC-GN-001"]["status"] == "accepted"
+    summary = by_id["DEC-GN-001"]["summary"]
+    assert "gn:" in summary
+    assert "skipped_unmapped" in summary
+    assert by_id["RSK-GN-INSERT"]["type"] == "Risk"

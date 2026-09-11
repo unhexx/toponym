@@ -163,7 +163,8 @@
       "type": "Mapping",
       "title": "GeoNames → канон",
       "path": "data/mappings/geonames.yaml",
-      "catalog_id": "geonames-ru"
+      "catalog_id": "geonames-ru",
+      "notes": "Match колонки geonames; не вставлять gn:{id} (DEC-GN-001)."
     },
     {
       "id": "MAP-GKGN",
@@ -266,6 +267,26 @@
       "title": "Stealing Agentix host ports",
       "status": "mitigated",
       "summary": "Product port 8099 only; tests forbid publishing 8080/8100/8110/8112."
+    },
+    {
+      "id": "DEC-GN-001",
+      "type": "Decision",
+      "title": "GeoNames sync только match существующих строк",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": [
+        "data/mappings/geonames.yaml",
+        "scripts/lib/upsert.py",
+        "docs/design/2026-09-09-v1-local-registries.md"
+      ],
+      "summary": "Канон не вставляет gn:{geonameId}. apply_geonames матчит колонку geonames; неизвестные id — skipped_unmapped. stable_id в маппинге — ключ стыковки, не лицензия на insert."
+    },
+    {
+      "id": "RSK-GN-INSERT",
+      "type": "Risk",
+      "title": "Дубли wd: городов как gn:{id}",
+      "status": "mitigated",
+      "summary": "DEC-GN-001; skipped_unmapped; validate gn_id; тесты wd:Q649 / 524901."
     }
   ]
 }

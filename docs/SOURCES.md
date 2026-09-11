@@ -18,7 +18,7 @@ SSOT каталога: [`data/sources/catalog.yaml`](../data/sources/catalog.yam
 |---|---|---|---|
 | `wikidata` | CC0 | нет | сиды мест, Q-id |
 | `ukase-326` | официальный текст | нет | ФОИВ (указ № 326, ред. № 522) |
-| `geonames-ru` | CC-BY-4.0 | нет (`RU.zip` вне git) | id, суточные mods/deletes |
+| `geonames-ru` | CC-BY-4.0 | нет (`RU.zip` вне git) | id в колонке `geonames`; без insert `gn:{id}` (DEC-GN-001) |
 | `gkgn-opendata` | official-open-data | нет | указатель официальных названий |
 | `fias-gar` | official-open-data | нет | указатель; полный ГАР запрещён |
 | `hflabs-region` | CC-BY-SA-4.0 | нет | указатель; не в curated |

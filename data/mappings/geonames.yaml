@@ -23,7 +23,7 @@ filter:
     - L
 delete_policy: deprecate
 notes: >
-  Mapping documents gn:{geonameId} as the GeoNames join key, but v1 sync
+  DEC-GN-001: gn:{geonameId} is the GeoNames join key, but sync
   matches the curated geonames column (digits) and never inserts unknown
   gn: rows (no-insert). Incoming geonameId updates lat/lon on the existing
   wd: (or other) row; unmapped ids are skipped_unmapped.

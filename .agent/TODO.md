@@ -7,7 +7,6 @@
 
 ## Pending
 
-- [ ] NR-B: немаппленные `gn:{id}` запрещены; GeoNames sync только match существующих строк
 - [ ] NR-C: pymorphy/Natasha не золото; авто только `review=needs_review` или queue.csv
 - [ ] NR-D: уникальность склонений `(id, lemma)`; золото не переписывать
 - [ ] NR-E: верхний уровень `toponym` / `oikonym` / `hydronym` без переименования
@@ -20,6 +19,7 @@
 
 ## Done
 
+- [x] NR-B: немаппленные `gn:{id}` запрещены; GeoNames sync только match (DEC-GN-001)
 - [x] NR-A: RU.zip / ГАР вне git — `data/raw/*/SOURCE.md`, `scripts/fetch_dump.py` пишет только вне репо
 - [x] NR-L: P1 не дробить на P1a–e (P1 COMPLETE)
 - [x] NR-PLAN: таблица Next release A–L в `CYCLE_PLAN.md`

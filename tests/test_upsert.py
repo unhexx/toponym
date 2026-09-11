@@ -137,6 +137,12 @@ def test_geonames_unknown_id_not_inserted() -> None:
     assert rows[0]["lat"] == ""
     assert counts.skipped_unmapped == 1
     assert counts.inserted == 0
+    assert not any(item["id"].startswith("gn:") for item in rows)
+    before = [dict(row) for row in existing]
+    again, counts2 = apply_geonames(before, mods + mods, today="2026-09-09")
+    assert len(again) == len(existing)
+    assert counts2.inserted == 0
+    assert counts2.skipped_unmapped == 2
 
 
 def test_gold_declension_not_overwritten() -> None:
