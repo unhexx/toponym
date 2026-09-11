@@ -199,6 +199,15 @@
       "catalog_id": "ukase-326"
     },
     {
+      "id": "MAP-WIKIDATA",
+      "type": "Mapping",
+      "title": "Wikidata → канон (указатель)",
+      "path": "data/mappings/wikidata.yaml",
+      "catalog_id": "wikidata",
+      "pointer": true,
+      "notes": "SPARQL только по известным Q-id; P625 точки, не полигоны (DEC-GEO-001)."
+    },
+    {
       "id": "CHK-DETECTOR",
       "type": "Check",
       "title": "Детекторы обновлений check.py",

@@ -18,6 +18,7 @@ EXPECTED_FILES = (
     "fias-pointer.yaml",
     "hflabs-region.yaml",
     "ukase-326.yaml",
+    "wikidata.yaml",
 )
 
 
@@ -74,9 +75,29 @@ def test_source_id_in_catalog() -> None:
 
 
 def test_pointer_sources_use_delete_policy_pointer() -> None:
-    for name in ("fias-pointer.yaml", "hflabs-region.yaml"):
+    for name in ("fias-pointer.yaml", "hflabs-region.yaml", "wikidata.yaml"):
         payload = _load_yaml(MAPPINGS_DIR / name)
         assert payload["delete_policy"] == "pointer", name
+
+
+def test_wikidata_mapping_points_and_no_sparql_dump() -> None:
+    payload = _load_yaml(MAPPINGS_DIR / "wikidata.yaml")
+    notes = payload["notes"].casefold()
+    assert payload["source_id"] == "wikidata"
+    assert payload["stable_id"] == "wd:{qid}"
+    assert payload["delete_policy"] == "pointer"
+    assert payload["fields"]["qid"] == "wd"
+    assert payload["fields"]["label_ru"] == "name_ru"
+    assert payload["fields"]["label_en"] == "name_en"
+    assert payload["fields"]["P625_lat"] == "lat"
+    assert payload["fields"]["P625_lon"] == "lon"
+    assert payload["filter"]["known_ids_only"] is True
+    assert "polygon" not in payload["fields"].values()
+    assert "geojson" not in {v.casefold() for v in payload["fields"].values()}
+    assert "без полигонов" in payload["notes"] or "dec-geo-001" in notes
+    assert "dec-geo-001" in notes
+    assert "sparql" in notes
+    assert "dump" in notes or "дамп" in payload["notes"].casefold()
 
 
 def test_geonames_notes_mention_no_insert() -> None:
