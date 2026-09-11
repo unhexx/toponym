@@ -86,7 +86,7 @@ data/
   raw/              # указатели источников + SOURCE.md (не смешивать с curated)
   sources/          # каталог источников и даты проверок
 schema/             # JSON Schema колонок
-scripts/            # check, sync, validate, index, serve, fetch_dump
+scripts/            # check, sync, validate, index, serve, fetch_dump, declensions_queue
 ontology/           # overlay DEC-REG-001, Source, Mapping
 docs/               # методология, таксономия, лицензии, презентация
 agents/             # промпт ежедневного обновления
@@ -124,7 +124,7 @@ agents/             # промпт ежедневного обновления
 
 `review`: `gold` (не перезаписывать), `needs_review` (авто без ручной проверки), `auto`.
 
-Очередь автоформ (не канон): [`data/declensions/queue.csv`](data/declensions/queue.csv). pymorphy/Natasha не пишут `gold` (DEC-DECL-001).
+Очередь автоформ (не канон): [`data/declensions/queue.csv`](data/declensions/queue.csv). CLI: `python scripts/declensions_queue.py --id wd:Q… --lemma …` (только очередь, `review=needs_review`; `--review gold` — отказ). pymorphy/Natasha не пишут `gold` (DEC-DECL-001).
 
 Уникальность склонений — `(id, lemma)` (DEC-DECL-002); `id` в файле может повторяться.
 
@@ -137,6 +137,7 @@ python scripts/validate.py              # frictionless + инварианты
 python scripts/index.py                 # knowledge/registry.db FTS5
 python scripts/serve.py                 # loopback JSON, 127.0.0.1:8099
 python scripts/fetch_dump.py --source geonames-ru   # RU.zip в tmp, не в git
+python scripts/declensions_queue.py --id wd:Q… --lemma …   # только queue.csv
 ```
 
 Console scripts (после `pip install -e .`): `toponym-check`, `toponym-validate`, `toponym-index`, `toponym-serve`.

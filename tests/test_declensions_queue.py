@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+import scripts.declensions_queue as queue_cli
 from scripts.lib.csvio import read_csv, write_csv
 from scripts.lib.declensions import (
     DECLENSIONS_HEADER,
@@ -157,6 +158,86 @@ def test_append_queue_dry_run_does_not_write(tmp_path: Path) -> None:
     )
     assert added == 1
     assert queue.read_bytes() == before
+
+
+def test_cli_appends_queue_and_leaves_gold(tmp_path: Path) -> None:
+    gold = tmp_path / "data/declensions/cities-major.csv"
+    gold.parent.mkdir(parents=True)
+    gold_row = {key: "" for key in DECLENSIONS_HEADER}
+    gold_row.update(
+        {
+            "id": "wd:Q649",
+            "type_code": "city",
+            "lemma": "Москва",
+            "review": "gold",
+            "source": "manual",
+        }
+    )
+    write_csv(gold, DECLENSIONS_HEADER, [gold_row])
+    write_csv(tmp_path / QUEUE_RELPATH, DECLENSIONS_HEADER, [])
+    before_gold = gold.read_bytes()
+    code = queue_cli.main(
+        [
+            "--root",
+            str(tmp_path),
+            "--id",
+            "wd:Q42",
+            "--lemma",
+            "Примерск",
+            "--type-code",
+            "city",
+        ]
+    )
+    assert code == 0
+    header, rows = read_csv(tmp_path / QUEUE_RELPATH)
+    assert header == DECLENSIONS_HEADER
+    assert len(rows) == 1
+    assert rows[0]["id"] == "wd:Q42"
+    assert rows[0]["lemma"] == "Примерск"
+    assert rows[0]["review"] == "needs_review"
+    assert rows[0]["nom"] == "Примерск"
+    assert gold.read_bytes() == before_gold
+    regions = tmp_path / "data/declensions/regions.csv"
+    agencies = tmp_path / "data/declensions/agencies.csv"
+    assert not regions.exists()
+    assert not agencies.exists()
+
+
+def test_cli_rejects_gold_review(tmp_path: Path) -> None:
+    write_csv(tmp_path / QUEUE_RELPATH, DECLENSIONS_HEADER, [])
+    before = (tmp_path / QUEUE_RELPATH).read_bytes()
+    code = queue_cli.main(
+        [
+            "--root",
+            str(tmp_path),
+            "--id",
+            "wd:Q649",
+            "--lemma",
+            "Москва",
+            "--review",
+            "gold",
+        ]
+    )
+    assert code == 2
+    assert (tmp_path / QUEUE_RELPATH).read_bytes() == before
+
+
+def test_cli_dry_run_does_not_write(tmp_path: Path) -> None:
+    write_csv(tmp_path / QUEUE_RELPATH, DECLENSIONS_HEADER, [])
+    before = (tmp_path / QUEUE_RELPATH).read_bytes()
+    code = queue_cli.main(
+        [
+            "--root",
+            str(tmp_path),
+            "--id",
+            "wd:Q1",
+            "--lemma",
+            "Тест",
+            "--dry-run",
+        ]
+    )
+    assert code == 0
+    assert (tmp_path / QUEUE_RELPATH).read_bytes() == before
 
 
 def test_upsert_still_skips_gold() -> None:

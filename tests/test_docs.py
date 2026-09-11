@@ -56,6 +56,7 @@ def test_readme_has_compose_one_shot() -> None:
     assert "toponym-index" in text
     assert "toponym-check" in text
     assert "python scripts/fetch_dump.py" in text
+    assert "python scripts/declensions_queue.py" in text
     assert "data/declensions/queue.csv" in text
     assert "http://127.0.0.1:8099/healthz" in text
     assert "http://127.0.0.1:8099/v1/search" in text
@@ -123,6 +124,7 @@ def test_usage_guide_covers_search_and_declensions() -> None:
     assert "DEC-SEED-002" in text
     assert "Тверской" in text
     assert "queue.csv" in text
+    assert "declensions_queue.py" in text
     assert "dromonyms.csv" in text
     assert "villages.csv" in text
     assert "agoronyms.csv" in text
