@@ -39,6 +39,7 @@ REQUIRED_IDS = {
     "RSK-GN-INSERT",
     "DEC-DECL-001",
     "DEC-DECL-002",
+    "DEC-TAX-001",
 }
 
 
@@ -103,3 +104,7 @@ def test_required_entities_present() -> None:
     assert by_id["DEC-DECL-002"]["type"] == "Decision"
     assert by_id["DEC-DECL-002"]["status"] == "accepted"
     assert "(id, lemma)" in by_id["DEC-DECL-002"]["title"]
+    assert by_id["DEC-TAX-001"]["type"] == "Decision"
+    assert by_id["DEC-TAX-001"]["status"] == "accepted"
+    summary = by_id["DEC-TAX-001"]["summary"]
+    assert "toponym" in summary and "oikonym" in summary and "hydronym" in summary

@@ -313,6 +313,18 @@
         "docs/DECLENSIONS.md"
       ],
       "summary": "Не форсировать unique id. Две леммы на один id (аббр + полное имя ФОИВ) остаются. Золото не переписывать в foiv:mvd#head."
+    },
+    {
+      "id": "DEC-TAX-001",
+      "type": "Decision",
+      "title": "Таксономия верхнего уровня не переименовывается",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": [
+        "data/curated/types.csv",
+        "docs/taxonomy.md"
+      ],
+      "summary": "Корни канона: toponym (root), oikonym и hydronym (primary, parent=toponym). Не «Торопум». Не переименовывать."
     }
   ]
 }
