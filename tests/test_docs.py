@@ -35,3 +35,19 @@ def test_readme_has_compose_one_shot() -> None:
     assert "docker compose up --build" in text
     assert "127.0.0.1:8099" in text
     assert "python scripts/serve.py" in text
+
+
+def test_product_presentation_exists() -> None:
+    deck = ROOT / "docs" / "presentation" / "toponym-2026.09.11.md"
+    assert deck.is_file()
+    text = deck.read_text(encoding="utf-8")
+    for needle in (
+        "CSV",
+        "check.py",
+        "sync.py",
+        "validate.py",
+        "index.py",
+        "127.0.0.1:8099",
+        "docker compose up --build",
+    ):
+        assert needle in text, needle

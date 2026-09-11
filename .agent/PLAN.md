@@ -26,6 +26,7 @@
 | P13-DONE reviewer | COMPLETE |
 | P14-REL tag 2026.09.11 | COMPLETE |
 | P15-DOCS docs match 2026.09.11 | COMPLETE |
+| P16-PRES product deck docs/presentation | COMPLETE |
 
 ## Gate
 
