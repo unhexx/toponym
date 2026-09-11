@@ -82,6 +82,14 @@ def test_usage_guide_covers_search_and_declensions() -> None:
     assert "HTTP **не** отдаёт" in text or "HTTP не отдаёт" in text
 
 
+def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
+    text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    unreleased, _, _ = text.partition("## [2026.09.11]")
+    assert "## [Unreleased]" in unreleased
+    assert "docs/USAGE.md" in unreleased
+    assert "git pull && docker compose up --build" in unreleased
+
+
 def test_product_presentation_exists() -> None:
     deck = ROOT / "docs" / "presentation" / "toponym-2026.09.11.md"
     assert deck.is_file()
