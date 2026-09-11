@@ -1,13 +1,28 @@
 # .agent/TODO.md — Task Backlog
 
 **Initiative:** toponym v1 local registries
-**Status:** Loop 2 tagged `2026.09.11` (P10–P16 COMPLETE)
+**Status:** Loop 2 tagged `2026.09.11`; next release A–L (после 2026.09.11)
 
 ## In progress
 
 ## Pending
 
+- [ ] NR-A: RU.zip / ГАР вне git — дописать `data/raw/*/SOURCE.md`, опциональный fetch в tmp, size gate
+- [ ] NR-B: немаппленные `gn:{id}` запрещены; GeoNames sync только match существующих строк
+- [ ] NR-C: pymorphy/Natasha не золото; авто только `review=needs_review` или queue.csv
+- [ ] NR-D: уникальность склонений `(id, lemma)`; золото не переписывать
+- [ ] NR-E: верхний уровень `toponym` / `oikonym` / `hydronym` без переименования
+- [ ] NR-F: публичный HTTP вне scope; loopback `127.0.0.1:8099`, не bind `0.0.0.0` на host publish
+- [ ] NR-G: только Outpost `ontology/ontology.json`; DEC-* на keep-out решения
+- [ ] NR-H: Agentix — sibling symlink SSOT, дерево не копировать
+- [ ] NR-I: hflabs CC-BY-SA только `data/raw/`, не curated
+- [ ] NR-J: население / полигоны / GeoJSON / PostGIS вне канона; указатель в docs опционален
+- [ ] NR-K: малые сиды муниципалитетов, годонимов, микротопонимов + datapackage resource
+
 ## Done
+
+- [x] NR-L: P1 не дробить на P1a–e (P1 COMPLETE)
+- [x] NR-PLAN: таблица Next release A–L в `CYCLE_PLAN.md`
 
 - [x] P16-PRES-01: docs/presentation product deck (CSV, pipeline, :8099, compose)
 - [x] P15-DOCS-01: README, CYCLE_PLAN, design snapshot match tag 2026.09.11
