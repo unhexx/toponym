@@ -164,6 +164,7 @@ grep -h '^wd:Q649,' data/declensions/*.csv
 grep -h '^foiv:mvd,' data/declensions/agencies.csv
 ```
 
+Ключ строки — `(id, lemma)`, не уникальный `id` (DEC-DECL-002).
 У МВД две леммы: несклоняемое «МВД» (`paradigm=indecl`) и
 «Министерство внутренних дел…» (`agency-head`). Берите нужную.
 

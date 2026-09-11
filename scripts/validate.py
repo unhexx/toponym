@@ -15,7 +15,7 @@ from frictionless import Package  # noqa: E402
 
 from scripts.lib.catalog import catalog_source_ids, load_catalog  # noqa: E402
 from scripts.lib.csvio import read_csv  # noqa: E402
-from scripts.lib.declensions import is_auto_source  # noqa: E402
+from scripts.lib.declensions import is_auto_source, uniqueness_key  # noqa: E402
 
 ROOT = _ROOT
 DATAPACKAGE = ROOT / "datapackage.json"
@@ -149,15 +149,15 @@ def validate_tree(dp_path: Path, *, root: Path | None = None) -> tuple[int, list
     for name, (header, rows) in tables.items():
         if "id" in header and name not in place_names:
             seen: set[tuple[str, str]] = set()
+            by_lemma = "lemma" in header
             for row in rows:
                 rid = row.get("id") or ""
                 if not rid:
                     _issue(errors, "id", "пустой id", name)
                     continue
-                extra = row.get("paradigm") or "" if "paradigm" in header else ""
-                key = (rid, extra)
+                key = uniqueness_key(row) if by_lemma else (rid, "")
                 if key in seen:
-                    label = rid if not extra else f"{rid}/{extra}"
+                    label = f"{key[0]}/{key[1]}" if by_lemma and key[1] else rid
                     _issue(errors, "unique", f"повтор id {label}", name)
                 seen.add(key)
 

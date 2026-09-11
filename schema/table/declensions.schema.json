@@ -1,4 +1,6 @@
 {
+  "primaryKey": ["id", "lemma"],
+  "missingValues": [""],
   "fields": [
     { "name": "id", "type": "string", "constraints": { "required": true } },
     { "name": "type_code", "type": "string", "constraints": { "required": true } },

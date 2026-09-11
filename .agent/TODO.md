@@ -7,7 +7,6 @@
 
 ## Pending
 
-- [ ] NR-D: уникальность склонений `(id, lemma)`; золото не переписывать
 - [ ] NR-E: верхний уровень `toponym` / `oikonym` / `hydronym` без переименования
 - [ ] NR-F: публичный HTTP вне scope; loopback `127.0.0.1:8099`, не bind `0.0.0.0` на host publish
 - [ ] NR-G: только Outpost `ontology/ontology.json`; DEC-* на keep-out решения
@@ -18,6 +17,7 @@
 
 ## Done
 
+- [x] NR-D: уникальность склонений `(id, lemma)`; золото не переписывать (DEC-DECL-002)
 - [x] NR-C: pymorphy/Natasha не золото; очередь `data/declensions/queue.csv` (DEC-DECL-001)
 - [x] NR-B: немаппленные `gn:{id}` запрещены; GeoNames sync только match (DEC-GN-001)
 - [x] NR-A: RU.zip / ГАР вне git — `data/raw/*/SOURCE.md`, `scripts/fetch_dump.py` пишет только вне репо

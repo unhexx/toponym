@@ -31,6 +31,7 @@ def test_design_snapshot_is_released_v1() -> None:
     assert "DEC-GN-001" in text
     assert "never insert" in text.lower() or "Do not create `gn:`" in text
     assert "DEC-DECL-001" in text
+    assert "DEC-DECL-002" in text
 
 
 def test_readme_has_compose_one_shot() -> None:

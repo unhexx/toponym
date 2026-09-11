@@ -42,6 +42,10 @@ def is_auto_source(source: str) -> bool:
     return any(marker in text for marker in AUTO_SOURCE_MARKERS)
 
 
+def uniqueness_key(row: dict[str, Any]) -> tuple[str, str]:
+    return (str(row.get("id") or ""), str(row.get("lemma") or ""))
+
+
 def prepare_queue_row(row: dict[str, Any]) -> dict[str, str]:
     out = {key: str(row.get(key) or "") for key in DECLENSIONS_HEADER}
     if not out["id"] or not out["lemma"]:

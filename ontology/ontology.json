@@ -300,6 +300,19 @@
         "scripts/lib/declensions.py"
       ],
       "summary": "Автосклонения только review=needs_review в каноне или data/declensions/queue.csv (не datapackage). gold не перезаписывать. Морфоанализаторы не в зависимостях."
+    },
+    {
+      "id": "DEC-DECL-002",
+      "type": "Decision",
+      "title": "Уникальность склонений (id, lemma)",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": [
+        "schema/table/declensions.schema.json",
+        "data/declensions/agencies.csv",
+        "docs/DECLENSIONS.md"
+      ],
+      "summary": "Не форсировать unique id. Две леммы на один id (аббр + полное имя ФОИВ) остаются. Золото не переписывать в foiv:mvd#head."
     }
   ]
 }
