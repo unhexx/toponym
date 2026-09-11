@@ -1,3 +1,18 @@
 id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,review,source
 wd:Q4420279,microtoponym,Синий камень,,,mixed_phrase,always,Синий камень,,,,,,,needs_review,manual
 local:micro:sinie-kamni,microtoponym,урочище Синие камни,,,mixed_phrase,always,урочище Синие камни,,,,,,,needs_review,manual
+wd:Q3896098,microtoponym,Серебряный Бор,,,mixed_phrase,always,Серебряный Бор,,,,,,,needs_review,manual
+wd:Q3162344,microtoponym,Нескучный сад,,,mixed_phrase,always,Нескучный сад,,,,,,,needs_review,manual
+wd:Q99296,microtoponym,Битцевский лес,,,mixed_phrase,always,Битцевский лес,,,,,,,needs_review,manual
+wd:Q3363844,microtoponym,Кузьминский лесопарк,,,mixed_phrase,always,Кузьминский лесопарк,,,,,,,needs_review,manual
+wd:Q1643788,microtoponym,Капова пещера,,,mixed_phrase,always,Капова пещера,,,,,,,needs_review,manual
+wd:Q2607150,microtoponym,Кунгурская ледяная пещера,,,mixed_phrase,always,Кунгурская ледяная пещера,,,,,,,needs_review,manual
+wd:Q4362259,microtoponym,Ординская пещера,,,mixed_phrase,always,Ординская пещера,,,,,,,needs_review,manual
+wd:Q1029322,microtoponym,Денисова пещера,,,mixed_phrase,always,Денисова пещера,,,,,,,needs_review,manual
+wd:Q4073271,microtoponym,Ахштырская пещера,,,mixed_phrase,always,Ахштырская пещера,,,,,,,needs_review,manual
+wd:Q4125821,microtoponym,Воронцовская пещера,,,mixed_phrase,always,Воронцовская пещера,,,,,,,needs_review,manual
+wd:Q4449381,microtoponym,Тавдинские пещеры,,,mixed_phrase,always,Тавдинские пещеры,,,,,,,needs_review,manual
+wd:Q4332103,microtoponym,Провал,,,mixed_phrase,always,Провал,,,,,,,needs_review,manual
+wd:Q81395061,microtoponym,Сарыкум,,,mixed_phrase,always,Сарыкум,,,,,,,needs_review,manual
+wd:Q186369,microtoponym,Дивногорье,,,mixed_phrase,always,Дивногорье,,,,,,,needs_review,manual
+wd:Q4518960,microtoponym,Чертово городище,Чёртово городище,,mixed_phrase,always,Чертово городище,,,,,,,needs_review,manual

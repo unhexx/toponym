@@ -138,6 +138,26 @@ def test_fts_tverskaya_hits_hodonym(tmp_path: Path) -> None:
     assert table_name == "hodonyms"
 
 
+def test_fts_expanded_seeds_street_and_municipality(tmp_path: Path) -> None:
+    db_path = _build(tmp_path)
+    assert "wd:Q269373" in index_mod.fts_match(db_path, "Арбат")
+    rec = index_mod.get_record(db_path, "wd:Q269373")
+    assert rec is not None
+    assert rec["name_ru"] == "Арбат"
+    assert rec["table_name"] == "hodonyms"
+    assert rec["type_id"] == "hodonym"
+    assert "wd:Q15190285" in index_mod.fts_match(db_path, "Уфа")
+    mun = index_mod.get_record(db_path, "wd:Q15190285")
+    assert mun is not None
+    assert mun["table_name"] == "municipalities"
+    assert mun["type_id"] == "municipality"
+    assert "wd:Q1643788" in index_mod.fts_match(db_path, "Капова")
+    cave = index_mod.get_record(db_path, "wd:Q1643788")
+    assert cave is not None
+    assert cave["name_ru"] == "Капова пещера"
+    assert cave["table_name"] == "microtoponyms"
+
+
 def test_sync_meta_from_catalog(tmp_path: Path) -> None:
     db_path = _build(tmp_path)
     conn = sqlite3.connect(db_path)

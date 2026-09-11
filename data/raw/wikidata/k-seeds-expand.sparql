@@ -1,0 +1,24 @@
+# Expand municipality / hodonym / microtoponym seeds from Wikidata (CC0).
+# Run at https://query.wikidata.org/ — do not dump the result into git.
+# Insert only matchable Q-ids as wd:{id}; never gn:{id}; never hflabs tables.
+
+# Urban okrugs (Q13626398) of already curated cities via P131.
+# SELECT DISTINCT ?item ?ru ?en ?oktmo ?iso ?city WHERE {
+#   VALUES ?city { wd:Q894 wd:Q887 }
+#   ?city wdt:P131 ?item .
+#   ?item wdt:P31/wdt:P279* wd:Q13626398 .
+#   OPTIONAL { ?item rdfs:label ?ru FILTER(LANG(?ru) = "ru") }
+#   OPTIONAL { ?item rdfs:label ?en FILTER(LANG(?en) = "en") }
+#   OPTIONAL { ?item wdt:P764 ?oktmo }
+#   OPTIONAL { ?item wdt:P131/wdt:P300 ?iso FILTER(STRSTARTS(?iso, "RU-")) }
+# }
+
+# Famous streets: exact ru-label + P131* city already in cities-major.csv.
+# SELECT DISTINCT ?item ?ru ?en ?lat ?lon WHERE {
+#   VALUES (?ru ?city) { ("Арбат"@ru wd:Q649) ("Литейный проспект"@ru wd:Q656) }
+#   ?item rdfs:label ?ru .
+#   ?item wdt:P131* ?city .
+#   ?item wdt:P17 wd:Q159 .
+#   OPTIONAL { ?item rdfs:label ?en FILTER(LANG(?en) = "en") }
+#   OPTIONAL { ?item p:P625/psv:P625 [ wikibase:geoLatitude ?lat; wikibase:geoLongitude ?lon ] }
+# }

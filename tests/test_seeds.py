@@ -78,9 +78,9 @@ def test_seed_counts() -> None:
     assert len(oros) >= 25
     assert len(foiv) >= 69
     assert len(other) >= 10
-    assert len(mun) >= 1
-    assert len(hod) >= 1
-    assert len(micro) >= 1
+    assert len(mun) >= 20
+    assert len(hod) >= 20
+    assert len(micro) >= 12
 
 
 def test_declension_ids_may_repeat() -> None:
@@ -397,6 +397,10 @@ def test_k_seed_types_and_parents() -> None:
         assert parent, row["id"]
         assert parent in union_ids, (row["id"], parent)
     assert all(not row["id"].startswith("gn:") for row in (*mun, *hod, *micro))
+    assert all(row["source_id"] != "hflabs-city" for row in (*mun, *hod, *micro))
+    assert any(row["id"] == "wd:Q269373" and row["name_ru"] == "Арбат" for row in hod)
+    assert any(row["id"] == "wd:Q15190285" and row["type_id"] == "municipality" for row in mun)
+    assert any(row["id"] == "wd:Q1643788" and row["name_ru"] == "Капова пещера" for row in micro)
     raw_dir = ROOT / "data"
     for path in raw_dir.rglob("*"):
         if path.is_file():

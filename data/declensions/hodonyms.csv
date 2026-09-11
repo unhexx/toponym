@@ -1,3 +1,23 @@
 id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,review,source
 wd:Q1644209,hodonym,Тверская улица,,,mixed_phrase,always,Тверская улица,Тверской улицы,Тверской улице,Тверскую улицу,Тверской улицей,Тверской улице,,needs_review,manual
 wd:Q382500,hodonym,Невский проспект,,,mixed_phrase,always,Невский проспект,Невского проспекта,Невскому проспекту,Невский проспект,Невским проспектом,Невском проспекте,,needs_review,manual
+wd:Q269373,hodonym,Арбат,,,mixed_phrase,always,Арбат,,,,,,,needs_review,manual
+wd:Q2545285,hodonym,Новый Арбат,,,mixed_phrase,always,Новый Арбат,,,,,,,needs_review,manual
+wd:Q281935,hodonym,Кутузовский проспект,,,mixed_phrase,always,Кутузовский проспект,,,,,,,needs_review,manual
+wd:Q2622445,hodonym,Ленинский проспект,,,mixed_phrase,always,Ленинский проспект,,,,,,,needs_review,manual
+wd:Q2320137,hodonym,улица Петровка,,,mixed_phrase,always,улица Петровка,,,,,,,needs_review,manual
+wd:Q1972493,hodonym,Большая Никитская улица,,,mixed_phrase,always,Большая Никитская улица,,,,,,,needs_review,manual
+wd:Q4310347,hodonym,Мясницкая улица,,,mixed_phrase,always,Мясницкая улица,,,,,,,needs_review,manual
+wd:Q4338672,hodonym,Остоженка,,,mixed_phrase,always,Остоженка,,,,,,,needs_review,manual
+wd:Q4471600,hodonym,Варварка,,,mixed_phrase,always,Варварка,,,,,,,needs_review,manual
+wd:Q4473677,hodonym,улица Пречистенка,,,mixed_phrase,always,улица Пречистенка,,,,,,,needs_review,manual
+wd:Q3007468,hodonym,Литейный проспект,,,mixed_phrase,always,Литейный проспект,,,,,,,needs_review,manual
+wd:Q1985951,hodonym,Садовая улица,,,mixed_phrase,always,Садовая улица,,,,,,,needs_review,manual
+wd:Q1991971,hodonym,Гороховая улица,,,mixed_phrase,always,Гороховая улица,,,,,,,needs_review,manual
+wd:Q2632681,hodonym,Московский проспект,,,mixed_phrase,always,Московский проспект,,,,,,,needs_review,manual
+wd:Q4211220,hodonym,Каменноостровский проспект,,,mixed_phrase,always,Каменноостровский проспект,,,,,,,needs_review,manual
+wd:Q1593247,hodonym,улица Баумана,,,mixed_phrase,always,улица Баумана,,,,,,,needs_review,manual
+wd:Q4091587,hodonym,Большая Покровская улица,,,mixed_phrase,always,Большая Покровская улица,,,,,,,needs_review,manual
+wd:Q4239714,hodonym,Красный проспект,,,mixed_phrase,always,Красный проспект,,,,,,,needs_review,manual
+wd:Q18398914,hodonym,Кировка,,,mixed_phrase,always,Кировка,,,,,,,needs_review,manual
+wd:Q4091641,hodonym,Большая Садовая улица,,,mixed_phrase,always,Большая Садовая улица,,,,,,,needs_review,manual

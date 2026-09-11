@@ -1,3 +1,28 @@
 id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,review,source
 wd:Q27577214,municipality,городской округ Самара,,,mixed_phrase,always,городской округ Самара,,,,,,,needs_review,manual
 local:mun:kazan-go,municipality,городской округ Казань,,,mixed_phrase,always,городской округ Казань,,,,,,,needs_review,manual
+wd:Q4144855,municipality,"Городской округ ""Город Оренбург""",,,mixed_phrase,always,"Городской округ ""Город Оренбург""",,,,,,,needs_review,manual
+wd:Q4307474,municipality,город Екатеринбург,,,mixed_phrase,always,город Екатеринбург,,,,,,,needs_review,manual
+wd:Q27566164,municipality,Кемеровский городской округ,,,mixed_phrase,always,Кемеровский городской округ,,,,,,,needs_review,manual
+wd:Q27532708,municipality,Городской округ город Астрахань,,,mixed_phrase,always,Городской округ город Астрахань,,,,,,,needs_review,manual
+wd:Q27566173,municipality,Новокузнецкий городской округ,,,mixed_phrase,always,Новокузнецкий городской округ,,,,,,,needs_review,manual
+wd:Q27477627,municipality,Городской округ Жуковский,,,mixed_phrase,always,Городской округ Жуковский,,,,,,,needs_review,manual
+wd:Q3085607,municipality,Муниципальное образование город-курорт Сочи,,,mixed_phrase,always,Муниципальное образование город-курорт Сочи,,,,,,,needs_review,manual
+wd:Q27551718,municipality,Городской округ «город Иркутск»,,,mixed_phrase,always,Городской округ «город Иркутск»,,,,,,,needs_review,manual
+wd:Q15190285,municipality,Городской округ город Уфа,,,mixed_phrase,always,Городской округ город Уфа,,,,,,,needs_review,manual
+wd:Q24636058,municipality,Городской округ город Томск,,,mixed_phrase,always,Городской округ город Томск,,,,,,,needs_review,manual
+wd:Q19908746,municipality,город Волгоград,,,mixed_phrase,always,город Волгоград,,,,,,,needs_review,manual
+wd:Q23898959,municipality,Город Нижний Новгород,,,mixed_phrase,always,Город Нижний Новгород,,,,,,,needs_review,manual
+wd:Q27538353,municipality,город Воронеж,,,mixed_phrase,always,город Воронеж,,,,,,,needs_review,manual
+wd:Q18405934,municipality,Городской округ город Красноярск,,,mixed_phrase,always,Городской округ город Красноярск,,,,,,,needs_review,manual
+wd:Q27577216,municipality,Городской округ Тольятти,,,mixed_phrase,always,Городской округ Тольятти,,,,,,,needs_review,manual
+wd:Q37804109,municipality,город Барнаул,,,mixed_phrase,always,город Барнаул,,,,,,,needs_review,manual
+wd:Q4307501,municipality,муниципальное образование город Краснодар,,,mixed_phrase,always,муниципальное образование город Краснодар,,,,,,,needs_review,manual
+wd:Q846254,municipality,Городской округ Домодедово,,,mixed_phrase,always,Городской округ Домодедово,,,,,,,needs_review,manual
+wd:Q27517125,municipality,Городской округ город Хабаровск,,,mixed_phrase,always,Городской округ город Хабаровск,,,,,,,needs_review,manual
+wd:Q21644760,municipality,Городской округ Тюмень,,,mixed_phrase,always,Городской округ Тюмень,,,,,,,needs_review,manual
+wd:Q4112963,municipality,Владивостокский городской округ,,,mixed_phrase,always,Владивостокский городской округ,,,,,,,needs_review,manual
+wd:Q27477634,municipality,Городской округ Королев,Городской округ Королёв,,mixed_phrase,always,Городской округ Королев,,,,,,,needs_review,manual
+wd:Q2710135,municipality,Городской округ Мытищи,,,mixed_phrase,always,Городской округ Мытищи,,,,,,,needs_review,manual
+wd:Q2624366,municipality,Щелково (городской округ),Щёлково (городской округ),,mixed_phrase,always,Щелково (городской округ),,,,,,,needs_review,manual
+wd:Q4145649,municipality,муниципальный округ Нижний Тагил,,,mixed_phrase,always,муниципальный округ Нижний Тагил,,,,,,,needs_review,manual
