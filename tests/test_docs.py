@@ -107,10 +107,15 @@ def test_usage_guide_covers_search_and_declensions() -> None:
 
 def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
     text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    unreleased, _, _ = text.partition("## [2026.09.11]")
-    assert "## [Unreleased]" in unreleased
-    assert "docs/USAGE.md" in unreleased
-    assert "git pull && docker compose up --build" in unreleased
+    before_loop2, _, _ = text.partition("## [2026.09.11] - 2026-09-11")
+    assert "## [Unreleased]" in before_loop2
+    assert "2026.09.12" in before_loop2
+    assert "blocked-until-tomorrow" in before_loop2
+    assert "## [2026.09.12]" in before_loop2
+    assert "docs/USAGE.md" in before_loop2
+    assert "git pull && docker compose up --build" in before_loop2
+    assert "municipalities.csv" in before_loop2
+    assert "DEC-SEED-001" in before_loop2
 
 
 def test_product_presentation_exists() -> None:

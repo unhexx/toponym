@@ -5,12 +5,18 @@
 
 ## [Unreleased]
 
+Следующий annotated CalVer — `2026.09.12` (blocked-until-tomorrow: тег `2026.09.11` уже есть в этот календарный день). `pyproject.toml`, `CITATION.cff` и бейджи README остаются `2026.09.11`, пока тег не поставлен.
+
+## [2026.09.12] - pending (ship 2026-09-11)
+
+Next-release A–L на `main`. Annotated tag `2026.09.12` не раньше 2026-09-12.
+
 ### Added
-- 2026-09-11: малые сиды [`data/curated/municipalities.csv`](data/curated/municipalities.csv), [`hodonyms.csv`](data/curated/hodonyms.csv), [`microtoponyms.csv`](data/curated/microtoponyms.csv) (DEC-SEED-001): типы уже в `types.csv`; схема `places.schema.json`; ≥1 строка; без дампа ГАР.
-- 2026-09-11: очередь автосклонений [`data/declensions/queue.csv`](data/declensions/queue.csv) (не ресурс datapackage).
-- 2026-09-11: `scripts/fetch_dump.py` — опциональная выгрузка GeoNames `RU.zip` / ГАР / ГКГН **вне** дерева git (`--dest` внутри репозитория — ошибка; указатели ГАР/ГКГН требуют `--url`). Size gate `data/` и tracked-файлов не снимается.
-- 2026-09-11: руководство [`docs/USAGE.md`](docs/USAGE.md) — `GET /healthz`, `/v1/search`, `/v1/records` (только loopback); склонения через CSV join по `id` (HTTP падежей не отдаёт); офлайн CSV/SQLite; сеть только для `check.py` / `sync.py`.
-- 2026-09-11: обновление Compose-ящика одной строкой: `git pull && docker compose up --build`.
+- Малые сиды [`data/curated/municipalities.csv`](data/curated/municipalities.csv), [`hodonyms.csv`](data/curated/hodonyms.csv), [`microtoponyms.csv`](data/curated/microtoponyms.csv) (DEC-SEED-001): типы уже в `types.csv`; схема `places.schema.json`; ≥1 строка; без дампа ГАР.
+- Очередь автосклонений [`data/declensions/queue.csv`](data/declensions/queue.csv) (не ресурс datapackage).
+- `scripts/fetch_dump.py` — опциональная выгрузка GeoNames `RU.zip` / ГАР / ГКГН **вне** дерева git (`--dest` внутри репозитория — ошибка; указатели ГАР/ГКГН требуют `--url`). Size gate `data/` и tracked-файлов не снимается.
+- Руководство [`docs/USAGE.md`](docs/USAGE.md) — `GET /healthz`, `/v1/search`, `/v1/records` (только loopback); склонения через CSV join по `id` (HTTP падежей не отдаёт); офлайн CSV/SQLite; сеть только для `check.py` / `sync.py`.
+- Обновление Compose-ящика одной строкой: `git pull && docker compose up --build`.
 
 ### Changed
 - Геометрия: DEC-GEO-001 — население / полигоны / GeoJSON / PostGIS вне канона; указатель в `docs/SOURCES.md`; `lat`/`lon` остаются точками.
@@ -68,5 +74,6 @@ Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-S
 - Склонения: `review=gold` / `needs_review` (не boolean).
 
 [Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.11...HEAD
+[2026.09.12]: https://github.com/unhexx/toponym/compare/2026.09.11...HEAD
 [2026.09.11]: https://github.com/unhexx/toponym/releases/tag/2026.09.11
 [2026.09.09]: https://github.com/unhexx/toponym/releases/tag/2026.09.09
