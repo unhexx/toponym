@@ -6,8 +6,10 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import signal
 import sqlite3
 import sys
+import threading
 from dataclasses import dataclass
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -252,11 +254,17 @@ def serve(bind: str, port: int, db_path: Path) -> None:
     handler = make_handler(db_path)
     httpd = ThreadingHTTPServer((bind, port), handler)
     httpd.daemon_threads = True
+
+    def _stop(_signum: int, _frame: object) -> None:
+        threading.Thread(target=httpd.shutdown, daemon=True).start()
+
+    signal.signal(signal.SIGTERM, _stop)
+    signal.signal(signal.SIGINT, _stop)
     print(f"ok serve http://{bind}:{port}/healthz db={db_path}", flush=True)
     try:
         httpd.serve_forever()
-    except KeyboardInterrupt:
-        httpd.shutdown()
+    finally:
+        httpd.server_close()
 
 
 def main(argv: list[str] | None = None) -> int:
