@@ -5,6 +5,14 @@ import shutil
 from pathlib import Path
 
 import scripts.validate as validate_mod
+from scripts.lib.invariants import (
+    FROZEN_TAXONOMY,
+    SHAREALIKE_SOURCE_IDS,
+    check_frozen_taxonomy,
+    check_gn_id,
+    check_gold_auto,
+    check_sharealike,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
@@ -122,3 +130,61 @@ def test_gn_place_id_fails_validate(tmp_path: Path) -> None:
     code, errors = validate_mod.validate_tree(dest / "datapackage.json", root=dest)
     assert code == 1
     assert any(row["check"] == "gn_id" for row in errors)
+
+
+def test_check_gn_id_rejects_prefix() -> None:
+    errors: list[dict] = []
+    check_gn_id("gn:472776", "hydronyms-major", errors)
+    assert errors[0]["check"] == "gn_id"
+    assert errors[0]["resource"] == "hydronyms-major"
+    ok: list[dict] = []
+    check_gn_id("wd:Q626", "hydronyms-major", ok)
+    assert ok == []
+
+
+def test_check_sharealike_rejects_hflabs() -> None:
+    assert "hflabs-region" in SHAREALIKE_SOURCE_IDS
+    errors: list[dict] = []
+    check_sharealike({"id": "wd:Q1", "source_id": "hflabs-region"}, "regions", errors)
+    assert errors[0]["check"] == "sharealike"
+    ok: list[dict] = []
+    check_sharealike({"id": "wd:Q1", "source_id": "wikidata"}, "regions", ok)
+    assert ok == []
+
+
+def test_check_gold_auto_rejects_pymorphy() -> None:
+    errors: list[dict] = []
+    check_gold_auto(
+        {"id": "wd:Q649", "review": "gold", "source": "pymorphy3"},
+        "cities-major",
+        errors,
+    )
+    assert errors[0]["check"] == "gold_auto"
+    ok: list[dict] = []
+    check_gold_auto(
+        {"id": "wd:Q649", "review": "gold", "source": "manual"},
+        "cities-major",
+        ok,
+    )
+    assert ok == []
+    skipped: list[dict] = []
+    check_gold_auto(
+        {"id": "wd:Q649", "review": "needs_review", "source": "pymorphy3"},
+        "cities-major",
+        skipped,
+    )
+    assert skipped == []
+
+
+def test_check_frozen_taxonomy_rejects_renamed_root() -> None:
+    rows = [
+        {"id": tid, "level": spec["level"], "parent_id": spec["parent_id"]}
+        for tid, spec in FROZEN_TAXONOMY.items()
+    ]
+    ok: list[dict] = []
+    check_frozen_taxonomy(rows, ok)
+    assert ok == []
+    rows[0]["level"] = "primary"
+    errors: list[dict] = []
+    check_frozen_taxonomy(rows, errors)
+    assert any(row["check"] == "taxonomy" for row in errors)

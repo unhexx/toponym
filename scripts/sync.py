@@ -27,6 +27,7 @@ from scripts.lib.detectors import (  # noqa: E402
     utcnow,
     yesterday_utc,
 )
+from scripts.lib.places import PLACE_RELPATHS  # noqa: E402
 from scripts.lib.upsert import (  # noqa: E402
     DEFAULT_MAX_VENDOR_BYTES,
     UpsertCounts,
@@ -37,17 +38,6 @@ from scripts.lib.upsert import (  # noqa: E402
 
 ROOT = _ROOT
 CATALOG_PATH = ROOT / "data" / "sources" / "catalog.yaml"
-
-PLACE_RELPATHS = [
-    "data/curated/federal-districts.csv",
-    "data/curated/regions.csv",
-    "data/curated/cities-major.csv",
-    "data/curated/hydronyms-major.csv",
-    "data/curated/oronyms-major.csv",
-    "data/curated/municipalities.csv",
-    "data/curated/hodonyms.csv",
-    "data/curated/microtoponyms.csv",
-]
 POINTER_IDS = {
     "fias-gar",
     "gkgn-opendata",
