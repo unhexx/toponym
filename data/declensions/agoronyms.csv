@@ -1,0 +1,6 @@
+id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,review,source
+wd:Q41116,agoronym,Красная площадь,,,mixed_phrase,always,Красная площадь,,,,,,,needs_review,manual
+wd:Q1132624,agoronym,Дворцовая площадь,,,mixed_phrase,always,Дворцовая площадь,,,,,,,needs_review,manual
+wd:Q2352588,agoronym,Исаакиевская площадь,,,mixed_phrase,always,Исаакиевская площадь,,,,,,,needs_review,manual
+wd:Q1633670,agoronym,Театральная площадь,,,mixed_phrase,always,Театральная площадь,,,,,,,needs_review,manual
+wd:Q4365734,agoronym,Площадь Революции,,,mixed_phrase,always,Площадь Революции,,,,,,,needs_review,manual

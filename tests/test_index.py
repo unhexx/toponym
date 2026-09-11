@@ -21,6 +21,9 @@ def test_place_relpaths_exclude_agencies() -> None:
         "data/curated/municipalities.csv",
         "data/curated/hodonyms.csv",
         "data/curated/microtoponyms.csv",
+        "data/curated/dromonyms.csv",
+        "data/curated/villages.csv",
+        "data/curated/agoronyms.csv",
     ]
     assert INDEX_RELPATHS == PLACE_RELPATHS + [
         "data/curated/agencies-foiv.csv",
@@ -156,6 +159,27 @@ def test_fts_expanded_seeds_street_and_municipality(tmp_path: Path) -> None:
     assert cave is not None
     assert cave["name_ru"] == "Капова пещера"
     assert cave["table_name"] == "microtoponyms"
+
+
+def test_fts_dva_seeds(tmp_path: Path) -> None:
+    db_path = _build(tmp_path)
+    assert "wd:Q41116" in index_mod.fts_match(db_path, "Красная")
+    square = index_mod.get_record(db_path, "wd:Q41116")
+    assert square is not None
+    assert square["name_ru"] == "Красная площадь"
+    assert square["type_id"] == "agoronym"
+    assert square["table_name"] == "agoronyms"
+    assert "wd:Q894049" in index_mod.fts_match(db_path, "Бородино")
+    village = index_mod.get_record(db_path, "wd:Q894049")
+    assert village is not None
+    assert village["type_id"] == "village"
+    assert village["table_name"] == "villages"
+    assert "wd:Q58767" in index_mod.fts_match(db_path, "Транссиб")
+    rail = index_mod.get_record(db_path, "wd:Q58767")
+    assert rail is not None
+    assert rail["type_id"] == "dromonym"
+    assert rail["table_name"] == "dromonyms"
+    assert rail["abbr"] == "Транссиб"
 
 
 def test_sync_meta_from_catalog(tmp_path: Path) -> None:

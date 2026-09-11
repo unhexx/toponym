@@ -18,4 +18,6 @@
 
 Малые сиды (DEC-SEED-001, не дамп ГАР): `data/curated/municipalities.csv`, `hodonyms.csv`, `microtoponyms.csv` — десятки строк Wikidata CC0, не полный реестр улиц/МО.
 
+Дромонимы / сёла / площади (DEC-SEED-002): `data/curated/dromonyms.csv`, `villages.csv`, `agoronyms.csv`. Улица ≠ площадь.
+
 Полная таблица типов: `data/curated/types.csv`.

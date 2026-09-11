@@ -1,0 +1,7 @@
+id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,review,source
+wd:Q58767,dromonym,Транссибирская магистраль,,,mixed_phrase,always,Транссибирская магистраль,,,,,,,needs_review,manual
+wd:Q24971,dromonym,М11 «Нева»,,,mixed_phrase,always,М11 «Нева»,,,,,,,needs_review,manual
+wd:Q1635333,dromonym,М-4 «Дон»,,,mixed_phrase,always,М-4 «Дон»,,,,,,,needs_review,manual
+wd:Q1365529,dromonym,Р256 «Чуйский тракт»,,,mixed_phrase,always,Р256 «Чуйский тракт»,,,,,,,needs_review,manual
+wd:Q377967,dromonym,Байкало-Амурская магистраль,,,mixed_phrase,always,Байкало-Амурская магистраль,,,,,,,needs_review,manual
+wd:Q590408,dromonym,Кольцевая автомобильная дорога вокруг Санкт-Петербурга,,,mixed_phrase,always,Кольцевая автомобильная дорога вокруг Санкт-Петербурга,,,,,,,needs_review,manual

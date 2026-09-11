@@ -33,6 +33,9 @@ GOLD_RELPATHS = (
     Path("data/declensions/municipalities.csv"),
     Path("data/declensions/hodonyms.csv"),
     Path("data/declensions/microtoponyms.csv"),
+    Path("data/declensions/dromonyms.csv"),
+    Path("data/declensions/villages.csv"),
+    Path("data/declensions/agoronyms.csv"),
 )
 AUTO_SOURCE_MARKERS = ("pymorphy", "natasha", "pyphrasy")
 QUEUE_REVIEW = frozenset({"auto", "needs_review"})

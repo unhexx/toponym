@@ -120,8 +120,15 @@ def test_usage_guide_covers_search_and_declensions() -> None:
     assert "hodonyms.csv" in text
     assert "microtoponyms.csv" in text
     assert "DEC-SEED-001" in text
+    assert "DEC-SEED-002" in text
     assert "Тверской" in text
     assert "queue.csv" in text
+    assert "dromonyms.csv" in text
+    assert "villages.csv" in text
+    assert "agoronyms.csv" in text
+    assert "Красная площадь" in text
+    assert "Бородино" in text
+    assert "Транссиб" in text
 
 
 def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
@@ -140,11 +147,12 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
 
 def test_cycle_plan_dod_counts_datapackage_resources() -> None:
     text = (ROOT / "CYCLE_PLAN.md").read_text(encoding="utf-8")
-    assert "19 resources" in text
+    assert "25 resources" in text
     assert "11 resources" not in text
     assert "14 resources" not in text
+    assert "19 resources" not in text
     package = json.loads((ROOT / "datapackage.json").read_text(encoding="utf-8"))
-    assert len(package["resources"]) == 19
+    assert len(package["resources"]) == 25
 
 
 def test_ontology_calver_matches_tagged_release() -> None:
