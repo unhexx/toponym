@@ -100,6 +100,17 @@ def test_records_store_coords_outside_fts(tmp_path: Path) -> None:
     assert "name_ru" in fts_sql
 
 
+def test_fts_yo_hits_orel_and_black_sea(tmp_path: Path) -> None:
+    db_path = _build(tmp_path)
+    assert "wd:Q3118" in index_mod.fts_match(db_path, "Орёл")
+    assert "wd:Q3118" in index_mod.fts_match(db_path, "Орел")
+    assert "wd:Q166" in index_mod.fts_match(db_path, "Чёрное")
+    rec = index_mod.get_record(db_path, "wd:Q3118")
+    assert rec is not None
+    assert rec["name_ru"] == "Орел"
+    assert rec["name_yo"] == "Орёл"
+
+
 def test_fts_tverskaya_hits_hodonym(tmp_path: Path) -> None:
     db_path = _build(tmp_path)
     ids = index_mod.fts_match(db_path, "Тверская")

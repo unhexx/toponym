@@ -11,6 +11,7 @@ from scripts.lib.invariants import (
     check_frozen_taxonomy,
     check_gn_id,
     check_gold_auto,
+    check_name_yo,
     check_sharealike,
 )
 
@@ -174,6 +175,62 @@ def test_check_gold_auto_rejects_pymorphy() -> None:
         skipped,
     )
     assert skipped == []
+
+
+def test_check_name_yo_rejects_mismatch() -> None:
+    ok: list[dict] = []
+    check_name_yo(
+        {"id": "wd:Q3118", "name_ru": "Орел", "name_yo": "Орёл"},
+        "cities-major",
+        ok,
+    )
+    assert ok == []
+    empty: list[dict] = []
+    check_name_yo(
+        {"id": "wd:Q649", "name_ru": "Москва", "name_yo": ""},
+        "cities-major",
+        empty,
+    )
+    assert empty == []
+    errors: list[dict] = []
+    check_name_yo(
+        {"id": "wd:Q3118", "name_ru": "Орёл", "name_yo": "Орёл"},
+        "cities-major",
+        errors,
+    )
+    assert any(row["check"] == "yo" and "name_ru" in row["message"] for row in errors)
+    drift: list[dict] = []
+    check_name_yo(
+        {"id": "wd:Q3118", "name_ru": "Орел", "name_yo": "Орёл-град"},
+        "cities-major",
+        drift,
+    )
+    assert any(row["check"] == "yo" and "нормализация" in row["message"] for row in drift)
+    no_yo: list[dict] = []
+    check_name_yo(
+        {"id": "wd:Q3118", "name_ru": "Орел", "name_yo": "Орел"},
+        "cities-major",
+        no_yo,
+    )
+    assert any(row["check"] == "yo" and "без ё" in row["message"] for row in no_yo)
+
+
+def test_name_yo_mismatch_fails_validate(tmp_path: Path) -> None:
+    dest = tmp_path / "pkg"
+    dest.mkdir()
+    shutil.copy(ROOT / "datapackage.json", dest / "datapackage.json")
+    shutil.copytree(ROOT / "schema", dest / "schema")
+    shutil.copytree(ROOT / "data", dest / "data")
+    path = dest / "data/curated/hydronyms-major.csv"
+    text = path.read_text(encoding="utf-8")
+    assert "Черное море,Чёрное море," in text
+    path.write_text(
+        text.replace("Черное море,Чёрное море,", "Черное море,Черное море,", 1),
+        encoding="utf-8",
+    )
+    code, errors = validate_mod.validate_tree(dest / "datapackage.json", root=dest)
+    assert code == 1
+    assert any(row["check"] == "yo" and "wd:Q166" in row["message"] for row in errors)
 
 
 def test_check_frozen_taxonomy_rejects_renamed_root() -> None:
