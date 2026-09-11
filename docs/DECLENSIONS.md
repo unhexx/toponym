@@ -34,5 +34,5 @@
 
 1. Строка с `review=gold` не трогать без issue и ссылки на норму.
 2. Новое высокочастотное имя — ручная строка или `review=needs_review`.
-3. Массовая автогенерация pymorphy — только в `data/declensions/queue.csv` (не ресурс datapackage; DEC-DECL-001). В канон автоформы попадают лишь с `review=needs_review`. `review=gold` морфоанализатор не ставит.
+3. Массовая автогенерация pymorphy — только в `data/declensions/queue.csv` (не ресурс datapackage; DEC-DECL-001). CLI: `python scripts/declensions_queue.py --id … --lemma …` пишет очередь, не `regions`/`cities-major`/`agencies`. В канон автоформы попадают лишь с `review=needs_review`. `review=gold` морфоанализатор не ставит.
 4. Фикстуры нельзя ломать: Москва; Нижний Новгород; Сочи; Орёл; Пушкин (*Пушкином*); Жуковский; Домодедово; Волга (*Волги*); Дон (*на Дону*); МВД / Министерство внутренних дел.

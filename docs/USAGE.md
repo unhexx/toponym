@@ -189,6 +189,13 @@ curl -sSG http://127.0.0.1:8099/v1/declensions --data-urlencode 'id=wd:Q626'
 
 Ключ стыковки с поиском — поле **`id`**.
 
+Автоформы в канон не пишутся. Очередь (не ресурс datapackage):
+
+```bash
+python scripts/declensions_queue.py --id wd:Q42 --lemma Примерск
+# отказ: python scripts/declensions_queue.py --id wd:Q649 --lemma Москва --review gold
+```
+
 Колонки: `id,type_code,lemma,yo,gender,paradigm,declinable,nom/gen/dat/acc/ins/pre/loc2,review,source`.
 
 | Падеж | Колонка | Пример (Москва) |
