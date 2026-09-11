@@ -43,6 +43,9 @@ class FakeSession:
         self.calls.append({"method": method.upper(), "url": url, "kwargs": kwargs})
         return self.handler(method.upper(), url, kwargs)
 
+    def get(self, url: str, **kwargs):
+        return self.request("GET", url, **kwargs)
+
 
 def test_source_md_present_for_raw_dirs() -> None:
     raw = ROOT / "data" / "raw"
