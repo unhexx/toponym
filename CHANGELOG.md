@@ -12,6 +12,7 @@
 Next-release A–L на `main`. Annotated tag `2026.09.12` не раньше 2026-09-12.
 
 ### Added
+- Склонения гидронимов, оронимов, МО, годонимов и микротопонимов: отдельные CSV в `data/declensions/` (ресурсы datapackage). Золото «Волга»/`wd:Q626` и «Дон»/`wd:Q1229` (`loc2` Дону) перенесены из `cities-major.csv`. Остальные строки — `review=needs_review`, без pymorphy.
 - Малые сиды [`data/curated/municipalities.csv`](data/curated/municipalities.csv), [`hodonyms.csv`](data/curated/hodonyms.csv), [`microtoponyms.csv`](data/curated/microtoponyms.csv) (DEC-SEED-001): типы уже в `types.csv`; схема `places.schema.json`; ≥1 строка; без дампа ГАР.
 - Очередь автосклонений [`data/declensions/queue.csv`](data/declensions/queue.csv) (не ресурс datapackage).
 - `scripts/fetch_dump.py` — опциональная выгрузка GeoNames `RU.zip` / ГАР / ГКГН **вне** дерева git (`--dest` внутри репозитория — ошибка; указатели ГАР/ГКГН требуют `--url`). Size gate `data/` и tracked-файлов не снимается.

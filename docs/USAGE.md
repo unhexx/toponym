@@ -114,6 +114,11 @@ HTTP **не** отдаёт `nom/gen/dat/acc/ins/pre/loc2`. Золото:
 |---|---|
 | `data/declensions/regions.csv` | округа и субъекты |
 | `data/declensions/cities-major.csv` | крупные города |
+| `data/declensions/hydronyms-major.csv` | гидронимы (Волга, Дон — gold) |
+| `data/declensions/oronyms-major.csv` | оронимы |
+| `data/declensions/municipalities.csv` | муниципалитеты |
+| `data/declensions/hodonyms.csv` | годонимы |
+| `data/declensions/microtoponyms.csv` | микротопонимы |
 | `data/declensions/agencies.csv` | ведомства (часто две строки на id: аббревиатура + полное имя) |
 
 Ключ стыковки с поиском — поле **`id`**.

@@ -206,7 +206,16 @@ def test_no_toropum_in_id_or_names() -> None:
 
 def test_declension_fixtures_are_gold() -> None:
     rows: list[dict[str, str]] = []
-    for name in ("regions.csv", "cities-major.csv", "agencies.csv"):
+    for name in (
+        "regions.csv",
+        "cities-major.csv",
+        "agencies.csv",
+        "hydronyms-major.csv",
+        "oronyms-major.csv",
+        "municipalities.csv",
+        "hodonyms.csv",
+        "microtoponyms.csv",
+    ):
         _header, part = _read_csv(ROOT / "data" / "declensions" / name)
         rows.extend(part)
     by_lemma: dict[str, list[dict[str, str]]] = {}
@@ -225,6 +234,12 @@ def test_declension_fixtures_are_gold() -> None:
     assert volga["id"] == "wd:Q626"
     assert volga["gen"] == "Волги"
     assert volga["gen"] != "Волгы"
+    assert don["id"] == "wd:Q1229"
+    cities = _read_csv(ROOT / "data/declensions/cities-major.csv")[1]
+    assert all(row["id"] not in {"wd:Q626", "wd:Q1229"} for row in cities)
+    hydros = _read_csv(ROOT / "data/declensions/hydronyms-major.csv")[1]
+    assert any(row["id"] == "wd:Q626" and row["review"] == "gold" for row in hydros)
+    assert any(row["id"] == "wd:Q1229" and row["loc2"] == "Дону" for row in hydros)
 
 
 def test_name_ru_has_no_yo() -> None:

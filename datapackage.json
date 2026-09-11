@@ -131,6 +131,51 @@
       "encoding": "utf-8",
       "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
       "schema": "schema/table/declensions.schema.json"
+    },
+    {
+      "name": "declensions-hydronyms",
+      "path": "data/declensions/hydronyms-major.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/declensions.schema.json"
+    },
+    {
+      "name": "declensions-oronyms",
+      "path": "data/declensions/oronyms-major.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/declensions.schema.json"
+    },
+    {
+      "name": "declensions-municipalities",
+      "path": "data/declensions/municipalities.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/declensions.schema.json"
+    },
+    {
+      "name": "declensions-hodonyms",
+      "path": "data/declensions/hodonyms.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/declensions.schema.json"
+    },
+    {
+      "name": "declensions-microtoponyms",
+      "path": "data/declensions/microtoponyms.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/declensions.schema.json"
     }
   ]
 }
