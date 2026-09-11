@@ -2,7 +2,7 @@
 
 **Initiative:** toponym v1 local registries
 **Template Version:** 3.13.0
-**Last Update:** 2026-09-11 (loop 2 P10-SERVE)
+**Last Update:** 2026-09-11 (loop 2 tagged 2026.09.11)
 
 ## Phase Status
 
@@ -24,6 +24,8 @@
 | P11-BOX compose one-shot | COMPLETE |
 | P12-DOCS DEC-SERVE-001 | COMPLETE |
 | P13-DONE reviewer | COMPLETE |
+| P14-REL tag 2026.09.11 | COMPLETE |
+| P15-DOCS docs match 2026.09.11 | COMPLETE |
 
 ## Gate
 

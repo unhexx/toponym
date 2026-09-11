@@ -1,4 +1,4 @@
-# CYCLE_PLAN.md — toponym v1 (2026.09.09)
+# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`)
 
 Исполняемый план циклов. Детали интерфейсов: `docs/design/2026-09-09-v1-local-registries.md`.
 Спека: `TASK_SPECIFICATION.md`. ADR: `LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`.
@@ -38,6 +38,8 @@
 | P11-BOX | Dockerfile + compose.yaml + entrypoint | `feature/P11-compose` | file-contract: 3.12, `cap_drop: ALL`, `127.0.0.1:8099`; `.dockerignore` без шаблона | COMPLETE |
 | P12-DOCS | README docker, ontology DEC-SERVE-001, CHANGELOG | `feature/P12-docs` | `docker compose up --build` в README; v1 host-путь цел | COMPLETE |
 | P13-DONE | reviewer gate | `feature/P13-release` | pytest+ruff+validate; без файлов >10 МБ; тег только по запросу оператора | COMPLETE |
+| P14-REL | tag `2026.09.11` + GitHub Release | `feature/P14-release` | CHANGELOG dated; pyproject/CITATION; annotated tag | COMPLETE |
+| P15-DOCS | docs match `2026.09.11` | `feature/P15-docs` | README, CYCLE_PLAN, design snapshot | COMPLETE |
 
 ## Definition of Done v1
 

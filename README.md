@@ -49,7 +49,7 @@ data/
   raw/              # указатели источников + SOURCE.md (не смешивать с curated)
   sources/          # каталог источников и даты проверок
 schema/             # JSON Schema колонок
-scripts/            # check, sync, validate, index
+scripts/            # check, sync, validate, index, serve
 ontology/           # overlay DEC-REG-001, Source, Mapping
 docs/               # методология, таксономия, лицензии
 agents/             # промпт ежедневного обновления
@@ -107,4 +107,4 @@ python scripts/serve.py                 # loopback JSON, 127.0.0.1:8099
 
 ## Цитирование
 
-См. [`CITATION.cff`](CITATION.cff). Версия: `2026.09.09`.
+См. [`CITATION.cff`](CITATION.cff). Версия: `2026.09.11`.
