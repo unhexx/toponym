@@ -216,8 +216,13 @@ def _row_to_record(row: tuple[object, ...]) -> dict[str, str]:
     }
 
 
+def _connect_ro(db_path: Path) -> sqlite3.Connection:
+    uri = Path(db_path).resolve().as_uri() + "?mode=ro"
+    return sqlite3.connect(uri, uri=True)
+
+
 def get_record(db_path: Path, record_id: str) -> dict[str, str] | None:
-    conn = sqlite3.connect(db_path)
+    conn = _connect_ro(db_path)
     try:
         row = conn.execute(
             f"SELECT {','.join(RECORD_FIELDS)} FROM records WHERE id = ?",
@@ -238,7 +243,7 @@ def fts_search(
     status: str | None = None,
     table_name: str | None = None,
 ) -> list[dict[str, str]]:
-    conn = sqlite3.connect(db_path)
+    conn = _connect_ro(db_path)
     try:
         rows = conn.execute(
             f"""
@@ -258,7 +263,7 @@ def fts_search(
 
 
 def index_counts(db_path: Path) -> dict[str, int]:
-    conn = sqlite3.connect(db_path)
+    conn = _connect_ro(db_path)
     try:
         records = conn.execute("SELECT COUNT(*) FROM records").fetchone()
         sources = conn.execute("SELECT COUNT(*) FROM sync_meta").fetchone()

@@ -73,6 +73,10 @@ def test_quoted_operators_never_500(tmp_path: Path) -> None:
         assert status in {200, 400}, (q, payload)
         if status == 400:
             assert payload["error"] in {"invalid_query", "missing_query", "query_too_long"}
+    status, _headers, payload = _get("/v1/search", db_path, q="Волга OR МВД")
+    assert status == 200, payload
+    ids = set(payload["ids"])
+    assert not ({"wd:Q626", "foiv:mvd"} <= ids)
 
 
 def test_invalid_limit(tmp_path: Path) -> None:
@@ -100,12 +104,13 @@ def test_unknown_path_and_post(tmp_path: Path) -> None:
     db_path = _build(tmp_path)
     status, _headers, payload = _get("/nope", db_path)
     assert status == 404
-    req = Request(method="POST", path="/v1/search", query={"q": ["Волга"]})
-    response = handle(req, db_path)
-    payload = json.loads(response.body.decode("utf-8"))
-    assert response.status == 405
-    assert payload["error"] == "method_not_allowed"
-    assert response.headers.get("Allow") == "GET"
+    for method in ("POST", "PUT", "DELETE", "PATCH", "OPTIONS"):
+        req = Request(method=method, path="/v1/search", query={"q": ["Волга"]})
+        response = handle(req, db_path)
+        payload = json.loads(response.body.decode("utf-8"))
+        assert response.status == 405, method
+        assert payload["error"] == "method_not_allowed"
+        assert response.headers.get("Allow") == "GET"
 
 
 def test_healthz(tmp_path: Path) -> None:
@@ -113,6 +118,13 @@ def test_healthz(tmp_path: Path) -> None:
     status, _headers, payload = _get("/healthz", missing)
     assert status == 503
     assert payload["error"] == "index_unavailable"
+    status, _headers, payload = _get("/v1/search", missing, q="Волга")
+    assert status == 503
+    assert payload["error"] == "index_unavailable"
+    status, _headers, payload = _get("/v1/records", missing, id="wd:Q626")
+    assert status == 503
+    assert payload["error"] == "index_unavailable"
+    assert not missing.exists()
     db_path = _build(tmp_path)
     status, _headers, payload = _get("/healthz", db_path)
     assert status == 200

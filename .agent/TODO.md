@@ -1,18 +1,16 @@
 # .agent/TODO.md — Task Backlog
 
 **Initiative:** toponym v1 local registries
-**Status:** Loop 2 — P12-DOCS in progress (DEC-SERVE-001)
+**Status:** Loop 2 P10–P13 COMPLETE on `feature/P10-serve` (DEC-SERVE-001)
 
 ## In progress
 
-- [x] P12-DOCS-01: README docker path, ontology DEC-SERVE-001, CHANGELOG
-
 ## Pending
-
-- [ ] P13-DONE-01: reviewer gate, no tag unless operator asks
 
 ## Done
 
+- [x] P13-DONE-01: reviewer gate (ruff, pytest, validate, compose smoke Волга/МВД); no tag
+- [x] P12-DOCS-01: README docker path, ontology DEC-SERVE-001, CHANGELOG
 - [x] P11-BOX-01: Dockerfile + compose.yaml + entrypoint + file-contract tests
 - [x] P10-SERVE-01: `scripts/serve.py` handle() JSON; bind 127.0.0.1:8099; `fts_search`
 

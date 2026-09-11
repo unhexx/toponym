@@ -188,7 +188,7 @@ def _search(req: Request, db_path: Path) -> Response:
     except sqlite3.OperationalError as exc:
         return _error(400, "invalid_query", str(exc))
     except sqlite3.Error as exc:
-        return _error(400, "invalid_query", str(exc))
+        return _error(503, "index_unavailable", str(exc))
     ids = [row["id"] for row in hits]
     return _json_response(
         {"ok": True, "query": raw, "count": len(hits), "limit": limit, "ids": ids, "hits": hits},
@@ -214,8 +214,21 @@ def _record(req: Request, db_path: Path) -> Response:
 class RegistryHandler(BaseHTTPRequestHandler):
     db_path: Path = DEFAULT_OUT
 
+    def version_string(self) -> str:
+        return "toponym"
+
     def log_message(self, fmt: str, *args: object) -> None:
         sys.stderr.write(f"{self.address_string()} - {fmt % args}\n")
+
+    def log_request(self, code: object = "-", size: object = "-") -> None:
+        path = urlparse(self.path).path
+        q_len = len(urlparse(self.path).query)
+        self.log_message('"%s %s" %s q_len=%s', self.command, path, str(code), q_len)
+
+    def send_response(self, code: int, message: str | None = None) -> None:
+        self.log_request(code)
+        self.send_response_only(code, message)
+        self.send_header("Date", self.date_time_string())
 
     def _dispatch(self) -> None:
         parsed = urlparse(self.path)
@@ -239,6 +252,18 @@ class RegistryHandler(BaseHTTPRequestHandler):
         self._dispatch()
 
     def do_POST(self) -> None:  # noqa: N802
+        self._dispatch()
+
+    def do_PUT(self) -> None:  # noqa: N802
+        self._dispatch()
+
+    def do_DELETE(self) -> None:  # noqa: N802
+        self._dispatch()
+
+    def do_PATCH(self) -> None:  # noqa: N802
+        self._dispatch()
+
+    def do_OPTIONS(self) -> None:  # noqa: N802
         self._dispatch()
 
 
