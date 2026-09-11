@@ -50,7 +50,9 @@ python scripts/serve.py
 
 ## One-shot (Docker Compose)
 
-Если на хосте нет CPython 3.12 — тот же канон поднимается ящиком:
+Если на хосте нет CPython 3.12 — тот же канон поднимается ящиком.
+
+Первый запуск:
 
 ```bash
 git clone https://github.com/unhexx/toponym.git
@@ -58,12 +60,18 @@ cd toponym
 docker compose up --build
 ```
 
+Обновление уже клонированного репозитория:
+
+```bash
+git pull && docker compose up --build
+```
+
 Слушает только loopback: http://127.0.0.1:8099/healthz  
 Поиск: http://127.0.0.1:8099/v1/search?q=Волга  
 
 Не стартует SearXNG, Ollama и pxpipe. Порты 8080 / 8100 / 8110 / 8112 на хосте свободны.
 
-На хосте без Docker: `python scripts/validate.py && python scripts/index.py && python scripts/serve.py` (bind `127.0.0.1:8099`).
+На хосте без Docker путь не меняется: `bash Agent-Init.sh`, затем `python scripts/validate.py && python scripts/index.py && python scripts/serve.py` (bind `127.0.0.1:8099`).
 
 ## Дерево
 

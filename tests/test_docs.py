@@ -33,6 +33,7 @@ def test_design_snapshot_is_released_v1() -> None:
 def test_readme_has_compose_one_shot() -> None:
     text = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "docker compose up --build" in text
+    assert "git pull && docker compose up --build" in text
     assert "127.0.0.1:8099" in text
     assert "python scripts/serve.py" in text
     assert "http://127.0.0.1:8099/healthz" in text
