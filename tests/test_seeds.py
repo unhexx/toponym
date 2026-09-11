@@ -334,6 +334,48 @@ def test_declension_fixtures_are_gold() -> None:
     assert any(row["id"] == "wd:Q1229" and row["loc2"] == "Дону" for row in hydros)
 
 
+def test_high_frequency_declensions_hand_accepted() -> None:
+    cities = _read_csv(ROOT / "data/declensions/cities-major.csv")[1]
+    agencies = _read_csv(ROOT / "data/declensions/agencies.csv")[1]
+    moscow = next(row for row in cities if row["id"] == "wd:Q649")
+    assert moscow["review"] == "gold"
+    assert moscow["source"] == "manual"
+    by_id = {row["id"]: row for row in cities}
+    for rid, lemma, ins in (
+        ("wd:Q656", "Санкт-Петербург", "Санкт-Петербургом"),
+        ("wd:Q900", "Казань", "Казанью"),
+        ("wd:Q908", "Ростов-на-Дону", "Ростовом-на-Дону"),
+        ("wd:Q3426", "Воронеж", "Воронежем"),
+        ("wd:Q1341", "Тольятти", "Тольятти"),
+        ("wd:Q6816", "Улан-Удэ", "Улан-Удэ"),
+    ):
+        row = by_id[rid]
+        assert row["lemma"] == lemma
+        assert row["review"] == "gold", rid
+        assert row["ins"] == ins, rid
+        assert "pymorphy" not in (row["source"] or "").casefold()
+        assert "natasha" not in (row["source"] or "").casefold()
+    assert by_id["wd:Q3426"]["ins"] != "Воронежом"
+    assert by_id["wd:Q1341"]["declinable"] == "never"
+    assert by_id["wd:Q6816"]["declinable"] == "never"
+    gold_cities = [row for row in cities if row["review"] == "gold"]
+    needs_cities = [row for row in cities if row["review"] == "needs_review"]
+    assert len(gold_cities) >= 20
+    assert len(needs_cities) >= 100
+    short_gold = {
+        (row["id"], row["lemma"])
+        for row in agencies
+        if row["review"] == "gold"
+    }
+    for key in (
+        ("foiv:ksrf", "КС РФ"),
+        ("foiv:cbr", "Банк России"),
+        ("foiv:cik", "ЦИК России"),
+    ):
+        assert key in short_gold
+    assert any(row["review"] == "needs_review" for row in agencies)
+
+
 def test_name_ru_has_no_yo() -> None:
     for rel in (
         "data/curated/federal-districts.csv",
