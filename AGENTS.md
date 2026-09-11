@@ -19,7 +19,7 @@
 
 ## Current Status
 
-v1 `2026.09.09` на `main`. Loop 2 tagged `2026.09.11`: loopback `scripts/serve.py` + Docker Compose (`127.0.0.1:8099`, DEC-SERVE-001). Next-release A–L COMPLETE. Живой backlog: GitHub #13. Следующий annotated CalVer `2026.09.12` — не раньше 2026-09-12. См. `TASK_SPECIFICATION.md`, `CYCLE_PLAN.md`, `.agent/PLAN.md`.
+v1 `2026.09.09` на `main`. Loop 2 tagged `2026.09.11`. Текущий annotated CalVer `2026.09.12`: loopback `scripts/serve.py` + Docker Compose (`127.0.0.1:8099`, DEC-SERVE-001), next-release A–L COMPLETE. Живой backlog: GitHub #13. Тег `2026.09.11` не двигать. См. `TASK_SPECIFICATION.md`, `CYCLE_PLAN.md`, `.agent/PLAN.md`.
 
 ## Recommended Stack (do not deviate without an ADR)
 

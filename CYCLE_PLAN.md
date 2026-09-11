@@ -1,4 +1,4 @@
-# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`)
+# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`, `2026.09.12`)
 
 Исполняемый план циклов. Детали интерфейсов: `docs/design/2026-09-09-v1-local-registries.md`.
 Спека: `TASK_SPECIFICATION.md`. ADR: `LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`.
@@ -66,8 +66,9 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | J | Население / полигоны / GeoJSON / PostGIS | `feature/nr-j-geo` | вне канона; опциональный указатель в docs; CSV-канон не расширять геометрией | COMPLETE |
 | K | Сиды муниципалитетов, годонимов, микротопонимов | `feature/nr-k-seeds` | новые curated CSV + resource datapackage + schema; ≥1 строка каждый; типы уже есть; без дампа ГАР | COMPLETE |
 | L | Не дробить P1 на P1a–e | — | P1 COMPLETE; подциклы не открывать | COMPLETE |
+| NR-TAG | annotated CalVer `2026.09.12` | `feature/nr-tag-2026.09.12` | CHANGELOG dated; pyproject/CITATION/datapackage/README/serve; GitHub Release | COMPLETE |
 
-A–L COMPLETE на `main`. Следующий annotated CalVer — `2026.09.12` (blocked-until-tomorrow: тег `2026.09.11` уже есть).
+A–L COMPLETE на `main`. Annotated CalVer `2026.09.12` на `main`. Тег `2026.09.11` не двигать.
 
 ## Definition of Done v1
 

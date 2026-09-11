@@ -74,7 +74,7 @@ def test_readme_has_shields_badges_and_docs_links() -> None:
     assert "img.shields.io" in text
     for needle in (
         "license-MIT",
-        "CalVer-2026.09.11",
+        "CalVer-2026.09.12",
         "github/actions/workflow/status/unhexx/toponym/ci.yml",
         "python-3.12%2B",
         "docker-compose",
@@ -82,7 +82,7 @@ def test_readme_has_shields_badges_and_docs_links() -> None:
         "docs/USAGE.md",
         "docs/SOURCES.md",
         "docs/presentation/toponym-2026.09.11.md",
-        "https://github.com/unhexx/toponym/releases/tag/2026.09.11",
+        "https://github.com/unhexx/toponym/releases/tag/2026.09.12",
     ):
         assert needle in text, needle
 
@@ -128,13 +128,14 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
     text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
     before_loop2, _, _ = text.partition("## [2026.09.11] - 2026-09-11")
     assert "## [Unreleased]" in before_loop2
-    assert "2026.09.12" in before_loop2
-    assert "blocked-until-tomorrow" in before_loop2
-    assert "## [2026.09.12]" in before_loop2
+    assert "blocked-until-tomorrow" not in before_loop2
+    assert "## [2026.09.12] - 2026-09-12" in before_loop2
+    assert "pending" not in before_loop2.split("## [2026.09.12]", 1)[0]
     assert "docs/USAGE.md" in before_loop2
     assert "git pull && docker compose up --build" in before_loop2
     assert "municipalities.csv" in before_loop2
     assert "DEC-SEED-001" in before_loop2
+    assert "PACKAGE_VERSION" in before_loop2
 
 
 def test_cycle_plan_dod_counts_datapackage_resources() -> None:
@@ -148,7 +149,20 @@ def test_cycle_plan_dod_counts_datapackage_resources() -> None:
 
 def test_ontology_calver_matches_tagged_release() -> None:
     ont = json.loads((ROOT / "ontology" / "ontology.json").read_text(encoding="utf-8"))
-    assert ont["project"]["calver"] == "2026.09.11"
+    assert ont["project"]["calver"] == "2026.09.12"
+
+
+def test_package_calver_aligned() -> None:
+    pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+    package = json.loads((ROOT / "datapackage.json").read_text(encoding="utf-8"))
+    from scripts.serve import PACKAGE_VERSION
+
+    assert 'version = "2026.09.12"' in pyproject
+    assert 'version: "2026.09.12"' in citation
+    assert 'date-released: "2026-09-12"' in citation
+    assert package["version"] == "2026.09.12"
+    assert PACKAGE_VERSION == "2026.09.12"
 
 
 def test_ssot_does_not_require_project_context() -> None:
@@ -156,9 +170,11 @@ def test_ssot_does_not_require_project_context() -> None:
     assert "PROJECT_CONTEXT.md" not in sys_prompt
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     assert "2026.09.11" in agents
+    assert "2026.09.12" in agents
     assert "#13" in agents
     spec = (ROOT / "TASK_SPECIFICATION.md").read_text(encoding="utf-8")
     assert "2026.09.11" in spec
+    assert "2026.09.12" in spec
     assert "A–L" in spec
 
 

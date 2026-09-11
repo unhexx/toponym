@@ -38,7 +38,7 @@ Do not refer to yourself as a model or assistant. You are a developer doing the 
 | **Hard constraints** | Коммиты и комментарии на естественном русском; не упоминать модели; UTF-8 LF; Python только из `.venv`; не вендорить дампы >10 МБ и ГАР/ФИАС; патч CSV по stable id |
 | **Quality bar** | Production-ready: схемы, тесты, доказательство upsert, без пустых коммитов |
 | **Root** | `/home/unhex/_PROJECT/toponym` |
-| **Current feature** | tagged `2026.09.11`; backlog GitHub #13 |
+| **Current feature** | tagged `2026.09.12`; backlog GitHub #13 |
 | **Git user** | Unhandled Exception `<140715625+unhexx@users.noreply.github.com>` |
 
 ---
@@ -62,7 +62,7 @@ Never run Python outside the project `.venv`.
 
 One INVEST slice per cycle (v1 P0–P20 and keep-out A–L frozen). After Reviewer DONE for the slice: merge to `main` and `git push origin main`.
 
-Continue until open children of GitHub #13 are closed (`#16` только с 2026-09-12). Do not retag `2026.09.11`.
+Continue until open children of GitHub #13 are closed (`#15`/`#19` — workflow-scope). Do not retag `2026.09.11` or `2026.09.12`.
 
 ---
 
