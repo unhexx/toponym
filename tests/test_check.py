@@ -205,6 +205,72 @@ def test_http_timeout_exit_2(monkeypatch, capsys) -> None:
     assert report["sources"][0]["error"] is True
 
 
+def test_pointer_http_head_timeout_is_not_error(tmp_path: Path) -> None:
+    catalog = {
+        "updated": "2026-09-09",
+        "sources": [
+            {
+                "id": "gkgn-opendata",
+                "url": "https://rosreestr.gov.ru/opendata/example",
+                "license": "official-open-data",
+                "vendor": False,
+                "checked_at": "2026-09-09",
+                "detector": {
+                    "kind": "http_head",
+                    "urls": ["https://rosreestr.gov.ru/opendata/example"],
+                },
+            }
+        ],
+    }
+
+    def handler(method: str, url: str, _kwargs: dict):
+        raise requests.Timeout("timed out")
+
+    report = check_catalog(catalog, session=FakeSession(handler), now=FIXED_NOW)
+    assert exit_code(report) == 0
+    assert report["error_count"] == 0
+    assert report["sources"][0]["error"] is False
+    assert report["sources"][0]["changed"] is False
+    assert "pointer only" in report["sources"][0]["reason"]
+
+
+def test_pointer_timeout_does_not_block_geonames_changed(tmp_path: Path) -> None:
+    catalog = {
+        "updated": "2026-09-09",
+        "sources": [
+            {
+                "id": "gkgn-opendata",
+                "url": "https://rosreestr.gov.ru/opendata/example",
+                "license": "official-open-data",
+                "vendor": False,
+                "checked_at": "2026-09-09",
+                "detector": {
+                    "kind": "http_head",
+                    "urls": ["https://rosreestr.gov.ru/opendata/example"],
+                },
+            },
+            yaml.safe_load((FIXTURES / "catalog_check_geonames.yaml").read_text(encoding="utf-8"))[
+                "sources"
+            ][0],
+        ],
+    }
+
+    def handler(method: str, url: str, _kwargs: dict):
+        if "rosreestr" in url:
+            raise requests.Timeout("timed out")
+        if "modifications-" in url:
+            return FakeResponse(200, _mods("geonames_mods_ru.tsv"))
+        if "deletes-" in url:
+            return FakeResponse(200, "")
+        raise AssertionError(url)
+
+    report = check_catalog(catalog, session=FakeSession(handler), now=FIXED_NOW)
+    assert exit_code(report) == 10
+    by_id = {row["id"]: row for row in report["sources"]}
+    assert by_id["gkgn-opendata"]["error"] is False
+    assert by_id["geonames-ru"]["changed"] is True
+
+
 def test_github_sha_differs_exit_10(tmp_path: Path, monkeypatch, capsys) -> None:
     payload = {
         "updated": "2026-09-09",

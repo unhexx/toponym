@@ -4,7 +4,7 @@
 
 **Лимит:** 15 минут. Один сфокусированный набор изменений.
 **Пустой коммит запрещён.**
-**Python только из `.venv`:** `bash Agent-Init.sh && source .venv/bin/activate`.
+**Python только из `.venv`:** `python3 -m venv .venv && source .venv/bin/activate && pip install -e ".[dev]"`. На GHA то же ставит `daily.yml` без шаблона Agentix.
 
 Этот файл — исполняемый промпт. Выполнять шаги по порядку. Не пропускать инварианты.
 
