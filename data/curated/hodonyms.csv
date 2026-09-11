@@ -1,3 +1,23 @@
 id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
 wd:Q1644209,wikidata,hodonym,Тверская улица,,Tverskaya Street,,wd:Q649,RU-MOW,,,Q1644209,6956712,,,,active,,wikidata,,2026-09-11,пример types.csv
 wd:Q382500,wikidata,hodonym,Невский проспект,,Nevsky Prospect,,wd:Q656,RU-SPE,,,Q382500,,,,,active,,wikidata,,2026-09-11,
+wd:Q269373,wikidata,hodonym,Арбат,,Arbat Street,,wd:Q649,RU-MOW,55.749167,37.590556,Q269373,,,,,active,,wikidata,,2026-09-12,пешеходная улица; город wd:Q649
+wd:Q2545285,wikidata,hodonym,Новый Арбат,,New Arbat Avenue,,wd:Q649,RU-MOW,55.752222,37.591111,Q2545285,,,,,active,,wikidata,,2026-09-12,
+wd:Q281935,wikidata,hodonym,Кутузовский проспект,,Kutuzovsky Prospekt,,wd:Q649,RU-MOW,55.735556,37.513056,Q281935,,,,,active,,wikidata,,2026-09-12,
+wd:Q2622445,wikidata,hodonym,Ленинский проспект,,Leninsky Avenue,,wd:Q649,RU-MOW,55.684444,37.539722,Q2622445,,,,,active,,wikidata,,2026-09-12,
+wd:Q2320137,wikidata,hodonym,улица Петровка,,Petrovka Street,,wd:Q649,RU-MOW,55.766111,37.615556,Q2320137,,,,,active,,wikidata,,2026-09-12,
+wd:Q1972493,wikidata,hodonym,Большая Никитская улица,,Bolshaya Nikitskaya Street,,wd:Q649,RU-MOW,55.757500,37.598333,Q1972493,,,,,active,,wikidata,,2026-09-12,
+wd:Q4310347,wikidata,hodonym,Мясницкая улица,,Myasnitskaya Street,,wd:Q649,RU-MOW,55.763750,37.636000,Q4310347,,,,,active,,wikidata,,2026-09-12,
+wd:Q4338672,wikidata,hodonym,Остоженка,,Ostozhenka Street,,wd:Q649,RU-MOW,55.740278,37.597222,Q4338672,,,,,active,,wikidata,,2026-09-12,
+wd:Q4471600,wikidata,hodonym,Варварка,,Varvarka Street,,wd:Q649,RU-MOW,55.752778,37.628056,Q4471600,,,,,active,,wikidata,,2026-09-12,
+wd:Q4473677,wikidata,hodonym,улица Пречистенка,,Prechistenka Street,,wd:Q649,RU-MOW,55.741705,37.593774,Q4473677,,,,,active,,wikidata,,2026-09-12,
+wd:Q3007468,wikidata,hodonym,Литейный проспект,,Liteyny Avenue,,wd:Q656,RU-SPE,59.940800,30.348300,Q3007468,,,,,active,,wikidata,,2026-09-12,
+wd:Q1985951,wikidata,hodonym,Садовая улица,,Sadovaya Street,,wd:Q656,RU-SPE,59.932100,30.330200,Q1985951,,,,,active,,wikidata,,2026-09-12,"центральная Садовая улица Санкт-Петербурга, не пригороды"
+wd:Q1991971,wikidata,hodonym,Гороховая улица,,Gorokhovaya Street,,wd:Q656,RU-SPE,59.929500,30.320500,Q1991971,,,,,active,,wikidata,,2026-09-12,
+wd:Q2632681,wikidata,hodonym,Московский проспект,,Moskovsky Avenue,,wd:Q656,RU-SPE,59.885900,30.319700,Q2632681,,,,,active,,wikidata,,2026-09-12,
+wd:Q4211220,wikidata,hodonym,Каменноостровский проспект,,Kamennoostrovsky Prospekt,,wd:Q656,RU-SPE,59.962200,30.315000,Q4211220,,,,,active,,wikidata,,2026-09-12,
+wd:Q1593247,wikidata,hodonym,улица Баумана,,Bauman Street,,wd:Q900,RU-TA,55.787222,49.121667,Q1593247,,,,,active,,wikidata,,2026-09-12,пешеходная улица Казани
+wd:Q4091587,wikidata,hodonym,Большая Покровская улица,,Bolshaya Pokrovskaya Street,,wd:Q891,RU-NIZ,56.322222,44.000556,Q4091587,,,,,active,,wikidata,,2026-09-12,
+wd:Q4239714,wikidata,hodonym,Красный проспект,,Krasny Avenue,,wd:Q883,RU-NVS,55.044810,82.916110,Q4239714,,,,,active,,wikidata,,2026-09-12,
+wd:Q18398914,wikidata,hodonym,Кировка,,Kirova street,,wd:Q906,RU-CHE,55.166667,61.400278,Q18398914,,,,,active,,wikidata,,2026-09-12,пешеходная улица Челябинска
+wd:Q4091641,wikidata,hodonym,Большая Садовая улица,,Bolshaya Sadovaya Street,,wd:Q908,RU-ROS,47.222310,39.718090,Q4091641,,,,,active,,wikidata,,2026-09-12,

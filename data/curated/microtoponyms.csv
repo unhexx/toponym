@@ -1,3 +1,18 @@
 id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
 wd:Q4420279,wikidata,microtoponym,Синий камень,,Blue Stone,,iso:RU-YAR,RU-YAR,,,Q4420279,,,,,active,,wikidata,,2026-09-11,Синь-камень у Плещеева озера; не дамп ГАР
 local:micro:sinie-kamni,local,microtoponym,урочище Синие камни,,Sinie kamni urochishche,,iso:RU-ORE,RU-ORE,,,,,,,,active,,gkgn-opendata,,2026-09-11,пример types.csv; Тюльганский район; без дампа ГАР/ГКГН
+wd:Q3896098,wikidata,microtoponym,Серебряный Бор,,Serebryany Bor,,wd:Q649,RU-MOW,55.780500,37.416200,Q3896098,,,,,active,,wikidata,,2026-09-12,местность / парк в Москве; не дамп ГАР
+wd:Q3162344,wikidata,microtoponym,Нескучный сад,,Neskuchny Garden,,wd:Q649,RU-MOW,55.716111,37.588056,Q3162344,,,,,active,,wikidata,,2026-09-12,
+wd:Q99296,wikidata,microtoponym,Битцевский лес,,Bitsa Park,,wd:Q649,RU-MOW,55.633000,37.562778,Q99296,,,,,active,,wikidata,,2026-09-12,
+wd:Q3363844,wikidata,microtoponym,Кузьминский лесопарк,,Vlakhernskoye-Kuzminki,,wd:Q649,RU-MOW,55.690300,37.789400,Q3363844,,,,,active,,wikidata,,2026-09-12,
+wd:Q1643788,wikidata,microtoponym,Капова пещера,,Kapova Cave,,iso:RU-BA,RU-BA,53.044444,57.063889,Q1643788,553029,,,,active,,wikidata,,2026-09-12,Шульган-Таш; Бурзянский район
+wd:Q2607150,wikidata,microtoponym,Кунгурская ледяная пещера,,Kungur Ice Cave,,iso:RU-PER,RU-PER,57.440278,57.007222,Q2607150,539143,,,,active,,wikidata,,2026-09-12,
+wd:Q4362259,wikidata,microtoponym,Ординская пещера,,Orda Cave,,iso:RU-PER,RU-PER,57.182000,56.888056,Q4362259,,,,,active,,wikidata,,2026-09-12,
+wd:Q1029322,wikidata,microtoponym,Денисова пещера,,Denisova Cave,,iso:RU-ALT,RU-ALT,51.397581,84.676206,Q1029322,,,,,active,,wikidata,,2026-09-12,"Солонешенский район, Алтайский край"
+wd:Q4073271,wikidata,microtoponym,Ахштырская пещера,,Akhshtyrskaya Cave,,iso:RU-KDA,RU-KDA,43.520771,39.995910,Q4073271,,,,,active,,wikidata,,2026-09-12,Адлерский район Сочи
+wd:Q4125821,wikidata,microtoponym,Воронцовская пещера,,Vorontsovskaya Cave,,iso:RU-KDA,RU-KDA,43.612167,39.936083,Q4125821,8378852,,,,active,,wikidata,,2026-09-12,
+wd:Q4449381,wikidata,microtoponym,Тавдинские пещеры,,Tavdinskaya Karst Arch,,iso:RU-AL,RU-AL,51.777222,85.730833,Q4449381,,,,,active,,wikidata,,2026-09-12,
+wd:Q4332103,wikidata,microtoponym,Провал,,Lake Proval,,wd:Q41970,RU-STA,44.046670,43.098610,Q4332103,,,,,active,,wikidata,,2026-09-12,"озеро Провал, Пятигорск"
+wd:Q81395061,wikidata,microtoponym,Сарыкум,,Sarykum,,iso:RU-DA,RU-DA,43.007130,47.228890,Q81395061,8693258,,,,active,,wikidata,,2026-09-12,бархан; Кумторкалинский район
+wd:Q186369,wikidata,microtoponym,Дивногорье,,Divnogorye,,iso:RU-VOR,RU-VOR,50.968509,39.313159,Q186369,,,,,active,,wikidata,,2026-09-12,"урочище / музей-заповедник, Лискинский район"
+wd:Q4518960,wikidata,microtoponym,Чертово городище,Чёртово городище,Chertovo Gorodishche Rocks,,wd:Q887,RU-SVE,56.941667,60.347222,Q4518960,,,,,active,,wikidata,,2026-09-12,скалы у Екатеринбурга; не дамп ГАР
