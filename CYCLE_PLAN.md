@@ -42,6 +42,7 @@
 | P15-DOCS | docs match `2026.09.11` | `feature/P15-docs` | README, CYCLE_PLAN, design snapshot | COMPLETE |
 | P16-PRES | продуктовая колода | `feature/P16-presentation` | `docs/presentation/`: CSV, check/sync/validate/index, :8099, compose | COMPLETE |
 | P17-README | world-class README + shields.io | `feature/P17-readme` | бейджи MIT/CalVer/CI/python/compose; `docker compose up --build`; `127.0.0.1:8099` healthz/search | COMPLETE |
+| P18-USAGE | user guide search + declensions | `feature/P18-usage` | `docs/USAGE.md`: healthz, GET search/records, CSV join по id, офлайн; README ссылается | COMPLETE |
 
 ## Definition of Done v1
 

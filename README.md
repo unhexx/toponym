@@ -16,6 +16,7 @@
 
 | | |
 |---|---|
+| [docs/USAGE.md](docs/USAGE.md) | поиск и склонения (HTTP и офлайн CSV) |
 | [docs/](docs/) | методология, таксономия, дизайн, презентация |
 | [CHANGELOG.md](CHANGELOG.md) | история релизов (CalVer `YYYY.MM.DD`) |
 | [docs/SOURCES.md](docs/SOURCES.md) | лицензии источников и границы вендора |
