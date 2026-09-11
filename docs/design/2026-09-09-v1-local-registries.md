@@ -93,7 +93,7 @@ CSV + Table Schema is the interchange any app can read (Python, Go, Excel, DuckD
 - Rewriting the top-level taxonomy (`toponym` / oikonym / hydronym / …) (**DEC-TAX-001**, frozen).
 - Public Internet API / host publish `0.0.0.0` (**DEC-SERVE-002**, frozen). Loopback `127.0.0.1:8099` is in (DEC-SERVE-001).
 - A second ontology format besides Outpost `ontology/ontology.json` (**DEC-ONT-001**, frozen).
-- Vendoring the Agentix template tree (symlink SSOT only) (**DEC-AGENTIX-001**).
+- Vendoring the Agentix template tree (symlink SSOT only) (**DEC-AGENTIX-001**, frozen). Sibling `../agentic_loop_template`; do not copy the tree into the product or image.
 - Copying hflabs CC-BY-SA tables into `data/curated/` (**DEC-HFLABS-001**).
 - Population time-series, polygons, GeoJSON, PostGIS (**DEC-GEO-001**).
 - Municipalities, streets (hodonyms), microtoponyms as populated tables (types exist; seed tables do not).
