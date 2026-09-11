@@ -51,11 +51,34 @@ def test_readme_has_shields_badges_and_docs_links() -> None:
         "python-3.12%2B",
         "docker-compose",
         "CHANGELOG.md",
+        "docs/USAGE.md",
         "docs/SOURCES.md",
         "docs/presentation/toponym-2026.09.11.md",
         "https://github.com/unhexx/toponym/releases/tag/2026.09.11",
     ):
         assert needle in text, needle
+
+
+def test_usage_guide_covers_search_and_declensions() -> None:
+    path = ROOT / "docs" / "USAGE.md"
+    assert path.is_file()
+    text = path.read_text(encoding="utf-8")
+    for needle in (
+        "/healthz",
+        "/v1/search",
+        "/v1/records",
+        "127.0.0.1:8099",
+        "data/declensions",
+        "nom/gen/dat/acc/ins/pre/loc2",
+        "knowledge/registry.db",
+        "check.py",
+        "sync.py",
+        "Только GET",
+    ):
+        assert needle in text, needle
+    assert "data/curated" in text
+    # HTTP does not serve case forms; join is on id.
+    assert "HTTP **не** отдаёт" in text or "HTTP не отдаёт" in text
 
 
 def test_product_presentation_exists() -> None:
