@@ -38,6 +38,8 @@ def test_daily_has_no_missing_check_py_skip() -> None:
     assert "python scripts/check.py --json" in text
     assert "python scripts/sync.py --apply" in text
     assert "python scripts/validate.py" in text
+    assert "refusing sync/commit" not in text
+    assert "check.py exit 2; skip sync, write journal" in text
 
 
 def test_daily_always_writes_journal_and_stamps_catalog() -> None:

@@ -12,7 +12,7 @@ _ROOT = Path(__file__).resolve().parents[2]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-from scripts.lib.catalog import stamp_catalog_checked_at  # noqa: E402
+from scripts.lib.catalog import patch_catalog_source, stamp_catalog_checked_at  # noqa: E402
 
 
 def write_run_journal(
@@ -86,7 +86,20 @@ def main() -> None:
         check_json=check_json,
     )
     if args.stamp_catalog:
-        stamp_catalog_checked_at(Path(args.catalog), args.today)
+        catalog = Path(args.catalog)
+        stamp_catalog_checked_at(catalog, args.today)
+        if check_json is not None and check_json.is_file():
+            report = json.loads(check_json.read_text(encoding="utf-8"))
+            for row in report.get("sources") or []:
+                if not isinstance(row, dict) or row.get("error"):
+                    continue
+                source_id = row.get("id")
+                cursor_new = row.get("cursor_new") or ""
+                if source_id and cursor_new:
+                    try:
+                        patch_catalog_source(catalog, str(source_id), cursor=str(cursor_new))
+                    except KeyError:
+                        continue
 
 
 if __name__ == "__main__":

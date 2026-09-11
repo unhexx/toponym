@@ -51,12 +51,6 @@ jobs:
           set -e
           echo "check_exit=$CHECK_EXIT" >> "$GITHUB_OUTPUT"
 
-          if [[ "$CHECK_EXIT" -eq 2 ]]; then
-            echo "validate=skip" >> "$GITHUB_OUTPUT"
-            echo "check.py failed (exit 2); refusing sync/commit" >&2
-            exit 1
-          fi
-
           if [[ "$CHECK_EXIT" -eq 10 ]]; then
             python scripts/sync.py --apply
             set +e
@@ -74,6 +68,9 @@ jobs:
           else
             echo "validate=skip" >> "$GITHUB_OUTPUT"
             echo "changed_count=0" >> "$GITHUB_OUTPUT"
+            if [[ "$CHECK_EXIT" -eq 2 ]]; then
+              echo "check.py exit 2; skip sync, write journal" >&2
+            fi
           fi
 
           CHANGED=0

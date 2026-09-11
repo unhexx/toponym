@@ -143,6 +143,15 @@ def detect_none(source: dict[str, Any], **_: Any) -> dict[str, Any]:
     return _ok_result(changed=False, reason="kind=none", cursor_old=cursor, cursor_new=cursor)
 
 
+def _is_pointer_http_head(source: dict[str, Any]) -> bool:
+    """vendor:false + http_head — указатель (ГКГН/ГАР). Таймаут не блокирует цикл."""
+    kind = (source.get("detector") or {}).get("kind")
+    if kind != "http_head":
+        return False
+    vendor = source.get("vendor")
+    return vendor is False or vendor == "false"
+
+
 def detect_http_head(
     source: dict[str, Any],
     *,
@@ -169,11 +178,25 @@ def detect_http_head(
                 if getattr(response, "raw", None) is not None:
                     response.close()
             if response.status_code >= 400:
+                if _is_pointer_http_head(source):
+                    return _ok_result(
+                        changed=False,
+                        reason=f"http_head HTTP {response.status_code}; pointer only",
+                        cursor_old=cursor_old,
+                        cursor_new=cursor_old,
+                    )
                 return _err_result(
                     reason=f"http_head HTTP {response.status_code}",
                     cursor_old=cursor_old,
                 )
         except requests.RequestException as exc:
+            if _is_pointer_http_head(source):
+                return _ok_result(
+                    changed=False,
+                    reason="http_head timeout/no reliable headers; pointer only",
+                    cursor_old=cursor_old,
+                    cursor_new=cursor_old,
+                )
             return _err_result(reason=f"http_head: {exc}", cursor_old=cursor_old)
         token = header_cursor(response.headers)
         last_cursor = token or last_cursor
