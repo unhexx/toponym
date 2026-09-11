@@ -1,0 +1,7 @@
+id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
+wd:Q58767,wikidata,dromonym,Транссибирская магистраль,,Trans-Siberian railway,Транссиб,,,,,Q58767,,,,,active,,wikidata,,2026-09-12,"пример types.csv; железная дорога, не ГАР"
+wd:Q24971,wikidata,dromonym,М11 «Нева»,,M11 Neva Federal Highway,М-11,,,57.993714,33.790008,Q24971,,,,,active,,wikidata,,2026-09-12,пример types.csv; Москва — Санкт-Петербург
+wd:Q1635333,wikidata,dromonym,М-4 «Дон»,,M4 Don Federal Highway,М-4,,,,,Q1635333,,,,,active,,wikidata,,2026-09-12,
+wd:Q1365529,wikidata,dromonym,Р256 «Чуйский тракт»,,R256 Chuysky Trakt Federal Highway,Р256,iso:RU-AL,RU-AL,,,Q1365529,,,,,active,,wikidata,,2026-09-12,
+wd:Q377967,wikidata,dromonym,Байкало-Амурская магистраль,,Baikal-Amur Mainline,БАМ,,,,,Q377967,,,,,active,,wikidata,,2026-09-12,
+wd:Q590408,wikidata,dromonym,Кольцевая автомобильная дорога вокруг Санкт-Петербурга,,A118 Saint Petersburg Ring Road,КАД,wd:Q656,RU-SPE,60.038791,29.973082,Q590408,,,,,active,,wikidata,,2026-09-12,

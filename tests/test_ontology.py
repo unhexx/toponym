@@ -47,6 +47,7 @@ REQUIRED_IDS = {
     "DEC-HFLABS-001",
     "DEC-GEO-001",
     "DEC-SEED-001",
+    "DEC-SEED-002",
     "DEC-P1-001",
 }
 
@@ -137,6 +138,10 @@ def test_required_entities_present() -> None:
     assert by_id["DEC-SEED-001"]["status"] == "accepted"
     summary = by_id["DEC-SEED-001"]["summary"]
     assert "municipality" in summary and "hodonym" in summary and "microtoponym" in summary
+    assert by_id["DEC-SEED-002"]["type"] == "Decision"
+    assert by_id["DEC-SEED-002"]["status"] == "accepted"
+    summary = by_id["DEC-SEED-002"]["summary"]
+    assert "dromonym" in summary and "village" in summary and "agoronym" in summary
 
 
 def test_keep_out_decisions_cover_a_to_l() -> None:

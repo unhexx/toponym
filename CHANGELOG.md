@@ -7,6 +7,7 @@
 
 ### Added
 - Сиды МО / годонимов / микротопонимов расширены из Wikidata (CC0): десятки городских округов, улиц и урочищ/пещер. Стабильные `wd:` id, `parent_id` на субъект или город. Склонения новых строк — `review=needs_review` (только `nom`), без pymorphy. ГАР/`RU.zip` и hflabs в curated не копировались.
+- Сиды дромонимов, сёл и агоронимов (DEC-SEED-002): [`data/curated/dromonyms.csv`](data/curated/dromonyms.csv), [`villages.csv`](data/curated/villages.csv), [`agoronyms.csv`](data/curated/agoronyms.csv) + ресурсы datapackage и склонения `needs_review`. Типы уже были в `types.csv`. Улица ≠ площадь. Без ГАР.
 
 ## [2026.09.12] - 2026-09-12
 

@@ -1,0 +1,5 @@
+id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,review,source
+wd:Q894049,village,Бородино,,,mixed_phrase,always,Бородино,,,,,,,needs_review,manual
+wd:Q2637584,village,Вешенская,Вёшенская,,mixed_phrase,always,Вешенская,,,,,,,needs_review,manual
+wd:Q681521,village,Холмогоры,,,mixed_phrase,always,Холмогоры,,,,,,,needs_review,manual
+wd:Q4231436,village,Константиново,,,mixed_phrase,always,Константиново,,,,,,,needs_review,manual

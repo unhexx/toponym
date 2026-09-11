@@ -67,6 +67,9 @@ def test_seed_counts() -> None:
     _, mun = _read_csv(ROOT / "data/curated/municipalities.csv")
     _, hod = _read_csv(ROOT / "data/curated/hodonyms.csv")
     _, micro = _read_csv(ROOT / "data/curated/microtoponyms.csv")
+    _, drom = _read_csv(ROOT / "data/curated/dromonyms.csv")
+    _, vil = _read_csv(ROOT / "data/curated/villages.csv")
+    _, ago = _read_csv(ROOT / "data/curated/agoronyms.csv")
     assert len(fo) == 8
     assert len(regions) == 89
     iso = [row["iso"] for row in regions if row["iso"]]
@@ -81,6 +84,9 @@ def test_seed_counts() -> None:
     assert len(mun) >= 20
     assert len(hod) >= 20
     assert len(micro) >= 12
+    assert len(drom) >= 1
+    assert len(vil) >= 1
+    assert len(ago) >= 1
 
 
 def test_declension_ids_may_repeat() -> None:
@@ -298,6 +304,9 @@ def test_declension_fixtures_are_gold() -> None:
         "municipalities.csv",
         "hodonyms.csv",
         "microtoponyms.csv",
+        "dromonyms.csv",
+        "villages.csv",
+        "agoronyms.csv",
     ):
         _header, part = _read_csv(ROOT / "data" / "declensions" / name)
         rows.extend(part)
@@ -337,6 +346,9 @@ def test_name_ru_has_no_yo() -> None:
         "data/curated/municipalities.csv",
         "data/curated/hodonyms.csv",
         "data/curated/microtoponyms.csv",
+        "data/curated/dromonyms.csv",
+        "data/curated/villages.csv",
+        "data/curated/agoronyms.csv",
     ):
         _header, rows = _read_csv(ROOT / rel)
         for row in rows:
@@ -405,6 +417,54 @@ def test_k_seed_types_and_parents() -> None:
     for path in raw_dir.rglob("*"):
         if path.is_file():
             assert path.stat().st_size < MAX_BYTES, path
+
+
+def test_dva_seed_types_and_parents() -> None:
+    type_ids = {row["id"] for row in _read_csv(TYPES_CSV)[1]}
+    assert {"dromonym", "village", "agoronym"} <= type_ids
+    _, drom = _read_csv(ROOT / "data/curated/dromonyms.csv")
+    _, vil = _read_csv(ROOT / "data/curated/villages.csv")
+    _, ago = _read_csv(ROOT / "data/curated/agoronyms.csv")
+    _, hod = _read_csv(ROOT / "data/curated/hodonyms.csv")
+    assert any(
+        row["id"] == "wd:Q58767" and row["type_id"] == "dromonym" and row["abbr"] == "Транссиб"
+        for row in drom
+    )
+    assert any(row["name_ru"] == "Бородино" and row["type_id"] == "village" for row in vil)
+    assert any(
+        row["name_ru"] == "Красная площадь" and row["type_id"] == "agoronym" for row in ago
+    )
+    assert all(row["type_id"] == "dromonym" for row in drom)
+    assert all(row["type_id"] == "village" for row in vil)
+    assert all(row["type_id"] == "agoronym" for row in ago)
+    assert all(row["name_ru"] != "Красная площадь" for row in hod)
+    union_ids = set()
+    for rel in (
+        "data/curated/federal-districts.csv",
+        "data/curated/regions.csv",
+        "data/curated/cities-major.csv",
+        "data/curated/hydronyms-major.csv",
+        "data/curated/oronyms-major.csv",
+        "data/curated/municipalities.csv",
+        "data/curated/hodonyms.csv",
+        "data/curated/microtoponyms.csv",
+        "data/curated/dromonyms.csv",
+        "data/curated/villages.csv",
+        "data/curated/agoronyms.csv",
+        "data/curated/agencies-foiv.csv",
+        "data/curated/agencies-other.csv",
+    ):
+        union_ids.update(row["id"] for row in _read_csv(ROOT / rel)[1])
+    for row in (*vil, *ago):
+        parent = row["parent_id"]
+        assert parent, row["id"]
+        assert parent in union_ids, (row["id"], parent)
+    for row in drom:
+        parent = row["parent_id"]
+        if parent:
+            assert parent in union_ids, (row["id"], parent)
+    assert all(not row["id"].startswith("gn:") for row in (*drom, *vil, *ago))
+    assert all(row["source_id"] == "wikidata" for row in (*drom, *vil, *ago))
 
 
 def test_cities_not_seeded_in_local_subjects() -> None:

@@ -9,6 +9,9 @@ PLACE_RELPATHS = [
     "data/curated/municipalities.csv",
     "data/curated/hodonyms.csv",
     "data/curated/microtoponyms.csv",
+    "data/curated/dromonyms.csv",
+    "data/curated/villages.csv",
+    "data/curated/agoronyms.csv",
 ]
 
 INDEX_RELPATHS = PLACE_RELPATHS + [

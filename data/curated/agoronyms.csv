@@ -1,0 +1,6 @@
+id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
+wd:Q41116,wikidata,agoronym,Красная площадь,,Red Square,,wd:Q649,RU-MOW,55.754167,37.620000,Q41116,6295575,,,,active,,wikidata,,2026-09-12,"пример types.csv; площадь, не улица"
+wd:Q1132624,wikidata,agoronym,Дворцовая площадь,,Palace Square,,wd:Q656,RU-SPE,59.938794,30.314814,Q1132624,7668989,,,,active,,wikidata,,2026-09-12,
+wd:Q2352588,wikidata,agoronym,Исаакиевская площадь,,Saint Isaac's Square,,wd:Q656,RU-SPE,59.933100,30.306800,Q2352588,,,,,active,,wikidata,,2026-09-12,
+wd:Q1633670,wikidata,agoronym,Театральная площадь,,Theatre Square,,wd:Q649,RU-MOW,55.759333,37.619778,Q1633670,,,,,active,,wikidata,,2026-09-12,
+wd:Q4365734,wikidata,agoronym,Площадь Революции,,"Revolution Square, Moscow",,wd:Q649,RU-MOW,55.757500,37.619697,Q4365734,,,,,active,,wikidata,,2026-09-12,Москва; не станция метро

@@ -1,0 +1,5 @@
+id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
+wd:Q894049,wikidata,village,Бородино,,Borodino,,iso:RU-MOS,RU-MOS,55.526944,35.821111,Q894049,572278,,,,active,,wikidata,,2026-09-12,"пример types.csv; деревня, Можайский округ; не город Бородино"
+wd:Q2637584,wikidata,village,Вешенская,Вёшенская,Vyoshenskaya,,iso:RU-ROS,RU-ROS,49.627222,41.726111,Q2637584,473998,,,,active,,wikidata,,2026-09-12,"станица, Шолоховский район"
+wd:Q681521,wikidata,village,Холмогоры,,Kholmogory,,iso:RU-ARK,RU-ARK,64.225000,41.650000,Q681521,549748,,,,active,,wikidata,,2026-09-12,село
+wd:Q4231436,wikidata,village,Константиново,,Konstantinovo,,iso:RU-RYA,RU-RYA,54.864722,39.600556,Q4231436,545288,,,,active,,wikidata,,2026-09-12,"село, Рыбновский район"

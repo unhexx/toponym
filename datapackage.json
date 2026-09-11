@@ -88,6 +88,33 @@
       "schema": "schema/table/places.schema.json"
     },
     {
+      "name": "dromonyms",
+      "path": "data/curated/dromonyms.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/places.schema.json"
+    },
+    {
+      "name": "villages",
+      "path": "data/curated/villages.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/places.schema.json"
+    },
+    {
+      "name": "agoronyms",
+      "path": "data/curated/agoronyms.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/places.schema.json"
+    },
+    {
       "name": "agencies-foiv",
       "path": "data/curated/agencies-foiv.csv",
       "profile": "tabular-data-resource",
@@ -171,6 +198,33 @@
     {
       "name": "declensions-microtoponyms",
       "path": "data/declensions/microtoponyms.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/declensions.schema.json"
+    },
+    {
+      "name": "declensions-dromonyms",
+      "path": "data/declensions/dromonyms.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/declensions.schema.json"
+    },
+    {
+      "name": "declensions-villages",
+      "path": "data/declensions/villages.csv",
+      "profile": "tabular-data-resource",
+      "format": "csv",
+      "encoding": "utf-8",
+      "dialect": { "delimiter": ",", "lineTerminator": "\n", "header": true },
+      "schema": "schema/table/declensions.schema.json"
+    },
+    {
+      "name": "declensions-agoronyms",
+      "path": "data/declensions/agoronyms.csv",
       "profile": "tabular-data-resource",
       "format": "csv",
       "encoding": "utf-8",

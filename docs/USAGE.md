@@ -94,7 +94,7 @@ curl -sSG http://127.0.0.1:8099/v1/search \
 |---|---|---|
 | `q` | да | 1–200 символов |
 | `limit` | нет | 1–100, по умолчанию 20 |
-| `table_name` | нет | `federal-districts`, `regions`, `cities-major`, `hydronyms-major`, `oronyms-major`, `municipalities`, `hodonyms`, `microtoponyms`, `agencies-foiv`, `agencies-other` |
+| `table_name` | нет | `federal-districts`, `regions`, `cities-major`, `hydronyms-major`, `oronyms-major`, `municipalities`, `hodonyms`, `microtoponyms`, `dromonyms`, `villages`, `agoronyms`, `agencies-foiv`, `agencies-other` |
 | `status` | нет | `all` (по умолчанию), `active`, `deprecated` |
 
 Ноль совпадений — HTTP 200, `"count": 0`, пустые `ids`/`hits` (не 404).
@@ -140,6 +140,25 @@ curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Синий'
 
 ---
 
+## 3.2. Дромонимы, сёла, площади
+
+Малые сиды (DEC-SEED-002), не ГАР. Типы уже были в `types.csv`. Улица ≠ площадь:
+Красная площадь живёт в `agoronyms.csv`, не в годонимах.
+
+| Таблица | Примеры |
+|---|---|
+| `data/curated/dromonyms.csv` | Транссибирская магистраль (Транссиб), М11 «Нева» |
+| `data/curated/villages.csv` | Бородино, Вешенская |
+| `data/curated/agoronyms.csv` | Красная площадь, Дворцовая площадь |
+
+```bash
+curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Транссиб'
+curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Бородино'
+curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Красная площадь'
+```
+
+---
+
 ## 4. Склонения (падежи)
 
 `GET /v1/declensions?id=…` стыкует падежи с карточкой поиска по **`id`**.
@@ -163,6 +182,9 @@ curl -sSG http://127.0.0.1:8099/v1/declensions --data-urlencode 'id=wd:Q626'
 | `data/declensions/municipalities.csv` | муниципалитеты |
 | `data/declensions/hodonyms.csv` | годонимы |
 | `data/declensions/microtoponyms.csv` | микротопонимы |
+| `data/declensions/dromonyms.csv` | дромонимы |
+| `data/declensions/villages.csv` | сёла |
+| `data/declensions/agoronyms.csv` | площади |
 | `data/declensions/agencies.csv` | ведомства (часто две строки на id: аббревиатура + полное имя) |
 
 Ключ стыковки с поиском — поле **`id`**.
@@ -264,7 +286,7 @@ sqlite3 knowledge/registry.db \
 
 Есть: 8 федеральных округов, 89 субъектов, крупные города, крупные гидронимы и оронимы,
 ФОИВ и смежные ведомства, золотые склонения к части из них,
-малые сиды муниципалитетов / годонимов / микротопонимов (десятки строк из Wikidata, DEC-SEED-001; не ГАР).
+малые сиды муниципалитетов / годонимов / микротопонимов (десятки строк, DEC-SEED-001) и дромонимов / сёл / площадей (DEC-SEED-002; не ГАР).
 
 Нет в этом релизе: полный ГАР/ФИАС, GeoNames `RU.zip`, полный список улиц и МО,
 склонения **каждого** ойконима (только золотые/черновые таблицы выше),
