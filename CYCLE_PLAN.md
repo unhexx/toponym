@@ -71,7 +71,7 @@ A–L COMPLETE на `main`. Следующий annotated CalVer — `2026.09.12`
 
 ## Definition of Done v1
 
-- Все 11 resources из `datapackage.json` на диске.
+- Все 14 resources из `datapackage.json` на диске.
 - `python scripts/check.py --json` без секретов.
 - `python scripts/validate.py` = 0.
 - Daily: дельта или `data/sources/runs/YYYY-MM-DD.json`, без пустого commit.

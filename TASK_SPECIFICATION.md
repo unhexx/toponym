@@ -1,7 +1,7 @@
 # TASK_SPECIFICATION.md — toponym
 
 **Project:** toponym (`unhexx/toponym`)
-**Version Target:** 2026.09.09 (v1 local registries)
+**Version Target:** v1 `2026.09.09`; текущий тег `2026.09.11` (loop 2). Следующий annotated CalVer `2026.09.12` — не раньше 2026-09-12.
 **Primary Goal:** Собрать в одном git-репозитории качественный локальный реестр российских топонимов и ведомств: CSV-канон, источники с лицензиями и детекторами, скрипты обновления, derived SQLite FTS, онтология.
 
 ADR и исследование: [`LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`](LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md) (DEC-REG-001).
@@ -53,6 +53,10 @@ ADR и исследование: [`LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`](LOCA
 ## Loop 2 (after v1)
 
 Executable list: `CYCLE_PLAN.md` (P10–P13). Design SSOT: `docs/design/2026-09-11-loop2-compose-box.md` (DEC-SERVE-001). v1 non-goals above stay true for the tagged release; loop 2 adds loopback `scripts/serve.py` and a one-service Compose box on `127.0.0.1:8099`. Do not retcon v1.
+
+## After loop 2 (A–L)
+
+Keep-out A–L COMPLETE на `main` (`CYCLE_PLAN.md`). Живой backlog: GitHub #13. Не retcon v1 non-goals. Тег `2026.09.11` не двигать.
 
 ## Cycles (INVEST)
 

@@ -1,7 +1,7 @@
 # Локальные реестры: дизайн и дорожная карта
 
 **Дата:** 2026-09-09  
-**Статус:** ADR + план разового полного цикла (Agentix 3.13.0)  
+**Статус:** исторический снимок ADR DEC-REG-001 и плана v1. Сиды и скрипты уже на `main` (тег `2026.09.09`); loop 2 — тег `2026.09.11`. Живой план: `CYCLE_PLAN.md`. Backlog: GitHub #13.  
 **Контекст:** `unhexx/toponym` (каркас) + навыки `local-knowledge-ingestion`, `structured-memory-ontology`, `deterministic-workflow-orchestrator`  
 **Шаблон исполнения:** `unhexx/agentic_loop_template` v3.13.0, режим consumer-starter **full** (symlink SSOT, не копировать дерево)
 
@@ -18,7 +18,7 @@
 5. Есть простые скрипты: «есть ли обновление?» → «обнови локальный реестр».
 6. Разработка до v1 идёт **одним полным agentic-циклом** по шаблону, а не бесконечным daily-no-op.
 
-Текущий `unhexx/toponym` — правильный зародыш (Frictionless `datapackage.json`, `catalog.yaml`, таксономия), но **сиды не закоммичены**, curated-таблиц нет, скриптов проверки нет. Daily-агент закономерно уходит в no-op.
+На дату ADR (2026-09-09) `unhexx/toponym` был зародышем (Frictionless `datapackage.json`, `catalog.yaml`, таксономия): сиды ещё не были закоммичены, curated-таблиц и скриптов проверки не было. Это уже не текущее состояние: v1 tagged `2026.09.09`, loop 2 — `2026.09.11`.
 
 ---
 
@@ -63,7 +63,7 @@
 toponym/                          # git SSOT
 ├── AGENTS.md
 ├── TASK_SPECIFICATION.md         # этот документ, сжатый контракт v1
-├── PROJECT_CONTEXT.md
+├── PROJECT_CONTEXT.md            # локальный артефакт Agentix (gitignore); продукт SSOT — AGENTS.md / TASK_SPECIFICATION.md / CYCLE_PLAN.md
 ├── datapackage.json              # пакет верхнего уровня
 ├── catalog.yaml                  # источники + детекторы обновлений
 ├── CHANGELOG.md                  # CalVer YYYY.MM.DD
@@ -352,7 +352,7 @@ bash ../agentic_loop_template/examples/consumer-starter/Agent-Init.consumer.sh
 
 # 3. Заполнить SSOT цикла
 cp TASK_SPECIFICATION из этого документа
-заполнить PROJECT_CONTEXT.md
+заполнить PROJECT_CONTEXT.md (локально, не в git)
 заполнить .agent/PLAN.md и .agent/TODO.md (ниже)
 
 # 4. Старт оркестратора
