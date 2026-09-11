@@ -5,6 +5,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/unhexx/toponym/ci.yml?branch=main&label=CI)](https://github.com/unhexx/toponym/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
 [![Docker Compose](https://img.shields.io/badge/docker-compose-2496ED.svg?logo=docker&logoColor=white)](compose.yaml)
+[![GHCR](https://img.shields.io/badge/ghcr.io-unhexx%2Ftoponym-blue.svg)](https://github.com/unhexx/toponym/pkgs/container/toponym)
 
 Открытый структурированный реестр топонимов Российской Федерации: населённые пункты, субъекты, гидронимы, оронимы, муниципалитеты, годонимы, микротопонимы, урбанонимы, ведомства и службы, таблицы склонений.
 
@@ -56,7 +57,7 @@ python scripts/serve.py
 
 Если на хосте нет CPython 3.12 — тот же канон поднимается ящиком.
 
-Первый запуск:
+Первый запуск (сборка из Dockerfile):
 
 ```bash
 git clone https://github.com/unhexx/toponym.git
@@ -64,7 +65,13 @@ cd toponym
 docker compose up --build
 ```
 
-Обновление уже клонированного репозитория:
+Обновление без компиляции (пин `ghcr.io/unhexx/toponym:2026.09.12`):
+
+```bash
+docker compose pull && docker compose up
+```
+
+Обновление из исходников клонированного репозитория:
 
 ```bash
 git pull && docker compose up --build

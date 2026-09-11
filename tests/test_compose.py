@@ -28,6 +28,8 @@ def test_compose_contract() -> None:
     assert "no-new-privileges:true" in svc["security_opt"]
     assert svc["read_only"] is True
     assert svc["user"] == "10001:10001"
+    assert svc["image"] == "ghcr.io/unhexx/toponym:2026.09.12"
+    assert svc["build"] == {"context": ".", "dockerfile": "Dockerfile"}
     assert not (FORBIDDEN_SERVICES & set(services))
 
 
@@ -67,6 +69,10 @@ def test_dockerfile_python_312() -> None:
     assert "python:3.12-slim" in text
     assert ".[dev]" not in text
     assert "agentic_loop_template" not in text
+    assert "searxng" not in text.casefold()
+    assert "ollama" not in text.casefold()
+    assert "org.opencontainers.image.source" in text
+    assert "https://github.com/unhexx/toponym" in text
 
 
 def test_dockerignore_excludes_harness() -> None:
@@ -114,3 +120,26 @@ def test_ci_compose_job_separate_from_unit() -> None:
     assert ":8100" not in compose_text
     assert ":8110" not in compose_text
     assert "pip install" not in compose_text
+
+
+def test_ci_publishes_ghcr_calver_on_main() -> None:
+    ci = yaml.safe_load((ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8"))
+    jobs = ci["jobs"]
+    assert "publish" in jobs
+    pub = jobs["publish"]
+    assert pub["if"] == "github.event_name == 'push' && github.ref == 'refs/heads/main'"
+    assert pub["needs"] == ["test", "compose"]
+    assert pub["permissions"]["packages"] == "write"
+    assert pub["permissions"]["contents"] == "read"
+    pub_text = "\n".join(str(step.get("run") or "") for step in pub["steps"])
+    assert "ghcr.io/unhexx/toponym" in pub_text
+    assert "${IMAGE}:${VERSION}" in pub_text
+    assert "${IMAGE}:CalVer" in pub_text
+    assert "docker push" in pub_text
+    assert "docker login ghcr.io" in pub_text
+    assert "visibility=public" in pub_text
+    assert "searxng" not in pub_text.casefold()
+    assert "ollama" not in pub_text.casefold()
+    assert ":8080" not in pub_text
+    assert ":8100" not in pub_text
+    assert ":8110" not in pub_text

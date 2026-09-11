@@ -2,10 +2,10 @@ name: toponym
 
 services:
   toponym:
+    image: ghcr.io/unhexx/toponym:2026.09.12
     build:
       context: .
       dockerfile: Dockerfile
-    image: toponym:local
     init: true
     user: "10001:10001"
     read_only: true
