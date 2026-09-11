@@ -17,6 +17,9 @@ SELECT DISTINCT ?city ?iso ?pop ?ru ?en WHERE {
 }
 ORDER BY DESC(?pop)
 
+# GeoNames ID (P1566, CC0) for already curated Q-ids — fill column geonames, never insert gn:{id}.
+# SELECT ?item ?gn WHERE { VALUES ?item { wd:Q649 } ?item wdt:P1566 ?gn }
+
 # Coordinates (P625) and OKTMO (P764, CC0) for already curated Q-ids.
 # VALUES — id из data/curated/cities-major.csv; не массовый дамп.
 # SELECT ?city ?lat ?lon ?oktmo WHERE {
