@@ -17,6 +17,7 @@ FIXTURE_LEMMAS = {
     "Жуковский",
     "Домодедово",
     "Дон",
+    "Волга",
     "МВД",
     "Министерство внутренних дел",
 }
@@ -220,6 +221,10 @@ def test_declension_fixtures_are_gold() -> None:
     assert pushkin["ins"] == "Пушкином"
     don = next(row for row in by_lemma["Дон"] if row["review"] == "gold")
     assert don["loc2"] == "Дону"
+    volga = next(row for row in by_lemma["Волга"] if row["review"] == "gold")
+    assert volga["id"] == "wd:Q626"
+    assert volga["gen"] == "Волги"
+    assert volga["gen"] != "Волгы"
 
 
 def test_name_ru_has_no_yo() -> None:
