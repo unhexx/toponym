@@ -57,6 +57,12 @@ def test_readme_has_compose_one_shot() -> None:
     assert "http://127.0.0.1:8099/v1/search" in text
     assert "bash Agent-Init.sh" in text
     assert "source .venv/bin/activate" in text
+    assert "python3 -m venv .venv" in text
+    assert 'pip install -e ".[dev]"' in text
+    venv_at = text.find("python3 -m venv .venv")
+    init_block = text.find("bash Agent-Init.sh")
+    assert venv_at != -1
+    assert venv_at < init_block
 
 
 def test_readme_has_shields_badges_and_docs_links() -> None:

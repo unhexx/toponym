@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Bootstrap a product repo against the Agentix SSOT without vendoring a stale copy.
-# Usage (from the product root): bash Agent-Init.consumer.sh [--wizard]
+# Bootstrap: full Agentix loop if sibling template exists; otherwise product venv + pip.
+# Usage (from the product root): bash Agent-Init.sh [--wizard]
 set -euo pipefail
 
 WIZARD=false
@@ -8,7 +8,8 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --wizard) WIZARD=true; shift ;;
     -h|--help)
-      echo "Usage: bash Agent-Init.consumer.sh [--wizard]"
+      echo "Usage: bash Agent-Init.sh [--wizard]"
+      echo "Without ../agentic_loop_template: python3 -m venv .venv && pip install -e \".[dev]\""
       exit 0
       ;;
     *) echo "Unknown arg: $1" >&2; exit 2 ;;
@@ -26,16 +27,19 @@ cd "$ROOT"
 
 log() { echo "[Agent-Init] $*"; }
 
+PRODUCT_ONLY=false
+TEMPLATE=""
 if [[ -d "$ROOT/../agentic_loop_template/memory" ]]; then
   TEMPLATE="$(cd "$ROOT/../agentic_loop_template" && pwd)"
 elif [[ -d "$ROOT/agentic_loop_template/memory" ]]; then
   TEMPLATE="$(cd "$ROOT/agentic_loop_template" && pwd)"
 else
-  echo "agentic_loop_template not found (expected ../agentic_loop_template or ./agentic_loop_template)" >&2
-  exit 1
+  echo "agentic_loop_template не найден (ожидался ../agentic_loop_template)." >&2
+  echo "Продуктовый путь: venv + pip install -e \".[dev]\" (harness не нужен для CSV+serve)." >&2
+  PRODUCT_ONLY=true
 fi
 
-if [[ ! -e "$ROOT/agentic_loop_template" ]]; then
+if [[ "$PRODUCT_ONLY" != true && ! -e "$ROOT/agentic_loop_template" ]]; then
   ln -s "$TEMPLATE" "$ROOT/agentic_loop_template"
   log "symlink agentic_loop_template -> $TEMPLATE"
 fi
@@ -50,6 +54,22 @@ if [[ ! -d .venv ]]; then
 fi
 # shellcheck disable=SC1091
 source .venv/bin/activate
+
+install_product() {
+  if command -v uv >/dev/null 2>&1; then
+    uv pip install -e ".[dev]"
+  else
+    python -m pip install -U pip -q 2>/dev/null || true
+    python -m pip install -e ".[dev]"
+  fi
+}
+
+if [[ "$PRODUCT_ONLY" == true ]]; then
+  install_product
+  log "product-only: installed .[dev] without agentic_loop_template"
+  echo "AGENT_INIT_OK product-only"
+  exit 0
+fi
 
 if command -v uv >/dev/null 2>&1; then
   uv pip install -e "${TEMPLATE}[dev]" \

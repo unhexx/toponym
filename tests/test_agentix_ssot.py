@@ -38,6 +38,23 @@ def test_agent_init_prefers_sibling_symlink() -> None:
     assert nested_at == -1 or sibling_at < nested_at
 
 
+def test_agent_init_falls_back_without_template() -> None:
+    text = (ROOT / "Agent-Init.sh").read_text(encoding="utf-8")
+    assert "PRODUCT_ONLY" in text
+    assert 'pip install -e ".[dev]"' in text
+    assert "Продуктовый путь" in text
+    detect = text.split("if [[ ! -d .venv ]]")[0]
+    assert "exit 1" not in detect
+    assert "product-only" in text
+    proc = subprocess.run(
+        ["bash", "-n", str(ROOT / "Agent-Init.sh")],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert proc.returncode == 0, proc.stderr
+
+
 def test_local_template_is_symlink_to_sibling() -> None:
     if not TEMPLATE.exists() and not TEMPLATE.is_symlink():
         return

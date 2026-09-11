@@ -25,12 +25,12 @@
 
 ## Пятиминутный старт (хост)
 
-CPython 3.12+, venv проекта:
+CPython 3.12+. Для канона CSV + поиск шаблон `agentic_loop_template` **не нужен**:
 
 ```bash
 git clone https://github.com/unhexx/toponym.git
 cd toponym
-bash Agent-Init.sh
+python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
 python scripts/validate.py
@@ -39,7 +39,9 @@ python scripts/index.py
 python scripts/serve.py
 ```
 
-Альтернатива установке: `uv pip install -e ".[dev]"` в том же `.venv`.
+Альтернатива: `uv venv .venv && source .venv/bin/activate && uv pip install -e ".[dev]"`.
+
+Полный harness-цикл — только если рядом sibling `../agentic_loop_template`: `bash Agent-Init.sh`. Без шаблона тот же скрипт ставит `.[dev]` и не падает.
 
 Ожидаемо: `validate.py` печатает `ok` и выходит 0. `check.py --json` ходит в сеть (коды 0 / 10 / 2). `index.py` пишет `knowledge/registry.db` (gitignored). `serve.py` слушает `127.0.0.1:8099`.
 
@@ -71,7 +73,7 @@ git pull && docker compose up --build
 
 Не стартует SearXNG, Ollama и pxpipe. Порты 8080 / 8100 / 8110 / 8112 на хосте свободны.
 
-На хосте без Docker путь не меняется: `bash Agent-Init.sh`, затем `python scripts/validate.py && python scripts/index.py && python scripts/serve.py` (bind `127.0.0.1:8099`).
+На хосте без Docker: `python3 -m venv .venv && source .venv/bin/activate && pip install -e ".[dev]"`, затем `python scripts/validate.py && python scripts/index.py && python scripts/serve.py` (bind `127.0.0.1:8099`).
 
 ## Дерево
 
