@@ -10,7 +10,7 @@
 ### 1. Bootstrap & state (FIRST)
 - **Bootstrap (Linux):** `bash Agent-Init.sh`; `source .venv/bin/activate`
 - Python: `.venv/bin/python` only
-- Template: `./agentic_loop_template` → `/home/unhex/_PROJECT/agentic_loop_template` (gitignored)
+- Template: `./agentic_loop_template` → sibling SSOT (gitignored symlink; never vendor the tree)
 - **Bounded state only (never load multi-MB `.agent` archives):**
   - `python -m memory.proxy health`
   - `python -m memory state snapshot --window 3`
@@ -23,7 +23,7 @@
 
 ### 2. Plan & context (compression first)
 - Read latest `.agent/PLAN.md` + `.agent/TODO.md` + `TASK_SPECIFICATION.md` + `CYCLE_PLAN.md`
-- Continue unfinished iteration tasks first (P0→P9 in order; P2 and P6 may run after P1)
+- Continue unfinished iteration tasks first (v1 P0–P9 frozen; loop 2 P10→P13 sequential; see `CYCLE_PLAN.md`)
 - Ultra-compact summary + deltas; full files on-demand
 - Tools: `python tools/select.py --intent <git|test|memory|state|…>` when the template tools exist
 

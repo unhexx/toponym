@@ -28,6 +28,17 @@
 | v1.1-HTTP-DATED | `http_dated`: `changed` только RU-строки; `also` не флипает | `feature/v1.1-http-dated` | non-RU + dump Last-Modified → exit 0; cursor остаётся датой mods | COMPLETE |
 | v1.1-DOCS-DRIFT | дизайн v1 = выпущенный контур; geonames Москва/Волга | `feature/v1.1-docs-drift` | design не говорит «P6 next»; Q649=524901, Q626=472776 | COMPLETE |
 
+## Loop 2 (compose box, DEC-SERVE-001)
+
+Последовательность. Не параллелить. Канон v1 не переписывать.
+
+| ID | Слайс | Ветка | Acceptance | Status |
+|---|---|---|---|---|
+| P10-SERVE | stdlib loopback JSON над FTS | `feature/P10-serve` | `handle()` поиск «Волга»/«МВД»; bind `127.0.0.1:8099`; не-loopback отказ; `fts_match` зелёный | COMPLETE |
+| P11-BOX | Dockerfile + compose.yaml + entrypoint | `feature/P11-compose` | file-contract: 3.12, `cap_drop: ALL`, `127.0.0.1:8099`; `.dockerignore` без шаблона | COMPLETE |
+| P12-DOCS | README docker, ontology DEC-SERVE-001, CHANGELOG | `feature/P12-docs` | `docker compose up --build` в README; v1 host-путь цел | COMPLETE |
+| P13-DONE | reviewer gate | `feature/P13-release` | pytest+ruff+validate; без файлов >10 МБ; тег только по запросу оператора | COMPLETE |
+
 ## Definition of Done v1
 
 - Все 11 resources из `datapackage.json` на диске.

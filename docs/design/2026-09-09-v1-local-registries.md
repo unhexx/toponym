@@ -23,7 +23,7 @@ Operator overrides of the ADR (binding):
 3. After each completed INVEST cycle: merge to `main` and `git push origin main` (overrides ADR §9.1 “do not merge until operator accepts Reviewer DONE”).
 4. Commits in natural Russian, as a human mid/senior developer. Never mention models, agents, LLM, Grok, Claude, or AI.
 5. v1 is released (tag `2026.09.09` / GitHub Release). Empty commits forbidden.
-6. Keep **ten** cycles P0–P9. Do **not** split P1 into P1a–e. Do not start streets / GAR / `RU.zip` / `serve.py` unless `CYCLE_PLAN.md` lists them.
+6. Keep **ten** cycles P0–P9. Do **not** split P1 into P1a–e. Do not start streets / GAR / `RU.zip` / `serve.py` unless `CYCLE_PLAN.md` lists them. Loop 2 serve/compose is listed in `CYCLE_PLAN.md` (DEC-SERVE-001).
 
 ---
 
@@ -33,7 +33,7 @@ Operator overrides of the ADR (binding):
 
 Canon stays UTF-8 CSV in git. Dumps larger than 10 MB and full ГАР/ФИАС are never vendored. CC BY-SA and ODbL stay in `data/raw/<source>/`. Curated rows are typed from official names, ISO 3166-2, Wikidata (CC0), and GeoNames **identifiers** — not copied wholesale from ShareAlike repos.
 
-**v1 is released.** Do not reopen P0–P9. Live `geonames` is filled for Москва `wd:Q649`=`524901` and Волга `wd:Q626`=`472776`. Further GeoNames digits remain optional. Streets / GAR / `RU.zip` / `serve.py` stay out of scope unless `CYCLE_PLAN.md` lists them.
+**v1 is released.** Do not reopen P0–P9. Live `geonames` is filled for Москва `wd:Q649`=`524901` and Волга `wd:Q626`=`472776`. Further GeoNames digits remain optional. Streets / GAR / `RU.zip` stay out of scope unless `CYCLE_PLAN.md` lists them. Loop 2 (`scripts/serve.py` + Compose box) is listed there.
 
 ---
 

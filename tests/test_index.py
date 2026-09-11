@@ -65,6 +65,14 @@ def test_sync_meta_from_catalog(tmp_path: Path) -> None:
     assert "wikidata" in sources
 
 
+def test_fts_search_returns_records(tmp_path: Path) -> None:
+    db_path = _build(tmp_path)
+    hits = index_mod.fts_search(db_path, '"Волга"', limit=1)
+    assert hits
+    assert hits[0]["id"] == "wd:Q626"
+    assert hits[0]["table_name"] == "hydronyms-major"
+
+
 def test_cli_out_temp_db(tmp_path: Path, capsys) -> None:
     db_path = tmp_path / "cli.db"
     code = index_mod.main(["--out", str(db_path)])

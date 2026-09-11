@@ -1,13 +1,18 @@
 # .agent/TODO.md — Task Backlog
 
 **Initiative:** toponym v1 local registries
-**Status:** P9-DONE complete; v1 tagged 2026.09.09; v1.1-http-dated and docs-drift landed
+**Status:** Loop 2 P10–P13 COMPLETE on `feature/P10-serve` (DEC-SERVE-001)
 
 ## In progress
 
 ## Pending
 
 ## Done
+
+- [x] P13-DONE-01: reviewer gate (ruff, pytest, validate, compose smoke Волга/МВД); no tag
+- [x] P12-DOCS-01: README docker path, ontology DEC-SERVE-001, CHANGELOG
+- [x] P11-BOX-01: Dockerfile + compose.yaml + entrypoint + file-contract tests
+- [x] P10-SERVE-01: `scripts/serve.py` handle() JSON; bind 127.0.0.1:8099; `fts_search`
 
 - [x] v1.1-DOCS-DRIFT: дизайн v1 = выпущенный контур; geonames Москва `524901`, Волга `472776`
 - [x] v1.1-HTTP-DATED: `http_dated` ignores dump Last-Modified; cursor stays mods date

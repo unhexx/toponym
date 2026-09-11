@@ -23,6 +23,23 @@ python scripts/index.py
 
 Ожидаемо: `validate.py` печатает `ok` и выходит 0. `check.py --json` ходит в сеть (коды 0 / 10 / 2). `index.py` пишет `knowledge/registry.db` (gitignored).
 
+## One-shot (Docker Compose)
+
+Если на хосте нет CPython 3.12 — тот же канон поднимается ящиком:
+
+```bash
+git clone https://github.com/unhexx/toponym.git
+cd toponym
+docker compose up --build
+```
+
+Слушает только loopback: http://127.0.0.1:8099/healthz  
+Поиск: http://127.0.0.1:8099/v1/search?q=Волга  
+
+Не стартует SearXNG, Ollama и pxpipe. Порты 8080 / 8100 / 8110 / 8112 на хосте свободны.
+
+На хосте без Docker: `python scripts/validate.py && python scripts/index.py && python scripts/serve.py` (bind `127.0.0.1:8099`).
+
 ## Дерево
 
 ```
@@ -77,6 +94,7 @@ python scripts/check.py --json          # детекторы; 0 / 10 / 2
 python scripts/sync.py --source ID      # dry-run; --apply пишет
 python scripts/validate.py              # frictionless + инварианты
 python scripts/index.py                 # knowledge/registry.db FTS5
+python scripts/serve.py                 # loopback JSON, 127.0.0.1:8099
 ```
 
 Поиск по индексу: `MATCH 'Волга'` (гидроним), `MATCH 'МВД'` (`foiv:mvd`).

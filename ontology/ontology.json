@@ -231,6 +231,41 @@
       "title": "Daily no-op из-за сидов, которых не было в git",
       "date": "2026-09-09",
       "summary": "CHANGELOG заявлял сиды ФО/субъектов/ФОИВ, пока в дереве был только types.csv. Daily не мог патчить канон. Сиды заведены в P1; календарная секция CHANGELOG — в релизе."
+    },
+    {
+      "id": "DEC-SERVE-001",
+      "type": "Decision",
+      "title": "Loopback stdlib HTTP + one-service Compose box",
+      "status": "accepted",
+      "date": "2026-09-11",
+      "refs": ["docs/design/2026-09-11-loop2-compose-box.md", "compose.yaml", "scripts/serve.py"],
+      "summary": "stdlib loopback JSON over existing FTS5; one python:3.12-slim service; not Datasette/FastAPI/CKAN; not Agentix SearXNG/pxpipe stack; not a public API."
+    },
+    {
+      "id": "ART-SERVE",
+      "type": "Artifact",
+      "title": "Loopback JSON search",
+      "path": "scripts/serve.py"
+    },
+    {
+      "id": "ART-COMPOSE",
+      "type": "Artifact",
+      "title": "One-shot Compose install box",
+      "path": "compose.yaml"
+    },
+    {
+      "id": "RSK-PUBLIC-BIND",
+      "type": "Risk",
+      "title": "Non-loopback bind of serve.py",
+      "status": "mitigated",
+      "summary": "Default 127.0.0.1:8099; refuse 0.0.0.0 without --allow-non-loopback; compose publishes 127.0.0.1:8099:8099."
+    },
+    {
+      "id": "RSK-PORT-COLLISION",
+      "type": "Risk",
+      "title": "Stealing Agentix host ports",
+      "status": "mitigated",
+      "summary": "Product port 8099 only; tests forbid publishing 8080/8100/8110/8112."
     }
   ]
 }
