@@ -49,6 +49,18 @@ def test_search_mvd(tmp_path: Path) -> None:
     assert "foiv:mvd" in payload["ids"]
 
 
+def test_search_tverskoy_lemma_alias(tmp_path: Path) -> None:
+    db_path = _build(tmp_path)
+    status, _headers, payload = _get("/v1/search", db_path, q="Тверской")
+    assert status == 200, payload
+    assert "wd:Q1644209" in payload["ids"]
+    hit = next(row for row in payload["hits"] if row["id"] == "wd:Q1644209")
+    assert hit["name_ru"] == "Тверская улица"
+    assert hit["table_name"] == "hodonyms"
+    assert "lemma" not in hit
+    assert "gen" not in hit
+
+
 def test_missing_and_empty_query(tmp_path: Path) -> None:
     db_path = _build(tmp_path)
     status, _headers, payload = _get("/v1/search", db_path)

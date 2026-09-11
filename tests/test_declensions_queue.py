@@ -13,6 +13,7 @@ from scripts.lib.declensions import (
     DeclensionError,
     append_queue,
     is_auto_source,
+    load_lemma_aliases,
     prepare_queue_row,
 )
 from scripts.lib.upsert import upsert_rows
@@ -32,6 +33,47 @@ def test_queue_csv_exists_and_is_not_a_resource() -> None:
     pkg = json.loads(DATAPACKAGE.read_text(encoding="utf-8"))
     paths = {resource["path"] for resource in pkg["resources"]}
     assert "data/declensions/queue.csv" not in paths
+
+
+def test_lemma_aliases_skip_queue_and_join_cases(tmp_path: Path) -> None:
+    aliases = load_lemma_aliases(ROOT)
+    tverskaya = aliases["wd:Q1644209"]
+    assert "Тверская улица" in tverskaya
+    assert "Тверской" in tverskaya
+    assert "Москвы" in aliases["wd:Q649"]
+    dest = tmp_path / "data/declensions"
+    dest.mkdir(parents=True)
+    write_csv(
+        dest / "hodonyms.csv",
+        DECLENSIONS_HEADER,
+        [
+            {
+                **{key: "" for key in DECLENSIONS_HEADER},
+                "id": "wd:Q1644209",
+                "lemma": "Тверская улица",
+                "gen": "Тверской улицы",
+                "review": "needs_review",
+                "source": "manual",
+            }
+        ],
+    )
+    write_csv(
+        tmp_path / QUEUE_RELPATH,
+        DECLENSIONS_HEADER,
+        [
+            {
+                **{key: "" for key in DECLENSIONS_HEADER},
+                "id": "local:queue-only",
+                "lemma": "Очередьалиас",
+                "review": "needs_review",
+                "source": "auto",
+            }
+        ],
+    )
+    isolated = load_lemma_aliases(tmp_path)
+    assert "local:queue-only" not in isolated
+    assert "Очередьалиас" not in isolated.get("wd:Q1644209", "")
+    assert "Тверской" in isolated["wd:Q1644209"]
 
 
 def test_gold_tables_have_no_pymorphy_natasha() -> None:

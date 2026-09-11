@@ -46,8 +46,10 @@ python scripts/serve.py       # 127.0.0.1:8099
 | `GET /v1/records?id=…` | одна карточка по стабильному id |
 | `GET /v1/declensions?id=…` | падежи из CSV (массив hits, ключ `(id, lemma)`) |
 
-В индекс **не входят** склонения, `types.csv` и сырьё `data/raw/`.
-Падежи **не** кладутся в FTS: `/v1/declensions` читает `data/declensions/*.csv` по `id`.
+В индекс **не входят** `types.csv` и сырьё `data/raw/`. Карточка `records` **не**
+дублирует CSV склонений: падежный ряд отдаёт `/v1/declensions`.
+`lemma` / `yo` / заполненные падежи из `data/declensions/*.csv` (не `queue.csv`)
+попадают в FTS как поисковые алиасы — «Тверской» и «Москвы» находят канон.
 Только GET; POST/PUT — 405.
 
 Поля карточки: `id`, `table_name`, `type_id`, `name_ru`, `name_yo`, `name_en`,
@@ -107,6 +109,32 @@ curl -sSG http://127.0.0.1:8099/v1/records --data-urlencode 'id=wd:Q626'   # В�
 Браузер на той же машине: [http://127.0.0.1:8099/v1/search?q=Волга](http://127.0.0.1:8099/v1/search?q=%D0%92%D0%BE%D0%BB%D0%B3%D0%B0).
 
 `ё`: в `name_ru` хранится нормализация «е»; буква ё — в `name_yo`. Поиск «Орел» и «Орёл» может разойтись; смотрите оба поля в карточке.
+
+---
+
+## 3.1. Муниципалитеты, улицы, микротопонимы
+
+Это **малые сиды** (DEC-SEED-001), не выгрузка ГАР. В каноне сейчас по две строки
+на таблицу — примеры типов из `types.csv`, без полного списка улиц и МО.
+
+| Таблица | Сколько строк | Примеры |
+|---|---|---|
+| `data/curated/municipalities.csv` | 2 | городской округ Самара, городской округ Казань |
+| `data/curated/hodonyms.csv` | 2 | Тверская улица, Невский проспект |
+| `data/curated/microtoponyms.csv` | 2 | Синий камень, урочище Синие камни |
+
+```bash
+curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Тверская'
+curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Тверской'
+curl -sSG http://127.0.0.1:8099/v1/search \
+  --data-urlencode 'q=Самара' \
+  --data-urlencode 'table_name=municipalities'
+curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Синий'
+```
+
+«Тверская» бьёт в `name_ru`. «Тверской» — падежный алиас из
+`data/declensions/hodonyms.csv` (`review=needs_review`, не pymorphy-золото).
+Расширять сиды без ГАР — отдельные задачи; полный реестр улиц/МО вне канона.
 
 ---
 
@@ -225,7 +253,8 @@ sqlite3 knowledge/registry.db \
    WHERE records_fts MATCH '\"Волга\"';"
 ```
 
-Склонения в `registry.db` **нет**.
+В `records` падежей нет. FTS-колонка `lemma` — только поисковые алиасы
+(лемма/ё/заполненные падежи); полный ряд — CSV или `GET /v1/declensions`.
 
 ---
 
@@ -233,7 +262,7 @@ sqlite3 knowledge/registry.db \
 
 Есть: 8 федеральных округов, 89 субъектов, крупные города, крупные гидронимы и оронимы,
 ФОИВ и смежные ведомства, золотые склонения к части из них,
-малые сиды муниципалитетов, годонимов и микротопонимов (DEC-SEED-001).
+малые сиды муниципалитетов / годонимов / микротопонимов (по 2 строки, DEC-SEED-001).
 
 Нет в этом релизе: полный ГАР/ФИАС, GeoNames `RU.zip`, полный список улиц и МО,
 склонения **каждого** ойконима (только золотые/черновые таблицы выше),
@@ -276,8 +305,9 @@ python scripts/check.py --json --offline
 curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Москва'
 grep -h '^wd:Q649,' data/declensions/cities-major.csv
 
-# Волга → wd:Q626 (строка склонения сейчас в cities-major.csv, type_code=potamonym)
-grep -h '^wd:Q626,' data/declensions/*.csv
+# Волга → wd:Q626 (склонение в hydronyms-major.csv, type_code=potamonym)
+curl -sSG http://127.0.0.1:8099/v1/declensions --data-urlencode 'id=wd:Q626'
+grep -h '^wd:Q626,' data/declensions/hydronyms-major.csv
 
 # МВД → foiv:mvd
 curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=МВД'

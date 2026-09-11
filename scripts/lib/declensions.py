@@ -36,6 +36,17 @@ GOLD_RELPATHS = (
 )
 AUTO_SOURCE_MARKERS = ("pymorphy", "natasha", "pyphrasy")
 QUEUE_REVIEW = frozenset({"auto", "needs_review"})
+ALIAS_FIELDS = (
+    "lemma",
+    "yo",
+    "nom",
+    "gen",
+    "dat",
+    "acc",
+    "ins",
+    "pre",
+    "loc2",
+)
 
 
 class DeclensionError(Exception):
@@ -49,6 +60,29 @@ def is_auto_source(source: str) -> bool:
 
 def uniqueness_key(row: dict[str, Any]) -> tuple[str, str]:
     return (str(row.get("id") or ""), str(row.get("lemma") or ""))
+
+
+def load_lemma_aliases(root: Path) -> dict[str, str]:
+    """FTS aliases from canon declensions (not queue). Does not copy CSV into records."""
+    blobs: dict[str, list[str]] = {}
+    seen: dict[str, set[str]] = {}
+    for rel in GOLD_RELPATHS:
+        path = Path(root) / rel
+        if not path.is_file():
+            continue
+        _header, rows = read_csv(path)
+        for row in rows:
+            rid = (row.get("id") or "").strip()
+            if not rid:
+                continue
+            tokens = seen.setdefault(rid, set())
+            parts = blobs.setdefault(rid, [])
+            for key in ALIAS_FIELDS:
+                value = (row.get(key) or "").strip()
+                if value and value not in tokens:
+                    tokens.add(value)
+                    parts.append(value)
+    return {rid: " ".join(parts) for rid, parts in blobs.items() if parts}
 
 
 def rows_for_id(root: Path, record_id: str) -> list[dict[str, str]]:
