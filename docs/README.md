@@ -43,4 +43,4 @@
 | [../CITATION.cff](../CITATION.cff) | цитирование |
 | [Релизы](https://github.com/unhexx/toponym/releases) | теги GitHub |
 
-Актуальный тег: [`2026.09.15`](https://github.com/unhexx/toponym/releases/tag/2026.09.15).
+Актуальный тег: [`2026.09.16`](https://github.com/unhexx/toponym/releases/tag/2026.09.16).

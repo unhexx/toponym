@@ -1,4 +1,4 @@
-# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`, `2026.09.15`)
+# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`, `2026.09.15`, `2026.09.16`)
 
 Исполняемый план циклов. Детали интерфейсов: `docs/design/2026-09-09-v1-local-registries.md`.
 Спека: `TASK_SPECIFICATION.md`. ADR: `LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`.
@@ -72,8 +72,9 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | REL-2026.09.15 | annotated CalVer `2026.09.15` | `chore/release-2026.09.15` | витрина README, оглавление docs; теги `2026.09.11`/`2026.09.12`/`2026.09.13`/`2026.09.14` не двигались | COMPLETE |
 | HOD-WD | Wikidata harvest годонимов (P31 Q79007, P17 Q159) | `feature/hodonyms-wikidata-harvest` | SPARQL + `seed_hodonyms.py` upsert `wd:Q`; покрытие Wikidata задокументировано; без ГАР | COMPLETE |
 | HOD-WD-P31 | SPARQL годонимов: бульвар/проспект/переулок/набережная | `feature/hodonyms-p31-types` | VALUES P31 из `wikidata.yaml`; harvest по одному типу; upsert `wd:Q`; без ГАР | COMPLETE |
+| REL-2026.09.16 | annotated CalVer `2026.09.16` | `chore/release-2026.09.16` | реестр годонимов Wikidata (~15 тыс.); теги `2026.09.11`–`2026.09.15` не двигались | COMPLETE |
 
-A–L COMPLETE на `main`. Annotated CalVer `2026.09.15` на `main`. Теги `2026.09.11`, `2026.09.12`, `2026.09.13` и `2026.09.14` не двигать. HOD-WD / HOD-WD-P31 — реестр улиц из Wikidata (улица/бульвар/проспект/переулок/набережная), не ФИАС.
+A–L COMPLETE на `main`. Annotated CalVer `2026.09.16` на `main`. Теги `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14` и `2026.09.15` не двигать. HOD-WD / HOD-WD-P31 — реестр улиц из Wikidata (улица/бульвар/проспект/переулок/набережная), не ФИАС.
 
 ## Definition of Done v1
 

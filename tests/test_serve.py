@@ -204,7 +204,7 @@ def test_healthz(tmp_path: Path) -> None:
     assert payload["records"] > 0
     assert payload["name"] == "toponym"
     assert payload["version"] == serve_mod.PACKAGE_VERSION
-    assert payload["version"] == "2026.09.15"
+    assert payload["version"] == "2026.09.16"
 
 
 def test_parse_args_defaults(monkeypatch: pytest.MonkeyPatch) -> None:
