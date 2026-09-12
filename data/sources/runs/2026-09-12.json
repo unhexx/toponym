@@ -1,0 +1,91 @@
+{
+  "as_of": "2026-09-12T03:06:00Z",
+  "changed_count": 2,
+  "error_count": 0,
+  "sources": [
+    {
+      "id": "gkgn-opendata",
+      "changed": false,
+      "reason": "http_head timeout/no reliable headers; pointer only",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "fias-gar",
+      "changed": false,
+      "reason": "http_head timeout/no reliable headers; pointer only",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "geonames-ru",
+      "changed": true,
+      "reason": "159 RU A,P,H,T,L rows in mods-2026-09-11.txt; no local checkout, sync.py not applied; DEC-GN-001 skipped_unmapped pending pipeline",
+      "cursor_old": "2026-09-10",
+      "cursor_new": "2026-09-11",
+      "error": false
+    },
+    {
+      "id": "ukase-326",
+      "changed": true,
+      "reason": "отпечаток страницы изменился; без --manual-file только checked_at/cursor, HTML→CSV нет",
+      "cursor_old": "77c8b5ffeac5f672930ec97134e69aa91ff4049a75dd242cc29fb847ee7736da",
+      "cursor_new": "839d44d7c744b1cc63534dfe4f9f734ed1321cb3cc9a0a617ebdc4e25557cda8",
+      "error": false
+    },
+    {
+      "id": "hflabs-region",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-11",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "hflabs-city",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-11",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "epogrebnyak-ru-cities",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-11",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "mfursov-russian-cities",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-11",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "nickyx3-settlements",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-11",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "wikidata",
+      "changed": false,
+      "reason": "kind=none",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    }
+  ],
+  "records_upserted": 0,
+  "records_deprecated": 0,
+  "commit": null,
+  "check_exit": "missing"
+}
