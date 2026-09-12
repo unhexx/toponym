@@ -13,6 +13,7 @@ from scripts.lib.catalog import (
     stamp_catalog_checked_at,
 )
 from scripts.lib.journal import write_run_journal
+from scripts.lib.upsert import UpsertCounts
 
 ROOT = Path(__file__).resolve().parents[1]
 DAILY = ROOT / ".github" / "workflows" / "daily.yml"
@@ -25,6 +26,11 @@ NOW = datetime(2026, 9, 12, 6, 0, 0, tzinfo=UTC)
 def _journal(root: Path) -> dict:
     path = root / "data" / "sources" / "runs" / "2026-09-12.json"
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _sync_report(*, inserted: int = 0, updated: int = 0, deprecated: int = 0) -> dict:
+    counts = UpsertCounts(inserted=inserted, updated=updated, deprecated=deprecated)
+    return {"apply": True, **counts.as_dict(), **counts.journal_fields(), "sources": []}
 
 
 def test_daily_yml_is_install_run_commit() -> None:
@@ -109,6 +115,11 @@ def test_journal_module_is_dump_only() -> None:
     assert "stamp-catalog" not in text
     assert "patch_catalog_source" not in text
     assert "scripts.lib.catalog" not in text
+    assert "argparse" not in text
+    assert "def main" not in text
+    assert "journal_counts_from_sync_files" not in text
+    assert "sync_json" not in text
+    assert "inserted" not in text
 
 
 def test_write_run_journal_copies_check_sources(tmp_path: Path, monkeypatch) -> None:
@@ -156,49 +167,34 @@ def test_write_run_journal_copies_check_sources(tmp_path: Path, monkeypatch) -> 
     assert catalog.read_text(encoding="utf-8") == original_catalog
 
 
-def test_write_run_journal_main_does_not_patch_catalog(tmp_path: Path, monkeypatch) -> None:
-    monkeypatch.chdir(tmp_path)
+def test_write_run_journal_does_not_patch_catalog(tmp_path: Path) -> None:
     catalog = tmp_path / "data" / "sources" / "catalog.yaml"
     catalog.parent.mkdir(parents=True, exist_ok=True)
     catalog.write_text(FIXTURE_CATALOG.read_text(encoding="utf-8"), encoding="utf-8")
     original_catalog = catalog.read_text(encoding="utf-8")
-    check_json = tmp_path / "check.json"
-    check_json.write_text(
-        json.dumps(
-            {
-                "as_of": "2026-09-11T06:00:00Z",
-                "changed_count": 2,
-                "error_count": 0,
-                "sources": [
-                    {
-                        "id": "example-src",
-                        "changed": True,
-                        "reason": "etag",
-                        "cursor_old": "old",
-                        "cursor_new": "should-not-be-patched",
-                        "error": False,
-                    }
-                ],
-            },
-            ensure_ascii=False,
-        ),
-        encoding="utf-8",
-    )
-    journal_mod.main(
-        [
-            "--today",
-            "2026-09-11",
-            "--as-of",
-            "2026-09-11T00:00:00Z",
-            "--check-exit",
-            "10",
-            "--check-json",
-            str(check_json),
-        ]
+    path = write_run_journal(
+        today="2026-09-11",
+        as_of="2026-09-11T00:00:00Z",
+        check_exit=10,
+        check_report={
+            "as_of": "2026-09-11T06:00:00Z",
+            "changed_count": 2,
+            "error_count": 0,
+            "sources": [
+                {
+                    "id": "example-src",
+                    "changed": True,
+                    "reason": "etag",
+                    "cursor_old": "old",
+                    "cursor_new": "should-not-be-patched",
+                    "error": False,
+                }
+            ],
+        },
+        runs_dir=tmp_path / "data" / "sources" / "runs",
     )
     assert catalog.read_text(encoding="utf-8") == original_catalog
-    journal = tmp_path / "data" / "sources" / "runs" / "2026-09-11.json"
-    payload = json.loads(journal.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8"))
     assert payload["changed_count"] == 2
     assert payload["sources"][0]["cursor_new"] == "should-not-be-patched"
     assert payload["records_upserted"] == 0
@@ -206,56 +202,32 @@ def test_write_run_journal_main_does_not_patch_catalog(tmp_path: Path, monkeypat
 
 
 def test_write_run_journal_from_upsert_counts(tmp_path: Path) -> None:
+    total = UpsertCounts()
+    for report in (
+        _sync_report(inserted=1, updated=4, deprecated=2),
+        _sync_report(inserted=2, updated=0, deprecated=1),
+    ):
+        total.add(
+            UpsertCounts(
+                inserted=int(report["inserted"]),
+                updated=int(report["updated"]),
+                deprecated=int(report["deprecated"]),
+            )
+        )
+    fields = total.journal_fields()
     path = write_run_journal(
         today="2026-09-12",
         as_of="2026-09-12T06:00:00Z",
         check_exit=10,
-        sync_reports=[
-            {
-                "inserted": 1,
-                "updated": 4,
-                "deprecated": 2,
-                "records_upserted": 5,
-                "records_deprecated": 2,
-            },
-            {"inserted": 2, "updated": 0, "deprecated": 1},
-        ],
         runs_dir=tmp_path / "data" / "sources" / "runs",
+        records_upserted=fields["records_upserted"],
+        records_deprecated=fields["records_deprecated"],
     )
     payload = json.loads(path.read_text(encoding="utf-8"))
     assert payload["records_upserted"] == 7
     assert payload["records_deprecated"] == 3
     assert payload["check_exit"] == 10
-
-
-def test_write_run_journal_explicit_counts_override_sync(tmp_path: Path, monkeypatch) -> None:
-    monkeypatch.chdir(tmp_path)
-    sync_json = tmp_path / "sync.json"
-    sync_json.write_text(
-        json.dumps({"inserted": 9, "updated": 1, "deprecated": 4}),
-        encoding="utf-8",
-    )
-    journal_mod.main(
-        [
-            "--today",
-            "2026-09-12",
-            "--as-of",
-            "2026-09-12T06:00:00Z",
-            "--check-exit",
-            "10",
-            "--sync-json",
-            str(sync_json),
-            "--records-upserted",
-            "3",
-            "--records-deprecated",
-            "1",
-        ]
-    )
-    payload = json.loads(
-        (tmp_path / "data" / "sources" / "runs" / "2026-09-12.json").read_text(encoding="utf-8")
-    )
-    assert payload["records_upserted"] == 3
-    assert payload["records_deprecated"] == 1
+    assert "inserted" not in payload
 
 
 def test_daily_noop_stamps_and_journals(tmp_path: Path) -> None:
@@ -369,13 +341,7 @@ def test_daily_syncs_changed_then_validate_index_journal(tmp_path: Path) -> None
 
     def sync_fn(source_id: str):
         order.append(f"sync:{source_id}")
-        return {
-            "inserted": 0,
-            "updated": 4,
-            "deprecated": 1,
-            "records_upserted": 4,
-            "records_deprecated": 1,
-        }
+        return _sync_report(updated=4, deprecated=1)
 
     def validate_fn():
         order.append("validate")
@@ -475,8 +441,7 @@ def test_daily_validate_fail_reverts_without_journal(tmp_path: Path) -> None:
         root=tmp_path,
         now=NOW,
         check_fn=check_fn,
-        sync_fn=lambda sid: order.append(f"sync:{sid}")
-        or {"records_upserted": 2, "records_deprecated": 0},
+        sync_fn=lambda sid: order.append(f"sync:{sid}") or _sync_report(inserted=2),
         validate_fn=lambda: order.append("validate") or 1,
         index_fn=lambda: order.append("index") or 0,
         stamp_fn=lambda: order.append("stamp") or True,
