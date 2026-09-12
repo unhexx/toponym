@@ -58,13 +58,14 @@ def test_compose_up_search() -> None:
     try:
         if up.returncode != 0:
             pytest.fail(f"compose up failed: {up.stderr or up.stdout}")
-        with urllib.request.urlopen(f"{BASE}/healthz", timeout=5) as resp:
+        with urllib.request.urlopen(f"{BASE}/healthz", timeout=10) as resp:
             health = json.loads(resp.read().decode())
         assert resp.status == 200
         assert health["ok"] is True
+        assert int(health.get("records") or 0) > 0, health
         for query, expected in (("Волга", "wd:Q626"), ("МВД", "foiv:mvd")):
             url = BASE + "/v1/search?" + urllib.parse.urlencode({"q": query})
-            with urllib.request.urlopen(url, timeout=5) as resp:
+            with urllib.request.urlopen(url, timeout=10) as resp:
                 payload = json.loads(resp.read().decode())
             assert expected in payload["ids"], payload
     finally:

@@ -104,17 +104,22 @@ def test_ci_compose_job_separate_from_unit() -> None:
     )
     assert '-m "not compose"' in test_text
     assert "docker compose" not in test_text
-    assert "docker compose up --build" in compose_text
-    assert "--wait" in compose_text
-    assert "127.0.0.1:8099/healthz" in compose_text
-    assert "Волга" in compose_text
-    assert "МВД" in compose_text
-    assert "wd:Q626" in compose_text
-    assert "foiv:mvd" in compose_text
+    assert "pytest tests/test_compose_smoke.py" in compose_text
+    assert '-m "not compose"' not in compose_text
+    assert "docker compose" not in compose_text
+    assert "curl" not in compose_text
     assert ":8080" not in compose_text
     assert ":8100" not in compose_text
     assert ":8110" not in compose_text
-    assert "pip install" not in compose_text
+    assert 'pip install -e ".[dev]"' not in compose_text
+
+    smoke = (ROOT / "tests" / "test_compose_smoke.py").read_text(encoding="utf-8")
+    assert '"--wait"' in smoke
+    assert "healthz" in smoke
+    assert "Волга" in smoke
+    assert "МВД" in smoke
+    assert "wd:Q626" in smoke
+    assert "foiv:mvd" in smoke
 
 
 def test_ci_publishes_ghcr_calver_on_main() -> None:
