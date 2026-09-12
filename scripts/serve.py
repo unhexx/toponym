@@ -23,7 +23,7 @@ if str(_ROOT) not in sys.path:
 from scripts.index import DEFAULT_OUT, ROOT, fts_search, get_record, index_counts  # noqa: E402
 from scripts.lib.declensions import rows_for_id  # noqa: E402
 
-PACKAGE_VERSION = "2026.09.13"
+PACKAGE_VERSION = "2026.09.14"
 DEFAULT_BIND = "127.0.0.1"
 DEFAULT_PORT = 8099
 DEFAULT_LIMIT = 20

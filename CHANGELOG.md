@@ -5,6 +5,10 @@
 
 ## [Unreleased]
 
+## [2026.09.14] - 2026-09-14
+
+http_dated без GET при текущем курсоре, журнал из `journal_fields`, daily без `*_fn`. Теги `2026.09.11`, `2026.09.12` и `2026.09.13` не двигались.
+
 ### Removed
 - Мёртвый SHA-стек HTML: `normalize_html`, `fingerprint_text` и четыре regex в детекторах. Kind `page_fingerprint` остаётся (MediaWiki lastrevid / ETag).
 - Журнал daily: один путь counts через `UpsertCounts.journal_fields()`. Убраны `journal_counts_from_sync_files`, fallback `inserted+updated`, `sync_json` и CLI `journal.py`.
@@ -13,6 +17,9 @@
 ### Fixed
 - `http_dated`: курсор сравнивается с вчерашней UTC-датой до GET mods/deletes. Текущий watermark — без сети; таймаут уже актуального дампа не блокирует check.
 - Daily: после `validate==0` CSV и журнал с реальными counts остаются даже если FTS-индекс падает. Индекс производный (gitignore); драйвер не валит GHA из-за него.
+
+### Added
+- Образ `ghcr.io/unhexx/toponym:2026.09.14` (и `:CalVer`) публикуется CI на push в `main`. `compose.yaml` пинит этот тег.
 
 ## [2026.09.13] - 2026-09-13
 
@@ -124,7 +131,8 @@ Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-S
 - GeoNames id: Москва `524901`, Волга `472776`.
 - Склонения: `review=gold` / `needs_review` (не boolean).
 
-[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.13...HEAD
+[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.14...HEAD
+[2026.09.14]: https://github.com/unhexx/toponym/releases/tag/2026.09.14
 [2026.09.13]: https://github.com/unhexx/toponym/releases/tag/2026.09.13
 [2026.09.12]: https://github.com/unhexx/toponym/releases/tag/2026.09.12
 [2026.09.11]: https://github.com/unhexx/toponym/releases/tag/2026.09.11
