@@ -72,8 +72,7 @@ def test_daily_syncs_only_changed_sources() -> None:
     assert "index.py || true" not in text
     assert "python scripts/index.py" in text
     assert "s.get('changed')" in text
-    assert "s.get('error')" in text
-    assert "s.get('blocking'" in text
+    assert "not (s.get('error') and s.get('blocking', True))" in text
     assert "blocking-error" not in text
     assert "blocking_error" not in text
     assert "--all" not in text
