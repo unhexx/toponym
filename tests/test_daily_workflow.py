@@ -420,6 +420,46 @@ def test_daily_check_exit_2_skips_sync_writes_journal(tmp_path: Path) -> None:
     assert journal["error_count"] == 1
 
 
+def test_daily_index_fail_keeps_csv_and_journals_counts(tmp_path: Path) -> None:
+    order: list[str] = []
+
+    def check_fn():
+        order.append("check")
+        return (
+            {
+                "as_of": "2026-09-12T06:00:00Z",
+                "changed_count": 1,
+                "error_count": 0,
+                "sources": [
+                    {"id": "geonames-ru", "changed": True, "error": False, "blocking": True}
+                ],
+            },
+            10,
+        )
+
+    summary, code = run_daily(
+        root=tmp_path,
+        now=NOW,
+        check_fn=check_fn,
+        sync_fn=lambda sid: order.append(f"sync:{sid}")
+        or _sync_report(inserted=2, updated=3, deprecated=1),
+        validate_fn=lambda: order.append("validate") or 0,
+        index_fn=lambda: order.append("index") or 2,
+        stamp_fn=lambda: order.append("stamp") or True,
+        revert_fn=lambda: order.append("revert"),
+    )
+    assert code == 0
+    assert order == ["check", "sync:geonames-ru", "validate", "index"]
+    assert summary["validate"] == "0"
+    assert summary["stamped"] is False
+    assert summary["records_upserted"] == 5
+    assert summary["records_deprecated"] == 1
+    journal = _journal(tmp_path)
+    assert journal["check_exit"] == 10
+    assert journal["records_upserted"] == 5
+    assert journal["records_deprecated"] == 1
+
+
 def test_daily_validate_fail_reverts_without_journal(tmp_path: Path) -> None:
     order: list[str] = []
 
