@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-09-12T04:17:23Z",
-  "changed_count": 2,
+  "as_of": "2026-09-12T09:49:08Z",
+  "changed_count": 0,
   "error_count": 2,
   "sources": [
     {
@@ -23,21 +23,19 @@
     },
     {
       "id": "geonames-ru",
-      "changed": true,
-      "reason": "174 RU rows in mods",
+      "changed": false,
+      "reason": "cursor already 2026-09-11",
       "cursor_old": "2026-09-11",
       "cursor_new": "2026-09-11",
-      "error": false,
-      "blocking": true
+      "error": false
     },
     {
       "id": "ukase-326",
-      "changed": true,
-      "reason": "отпечаток страницы изменился",
-      "cursor_old": "839d44d7c744b1cc63534dfe4f9f734ed1321cb3cc9a0a617ebdc4e25557cda8",
-      "cursor_new": "77c8b5ffeac5f672930ec97134e69aa91ff4049a75dd242cc29fb847ee7736da",
-      "error": false,
-      "blocking": true
+      "changed": false,
+      "reason": "тот же MediaWiki rev",
+      "cursor_old": "141625080",
+      "cursor_new": "141625080",
+      "error": false
     },
     {
       "id": "hflabs-region",
@@ -45,8 +43,7 @@
       "reason": "нет коммитов since 2026-09-12",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false,
-      "blocking": true
+      "error": false
     },
     {
       "id": "hflabs-city",
@@ -54,8 +51,7 @@
       "reason": "нет коммитов since 2026-09-12",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false,
-      "blocking": true
+      "error": false
     },
     {
       "id": "epogrebnyak-ru-cities",
@@ -63,8 +59,7 @@
       "reason": "нет коммитов since 2026-09-12",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false,
-      "blocking": true
+      "error": false
     },
     {
       "id": "mfursov-russian-cities",
@@ -72,8 +67,7 @@
       "reason": "нет коммитов since 2026-09-12",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false,
-      "blocking": true
+      "error": false
     },
     {
       "id": "nickyx3-settlements",
@@ -81,8 +75,7 @@
       "reason": "нет коммитов since 2026-09-12",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false,
-      "blocking": true
+      "error": false
     },
     {
       "id": "wikidata",
@@ -90,12 +83,11 @@
       "reason": "kind=none",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false,
-      "blocking": true
+      "error": false
     }
   ],
   "records_upserted": 0,
   "records_deprecated": 0,
   "commit": null,
-  "check_exit": 10
+  "check_exit": 0
 }
