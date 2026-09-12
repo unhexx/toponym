@@ -203,9 +203,10 @@ def test_http_timeout_exit_2(monkeypatch, capsys) -> None:
     assert code == 2
     assert report["error_count"] >= 1
     assert report["sources"][0]["error"] is True
+    assert report["sources"][0]["blocking"] is True
 
 
-def test_pointer_http_head_timeout_is_not_error(tmp_path: Path) -> None:
+def test_pointer_http_head_timeout_nonblocking_exit_0(tmp_path: Path) -> None:
     catalog = {
         "updated": "2026-09-09",
         "sources": [
@@ -228,8 +229,9 @@ def test_pointer_http_head_timeout_is_not_error(tmp_path: Path) -> None:
 
     report = check_catalog(catalog, session=FakeSession(handler), now=FIXED_NOW)
     assert exit_code(report) == 0
-    assert report["error_count"] == 0
-    assert report["sources"][0]["error"] is False
+    assert report["error_count"] == 1
+    assert report["sources"][0]["error"] is True
+    assert report["sources"][0]["blocking"] is False
     assert report["sources"][0]["changed"] is False
     assert "pointer only" in report["sources"][0]["reason"]
 
@@ -267,8 +269,10 @@ def test_pointer_timeout_does_not_block_geonames_changed(tmp_path: Path) -> None
     report = check_catalog(catalog, session=FakeSession(handler), now=FIXED_NOW)
     assert exit_code(report) == 10
     by_id = {row["id"]: row for row in report["sources"]}
-    assert by_id["gkgn-opendata"]["error"] is False
+    assert by_id["gkgn-opendata"]["error"] is True
+    assert by_id["gkgn-opendata"]["blocking"] is False
     assert by_id["geonames-ru"]["changed"] is True
+    assert by_id["geonames-ru"]["error"] is False
 
 
 def test_github_sha_differs_exit_10(tmp_path: Path, monkeypatch, capsys) -> None:
@@ -370,8 +374,70 @@ def test_json_shape_keys(monkeypatch, capsys) -> None:
     report = json.loads(capsys.readouterr().out)
     assert set(report) >= {"as_of", "sources", "changed_count", "error_count"}
     row = report["sources"][0]
-    assert set(row) >= {"id", "changed", "reason", "cursor_old", "cursor_new", "error"}
+    assert set(row) >= {
+        "id",
+        "changed",
+        "reason",
+        "cursor_old",
+        "cursor_new",
+        "error",
+        "blocking",
+    }
     assert report["as_of"].endswith("Z")
+
+
+def test_stamp_shifts_checked_at_without_network(tmp_path: Path, monkeypatch) -> None:
+    catalog_path = tmp_path / "catalog.yaml"
+    catalog_path.write_text(
+        (FIXTURES / "catalog_valid.yaml").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(check_mod, "CATALOG_PATH", catalog_path)
+
+    def boom():
+        raise AssertionError("network")
+
+    monkeypatch.setattr(check_mod, "build_session", boom)
+    code = check_mod.main(["--stamp", "--today", "2026-09-11"])
+    assert code == 0
+    payload = load_catalog(catalog_path)
+    assert payload["updated"] == "2026-09-11"
+    assert payload["sources"][0]["checked_at"] == "2026-09-11"
+
+
+def test_stamp_defaults_today_to_utcnow(tmp_path: Path, monkeypatch) -> None:
+    catalog_path = tmp_path / "catalog.yaml"
+    catalog_path.write_text(
+        (FIXTURES / "catalog_valid.yaml").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(check_mod, "CATALOG_PATH", catalog_path)
+    monkeypatch.setattr(check_mod, "utcnow", lambda: datetime(2026, 9, 12, 6, 0, 0, tzinfo=UTC))
+    assert check_mod.main(["--stamp"]) == 0
+    payload = load_catalog(catalog_path)
+    assert payload["updated"] == "2026-09-12"
+    assert payload["sources"][0]["checked_at"] == "2026-09-12"
+
+
+def test_stamp_rejects_combined_flags(tmp_path: Path, monkeypatch, capsys) -> None:
+    catalog_path = tmp_path / "catalog.yaml"
+    catalog_path.write_text(
+        (FIXTURES / "catalog_valid.yaml").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    original = catalog_path.read_text(encoding="utf-8")
+    monkeypatch.setattr(check_mod, "CATALOG_PATH", catalog_path)
+    for argv in (
+        ["--stamp", "--json"],
+        ["--stamp", "--offline"],
+        ["--stamp", "--source", "example-src"],
+    ):
+        code = check_mod.main(argv)
+        assert code == 2
+        err = capsys.readouterr().err
+        assert "--stamp" in err
+        assert "не сочетается" in err
+    assert catalog_path.read_text(encoding="utf-8") == original
 
 
 def test_dump_last_modified_does_not_flip_changed(monkeypatch, capsys) -> None:

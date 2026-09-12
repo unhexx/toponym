@@ -51,8 +51,15 @@ jobs:
           set -e
           echo "check_exit=$CHECK_EXIT" >> "$GITHUB_OUTPUT"
 
+          CHANGED=$(python -c "import json; print(int(json.load(open('/tmp/check.json')).get('changed_count') or 0))" || echo 0)
+          echo "changed_count=$CHANGED" >> "$GITHUB_OUTPUT"
+
           if [[ "$CHECK_EXIT" -eq 10 ]]; then
-            python scripts/sync.py --apply
+            python -c "import json; src=json.load(open('/tmp/check.json', encoding='utf-8')).get('sources') or []; [print(s['id']) for s in src if isinstance(s, dict) and s.get('changed') and not (s.get('error') and s.get('blocking', True)) and s.get('id')]" > /tmp/changed-ids.txt
+            mapfile -t CHANGED_IDS < /tmp/changed-ids.txt
+            for src in "${CHANGED_IDS[@]}"; do
+              python scripts/sync.py --source "$src" --apply --check-json /tmp/check.json
+            done
             set +e
             python scripts/validate.py
             VAL=$?
@@ -63,25 +70,23 @@ jobs:
               echo "validate failed; reverted data/, no commit" >&2
               exit 1
             fi
-            python scripts/index.py || true
-            echo "changed_count=1" >> "$GITHUB_OUTPUT"
+            python scripts/index.py
           else
             echo "validate=skip" >> "$GITHUB_OUTPUT"
-            echo "changed_count=0" >> "$GITHUB_OUTPUT"
             if [[ "$CHECK_EXIT" -eq 2 ]]; then
               echo "check.py exit 2; skip sync, write journal" >&2
             fi
           fi
 
-          CHANGED=0
-          if [[ "$CHECK_EXIT" -eq 10 ]]; then CHANGED=1; fi
           python .github/scripts/write_run_journal.py \
             --today "$TODAY" \
             --as-of "$AS_OF" \
             --check-exit "$CHECK_EXIT" \
-            --changed-count "$CHANGED" \
-            --check-json /tmp/check.json \
-            --stamp-catalog
+            --check-json /tmp/check.json
+
+          if [[ "$CHECK_EXIT" -eq 0 ]]; then
+            python scripts/check.py --stamp --today "$TODAY"
+          fi
 
       - name: Commit if there is a real diff
         env:

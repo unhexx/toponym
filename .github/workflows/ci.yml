@@ -41,29 +41,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Compose up
-        run: docker compose up --build -d --wait
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-      - name: Healthz and search
-        run: |
-          set -euo pipefail
-          curl -fsS http://127.0.0.1:8099/healthz
-          python3 - <<'PY'
-          import json
-          import urllib.parse
-          import urllib.request
+      - name: Install pytest
+        run: pip install "pytest>=8.0,<9"
 
-          with urllib.request.urlopen("http://127.0.0.1:8099/healthz", timeout=10) as resp:
-              health = json.load(resp)
-          assert health.get("ok") is True, health
-          assert int(health.get("records") or 0) > 0, health
-          for query, expected in (("Волга", "wd:Q626"), ("МВД", "foiv:mvd")):
-              url = "http://127.0.0.1:8099/v1/search?" + urllib.parse.urlencode({"q": query})
-              with urllib.request.urlopen(url, timeout=10) as resp:
-                  payload = json.load(resp)
-              assert expected in payload.get("ids", []), payload
-          print("compose-smoke ok")
-          PY
+      - name: Pytest compose smoke
+        run: pytest tests/test_compose_smoke.py -ra
 
       - name: Compose down
         if: always()

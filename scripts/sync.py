@@ -16,8 +16,8 @@ if str(_ROOT) not in sys.path:
 
 from scripts.lib.catalog import (  # noqa: E402
     load_catalog,
-    load_mapping,
     patch_catalog_source,
+    stamp_catalog_updated,
 )
 from scripts.lib.csvio import PLACES_HEADER, read_csv, write_csv  # noqa: E402
 from scripts.lib.detectors import (  # noqa: E402
@@ -27,7 +27,7 @@ from scripts.lib.detectors import (  # noqa: E402
     utcnow,
     yesterday_utc,
 )
-from scripts.lib.places import PLACE_RELPATHS  # noqa: E402
+from scripts.lib.places import load_place_relpaths  # noqa: E402
 from scripts.lib.upsert import (  # noqa: E402
     DEFAULT_MAX_VENDOR_BYTES,
     UpsertCounts,
@@ -38,12 +38,6 @@ from scripts.lib.upsert import (  # noqa: E402
 
 ROOT = _ROOT
 CATALOG_PATH = ROOT / "data" / "sources" / "catalog.yaml"
-POINTER_IDS = {
-    "fias-gar",
-    "gkgn-opendata",
-    "hflabs-region",
-    "hflabs-city",
-}
 
 
 class SyncError(Exception):
@@ -58,7 +52,35 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--apply", action="store_true", help="записать изменения")
     parser.add_argument("--dry-run", action="store_true", help="только отчёт (по умолчанию)")
     parser.add_argument("--manual-file", metavar="PATH", help="канонический CSV для ukase-326")
+    parser.add_argument(
+        "--check-json",
+        default="",
+        help="отчёт check.py: cursor_new для источников changed без error",
+    )
     return parser.parse_args(argv)
+
+
+def cursors_from_check_report(report: Any) -> dict[str, str]:
+    out: dict[str, str] = {}
+    if not isinstance(report, dict):
+        return out
+    for row in report.get("sources") or []:
+        if not isinstance(row, dict) or row.get("error") or not row.get("changed"):
+            continue
+        source_id = row.get("id")
+        cursor_new = row.get("cursor_new") or ""
+        if source_id and cursor_new:
+            out[str(source_id)] = str(cursor_new)
+    return out
+
+
+def load_check_cursors(path: Path | str | None) -> dict[str, str]:
+    if path is None:
+        return {}
+    path = Path(path)
+    if not path.is_file():
+        raise SyncError(f"нет файла {path}")
+    return cursors_from_check_report(json.loads(path.read_text(encoding="utf-8")))
 
 
 def _header(headers: Any, name: str) -> str:
@@ -129,7 +151,7 @@ def sync_geonames(
     deletes_body = _fetch_text(session, urls[1]) if len(urls) > 1 else ""
 
     total = UpsertCounts()
-    for rel in PLACE_RELPATHS:
+    for rel in load_place_relpaths(root):
         path = root / rel
         if not path.is_file():
             continue
@@ -155,6 +177,7 @@ def sync_ukase(
     apply: bool,
     manual_file: Path | None,
     today: str,
+    cursor: str | None = None,
 ) -> UpsertCounts:
     counts = UpsertCounts()
     if manual_file is not None:
@@ -173,6 +196,7 @@ def sync_ukase(
             root / "data" / "sources" / "catalog.yaml",
             source["id"],
             checked_at=today,
+            cursor=cursor,
         )
     return counts
 
@@ -205,11 +229,10 @@ def sync_source(
     manual_file: Path | None,
     session: requests.Session | None,
     now: datetime,
+    cursor: str | None = None,
 ) -> UpsertCounts:
     today = now.date().isoformat()
     source_id = source["id"]
-    mapping = load_mapping(root, source_id) or {}
-    policy = mapping.get("delete_policy") or ""
 
     if source.get("vendor"):
         if session is None:
@@ -224,11 +247,14 @@ def sync_source(
         )
     if source_id == "ukase-326":
         return sync_ukase(
-            source, root=root, apply=apply, manual_file=manual_file, today=today
+            source,
+            root=root,
+            apply=apply,
+            manual_file=manual_file,
+            today=today,
+            cursor=cursor,
         )
-    if policy == "pointer" or source_id in POINTER_IDS:
-        return sync_pointer(source, root=root, apply=apply, today=today)
-    return sync_pointer(source, root=root, apply=apply, today=today)
+    return sync_pointer(source, root=root, apply=apply, today=today, cursor=cursor)
 
 
 def run_sync(
@@ -240,11 +266,13 @@ def run_sync(
     now: datetime | None = None,
     root: Path | None = None,
     catalog_path: Path | None = None,
+    check_json: Path | str | None = None,
 ) -> tuple[dict[str, Any], int]:
     root = root or ROOT
     catalog_path = catalog_path or (root / "data" / "sources" / "catalog.yaml")
     current = now or utcnow()
     catalog = load_catalog(catalog_path)
+    cursors = load_check_cursors(check_json)
     if source_id:
         sources = [row for row in catalog.get("sources", []) if row.get("id") == source_id]
         if not sources:
@@ -262,9 +290,13 @@ def run_sync(
             manual_file=manual_file if source.get("id") == "ukase-326" else None,
             session=session,
             now=current,
+            cursor=cursors.get(str(source["id"])),
         )
         total.add(counts)
         per_source.append({"id": source["id"], **counts.as_dict()})
+
+    if apply:
+        stamp_catalog_updated(catalog_path, current.date().isoformat())
 
     report = {
         "as_of": current.strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -294,6 +326,7 @@ def main(argv: list[str] | None = None) -> int:
             now=utcnow(),
             root=ROOT,
             catalog_path=CATALOG_PATH,
+            check_json=Path(args.check_json) if args.check_json else None,
         )
     except (SyncError, OSError, KeyError, ValueError, requests.RequestException) as exc:
         print(str(exc), file=sys.stderr)
