@@ -1,5 +1,9 @@
 # Вклад
 
+Витрина продукта — [README.md](README.md). Оглавление документации — [docs/README.md](docs/README.md).
+
+Канон ведёт **Evgeniy Chistyakov** (Unhandled Exception), DAO EXCEPTION EXPERT.
+
 1. Новые записи — только со стабильным `id` и полем `source_id`.
 2. Изменения схемы — через PR с обновлением `datapackage.json`.
 3. Склонения высокочастотных имён — вручную, `review=gold`. Автобез проверки — `review=needs_review`, не в золото.

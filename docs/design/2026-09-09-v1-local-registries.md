@@ -1,5 +1,7 @@
 # Toponym v1 Local Registries — Implementation Design
 
+Актуальная витрина: [`README.md`](../../README.md). Оглавление: [`docs/README.md`](../README.md). Этот файл — снимок выпущенного v1, не ежедневный гайд.
+
 | Field | Value |
 |---|---|
 | **Document** | Implementation design and full-cycle plan for `unhexx/toponym` v1 |

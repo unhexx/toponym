@@ -1,5 +1,7 @@
 # Источники
 
+Витрина — [README](../README.md). Оглавление — [docs/README.md](README.md).
+
 SSOT каталога: [`data/sources/catalog.yaml`](../data/sources/catalog.yaml). Здесь — лицензии и что можно класть в git.
 
 Канон `data/curated/` и `data/declensions/` лицензирован MIT вместе с репозиторием. Строки набраны с официальных имён, ISO 3166-2, Wikidata (CC0) и идентификаторов GeoNames — не скопированы из ShareAlike-таблиц.

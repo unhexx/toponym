@@ -83,8 +83,35 @@ def test_readme_has_shields_badges_and_docs_links() -> None:
         "docs/SOURCES.md",
         "docs/presentation/toponym-2026.09.11.md",
         "https://github.com/unhexx/toponym/releases/tag/2026.09.14",
+        "docs/README.md",
+        "docs/DAILY_UPDATE.md",
+        "docs/DECLENSIONS.md",
+        "docs/taxonomy.md",
+        "CITATION.cff",
+        "```mermaid",
+        "Evgeniy Chistyakov",
+        "unhandled@exception.expert",
+        "DAO EXCEPTION EXPERT",
+        "python scripts/daily.py",
     ):
         assert needle in text, needle
+
+
+def test_docs_index_lists_living_and_historical() -> None:
+    text = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
+    for needle in (
+        "USAGE.md",
+        "DAILY_UPDATE.md",
+        "SOURCES.md",
+        "DECLENSIONS.md",
+        "taxonomy.md",
+        "design/2026-09-09-v1-local-registries.md",
+        "presentation/toponym-2026.09.11.md",
+        "Evgeniy Chistyakov",
+        "127.0.0.1:8099",
+    ):
+        assert needle in text, needle
+    assert "0.0.0.0:8099" not in text
 
 
 def test_docs_do_not_publish_all_interfaces() -> None:
@@ -174,6 +201,9 @@ def test_package_calver_aligned() -> None:
     assert 'version = "2026.09.14"' in pyproject
     assert 'version: "2026.09.14"' in citation
     assert 'date-released: "2026-09-14"' in citation
+    assert "Chistyakov" in citation
+    assert "unhandled@exception.expert" in citation
+    assert "DAO EXCEPTION EXPERT" in citation
     assert package["version"] == "2026.09.14"
     assert PACKAGE_VERSION == "2026.09.14"
 

@@ -1,5 +1,7 @@
 # Таксономия
 
+Витрина — [README](../README.md). Оглавление — [docs/README.md](README.md).
+
 Верхний уровень — справочный список типов (на слайде опечатка «Торопум» → **Toponym / топоним**).
 
 **DEC-TAX-001:** идентификаторы `toponym` (root), `oikonym` и `hydronym` (primary, parent=`toponym`) не переименовывать.

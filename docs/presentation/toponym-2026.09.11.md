@@ -8,6 +8,8 @@ lang: ru
 
 Реестр российских топонимов и ведомств
 
+Колода к тегу `2026.09.11`. Актуальная витрина — [README](../../README.md).
+
 Канон CSV в git · локальный FTS · loopback-поиск
 
 **2026.09.11** · MIT · [github.com/unhexx/toponym](https://github.com/unhexx/toponym)
