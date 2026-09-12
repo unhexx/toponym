@@ -13,7 +13,7 @@
 
 **Evgeniy Chistyakov** aka **Unhandled Exception** · [DAO EXCEPTION EXPERT](https://exception.expert) · `unhandled@exception.expert`
 
-Релиз: [`2026.09.15`](https://github.com/unhexx/toponym/releases/tag/2026.09.15). Лицензия репозитория: [MIT](LICENSE). Сырьё источников хранит свои лицензии — [`docs/SOURCES.md`](docs/SOURCES.md).
+Релиз: [`2026.09.15`](https://github.com/unhexx/toponym/releases/tag/2026.09.15). Лицензия репозитория: [MIT](LICENSE). Иходники — [`docs/SOURCES.md`](docs/SOURCES.md).
 
 ---
 
@@ -212,4 +212,4 @@ HTTP (только GET, только loopback): `/healthz`, `/v1/search?q=…`, 
 
 ---
 
-Сделал и веду **Evgeniy Chistyakov** (Unhandled Exception), [DAO EXCEPTION EXPERT](https://exception.expert). Пишите на `unhandled@exception.expert`.
+Обратная связь: `unhandled@exception.expert`.
