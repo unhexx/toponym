@@ -1,11 +1,11 @@
-#!/usr/bin/env python3
-"""Write data/sources/runs/YYYY-MM-DD.json for the daily workflow."""
+"""Write data/sources/runs/YYYY-MM-DD.json for the daily driver."""
 
 from __future__ import annotations
 
 import argparse
 import json
 from pathlib import Path
+from typing import Any
 
 
 def journal_counts_from_sync_report(report: dict) -> tuple[int, int]:
@@ -41,12 +41,18 @@ def write_run_journal(
     changed_count: int = 0,
     notes: str = "",
     check_json: Path | None = None,
+    check_report: dict[str, Any] | None = None,
     runs_dir: Path | None = None,
     records_upserted: int | None = None,
     records_deprecated: int | None = None,
     sync_json: list[Path] | None = None,
+    sync_reports: list[dict[str, Any]] | None = None,
 ) -> Path:
     from_sync_u, from_sync_d = journal_counts_from_sync_files(list(sync_json or []))
+    for report in sync_reports or []:
+        add_u, add_d = journal_counts_from_sync_report(report)
+        from_sync_u += add_u
+        from_sync_d += add_d
     payload: dict = {
         "as_of": as_of,
         "changed_count": changed_count,
@@ -57,17 +63,18 @@ def write_run_journal(
         "commit": None,
         "check_exit": check_exit,
     }
-    if check_json is not None:
+    report: Any = check_report
+    if report is None and check_json is not None:
         report = json.loads(Path(check_json).read_text(encoding="utf-8"))
-        if isinstance(report, dict):
-            if report.get("as_of"):
-                payload["as_of"] = report["as_of"]
-            if "sources" in report and isinstance(report["sources"], list):
-                payload["sources"] = report["sources"]
-            if "changed_count" in report:
-                payload["changed_count"] = int(report["changed_count"] or 0)
-            if "error_count" in report:
-                payload["error_count"] = int(report["error_count"] or 0)
+    if isinstance(report, dict):
+        if report.get("as_of"):
+            payload["as_of"] = report["as_of"]
+        if "sources" in report and isinstance(report["sources"], list):
+            payload["sources"] = report["sources"]
+        if "changed_count" in report:
+            payload["changed_count"] = int(report["changed_count"] or 0)
+        if "error_count" in report:
+            payload["error_count"] = int(report["error_count"] or 0)
     if notes:
         payload["notes"] = notes
     path = (runs_dir or Path("data/sources/runs")) / f"{today}.json"

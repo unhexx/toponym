@@ -13,4 +13,4 @@
 11. Пустой коммит запрещён. Сообщения коммитов — на русском, от лица разработчика.
 12. Не копировать в git посторонние деревья шаблонов и локальные индексы (`knowledge/*.db`).
 
-Ежедневное обновление канона: [`docs/DAILY_UPDATE.md`](docs/DAILY_UPDATE.md) и [`.github/workflows/daily.yml`](.github/workflows/daily.yml).
+Ежедневное обновление канона: `python scripts/daily.py`; [`docs/DAILY_UPDATE.md`](docs/DAILY_UPDATE.md) и [`.github/workflows/daily.yml`](.github/workflows/daily.yml).

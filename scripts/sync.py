@@ -269,12 +269,16 @@ def run_sync(
     root: Path | None = None,
     catalog_path: Path | None = None,
     check_json: Path | str | None = None,
+    check_report: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], int]:
     root = root or ROOT
     catalog_path = catalog_path or (root / "data" / "sources" / "catalog.yaml")
     current = now or utcnow()
     catalog = load_catalog(catalog_path)
-    cursors = load_check_cursors(check_json)
+    if check_report is not None:
+        cursors = cursors_from_check_report(check_report)
+    else:
+        cursors = load_check_cursors(check_json)
     if source_id:
         sources = [row for row in catalog.get("sources", []) if row.get("id") == source_id]
         if not sources:

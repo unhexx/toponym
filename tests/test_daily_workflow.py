@@ -1,113 +1,55 @@
 from __future__ import annotations
 
-import importlib.util
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 
+import scripts.lib.journal as journal_mod
+from scripts.daily import changed_source_ids, run_daily
 from scripts.lib.catalog import load_catalog, stamp_catalog_checked_at
+from scripts.lib.journal import write_run_journal
 
 ROOT = Path(__file__).resolve().parents[1]
 DAILY = ROOT / ".github" / "workflows" / "daily.yml"
 CI = ROOT / ".github" / "workflows" / "ci.yml"
-JOURNAL_SCRIPT = ROOT / ".github" / "scripts" / "write_run_journal.py"
 FIXTURE_CATALOG = ROOT / "tests" / "fixtures" / "catalog_valid.yaml"
+FIXTURE_NONE = ROOT / "tests" / "fixtures" / "catalog_none_only.yaml"
+NOW = datetime(2026, 9, 12, 6, 0, 0, tzinfo=UTC)
 
 
-def _load_journal_mod():
-    spec = importlib.util.spec_from_file_location("write_run_journal", JOURNAL_SCRIPT)
-    assert spec is not None and spec.loader is not None
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
+def _journal(root: Path) -> dict:
+    path = root / "data" / "sources" / "runs" / "2026-09-12.json"
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
-def test_daily_installs_product_without_agent_init() -> None:
+def test_daily_yml_is_install_run_commit() -> None:
     text = DAILY.read_text(encoding="utf-8")
     assert 'pip install -e ".[dev]"' in text
+    assert "python scripts/daily.py" in text
+    assert "empty commit forbidden" in text
+    assert "workflow_dispatch" in text
+    assert 'cron: "0 6 * * *"' in text
+    assert "write_run_journal.py" not in text
+    assert "scripts/check.py" not in text
+    assert "scripts/sync.py" not in text
+    assert "scripts/validate.py" not in text
+    assert "scripts/index.py" not in text
     ci = CI.read_text(encoding="utf-8")
     assert 'pip install -e ".[dev]"' in ci
 
 
-def test_daily_has_no_missing_check_py_skip() -> None:
-    text = DAILY.read_text(encoding="utf-8")
-    assert "scripts/check.py отсутствует" not in text
-    assert "scripts/check.py missing" not in text
-    assert "check_exit=missing" not in text
-    assert "python scripts/check.py --json" in text
-    assert 'python scripts/sync.py --source "$src" --apply --check-json /tmp/check.json' in text
-    assert "python scripts/sync.py --apply --check-json /tmp/check.json" not in text
-    assert "python scripts/validate.py" in text
-    assert "refusing sync/commit" not in text
-    assert "check.py exit 2; skip sync, write journal" in text
-
-
-def test_daily_writes_journal_and_stamps_catalog_only_on_noop() -> None:
-    text = DAILY.read_text(encoding="utf-8")
-    assert "write_run_journal.py" in text
-    assert "--check-json /tmp/check.json" in text
-    assert "--stamp-catalog" not in text
-    assert "--changed-count" not in text
-    assert "json.load(open('/tmp/check.json')).get('changed_count')" in text
-    assert 'echo "changed_count=1"' not in text
-    assert 'if [[ ! -f "data/sources/runs/${TODAY}.json" ]]' not in text
-    assert "workflow_dispatch" in text
-    assert "empty commit forbidden" in text
-    stamp_block = (
-        'if [[ "$CHECK_EXIT" -eq 0 ]]; then\n'
-        '            python scripts/check.py --stamp --today "$TODAY"\n'
-        "          fi\n"
-    )
-    assert stamp_block in text
-    assert text.count("python scripts/check.py --stamp") == 1
-    exit2_at = text.index("check.py exit 2; skip sync, write journal")
-    stamp_at = text.index("python scripts/check.py --stamp")
-    assert stamp_at > exit2_at
-    exit2_block = text[text.index('if [[ "$CHECK_EXIT" -eq 2 ]]') : exit2_at]
-    assert "--stamp" not in exit2_block
-
-
-def test_daily_syncs_only_changed_sources() -> None:
-    text = DAILY.read_text(encoding="utf-8")
-    assert 'python scripts/sync.py --source "$src" --apply --check-json /tmp/check.json' in text
-    assert "index.py || true" not in text
-    assert "python scripts/index.py" in text
-    assert "s.get('changed')" in text
-    assert "not (s.get('error') and s.get('blocking', True))" in text
-    assert "blocking-error" not in text
-    assert "blocking_error" not in text
-    assert "--all" not in text
-    assert "open('/tmp/check.json', encoding='utf-8')" in text
-    sync_lines = [
-        line
-        for line in text.splitlines()
-        if "scripts/sync.py" in line and not line.lstrip().startswith("#")
-    ]
-    assert sync_lines
-    for line in sync_lines:
-        assert "--source" in line
-        assert "--all" not in line
-    sync_block = text[
-        text.index('if [[ "$CHECK_EXIT" -eq 10 ]]') : text.index("write_run_journal.py")
-    ]
-    assert "python scripts/sync.py --source" in sync_block
-    assert "for src" in sync_block
-    assert "mapfile" in sync_block
-    assert "< <(" not in sync_block
-    assert "python scripts/index.py" in sync_block
-    assert "index.py || true" not in sync_block
-    exit2_at = text.index("check.py exit 2; skip sync, write journal")
-    journal_at = text.index("write_run_journal.py")
-    assert journal_at > exit2_at
-    skip_sync = text[text.index('if [[ "$CHECK_EXIT" -eq 2 ]]') : journal_at]
-    assert "scripts/sync.py" not in skip_sync
-
-
-def test_journal_script_is_dump_only() -> None:
-    text = JOURNAL_SCRIPT.read_text(encoding="utf-8")
-    assert "stamp_catalog" not in text
-    assert "stamp-catalog" not in text
-    assert "patch_catalog_source" not in text
-    assert "scripts.lib.catalog" not in text
+def test_changed_source_ids_skips_blocking_errors() -> None:
+    report = {
+        "sources": [
+            {"id": "geonames-ru", "changed": True, "error": False, "blocking": True},
+            {"id": "fias-gar", "changed": False, "error": True, "blocking": False},
+            {"id": "gkgn-opendata", "changed": True, "error": True, "blocking": True},
+            {"id": "ukase-326", "changed": True, "error": True, "blocking": False},
+            {"id": "", "changed": True, "error": False},
+            {"changed": True, "error": False, "id": "wikidata"},
+        ]
+    }
+    assert changed_source_ids(report) == ["geonames-ru", "ukase-326", "wikidata"]
 
 
 def test_stamp_catalog_checked_at_shifts_dates(tmp_path: Path) -> None:
@@ -118,6 +60,14 @@ def test_stamp_catalog_checked_at_shifts_dates(tmp_path: Path) -> None:
     assert payload["updated"] == "2026-09-11"
     assert payload["sources"][0]["checked_at"] == "2026-09-11"
     assert stamp_catalog_checked_at(catalog, "2026-09-11") is False
+
+
+def test_journal_module_is_dump_only() -> None:
+    text = Path(journal_mod.__file__).read_text(encoding="utf-8")
+    assert "stamp_catalog" not in text
+    assert "stamp-catalog" not in text
+    assert "patch_catalog_source" not in text
+    assert "scripts.lib.catalog" not in text
 
 
 def test_write_run_journal_copies_check_sources(tmp_path: Path, monkeypatch) -> None:
@@ -148,8 +98,7 @@ def test_write_run_journal_copies_check_sources(tmp_path: Path, monkeypatch) -> 
         ),
         encoding="utf-8",
     )
-    mod = _load_journal_mod()
-    path = mod.write_run_journal(
+    path = write_run_journal(
         today="2026-09-11",
         as_of="2026-09-11T00:00:00Z",
         check_exit=0,
@@ -194,8 +143,7 @@ def test_write_run_journal_main_does_not_patch_catalog(tmp_path: Path, monkeypat
         ),
         encoding="utf-8",
     )
-    mod = _load_journal_mod()
-    mod.main(
+    journal_mod.main(
         [
             "--today",
             "2026-09-11",
@@ -216,48 +164,21 @@ def test_write_run_journal_main_does_not_patch_catalog(tmp_path: Path, monkeypat
     assert payload["records_deprecated"] == 0
 
 
-def test_daily_passes_sync_json_to_journal() -> None:
-    text = DAILY.read_text(encoding="utf-8")
-    assert "--sync-json" in text
-    assert 'SYNC_JSON_ARGS+=(--sync-json "/tmp/sync-${src}.json")' in text
-    assert 'tee "/tmp/sync-${src}.json"' in text
-    assert '"${SYNC_JSON_ARGS[@]}"' in text
-    journal_block = text[text.index("write_run_journal.py") :]
-    assert "--sync-json" in journal_block or '"${SYNC_JSON_ARGS[@]}"' in journal_block
-    script = JOURNAL_SCRIPT.read_text(encoding="utf-8")
-    assert '"records_upserted": 0' not in script
-    assert "journal_counts_from_sync_report" in script
-
-
-def test_write_run_journal_from_upsert_counts(tmp_path: Path, monkeypatch) -> None:
-    monkeypatch.chdir(tmp_path)
-    sync_one = tmp_path / "sync-geonames.json"
-    sync_one.write_text(
-        json.dumps(
-            {
-                "apply": True,
-                "inserted": 1,
-                "updated": 4,
-                "deprecated": 2,
-                "skipped_gold": 0,
-                "skipped_unmapped": 3,
-                "records_upserted": 5,
-                "records_deprecated": 2,
-            }
-        ),
-        encoding="utf-8",
-    )
-    sync_two = tmp_path / "sync-ukase.json"
-    sync_two.write_text(
-        json.dumps({"inserted": 2, "updated": 0, "deprecated": 1}),
-        encoding="utf-8",
-    )
-    mod = _load_journal_mod()
-    path = mod.write_run_journal(
+def test_write_run_journal_from_upsert_counts(tmp_path: Path) -> None:
+    path = write_run_journal(
         today="2026-09-12",
         as_of="2026-09-12T06:00:00Z",
         check_exit=10,
-        sync_json=[sync_one, sync_two],
+        sync_reports=[
+            {
+                "inserted": 1,
+                "updated": 4,
+                "deprecated": 2,
+                "records_upserted": 5,
+                "records_deprecated": 2,
+            },
+            {"inserted": 2, "updated": 0, "deprecated": 1},
+        ],
         runs_dir=tmp_path / "data" / "sources" / "runs",
     )
     payload = json.loads(path.read_text(encoding="utf-8"))
@@ -273,8 +194,7 @@ def test_write_run_journal_explicit_counts_override_sync(tmp_path: Path, monkeyp
         json.dumps({"inserted": 9, "updated": 1, "deprecated": 4}),
         encoding="utf-8",
     )
-    mod = _load_journal_mod()
-    mod.main(
+    journal_mod.main(
         [
             "--today",
             "2026-09-12",
@@ -295,3 +215,251 @@ def test_write_run_journal_explicit_counts_override_sync(tmp_path: Path, monkeyp
     )
     assert payload["records_upserted"] == 3
     assert payload["records_deprecated"] == 1
+
+
+def test_daily_noop_stamps_and_journals(tmp_path: Path) -> None:
+    order: list[str] = []
+
+    def check_fn():
+        order.append("check")
+        return (
+            {
+                "as_of": "2026-09-12T06:00:00Z",
+                "changed_count": 0,
+                "error_count": 0,
+                "sources": [
+                    {
+                        "id": "wikidata",
+                        "changed": False,
+                        "error": False,
+                        "blocking": True,
+                        "reason": "kind=none",
+                        "cursor_old": "",
+                        "cursor_new": "",
+                    }
+                ],
+            },
+            0,
+        )
+
+    def sync_fn(source_id: str):
+        order.append(f"sync:{source_id}")
+        return {}
+
+    def validate_fn():
+        order.append("validate")
+        return 0
+
+    def index_fn():
+        order.append("index")
+        return 0
+
+    def stamp_fn():
+        order.append("stamp")
+        return True
+
+    def revert_fn():
+        order.append("revert")
+
+    summary, code = run_daily(
+        root=tmp_path,
+        now=NOW,
+        offline=True,
+        check_fn=check_fn,
+        sync_fn=sync_fn,
+        validate_fn=validate_fn,
+        index_fn=index_fn,
+        stamp_fn=stamp_fn,
+        revert_fn=revert_fn,
+    )
+    assert code == 0
+    assert order == ["check", "stamp"]
+    assert summary["check_exit"] == 0
+    assert summary["synced"] == []
+    assert summary["validate"] == "skip"
+    assert summary["stamped"] is True
+    assert summary["records_upserted"] == 0
+    journal = _journal(tmp_path)
+    assert journal["check_exit"] == 0
+    assert journal["records_upserted"] == 0
+    assert journal["sources"][0]["id"] == "wikidata"
+
+
+def test_daily_syncs_changed_then_validate_index_journal(tmp_path: Path) -> None:
+    order: list[str] = []
+
+    def check_fn():
+        order.append("check")
+        return (
+            {
+                "as_of": "2026-09-12T06:00:00Z",
+                "changed_count": 2,
+                "error_count": 1,
+                "sources": [
+                    {
+                        "id": "geonames-ru",
+                        "changed": True,
+                        "error": False,
+                        "blocking": True,
+                        "cursor_new": "2026-09-11",
+                    },
+                    {
+                        "id": "fias-gar",
+                        "changed": False,
+                        "error": True,
+                        "blocking": False,
+                    },
+                    {
+                        "id": "gkgn-opendata",
+                        "changed": True,
+                        "error": True,
+                        "blocking": True,
+                    },
+                    {
+                        "id": "ukase-326",
+                        "changed": False,
+                        "error": False,
+                        "blocking": True,
+                    },
+                ],
+            },
+            10,
+        )
+
+    def sync_fn(source_id: str):
+        order.append(f"sync:{source_id}")
+        return {
+            "inserted": 0,
+            "updated": 4,
+            "deprecated": 1,
+            "records_upserted": 4,
+            "records_deprecated": 1,
+        }
+
+    def validate_fn():
+        order.append("validate")
+        return 0
+
+    def index_fn():
+        order.append("index")
+        return 0
+
+    def stamp_fn():
+        order.append("stamp")
+        return True
+
+    summary, code = run_daily(
+        root=tmp_path,
+        now=NOW,
+        check_fn=check_fn,
+        sync_fn=sync_fn,
+        validate_fn=validate_fn,
+        index_fn=index_fn,
+        stamp_fn=stamp_fn,
+        revert_fn=lambda: order.append("revert"),
+    )
+    assert code == 0
+    assert order == ["check", "sync:geonames-ru", "validate", "index"]
+    assert summary["synced"] == ["geonames-ru"]
+    assert summary["validate"] == "0"
+    assert summary["stamped"] is False
+    assert summary["records_upserted"] == 4
+    assert summary["records_deprecated"] == 1
+    journal = _journal(tmp_path)
+    assert journal["check_exit"] == 10
+    assert journal["records_upserted"] == 4
+    assert journal["records_deprecated"] == 1
+
+
+def test_daily_check_exit_2_skips_sync_writes_journal(tmp_path: Path) -> None:
+    order: list[str] = []
+
+    def check_fn():
+        order.append("check")
+        return (
+            {
+                "as_of": "2026-09-12T06:00:00Z",
+                "changed_count": 0,
+                "error_count": 1,
+                "sources": [
+                    {
+                        "id": "geonames-ru",
+                        "changed": False,
+                        "error": True,
+                        "blocking": True,
+                        "reason": "timeout",
+                    }
+                ],
+            },
+            2,
+        )
+
+    summary, code = run_daily(
+        root=tmp_path,
+        now=NOW,
+        check_fn=check_fn,
+        sync_fn=lambda sid: order.append(f"sync:{sid}") or {},
+        validate_fn=lambda: order.append("validate") or 0,
+        index_fn=lambda: order.append("index") or 0,
+        stamp_fn=lambda: order.append("stamp") or True,
+        revert_fn=lambda: order.append("revert"),
+    )
+    assert code == 0
+    assert order == ["check"]
+    assert summary["check_exit"] == 2
+    assert summary["stamped"] is False
+    journal = _journal(tmp_path)
+    assert journal["check_exit"] == 2
+    assert journal["error_count"] == 1
+
+
+def test_daily_validate_fail_reverts_without_journal(tmp_path: Path) -> None:
+    order: list[str] = []
+
+    def check_fn():
+        order.append("check")
+        return (
+            {
+                "as_of": "2026-09-12T06:00:00Z",
+                "changed_count": 1,
+                "error_count": 0,
+                "sources": [
+                    {"id": "geonames-ru", "changed": True, "error": False, "blocking": True}
+                ],
+            },
+            10,
+        )
+
+    summary, code = run_daily(
+        root=tmp_path,
+        now=NOW,
+        check_fn=check_fn,
+        sync_fn=lambda sid: order.append(f"sync:{sid}")
+        or {"records_upserted": 2, "records_deprecated": 0},
+        validate_fn=lambda: order.append("validate") or 1,
+        index_fn=lambda: order.append("index") or 0,
+        stamp_fn=lambda: order.append("stamp") or True,
+        revert_fn=lambda: order.append("revert"),
+    )
+    assert code == 1
+    assert order == ["check", "sync:geonames-ru", "validate", "revert"]
+    assert summary["validate"] == "fail"
+    assert summary["journal"] is None
+    assert not (tmp_path / "data/sources/runs/2026-09-12.json").exists()
+
+
+def test_daily_offline_none_only_fixture_stamps(tmp_path: Path) -> None:
+    catalog = tmp_path / "data" / "sources" / "catalog.yaml"
+    catalog.parent.mkdir(parents=True, exist_ok=True)
+    catalog.write_text(FIXTURE_NONE.read_text(encoding="utf-8"), encoding="utf-8")
+    summary, code = run_daily(root=tmp_path, now=NOW, offline=True, session=None)
+    assert code == 0
+    assert summary["check_exit"] == 0
+    assert summary["stamped"] is True
+    payload = load_catalog(catalog)
+    assert payload["updated"] == "2026-09-12"
+    assert payload["sources"][0]["checked_at"] == "2026-09-12"
+    journal = _journal(tmp_path)
+    assert journal["check_exit"] == 0
+    assert journal["sources"][0]["id"] == "wikidata"
+    assert journal["records_upserted"] == 0
