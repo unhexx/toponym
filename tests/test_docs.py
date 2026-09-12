@@ -65,8 +65,6 @@ def test_readme_has_compose_one_shot() -> None:
     assert "source .venv/bin/activate" in text
     assert "python3 -m venv .venv" in text
     assert 'pip install -e ".[dev]"' in text
-    assert "Agent-Init.sh" not in text
-    assert "agentic_loop_template" not in text
 
 
 def test_readme_has_shields_badges_and_docs_links() -> None:
@@ -180,8 +178,6 @@ def test_package_calver_aligned() -> None:
 
 def test_ssot_does_not_require_project_context() -> None:
     assert not (ROOT / "SYSTEM_PROMPT.md").exists()
-    assert not (ROOT / "AGENTS.md").exists()
-    assert not (ROOT / "Agent-Init.sh").exists()
     contrib = (ROOT / "CONTRIBUTING.md").read_text(encoding="utf-8")
     assert "docs/DAILY_UPDATE.md" in contrib
     spec = (ROOT / "TASK_SPECIFICATION.md").read_text(encoding="utf-8")

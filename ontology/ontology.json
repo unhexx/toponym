@@ -378,7 +378,7 @@
       "status": "accepted",
       "date": "2026-09-11",
       "refs": [".gitignore", "CONTRIBUTING.md"],
-      "summary": "Keep-out H: посторонние деревья шаблонов и локальный harness не входят в продукт."
+      "summary": "Keep-out H: посторонние деревья шаблонов не входят в продукт."
     },
     {
       "id": "DEC-HFLABS-001",

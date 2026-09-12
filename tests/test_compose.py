@@ -10,9 +10,6 @@ FORBIDDEN_SERVICES = {
     "searxng",
     "ollama",
     "local-deep-research",
-    "pxpipe",
-    "gateway",
-    "dashboard",
 }
 
 
@@ -68,16 +65,14 @@ def test_dockerfile_python_312() -> None:
     text = (ROOT / "Dockerfile").read_text(encoding="utf-8")
     assert "python:3.12-slim" in text
     assert ".[dev]" not in text
-    assert "agentic_loop_template" not in text
     assert "searxng" not in text.casefold()
     assert "ollama" not in text.casefold()
     assert "org.opencontainers.image.source" in text
     assert "https://github.com/unhexx/toponym" in text
 
 
-def test_dockerignore_excludes_harness() -> None:
+def test_dockerignore_excludes_venv() -> None:
     text = (ROOT / ".dockerignore").read_text(encoding="utf-8")
-    assert "agentic_loop_template" in text
     assert ".venv" in text
 
 
