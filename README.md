@@ -153,7 +153,7 @@ HTTP (только GET, только loopback): `/healthz`, `/v1/search?q=…`, 
 ## Автоматизация
 
 - GitHub Actions: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — pytest, ruff, validate.
-- Daily: [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — механический refresh.
+- Daily: `python scripts/daily.py` (GHA [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — install + run + commit-if-diff).
 - Куратор: [`docs/DAILY_UPDATE.md`](docs/DAILY_UPDATE.md) — check → sync → validate → index; без пустого коммита.
 
 ## Цитирование

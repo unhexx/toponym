@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   refresh:
-    name: check → sync → validate → journal
+    name: daily.py
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -36,67 +36,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
 
-      - name: Daily refresh (DAILY_UPDATE mechanical path)
-        id: refresh
+      - name: Daily refresh
+        run: python scripts/daily.py
+
+      - name: Commit if there is a real diff
         run: |
           set -euo pipefail
           TODAY=$(date -u +%Y-%m-%d)
-          AS_OF=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-          echo "today=$TODAY" >> "$GITHUB_OUTPUT"
-          mkdir -p data/sources/runs
-          SYNC_JSON_ARGS=()
-
-          set +e
-          python scripts/check.py --json | tee /tmp/check.json
-          CHECK_EXIT=$?
-          set -e
-          echo "check_exit=$CHECK_EXIT" >> "$GITHUB_OUTPUT"
-
-          CHANGED=$(python -c "import json; print(int(json.load(open('/tmp/check.json')).get('changed_count') or 0))" || echo 0)
-          echo "changed_count=$CHANGED" >> "$GITHUB_OUTPUT"
-
-          if [[ "$CHECK_EXIT" -eq 10 ]]; then
-            python -c "import json; src=json.load(open('/tmp/check.json', encoding='utf-8')).get('sources') or []; [print(s['id']) for s in src if isinstance(s, dict) and s.get('changed') and not (s.get('error') and s.get('blocking', True)) and s.get('id')]" > /tmp/changed-ids.txt
-            mapfile -t CHANGED_IDS < /tmp/changed-ids.txt
-            for src in "${CHANGED_IDS[@]}"; do
-              python scripts/sync.py --source "$src" --apply --check-json /tmp/check.json | tee "/tmp/sync-${src}.json"
-              SYNC_JSON_ARGS+=(--sync-json "/tmp/sync-${src}.json")
-            done
-            set +e
-            python scripts/validate.py
-            VAL=$?
-            set -e
-            echo "validate=$VAL" >> "$GITHUB_OUTPUT"
-            if [[ "$VAL" -ne 0 ]]; then
-              git checkout -- data || true
-              echo "validate failed; reverted data/, no commit" >&2
-              exit 1
-            fi
-            python scripts/index.py
-          else
-            echo "validate=skip" >> "$GITHUB_OUTPUT"
-            if [[ "$CHECK_EXIT" -eq 2 ]]; then
-              echo "check.py exit 2; skip sync, write journal" >&2
-            fi
-          fi
-
-          python .github/scripts/write_run_journal.py \
-            --today "$TODAY" \
-            --as-of "$AS_OF" \
-            --check-exit "$CHECK_EXIT" \
-            --check-json /tmp/check.json \
-            "${SYNC_JSON_ARGS[@]}"
-
-          if [[ "$CHECK_EXIT" -eq 0 ]]; then
-            python scripts/check.py --stamp --today "$TODAY"
-          fi
-
-      - name: Commit if there is a real diff
-        env:
-          TODAY: ${{ steps.refresh.outputs.today }}
-        run: |
-          set -euo pipefail
-          TODAY=${TODAY:-$(date -u +%Y-%m-%d)}
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
@@ -109,7 +55,7 @@ jobs:
           if [[ -d data/sources/runs ]]; then
             git add data/sources/runs/
           fi
-          for p in data/sources/catalog.yaml data/curated knowledge CHANGELOG.md .github/scripts; do
+          for p in data/sources/catalog.yaml data/curated knowledge CHANGELOG.md; do
             if [[ -e "$p" ]]; then
               git add -A "$p" || true
             fi
