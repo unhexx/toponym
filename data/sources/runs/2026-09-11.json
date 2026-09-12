@@ -1,12 +1,12 @@
 {
-  "as_of": "2026-09-11T16:25:00Z",
-  "changed_count": 0,
+  "as_of": "2026-09-11T23:58:26Z",
+  "changed_count": 2,
   "error_count": 0,
   "sources": [
     {
       "id": "gkgn-opendata",
       "changed": false,
-      "reason": "no local checkout; check.py not run",
+      "reason": "http_head timeout/no reliable headers; pointer only",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -14,31 +14,31 @@
     {
       "id": "fias-gar",
       "changed": false,
-      "reason": "no local checkout; check.py not run",
+      "reason": "http_head timeout/no reliable headers; pointer only",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
     },
     {
       "id": "geonames-ru",
-      "changed": false,
-      "reason": "no local checkout; check.py not run",
+      "changed": true,
+      "reason": "2 RU rows in mods",
       "cursor_old": "2026-09-08",
-      "cursor_new": "2026-09-08",
+      "cursor_new": "2026-09-10",
       "error": false
     },
     {
       "id": "ukase-326",
-      "changed": false,
-      "reason": "no local checkout; check.py not run",
+      "changed": true,
+      "reason": "отпечаток страницы изменился",
       "cursor_old": "",
-      "cursor_new": "",
+      "cursor_new": "77c8b5ffeac5f672930ec97134e69aa91ff4049a75dd242cc29fb847ee7736da",
       "error": false
     },
     {
       "id": "hflabs-region",
       "changed": false,
-      "reason": "no local checkout; check.py not run",
+      "reason": "нет коммитов since 2026-09-10",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -46,7 +46,7 @@
     {
       "id": "hflabs-city",
       "changed": false,
-      "reason": "no local checkout; check.py not run",
+      "reason": "нет коммитов since 2026-09-10",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -54,7 +54,7 @@
     {
       "id": "epogrebnyak-ru-cities",
       "changed": false,
-      "reason": "no local checkout; check.py not run",
+      "reason": "нет коммитов since 2026-09-10",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -62,7 +62,7 @@
     {
       "id": "mfursov-russian-cities",
       "changed": false,
-      "reason": "no local checkout; check.py not run",
+      "reason": "нет коммитов since 2026-09-10",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -70,7 +70,7 @@
     {
       "id": "nickyx3-settlements",
       "changed": false,
-      "reason": "no local checkout; check.py not run",
+      "reason": "нет коммитов since 2026-09-10",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -86,5 +86,6 @@
   ],
   "records_upserted": 0,
   "records_deprecated": 0,
-  "commit": null
+  "commit": null,
+  "check_exit": 10
 }

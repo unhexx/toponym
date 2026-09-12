@@ -36,7 +36,7 @@ def test_design_snapshot_is_released_v1() -> None:
     assert "DEC-TAX-001" in text
     assert "DEC-SERVE-002" in text
     assert "DEC-ONT-001" in text
-    assert "DEC-AGENTIX-001" in text
+    assert "DEC-TEMPLATE-001" in text
     assert "DEC-HFLABS-001" in text
     assert "DEC-GEO-001" in text
     assert "DEC-SEED-001" in text
@@ -62,14 +62,11 @@ def test_readme_has_compose_one_shot() -> None:
     assert "data/declensions/queue.csv" in text
     assert "http://127.0.0.1:8099/healthz" in text
     assert "http://127.0.0.1:8099/v1/search" in text
-    assert "bash Agent-Init.sh" in text
     assert "source .venv/bin/activate" in text
     assert "python3 -m venv .venv" in text
     assert 'pip install -e ".[dev]"' in text
-    venv_at = text.find("python3 -m venv .venv")
-    init_block = text.find("bash Agent-Init.sh")
-    assert venv_at != -1
-    assert venv_at < init_block
+    assert "Agent-Init.sh" not in text
+    assert "agentic_loop_template" not in text
 
 
 def test_readme_has_shields_badges_and_docs_links() -> None:
@@ -182,12 +179,11 @@ def test_package_calver_aligned() -> None:
 
 
 def test_ssot_does_not_require_project_context() -> None:
-    sys_prompt = (ROOT / "SYSTEM_PROMPT.md").read_text(encoding="utf-8")
-    assert "PROJECT_CONTEXT.md" not in sys_prompt
-    agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
-    assert "2026.09.11" in agents
-    assert "2026.09.12" in agents
-    assert "#13" in agents
+    assert not (ROOT / "SYSTEM_PROMPT.md").exists()
+    assert not (ROOT / "AGENTS.md").exists()
+    assert not (ROOT / "Agent-Init.sh").exists()
+    contrib = (ROOT / "CONTRIBUTING.md").read_text(encoding="utf-8")
+    assert "docs/DAILY_UPDATE.md" in contrib
     spec = (ROOT / "TASK_SPECIFICATION.md").read_text(encoding="utf-8")
     assert "2026.09.11" in spec
     assert "2026.09.12" in spec

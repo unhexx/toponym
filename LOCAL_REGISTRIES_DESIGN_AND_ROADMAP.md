@@ -2,8 +2,7 @@
 
 **Дата:** 2026-09-09  
 **Статус:** исторический снимок ADR DEC-REG-001 и плана v1. Сиды и скрипты уже на `main` (тег `2026.09.09`); loop 2 — тег `2026.09.11`. Живой план: `CYCLE_PLAN.md`. Backlog: GitHub #13.  
-**Контекст:** `unhexx/toponym` (каркас) + навыки `local-knowledge-ingestion`, `structured-memory-ontology`, `deterministic-workflow-orchestrator`  
-**Шаблон исполнения:** `unhexx/agentic_loop_template` v3.13.0, режим consumer-starter **full** (symlink SSOT, не копировать дерево)
+**Контекст:** `unhexx/toponym` — локальный реестр топонимов (Frictionless CSV + derived SQLite FTS).
 
 ---
 
@@ -48,10 +47,10 @@
 - `datapackage.json` + Table Schema дают машинную валидацию (`frictionless validate`).
 - Git даёт историю, review, CalVer, воспроизводимость.
 - Local-first: агент не ходит в облако на каждый запрос.
-- Совпадает с уже выбранным профилем `toponym` и с `memory.knowledge` в Agentix.
+- Совпадает с уже выбранным профилем `toponym`.
 - Провенанс OKF (`sources`, `stale_after`, `status`) переносим в `catalog.yaml` и в ontology.json, не ломая табличный канон.
 
-Ссылки практик: Frictionless Data Package / Table Schema / Tabular Data Resource; OKF v0.2 provenance; Agentix consumer-starter; Outpost Memory (не плодить второй формат онтологии).
+Ссылки практик: Frictionless Data Package / Table Schema / Tabular Data Resource; OKF v0.2 provenance; Outpost Memory (не плодить второй формат онтологии).
 
 ---
 
@@ -61,9 +60,9 @@
 
 ```
 toponym/                          # git SSOT
-├── AGENTS.md
+├── CONTRIBUTING.md
 ├── TASK_SPECIFICATION.md         # этот документ, сжатый контракт v1
-├── PROJECT_CONTEXT.md            # локальный артефакт Agentix (gitignore); продукт SSOT — AGENTS.md / TASK_SPECIFICATION.md / CYCLE_PLAN.md
+├── TASK_SPECIFICATION.md
 ├── datapackage.json              # пакет верхнего уровня
 ├── catalog.yaml                  # источники + детекторы обновлений
 ├── CHANGELOG.md                  # CalVer YYYY.MM.DD
@@ -109,7 +108,7 @@ toponym/                          # git SSOT
 │   └── ontology.json             # сущности Source, Registry, Mapping…
 ├── agents/
 │   └── DAILY_UPDATE.md
-├── .agent/                       # Agentix loop state
+├── docs/DAILY_UPDATE.md
 │   ├── PLAN.md
 │   ├── TODO.md
 │   └── LOOP_STATE.md
@@ -119,7 +118,7 @@ toponym/                          # git SSOT
     └── fixtures/
 ```
 
-Правила файлов (уже в AGENTS.md, закрепить):
+Правила файлов (CONTRIBUTING.md):
 
 - UTF-8, LF, CSV delimiter = запятая, заголовок обязателен.
 - Не переписывать CSV целиком; upsert по stable id.
@@ -333,7 +332,7 @@ check.py  →  (changed?)  →  sync.py  →  validate.py  →  index.py
 
 ---
 
-## 9. Дорожная карта одного полного цикла Agentix
+## 9. Дорожная карта v1
 
 Цель пользователя: **разовый запуск полного цикла разработки до финальной версии v1**, не вечный daily-агент.
 

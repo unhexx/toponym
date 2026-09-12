@@ -219,33 +219,11 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# Agentix template and cycle artifacts — merge of consumer-starter .gitignore.agentic
-agentic_loop_template
-agentic_loop_template/
-.agent/handoff_*.json
-.agent/last_handoff.json
-.agent/worktrees/
-PROJECT_CONTEXT.md
-SPRINTPLAN.md
-.env.agentic
-.env.blackbox
-blackbox_start_prompt.txt
-.agent/proxy_events.jsonl
-.agent/proxy_cache.sqlite
-.agent/proxy_cache.sqlite-*
-.agent/sft/
-.agent/stream_leases.json
-.agent/streams_state.json
-.agent/metrics.jsonl
-.agent/LOOP_STATE.json
-.agent/LOOP_STATE.md
-.agent/history/
-.agent/knowledge/
-.agent/starter_prompt_grok.txt
-
-# Derived local index (rebuild with scripts/index.py)
+# Local derived index and ignored directories
 knowledge/*.db
 knowledge/LAST_INDEX
+.agent/
+agentic_loop_template
 
 # Dump archives must never enter git
 /data/**/*.zip

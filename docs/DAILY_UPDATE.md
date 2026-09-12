@@ -1,12 +1,12 @@
 # Ежедневное обновление реестра unhexx/toponym
 
-Роль: куратор канона. Не оркестратор разработки.
+Роль: куратор канона.
 
 **Лимит:** 15 минут. Один сфокусированный набор изменений.
 **Пустой коммит запрещён.**
-**Python только из `.venv`:** `python3 -m venv .venv && source .venv/bin/activate && pip install -e ".[dev]"`. На GHA то же ставит `daily.yml` без шаблона Agentix.
+**Python только из `.venv`:** `python3 -m venv .venv && source .venv/bin/activate && pip install -e ".[dev]"`. На GHA то же ставит `daily.yml`.
 
-Этот файл — исполняемый промпт. Выполнять шаги по порядку. Не пропускать инварианты.
+Выполнять шаги по порядку. Не пропускать инварианты.
 
 ---
 
@@ -14,7 +14,7 @@
 
 Прочитать (не наизусть, файлы):
 
-1. `AGENTS.md` — непреложные правила
+1. `CONTRIBUTING.md` — правила канона
 2. `data/sources/catalog.yaml` — SSOT источников и курсоров
 3. `CHANGELOG.md`
 4. `datapackage.json`
@@ -58,7 +58,7 @@ python scripts/validate.py
 python scripts/index.py
 ```
 
-Правила sync (дублируют AGENTS.md, нарушение = стоп):
+Правила sync (дублируют CONTRIBUTING.md, нарушение = стоп):
 
 - Патч CSV **по stable `id`**. Файл целиком не переписывать, если байты не изменились.
 - Строки не удалять. Incoming delete → `status=deprecated` + `replaced_by` если известен преемник.
@@ -112,11 +112,9 @@ chore(data): daily refresh YYYY-MM-DD (0 records)
 
 Дописать `CHANGELOG.md` секцию Unreleased, если N>0 (какие id/источники).
 
-Не упоминать модели, агентов, LLM в коммите и комментариях.
-
 Не делать `git commit --allow-empty`. Перед коммитом: `git diff --cached --quiet` → если тихо, отмена.
 
-После коммита (если оператор так настроил цикл): `git push origin main`. Daily-агент **не** открывает feature-ветки под рутину данных.
+После коммита: `git push origin main`. Daily **не** открывает feature-ветки под рутину данных.
 
 ---
 

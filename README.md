@@ -26,7 +26,7 @@
 
 ## Пятиминутный старт (хост)
 
-CPython 3.12+. Для канона CSV + поиск шаблон `agentic_loop_template` **не нужен**:
+CPython 3.12+:
 
 ```bash
 git clone https://github.com/unhexx/toponym.git
@@ -43,8 +43,6 @@ python scripts/serve.py
 После `pip install` те же команды на PATH: `toponym-validate`, `toponym-check`, `toponym-index`, `toponym-serve`. `python scripts/*.py` не ломается.
 
 Альтернатива: `uv venv .venv && source .venv/bin/activate && uv pip install -e ".[dev]"`.
-
-Полный harness-цикл — только если рядом sibling `../agentic_loop_template`: `bash Agent-Init.sh`. Без шаблона тот же скрипт ставит `.[dev]` и не падает.
 
 Ожидаемо: `validate.py` печатает `ok` и выходит 0. `check.py --json` ходит в сеть (коды 0 / 10 / 2). `index.py` пишет `knowledge/registry.db` (gitignored). `serve.py` слушает `127.0.0.1:8099`.
 
@@ -80,7 +78,7 @@ git pull && docker compose up --build
 Слушает только loopback: http://127.0.0.1:8099/healthz  
 Поиск: http://127.0.0.1:8099/v1/search?q=Волга  
 
-Не стартует SearXNG, Ollama и pxpipe. Порты 8080 / 8100 / 8110 / 8112 на хосте свободны.
+Compose публикует только `127.0.0.1:8099`.
 
 На хосте без Docker: `python3 -m venv .venv && source .venv/bin/activate && pip install -e ".[dev]"`, затем `toponym-validate && toponym-index && toponym-serve` (или `python scripts/validate.py && python scripts/index.py && python scripts/serve.py`; bind `127.0.0.1:8099`).
 
@@ -95,8 +93,7 @@ data/
 schema/             # JSON Schema колонок
 scripts/            # check, sync, validate, index, serve, fetch_dump, declensions_queue
 ontology/           # overlay DEC-REG-001, Source, Mapping
-docs/               # методология, таксономия, лицензии, презентация
-agents/             # промпт ежедневного обновления
+docs/               # методология, таксономия, лицензии, презентация, daily-промпт
 ```
 
 Канонический формат: **CSV UTF-8, LF, заголовок обязателен**. Идентификаторы стабильны. Крупные дампы (ГАР/ФИАС, GeoNames `RU.zip`) **не вендорятся**.
@@ -157,7 +154,7 @@ HTTP (только GET, только loopback): `/healthz`, `/v1/search?q=…`, 
 
 - GitHub Actions: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — pytest, ruff, validate.
 - Daily: [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — механический refresh.
-- Куратор: [`agents/DAILY_UPDATE.md`](agents/DAILY_UPDATE.md) — check → sync → validate → index; без пустого коммита.
+- Куратор: [`docs/DAILY_UPDATE.md`](docs/DAILY_UPDATE.md) — check → sync → validate → index; без пустого коммита.
 
 ## Цитирование
 
