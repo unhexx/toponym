@@ -9,6 +9,7 @@
 - Из дерева продукта убраны служебные файлы внутреннего цикла разработки. Правила канона — в `CONTRIBUTING.md`; ежедневный прогон — `docs/DAILY_UPDATE.md`.
 
 ### Fixed
+- `http_dated`: `changed` только если есть RU-строки **и** курсор каталога ещё не равен вчерашней UTC-дате. Повторный check в тот же день (курсор уже yesterday) не даёт exit 10.
 - Daily: таймаут `http_head` у указателей (Росреестр/ФИАС) больше не даёт `check.py` код 2 и не блокирует GeoNames. Журнал `data/sources/runs/` пишется и при коде 2; `workflow_dispatch` — `--ref main`, не `main~`.
 
 ### Changed
