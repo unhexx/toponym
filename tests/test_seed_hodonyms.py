@@ -15,7 +15,9 @@ from scripts.seed_hodonyms import (
     main,
     map_hodonym,
     merge_bindings,
+    p31_from_query,
     qid_from_uri,
+    queries_for_p31,
     resolve_parent,
 )
 
@@ -39,9 +41,14 @@ def _decl(**kwargs: str) -> dict[str, str]:
 def test_sparql_hodonyms_file_is_pointer() -> None:
     text = SPARQL.read_text(encoding="utf-8")
     assert "Q79007" in text
+    assert "Q54114" in text
+    assert "Q628179" in text
+    assert "Q1251403" in text
+    assert "Q537127" in text
     assert "Q159" in text
     assert "Q174782" in text
     assert "SELECT" in text
+    assert "VALUES ?type" in text
     assert "не вендор" in text.casefold() or "do not vendor" in text.casefold()
     assert SPARQL.stat().st_size < 10_000
 
@@ -235,6 +242,19 @@ def test_harvest_from_json_no_network() -> None:
 
 def test_load_main_query_has_street_filter() -> None:
     query = load_main_query(SPARQL)
-    assert "wdt:P31 wd:Q79007" in query
+    types = p31_from_query(query)
+    assert types == ["Q79007", "Q54114", "Q628179", "Q1251403", "Q537127"]
+    assert "?item wdt:P31 ?type" in query
     assert "wdt:P17 wd:Q159" in query
     assert "Q174782" in query
+    split = queries_for_p31(query)
+    assert [qid for qid, _q in split] == [
+        "Q54114",
+        "Q628179",
+        "Q1251403",
+        "Q537127",
+        "Q79007",
+    ]
+    for qid, typed in split:
+        assert f"VALUES ?type {{ wd:{qid} }}" in typed
+        assert "wd:Q79007 wd:Q54114" not in typed

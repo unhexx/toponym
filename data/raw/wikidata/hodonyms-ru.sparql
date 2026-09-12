@@ -1,10 +1,12 @@
 # Hodonyms (streets) in Russia from Wikidata, CC0.
-# P31 = street (Q79007), P17 = Russia (Q159). Squares (Q174782) excluded.
+# P31 in mapped types: street Q79007, boulevard Q54114, avenue Q628179,
+# lane Q1251403, quay Q537127. P17 = Russia (Q159). Squares (Q174782) excluded.
 # Coverage is Wikidata only — not FIAS/GAR and not every street of Russia.
-# Run via scripts/seed_hodonyms.py. Do not vendor SPARQL JSON/CSV in git.
+# seed_hodonyms.py runs this once per VALUES type. Do not vendor SPARQL JSON/CSV.
 
 SELECT DISTINCT ?item ?ru ?en ?lat ?lon ?gn ?located ?iso WHERE {
-  ?item wdt:P31 wd:Q79007 .
+  VALUES ?type { wd:Q79007 wd:Q54114 wd:Q628179 wd:Q1251403 wd:Q537127 }
+  ?item wdt:P31 ?type .
   ?item wdt:P17 wd:Q159 .
   ?item rdfs:label ?ru FILTER(LANG(?ru) = "ru")
   FILTER NOT EXISTS { ?item wdt:P31 wd:Q174782 }

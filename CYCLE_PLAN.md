@@ -71,8 +71,9 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | REL-2026.09.14 | annotated CalVer `2026.09.14` | `chore/release-2026.09.14` | http_dated без GET, журнал journal_fields, daily без *_fn; теги `2026.09.11`/`2026.09.12`/`2026.09.13` не двигались | COMPLETE |
 | REL-2026.09.15 | annotated CalVer `2026.09.15` | `chore/release-2026.09.15` | витрина README, оглавление docs; теги `2026.09.11`/`2026.09.12`/`2026.09.13`/`2026.09.14` не двигались | COMPLETE |
 | HOD-WD | Wikidata harvest годонимов (P31 Q79007, P17 Q159) | `feature/hodonyms-wikidata-harvest` | SPARQL + `seed_hodonyms.py` upsert `wd:Q`; покрытие Wikidata задокументировано; без ГАР | COMPLETE |
+| HOD-WD-P31 | SPARQL годонимов: бульвар/проспект/переулок/набережная | `feature/hodonyms-p31-types` | VALUES P31 из `wikidata.yaml`; harvest по одному типу; upsert `wd:Q`; без ГАР | COMPLETE |
 
-A–L COMPLETE на `main`. Annotated CalVer `2026.09.15` на `main`. Теги `2026.09.11`, `2026.09.12`, `2026.09.13` и `2026.09.14` не двигать. HOD-WD — реестр улиц из Wikidata, не ФИАС.
+A–L COMPLETE на `main`. Annotated CalVer `2026.09.15` на `main`. Теги `2026.09.11`, `2026.09.12`, `2026.09.13` и `2026.09.14` не двигать. HOD-WD / HOD-WD-P31 — реестр улиц из Wikidata (улица/бульвар/проспект/переулок/набережная), не ФИАС.
 
 ## Definition of Done v1
 
