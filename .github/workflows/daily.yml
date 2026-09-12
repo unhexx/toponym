@@ -55,7 +55,10 @@ jobs:
           echo "changed_count=$CHANGED" >> "$GITHUB_OUTPUT"
 
           if [[ "$CHECK_EXIT" -eq 10 ]]; then
-            python scripts/sync.py --apply --check-json /tmp/check.json
+            mapfile -t CHANGED_IDS < <(python -c "import json; src=json.load(open('/tmp/check.json')).get('sources') or []; [print(s['id']) for s in src if isinstance(s, dict) and s.get('changed') and not s.get('error') and not s.get('blocking-error') and not s.get('blocking_error') and s.get('id')]")
+            for src in "${CHANGED_IDS[@]}"; do
+              python scripts/sync.py --source "$src" --apply --check-json /tmp/check.json
+            done
             set +e
             python scripts/validate.py
             VAL=$?
@@ -66,7 +69,7 @@ jobs:
               echo "validate failed; reverted data/, no commit" >&2
               exit 1
             fi
-            python scripts/index.py || true
+            python scripts/index.py
           else
             echo "validate=skip" >> "$GITHUB_OUTPUT"
             if [[ "$CHECK_EXIT" -eq 2 ]]; then

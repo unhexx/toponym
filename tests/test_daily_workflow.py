@@ -34,7 +34,8 @@ def test_daily_has_no_missing_check_py_skip() -> None:
     assert "scripts/check.py missing" not in text
     assert "check_exit=missing" not in text
     assert "python scripts/check.py --json" in text
-    assert "python scripts/sync.py --apply --check-json /tmp/check.json" in text
+    assert 'python scripts/sync.py --source "$src" --apply --check-json /tmp/check.json' in text
+    assert "python scripts/sync.py --apply --check-json /tmp/check.json" not in text
     assert "python scripts/validate.py" in text
     assert "refusing sync/commit" not in text
     assert "check.py exit 2; skip sync, write journal" in text
@@ -63,6 +64,30 @@ def test_daily_writes_journal_and_stamps_catalog_only_on_noop() -> None:
     assert stamp_at > exit2_at
     exit2_block = text[text.index('if [[ "$CHECK_EXIT" -eq 2 ]]') : exit2_at]
     assert "--stamp" not in exit2_block
+
+
+def test_daily_syncs_only_changed_sources() -> None:
+    text = DAILY.read_text(encoding="utf-8")
+    assert "python scripts/sync.py --source" in text
+    assert "--source" in text
+    assert 'python scripts/sync.py --source "$src" --apply --check-json /tmp/check.json' in text
+    assert "python scripts/sync.py --apply --check-json /tmp/check.json" not in text
+    assert "index.py || true" not in text
+    assert "python scripts/index.py" in text
+    assert "s.get('changed')" in text
+    assert "blocking-error" in text
+    assert "check.py exit 2; skip sync, write journal" in text
+    sync_block = text[
+        text.index('if [[ "$CHECK_EXIT" -eq 10 ]]') : text.index("write_run_journal.py")
+    ]
+    assert "python scripts/sync.py --source" in sync_block
+    assert "python scripts/index.py" in sync_block
+    assert "index.py || true" not in sync_block
+    exit2_at = text.index("check.py exit 2; skip sync, write journal")
+    journal_at = text.index("write_run_journal.py")
+    assert journal_at > exit2_at
+    skip_sync = text[text.index('if [[ "$CHECK_EXIT" -eq 2 ]]') : journal_at]
+    assert "scripts/sync.py" not in skip_sync
 
 
 def test_journal_script_is_dump_only() -> None:
