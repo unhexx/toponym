@@ -91,6 +91,7 @@ python scripts/index.py
 ```
 
 Поля `sources` — как у `check.py --json` (id, changed, reason, cursor_old, cursor_new, error).
+`records_upserted` / `records_deprecated` — из `UpsertCounts` после sync (`inserted+updated` / `deprecated`). Без sync — нули, не «на глаз».
 
 При no-op разрешено обновить только `checked_at` в `catalog.yaml` **если** значение реально сдвинулось. Если `git diff` пустой после записи журнала, который уже совпадает с сегодняшним файлом — **не коммитить**.
 

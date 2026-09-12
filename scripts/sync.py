@@ -304,6 +304,7 @@ def run_sync(
         else f"{current.isoformat()}Z",
         "apply": apply,
         **total.as_dict(),
+        **total.journal_fields(),
         "sources": per_source,
     }
     return report, 0

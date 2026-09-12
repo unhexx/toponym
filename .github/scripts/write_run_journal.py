@@ -8,6 +8,31 @@ import json
 from pathlib import Path
 
 
+def journal_counts_from_sync_report(report: dict) -> tuple[int, int]:
+    """Map sync.py / UpsertCounts JSON onto journal records_* fields."""
+    if "records_upserted" in report or "records_deprecated" in report:
+        return (
+            int(report.get("records_upserted") or 0),
+            int(report.get("records_deprecated") or 0),
+        )
+    upserted = int(report.get("inserted") or 0) + int(report.get("updated") or 0)
+    deprecated = int(report.get("deprecated") or 0)
+    return upserted, deprecated
+
+
+def journal_counts_from_sync_files(paths: list[Path]) -> tuple[int, int]:
+    upserted = 0
+    deprecated = 0
+    for path in paths:
+        report = json.loads(Path(path).read_text(encoding="utf-8"))
+        if not isinstance(report, dict):
+            continue
+        add_u, add_d = journal_counts_from_sync_report(report)
+        upserted += add_u
+        deprecated += add_d
+    return upserted, deprecated
+
+
 def write_run_journal(
     *,
     today: str,
@@ -17,14 +42,18 @@ def write_run_journal(
     notes: str = "",
     check_json: Path | None = None,
     runs_dir: Path | None = None,
+    records_upserted: int | None = None,
+    records_deprecated: int | None = None,
+    sync_json: list[Path] | None = None,
 ) -> Path:
+    from_sync_u, from_sync_d = journal_counts_from_sync_files(list(sync_json or []))
     payload: dict = {
         "as_of": as_of,
         "changed_count": changed_count,
         "error_count": 0,
         "sources": [],
-        "records_upserted": 0,
-        "records_deprecated": 0,
+        "records_upserted": from_sync_u if records_upserted is None else records_upserted,
+        "records_deprecated": from_sync_d if records_deprecated is None else records_deprecated,
         "commit": None,
         "check_exit": check_exit,
     }
@@ -55,6 +84,9 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--changed-count", type=int, default=0)
     parser.add_argument("--notes", default="")
     parser.add_argument("--check-json", default="")
+    parser.add_argument("--records-upserted", type=int, default=None)
+    parser.add_argument("--records-deprecated", type=int, default=None)
+    parser.add_argument("--sync-json", action="append", default=[])
     args = parser.parse_args(argv)
 
     check_exit: int | str
@@ -71,6 +103,9 @@ def main(argv: list[str] | None = None) -> None:
         changed_count=args.changed_count,
         notes=args.notes,
         check_json=check_json,
+        records_upserted=args.records_upserted,
+        records_deprecated=args.records_deprecated,
+        sync_json=[Path(p) for p in args.sync_json],
     )
 
 

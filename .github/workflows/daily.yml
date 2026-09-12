@@ -44,6 +44,7 @@ jobs:
           AS_OF=$(date -u +%Y-%m-%dT%H:%M:%SZ)
           echo "today=$TODAY" >> "$GITHUB_OUTPUT"
           mkdir -p data/sources/runs
+          SYNC_JSON_ARGS=()
 
           set +e
           python scripts/check.py --json | tee /tmp/check.json
@@ -58,7 +59,8 @@ jobs:
             python -c "import json; src=json.load(open('/tmp/check.json', encoding='utf-8')).get('sources') or []; [print(s['id']) for s in src if isinstance(s, dict) and s.get('changed') and not (s.get('error') and s.get('blocking', True)) and s.get('id')]" > /tmp/changed-ids.txt
             mapfile -t CHANGED_IDS < /tmp/changed-ids.txt
             for src in "${CHANGED_IDS[@]}"; do
-              python scripts/sync.py --source "$src" --apply --check-json /tmp/check.json
+              python scripts/sync.py --source "$src" --apply --check-json /tmp/check.json | tee "/tmp/sync-${src}.json"
+              SYNC_JSON_ARGS+=(--sync-json "/tmp/sync-${src}.json")
             done
             set +e
             python scripts/validate.py
@@ -82,7 +84,8 @@ jobs:
             --today "$TODAY" \
             --as-of "$AS_OF" \
             --check-exit "$CHECK_EXIT" \
-            --check-json /tmp/check.json
+            --check-json /tmp/check.json \
+            "${SYNC_JSON_ARGS[@]}"
 
           if [[ "$CHECK_EXIT" -eq 0 ]]; then
             python scripts/check.py --stamp --today "$TODAY"
