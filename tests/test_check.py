@@ -392,6 +392,133 @@ def test_page_fingerprint_stable() -> None:
     assert fingerprint_text(normalize_html(html_a)) == fingerprint_text(normalize_html(html_b))
 
 
+_UKASE_WIKI = (
+    "https://ru.wikipedia.org/wiki/"
+    "Структура_федеральных_органов_исполнительной_власти_России_(с_2024)"
+)
+
+
+def _ukase_catalog(*, cursor: str) -> dict:
+    return {
+        "updated": "2026-09-09",
+        "sources": [
+            {
+                "id": "ukase-326",
+                "url": _UKASE_WIKI,
+                "license": "official-text",
+                "vendor": False,
+                "checked_at": "2026-09-09",
+                "cursor": cursor,
+                "detector": {"kind": "page_fingerprint", "urls": [_UKASE_WIKI]},
+            }
+        ],
+    }
+
+
+def test_page_fingerprint_uses_mediawiki_revid_not_html_sha() -> None:
+    def handler(method: str, url: str, kwargs: dict):
+        if "api.php" in url:
+            params = kwargs.get("params") or {}
+            assert "Структура" in str(params.get("titles") or "")
+            return FakeResponse(
+                json_data={"query": {"pages": [{"pageid": 10669518, "lastrevid": 141625080}]}}
+            )
+        raise AssertionError(f"нельзя GET HTML статьи: {method} {url}")
+
+    session = FakeSession(handler)
+    report = check_catalog(_ukase_catalog(cursor="141625080"), session=session, now=FIXED_NOW)
+    assert report["changed_count"] == 0
+    assert report["error_count"] == 0
+    row = report["sources"][0]
+    assert row["changed"] is False
+    assert row["cursor_new"] == "141625080"
+    assert "MediaWiki" in row["reason"]
+    assert any("api.php" in call["url"] for call in session.calls)
+    assert not any("/wiki/" in call["url"] for call in session.calls)
+
+
+def test_page_fingerprint_new_revid_is_changed() -> None:
+    def handler(method: str, url: str, _kwargs: dict):
+        if "api.php" in url:
+            return FakeResponse(
+                json_data={"query": {"pages": [{"pageid": 1, "lastrevid": 141625081}]}}
+            )
+        raise AssertionError(f"нельзя GET HTML статьи: {method} {url}")
+
+    report = check_catalog(
+        _ukase_catalog(cursor="141625080"),
+        session=FakeSession(handler),
+        now=FIXED_NOW,
+    )
+    assert exit_code(report) == 10
+    row = report["sources"][0]
+    assert row["changed"] is True
+    assert row["cursor_old"] == "141625080"
+    assert row["cursor_new"] == "141625081"
+    assert "141625081" in row["reason"]
+
+
+def test_page_fingerprint_uses_etag_not_html_sha() -> None:
+    chrome_a = "<html><body>nav chrome A</body></html>"
+    catalog = {
+        "updated": "2026-09-09",
+        "sources": [
+            {
+                "id": "ukase-326",
+                "url": "https://example.invalid/ukase",
+                "license": "official-text",
+                "vendor": False,
+                "checked_at": "2026-09-09",
+                "cursor": 'W/"rev-1"',
+                "detector": {
+                    "kind": "page_fingerprint",
+                    "urls": ["https://example.invalid/ukase"],
+                },
+            }
+        ],
+    }
+
+    def handler(method: str, url: str, _kwargs: dict):
+        return FakeResponse(text=chrome_a, headers={"ETag": 'W/"rev-1"'})
+
+    report = check_catalog(catalog, session=FakeSession(handler), now=FIXED_NOW)
+    assert report["changed_count"] == 0
+    assert report["sources"][0]["cursor_new"] == 'W/"rev-1"'
+    assert report["sources"][0]["cursor_new"] != fingerprint_text(normalize_html(chrome_a))
+
+
+def test_page_fingerprint_without_revid_or_etag_is_error() -> None:
+    catalog = {
+        "updated": "2026-09-09",
+        "sources": [
+            {
+                "id": "ukase-326",
+                "url": "https://example.invalid/ukase",
+                "license": "official-text",
+                "vendor": False,
+                "checked_at": "2026-09-09",
+                "cursor": "old-sha",
+                "detector": {
+                    "kind": "page_fingerprint",
+                    "urls": ["https://example.invalid/ukase"],
+                },
+            }
+        ],
+    }
+
+    def handler(method: str, url: str, _kwargs: dict):
+        return FakeResponse(text="<html><body>chrome jitter</body></html>")
+
+    report = check_catalog(catalog, session=FakeSession(handler), now=FIXED_NOW)
+    assert report["error_count"] == 1
+    assert report["changed_count"] == 0
+    row = report["sources"][0]
+    assert row["error"] is True
+    assert row["changed"] is False
+    assert row["cursor_new"] == "old-sha"
+    assert "ETag" in row["reason"] or "rev" in row["reason"]
+
+
 def test_json_shape_keys(monkeypatch, capsys) -> None:
     session = FakeSession(_geonames_handler(mods_body=_mods("geonames_mods_non_ru.tsv")))
     _run_cli(monkeypatch, FIXTURES / "catalog_check_geonames.yaml", ["--json"], session)

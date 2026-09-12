@@ -9,7 +9,7 @@ fields:
 delete_policy: ignore
 notes: >
   Юридический текст — Указ Президента № 326 / № 522 на pravo.gov.ru.
-  URL в каталоге — Wikipedia-отпечаток (page_fingerprint), не источник
-  официальных названий. --apply обновляет только checked_at, пока не
-  передан --manual-file с каноническим 22-колоночным заголовком.
-  Слаг foiv:{slug} назначает оператор, sync его не выводит из HTML.
+  URL в каталоге — Wikipedia (сигнал page_fingerprint: MediaWiki lastrevid
+  или ETag, не SHA хрома). --apply без --manual-file обновляет только
+  checked_at и не пишет cursor. --manual-file — канонический 22-колоночный
+  заголовок. Слаг foiv:{slug} назначает оператор, sync его не выводит из HTML.

@@ -192,11 +192,13 @@ def sync_ukase(
         if apply:
             write_csv(target, existing_header, new_rows)
     if apply:
+        kwargs: dict[str, str] = {"checked_at": today}
+        if manual_file is not None and cursor is not None:
+            kwargs["cursor"] = cursor
         patch_catalog_source(
             root / "data" / "sources" / "catalog.yaml",
             source["id"],
-            checked_at=today,
-            cursor=cursor,
+            **kwargs,
         )
     return counts
 

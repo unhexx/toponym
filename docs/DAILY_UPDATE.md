@@ -125,7 +125,7 @@ GitHub watchlist из `catalog.yaml` (`watchlist_github`): commits since `checke
 
 Wikidata: SPARQL `P17=Q159` за 48 ч — только для id, которые уже есть в curated, либо очередь на ревью. Не массовый импорт.
 
-Указ №326 / №522: `detector.kind=none` или page_fingerprint. Структурное изменение ФОИВ — ручной gate, не HTML→CSV.
+Указ №326 / №522: `detector.kind=page_fingerprint`, курсор — MediaWiki lastrevid (или ETag), не SHA Wikipedia-хрома. Структурное изменение ФОИВ — ручной gate (`--manual-file`), не HTML→CSV. Без `--manual-file` cursor в catalog.yaml не патчится.
 
 ---
 
