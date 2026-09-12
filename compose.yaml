@@ -2,7 +2,7 @@ name: toponym
 
 services:
   toponym:
-    image: ghcr.io/unhexx/toponym:2026.09.12
+    image: ghcr.io/unhexx/toponym:2026.09.13
     build:
       context: .
       dockerfile: Dockerfile
