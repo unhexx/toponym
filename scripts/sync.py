@@ -14,11 +14,7 @@ _ROOT = Path(__file__).resolve().parents[1]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-from scripts.lib.catalog import (  # noqa: E402
-    load_catalog,
-    load_mapping,
-    patch_catalog_source,
-)
+from scripts.lib.catalog import load_catalog, patch_catalog_source  # noqa: E402
 from scripts.lib.csvio import PLACES_HEADER, read_csv, write_csv  # noqa: E402
 from scripts.lib.detectors import (  # noqa: E402
     _request,
@@ -38,12 +34,6 @@ from scripts.lib.upsert import (  # noqa: E402
 
 ROOT = _ROOT
 CATALOG_PATH = ROOT / "data" / "sources" / "catalog.yaml"
-POINTER_IDS = {
-    "fias-gar",
-    "gkgn-opendata",
-    "hflabs-region",
-    "hflabs-city",
-}
 
 
 class SyncError(Exception):
@@ -208,8 +198,6 @@ def sync_source(
 ) -> UpsertCounts:
     today = now.date().isoformat()
     source_id = source["id"]
-    mapping = load_mapping(root, source_id) or {}
-    policy = mapping.get("delete_policy") or ""
 
     if source.get("vendor"):
         if session is None:
@@ -226,8 +214,6 @@ def sync_source(
         return sync_ukase(
             source, root=root, apply=apply, manual_file=manual_file, today=today
         )
-    if policy == "pointer" or source_id in POINTER_IDS:
-        return sync_pointer(source, root=root, apply=apply, today=today)
     return sync_pointer(source, root=root, apply=apply, today=today)
 
 
