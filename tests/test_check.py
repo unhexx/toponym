@@ -103,6 +103,14 @@ def _write_catalog(tmp_path: Path, payload: dict) -> Path:
     return path
 
 
+def _geonames_catalog(*, cursor: str) -> dict:
+    payload = yaml.safe_load(
+        (FIXTURES / "catalog_check_geonames.yaml").read_text(encoding="utf-8")
+    )
+    payload["sources"][0]["cursor"] = cursor
+    return payload
+
+
 def _run_cli(monkeypatch, catalog_path: Path, argv: list[str], session: FakeSession | None):
     monkeypatch.setattr(check_mod, "CATALOG_PATH", catalog_path)
     monkeypatch.setattr(check_mod, "utcnow", lambda: FIXED_NOW)
@@ -119,8 +127,8 @@ def test_yesterday_is_utc_date() -> None:
     assert url.endswith("modifications-2026-09-08.txt")
 
 
-def test_non_ru_mods_exit_0(monkeypatch, capsys) -> None:
-    catalog_path = FIXTURES / "catalog_check_geonames.yaml"
+def test_non_ru_mods_exit_0(tmp_path: Path, monkeypatch, capsys) -> None:
+    catalog_path = _write_catalog(tmp_path, _geonames_catalog(cursor="2026-09-07"))
     session = FakeSession(_geonames_handler(mods_body=_mods("geonames_mods_non_ru.tsv")))
     code = _run_cli(monkeypatch, catalog_path, ["--json"], session)
     captured = capsys.readouterr()
@@ -131,18 +139,14 @@ def test_non_ru_mods_exit_0(monkeypatch, capsys) -> None:
     assert report["sources"][0]["changed"] is False
     assert report["sources"][0]["error"] is False
     assert "0 RU rows in mods" in report["sources"][0]["reason"]
-    assert report["sources"][0]["cursor_new"] == "2026-09-08"
+    assert report["sources"][0]["cursor_old"] == "2026-09-07"
+    assert report["sources"][0]["cursor_new"] == "2026-09-07"
     assert any("modifications-2026-09-08.txt" in call["url"] for call in session.calls)
     assert not any("RU.zip" in call["url"] for call in session.calls)
 
 
 def test_ru_mods_exit_10(tmp_path: Path, monkeypatch, capsys) -> None:
-    # catalog_check_geonames.yaml already has cursor=yesterday (2026-09-08).
-    payload = yaml.safe_load(
-        (FIXTURES / "catalog_check_geonames.yaml").read_text(encoding="utf-8")
-    )
-    payload["sources"][0]["cursor"] = "2026-09-07"
-    catalog_path = _write_catalog(tmp_path, payload)
+    catalog_path = _write_catalog(tmp_path, _geonames_catalog(cursor="2026-09-07"))
     session = FakeSession(_geonames_handler(mods_body=_mods("geonames_mods_ru.tsv")))
     code = _run_cli(monkeypatch, catalog_path, ["--json"], session)
     report = json.loads(capsys.readouterr().out)
@@ -157,18 +161,28 @@ def test_ru_mods_exit_10(tmp_path: Path, monkeypatch, capsys) -> None:
 
 
 def test_ru_mods_cursor_already_yesterday_exit_0(monkeypatch, capsys) -> None:
-    catalog_path = FIXTURES / "catalog_check_geonames.yaml"
-    session = FakeSession(_geonames_handler(mods_body=_mods("geonames_mods_ru.tsv")))
-    code = _run_cli(monkeypatch, catalog_path, ["--json"], session)
+    def handler(method: str, url: str, _kwargs: dict):
+        raise requests.Timeout(f"нельзя GET при текущем курсоре: {method} {url}")
+
+    session = FakeSession(handler)
+    code = _run_cli(
+        monkeypatch,
+        FIXTURES / "catalog_check_geonames.yaml",
+        ["--json"],
+        session,
+    )
     report = json.loads(capsys.readouterr().out)
     assert code == 0
     assert report["changed_count"] == 0
     assert report["error_count"] == 0
     assert report["sources"][0]["changed"] is False
+    assert report["sources"][0]["error"] is False
     assert report["sources"][0]["cursor_old"] == "2026-09-08"
     assert report["sources"][0]["cursor_new"] == "2026-09-08"
     assert "cursor already 2026-09-08" in report["sources"][0]["reason"]
-    assert not any("RU.zip" in call["url"] for call in session.calls)
+    assert session.calls == []
+    assert not any("modifications-" in call["url"] for call in session.calls)
+    assert not any("deletes-" in call["url"] for call in session.calls)
 
 
 def test_offline_mixed_catalog_exit_2(monkeypatch, capsys) -> None:
@@ -209,17 +223,13 @@ def test_kind_none_never_changed() -> None:
     assert report["sources"][0]["changed"] is False
 
 
-def test_http_timeout_exit_2(monkeypatch, capsys) -> None:
+def test_http_timeout_exit_2(tmp_path: Path, monkeypatch, capsys) -> None:
     def handler(method: str, url: str, _kwargs: dict):
         raise requests.Timeout("timed out")
 
     session = FakeSession(handler)
-    code = _run_cli(
-        monkeypatch,
-        FIXTURES / "catalog_check_geonames.yaml",
-        ["--json"],
-        session,
-    )
+    catalog_path = _write_catalog(tmp_path, _geonames_catalog(cursor="2026-09-07"))
+    code = _run_cli(monkeypatch, catalog_path, ["--json"], session)
     report = json.loads(capsys.readouterr().out)
     assert code == 2
     assert report["error_count"] >= 1
@@ -664,19 +674,15 @@ def test_stamp_rejects_combined_flags(tmp_path: Path, monkeypatch, capsys) -> No
     assert catalog_path.read_text(encoding="utf-8") == original
 
 
-def test_dump_last_modified_does_not_flip_changed(monkeypatch, capsys) -> None:
+def test_dump_last_modified_does_not_flip_changed(tmp_path: Path, monkeypatch, capsys) -> None:
     session = FakeSession(
         _geonames_handler(
             mods_body=_mods("geonames_mods_non_ru.tsv"),
             dump_lm="Wed, 09 Sep 2026 01:00:00 GMT",
         )
     )
-    code = _run_cli(
-        monkeypatch,
-        FIXTURES / "catalog_check_geonames.yaml",
-        ["--json"],
-        session,
-    )
+    catalog_path = _write_catalog(tmp_path, _geonames_catalog(cursor="2026-09-07"))
+    code = _run_cli(monkeypatch, catalog_path, ["--json"], session)
     report = json.loads(capsys.readouterr().out)
     row = report["sources"][0]
     assert code == 0
@@ -684,6 +690,6 @@ def test_dump_last_modified_does_not_flip_changed(monkeypatch, capsys) -> None:
     assert row["changed"] is False
     assert "0 RU rows in mods" in row["reason"]
     assert "Last-Modified" not in row["reason"]
-    assert row["cursor_old"] == "2026-09-08"
-    assert row["cursor_new"] == "2026-09-08"
+    assert row["cursor_old"] == "2026-09-07"
+    assert row["cursor_new"] == "2026-09-07"
     assert not any("RU.zip" in call["url"] for call in session.calls)

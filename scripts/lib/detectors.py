@@ -296,6 +296,15 @@ def detect_http_dated(
     if not urls:
         return _err_result(reason="http_dated: нет urls", cursor_old=cursor_old)
 
+    yesterday = yesterday_utc(now)
+    if cursor_old == yesterday:
+        return _ok_result(
+            changed=False,
+            reason=f"cursor already {yesterday}",
+            cursor_old=cursor_old,
+            cursor_new=cursor_old,
+        )
+
     # `also: last_modified_header` is informational. Dump Last-Modified
     # must not flip `changed` and must not replace the mods-date cursor.
     ru_total = 0
@@ -310,17 +319,9 @@ def detect_http_dated(
     except requests.RequestException as exc:
         return _err_result(reason=f"http_dated: {exc}", cursor_old=cursor_old)
 
-    yesterday = yesterday_utc(now)
     if ru_total > 0:
         target = "mods" if mods_ru or ru_total == mods_ru else "mods/deletes"
         word = "row" if ru_total == 1 else "rows"
-        if cursor_old == yesterday:
-            return _ok_result(
-                changed=False,
-                reason=f"cursor already {yesterday}",
-                cursor_old=cursor_old,
-                cursor_new=cursor_old,
-            )
         return _ok_result(
             changed=True,
             reason=f"{ru_total} RU {word} in {target}",
