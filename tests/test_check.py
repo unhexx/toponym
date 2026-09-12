@@ -136,8 +136,13 @@ def test_non_ru_mods_exit_0(monkeypatch, capsys) -> None:
     assert not any("RU.zip" in call["url"] for call in session.calls)
 
 
-def test_ru_mods_exit_10(monkeypatch, capsys) -> None:
-    catalog_path = FIXTURES / "catalog_check_geonames.yaml"
+def test_ru_mods_exit_10(tmp_path: Path, monkeypatch, capsys) -> None:
+    # catalog_check_geonames.yaml already has cursor=yesterday (2026-09-08).
+    payload = yaml.safe_load(
+        (FIXTURES / "catalog_check_geonames.yaml").read_text(encoding="utf-8")
+    )
+    payload["sources"][0]["cursor"] = "2026-09-07"
+    catalog_path = _write_catalog(tmp_path, payload)
     session = FakeSession(_geonames_handler(mods_body=_mods("geonames_mods_ru.tsv")))
     code = _run_cli(monkeypatch, catalog_path, ["--json"], session)
     report = json.loads(capsys.readouterr().out)
@@ -146,7 +151,23 @@ def test_ru_mods_exit_10(monkeypatch, capsys) -> None:
     assert report["error_count"] == 0
     assert report["sources"][0]["changed"] is True
     assert "RU" in report["sources"][0]["reason"]
+    assert report["sources"][0]["cursor_old"] == "2026-09-07"
     assert report["sources"][0]["cursor_new"] == "2026-09-08"
+    assert not any("RU.zip" in call["url"] for call in session.calls)
+
+
+def test_ru_mods_cursor_already_yesterday_exit_0(monkeypatch, capsys) -> None:
+    catalog_path = FIXTURES / "catalog_check_geonames.yaml"
+    session = FakeSession(_geonames_handler(mods_body=_mods("geonames_mods_ru.tsv")))
+    code = _run_cli(monkeypatch, catalog_path, ["--json"], session)
+    report = json.loads(capsys.readouterr().out)
+    assert code == 0
+    assert report["changed_count"] == 0
+    assert report["error_count"] == 0
+    assert report["sources"][0]["changed"] is False
+    assert report["sources"][0]["cursor_old"] == "2026-09-08"
+    assert report["sources"][0]["cursor_new"] == "2026-09-08"
+    assert "cursor already 2026-09-08" in report["sources"][0]["reason"]
     assert not any("RU.zip" in call["url"] for call in session.calls)
 
 
@@ -251,9 +272,12 @@ def test_pointer_timeout_does_not_block_geonames_changed(tmp_path: Path) -> None
                     "urls": ["https://rosreestr.gov.ru/opendata/example"],
                 },
             },
-            yaml.safe_load((FIXTURES / "catalog_check_geonames.yaml").read_text(encoding="utf-8"))[
-                "sources"
-            ][0],
+            {
+                **yaml.safe_load(
+                    (FIXTURES / "catalog_check_geonames.yaml").read_text(encoding="utf-8")
+                )["sources"][0],
+                "cursor": "2026-09-07",
+            },
         ],
     }
 
