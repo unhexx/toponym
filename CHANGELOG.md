@@ -5,8 +5,13 @@
 
 ## [Unreleased]
 
+## [2026.09.16] - 2026-09-16
+
+Реестр годонимов Wikidata. Теги `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14` и `2026.09.15` не двигались.
+
 ### Added
 - Реестр годонимов из Wikidata (DEC-SEED-003): SPARQL [`data/raw/wikidata/hodonyms-ru.sparql`](data/raw/wikidata/hodonyms-ru.sparql) (P31 улица/бульвар/проспект/переулок/набережная, P17=Q159, без площадей), upsert `python scripts/seed_hodonyms.py` по `wd:Q…`. JSON/CSV запроса в git не кладётся. В каноне — около 15 тыс. строк (Wikidata), не ФИАС и не все улицы России.
+- Образ `ghcr.io/unhexx/toponym:2026.09.16` (и `:CalVer`) публикуется CI на push в `main`. `compose.yaml` пинит этот тег.
 
 ### Changed
 - [`data/curated/hodonyms.csv`](data/curated/hodonyms.csv) — уже не демо-сиды DEC-SEED-001, а таблица улиц Wikidata. Daily-синк по-прежнему `known_ids_only`. Склонения новых строк — `review=needs_review`, без pymorphy.
@@ -148,7 +153,8 @@ Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-S
 - GeoNames id: Москва `524901`, Волга `472776`.
 - Склонения: `review=gold` / `needs_review` (не boolean).
 
-[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.15...HEAD
+[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.16...HEAD
+[2026.09.16]: https://github.com/unhexx/toponym/releases/tag/2026.09.16
 [2026.09.15]: https://github.com/unhexx/toponym/releases/tag/2026.09.15
 [2026.09.14]: https://github.com/unhexx/toponym/releases/tag/2026.09.14
 [2026.09.13]: https://github.com/unhexx/toponym/releases/tag/2026.09.13

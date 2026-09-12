@@ -3,7 +3,7 @@
   "project": {
     "id": "PRJ-TOPONYM",
     "name": "toponym",
-    "calver": "2026.09.15",
+    "calver": "2026.09.16",
     "canon": "frictionless-tabular-data-package"
   },
   "entities": [

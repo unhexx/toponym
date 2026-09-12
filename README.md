@@ -3,7 +3,7 @@
 Локальный канон имён мест и ведомств: CSV в git, поиск у себя на машине, без портала и без дампа ГАР.
 
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![CalVer](https://img.shields.io/badge/CalVer-2026.09.15-informational.svg)](https://github.com/unhexx/toponym/releases/tag/2026.09.15)
+[![CalVer](https://img.shields.io/badge/CalVer-2026.09.16-informational.svg)](https://github.com/unhexx/toponym/releases/tag/2026.09.16)
 [![CI](https://img.shields.io/github/actions/workflow/status/unhexx/toponym/ci.yml?branch=main&label=CI)](https://github.com/unhexx/toponym/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/unhexx/toponym?label=release)](https://github.com/unhexx/toponym/releases)
 [![Python](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
@@ -13,7 +13,7 @@
 
 **Evgeniy Chistyakov** aka **Unhandled Exception** · [DAO EXCEPTION EXPERT](https://exception.expert) · `unhandled@exception.expert`
 
-Релиз: [`2026.09.15`](https://github.com/unhexx/toponym/releases/tag/2026.09.15). Лицензия репозитория: [MIT](LICENSE). Иходники — [`docs/SOURCES.md`](docs/SOURCES.md).
+Релиз: [`2026.09.16`](https://github.com/unhexx/toponym/releases/tag/2026.09.16). Лицензия репозитория: [MIT](LICENSE). Иходники — [`docs/SOURCES.md`](docs/SOURCES.md).
 
 ---
 
@@ -90,7 +90,7 @@ cd toponym
 docker compose up --build
 ```
 
-Обновление без компиляции (пин `ghcr.io/unhexx/toponym:2026.09.15`):
+Обновление без компиляции (пин `ghcr.io/unhexx/toponym:2026.09.16`):
 
 ```bash
 docker compose pull && docker compose up
@@ -153,7 +153,7 @@ docs/               # оглавление: docs/README.md
 | [ADR](LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md) | исторический снимок решений |
 | [datapackage.json](datapackage.json) · [schema/](schema/) | машинный канон |
 | [catalog.yaml](data/sources/catalog.yaml) | источники и детекторы |
-| [Релиз 2026.09.15](https://github.com/unhexx/toponym/releases/tag/2026.09.15) | тег и GitHub Release |
+| [Релиз 2026.09.16](https://github.com/unhexx/toponym/releases/tag/2026.09.16) | тег и GitHub Release |
 
 ## Источники
 
@@ -208,7 +208,7 @@ HTTP (только GET, только loopback): `/healthz`, `/v1/search?q=…`, 
 
 ## Цитирование
 
-См. [`CITATION.cff`](CITATION.cff). Версия: `2026.09.15`.
+См. [`CITATION.cff`](CITATION.cff). Версия: `2026.09.16`.
 
 ---
 
