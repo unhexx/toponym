@@ -203,9 +203,10 @@ def test_http_timeout_exit_2(monkeypatch, capsys) -> None:
     assert code == 2
     assert report["error_count"] >= 1
     assert report["sources"][0]["error"] is True
+    assert report["sources"][0]["blocking"] is True
 
 
-def test_pointer_http_head_timeout_is_not_error(tmp_path: Path) -> None:
+def test_pointer_http_head_timeout_nonblocking_exit_0(tmp_path: Path) -> None:
     catalog = {
         "updated": "2026-09-09",
         "sources": [
@@ -228,8 +229,9 @@ def test_pointer_http_head_timeout_is_not_error(tmp_path: Path) -> None:
 
     report = check_catalog(catalog, session=FakeSession(handler), now=FIXED_NOW)
     assert exit_code(report) == 0
-    assert report["error_count"] == 0
-    assert report["sources"][0]["error"] is False
+    assert report["error_count"] == 1
+    assert report["sources"][0]["error"] is True
+    assert report["sources"][0]["blocking"] is False
     assert report["sources"][0]["changed"] is False
     assert "pointer only" in report["sources"][0]["reason"]
 
@@ -267,8 +269,10 @@ def test_pointer_timeout_does_not_block_geonames_changed(tmp_path: Path) -> None
     report = check_catalog(catalog, session=FakeSession(handler), now=FIXED_NOW)
     assert exit_code(report) == 10
     by_id = {row["id"]: row for row in report["sources"]}
-    assert by_id["gkgn-opendata"]["error"] is False
+    assert by_id["gkgn-opendata"]["error"] is True
+    assert by_id["gkgn-opendata"]["blocking"] is False
     assert by_id["geonames-ru"]["changed"] is True
+    assert by_id["geonames-ru"]["error"] is False
 
 
 def test_github_sha_differs_exit_10(tmp_path: Path, monkeypatch, capsys) -> None:
@@ -370,7 +374,15 @@ def test_json_shape_keys(monkeypatch, capsys) -> None:
     report = json.loads(capsys.readouterr().out)
     assert set(report) >= {"as_of", "sources", "changed_count", "error_count"}
     row = report["sources"][0]
-    assert set(row) >= {"id", "changed", "reason", "cursor_old", "cursor_new", "error"}
+    assert set(row) >= {
+        "id",
+        "changed",
+        "reason",
+        "cursor_old",
+        "cursor_new",
+        "error",
+        "blocking",
+    }
     assert report["as_of"].endswith("Z")
 
 

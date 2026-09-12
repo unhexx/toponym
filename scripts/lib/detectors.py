@@ -144,12 +144,16 @@ def detect_none(source: dict[str, Any], **_: Any) -> dict[str, Any]:
 
 
 def _is_pointer_http_head(source: dict[str, Any]) -> bool:
-    """vendor:false + http_head — указатель (ГКГН/ГАР). Таймаут не блокирует цикл."""
+    """vendor:false + http_head — указатель (ГКГН/ГАР). Ошибка не блокирует daily."""
     kind = (source.get("detector") or {}).get("kind")
     if kind != "http_head":
         return False
     vendor = source.get("vendor")
     return vendor is False or vendor == "false"
+
+
+def _source_blocking(source: dict[str, Any]) -> bool:
+    return not _is_pointer_http_head(source)
 
 
 def detect_http_head(
@@ -178,24 +182,15 @@ def detect_http_head(
                 if getattr(response, "raw", None) is not None:
                     response.close()
             if response.status_code >= 400:
+                reason = f"http_head HTTP {response.status_code}"
                 if _is_pointer_http_head(source):
-                    return _ok_result(
-                        changed=False,
-                        reason=f"http_head HTTP {response.status_code}; pointer only",
-                        cursor_old=cursor_old,
-                        cursor_new=cursor_old,
-                    )
-                return _err_result(
-                    reason=f"http_head HTTP {response.status_code}",
-                    cursor_old=cursor_old,
-                )
+                    reason += "; pointer only"
+                return _err_result(reason=reason, cursor_old=cursor_old)
         except requests.RequestException as exc:
             if _is_pointer_http_head(source):
-                return _ok_result(
-                    changed=False,
+                return _err_result(
                     reason="http_head timeout/no reliable headers; pointer only",
                     cursor_old=cursor_old,
-                    cursor_new=cursor_old,
                 )
             return _err_result(reason=f"http_head: {exc}", cursor_old=cursor_old)
         token = header_cursor(response.headers)
@@ -386,6 +381,8 @@ def detect_source(
     source_id = source.get("id") or ""
     kind = (source.get("detector") or {}).get("kind")
     cursor_old = source.get("cursor") or ""
+    blocking = _source_blocking(source)
+
     def with_id(row: dict[str, Any]) -> dict[str, Any]:
         return {
             "id": source_id,
@@ -394,6 +391,7 @@ def detect_source(
             "cursor_old": row["cursor_old"],
             "cursor_new": row["cursor_new"],
             "error": row["error"],
+            "blocking": blocking,
         }
 
     if not kind:
@@ -432,6 +430,7 @@ def check_catalog(
                     "cursor_old": "",
                     "cursor_new": "",
                     "error": True,
+                    "blocking": True,
                 }
             )
         else:
@@ -455,7 +454,8 @@ def check_catalog(
 
 
 def exit_code(report: dict[str, Any]) -> int:
-    if report.get("error_count"):
+    sources = report.get("sources") or []
+    if any(row.get("error") and row.get("blocking", True) for row in sources):
         return 2
     if report.get("changed_count"):
         return 10
