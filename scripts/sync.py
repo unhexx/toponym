@@ -27,7 +27,7 @@ from scripts.lib.detectors import (  # noqa: E402
     utcnow,
     yesterday_utc,
 )
-from scripts.lib.places import PLACE_RELPATHS  # noqa: E402
+from scripts.lib.places import load_place_relpaths  # noqa: E402
 from scripts.lib.upsert import (  # noqa: E402
     DEFAULT_MAX_VENDOR_BYTES,
     UpsertCounts,
@@ -151,7 +151,7 @@ def sync_geonames(
     deletes_body = _fetch_text(session, urls[1]) if len(urls) > 1 else ""
 
     total = UpsertCounts()
-    for rel in PLACE_RELPATHS:
+    for rel in load_place_relpaths(root):
         path = root / rel
         if not path.is_file():
             continue

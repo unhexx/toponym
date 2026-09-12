@@ -162,6 +162,7 @@ def _prepare_root(tmp_path: Path) -> Path:
     (tmp_path / "data" / "sources").mkdir(parents=True)
     (tmp_path / "data" / "curated").mkdir(parents=True)
     (tmp_path / "data" / "mappings").mkdir(parents=True)
+    shutil.copy(ROOT / "datapackage.json", tmp_path / "datapackage.json")
     shutil.copy(FIXTURES / "catalog_sync_geonames.yaml", tmp_path / "data/sources/catalog.yaml")
     shutil.copy(FIXTURES / "places_wd_moscow.csv", tmp_path / "data/curated/cities-major.csv")
     shutil.copy(ROOT / "data/mappings/geonames.yaml", tmp_path / "data/mappings/geonames.yaml")

@@ -15,7 +15,7 @@ from scripts.lib.catalog import load_catalog  # noqa: E402
 from scripts.lib.csvio import read_csv  # noqa: E402
 from scripts.lib.declensions import load_lemma_aliases  # noqa: E402
 from scripts.lib.detectors import utcnow  # noqa: E402
-from scripts.lib.places import INDEX_RELPATHS  # noqa: E402
+from scripts.lib.places import load_index_relpaths  # noqa: E402
 
 ROOT = _ROOT
 DEFAULT_OUT = ROOT / "knowledge" / "registry.db"
@@ -101,7 +101,7 @@ def _cell(row: dict[str, str], key: str) -> str:
 def load_records(root: Path) -> list[dict[str, str]]:
     records: list[dict[str, str]] = []
     seen: set[str] = set()
-    for rel in INDEX_RELPATHS:
+    for rel in load_index_relpaths(root):
         path = root / rel
         if not path.is_file():
             raise FileNotFoundError(f"нет таблицы {rel}")
