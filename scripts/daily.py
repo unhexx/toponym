@@ -166,19 +166,8 @@ def run_daily(
             }
             return summary, 1
         validate_status = "0"
-        idx = index_fn()
-        if idx != 0:
-            summary = {
-                "today": today,
-                "check_exit": check_exit,
-                "synced": synced,
-                "validate": validate_status,
-                "stamped": False,
-                "records_upserted": 0,
-                "records_deprecated": 0,
-                "journal": None,
-            }
-            return summary, 1
+        # Index is derived (gitignored); failure must not drop a valid upsert.
+        index_fn()
 
     total = UpsertCounts()
     for report in sync_reports:
