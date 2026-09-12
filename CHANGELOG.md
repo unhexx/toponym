@@ -7,6 +7,7 @@
 
 ### Removed
 - Мёртвый SHA-стек HTML: `normalize_html`, `fingerprint_text` и четыре regex в детекторах. Kind `page_fingerprint` остаётся (MediaWiki lastrevid / ETag).
+- Журнал daily: один путь counts через `UpsertCounts.journal_fields()`. Убраны `journal_counts_from_sync_files`, fallback `inserted+updated`, `sync_json` и CLI `journal.py`.
 
 ### Fixed
 - `http_dated`: курсор сравнивается с вчерашней UTC-датой до GET mods/deletes. Текущий watermark — без сети; таймаут уже актуального дампа не блокирует check.

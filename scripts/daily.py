@@ -20,7 +20,8 @@ if str(_ROOT) not in sys.path:
 from scripts.index import rebuild_index  # noqa: E402
 from scripts.lib.catalog import load_catalog, stamp_catalog_checked_at  # noqa: E402
 from scripts.lib.detectors import build_session, check_catalog, exit_code, utcnow  # noqa: E402
-from scripts.lib.journal import journal_counts_from_sync_report, write_run_journal  # noqa: E402
+from scripts.lib.journal import write_run_journal  # noqa: E402
+from scripts.lib.upsert import UpsertCounts  # noqa: E402
 from scripts.sync import SyncError, run_sync  # noqa: E402
 from scripts.validate import ValidateCrash, validate_tree  # noqa: E402
 
@@ -179,12 +180,18 @@ def run_daily(
             }
             return summary, 1
 
-    upserted = 0
-    deprecated = 0
+    total = UpsertCounts()
     for report in sync_reports:
-        add_u, add_d = journal_counts_from_sync_report(report)
-        upserted += add_u
-        deprecated += add_d
+        total.add(
+            UpsertCounts(
+                inserted=int(report.get("inserted") or 0),
+                updated=int(report.get("updated") or 0),
+                deprecated=int(report.get("deprecated") or 0),
+            )
+        )
+    fields = total.journal_fields()
+    upserted = fields["records_upserted"]
+    deprecated = fields["records_deprecated"]
 
     journal_path = write_run_journal(
         today=today,
@@ -194,7 +201,6 @@ def run_daily(
         runs_dir=runs_dir,
         records_upserted=upserted,
         records_deprecated=deprecated,
-        sync_reports=sync_reports,
     )
 
     if check_exit == 0:
