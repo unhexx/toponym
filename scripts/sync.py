@@ -14,16 +14,11 @@ _ROOT = Path(__file__).resolve().parents[1]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-<<<<<<< HEAD
-from scripts.lib.catalog import load_catalog, patch_catalog_source  # noqa: E402
-=======
 from scripts.lib.catalog import (  # noqa: E402
     load_catalog,
-    load_mapping,
     patch_catalog_source,
     stamp_catalog_updated,
 )
->>>>>>> d205583 (fix: курсор catalog из check.json в sync, не в журнал)
 from scripts.lib.csvio import PLACES_HEADER, read_csv, write_csv  # noqa: E402
 from scripts.lib.detectors import (  # noqa: E402
     _request,
