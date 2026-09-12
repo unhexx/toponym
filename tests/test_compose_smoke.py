@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import socket
 import subprocess
@@ -42,20 +43,27 @@ def _port_free(port: int) -> bool:
         return sock.connect_ex(("127.0.0.1", port)) != 0
 
 
+def _skip_or_fail(reason: str) -> None:
+    if os.environ.get("CI"):
+        pytest.fail(reason)
+    pytest.skip(reason)
+
+
 @pytest.mark.compose
-@pytest.mark.skipif(not docker_ok(), reason="docker unavailable")
 def test_compose_up_search() -> None:
+    if not docker_ok():
+        _skip_or_fail("docker unavailable")
     if not _port_free(8099):
-        pytest.skip("8099 in use")
-    up = subprocess.run(
-        ["docker", "compose", "-f", str(COMPOSE), "up", "--build", "-d", "--wait"],
-        cwd=ROOT,
-        check=False,
-        capture_output=True,
-        text=True,
-        timeout=180,
-    )
+        _skip_or_fail("8099 in use")
     try:
+        up = subprocess.run(
+            ["docker", "compose", "-f", str(COMPOSE), "up", "--build", "-d", "--wait"],
+            cwd=ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=600,
+        )
         if up.returncode != 0:
             pytest.fail(f"compose up failed: {up.stderr or up.stdout}")
         with urllib.request.urlopen(f"{BASE}/healthz", timeout=10) as resp:

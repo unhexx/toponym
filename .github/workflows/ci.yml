@@ -50,7 +50,11 @@ jobs:
         run: pip install "pytest>=8.0,<9"
 
       - name: Pytest compose smoke
-        run: pytest tests/test_compose_smoke.py
+        run: pytest tests/test_compose_smoke.py -ra
+
+      - name: Compose down
+        if: always()
+        run: docker compose down -v
 
   publish:
     name: ghcr
