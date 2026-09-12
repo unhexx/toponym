@@ -5,6 +5,12 @@
 
 ## [Unreleased]
 
+### Added
+- Реестр годонимов из Wikidata (DEC-SEED-003): SPARQL [`data/raw/wikidata/hodonyms-ru.sparql`](data/raw/wikidata/hodonyms-ru.sparql) (P31=улица Q79007, P17=Q159, без площадей), upsert `python scripts/seed_hodonyms.py` по `wd:Q…`. JSON/CSV запроса в git не кладётся. В каноне — порядка 14 тыс. строк (Wikidata), не ФИАС и не все улицы России.
+
+### Changed
+- [`data/curated/hodonyms.csv`](data/curated/hodonyms.csv) — уже не демо-сиды DEC-SEED-001, а таблица улиц Wikidata. Daily-синк по-прежнему `known_ids_only`. Склонения новых строк — `review=needs_review`, без pymorphy.
+
 ## [2026.09.15] - 2026-09-15
 
 Витрина README и оглавление документации. Теги `2026.09.11`, `2026.09.12`, `2026.09.13` и `2026.09.14` не двигались.

@@ -148,6 +148,7 @@ def test_usage_guide_covers_search_and_declensions() -> None:
     assert "microtoponyms.csv" in text
     assert "DEC-SEED-001" in text
     assert "DEC-SEED-002" in text
+    assert "DEC-SEED-003" in text
     assert "Тверской" in text
     assert "queue.csv" in text
     assert "declensions_queue.py" in text
@@ -175,6 +176,8 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
     assert "ghcr.io/unhexx/toponym:2026.09.13" in before_loop2
     assert "municipalities.csv" in before_loop2
     assert "DEC-SEED-001" in before_loop2
+    assert "DEC-SEED-003" in before_loop2
+    assert "seed_hodonyms.py" in before_loop2
     assert "PACKAGE_VERSION" in before_loop2
 
 

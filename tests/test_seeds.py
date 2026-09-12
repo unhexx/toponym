@@ -82,7 +82,7 @@ def test_seed_counts() -> None:
     assert len(foiv) >= 69
     assert len(other) >= 10
     assert len(mun) >= 20
-    assert len(hod) >= 20
+    assert len(hod) >= 10000
     assert len(micro) >= 12
     assert len(drom) >= 1
     assert len(vil) >= 1
@@ -453,6 +453,9 @@ def test_k_seed_types_and_parents() -> None:
     assert all(not row["id"].startswith("gn:") for row in (*mun, *hod, *micro))
     assert all(row["source_id"] != "hflabs-city" for row in (*mun, *hod, *micro))
     assert any(row["id"] == "wd:Q269373" and row["name_ru"] == "Арбат" for row in hod)
+    assert all(row["source_id"] == "wikidata" for row in hod)
+    assert all(row["id"].startswith("wd:") for row in hod)
+    assert (ROOT / "data/raw/wikidata/hodonyms-ru.sparql").is_file()
     assert any(row["id"] == "wd:Q15190285" and row["type_id"] == "municipality" for row in mun)
     assert any(row["id"] == "wd:Q1643788" and row["name_ru"] == "Капова пещера" for row in micro)
     raw_dir = ROOT / "data"

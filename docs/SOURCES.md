@@ -18,7 +18,7 @@ SSOT каталога: [`data/sources/catalog.yaml`](../data/sources/catalog.yam
 
 | `id` | Лицензия | Вендор | Роль |
 |---|---|---|---|
-| `wikidata` | CC0 | нет | сиды мест, Q-id; маппинг `data/mappings/wikidata.yaml` |
+| `wikidata` | CC0 | нет | сиды мест, Q-id; маппинг `data/mappings/wikidata.yaml`; годонимы — `hodonyms-ru.sparql` + `scripts/seed_hodonyms.py` (не дамп SPARQL в git) |
 | `ukase-326` | официальный текст | нет | ФОИВ (указ № 326, ред. № 522) |
 | `geonames-ru` | CC-BY-4.0 | нет (`RU.zip` вне git) | id в колонке `geonames`; без insert `gn:{id}` (DEC-GN-001) |
 | `gkgn-opendata` | official-open-data | нет | указатель официальных названий |

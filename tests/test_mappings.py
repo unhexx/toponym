@@ -112,6 +112,10 @@ def test_wikidata_mapping_points_and_no_sparql_dump() -> None:
     assert payload["fields"]["P625_lat"] == "lat"
     assert payload["fields"]["P625_lon"] == "lon"
     assert payload["filter"]["known_ids_only"] is True
+    assert payload["class_map"]["Q79007"] == "hodonym"
+    assert payload["class_map"]["Q174782"] == "agoronym"
+    assert payload["filter"]["hodonym_p31"] == "Q79007"
+    assert "seed_hodonyms.py" in payload["notes"]
     assert "polygon" not in payload["fields"].values()
     assert "geojson" not in {v.casefold() for v in payload["fields"].values()}
     assert "без полигонов" in payload["notes"] or "dec-geo-001" in notes

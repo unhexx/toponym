@@ -12,16 +12,22 @@ class_map:
   Q515: city
   Q532: village
   Q79007: hodonym
+  Q54114: hodonym
+  Q628179: hodonym
+  Q1251403: hodonym
   Q174782: agoronym
   Q34442: dromonym
   Q13626398: municipality
 filter:
   P17: Q159
   known_ids_only: true
+  hodonym_p31: Q79007
 delete_policy: pointer
 notes: >
-  Указатель, не дамп SPARQL: запросы только по уже известным Q-id из
-  curated (VALUES), результат в git не кладётся. Q-id → колонка wd;
-  ru/en label → name_ru/name_en; P625 → lat/lon как точки (DEC-GEO-001,
-  без полигонов/GeoJSON). P1566/P764 стыкуют geonames/oktmo на существующей
-  строке; insert gn:{id} запрещён (DEC-GN-001). detector.kind=none.
+  Указатель, не дамп SPARQL: daily-запросы только по уже известным Q-id из
+  curated (VALUES), результат в git не кладётся. Массовая вставка улиц —
+  scripts/seed_hodonyms.py (P31=Q79007, P17=Q159, не ГАР/ФИАС; покрытие
+  Wikidata, не «все улицы России»). Q-id → колонка wd; ru/en label →
+  name_ru/name_en; P625 → lat/lon как точки (DEC-GEO-001, без полигонов/GeoJSON).
+  P1566/P764 стыкуют geonames/oktmo на существующей строке; insert gn:{id}
+  запрещён (DEC-GN-001). detector.kind=none.

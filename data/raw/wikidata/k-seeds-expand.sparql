@@ -22,3 +22,6 @@
 #   OPTIONAL { ?item rdfs:label ?en FILTER(LANG(?en) = "en") }
 #   OPTIONAL { ?item p:P625/psv:P625 [ wikibase:geoLatitude ?lat; wikibase:geoLongitude ?lon ] }
 # }
+
+# Полный harvest улиц Wikidata — data/raw/wikidata/hodonyms-ru.sparql
+# и scripts/seed_hodonyms.py. Не вендорить SPARQL JSON.
