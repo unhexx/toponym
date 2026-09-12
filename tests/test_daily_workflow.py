@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import inspect
 import json
+import sqlite3
 from datetime import UTC, datetime
 from pathlib import Path
 
+import scripts.daily as daily_mod
 import scripts.lib.journal as journal_mod
 from scripts.daily import changed_source_ids, run_daily
 from scripts.lib.catalog import (
@@ -33,6 +36,51 @@ def _sync_report(*, inserted: int = 0, updated: int = 0, deprecated: int = 0) ->
     return {"apply": True, **counts.as_dict(), **counts.journal_fields(), "sources": []}
 
 
+def _patch_pipeline(
+    monkeypatch,
+    order: list[str],
+    *,
+    check_report: dict,
+    sync_report: dict | None = None,
+    validate_code: int = 0,
+    index_error: BaseException | None = None,
+) -> None:
+    def fake_load(_path):
+        return {"sources": check_report.get("sources") or []}
+
+    def fake_check(catalog, **_kwargs):
+        order.append("check")
+        return check_report
+
+    def fake_sync(*, source_id, **_kwargs):
+        order.append(f"sync:{source_id}")
+        return (sync_report or _sync_report()), 0
+
+    def fake_validate(_dp, **_kwargs):
+        order.append("validate")
+        return validate_code, []
+
+    def fake_index(_root, _out):
+        order.append("index")
+        if index_error is not None:
+            raise index_error
+
+    def fake_stamp(_path, _today):
+        order.append("stamp")
+        return True
+
+    def fake_revert(_root):
+        order.append("revert")
+
+    monkeypatch.setattr(daily_mod, "load_catalog", fake_load)
+    monkeypatch.setattr(daily_mod, "check_catalog", fake_check)
+    monkeypatch.setattr(daily_mod, "run_sync", fake_sync)
+    monkeypatch.setattr(daily_mod, "validate_tree", fake_validate)
+    monkeypatch.setattr(daily_mod, "rebuild_index", fake_index)
+    monkeypatch.setattr(daily_mod, "stamp_catalog_checked_at", fake_stamp)
+    monkeypatch.setattr(daily_mod, "revert_data", fake_revert)
+
+
 def test_daily_yml_is_install_run_commit() -> None:
     text = DAILY.read_text(encoding="utf-8")
     assert 'pip install -e ".[dev]"' in text
@@ -49,7 +97,7 @@ def test_daily_yml_is_install_run_commit() -> None:
     assert 'pip install -e ".[dev]"' in ci
 
 
-def test_changed_source_ids_skips_blocking_errors() -> None:
+def test_changed_source_ids_changed_and_not_error() -> None:
     report = {
         "sources": [
             {"id": "geonames-ru", "changed": True, "error": False, "blocking": True},
@@ -60,7 +108,13 @@ def test_changed_source_ids_skips_blocking_errors() -> None:
             {"changed": True, "error": False, "id": "wikidata"},
         ]
     }
-    assert changed_source_ids(report) == ["geonames-ru", "ukase-326", "wikidata"]
+    assert changed_source_ids(report) == ["geonames-ru", "wikidata"]
+
+
+def test_run_daily_has_no_injectables() -> None:
+    params = inspect.signature(run_daily).parameters
+    for name in ("check_fn", "sync_fn", "validate_fn", "index_fn", "stamp_fn", "revert_fn"):
+        assert name not in params
 
 
 def test_catalog_module_has_no_regex_patch() -> None:
@@ -230,61 +284,26 @@ def test_write_run_journal_from_upsert_counts(tmp_path: Path) -> None:
     assert "inserted" not in payload
 
 
-def test_daily_noop_stamps_and_journals(tmp_path: Path) -> None:
+def test_daily_noop_stamps_and_journals(tmp_path: Path, monkeypatch) -> None:
     order: list[str] = []
-
-    def check_fn():
-        order.append("check")
-        return (
+    check_report = {
+        "as_of": "2026-09-12T06:00:00Z",
+        "changed_count": 0,
+        "error_count": 0,
+        "sources": [
             {
-                "as_of": "2026-09-12T06:00:00Z",
-                "changed_count": 0,
-                "error_count": 0,
-                "sources": [
-                    {
-                        "id": "wikidata",
-                        "changed": False,
-                        "error": False,
-                        "blocking": True,
-                        "reason": "kind=none",
-                        "cursor_old": "",
-                        "cursor_new": "",
-                    }
-                ],
-            },
-            0,
-        )
-
-    def sync_fn(source_id: str):
-        order.append(f"sync:{source_id}")
-        return {}
-
-    def validate_fn():
-        order.append("validate")
-        return 0
-
-    def index_fn():
-        order.append("index")
-        return 0
-
-    def stamp_fn():
-        order.append("stamp")
-        return True
-
-    def revert_fn():
-        order.append("revert")
-
-    summary, code = run_daily(
-        root=tmp_path,
-        now=NOW,
-        offline=True,
-        check_fn=check_fn,
-        sync_fn=sync_fn,
-        validate_fn=validate_fn,
-        index_fn=index_fn,
-        stamp_fn=stamp_fn,
-        revert_fn=revert_fn,
-    )
+                "id": "wikidata",
+                "changed": False,
+                "error": False,
+                "blocking": True,
+                "reason": "kind=none",
+                "cursor_old": "",
+                "cursor_new": "",
+            }
+        ],
+    }
+    _patch_pipeline(monkeypatch, order, check_report=check_report)
+    summary, code = run_daily(root=tmp_path, now=NOW, offline=True)
     assert code == 0
     assert order == ["check", "stamp"]
     assert summary["check_exit"] == 0
@@ -298,73 +317,47 @@ def test_daily_noop_stamps_and_journals(tmp_path: Path) -> None:
     assert journal["sources"][0]["id"] == "wikidata"
 
 
-def test_daily_syncs_changed_then_validate_index_journal(tmp_path: Path) -> None:
+def test_daily_syncs_changed_then_validate_index_journal(tmp_path: Path, monkeypatch) -> None:
     order: list[str] = []
-
-    def check_fn():
-        order.append("check")
-        return (
+    check_report = {
+        "as_of": "2026-09-12T06:00:00Z",
+        "changed_count": 2,
+        "error_count": 1,
+        "sources": [
             {
-                "as_of": "2026-09-12T06:00:00Z",
-                "changed_count": 2,
-                "error_count": 1,
-                "sources": [
-                    {
-                        "id": "geonames-ru",
-                        "changed": True,
-                        "error": False,
-                        "blocking": True,
-                        "cursor_new": "2026-09-11",
-                    },
-                    {
-                        "id": "fias-gar",
-                        "changed": False,
-                        "error": True,
-                        "blocking": False,
-                    },
-                    {
-                        "id": "gkgn-opendata",
-                        "changed": True,
-                        "error": True,
-                        "blocking": True,
-                    },
-                    {
-                        "id": "ukase-326",
-                        "changed": False,
-                        "error": False,
-                        "blocking": True,
-                    },
-                ],
+                "id": "geonames-ru",
+                "changed": True,
+                "error": False,
+                "blocking": True,
+                "cursor_new": "2026-09-11",
             },
-            10,
-        )
-
-    def sync_fn(source_id: str):
-        order.append(f"sync:{source_id}")
-        return _sync_report(updated=4, deprecated=1)
-
-    def validate_fn():
-        order.append("validate")
-        return 0
-
-    def index_fn():
-        order.append("index")
-        return 0
-
-    def stamp_fn():
-        order.append("stamp")
-        return True
-
-    summary, code = run_daily(
-        root=tmp_path,
-        now=NOW,
-        check_fn=check_fn,
-        sync_fn=sync_fn,
-        validate_fn=validate_fn,
-        index_fn=index_fn,
-        stamp_fn=stamp_fn,
-        revert_fn=lambda: order.append("revert"),
+            {
+                "id": "fias-gar",
+                "changed": False,
+                "error": True,
+                "blocking": False,
+            },
+            {
+                "id": "gkgn-opendata",
+                "changed": True,
+                "error": True,
+                "blocking": False,
+            },
+            {
+                "id": "ukase-326",
+                "changed": False,
+                "error": False,
+                "blocking": True,
+            },
+        ],
+    }
+    _patch_pipeline(
+        monkeypatch,
+        order,
+        check_report=check_report,
+        sync_report=_sync_report(updated=4, deprecated=1),
     )
+    summary, code = run_daily(root=tmp_path, now=NOW)
     assert code == 0
     assert order == ["check", "sync:geonames-ru", "validate", "index"]
     assert summary["synced"] == ["geonames-ru"]
@@ -378,39 +371,24 @@ def test_daily_syncs_changed_then_validate_index_journal(tmp_path: Path) -> None
     assert journal["records_deprecated"] == 1
 
 
-def test_daily_check_exit_2_skips_sync_writes_journal(tmp_path: Path) -> None:
+def test_daily_check_exit_2_skips_sync_writes_journal(tmp_path: Path, monkeypatch) -> None:
     order: list[str] = []
-
-    def check_fn():
-        order.append("check")
-        return (
+    check_report = {
+        "as_of": "2026-09-12T06:00:00Z",
+        "changed_count": 0,
+        "error_count": 1,
+        "sources": [
             {
-                "as_of": "2026-09-12T06:00:00Z",
-                "changed_count": 0,
-                "error_count": 1,
-                "sources": [
-                    {
-                        "id": "geonames-ru",
-                        "changed": False,
-                        "error": True,
-                        "blocking": True,
-                        "reason": "timeout",
-                    }
-                ],
-            },
-            2,
-        )
-
-    summary, code = run_daily(
-        root=tmp_path,
-        now=NOW,
-        check_fn=check_fn,
-        sync_fn=lambda sid: order.append(f"sync:{sid}") or {},
-        validate_fn=lambda: order.append("validate") or 0,
-        index_fn=lambda: order.append("index") or 0,
-        stamp_fn=lambda: order.append("stamp") or True,
-        revert_fn=lambda: order.append("revert"),
-    )
+                "id": "geonames-ru",
+                "changed": False,
+                "error": True,
+                "blocking": True,
+                "reason": "timeout",
+            }
+        ],
+    }
+    _patch_pipeline(monkeypatch, order, check_report=check_report)
+    summary, code = run_daily(root=tmp_path, now=NOW)
     assert code == 0
     assert order == ["check"]
     assert summary["check_exit"] == 2
@@ -420,34 +398,24 @@ def test_daily_check_exit_2_skips_sync_writes_journal(tmp_path: Path) -> None:
     assert journal["error_count"] == 1
 
 
-def test_daily_index_fail_keeps_csv_and_journals_counts(tmp_path: Path) -> None:
+def test_daily_index_fail_keeps_csv_and_journals_counts(tmp_path: Path, monkeypatch) -> None:
     order: list[str] = []
-
-    def check_fn():
-        order.append("check")
-        return (
-            {
-                "as_of": "2026-09-12T06:00:00Z",
-                "changed_count": 1,
-                "error_count": 0,
-                "sources": [
-                    {"id": "geonames-ru", "changed": True, "error": False, "blocking": True}
-                ],
-            },
-            10,
-        )
-
-    summary, code = run_daily(
-        root=tmp_path,
-        now=NOW,
-        check_fn=check_fn,
-        sync_fn=lambda sid: order.append(f"sync:{sid}")
-        or _sync_report(inserted=2, updated=3, deprecated=1),
-        validate_fn=lambda: order.append("validate") or 0,
-        index_fn=lambda: order.append("index") or 2,
-        stamp_fn=lambda: order.append("stamp") or True,
-        revert_fn=lambda: order.append("revert"),
+    check_report = {
+        "as_of": "2026-09-12T06:00:00Z",
+        "changed_count": 1,
+        "error_count": 0,
+        "sources": [
+            {"id": "geonames-ru", "changed": True, "error": False, "blocking": True}
+        ],
+    }
+    _patch_pipeline(
+        monkeypatch,
+        order,
+        check_report=check_report,
+        sync_report=_sync_report(inserted=2, updated=3, deprecated=1),
+        index_error=sqlite3.Error("disk"),
     )
+    summary, code = run_daily(root=tmp_path, now=NOW)
     assert code == 0
     assert order == ["check", "sync:geonames-ru", "validate", "index"]
     assert summary["validate"] == "0"
@@ -460,33 +428,24 @@ def test_daily_index_fail_keeps_csv_and_journals_counts(tmp_path: Path) -> None:
     assert journal["records_deprecated"] == 1
 
 
-def test_daily_validate_fail_reverts_without_journal(tmp_path: Path) -> None:
+def test_daily_validate_fail_reverts_without_journal(tmp_path: Path, monkeypatch) -> None:
     order: list[str] = []
-
-    def check_fn():
-        order.append("check")
-        return (
-            {
-                "as_of": "2026-09-12T06:00:00Z",
-                "changed_count": 1,
-                "error_count": 0,
-                "sources": [
-                    {"id": "geonames-ru", "changed": True, "error": False, "blocking": True}
-                ],
-            },
-            10,
-        )
-
-    summary, code = run_daily(
-        root=tmp_path,
-        now=NOW,
-        check_fn=check_fn,
-        sync_fn=lambda sid: order.append(f"sync:{sid}") or _sync_report(inserted=2),
-        validate_fn=lambda: order.append("validate") or 1,
-        index_fn=lambda: order.append("index") or 0,
-        stamp_fn=lambda: order.append("stamp") or True,
-        revert_fn=lambda: order.append("revert"),
+    check_report = {
+        "as_of": "2026-09-12T06:00:00Z",
+        "changed_count": 1,
+        "error_count": 0,
+        "sources": [
+            {"id": "geonames-ru", "changed": True, "error": False, "blocking": True}
+        ],
+    }
+    _patch_pipeline(
+        monkeypatch,
+        order,
+        check_report=check_report,
+        sync_report=_sync_report(inserted=2),
+        validate_code=1,
     )
+    summary, code = run_daily(root=tmp_path, now=NOW)
     assert code == 1
     assert order == ["check", "sync:geonames-ru", "validate", "revert"]
     assert summary["validate"] == "fail"
