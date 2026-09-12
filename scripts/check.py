@@ -29,7 +29,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--today",
         metavar="YYYY-MM-DD",
-        help="дата для --stamp (UTC сегодня по умолчанию)",
+        help="дата для --stamp; без --stamp игнорируется (UTC сегодня по умолчанию)",
     )
     return parser.parse_args(argv)
 
@@ -37,6 +37,9 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     if args.stamp:
+        if args.json or args.source or args.offline:
+            print("--stamp не сочетается с --json / --source / --offline", file=sys.stderr)
+            return 2
         today = args.today or utcnow().strftime("%Y-%m-%d")
         stamp_catalog_checked_at(CATALOG_PATH, today)
         return 0

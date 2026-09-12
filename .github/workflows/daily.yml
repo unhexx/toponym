@@ -55,7 +55,7 @@ jobs:
           echo "changed_count=$CHANGED" >> "$GITHUB_OUTPUT"
 
           if [[ "$CHECK_EXIT" -eq 10 ]]; then
-            python scripts/sync.py --apply
+            python scripts/sync.py --apply --check-json /tmp/check.json
             set +e
             python scripts/validate.py
             VAL=$?

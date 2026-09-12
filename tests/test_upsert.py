@@ -248,6 +248,96 @@ def test_manual_file_requires_canonical_header(tmp_path: Path, monkeypatch, caps
     assert "заголовок" in err.lower() or "header" in err.lower() or "канонический" in err
 
 
+def test_check_json_cursor_applied_to_pointer_and_ukase(
+    tmp_path: Path, monkeypatch, capsys
+) -> None:
+    root = _prepare_root(tmp_path)
+    catalog_path = root / "data/sources/catalog.yaml"
+    text = catalog_path.read_text(encoding="utf-8")
+    catalog_path.write_text(
+        text.replace("updated: 2026-09-09", "updated: 2026-09-01"),
+        encoding="utf-8",
+    )
+    check_json = tmp_path / "check.json"
+    check_json.write_text(
+        json.dumps(
+            {
+                "changed_count": 2,
+                "error_count": 0,
+                "sources": [
+                    {
+                        "id": "ukase-326",
+                        "changed": True,
+                        "error": False,
+                        "cursor_new": "new-fingerprint",
+                    },
+                    {
+                        "id": "fias-gar",
+                        "changed": True,
+                        "error": False,
+                        "cursor_new": 'W/"etag"',
+                    },
+                    {
+                        "id": "geonames-ru",
+                        "changed": True,
+                        "error": False,
+                        "cursor_new": "2099-01-01",
+                    },
+                ],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    _patch_sync(monkeypatch, root, FakeSession(_geonames_handler("")))
+    code = sync_mod.main(["--apply", "--check-json", str(check_json)])
+    assert code == 0
+    json.loads(capsys.readouterr().out)
+    catalog = yaml.safe_load(catalog_path.read_text(encoding="utf-8"))
+    assert str(catalog["updated"]) == "2026-09-09"
+    by_id = {row["id"]: row for row in catalog["sources"]}
+    assert str(by_id["ukase-326"]["cursor"]) == "new-fingerprint"
+    assert str(by_id["fias-gar"]["cursor"]) == 'W/"etag"'
+    assert str(by_id["geonames-ru"]["cursor"]) == "2026-09-08"
+
+
+def test_check_json_skips_unchanged_and_error_cursors(
+    tmp_path: Path, monkeypatch, capsys
+) -> None:
+    root = _prepare_root(tmp_path)
+    check_json = tmp_path / "check.json"
+    check_json.write_text(
+        json.dumps(
+            {
+                "sources": [
+                    {
+                        "id": "ukase-326",
+                        "changed": False,
+                        "error": False,
+                        "cursor_new": "noop-cursor",
+                    },
+                    {
+                        "id": "fias-gar",
+                        "changed": True,
+                        "error": True,
+                        "cursor_new": "error-cursor",
+                    },
+                ],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    _patch_sync(monkeypatch, root, FakeSession(_geonames_handler("")))
+    code = sync_mod.main(["--apply", "--check-json", str(check_json)])
+    assert code == 0
+    json.loads(capsys.readouterr().out)
+    catalog = yaml.safe_load((root / "data/sources/catalog.yaml").read_text(encoding="utf-8"))
+    by_id = {row["id"]: row for row in catalog["sources"]}
+    assert "cursor" not in by_id["ukase-326"] or by_id["ukase-326"].get("cursor") in (None, "")
+    assert "cursor" not in by_id["fias-gar"]
+
+
 def test_pointer_source_only_checked_at(tmp_path: Path, monkeypatch, capsys) -> None:
     root = _prepare_root(tmp_path)
     _patch_sync(monkeypatch, root, FakeSession(_geonames_handler("")))

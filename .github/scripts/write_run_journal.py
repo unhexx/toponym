@@ -47,7 +47,7 @@ def write_run_journal(
     return path
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--today", required=True)
     parser.add_argument("--as-of", required=True)
@@ -55,7 +55,7 @@ def main() -> None:
     parser.add_argument("--changed-count", type=int, default=0)
     parser.add_argument("--notes", default="")
     parser.add_argument("--check-json", default="")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     check_exit: int | str
     if args.check_exit.lstrip("-").isdigit():

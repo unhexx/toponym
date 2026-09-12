@@ -419,6 +419,27 @@ def test_stamp_defaults_today_to_utcnow(tmp_path: Path, monkeypatch) -> None:
     assert payload["sources"][0]["checked_at"] == "2026-09-12"
 
 
+def test_stamp_rejects_combined_flags(tmp_path: Path, monkeypatch, capsys) -> None:
+    catalog_path = tmp_path / "catalog.yaml"
+    catalog_path.write_text(
+        (FIXTURES / "catalog_valid.yaml").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    original = catalog_path.read_text(encoding="utf-8")
+    monkeypatch.setattr(check_mod, "CATALOG_PATH", catalog_path)
+    for argv in (
+        ["--stamp", "--json"],
+        ["--stamp", "--offline"],
+        ["--stamp", "--source", "example-src"],
+    ):
+        code = check_mod.main(argv)
+        assert code == 2
+        err = capsys.readouterr().err
+        assert "--stamp" in err
+        assert "не сочетается" in err
+    assert catalog_path.read_text(encoding="utf-8") == original
+
+
 def test_dump_last_modified_does_not_flip_changed(monkeypatch, capsys) -> None:
     session = FakeSession(
         _geonames_handler(

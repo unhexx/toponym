@@ -105,17 +105,25 @@ def patch_catalog_source(
     return True
 
 
+def stamp_catalog_updated(path: Path | str, today: str) -> bool:
+    """Set catalog.updated to today if it differs."""
+    path = Path(path)
+    catalog = load_catalog(path)
+    if catalog.get("updated") == today:
+        return False
+    text = path.read_text(encoding="utf-8")
+    new = re.sub(r"^updated:\s*.*$", f"updated: {today}", text, count=1, flags=re.M)
+    if new == text:
+        return False
+    path.write_text(new, encoding="utf-8")
+    return True
+
+
 def stamp_catalog_checked_at(path: Path | str, today: str) -> bool:
     """Set catalog.updated and each source.checked_at to today if they differ."""
     path = Path(path)
+    changed = stamp_catalog_updated(path, today)
     catalog = load_catalog(path)
-    changed = False
-    text = path.read_text(encoding="utf-8")
-    if catalog.get("updated") != today:
-        new = re.sub(r"^updated:\s*.*$", f"updated: {today}", text, count=1, flags=re.M)
-        if new != text:
-            path.write_text(new, encoding="utf-8")
-            changed = True
     for source in catalog.get("sources", []):
         source_id = source.get("id")
         if not source_id:

@@ -34,24 +34,35 @@ def test_daily_has_no_missing_check_py_skip() -> None:
     assert "scripts/check.py missing" not in text
     assert "check_exit=missing" not in text
     assert "python scripts/check.py --json" in text
-    assert "python scripts/sync.py --apply" in text
+    assert "python scripts/sync.py --apply --check-json /tmp/check.json" in text
     assert "python scripts/validate.py" in text
     assert "refusing sync/commit" not in text
     assert "check.py exit 2; skip sync, write journal" in text
 
 
-def test_daily_always_writes_journal_and_stamps_catalog() -> None:
+def test_daily_writes_journal_and_stamps_catalog_only_on_noop() -> None:
     text = DAILY.read_text(encoding="utf-8")
     assert "write_run_journal.py" in text
     assert "--check-json /tmp/check.json" in text
     assert "--stamp-catalog" not in text
     assert "--changed-count" not in text
-    assert "python scripts/check.py --stamp" in text
     assert "json.load(open('/tmp/check.json')).get('changed_count')" in text
     assert 'echo "changed_count=1"' not in text
     assert 'if [[ ! -f "data/sources/runs/${TODAY}.json" ]]' not in text
     assert "workflow_dispatch" in text
     assert "empty commit forbidden" in text
+    stamp_block = (
+        'if [[ "$CHECK_EXIT" -eq 0 ]]; then\n'
+        '            python scripts/check.py --stamp --today "$TODAY"\n'
+        "          fi\n"
+    )
+    assert stamp_block in text
+    assert text.count("python scripts/check.py --stamp") == 1
+    exit2_at = text.index("check.py exit 2; skip sync, write journal")
+    stamp_at = text.index("python scripts/check.py --stamp")
+    assert stamp_at > exit2_at
+    exit2_block = text[text.index('if [[ "$CHECK_EXIT" -eq 2 ]]') : exit2_at]
+    assert "--stamp" not in exit2_block
 
 
 def test_journal_script_is_dump_only() -> None:
@@ -116,3 +127,51 @@ def test_write_run_journal_copies_check_sources(tmp_path: Path, monkeypatch) -> 
     assert payload["changed_count"] == 2
     assert "notes" not in payload
     assert catalog.read_text(encoding="utf-8") == original_catalog
+
+
+def test_write_run_journal_main_does_not_patch_catalog(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    catalog = tmp_path / "data" / "sources" / "catalog.yaml"
+    catalog.parent.mkdir(parents=True, exist_ok=True)
+    catalog.write_text(FIXTURE_CATALOG.read_text(encoding="utf-8"), encoding="utf-8")
+    original_catalog = catalog.read_text(encoding="utf-8")
+    check_json = tmp_path / "check.json"
+    check_json.write_text(
+        json.dumps(
+            {
+                "as_of": "2026-09-11T06:00:00Z",
+                "changed_count": 2,
+                "error_count": 0,
+                "sources": [
+                    {
+                        "id": "example-src",
+                        "changed": True,
+                        "reason": "etag",
+                        "cursor_old": "old",
+                        "cursor_new": "should-not-be-patched",
+                        "error": False,
+                    }
+                ],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    mod = _load_journal_mod()
+    mod.main(
+        [
+            "--today",
+            "2026-09-11",
+            "--as-of",
+            "2026-09-11T00:00:00Z",
+            "--check-exit",
+            "10",
+            "--check-json",
+            str(check_json),
+        ]
+    )
+    assert catalog.read_text(encoding="utf-8") == original_catalog
+    journal = tmp_path / "data" / "sources" / "runs" / "2026-09-11.json"
+    payload = json.loads(journal.read_text(encoding="utf-8"))
+    assert payload["changed_count"] == 2
+    assert payload["sources"][0]["cursor_new"] == "should-not-be-patched"
