@@ -15,7 +15,7 @@
 3. У каждого реестра указаны источники, лицензии, даты проверки.
 4. Схемы источников сопоставлены с канонической моделью.
 5. Есть простые скрипты: «есть ли обновление?» → «обнови локальный реестр».
-6. Разработка до v1 идёт **одним полным agentic-циклом** по шаблону, а не бесконечным daily-no-op.
+6. Разработка до v1 идёт **одним полным циклом** по плану, а не бесконечным daily-no-op.
 
 На дату ADR (2026-09-09) `unhexx/toponym` был зародышем (Frictionless `datapackage.json`, `catalog.yaml`, таксономия): сиды ещё не были закоммичены, curated-таблиц и скриптов проверки не было. Это уже не текущее состояние: v1 tagged `2026.09.09`, loop 2 — `2026.09.11`.
 
@@ -31,12 +31,12 @@
 | B. Только GeoJSON / PostGIS | Гео-натив | Тяжело для ФОИВ, склонений, кодов; вендорит объём |
 | C. CKAN / Dataverse | Каталог-сервер | Сервер = не local-first, избыточно |
 | D. Google OKF (markdown concepts) | Провенанс, stale_after | Слабый tabular interchange, нет Table Schema |
-| E. **Frictionless Tabular Data Package + git + derived SQLite + ontology overlay** | CSV UTF-8 как канон, `datapackage.json` как контракт, catalog как источники, SQLite как индекс агента | Нужна дисциплина upsert и не вендорить >10 МБ |
+| E. **Frictionless Tabular Data Package + git + derived SQLite + ontology overlay** | CSV UTF-8 как канон, `datapackage.json` как контракт, catalog как источники, SQLite как индекс | Нужна дисциплина upsert и не вендорить >10 МБ |
 
 ### 2.2 Решение (DEC-REG-001)
 
 **Канон = git + Frictionless Tabular Data Package.**  
-**Индекс агента = локальный SQLite FTS (derived, в `.gitignore` или `knowledge/`).**  
+**Индекс = локальный SQLite FTS (derived, в `.gitignore` или `knowledge/`).**  
 **Смысловой слой = онтология Source / Registry / Resource / Mapping / Check / Decision.**  
 **Сырьё с ODbL / CC-BY-SA = только `data/raw/<source>/` + SOURCE.md.**  
 **Дампы >10 МБ и полный ГАР/ФИАС не вендорятся** — только указатель + хеш + скрипт импорта.
@@ -46,7 +46,7 @@
 - Любое приложение читает CSV без SDK (Python, Go, Excel, DuckDB, pandas, jq).
 - `datapackage.json` + Table Schema дают машинную валидацию (`frictionless validate`).
 - Git даёт историю, review, CalVer, воспроизводимость.
-- Local-first: агент не ходит в облако на каждый запрос.
+- Local-first: поиск не ходит в облако на каждый запрос.
 - Совпадает с уже выбранным профилем `toponym`.
 - Провенанс OKF (`sources`, `stale_after`, `status`) переносим в `catalog.yaml` и в ontology.json, не ломая табличный канон.
 
@@ -318,7 +318,7 @@ check.py  →  (changed?)  →  sync.py  →  validate.py  →  index.py
         duckdb.read_csv_auto('data/curated/regions.csv')
 ```
 
-Позже (вне v1): тонкий `scripts/serve.py` loopback только если понадобится агенту; не делать публичный API в первом цикле.
+Позже (вне v1): тонкий `scripts/serve.py` loopback; не делать публичный API в первом цикле.
 
 ---
 
@@ -327,42 +327,26 @@ check.py  →  (changed?)  →  sync.py  →  validate.py  →  index.py
 - Полный импорт RU.zip / ГАР.
 - Автосклонения pymorphy как золото.
 - Переписывание таксономии верхнего уровня.
-- Merge в `main` шаблона Agentix (циклы живут на feature-ветке продукта).
+- Merge в `main` внешнего шаблона (циклы живут на feature-ветке продукта).
 - Второй формат онтологии помимо Outpost `ontology.json`.
 
 ---
 
 ## 9. Дорожная карта v1
 
-Цель пользователя: **разовый запуск полного цикла разработки до финальной версии v1**, не вечный daily-агент.
+Цель пользователя: **разовый запуск полного цикла разработки до финальной версии v1**, не вечный ежедневный прогон.
 
-### 9.1 Bootstrap (человек, ~20 мин)
+### 9.1 Bootstrap
 
 ```bash
-# 1. Рабочая копия продукта
 git clone https://github.com/unhexx/toponym.git
 cd toponym
-git checkout -b feature/v1-local-registries
-
-# 2. Подключить harness шаблона, не копируя дерево
-#    (examples/consumer-starter/Agent-Init.consumer.sh)
-git clone https://github.com/unhexx/agentic_loop_template.git ../agentic_loop_template
-bash ../agentic_loop_template/examples/consumer-starter/Agent-Init.consumer.sh
-
-# 3. Заполнить SSOT цикла
-cp TASK_SPECIFICATION из этого документа
-заполнить PROJECT_CONTEXT.md (локально, не в git)
-заполнить .agent/PLAN.md и .agent/TODO.md (ниже)
-
-# 4. Старт оркестратора
-# вставить prompts/short_orchestrator_prompt.md первым сообщением агенту
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
 ```
 
-Цикл ролей: **Orchestrator → Coder → Tester → Debugger → Reviewer**.  
-Внутренний ритм роли: PLAN → ACT (≤3 tool calls) → REFLECT → handoff JSON.  
-Готово только когда Reviewer ставит `status: DONE` и сиды + скрипты + тесты зелёные.
-
-Не сливать feature-ветку в `main`, пока оператор не принял Reviewer DONE (дисциплина шаблона §11 / PLAN).
+Разработка — узкими слайсами в git. Готово, когда сиды, скрипты и тесты зелёные.
 
 ### 9.2 Фазы INVEST (узкие слайсы)
 
@@ -377,7 +361,7 @@ cp TASK_SPECIFICATION из этого документа
 | **P6-INDEX** | `scripts/index.py` SQLite FTS | поиск «Волга» / «МВД» | db + test |
 | **P7-ONT** | ontology.json сущности Source/Decision/Check | валидный JSON, DEC-REG-001 | файл |
 | **P8-DOCS** | README quick start, CHANGELOG Unreleased→2026.09.09, DAILY_UPDATE ссылается на check.py | человек поднимает за 5 мин | docs |
-| **P9-DONE** | Reviewer: тесты зелёные, нет вендора >10МБ, типы верхнего уровня целы | handoff DONE | ledger |
+| **P9-DONE** | тесты зелёные, нет вендора >10МБ, типы верхнего уровня целы | tag | ledger |
 
 Параллелить можно только P2 и P6 после P1; остальное последовательно. Синхроточка: после P5.
 
@@ -386,7 +370,7 @@ cp TASK_SPECIFICATION из этого документа
 - В репозитории есть все resources из текущего `datapackage.json`.
 - `python scripts/check.py --json` работает без секретов.
 - `python scripts/validate.py` = 0.
-- Daily-агент больше не «смотрит в пустоту»: либо применяет дельту, либо пишет `data/sources/runs/…` и **не** делает пустой commit.
+- Ежедневный прогон больше не «смотрит в пустоту»: либо применяет дельту, либо пишет `data/sources/runs/…` и **не** делает пустой commit.
 - Онтология содержит DEC-REG-001 и список Source.
 - Верхний уровень типов не сломан (`toponym`, не «Торопум»).
 
@@ -417,7 +401,7 @@ Daily после v1 снова 15 минут и честный no-op, если �
 2. **Источники:** расширенный `catalog.yaml` с детекторами.  
 3. **Схемы:** Table Schema + YAML mappings.  
 4. **Скрипты:** check / sync / validate / index.  
-5. **Агентский слой:** SQLite FTS + ontology overlay.  
-6. **Исполнение v1:** один Agentix-цикл на `feature/v1-local-registries` по INVEST P0–P9 до Reviewer DONE.
+5. **Поисковый слой:** SQLite FTS + ontology overlay.  
+6. **Исполнение v1:** слайсы P0–P9 на `feature/v1-local-registries` до зелёных тестов.
 
-Следующий конкретный шаг оператора: bootstrap §9.1 и отдать агенту `short_orchestrator_prompt.md` с этим документом как `TASK_SPECIFICATION.md`.
+Следующий шаг: bootstrap §9.1 и `TASK_SPECIFICATION.md`.

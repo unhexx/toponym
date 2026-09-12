@@ -219,11 +219,9 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# Local derived index and ignored directories
+# Local derived index
 knowledge/*.db
 knowledge/LAST_INDEX
-.agent/
-agentic_loop_template
 
 # Dump archives must never enter git
 /data/**/*.zip

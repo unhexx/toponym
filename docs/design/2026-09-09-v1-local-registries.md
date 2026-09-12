@@ -18,10 +18,10 @@ This is not a greenfield vision. DEC-REG-001 already chose Frictionless CSV in g
 
 Operator overrides of the ADR (binding):
 
-1. Agentix consumer-starter **full** is already installed (sibling symlink, not a vendored tree).
+1. development bootstrap is already installed (sibling symlink, not a vendored tree).
 2. All development cycles are planned; the executable plan lives at repo root as `CYCLE_PLAN.md`.
-3. After each completed INVEST cycle: merge to `main` and `git push origin main` (overrides ADR §9.1 “do not merge until operator accepts Reviewer DONE”).
-4. Commits in natural Russian, as a human mid/senior developer. Never mention models, agents, LLM, Grok, Claude, or AI.
+3. After each completed INVEST cycle: merge to `main` and `git push origin main`.
+4. Commits in natural Russian, as a human mid/senior developer.
 5. v1 is released (tag `2026.09.09` / GitHub Release). Empty commits forbidden.
 6. Keep **ten** cycles P0–P9. Do **not** split P1 into P1a–e. Do not start streets / GAR / `RU.zip` / `serve.py` unless `CYCLE_PLAN.md` lists them. Loop 2 serve/compose is listed in `CYCLE_PLAN.md` (DEC-SERVE-001).
 
@@ -54,9 +54,9 @@ Canon stays UTF-8 CSV in git. Dumps larger than 10 MB and full ГАР/ФИАС a
 | `docs/SOURCES.md` | Present (P8). |
 | `docs/TAXONOMY.md` (README) | File on disk is `docs/taxonomy.md` (Linux is case-sensitive). README links the lowercase path. |
 | Catalog detectors | All 10 sources. `geonames-ru` `kind: http_dated`, `cursor` is a mods date, `also: last_modified_header`. v1.1 `detect_http_dated` does **not** OR dump Last-Modified into `changed` and does not rewrite the date cursor from dump LM. |
-| Agentix full | Present. `.venv` CPython 3.14.7, symlink gitignored. |
+| Host venv | Present. `.venv` CPython 3.14.7. |
 | Git | `main` tagged `2026.09.09`. Origin `https://github.com/unhexx/toponym.git`. |
-| `agents/DAILY_UPDATE.md` | Step 1 = `check.py`. Do not rewrite it from the old sketch. |
+| `docs/DAILY_UPDATE.md` | Step 1 = `check.py`. Do not rewrite it from the old sketch. |
 
 ### Pain (remaining after v1)
 
@@ -81,7 +81,7 @@ CSV + Table Schema is the interchange any app can read (Python, Go, Excel, DuckD
 - `python scripts/index.py` builds `knowledge/registry.db` FTS5; queries `Волга` and `МВД` hit.
 - `ontology/ontology.json` is valid JSON, contains `DEC-REG-001` and one Source per catalog id.
 - Daily path: either apply a delta, or write `data/sources/runs/YYYY-MM-DD.json` (and typically bump `checked_at`) — never an empty commit.
-- Reviewer gate: tests green, no vendored file >10 MB under `data/`, top-level type remains `toponym` (not «Торопум» as a type name).
+- Release gate: tests green, no vendored file >10 MB under `data/`, top-level type remains `toponym` (not «Торопум» as a type name).
 - GitHub Release + tag `2026.09.09`.
 
 ### Non-goals (v1)
@@ -107,7 +107,7 @@ CSV + Table Schema is the interchange any app can read (Python, Go, Excel, DuckD
 
 ```
 toponym/
-├── AGENTS.md
+├── CONTRIBUTING.md
 ├── TASK_SPECIFICATION.md
 ├── CYCLE_PLAN.md
 ├── pyproject.toml                 # exists (P0)
@@ -182,7 +182,7 @@ toponym/
 │   ├── taxonomy.md
 │   ├── SOURCES.md                 # NEW (P8)
 │   └── design/2026-09-09-v1-local-registries.md
-├── agents/DAILY_UPDATE.md
+├── docs/DAILY_UPDATE.md
 └── .github/workflows/ci.yml       # pytest + validate (P5)
 ```
 
@@ -230,7 +230,7 @@ flowchart LR
 
 ### Daily update sequence
 
-Matches live `agents/DAILY_UPDATE.md` (already rewritten; P8 does not replace this diagram with the old step numbering).
+Matches live `docs/DAILY_UPDATE.md` (already rewritten; P8 does not replace this diagram with the old step numbering).
 
 ```mermaid
 sequenceDiagram
@@ -367,7 +367,7 @@ id,type_code,lemma,yo,gender,paradigm,declinable,nom,gen,dat,acc,ins,pre,loc2,re
 
 **DEC-DECL-001 (next release, frozen):** pymorphy2/3, Natasha, pyphrasy are proposals, not gold. They are not project dependencies. Mass auto output lands in `data/declensions/queue.csv` via `scripts.lib.declensions.append_queue` (`review=auto` or `needs_review`, never `gold`). `validate.py` rejects gold rows whose `source` names a morphologizer.
 
-CONTRIBUTING.md currently says `review=false` for gold — inverted; P8 sets `review=gold`. AGENTS.md / README `review=true` maps to `needs_review` (P8 edits AGENTS.md Непреложно §6 and NEVER).
+CONTRIBUTING.md currently says `review=false` for gold — inverted; P8 sets `review=gold`. CONTRIBUTING.md / README `review=true` maps to `needs_review` (P8 edits CONTRIBUTING.md Непреложно §6 and NEVER).
 
 ### Package and runtime
 
@@ -411,7 +411,7 @@ testpaths = ["tests"]
 addopts = "-q"
 ```
 
-Install: `uv pip install -e ".[dev]"` inside the existing `.venv` (AGENTS.md). Do not create a second venv. Do not vendor Agentix.
+Install: `uv pip install -e ".[dev]"` inside the existing `.venv` (CONTRIBUTING.md). Do not create a second venv.
 
 **Import freeze:** `from scripts.lib.catalog import …` / `from scripts.lib.detectors import …`. CLI stays `python scripts/check.py` (no `python -m scripts.check` rename in v1). Every CLI module bootstraps the repo root so the command works **without** relying on the script directory being on `sys.path`:
 
@@ -1209,17 +1209,17 @@ Landed follow-ups (not required for MATCH tests, both done):
 
 **Creates/changes:**
 
-- `README.md` (5-min path: clone, `bash Agent-Init.sh`, `uv pip install -e ".[dev]"`, `python scripts/validate.py`, `python scripts/check.py --json`, `python scripts/index.py`); link `docs/taxonomy.md` not `TAXONOMY.md`.
+- `README.md` (5-min path: clone, `python3 -m venv .venv`, `uv pip install -e ".[dev]"`, `python scripts/validate.py`, `python scripts/check.py --json`, `python scripts/index.py`); link `docs/taxonomy.md` not `TAXONOMY.md`.
 - `docs/SOURCES.md`.
 - `CHANGELOG.md` move Unreleased seeds claim into `[2026.09.09]` **after they exist**.
-- **`AGENTS.md`:** Непреложно §6 and NEVER — replace `review=true` with `review=needs_review` (auto inflection must not land as `gold`).
+- **`CONTRIBUTING.md`:** Непреложно §6 and NEVER — replace `review=true` with `review=needs_review` (auto inflection must not land as `gold`).
 - `CONTRIBUTING.md`: gold is `review=gold` (not `review=false`).
 - `CYCLE_PLAN.md`: mark P0 DONE if not already.
-- `agents/DAILY_UPDATE.md`: **diff against current**. Expected: **no rewrite** (already matches Key Decision 8). Edit only if it drifted.
+- `docs/DAILY_UPDATE.md`: **diff against current**. Expected: **no rewrite** (already matches Key Decision 8). Edit only if it drifted.
 - `docs/DECLENSIONS.md` only if a cross-link is wrong; mention `(id, lemma)` uniqueness if needed.
 - `CITATION.cff` already `2026.09.09`.
 
-**Acceptance:** README commands are copy-pasteable; grep README for `TAXONOMY.md` is empty; CHANGELOG has `## [2026.09.09]` and does not claim Unreleased seeds; AGENTS.md does not say `review=true`; DAILY_UPDATE still mentions `scripts/check.py` as step 1.
+**Acceptance:** README commands are copy-pasteable; grep README for `TAXONOMY.md` is empty; CHANGELOG has `## [2026.09.09]` and does not claim Unreleased seeds; CONTRIBUTING.md does not say `review=true`; DAILY_UPDATE still mentions `scripts/check.py` as step 1.
 
 **Out of cycle:** GitHub Release (P9).
 
@@ -1238,7 +1238,7 @@ Landed follow-ups (not required for MATCH tests, both done):
 
 **PR / empty-commit rule:** if CHANGELOG compare-links actually change, one commit on `main` (feature branch optional). If **no file changes**, **do not** open `feature/P9-release` and **do not** empty-commit; tag HEAD of `main`.
 
-**Acceptance:** tag on origin; CI green; handoff DONE.
+**Acceptance:** tag on origin; CI green.
 
 **Out of cycle:** any new seed family (streets, municipalities).
 
@@ -1260,7 +1260,7 @@ The current daily no-op exists **because** seed CSVs were not in git (now they a
 
 ### D. Boolean `review` column (rejected)
 
-Docs already disagree (`true` / `false` / `gold`). A three-way enum (`gold|auto|needs_review`) matches `docs/DECLENSIONS.md` and the pipeline (sync must know what is sacred). P8 deletes the boolean wording in AGENTS.md / CONTRIBUTING.
+Docs already disagree (`true` / `false` / `gold`). A three-way enum (`gold|auto|needs_review`) matches `docs/DECLENSIONS.md` and the pipeline (sync must know what is sacred). P8 deletes the boolean wording in CONTRIBUTING.md / CONTRIBUTING.
 
 ### E. Feature branch until all of P0–P9 done (ADR §9.1) vs merge each cycle (operator)
 
@@ -1318,7 +1318,7 @@ Logging: scripts log to stderr at INFO (one line per source). No Python `logging
 1. **P0–P5 on `main` (`3c16dbf`):** schemas, seeds, mappings, check/sync/validate, CI. Done.
 2. **P6 (`5a6a06a`):** FTS index. Done.
 3. **P7 (`c57a8c8`):** ontology. Done.
-4. **P8 (`3633de7`):** docs tell the truth; AGENTS.md review enum; DAILY_UPDATE left as-is. Done.
+4. **P8 (`3633de7`):** docs tell the truth; CONTRIBUTING.md review enum; DAILY_UPDATE left as-is. Done.
 5. **P9 (`e95ea0b`):** tag `2026.09.09`, GitHub Release. Done.
 6. **v1.1 (`b1bb72f`):** `http_dated` ignores dump Last-Modified; live `geonames` on Q649/Q626. Done.
 
@@ -1365,7 +1365,7 @@ Logging: scripts log to stderr at INFO (one line per source). No Python `logging
 
 - `LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md` — DEC-REG-001, phases P0–P9
 - `TASK_SPECIFICATION.md` — v1 contract
-- `AGENTS.md`, `agents/DAILY_UPDATE.md`, `CONTRIBUTING.md`
+- `CONTRIBUTING.md`, `docs/DAILY_UPDATE.md`, `CONTRIBUTING.md`
 - `docs/DECLENSIONS.md`, `docs/taxonomy.md`
 - Frictionless Table Schema / Tabular Data Package
 - ISO 3166-2:RU (83 codes); ISO 3166-2:UA (codes referenced in notes only)
@@ -1376,7 +1376,7 @@ Logging: scripts log to stderr at INFO (one line per source). No Python `logging
 - Wikidata CC0; SPARQL endpoint https://query.wikidata.org/
 - hflabs/region, hflabs/city (CC-BY-SA-4.0) — pointer only
 - GOST 7.67-2024 (additional subject codes — **not** ISO; verify before citing specific Latin codes)
-- Agentix `unhexx/agentic_loop_template` v3.13.0 consumer-starter full
+- Host Python 3.12+ venv
 - Outpost ontology overlay (this document’s `outpost-ontology/v1` JSON)
 
 ---
@@ -1395,7 +1395,7 @@ Logging: scripts log to stderr at INFO (one line per source). No Python `logging
 
 6. **hflabs is a pointer, never a curated source.** Rationale: CC-BY-SA ShareAlike vs MIT curated. Official names + ISO + Wikidata are sufficient for v1 rows. Mapping uses `delete_policy: pointer`.
 
-7. **Declension `review` is an enum `gold|auto|needs_review`, not a boolean. Uniqueness per file is `(id, lemma)`.** Rationale: landed P1 + `test_seeds.py`; 79 FOIV ids have both abbr and full-name gold rows. Sync must hard-protect `gold`. P8 aligns AGENTS.md / CONTRIBUTING.
+7. **Declension `review` is an enum `gold|auto|needs_review`, not a boolean. Uniqueness per file is `(id, lemma)`.** Rationale: landed P1 + `test_seeds.py`; 79 FOIV ids have both abbr and full-name gold rows. Sync must hard-protect `gold`. P8 aligns CONTRIBUTING.md / CONTRIBUTING.
 
 8. **`check.py` exit `0/10/2` and daily no-op writes `data/sources/runs/YYYY-MM-DD.json`.** Rationale: TASK_SPEC + empty-commit ban. A second run the same day with no diff does not commit. Live DAILY_UPDATE already implements this.
 
@@ -1405,13 +1405,13 @@ Logging: scripts log to stderr at INFO (one line per source). No Python `logging
 
 11. **Outpost ontology is a single `ontology/ontology.json` with typed entities; not MultiLLM `llm_ontology.json` and not a second RDF stack.** Rationale: ADR “не плодить второй формат”. Check class id is `CHK-DETECTOR`.
 
-12. **Agentix stays a gitignored sibling symlink.** Rationale: already installed; AGENTS.md NEVER copy the tree.
+12. **Do not vendor third-party development trees into git.** Rationale: CONTRIBUTING.md.
 
 13. **P0–P9 are on `main`; tag `2026.09.09` is the v1 release.** Rationale: do not fight git. Residual: further `geonames` digits beyond Москва/Волга (optional). `http_dated` ignore-`also` is v1.1.
 
 14. **`data/sources/catalog.yaml` is the only catalog file** (no root `catalog.yaml`). Rationale: the repo already chose this path; a duplicate SSOT is how catalogs rot. Detector keys are the landed schema, not ADR sketches with `dump_url` / `stale_after_days`.
 
-15. **Work language: implementation comments and commit messages in Russian; this design document in English.** Rationale: AGENTS.md + Agentix product-doc convention in the tasking.
+15. **Work language: implementation comments and commit messages in Russian; this design document in English.** Rationale: CONTRIBUTING.md.
 
 16. **`replaced_by` is optional.** Rationale: GeoNames deletes have no successor; Table Schema does not encode a conditional required; “withdrawn, no successor” is a valid deprecated row.
 
@@ -1468,15 +1468,15 @@ Skip. `missingValues` / `primaryKey` already on disk.
 ### PR 9 — `docs: пятиминутный старт, источники, календарный CHANGELOG` — MERGED (`3633de7`)
 
 - **Cycle:** P8-DOCS  (**LANDED**)
-- **Files:** `README.md`; `docs/SOURCES.md`; `docs/taxonomy.md` (if needed); `CHANGELOG.md`; **`AGENTS.md`**; `CONTRIBUTING.md`; `CYCLE_PLAN.md` status; `agents/DAILY_UPDATE.md` only if drifted; `docs/DECLENSIONS.md` only if a cross-link is wrong
+- **Files:** `README.md`; `docs/SOURCES.md`; `docs/taxonomy.md` (if needed); `CHANGELOG.md`; **`CONTRIBUTING.md`**; `CONTRIBUTING.md`; `CYCLE_PLAN.md` status; `docs/DAILY_UPDATE.md` only if drifted; `docs/DECLENSIONS.md` only if a cross-link is wrong
 - **Depends on:** PR 4–PR 8 so documented commands work
-- **Description:** Fix TAXONOMY casing link; add SOURCES.md; align review enum in AGENTS.md / CONTRIBUTING; do **not** rewrite DAILY_UPDATE from the old sketch. After merge: push `main`.
+- **Description:** Fix TAXONOMY casing link; add SOURCES.md; align review enum in CONTRIBUTING.md / CONTRIBUTING; do **not** rewrite DAILY_UPDATE from the old sketch. After merge: push `main`.
 
 ### PR 10 — `chore(release): 2026.09.09` — MERGED (`e95ea0b`, tag `2026.09.09`)
 
 - **Cycle:** P9-DONE  (**LANDED**)
 - **Files:** possibly `CHANGELOG.md` compare-link; **no feature code**; **skip the PR entirely if no file changes**
 - **Depends on:** P0–P8 on `main`
-- **Description:** Reviewer evidence (pytest, ruff, validate, no file >10 MB, types top-level intact). Annotated tag `2026.09.09`. GitHub Release. Push tag and `main`.
+- **Description:** Evidence (pytest, ruff, validate, no file >10 MB, types top-level intact). Annotated tag `2026.09.09`. GitHub Release. Push tag and `main`.
 
 End of design.

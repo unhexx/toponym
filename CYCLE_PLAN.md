@@ -61,7 +61,7 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | E | Таксономия верхнего уровня | `feature/nr-e-taxonomy` | DEC: `toponym` / `oikonym` / `hydronym` без переименования | COMPLETE |
 | F | Публичный HTTP вне scope | `feature/nr-f-loopback` | loopback `127.0.0.1:8099`; host publish не `0.0.0.0`; публичный Internet API нет | COMPLETE |
 | G | Один формат онтологии | `feature/nr-g-ontology` | только Outpost `ontology/ontology.json`; DEC-* на keep-out A–J, L | COMPLETE |
-| H | Посторонние деревья шаблонов не в git | `feature/nr-h-agentix` | DEC-TEMPLATE-001: не вендорить внешние шаблоны разработки | COMPLETE |
+| H | Посторонние деревья шаблонов не в git | `feature/nr-h-template` | DEC-TEMPLATE-001: не вендорить внешние шаблоны разработки | COMPLETE |
 | I | hflabs CC-BY-SA не в curated | `feature/nr-i-hflabs` | DEC + `data/raw/`: ShareAlike только raw; curated без копий таблиц | COMPLETE |
 | J | Население / полигоны / GeoJSON / PostGIS | `feature/nr-j-geo` | вне канона; опциональный указатель в docs; CSV-канон не расширять геометрией | COMPLETE |
 | K | Сиды муниципалитетов, годонимов, микротопонимов | `feature/nr-k-seeds` | новые curated CSV + resource datapackage + schema; ≥1 строка каждый; типы уже есть; без дампа ГАР | COMPLETE |

@@ -47,7 +47,7 @@ ADR и исследование: [`LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`](LOCA
 - Daily либо применяет дельту, либо пишет `data/sources/runs/YYYY-MM-DD.json` и не делает пустой commit.
 - Онтология содержит DEC-REG-001 и список Source.
 - Верхний уровень типов цел (`toponym`, не «Торопум»).
-- Reviewer: тесты зелёные, нет вендора >10 МБ.
+- Тесты зелёные, нет вендора >10 МБ.
 
 ## Loop 2 (after v1)
 
@@ -61,7 +61,7 @@ Keep-out A–L COMPLETE на `main` (`CYCLE_PLAN.md`). Живой backlog: GitHu
 
 | ID | Slice | Acceptance |
 |---|---|---|
-| P0-BOOT | PLAN, SPEC, AGENTS, catalog.schema.json | файлы на ветке, schema validate |
+| P0-BOOT | PLAN, SPEC, catalog.schema.json | файлы на ветке, schema validate |
 | P1-SEED | сиды ФО, субъекты, ФОИВ, крупные гидро/оро, types | datapackage resources, ≥1 строка |
 | P2-MAP | mappings GeoNames, ГКГН, 326, hflabs | yaml валиден mapping.schema |
 | P3-CHECK | `scripts/check.py` | код 0 на no-op; JSON-отчёт |
@@ -70,10 +70,10 @@ Keep-out A–L COMPLETE на `main` (`CYCLE_PLAN.md`). Живой backlog: GitHu
 | P6-INDEX | `scripts/index.py` SQLite FTS | поиск «Волга» / «МВД» |
 | P7-ONT | ontology.json | валидный JSON, DEC-REG-001 |
 | P8-DOCS | README, CHANGELOG, DAILY_UPDATE → check.py | человек поднимает за 5 мин |
-| P9-DONE | Reviewer gate + релиз 2026.09.09 | handoff DONE, tag |
+| P9-DONE | релиз 2026.09.09 | тесты зелёные, tag |
 
 Параллелить можно только P2 и P6 после P1; остальное последовательно. Синхроточка: после P5.
 
 Оператор явно требует: в конце каждого цикла merge в `main` и push.
 
-All loop output must use strict JSON handoffs per `HANDOFF_SCHEMA.md`.
+

@@ -120,7 +120,7 @@ docker compose up --build
 - публикация **`127.0.0.1:8099:8099`**
 - `cap_drop: ALL`, read-only, пользователь `10001`
 
-Не стартует SearXNG, Ollama и pxpipe. Порты 8080 / 8100 / 8110 / 8112 на хосте свободны.
+Compose публикует только `127.0.0.1:8099`.
 
 На хосте без Docker: `python scripts/validate.py && python scripts/index.py && python scripts/serve.py`.
 

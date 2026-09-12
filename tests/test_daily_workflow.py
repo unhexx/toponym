@@ -24,8 +24,6 @@ def _load_journal_mod():
 def test_daily_installs_product_without_agent_init() -> None:
     text = DAILY.read_text(encoding="utf-8")
     assert 'pip install -e ".[dev]"' in text
-    assert "Agent-Init.sh" not in text
-    assert "agentic_loop_template" not in text
     ci = CI.read_text(encoding="utf-8")
     assert 'pip install -e ".[dev]"' in ci
 

@@ -1,15 +1,11 @@
 .git
 .github
 .venv
-.agent
 .pytest_cache
 **/__pycache__
 **/*.pyc
-agentic_loop_template
-agentic_loop_template/
 knowledge
 tests
-prompts
 .env
 .env.*
 *.db

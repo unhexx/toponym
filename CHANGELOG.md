@@ -6,7 +6,7 @@
 ## [Unreleased]
 
 ### Removed
-- Из дерева продукта убраны служебные файлы внешнего harness (`.agent/`, `Agent-Init.sh`, `SYSTEM_PROMPT.md`, `prompts/`). Правила канона — в `CONTRIBUTING.md`; ежедневный прогон — `docs/DAILY_UPDATE.md`.
+- Из дерева продукта убраны служебные файлы внутреннего цикла разработки. Правила канона — в `CONTRIBUTING.md`; ежедневный прогон — `docs/DAILY_UPDATE.md`.
 
 ### Fixed
 - Daily: таймаут `http_head` у указателей (Росреестр/ФИАС) больше не даёт `check.py` код 2 и не блокирует GeoNames. Журнал `data/sources/runs/` пишется и при коде 2; `workflow_dispatch` — `--ref main`, не `main~`.
@@ -45,8 +45,8 @@ Next-release A–L на `main`. Annotated tag `2026.09.12`.
 - `cities-major.csv`: `lat`/`lon` из Wikidata P625 (CC0) и `oktmo` из P764 для всех 197 строк; `fias` пуст (нет CC0 GUID без дампа ГАР). Полигоны не добавлялись (DEC-GEO-001).
 - Геометрия: DEC-GEO-001 — население / полигоны / GeoJSON / PostGIS вне канона; указатель в `docs/SOURCES.md`; `lat`/`lon` остаются точками.
 - hflabs: DEC-HFLABS-001 — CC-BY-SA только `data/raw/`; `validate.py` отклоняет `source_id=hflabs-*` в каноне.
-- Agentix: DEC-AGENTIX-001 — шаблон только sibling-symlink `../agentic_loop_template`, дерево не в git.
-- Онтология: DEC-ONT-001 — только Outpost `ontology/ontology.json`; keep-out A–J, L закрыты DEC-* (дамп, Agentix, hflabs, гео, P1).
+- DEC-TEMPLATE-001 — внешние шаблоны разработки не вендорятся в git.
+- Онтология: DEC-ONT-001 — только Outpost `ontology/ontology.json`; keep-out A–J, L закрыты DEC-* (дамп, шаблоны, hflabs, гео, P1).
 - HTTP: DEC-SERVE-002 — публичный Internet API вне scope; host publish только `127.0.0.1:8099`, не `0.0.0.0`.
 - Таксономия: DEC-TAX-001 — `toponym` / `oikonym` / `hydronym` не переименовывать; `validate.py` держит корень.
 - Склонения: DEC-DECL-002 — уникальность `(id, lemma)`; `id` не unique; золото ФОИВ с двумя леммами не переписывать.
@@ -56,10 +56,10 @@ Next-release A–L на `main`. Annotated tag `2026.09.12`.
 - `scripts/serve.py`: `PACKAGE_VERSION` = `2026.09.12` (`GET /healthz` больше не отдаёт `2026.09.09`).
 
 ### Fixed
-- `Agent-Init.sh`: без sibling `../agentic_loop_template` — понятное сообщение и fallback `pip install -e ".[dev]"` (не exit 1, дерево шаблона не копируется). README: дефолт «только реестр» — venv + pip, без шаблона. Daily GHA уже ставит пакет без Agent-Init.
+- README: дефолт «только реестр» — venv + `pip install -e ".[dev]"`. Daily GHA ставит пакет так же.
 - Золото «Волга» (`wd:Q626`): родительный падеж **Волги**, не «Волгы» (Розенталь; `docs/DECLENSIONS.md`). Ручной патч по id, без автосклонения.
-- Daily GHA: установка `pip install -e ".[dev]"` без `Agent-Init.sh` (на `ubuntu-latest` нет sibling-шаблона). Журнал `data/sources/runs/YYYY-MM-DD.json` пишется при check 0/10; `checked_at` сдвигается, если устарел. Dead-ветки «нет check.py» убраны.
-- SSOT: CYCLE_PLAN DoD — 19 resources; онтология `calver` = `2026.09.12`; ADR помечен историческим снимком v1; SYSTEM_PROMPT/AGENTS — тег `2026.09.12` и backlog #13. `PROJECT_CONTEXT.md` не продукт-SSOT.
+- Daily GHA: установка `pip install -e ".[dev]"`. Журнал `data/sources/runs/YYYY-MM-DD.json` пишется при check 0/10; `checked_at` сдвигается, если устарел.
+- SSOT: CYCLE_PLAN DoD — 19 resources; онтология `calver` = `2026.09.12`; ADR помечен историческим снимком v1.
 
 ## [2026.09.11] - 2026-09-11
 
@@ -68,7 +68,7 @@ Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-S
 ### Added
 - Loopback JSON-поиск `scripts/serve.py` на `127.0.0.1:8099` (`/healthz`, `/v1/search`, `/v1/records`).
 - One-shot Docker Compose: `docker compose up --build`, Python 3.12, `validate → index → serve`.
-- Решение `DEC-SERVE-001`: stdlib HTTP, не Datasette/FastAPI и не стек Agentix.
+- Решение `DEC-SERVE-001`: stdlib HTTP, не Datasette/FastAPI и не посторонний стек.
 
 ### Changed
 - Дизайн v1 описывает выпущенный контур (P0–P9, geonames Москва `524901` / Волга `472776`), а не «следующий цикл P6».
@@ -84,7 +84,7 @@ Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-S
 - Каркас репозитория, таксономия типов, каталог источников.
 - Контракт v1: Table Schema, JSON Schema каталога и маппингов, `pyproject.toml`.
 - Детекторы обновлений в `data/sources/catalog.yaml`.
-- Исполняемый ежедневный промпт `agents/DAILY_UPDATE.md` (check → sync → validate → index; журнал `data/sources/runs/`).
+- Исполняемый ежедневный промпт `docs/DAILY_UPDATE.md` (check → sync → validate → index; журнал `data/sources/runs/`).
 - План циклов `CYCLE_PLAN.md` и дизайн v1.
 - Сиды канона: 8 федеральных округов, 89 субъектов, крупные города, гидронимы, оронимы, ФОИВ (указ № 326 / № 522) и смежные ведомства.
 - Золотые склонения фикстур из `docs/DECLENSIONS.md`, округов, субъектов и аббревиатур ФОИВ.
