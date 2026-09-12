@@ -5,8 +5,15 @@
 
 ## [Unreleased]
 
+## [2026.09.15] - 2026-09-15
+
+Витрина README и оглавление документации. Теги `2026.09.11`, `2026.09.12`, `2026.09.13` и `2026.09.14` не двигались.
+
 ### Changed
 - README — витрина: схемы mermaid, полный каталог документации, бейджи, автор Evgeniy Chistyakov / Unhandled Exception (DAO EXCEPTION EXPERT). Оглавление — `docs/README.md`. `CITATION.cff` и `pyproject.toml` authors/urls.
+
+### Added
+- Образ `ghcr.io/unhexx/toponym:2026.09.15` (и `:CalVer`) публикуется CI на push в `main`. `compose.yaml` пинит этот тег.
 
 ## [2026.09.14] - 2026-09-14
 
@@ -134,7 +141,8 @@ Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-S
 - GeoNames id: Москва `524901`, Волга `472776`.
 - Склонения: `review=gold` / `needs_review` (не boolean).
 
-[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.14...HEAD
+[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.15...HEAD
+[2026.09.15]: https://github.com/unhexx/toponym/releases/tag/2026.09.15
 [2026.09.14]: https://github.com/unhexx/toponym/releases/tag/2026.09.14
 [2026.09.13]: https://github.com/unhexx/toponym/releases/tag/2026.09.13
 [2026.09.12]: https://github.com/unhexx/toponym/releases/tag/2026.09.12

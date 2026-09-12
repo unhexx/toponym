@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "toponym"
-version = "2026.09.14"
+version = "2026.09.15"
 description = "Local registry of Russian toponyms and agencies"
 readme = "README.md"
 requires-python = ">=3.12"
