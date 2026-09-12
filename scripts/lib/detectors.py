@@ -5,7 +5,7 @@ import os
 import re
 from datetime import UTC, datetime, timedelta
 from typing import Any
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 
 import requests
 
@@ -110,6 +110,71 @@ def normalize_html(html: str) -> str:
 
 def fingerprint_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _mediawiki_api_endpoint(page_url: str) -> tuple[str, str] | None:
+    parsed = urlparse(page_url)
+    host = (parsed.netloc or "").lower()
+    if host.startswith("www."):
+        host = host[4:]
+    if host != "wikipedia.org" and not host.endswith(".wikipedia.org"):
+        return None
+    path = unquote(parsed.path or "")
+    if not path.startswith("/wiki/"):
+        return None
+    title = path[len("/wiki/") :]
+    if not title:
+        return None
+    scheme = parsed.scheme or "https"
+    return f"{scheme}://{parsed.netloc}/w/api.php", title
+
+
+def _mediawiki_lastrevid(payload: Any) -> str:
+    if not isinstance(payload, dict):
+        return ""
+    query = payload.get("query") or {}
+    pages = query.get("pages")
+    page: Any = None
+    if isinstance(pages, list) and pages:
+        page = pages[0]
+    elif isinstance(pages, dict) and pages:
+        page = next(iter(pages.values()), None)
+    if not isinstance(page, dict) or page.get("missing") or page.get("invalid"):
+        return ""
+    revid = page.get("lastrevid")
+    if revid is None:
+        revisions = page.get("revisions") or []
+        if revisions and isinstance(revisions[0], dict):
+            revid = revisions[0].get("revid")
+    if revid is None or revid == "":
+        return ""
+    return str(revid)
+
+
+def _fetch_mediawiki_revid(session: requests.Session, page_url: str) -> str:
+    parsed = _mediawiki_api_endpoint(page_url)
+    if parsed is None:
+        return ""
+    api, title = parsed
+    try:
+        response = _request(
+            session,
+            "GET",
+            api,
+            params={
+                "action": "query",
+                "format": "json",
+                "formatversion": "2",
+                "prop": "info",
+                "redirects": "1",
+                "titles": title,
+            },
+        )
+        if response.status_code >= 400:
+            return ""
+        return _mediawiki_lastrevid(response.json())
+    except (requests.RequestException, ValueError, TypeError):
+        return ""
 
 
 def _ok_result(
@@ -342,31 +407,50 @@ def detect_page_fingerprint(
     session: requests.Session,
     **_: Any,
 ) -> dict[str, Any]:
-    cursor_old = source.get("cursor") or ""
+    raw_cursor = source.get("cursor")
+    cursor_old = "" if raw_cursor is None else str(raw_cursor)
     urls = list(source.get("detector", {}).get("urls") or [])
     if not urls and source.get("url"):
         urls = [source["url"]]
     if not urls:
         return _err_result(reason="page_fingerprint: нет url", cursor_old=cursor_old)
+    url = urls[0]
+    revid = _fetch_mediawiki_revid(session, url)
+    if revid:
+        if revid == cursor_old:
+            return _ok_result(
+                changed=False,
+                reason="тот же MediaWiki rev",
+                cursor_old=cursor_old,
+                cursor_new=revid,
+            )
+        return _ok_result(
+            changed=True,
+            reason=f"MediaWiki rev {revid}",
+            cursor_old=cursor_old,
+            cursor_new=revid,
+        )
     try:
-        response = _request(session, "GET", urls[0])
+        response = _request(session, "GET", url)
         if response.status_code >= 400:
             return _err_result(
                 reason=f"page_fingerprint HTTP {response.status_code}",
                 cursor_old=cursor_old,
             )
-        digest = fingerprint_text(normalize_html(response.text or ""))
+        etag = _header(response.headers, "ETag")
     except requests.RequestException as exc:
         return _err_result(reason=f"page_fingerprint: {exc}", cursor_old=cursor_old)
-    if digest == cursor_old:
+    if etag:
+        if etag == cursor_old:
+            return _ok_result(
+                changed=False, reason="ETag совпадает", cursor_old=cursor_old, cursor_new=etag
+            )
         return _ok_result(
-            changed=False, reason="отпечаток совпадает", cursor_old=cursor_old, cursor_new=digest
+            changed=True, reason="ETag изменился", cursor_old=cursor_old, cursor_new=etag
         )
-    return _ok_result(
-        changed=True,
-        reason="отпечаток страницы изменился",
+    return _err_result(
+        reason="page_fingerprint: нет MediaWiki rev/ETag",
         cursor_old=cursor_old,
-        cursor_new=digest,
     )
 
 

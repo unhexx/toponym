@@ -250,6 +250,7 @@ def test_ukase_apply_without_manual_only_checked_at(tmp_path: Path, monkeypatch,
     catalog = yaml.safe_load((root / "data/sources/catalog.yaml").read_text(encoding="utf-8"))
     row = next(s for s in catalog["sources"] if s["id"] == "ukase-326")
     assert str(row["checked_at"]) == "2026-09-09"
+    assert "cursor" not in row or row.get("cursor") in (None, "")
 
 
 def test_manual_file_requires_canonical_header(tmp_path: Path, monkeypatch, capsys) -> None:
@@ -311,9 +312,52 @@ def test_check_json_cursor_applied_to_pointer_and_ukase(
     catalog = yaml.safe_load(catalog_path.read_text(encoding="utf-8"))
     assert str(catalog["updated"]) == "2026-09-09"
     by_id = {row["id"]: row for row in catalog["sources"]}
-    assert str(by_id["ukase-326"]["cursor"]) == "new-fingerprint"
+    assert "cursor" not in by_id["ukase-326"] or by_id["ukase-326"].get("cursor") in (None, "")
     assert str(by_id["fias-gar"]["cursor"]) == 'W/"etag"'
     assert str(by_id["geonames-ru"]["cursor"]) == "2026-09-08"
+
+
+def test_ukase_cursor_from_check_json_only_with_manual_file(
+    tmp_path: Path, monkeypatch, capsys
+) -> None:
+    root = _prepare_root(tmp_path)
+    check_json = tmp_path / "check.json"
+    check_json.write_text(
+        json.dumps(
+            {
+                "sources": [
+                    {
+                        "id": "ukase-326",
+                        "changed": True,
+                        "error": False,
+                        "cursor_new": "141625081",
+                    }
+                ]
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    manual = tmp_path / "ukase.csv"
+    write_csv(manual, PLACES_HEADER, [])
+    _patch_sync(monkeypatch, root, FakeSession(_geonames_handler("")))
+    code = sync_mod.main(
+        [
+            "--source",
+            "ukase-326",
+            "--apply",
+            "--manual-file",
+            str(manual),
+            "--check-json",
+            str(check_json),
+        ]
+    )
+    assert code == 0
+    json.loads(capsys.readouterr().out)
+    catalog = yaml.safe_load((root / "data/sources/catalog.yaml").read_text(encoding="utf-8"))
+    row = next(s for s in catalog["sources"] if s["id"] == "ukase-326")
+    assert str(row["cursor"]) == "141625081"
+    assert str(row["checked_at"]) == "2026-09-09"
 
 
 def test_check_json_skips_unchanged_and_error_cursors(

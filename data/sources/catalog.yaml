@@ -39,12 +39,12 @@ sources:
     vendor: false
     last_updated: 2024-06-17
     checked_at: 2026-09-12
-    cursor: "77c8b5ffeac5f672930ec97134e69aa91ff4049a75dd242cc29fb847ee7736da"
+    cursor: "141625080"
     detector:
       kind: page_fingerprint
       urls:
         - https://ru.wikipedia.org/wiki/Структура_федеральных_органов_исполнительной_власти_России_(с_2024)
-      note: структурный указ после №522 — ручной gate в curated
+      note: курсор MediaWiki lastrevid; структурный указ после №522 — ручной gate в curated
   - id: hflabs-region
     url: https://github.com/hflabs/region
     license: CC-BY-SA-4.0
