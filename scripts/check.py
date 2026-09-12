@@ -10,7 +10,7 @@ _ROOT = Path(__file__).resolve().parents[1]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-from scripts.lib.catalog import load_catalog  # noqa: E402
+from scripts.lib.catalog import load_catalog, stamp_catalog_checked_at  # noqa: E402
 from scripts.lib.detectors import build_session, check_catalog, exit_code, utcnow  # noqa: E402
 
 CATALOG_PATH = _ROOT / "data" / "sources" / "catalog.yaml"
@@ -21,11 +21,25 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--json", action="store_true", help="печатать JSON-отчёт")
     parser.add_argument("--source", metavar="ID", help="проверить один источник")
     parser.add_argument("--offline", action="store_true", help="без сети; ошибка, если kind≠none")
+    parser.add_argument(
+        "--stamp",
+        action="store_true",
+        help="сдвинуть catalog.yaml updated/checked_at, без детекторов",
+    )
+    parser.add_argument(
+        "--today",
+        metavar="YYYY-MM-DD",
+        help="дата для --stamp (UTC сегодня по умолчанию)",
+    )
     return parser.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
+    if args.stamp:
+        today = args.today or utcnow().strftime("%Y-%m-%d")
+        stamp_catalog_checked_at(CATALOG_PATH, today)
+        return 0
     try:
         catalog = load_catalog(CATALOG_PATH)
     except (OSError, ValueError) as exc:

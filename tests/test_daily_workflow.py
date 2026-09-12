@@ -44,10 +44,22 @@ def test_daily_always_writes_journal_and_stamps_catalog() -> None:
     text = DAILY.read_text(encoding="utf-8")
     assert "write_run_journal.py" in text
     assert "--check-json /tmp/check.json" in text
-    assert "--stamp-catalog" in text
+    assert "--stamp-catalog" not in text
+    assert "--changed-count" not in text
+    assert "python scripts/check.py --stamp" in text
+    assert "json.load(open('/tmp/check.json')).get('changed_count')" in text
+    assert 'echo "changed_count=1"' not in text
     assert 'if [[ ! -f "data/sources/runs/${TODAY}.json" ]]' not in text
     assert "workflow_dispatch" in text
     assert "empty commit forbidden" in text
+
+
+def test_journal_script_is_dump_only() -> None:
+    text = JOURNAL_SCRIPT.read_text(encoding="utf-8")
+    assert "stamp_catalog" not in text
+    assert "stamp-catalog" not in text
+    assert "patch_catalog_source" not in text
+    assert "scripts.lib.catalog" not in text
 
 
 def test_stamp_catalog_checked_at_shifts_dates(tmp_path: Path) -> None:
@@ -62,12 +74,16 @@ def test_stamp_catalog_checked_at_shifts_dates(tmp_path: Path) -> None:
 
 def test_write_run_journal_copies_check_sources(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
+    catalog = tmp_path / "data" / "sources" / "catalog.yaml"
+    catalog.parent.mkdir(parents=True, exist_ok=True)
+    catalog.write_text(FIXTURE_CATALOG.read_text(encoding="utf-8"), encoding="utf-8")
+    original_catalog = catalog.read_text(encoding="utf-8")
     check_json = tmp_path / "check.json"
     check_json.write_text(
         json.dumps(
             {
                 "as_of": "2026-09-11T06:00:00Z",
-                "changed_count": 0,
+                "changed_count": 2,
                 "error_count": 0,
                 "sources": [
                     {
@@ -75,7 +91,7 @@ def test_write_run_journal_copies_check_sources(tmp_path: Path, monkeypatch) -> 
                         "changed": False,
                         "reason": "kind=none",
                         "cursor_old": "",
-                        "cursor_new": "",
+                        "cursor_new": "should-not-be-patched",
                         "error": False,
                     }
                 ],
@@ -89,7 +105,7 @@ def test_write_run_journal_copies_check_sources(tmp_path: Path, monkeypatch) -> 
         today="2026-09-11",
         as_of="2026-09-11T00:00:00Z",
         check_exit=0,
-        changed_count=0,
+        changed_count=99,
         check_json=check_json,
         runs_dir=tmp_path / "data" / "sources" / "runs",
     )
@@ -97,5 +113,6 @@ def test_write_run_journal_copies_check_sources(tmp_path: Path, monkeypatch) -> 
     assert payload["check_exit"] == 0
     assert payload["as_of"] == "2026-09-11T06:00:00Z"
     assert payload["sources"][0]["id"] == "wikidata"
-    assert payload["changed_count"] == 0
+    assert payload["changed_count"] == 2
     assert "notes" not in payload
+    assert catalog.read_text(encoding="utf-8") == original_catalog

@@ -386,6 +386,39 @@ def test_json_shape_keys(monkeypatch, capsys) -> None:
     assert report["as_of"].endswith("Z")
 
 
+def test_stamp_shifts_checked_at_without_network(tmp_path: Path, monkeypatch) -> None:
+    catalog_path = tmp_path / "catalog.yaml"
+    catalog_path.write_text(
+        (FIXTURES / "catalog_valid.yaml").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(check_mod, "CATALOG_PATH", catalog_path)
+
+    def boom():
+        raise AssertionError("network")
+
+    monkeypatch.setattr(check_mod, "build_session", boom)
+    code = check_mod.main(["--stamp", "--today", "2026-09-11"])
+    assert code == 0
+    payload = load_catalog(catalog_path)
+    assert payload["updated"] == "2026-09-11"
+    assert payload["sources"][0]["checked_at"] == "2026-09-11"
+
+
+def test_stamp_defaults_today_to_utcnow(tmp_path: Path, monkeypatch) -> None:
+    catalog_path = tmp_path / "catalog.yaml"
+    catalog_path.write_text(
+        (FIXTURES / "catalog_valid.yaml").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(check_mod, "CATALOG_PATH", catalog_path)
+    monkeypatch.setattr(check_mod, "utcnow", lambda: datetime(2026, 9, 12, 6, 0, 0, tzinfo=UTC))
+    assert check_mod.main(["--stamp"]) == 0
+    payload = load_catalog(catalog_path)
+    assert payload["updated"] == "2026-09-12"
+    assert payload["sources"][0]["checked_at"] == "2026-09-12"
+
+
 def test_dump_last_modified_does_not_flip_changed(monkeypatch, capsys) -> None:
     session = FakeSession(
         _geonames_handler(

@@ -5,14 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 from pathlib import Path
-
-_ROOT = Path(__file__).resolve().parents[2]
-if str(_ROOT) not in sys.path:
-    sys.path.insert(0, str(_ROOT))
-
-from scripts.lib.catalog import patch_catalog_source, stamp_catalog_checked_at  # noqa: E402
 
 
 def write_run_journal(
@@ -20,7 +13,7 @@ def write_run_journal(
     today: str,
     as_of: str,
     check_exit: int | str,
-    changed_count: int,
+    changed_count: int = 0,
     notes: str = "",
     check_json: Path | None = None,
     runs_dir: Path | None = None,
@@ -59,15 +52,9 @@ def main() -> None:
     parser.add_argument("--today", required=True)
     parser.add_argument("--as-of", required=True)
     parser.add_argument("--check-exit", required=True)
-    parser.add_argument("--changed-count", type=int, required=True)
+    parser.add_argument("--changed-count", type=int, default=0)
     parser.add_argument("--notes", default="")
     parser.add_argument("--check-json", default="")
-    parser.add_argument(
-        "--stamp-catalog",
-        action="store_true",
-        help="сдвинуть catalog.yaml updated/checked_at на --today, если устарели",
-    )
-    parser.add_argument("--catalog", default="data/sources/catalog.yaml")
     args = parser.parse_args()
 
     check_exit: int | str
@@ -85,21 +72,6 @@ def main() -> None:
         notes=args.notes,
         check_json=check_json,
     )
-    if args.stamp_catalog:
-        catalog = Path(args.catalog)
-        stamp_catalog_checked_at(catalog, args.today)
-        if check_json is not None and check_json.is_file():
-            report = json.loads(check_json.read_text(encoding="utf-8"))
-            for row in report.get("sources") or []:
-                if not isinstance(row, dict) or row.get("error"):
-                    continue
-                source_id = row.get("id")
-                cursor_new = row.get("cursor_new") or ""
-                if source_id and cursor_new:
-                    try:
-                        patch_catalog_source(catalog, str(source_id), cursor=str(cursor_new))
-                    except KeyError:
-                        continue
 
 
 if __name__ == "__main__":

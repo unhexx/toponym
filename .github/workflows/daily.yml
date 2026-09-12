@@ -51,6 +51,9 @@ jobs:
           set -e
           echo "check_exit=$CHECK_EXIT" >> "$GITHUB_OUTPUT"
 
+          CHANGED=$(python -c "import json; print(int(json.load(open('/tmp/check.json')).get('changed_count') or 0))" || echo 0)
+          echo "changed_count=$CHANGED" >> "$GITHUB_OUTPUT"
+
           if [[ "$CHECK_EXIT" -eq 10 ]]; then
             python scripts/sync.py --apply
             set +e
@@ -64,24 +67,22 @@ jobs:
               exit 1
             fi
             python scripts/index.py || true
-            echo "changed_count=1" >> "$GITHUB_OUTPUT"
           else
             echo "validate=skip" >> "$GITHUB_OUTPUT"
-            echo "changed_count=0" >> "$GITHUB_OUTPUT"
             if [[ "$CHECK_EXIT" -eq 2 ]]; then
               echo "check.py exit 2; skip sync, write journal" >&2
             fi
           fi
 
-          CHANGED=0
-          if [[ "$CHECK_EXIT" -eq 10 ]]; then CHANGED=1; fi
           python .github/scripts/write_run_journal.py \
             --today "$TODAY" \
             --as-of "$AS_OF" \
             --check-exit "$CHECK_EXIT" \
-            --changed-count "$CHANGED" \
-            --check-json /tmp/check.json \
-            --stamp-catalog
+            --check-json /tmp/check.json
+
+          if [[ "$CHECK_EXIT" -eq 0 ]]; then
+            python scripts/check.py --stamp --today "$TODAY"
+          fi
 
       - name: Commit if there is a real diff
         env:
