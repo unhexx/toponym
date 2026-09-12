@@ -1,0 +1,48 @@
+[
+  {
+    "item": "http://www.wikidata.org/entity/Q1644209",
+    "ru": "Тверская улица",
+    "en": "Tverskaya Street",
+    "lat": "55.7576",
+    "lon": "37.6137",
+    "gn": "6956712",
+    "located": "http://www.wikidata.org/entity/Q649",
+    "iso": "RU-MOW"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90000001",
+    "ru": "Тестовая улица",
+    "en": "Test Street",
+    "lat": "5.575E1",
+    "lon": "3.76E1",
+    "located": "http://www.wikidata.org/entity/Q649",
+    "iso": "RU-MOW"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90000002",
+    "ru": "Зелёная улица",
+    "en": "Zelyonaya Street",
+    "located": "http://www.wikidata.org/entity/Q1697",
+    "iso": "RU-MOS"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90000003",
+    "ru": "Новая площадь",
+    "en": "Novaya Square",
+    "located": "http://www.wikidata.org/entity/Q649",
+    "iso": "RU-MOW"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90000004",
+    "ru": "Бездомная улица",
+    "en": "No Parent Street",
+    "located": "http://www.wikidata.org/entity/Q1"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q41116",
+    "ru": "Красная площадь",
+    "en": "Red Square",
+    "located": "http://www.wikidata.org/entity/Q649",
+    "iso": "RU-MOW"
+  }
+]
