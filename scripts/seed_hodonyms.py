@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Harvest Russian streets from Wikidata SPARQL into data/curated/hodonyms.csv.
 
-Coverage is Wikidata (P31=Q79007, P17=Q159), not FIAS/GAR. SPARQL JSON/CSV
-is not vendored; optional --from-csv/--from-json is a cache outside git.
-Daily sync stays known_ids_only (data/mappings/wikidata.yaml).
+Coverage is Wikidata P31 in {Q79007, Q54114, Q628179, Q1251403, Q537127}, P17=Q159,
+not FIAS/GAR. SPARQL JSON/CSV is not vendored; optional --from-csv/--from-json
+is a cache outside git. Daily sync stays known_ids_only (wikidata.yaml).
 """
 
 from __future__ import annotations
@@ -13,6 +13,7 @@ import csv
 import io
 import json
 import math
+import re
 import sys
 import time
 from dataclasses import dataclass, field
@@ -50,6 +51,8 @@ HOP_QUERY = """SELECT DISTINCT ?item ?subj ?iso WHERE {
 }
 """
 FILL_IF_EMPTY = ("lat", "lon", "geonames", "name_en", "admin1", "parent_id", "name_yo")
+_VALUES_TYPE = re.compile(r"VALUES\s+\?type\s*\{([^}]+)\}", re.IGNORECASE | re.DOTALL)
+_WD_QID = re.compile(r"wd:(Q\d+)", re.IGNORECASE)
 
 
 class SeedError(Exception):
@@ -156,7 +159,36 @@ def load_main_query(path: Path) -> str:
     query = "\n".join(lines).strip()
     if "SELECT" not in query or "Q79007" not in query:
         raise SeedError(f"нет основного SPARQL в {path}")
+    if "VALUES" not in query or "?type" not in query:
+        raise SeedError(f"SPARQL без VALUES ?type в {path}")
     return query
+
+
+def p31_from_query(query: str) -> list[str]:
+    match = _VALUES_TYPE.search(query)
+    if match:
+        qids: list[str] = []
+        for raw in _WD_QID.findall(match.group(1)):
+            qid = "Q" + raw[1:]
+            if qid not in qids:
+                qids.append(qid)
+        if qids:
+            return qids
+    raise SeedError("SPARQL: нет P31 в VALUES ?type")
+
+
+def queries_for_p31(query: str) -> list[tuple[str, str]]:
+    types = p31_from_query(query)
+    # мелкие типы раньше улицы: таймаут Q79007 не съедает проспекты/переулки
+    types = [qid for qid in types if qid != "Q79007"] + [qid for qid in types if qid == "Q79007"]
+    match = _VALUES_TYPE.search(query)
+    if match is None:
+        return [(types[0], query)]
+    out: list[tuple[str, str]] = []
+    for qid in types:
+        typed = query[: match.start()] + f"VALUES ?type {{ wd:{qid} }}" + query[match.end() :]
+        out.append((qid, typed))
+    return out
 
 
 def _cell(row: dict[str, str], *keys: str) -> str:
@@ -520,7 +552,23 @@ def harvest(
         query = load_main_query(root / SPARQL_PATH)
         if session is None:
             session = build_session()
-        rows = sparql_csv(session, query, timeout=90)
+        rows = []
+        errors: list[str] = []
+        for p31, typed in queries_for_p31(query):
+            print(f"sparql P31={p31}", file=sys.stderr)
+            try:
+                chunk = sparql_csv(session, typed, timeout=90)
+            except SeedError as exc:
+                errors.append(f"{p31}: {exc}")
+                print(f"sparql P31={p31} fail {exc}", file=sys.stderr)
+                continue
+            print(f"sparql P31={p31} rows={len(chunk)}", file=sys.stderr)
+            rows.extend(chunk)
+            time.sleep(0.4)
+        if not rows:
+            raise SeedError("SPARQL: " + "; ".join(errors) if errors else "пусто")
+        if errors:
+            print("sparql partial: " + "; ".join(errors), file=sys.stderr)
     records = merge_bindings(rows)
     counts = HarvestCounts()
     if hop and from_json is None:

@@ -7,6 +7,8 @@ from pathlib import Path
 import jsonschema
 import yaml
 
+from scripts.seed_hodonyms import load_main_query, p31_from_query
+
 ROOT = Path(__file__).resolve().parents[1]
 MAPPINGS_DIR = ROOT / "data" / "mappings"
 MAPPING_SCHEMA = ROOT / "schema" / "mapping.schema.json"
@@ -113,9 +115,22 @@ def test_wikidata_mapping_points_and_no_sparql_dump() -> None:
     assert payload["fields"]["P625_lon"] == "lon"
     assert payload["filter"]["known_ids_only"] is True
     assert payload["class_map"]["Q79007"] == "hodonym"
+    assert payload["class_map"]["Q54114"] == "hodonym"
+    assert payload["class_map"]["Q628179"] == "hodonym"
+    assert payload["class_map"]["Q1251403"] == "hodonym"
+    assert payload["class_map"]["Q537127"] == "hodonym"
     assert payload["class_map"]["Q174782"] == "agoronym"
-    assert payload["filter"]["hodonym_p31"] == "Q79007"
+    assert payload["filter"]["hodonym_p31"] == [
+        "Q79007",
+        "Q54114",
+        "Q628179",
+        "Q1251403",
+        "Q537127",
+    ]
+    sparql = ROOT / "data" / "raw" / "wikidata" / "hodonyms-ru.sparql"
+    assert payload["filter"]["hodonym_p31"] == p31_from_query(load_main_query(sparql))
     assert "seed_hodonyms.py" in payload["notes"]
+    assert "Q628179" in payload["notes"]
     assert "polygon" not in payload["fields"].values()
     assert "geojson" not in {v.casefold() for v in payload["fields"].values()}
     assert "без полигонов" in payload["notes"] or "dec-geo-001" in notes

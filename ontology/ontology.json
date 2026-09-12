@@ -214,7 +214,7 @@
       "path": "data/mappings/wikidata.yaml",
       "catalog_id": "wikidata",
       "pointer": true,
-      "notes": "Daily SPARQL только по известным Q-id; harvest улиц — seed_hodonyms.py (P31=Q79007). P625 точки, не полигоны (DEC-GEO-001)."
+      "notes": "Daily SPARQL только по известным Q-id; harvest улиц — seed_hodonyms.py (P31 Q79007/Q54114/Q628179/Q1251403/Q537127). P625 точки, не полигоны (DEC-GEO-001)."
     },
     {
       "id": "CHK-DETECTOR",
@@ -438,7 +438,7 @@
         "scripts/seed_hodonyms.py",
         "data/mappings/wikidata.yaml"
       ],
-      "summary": "Реестр улиц растёт upsert-ом по wd:Q-id из Wikidata (P31=Q79007, P17=Q159, без Q174782). SPARQL JSON не вендорится. Daily остаётся known_ids_only. Покрытие Wikidata, не ФИАС и не все улицы России. Полный ГАР вне git."
+      "summary": "Реестр улиц растёт upsert-ом по wd:Q-id из Wikidata (P31 улица Q79007, бульвар Q54114, проспект Q628179, переулок Q1251403, набережная Q537127; P17=Q159, без Q174782). SPARQL JSON не вендорится. Daily остаётся known_ids_only. Покрытие Wikidata, не ФИАС и не все улицы России. Полный ГАР вне git."
     },
     {
       "id": "DEC-P1-001",
