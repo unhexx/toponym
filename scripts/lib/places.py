@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import sys
 from pathlib import Path
 from typing import Any
 
@@ -48,17 +47,3 @@ def load_place_relpaths(root: Path | None = None) -> list[str]:
 
 def load_index_relpaths(root: Path | None = None) -> list[str]:
     return _relpaths(root or _ROOT)[1]
-
-
-def __getattr__(name: str) -> list[str]:
-    if name not in {"PLACE_RELPATHS", "INDEX_RELPATHS"}:
-        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
-    places, index = _relpaths(_ROOT)
-    module = sys.modules[__name__]
-    module.PLACE_RELPATHS = places
-    module.INDEX_RELPATHS = index
-    return places if name == "PLACE_RELPATHS" else index
-
-
-def __dir__() -> list[str]:
-    return sorted([*globals(), "PLACE_RELPATHS", "INDEX_RELPATHS"])

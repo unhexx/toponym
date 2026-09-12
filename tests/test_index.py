@@ -10,8 +10,6 @@ import scripts.index as index_mod
 from scripts.lib.csvio import PLACES_HEADER, write_csv
 from scripts.lib.places import (
     AGENCIES_SCHEMA,
-    INDEX_RELPATHS,
-    PLACE_RELPATHS,
     PLACES_SCHEMA,
     load_index_relpaths,
     load_place_relpaths,
@@ -36,20 +34,30 @@ def _expected_relpaths() -> tuple[list[str], list[str]]:
     return places, places + agencies
 
 
+def test_places_has_no_module_getattr() -> None:
+    import scripts.lib.places as places_mod
+
+    assert getattr(places_mod, "__getattr__", None) is None
+    assert not hasattr(places_mod, "PLACE_RELPATHS")
+    assert not hasattr(places_mod, "INDEX_RELPATHS")
+
+
 def test_place_relpaths_exclude_agencies() -> None:
-    places, index = _expected_relpaths()
-    assert PLACE_RELPATHS == places
-    assert INDEX_RELPATHS == index
-    assert "data/curated/municipalities.csv" in PLACE_RELPATHS
-    assert "data/curated/dromonyms.csv" in PLACE_RELPATHS
-    assert "data/curated/agencies-foiv.csv" not in PLACE_RELPATHS
-    assert "data/curated/agencies-other.csv" not in PLACE_RELPATHS
-    assert "data/curated/types.csv" not in PLACE_RELPATHS
-    assert "data/curated/types.csv" not in INDEX_RELPATHS
-    assert not any(path.startswith("data/declensions/") for path in PLACE_RELPATHS)
-    assert not any(path.startswith("data/declensions/") for path in INDEX_RELPATHS)
-    assert "data/curated/agencies-foiv.csv" in INDEX_RELPATHS
-    assert "data/curated/agencies-other.csv" in INDEX_RELPATHS
+    expected_places, expected_index = _expected_relpaths()
+    places = load_place_relpaths(ROOT)
+    index = load_index_relpaths(ROOT)
+    assert places == expected_places
+    assert index == expected_index
+    assert "data/curated/municipalities.csv" in places
+    assert "data/curated/dromonyms.csv" in places
+    assert "data/curated/agencies-foiv.csv" not in places
+    assert "data/curated/agencies-other.csv" not in places
+    assert "data/curated/types.csv" not in places
+    assert "data/curated/types.csv" not in index
+    assert not any(path.startswith("data/declensions/") for path in places)
+    assert not any(path.startswith("data/declensions/") for path in index)
+    assert "data/curated/agencies-foiv.csv" in index
+    assert "data/curated/agencies-other.csv" in index
 
 
 def _write_tmp_package(tmp_path: Path) -> Path:

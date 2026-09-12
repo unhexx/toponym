@@ -6,7 +6,7 @@
 **Пустой коммит запрещён.**
 **Python только из `.venv`:** `python3 -m venv .venv && source .venv/bin/activate && pip install -e ".[dev]"`. На GHA то же ставит `daily.yml`.
 
-Механический прогон (GHA и локально): `python scripts/daily.py` — check → sync только `changed` без blocking-error → validate/index → журнал с `UpsertCounts` → stamp `checked_at` только при check 0.
+Механический прогон (GHA и локально): `python scripts/daily.py` — check → sync только `changed` без blocking-error → validate/index → журнал с `UpsertCounts` → stamp `checked_at` только при check 0. `blocking` в отчёте — только на `error`; неблокирующие указатели задаются в `catalog.yaml`.
 
 Выполнять шаги по порядку. Не пропускать инварианты.
 
