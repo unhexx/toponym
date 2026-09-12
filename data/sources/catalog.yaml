@@ -39,7 +39,7 @@ sources:
     vendor: false
     last_updated: 2024-06-17
     checked_at: 2026-09-12
-    cursor: "839d44d7c744b1cc63534dfe4f9f734ed1321cb3cc9a0a617ebdc4e25557cda8"
+    cursor: "77c8b5ffeac5f672930ec97134e69aa91ff4049a75dd242cc29fb847ee7736da"
     detector:
       kind: page_fingerprint
       urls:
