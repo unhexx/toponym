@@ -9,12 +9,15 @@
 - Из дерева продукта убраны служебные файлы внутреннего цикла разработки. Правила канона — в `CONTRIBUTING.md`; ежедневный прогон — `docs/DAILY_UPDATE.md`.
 
 ### Fixed
+- `blocking` в отчёте check только на строках с `error`; неблокирующие указатели (ГКГН/ГАР) задаются в `catalog.yaml` (`blocking: false`), а не эвристикой vendor+http_head.
+- Каталог больше не патчится regex: load → правка mapping → YAML dump.
 - `ukase-326`: курсор — MediaWiki `lastrevid` (или ETag), не SHA Wikipedia-хрома. `sync --apply` без `--manual-file` не пишет `cursor` в каталог.
 - Журнал daily: `records_upserted` / `records_deprecated` берутся из `UpsertCounts` sync (`inserted+updated` / `deprecated`), а не захардкоженные нули.
 - `http_dated`: `changed` только если есть RU-строки **и** курсор каталога ещё не равен вчерашней UTC-дате. Повторный check в тот же день (курсор уже yesterday) не даёт exit 10.
 - Daily: таймаут `http_head` у указателей (Росреестр/ФИАС) больше не даёт `check.py` код 2 и не блокирует GeoNames. Журнал `data/sources/runs/` пишется и при коде 2; `workflow_dispatch` — `--ref main`, не `main~`.
 
 ### Changed
+- Списки CSV мест — только `load_place_relpaths` / `load_index_relpaths`, без модульных `__getattr__`.
 - Daily: `scripts/daily.py` ведёт check → sync только changed → validate/index → журнал с `UpsertCounts` → stamp на no-op. `.github/workflows/daily.yml` — install, запуск драйвера, commit-if-diff.
 - Ручная приёмка высокочастотных склонений в `gold`: 15 городов-миллионников плюс Тольятти/Улан-Удэ (нескл.) и Ярославль, Саратов, Иркутск, Владивосток, Томск, Тюмень; творительный Воронежа — **Воронежем**. Аббревиатуры КС РФ, ВС РФ, АП, Совбез, Генпрокуратура, СК России, Банк России, ЦИК России, Счётная палата. Норма в `source` (`Розенталь; Грамота.ру`). Остаток городов/полных имён ФОИВ — `needs_review`. Фикстуры DECLENSIONS.md не переписывались.
 

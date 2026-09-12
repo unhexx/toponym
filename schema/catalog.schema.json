@@ -50,6 +50,7 @@
         "title": { "type": "string" },
         "license": { "type": "string", "minLength": 2 },
         "vendor": { "type": "boolean" },
+        "blocking": { "type": "boolean" },
         "max_vendor_bytes": { "type": "integer", "minimum": 0 },
         "checked_at": {
           "type": "string",

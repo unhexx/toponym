@@ -6,7 +6,12 @@ from pathlib import Path
 
 import scripts.lib.journal as journal_mod
 from scripts.daily import changed_source_ids, run_daily
-from scripts.lib.catalog import load_catalog, stamp_catalog_checked_at
+from scripts.lib.catalog import (
+    dump_catalog,
+    load_catalog,
+    patch_catalog_source,
+    stamp_catalog_checked_at,
+)
 from scripts.lib.journal import write_run_journal
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -50,6 +55,42 @@ def test_changed_source_ids_skips_blocking_errors() -> None:
         ]
     }
     assert changed_source_ids(report) == ["geonames-ru", "ukase-326", "wikidata"]
+
+
+def test_catalog_module_has_no_regex_patch() -> None:
+    text = (ROOT / "scripts" / "lib" / "catalog.py").read_text(encoding="utf-8")
+    assert "import re\n" not in text
+    assert "re.compile" not in text
+    assert "re.sub" not in text
+
+
+def test_patch_catalog_source_yaml_roundtrip(tmp_path: Path) -> None:
+    catalog = tmp_path / "catalog.yaml"
+    dump_catalog(
+        catalog,
+        {
+            "updated": "2026-09-01",
+            "sources": [
+                {
+                    "id": "fias-gar",
+                    "license": "official-open-data",
+                    "vendor": False,
+                    "blocking": False,
+                    "checked_at": "2026-09-01",
+                    "detector": {"kind": "http_head"},
+                }
+            ],
+            "watchlist_github": [],
+        },
+    )
+    assert patch_catalog_source(catalog, "fias-gar", checked_at="2026-09-12", cursor='W/"etag"')
+    payload = load_catalog(catalog)
+    assert payload["sources"][0]["checked_at"] == "2026-09-12"
+    assert payload["sources"][0]["cursor"] == 'W/"etag"'
+    assert payload["sources"][0]["blocking"] is False
+    raw = catalog.read_text(encoding="utf-8")
+    assert "blocking: false" in raw
+    assert "W/" in raw
 
 
 def test_stamp_catalog_checked_at_shifts_dates(tmp_path: Path) -> None:

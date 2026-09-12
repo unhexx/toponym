@@ -208,17 +208,11 @@ def detect_none(source: dict[str, Any], **_: Any) -> dict[str, Any]:
     return _ok_result(changed=False, reason="kind=none", cursor_old=cursor, cursor_new=cursor)
 
 
-def _is_pointer_http_head(source: dict[str, Any]) -> bool:
-    """vendor:false + http_head — указатель (ГКГН/ГАР). Ошибка не блокирует daily."""
-    kind = (source.get("detector") or {}).get("kind")
-    if kind != "http_head":
-        return False
-    vendor = source.get("vendor")
-    return vendor is False or vendor == "false"
-
-
-def _source_blocking(source: dict[str, Any]) -> bool:
-    return not _is_pointer_http_head(source)
+def source_error_blocks(source: dict[str, Any]) -> bool:
+    """Ошибка источника валит daily, если catalog не задал blocking: false."""
+    if "blocking" not in source:
+        return True
+    return bool(source.get("blocking"))
 
 
 def detect_http_head(
@@ -248,11 +242,11 @@ def detect_http_head(
                     response.close()
             if response.status_code >= 400:
                 reason = f"http_head HTTP {response.status_code}"
-                if _is_pointer_http_head(source):
+                if not source_error_blocks(source):
                     reason += "; pointer only"
                 return _err_result(reason=reason, cursor_old=cursor_old)
         except requests.RequestException as exc:
-            if _is_pointer_http_head(source):
+            if not source_error_blocks(source):
                 return _err_result(
                     reason="http_head timeout/no reliable headers; pointer only",
                     cursor_old=cursor_old,
@@ -473,18 +467,19 @@ def detect_source(
     source_id = source.get("id") or ""
     kind = (source.get("detector") or {}).get("kind")
     cursor_old = source.get("cursor") or ""
-    blocking = _source_blocking(source)
 
     def with_id(row: dict[str, Any]) -> dict[str, Any]:
-        return {
+        out = {
             "id": source_id,
             "changed": row["changed"],
             "reason": row["reason"],
             "cursor_old": row["cursor_old"],
             "cursor_new": row["cursor_new"],
             "error": row["error"],
-            "blocking": blocking,
         }
+        if row["error"]:
+            out["blocking"] = source_error_blocks(source)
+        return out
 
     if not kind:
         return with_id(_err_result(reason="нет detector.kind", cursor_old=cursor_old))

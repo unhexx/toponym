@@ -227,6 +227,74 @@ def test_http_timeout_exit_2(monkeypatch, capsys) -> None:
     assert report["sources"][0]["blocking"] is True
 
 
+def test_blocking_absent_unless_error(tmp_path: Path) -> None:
+    catalog = {
+        "updated": "2026-09-09",
+        "sources": [
+            {
+                "id": "gkgn-opendata",
+                "url": "https://example.invalid/gkgn",
+                "license": "official-open-data",
+                "vendor": False,
+                "blocking": False,
+                "checked_at": "2026-09-09",
+                "detector": {"kind": "http_head", "urls": ["https://example.invalid/gkgn"]},
+            },
+            {
+                "id": "geonames-ru",
+                "url": "https://download.geonames.org/export/dump/RU.zip",
+                "license": "CC-BY-4.0",
+                "vendor": False,
+                "checked_at": "2026-09-09",
+                "cursor": "2026-09-08",
+                "detector": {
+                    "kind": "http_dated",
+                    "urls": [
+                        "https://download.geonames.org/export/dump/modifications-{yesterday}.txt"
+                    ],
+                },
+            },
+        ],
+    }
+
+    def handler(method: str, url: str, _kwargs: dict):
+        if "gkgn" in url:
+            raise requests.Timeout("timed out")
+        if "modifications-" in url:
+            return FakeResponse(200, _mods("geonames_mods_non_ru.tsv"))
+        raise AssertionError(url)
+
+    report = check_catalog(catalog, session=FakeSession(handler), now=FIXED_NOW)
+    by_id = {row["id"]: row for row in report["sources"]}
+    assert by_id["gkgn-opendata"]["error"] is True
+    assert by_id["gkgn-opendata"]["blocking"] is False
+    assert by_id["geonames-ru"]["error"] is False
+    assert "blocking" not in by_id["geonames-ru"]
+
+
+def test_http_head_without_catalog_blocking_is_blocking(tmp_path: Path) -> None:
+    catalog = {
+        "updated": "2026-09-09",
+        "sources": [
+            {
+                "id": "gkgn-opendata",
+                "url": "https://example.invalid/gkgn",
+                "license": "official-open-data",
+                "vendor": False,
+                "checked_at": "2026-09-09",
+                "detector": {"kind": "http_head", "urls": ["https://example.invalid/gkgn"]},
+            }
+        ],
+    }
+
+    def handler(method: str, url: str, _kwargs: dict):
+        raise requests.Timeout("timed out")
+
+    report = check_catalog(catalog, session=FakeSession(handler), now=FIXED_NOW)
+    assert exit_code(report) == 2
+    assert report["sources"][0]["blocking"] is True
+
+
 def test_pointer_http_head_timeout_nonblocking_exit_0(tmp_path: Path) -> None:
     catalog = {
         "updated": "2026-09-09",
@@ -236,6 +304,7 @@ def test_pointer_http_head_timeout_nonblocking_exit_0(tmp_path: Path) -> None:
                 "url": "https://rosreestr.gov.ru/opendata/example",
                 "license": "official-open-data",
                 "vendor": False,
+                "blocking": False,
                 "checked_at": "2026-09-09",
                 "detector": {
                     "kind": "http_head",
@@ -266,6 +335,7 @@ def test_pointer_timeout_does_not_block_geonames_changed(tmp_path: Path) -> None
                 "url": "https://rosreestr.gov.ru/opendata/example",
                 "license": "official-open-data",
                 "vendor": False,
+                "blocking": False,
                 "checked_at": "2026-09-09",
                 "detector": {
                     "kind": "http_head",
@@ -297,6 +367,7 @@ def test_pointer_timeout_does_not_block_geonames_changed(tmp_path: Path) -> None
     assert by_id["gkgn-opendata"]["blocking"] is False
     assert by_id["geonames-ru"]["changed"] is True
     assert by_id["geonames-ru"]["error"] is False
+    assert "blocking" not in by_id["geonames-ru"]
 
 
 def test_github_sha_differs_exit_10(tmp_path: Path, monkeypatch, capsys) -> None:
@@ -384,6 +455,7 @@ def test_http_head_etag_change(tmp_path: Path) -> None:
     report = check_catalog(catalog, session=FakeSession(handler), now=FIXED_NOW)
     assert exit_code(report) == 10
     assert report["sources"][0]["changed"] is True
+    assert "blocking" not in report["sources"][0]
 
 
 def test_page_fingerprint_stable() -> None:
@@ -532,8 +604,9 @@ def test_json_shape_keys(monkeypatch, capsys) -> None:
         "cursor_old",
         "cursor_new",
         "error",
-        "blocking",
     }
+    assert row["error"] is False
+    assert "blocking" not in row
     assert report["as_of"].endswith("Z")
 
 
