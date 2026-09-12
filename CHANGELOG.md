@@ -5,6 +5,9 @@
 
 ## [Unreleased]
 
+### Removed
+- Из дерева продукта убраны служебные файлы внешнего harness (`.agent/`, `Agent-Init.sh`, `SYSTEM_PROMPT.md`, `prompts/`). Правила канона — в `CONTRIBUTING.md`; ежедневный прогон — `docs/DAILY_UPDATE.md`.
+
 ### Fixed
 - Daily: таймаут `http_head` у указателей (Росреестр/ФИАС) больше не даёт `check.py` код 2 и не блокирует GeoNames. Журнал `data/sources/runs/` пишется и при коде 2; `workflow_dispatch` — `--ref main`, не `main~`.
 

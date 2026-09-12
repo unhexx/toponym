@@ -10,7 +10,7 @@
 
 | ID | Слайс | Ветка | Acceptance | Status |
 |---|---|---|---|---|
-| P0-BOOT | схемы, pyproject, catalog detectors, Agentix-файлы | `feature/P0-boot` | jsonschema catalog; pytest `tests/test_schema.py`; datapackage schema paths существуют | COMPLETE |
+| P0-BOOT | схемы, pyproject, catalog detectors | `feature/P0-boot` | jsonschema catalog; pytest `tests/test_schema.py`; datapackage schema paths существуют | COMPLETE |
 | P1-SEED | сиды ФО / 89 субъектов / города / гидро / оро / ФОИВ / склонения | `feature/P1-seed` | все resources datapackage ≥1 строка; types.oikonym починен | COMPLETE |
 | P2-MAP | mappings YAML | `feature/P2-map` | yaml валиден `mapping.schema.json` | COMPLETE |
 | P3-CHECK | `scripts/check.py` | `feature/P3-check` | exit 0/10/2; JSON; pytest без сети | COMPLETE |
@@ -43,7 +43,7 @@
 | P16-PRES | продуктовая колода | `feature/P16-presentation` | `docs/presentation/`: CSV, check/sync/validate/index, :8099, compose | COMPLETE |
 | P17-README | world-class README + shields.io | `feature/P17-readme` | бейджи MIT/CalVer/CI/python/compose; `docker compose up --build`; `127.0.0.1:8099` healthz/search | COMPLETE |
 | P18-USAGE | user guide search + declensions | `feature/P18-usage` | `docs/USAGE.md`: healthz, GET search/records, CSV join по id, офлайн; README ссылается | COMPLETE |
-| P19-DEPLOY | min first-run / update | `feature/P19-deploy` | README: первый запуск `docker compose up --build`; обновление `git pull && docker compose up --build`; хост Agent-Init + serve.py | COMPLETE |
+| P19-DEPLOY | min first-run / update | `feature/P19-deploy` | README: первый запуск `docker compose up --build`; обновление `git pull && docker compose up --build`; хост venv + serve.py | COMPLETE |
 | P20-CHANGELOG | Unreleased USAGE + min-update | `feature/P20-changelog` | CHANGELOG Unreleased датирует USAGE и `git pull && docker compose up --build`; тег `2026.09.11` не двигается | COMPLETE |
 
 ## Next release (после `2026.09.11`)
@@ -61,7 +61,7 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | E | Таксономия верхнего уровня | `feature/nr-e-taxonomy` | DEC: `toponym` / `oikonym` / `hydronym` без переименования | COMPLETE |
 | F | Публичный HTTP вне scope | `feature/nr-f-loopback` | loopback `127.0.0.1:8099`; host publish не `0.0.0.0`; публичный Internet API нет | COMPLETE |
 | G | Один формат онтологии | `feature/nr-g-ontology` | только Outpost `ontology/ontology.json`; DEC-* на keep-out A–J, L | COMPLETE |
-| H | Agentix — symlink SSOT | `feature/nr-h-agentix` | DEC: дерево шаблона не копировать; sibling `../agentic_loop_template` | COMPLETE |
+| H | Посторонние деревья шаблонов не в git | `feature/nr-h-agentix` | DEC-TEMPLATE-001: не вендорить внешние шаблоны разработки | COMPLETE |
 | I | hflabs CC-BY-SA не в curated | `feature/nr-i-hflabs` | DEC + `data/raw/`: ShareAlike только raw; curated без копий таблиц | COMPLETE |
 | J | Население / полигоны / GeoJSON / PostGIS | `feature/nr-j-geo` | вне канона; опциональный указатель в docs; CSV-канон не расширять геометрией | COMPLETE |
 | K | Сиды муниципалитетов, годонимов, микротопонимов | `feature/nr-k-seeds` | новые curated CSV + resource datapackage + schema; ≥1 строка каждый; типы уже есть; без дампа ГАР | COMPLETE |
@@ -88,4 +88,4 @@ git merge --no-ff feature/P{n}-*
 git push origin main
 ```
 
-Daily-промпт: [`agents/DAILY_UPDATE.md`](agents/DAILY_UPDATE.md).
+Daily-промпт: [`docs/DAILY_UPDATE.md`](docs/DAILY_UPDATE.md).

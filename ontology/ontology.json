@@ -258,7 +258,7 @@
       "status": "accepted",
       "date": "2026-09-11",
       "refs": ["docs/design/2026-09-11-loop2-compose-box.md", "compose.yaml", "scripts/serve.py"],
-      "summary": "stdlib loopback JSON over existing FTS5; one python:3.12-slim service; not Datasette/FastAPI/CKAN; not Agentix SearXNG/pxpipe stack; not a public API."
+      "summary": "stdlib loopback JSON over existing FTS5; one python:3.12-slim service; not Datasette/FastAPI/CKAN; not a public API."
     },
     {
       "id": "DEC-SERVE-002",
@@ -291,7 +291,7 @@
     {
       "id": "RSK-PORT-COLLISION",
       "type": "Risk",
-      "title": "Stealing Agentix host ports",
+      "title": "Stealing unrelated host ports",
       "status": "mitigated",
       "summary": "Product port 8099 only; tests forbid publishing 8080/8100/8110/8112."
     },
@@ -372,13 +372,13 @@
       "summary": "Keep-out G: только ontology/ontology.json (schema outpost-ontology/v1). Без OWL/SKOS/JSON-LD второго канона."
     },
     {
-      "id": "DEC-AGENTIX-001",
+      "id": "DEC-TEMPLATE-001",
       "type": "Decision",
-      "title": "Agentix — sibling symlink SSOT",
+      "title": "Не вендорить внешние шаблоны разработки в git",
       "status": "accepted",
       "date": "2026-09-11",
-      "refs": ["Agent-Init.sh", ".gitignore"],
-      "summary": "Keep-out H: дерево agentic_loop_template не копировать в продукт; только symlink ../agentic_loop_template."
+      "refs": [".gitignore", "CONTRIBUTING.md"],
+      "summary": "Keep-out H: посторонние деревья шаблонов и локальный harness не входят в продукт."
     },
     {
       "id": "DEC-HFLABS-001",

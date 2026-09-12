@@ -10,14 +10,13 @@ ADR и исследование: [`LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`](LOCA
 
 - Любое приложение читает канон как UTF-8 CSV без SDK.
 - `datapackage.json` + Table Schema дают машинную валидацию.
-- Агент и человек видят, есть ли обновление источника, и применяют дельту upsert-ом.
-- Daily-агент больше не смотрит в пустоту: либо патч, либо runs-журнал, без пустого коммита.
+- Есть ли обновление источника — видно по `check.py`; дельта применяется upsert-ом.
+- Ежедневный прогон либо патчит канон, либо пишет runs-журнал, без пустого коммита.
 
 ## Scope
 
 **In scope:**
 
-- Agentix consumer-starter **full** (symlink SSOT `../agentic_loop_template` v3.13.0, не копировать дерево).
 - Сиды: ФО, субъекты РФ, крупные города, гидронимы/оронимы, ФОИВ и прочие органы, золотые склонения.
 - Mappings: GeoNames, ГКГН-указатель, Указ №326, hflabs.
 - Скрипты: `check.py`, `sync.py`, `validate.py`, `index.py`.
@@ -32,7 +31,7 @@ ADR и исследование: [`LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`](LOCA
 - Публичный HTTP API (`serve.py` — вне v1).
 - Второй формат онтологии помимо Outpost `ontology.json`.
 
-## Canonical rules (from AGENTS.md)
+## Canonical rules (from CONTRIBUTING.md)
 
 - Патч CSV по stable id; delete запрещён (`status=deprecated` + `replaced_by`).
 - Дампы >10 МБ и полный ГАР/ФИАС не вендорятся.
@@ -45,7 +44,7 @@ ADR и исследование: [`LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`](LOCA
 - Все resources из текущего `datapackage.json` существуют и содержат ≥1 строку.
 - `python scripts/check.py --json` работает без секретов.
 - `python scripts/validate.py` = 0.
-- Daily-агент либо применяет дельту, либо пишет `data/sources/runs/YYYY-MM-DD.json` и не делает пустой commit.
+- Daily либо применяет дельту, либо пишет `data/sources/runs/YYYY-MM-DD.json` и не делает пустой commit.
 - Онтология содержит DEC-REG-001 и список Source.
 - Верхний уровень типов цел (`toponym`, не «Торопум»).
 - Reviewer: тесты зелёные, нет вендора >10 МБ.
