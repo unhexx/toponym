@@ -5,6 +5,10 @@
 
 ## [Unreleased]
 
+## [2026.09.13] - 2026-09-13
+
+Daily-драйвер, честные курсоры и журнал. Теги `2026.09.11` и `2026.09.12` не двигались.
+
 ### Removed
 - Из дерева продукта убраны служебные файлы внутреннего цикла разработки. Правила канона — в `CONTRIBUTING.md`; ежедневный прогон — `docs/DAILY_UPDATE.md`.
 
@@ -22,7 +26,7 @@
 - Ручная приёмка высокочастотных склонений в `gold`: 15 городов-миллионников плюс Тольятти/Улан-Удэ (нескл.) и Ярославль, Саратов, Иркутск, Владивосток, Томск, Тюмень; творительный Воронежа — **Воронежем**. Аббревиатуры КС РФ, ВС РФ, АП, Совбез, Генпрокуратура, СК России, Банк России, ЦИК России, Счётная палата. Норма в `source` (`Розенталь; Грамота.ру`). Остаток городов/полных имён ФОИВ — `needs_review`. Фикстуры DECLENSIONS.md не переписывались.
 
 ### Added
-- Образ `ghcr.io/unhexx/toponym:2026.09.12` (и `:CalVer`) публикуется CI на push в `main`. `compose.yaml` пинит этот тег, `build` остаётся опциональным. Обновление без сборки: `docker compose pull && docker compose up`.
+- Образ `ghcr.io/unhexx/toponym:2026.09.13` (и `:CalVer`) публикуется CI на push в `main`. `compose.yaml` пинит этот тег, `build` остаётся опциональным. Обновление без сборки: `docker compose pull && docker compose up`.
 - CI: отдельный job `compose` (`pytest tests/test_compose_smoke.py`, timeout 20 мин; ящик поднимает сам тест). Unit-job `pytest -m "not compose"` без Docker.
 - Указатель [`data/mappings/wikidata.yaml`](data/mappings/wikidata.yaml): Q-id → `wd`, label ru/en, P625 → `lat`/`lon` (точки, DEC-GEO-001). SPARQL-дамп не вендорится; `delete_policy=pointer`.
 - Указатель [`data/mappings/hflabs-city.yaml`](data/mappings/hflabs-city.yaml): join по FIAS GUID; `city`/`name` в curated не копируются (DEC-HFLABS-001). Таблица hflabs в git не кладётся.
@@ -111,7 +115,8 @@ Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-S
 - GeoNames id: Москва `524901`, Волга `472776`.
 - Склонения: `review=gold` / `needs_review` (не boolean).
 
-[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.12...HEAD
+[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.13...HEAD
+[2026.09.13]: https://github.com/unhexx/toponym/releases/tag/2026.09.13
 [2026.09.12]: https://github.com/unhexx/toponym/releases/tag/2026.09.12
 [2026.09.11]: https://github.com/unhexx/toponym/releases/tag/2026.09.11
 [2026.09.09]: https://github.com/unhexx/toponym/releases/tag/2026.09.09
