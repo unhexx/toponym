@@ -2,9 +2,14 @@ cff-version: 1.2.0
 message: "If you use this registry, please cite it."
 title: "Toponym — реестр российских топонимов"
 authors:
-  - name: "Unhandled Exception"
+  - family-names: "Chistyakov"
+    given-names: "Evgeniy"
+    alias: "Unhandled Exception"
+    email: "unhandled@exception.expert"
+    affiliation: "DAO EXCEPTION EXPERT"
     website: "https://exception.expert"
 repository-code: "https://github.com/unhexx/toponym"
+url: "https://exception.expert"
 license: MIT
 version: "2026.09.14"
 date-released: "2026-09-14"

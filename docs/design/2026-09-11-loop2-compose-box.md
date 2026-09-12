@@ -1,5 +1,7 @@
 # Compose-ящик и loopback-поиск (DEC-SERVE-001)
 
+Актуальная витрина: [`README.md`](../../README.md). Оглавление: [`docs/README.md`](../README.md).
+
 Снимок выпущенного контура. Тег `2026.09.11`. План: `CYCLE_PLAN.md`. Канон v1 (`docs/design/2026-09-09-v1-local-registries.md`) не переписывать.
 
 ## Цель

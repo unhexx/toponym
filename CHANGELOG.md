@@ -5,6 +5,9 @@
 
 ## [Unreleased]
 
+### Changed
+- README — витрина: схемы mermaid, полный каталог документации, бейджи, автор Evgeniy Chistyakov / Unhandled Exception (DAO EXCEPTION EXPERT). Оглавление — `docs/README.md`. `CITATION.cff` и `pyproject.toml` authors/urls.
+
 ## [2026.09.14] - 2026-09-14
 
 http_dated без GET при текущем курсоре, журнал из `journal_fields`, daily без `*_fn`. Теги `2026.09.11`, `2026.09.12` и `2026.09.13` не двигались.
