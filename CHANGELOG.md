@@ -8,6 +8,7 @@
 ### Removed
 - Мёртвый SHA-стек HTML: `normalize_html`, `fingerprint_text` и четыре regex в детекторах. Kind `page_fingerprint` остаётся (MediaWiki lastrevid / ETag).
 - Журнал daily: один путь counts через `UpsertCounts.journal_fields()`. Убраны `journal_counts_from_sync_files`, fallback `inserted+updated`, `sync_json` и CLI `journal.py`.
+- `run_daily` больше не принимает шесть `*_fn`: зовёт `check_catalog` / `run_sync` / `validate_tree` / `rebuild_index` / `stamp_catalog_checked_at` / `revert_data` напрямую. Sync только `changed and not error`.
 
 ### Fixed
 - `http_dated`: курсор сравнивается с вчерашней UTC-датой до GET mods/deletes. Текущий watermark — без сети; таймаут уже актуального дампа не блокирует check.
