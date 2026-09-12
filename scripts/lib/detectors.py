@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import hashlib
 import os
-import re
 from datetime import UTC, datetime, timedelta
 from typing import Any
 from urllib.parse import unquote, urlparse
@@ -12,11 +10,6 @@ import requests
 USER_AGENT = "toponym-check/2026.09.09 (+https://github.com/unhexx/toponym)"
 TIMEOUT_SEC = 15
 GITHUB_ACCEPT = "application/vnd.github+json"
-
-_SCRIPT_RE = re.compile(r"<script\b[^>]*>.*?</script>", re.IGNORECASE | re.DOTALL)
-_STYLE_RE = re.compile(r"<style\b[^>]*>.*?</style>", re.IGNORECASE | re.DOTALL)
-_TAG_RE = re.compile(r"<[^>]+>")
-_SPACE_RE = re.compile(r"\s+")
 
 
 def utcnow() -> datetime:
@@ -99,17 +92,6 @@ def count_ru_rows(body: str) -> int:
         if row_is_ru(line):
             total += 1
     return total
-
-
-def normalize_html(html: str) -> str:
-    text = _SCRIPT_RE.sub(" ", html)
-    text = _STYLE_RE.sub(" ", text)
-    text = _TAG_RE.sub(" ", text)
-    return _SPACE_RE.sub(" ", text).strip()
-
-
-def fingerprint_text(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
 def _mediawiki_api_endpoint(page_url: str) -> tuple[str, str] | None:

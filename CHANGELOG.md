@@ -5,6 +5,9 @@
 
 ## [Unreleased]
 
+### Removed
+- Мёртвый SHA-стек HTML: `normalize_html`, `fingerprint_text` и четыре regex в детекторах. Kind `page_fingerprint` остаётся (MediaWiki lastrevid / ETag).
+
 ### Fixed
 - `http_dated`: курсор сравнивается с вчерашней UTC-датой до GET mods/deletes. Текущий watermark — без сети; таймаут уже актуального дампа не блокирует check.
 

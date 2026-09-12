@@ -13,8 +13,6 @@ from scripts.lib.detectors import (
     check_catalog,
     exit_code,
     expand_url,
-    fingerprint_text,
-    normalize_html,
     yesterday_utc,
 )
 
@@ -468,12 +466,6 @@ def test_http_head_etag_change(tmp_path: Path) -> None:
     assert "blocking" not in report["sources"][0]
 
 
-def test_page_fingerprint_stable() -> None:
-    html_a = "<html><script>foo()</script><body>Hello   world</body></html>"
-    html_b = "<html><style>p{}</style><body>Hello world</body></html>"
-    assert fingerprint_text(normalize_html(html_a)) == fingerprint_text(normalize_html(html_b))
-
-
 _UKASE_WIKI = (
     "https://ru.wikipedia.org/wiki/"
     "Структура_федеральных_органов_исполнительной_власти_России_(с_2024)"
@@ -566,7 +558,7 @@ def test_page_fingerprint_uses_etag_not_html_sha() -> None:
     report = check_catalog(catalog, session=FakeSession(handler), now=FIXED_NOW)
     assert report["changed_count"] == 0
     assert report["sources"][0]["cursor_new"] == 'W/"rev-1"'
-    assert report["sources"][0]["cursor_new"] != fingerprint_text(normalize_html(chrome_a))
+    assert report["sources"][0]["cursor_new"] != chrome_a
 
 
 def test_page_fingerprint_without_revid_or_etag_is_error() -> None:
