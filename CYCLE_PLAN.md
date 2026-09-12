@@ -1,4 +1,4 @@
-# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`)
+# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`, `2026.09.15`)
 
 Исполняемый план циклов. Детали интерфейсов: `docs/design/2026-09-09-v1-local-registries.md`.
 Спека: `TASK_SPECIFICATION.md`. ADR: `LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`.
@@ -69,8 +69,9 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | NR-TAG | annotated CalVer `2026.09.12` | `feature/nr-tag-2026.09.12` | CHANGELOG dated; pyproject/CITATION/datapackage/README/serve; GitHub Release | COMPLETE |
 | REL-2026.09.13 | annotated CalVer `2026.09.13` | `chore/release-2026.09.13` | daily.py, курсоры, журнал counts, blocking из каталога; теги `2026.09.11`/`2026.09.12` не двигались | COMPLETE |
 | REL-2026.09.14 | annotated CalVer `2026.09.14` | `chore/release-2026.09.14` | http_dated без GET, журнал journal_fields, daily без *_fn; теги `2026.09.11`/`2026.09.12`/`2026.09.13` не двигались | COMPLETE |
+| REL-2026.09.15 | annotated CalVer `2026.09.15` | `chore/release-2026.09.15` | витрина README, оглавление docs; теги `2026.09.11`/`2026.09.12`/`2026.09.13`/`2026.09.14` не двигались | COMPLETE |
 
-A–L COMPLETE на `main`. Annotated CalVer `2026.09.14` на `main`. Теги `2026.09.11`, `2026.09.12` и `2026.09.13` не двигать.
+A–L COMPLETE на `main`. Annotated CalVer `2026.09.15` на `main`. Теги `2026.09.11`, `2026.09.12`, `2026.09.13` и `2026.09.14` не двигать.
 
 ## Definition of Done v1
 

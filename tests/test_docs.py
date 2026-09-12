@@ -50,7 +50,7 @@ def test_readme_has_compose_one_shot() -> None:
     assert "docker compose up --build" in text
     assert "git pull && docker compose up --build" in text
     assert "docker compose pull && docker compose up" in text
-    assert "ghcr.io/unhexx/toponym:2026.09.14" in text
+    assert "ghcr.io/unhexx/toponym:2026.09.15" in text
     assert "127.0.0.1:8099" in text
     assert "python scripts/serve.py" in text
     assert "toponym-serve" in text
@@ -72,7 +72,7 @@ def test_readme_has_shields_badges_and_docs_links() -> None:
     assert "img.shields.io" in text
     for needle in (
         "license-MIT",
-        "CalVer-2026.09.14",
+        "CalVer-2026.09.15",
         "github/actions/workflow/status/unhexx/toponym/ci.yml",
         "python-3.12%2B",
         "docker-compose",
@@ -82,7 +82,7 @@ def test_readme_has_shields_badges_and_docs_links() -> None:
         "docs/USAGE.md",
         "docs/SOURCES.md",
         "docs/presentation/toponym-2026.09.11.md",
-        "https://github.com/unhexx/toponym/releases/tag/2026.09.14",
+        "https://github.com/unhexx/toponym/releases/tag/2026.09.15",
         "docs/README.md",
         "docs/DAILY_UPDATE.md",
         "docs/DECLENSIONS.md",
@@ -164,6 +164,7 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
     before_loop2, _, _ = text.partition("## [2026.09.11] - 2026-09-11")
     assert "## [Unreleased]" in before_loop2
     assert "blocked-until-tomorrow" not in before_loop2
+    assert "## [2026.09.15] - 2026-09-15" in before_loop2
     assert "## [2026.09.14] - 2026-09-14" in before_loop2
     assert "## [2026.09.13] - 2026-09-13" in before_loop2
     assert "## [2026.09.12] - 2026-09-12" in before_loop2
@@ -189,7 +190,7 @@ def test_cycle_plan_dod_counts_datapackage_resources() -> None:
 
 def test_ontology_calver_matches_tagged_release() -> None:
     ont = json.loads((ROOT / "ontology" / "ontology.json").read_text(encoding="utf-8"))
-    assert ont["project"]["calver"] == "2026.09.14"
+    assert ont["project"]["calver"] == "2026.09.15"
 
 
 def test_package_calver_aligned() -> None:
@@ -198,14 +199,14 @@ def test_package_calver_aligned() -> None:
     package = json.loads((ROOT / "datapackage.json").read_text(encoding="utf-8"))
     from scripts.serve import PACKAGE_VERSION
 
-    assert 'version = "2026.09.14"' in pyproject
-    assert 'version: "2026.09.14"' in citation
-    assert 'date-released: "2026-09-14"' in citation
+    assert 'version = "2026.09.15"' in pyproject
+    assert 'version: "2026.09.15"' in citation
+    assert 'date-released: "2026-09-15"' in citation
     assert "Chistyakov" in citation
     assert "unhandled@exception.expert" in citation
     assert "DAO EXCEPTION EXPERT" in citation
-    assert package["version"] == "2026.09.14"
-    assert PACKAGE_VERSION == "2026.09.14"
+    assert package["version"] == "2026.09.15"
+    assert PACKAGE_VERSION == "2026.09.15"
 
 
 def test_ssot_does_not_require_project_context() -> None:
@@ -217,6 +218,7 @@ def test_ssot_does_not_require_project_context() -> None:
     assert "2026.09.12" in spec
     assert "2026.09.13" in spec
     assert "2026.09.14" in spec
+    assert "2026.09.15" in spec
     assert "A–L" in spec
 
 

@@ -25,7 +25,7 @@ def test_compose_contract() -> None:
     assert "no-new-privileges:true" in svc["security_opt"]
     assert svc["read_only"] is True
     assert svc["user"] == "10001:10001"
-    assert svc["image"] == "ghcr.io/unhexx/toponym:2026.09.14"
+    assert svc["image"] == "ghcr.io/unhexx/toponym:2026.09.15"
     assert svc["build"] == {"context": ".", "dockerfile": "Dockerfile"}
     assert not (FORBIDDEN_SERVICES & set(services))
 
