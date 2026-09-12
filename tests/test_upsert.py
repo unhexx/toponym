@@ -10,7 +10,7 @@ import yaml
 import scripts.sync as sync_mod
 from scripts.lib.csvio import PLACES_HEADER, read_csv, write_csv
 from scripts.lib.places import AGENCIES_SCHEMA, PLACES_SCHEMA, load_place_relpaths
-from scripts.lib.upsert import apply_geonames, too_large, upsert_rows
+from scripts.lib.upsert import UpsertCounts, apply_geonames, too_large, upsert_rows
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 FIXED_NOW = datetime(2026, 9, 9, 10, 0, 0, tzinfo=UTC)
@@ -70,6 +70,17 @@ def _geonames_handler(mods_body: str, deletes_body: str = ""):
         return FakeResponse(status_code=404)
 
     return handler
+
+
+def test_upsert_counts_journal_fields() -> None:
+    counts = UpsertCounts(inserted=2, updated=3, deprecated=4, skipped_unmapped=9)
+    assert counts.journal_fields() == {
+        "records_upserted": 5,
+        "records_deprecated": 4,
+    }
+    empty = UpsertCounts()
+    empty.add(counts)
+    assert empty.journal_fields()["records_upserted"] == 5
 
 
 def test_upsert_two_plus_new_is_three() -> None:
@@ -217,6 +228,8 @@ def test_cli_geonames_apply_match_without_insert(tmp_path: Path, monkeypatch, ca
     assert report["updated"] == 1
     assert report["skipped_unmapped"] == 1
     assert report["inserted"] == 0
+    assert report["records_upserted"] == 1
+    assert report["records_deprecated"] == 0
     catalog = yaml.safe_load((root / "data/sources/catalog.yaml").read_text(encoding="utf-8"))
     geo = next(s for s in catalog["sources"] if s["id"] == "geonames-ru")
     assert str(geo["checked_at"]) == "2026-09-09"

@@ -25,6 +25,12 @@ class UpsertCounts:
         self.skipped_gold += other.skipped_gold
         self.skipped_unmapped += other.skipped_unmapped
 
+    def journal_fields(self) -> dict[str, int]:
+        return {
+            "records_upserted": self.inserted + self.updated,
+            "records_deprecated": self.deprecated,
+        }
+
 
 def _is_delete(row: dict[str, str]) -> bool:
     if (row.get("status") or "").strip() == "deprecated":

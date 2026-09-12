@@ -212,3 +212,86 @@ def test_write_run_journal_main_does_not_patch_catalog(tmp_path: Path, monkeypat
     payload = json.loads(journal.read_text(encoding="utf-8"))
     assert payload["changed_count"] == 2
     assert payload["sources"][0]["cursor_new"] == "should-not-be-patched"
+    assert payload["records_upserted"] == 0
+    assert payload["records_deprecated"] == 0
+
+
+def test_daily_passes_sync_json_to_journal() -> None:
+    text = DAILY.read_text(encoding="utf-8")
+    assert "--sync-json" in text
+    assert 'SYNC_JSON_ARGS+=(--sync-json "/tmp/sync-${src}.json")' in text
+    assert 'tee "/tmp/sync-${src}.json"' in text
+    assert '"${SYNC_JSON_ARGS[@]}"' in text
+    journal_block = text[text.index("write_run_journal.py") :]
+    assert "--sync-json" in journal_block or '"${SYNC_JSON_ARGS[@]}"' in journal_block
+    script = JOURNAL_SCRIPT.read_text(encoding="utf-8")
+    assert '"records_upserted": 0' not in script
+    assert "journal_counts_from_sync_report" in script
+
+
+def test_write_run_journal_from_upsert_counts(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    sync_one = tmp_path / "sync-geonames.json"
+    sync_one.write_text(
+        json.dumps(
+            {
+                "apply": True,
+                "inserted": 1,
+                "updated": 4,
+                "deprecated": 2,
+                "skipped_gold": 0,
+                "skipped_unmapped": 3,
+                "records_upserted": 5,
+                "records_deprecated": 2,
+            }
+        ),
+        encoding="utf-8",
+    )
+    sync_two = tmp_path / "sync-ukase.json"
+    sync_two.write_text(
+        json.dumps({"inserted": 2, "updated": 0, "deprecated": 1}),
+        encoding="utf-8",
+    )
+    mod = _load_journal_mod()
+    path = mod.write_run_journal(
+        today="2026-09-12",
+        as_of="2026-09-12T06:00:00Z",
+        check_exit=10,
+        sync_json=[sync_one, sync_two],
+        runs_dir=tmp_path / "data" / "sources" / "runs",
+    )
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    assert payload["records_upserted"] == 7
+    assert payload["records_deprecated"] == 3
+    assert payload["check_exit"] == 10
+
+
+def test_write_run_journal_explicit_counts_override_sync(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    sync_json = tmp_path / "sync.json"
+    sync_json.write_text(
+        json.dumps({"inserted": 9, "updated": 1, "deprecated": 4}),
+        encoding="utf-8",
+    )
+    mod = _load_journal_mod()
+    mod.main(
+        [
+            "--today",
+            "2026-09-12",
+            "--as-of",
+            "2026-09-12T06:00:00Z",
+            "--check-exit",
+            "10",
+            "--sync-json",
+            str(sync_json),
+            "--records-upserted",
+            "3",
+            "--records-deprecated",
+            "1",
+        ]
+    )
+    payload = json.loads(
+        (tmp_path / "data" / "sources" / "runs" / "2026-09-12.json").read_text(encoding="utf-8")
+    )
+    assert payload["records_upserted"] == 3
+    assert payload["records_deprecated"] == 1
