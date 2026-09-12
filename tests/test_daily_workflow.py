@@ -68,19 +68,32 @@ def test_daily_writes_journal_and_stamps_catalog_only_on_noop() -> None:
 
 def test_daily_syncs_only_changed_sources() -> None:
     text = DAILY.read_text(encoding="utf-8")
-    assert "python scripts/sync.py --source" in text
-    assert "--source" in text
     assert 'python scripts/sync.py --source "$src" --apply --check-json /tmp/check.json' in text
-    assert "python scripts/sync.py --apply --check-json /tmp/check.json" not in text
     assert "index.py || true" not in text
     assert "python scripts/index.py" in text
     assert "s.get('changed')" in text
-    assert "blocking-error" in text
-    assert "check.py exit 2; skip sync, write journal" in text
+    assert "s.get('error')" in text
+    assert "s.get('blocking'" in text
+    assert "blocking-error" not in text
+    assert "blocking_error" not in text
+    assert "--all" not in text
+    assert "open('/tmp/check.json', encoding='utf-8')" in text
+    sync_lines = [
+        line
+        for line in text.splitlines()
+        if "scripts/sync.py" in line and not line.lstrip().startswith("#")
+    ]
+    assert sync_lines
+    for line in sync_lines:
+        assert "--source" in line
+        assert "--all" not in line
     sync_block = text[
         text.index('if [[ "$CHECK_EXIT" -eq 10 ]]') : text.index("write_run_journal.py")
     ]
     assert "python scripts/sync.py --source" in sync_block
+    assert "for src" in sync_block
+    assert "mapfile" in sync_block
+    assert "< <(" not in sync_block
     assert "python scripts/index.py" in sync_block
     assert "index.py || true" not in sync_block
     exit2_at = text.index("check.py exit 2; skip sync, write journal")

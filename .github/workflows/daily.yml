@@ -55,7 +55,8 @@ jobs:
           echo "changed_count=$CHANGED" >> "$GITHUB_OUTPUT"
 
           if [[ "$CHECK_EXIT" -eq 10 ]]; then
-            mapfile -t CHANGED_IDS < <(python -c "import json; src=json.load(open('/tmp/check.json')).get('sources') or []; [print(s['id']) for s in src if isinstance(s, dict) and s.get('changed') and not s.get('error') and not s.get('blocking-error') and not s.get('blocking_error') and s.get('id')]")
+            python -c "import json; src=json.load(open('/tmp/check.json', encoding='utf-8')).get('sources') or []; [print(s['id']) for s in src if isinstance(s, dict) and s.get('changed') and not (s.get('error') and s.get('blocking', True)) and s.get('id')]" > /tmp/changed-ids.txt
+            mapfile -t CHANGED_IDS < /tmp/changed-ids.txt
             for src in "${CHANGED_IDS[@]}"; do
               python scripts/sync.py --source "$src" --apply --check-json /tmp/check.json
             done
