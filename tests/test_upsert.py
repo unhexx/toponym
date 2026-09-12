@@ -9,6 +9,7 @@ import yaml
 
 import scripts.sync as sync_mod
 from scripts.lib.csvio import PLACES_HEADER, read_csv, write_csv
+from scripts.lib.places import AGENCIES_SCHEMA, PLACES_SCHEMA, load_place_relpaths
 from scripts.lib.upsert import apply_geonames, too_large, upsert_rows
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
@@ -391,3 +392,37 @@ def test_write_csv_skips_unchanged(tmp_path: Path) -> None:
     path = tmp_path / "out.csv"
     assert write_csv(path, header, rows) is True
     assert write_csv(path, header, rows) is False
+
+
+def test_geonames_walks_tmp_datapackage(tmp_path: Path, monkeypatch, capsys) -> None:
+    (tmp_path / "data" / "sources").mkdir(parents=True)
+    (tmp_path / "data" / "curated").mkdir(parents=True)
+    (tmp_path / "data" / "mappings").mkdir(parents=True)
+    extra = "data/curated/extra-places.csv"
+    agencies = "data/curated/agencies-foiv.csv"
+    payload = {
+        "resources": [
+            {"name": "extra-places", "path": extra, "schema": PLACES_SCHEMA},
+            {"name": "agencies-foiv", "path": agencies, "schema": AGENCIES_SCHEMA},
+            {
+                "name": "types",
+                "path": "data/curated/types.csv",
+                "schema": "schema/table/types.schema.json",
+            },
+        ]
+    }
+    (tmp_path / "datapackage.json").write_text(json.dumps(payload), encoding="utf-8")
+    shutil.copy(FIXTURES / "catalog_sync_geonames.yaml", tmp_path / "data/sources/catalog.yaml")
+    shutil.copy(FIXTURES / "places_wd_moscow.csv", tmp_path / extra)
+    shutil.copy(ROOT / "data/mappings/geonames.yaml", tmp_path / "data/mappings/geonames.yaml")
+    write_csv(tmp_path / agencies, PLACES_HEADER, [])
+    assert load_place_relpaths(tmp_path) == [extra]
+    mods = (FIXTURES / "geonames_mods_moscow.tsv").read_text(encoding="utf-8")
+    session = FakeSession(_geonames_handler(mods))
+    _patch_sync(monkeypatch, tmp_path, session)
+    code = sync_mod.main(["--source", "geonames-ru", "--apply"])
+    assert code == 0
+    report = json.loads(capsys.readouterr().out)
+    assert report["updated"] == 1
+    _header, rows = read_csv(tmp_path / extra)
+    assert rows[0]["lat"] == "55.75222"

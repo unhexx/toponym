@@ -1,27 +1,115 @@
 from __future__ import annotations
 
+import json
 import sqlite3
 from pathlib import Path
 
+import pytest
+
 import scripts.index as index_mod
-import scripts.sync as sync_mod
-from scripts.lib.places import INDEX_RELPATHS, PLACE_RELPATHS
+from scripts.lib.csvio import PLACES_HEADER, write_csv
+from scripts.lib.places import (
+    AGENCIES_SCHEMA,
+    INDEX_RELPATHS,
+    PLACE_RELPATHS,
+    PLACES_SCHEMA,
+    load_index_relpaths,
+    load_place_relpaths,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
+DATAPACKAGE = ROOT / "datapackage.json"
 MAX_BYTES = 10 * 1024 * 1024
 
 
+def _expected_relpaths() -> tuple[list[str], list[str]]:
+    payload = json.loads(DATAPACKAGE.read_text(encoding="utf-8"))
+    places: list[str] = []
+    agencies: list[str] = []
+    for res in payload.get("resources") or []:
+        schema = res.get("schema")
+        path = res.get("path") or ""
+        if schema == PLACES_SCHEMA:
+            places.append(path)
+        elif schema == AGENCIES_SCHEMA:
+            agencies.append(path)
+    return places, places + agencies
+
+
 def test_place_relpaths_exclude_agencies() -> None:
+    places, index = _expected_relpaths()
+    assert PLACE_RELPATHS == places
+    assert INDEX_RELPATHS == index
     assert "data/curated/municipalities.csv" in PLACE_RELPATHS
     assert "data/curated/dromonyms.csv" in PLACE_RELPATHS
     assert "data/curated/agencies-foiv.csv" not in PLACE_RELPATHS
     assert "data/curated/agencies-other.csv" not in PLACE_RELPATHS
-    assert INDEX_RELPATHS[: len(PLACE_RELPATHS)] == list(PLACE_RELPATHS)
+    assert "data/curated/types.csv" not in PLACE_RELPATHS
+    assert "data/curated/types.csv" not in INDEX_RELPATHS
+    assert not any(path.startswith("data/declensions/") for path in PLACE_RELPATHS)
+    assert not any(path.startswith("data/declensions/") for path in INDEX_RELPATHS)
     assert "data/curated/agencies-foiv.csv" in INDEX_RELPATHS
     assert "data/curated/agencies-other.csv" in INDEX_RELPATHS
-    assert index_mod.load_index_relpaths() == INDEX_RELPATHS
-    assert sync_mod.load_place_relpaths() == PLACE_RELPATHS
-    assert "data/curated/agencies-foiv.csv" not in sync_mod.load_place_relpaths()
+
+
+def _write_tmp_package(tmp_path: Path) -> Path:
+    curated = tmp_path / "data" / "curated"
+    curated.mkdir(parents=True)
+    extra = "data/curated/extra-places.csv"
+    agencies = "data/curated/agencies-foiv.csv"
+    payload = {
+        "resources": [
+            {"name": "extra-places", "path": extra, "schema": PLACES_SCHEMA},
+            {
+                "name": "types",
+                "path": "data/curated/types.csv",
+                "schema": "schema/table/types.schema.json",
+            },
+            {
+                "name": "declensions-extra",
+                "path": "data/declensions/extra-places.csv",
+                "schema": "schema/table/declensions.schema.json",
+            },
+            {"name": "agencies-foiv", "path": agencies, "schema": AGENCIES_SCHEMA},
+        ]
+    }
+    (tmp_path / "datapackage.json").write_text(json.dumps(payload), encoding="utf-8")
+    write_csv(
+        tmp_path / extra,
+        PLACES_HEADER,
+        [{"id": "extra:1", "name_ru": "Экстра", "type_id": "city", "status": "active"}],
+    )
+    write_csv(
+        tmp_path / agencies,
+        PLACES_HEADER,
+        [{"id": "foiv:extra", "name_ru": "ЭкстраФОИВ", "type_id": "foiv", "status": "active"}],
+    )
+    return tmp_path
+
+
+def test_load_relpaths_reads_tmp_datapackage(tmp_path: Path) -> None:
+    root = _write_tmp_package(tmp_path)
+    assert load_place_relpaths(root) == ["data/curated/extra-places.csv"]
+    assert load_index_relpaths(root) == [
+        "data/curated/extra-places.csv",
+        "data/curated/agencies-foiv.csv",
+    ]
+    ids = {row["id"] for row in index_mod.load_records(root)}
+    assert ids == {"extra:1", "foiv:extra"}
+
+
+def test_list_resource_path_raises(tmp_path: Path) -> None:
+    payload = {
+        "resources": [
+            {
+                "path": ["data/curated/a.csv", "data/curated/b.csv"],
+                "schema": PLACES_SCHEMA,
+            }
+        ]
+    }
+    (tmp_path / "datapackage.json").write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(ValueError, match="string"):
+        load_place_relpaths(tmp_path)
 
 
 def _build(tmp_path: Path) -> Path:
