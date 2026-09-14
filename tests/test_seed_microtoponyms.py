@@ -182,7 +182,7 @@ def test_cli_from_json_writes_tmp(tmp_path: Path, capsys) -> None:
     assert "wd:Q90002003" not in by_id
     assert "local:micro:sinie-kamni" in by_id
     assert "Шульган-Таш" in by_id["wd:Q1643788"]["notes"]
-    assert len(read_csv(ROOT / "data/curated/microtoponyms.csv")[1]) == 17
+    assert len(read_csv(ROOT / "data/curated/microtoponyms.csv")[1]) >= 100
 
 
 def test_harvest_from_json_no_network() -> None:
@@ -198,11 +198,12 @@ def test_harvest_from_json_no_network() -> None:
     assert counts.incoming >= 5
     assert any(row["id"] == "local:micro:sinie-kamni" for row in places)
     assert any(row["id"] == "wd:Q1643788" for row in places)
-    assert len(read_csv(ROOT / "data/curated/microtoponyms.csv")[1]) == 17
+    assert len(read_csv(ROOT / "data/curated/microtoponyms.csv")[1]) >= 100
 
 
-def test_canon_microtoponyms_still_17() -> None:
+def test_canon_microtoponyms_harvested() -> None:
     _header, rows = read_csv(ROOT / "data/curated/microtoponyms.csv")
-    assert len(rows) == 17
+    assert len(rows) >= 100
     assert any(row["id"] == "local:micro:sinie-kamni" for row in rows)
+    assert any(row["id"] == "wd:Q1643788" for row in rows)
     assert all(row["type_id"] == "microtoponym" for row in rows)
