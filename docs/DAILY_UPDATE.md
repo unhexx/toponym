@@ -127,7 +127,7 @@ chore(data): daily refresh YYYY-MM-DD (0 records)
 
 GitHub watchlist из `catalog.yaml` (`watchlist_github`): commits since `checked_at`. Это повод занести источник в `notes` журнала, а не копировать чужие CSV.
 
-Wikidata: SPARQL `P17=Q159` за 48 ч — только для id, которые уже есть в curated, либо очередь на ревью. Не массовый импорт.
+Wikidata: SPARQL `P17=Q159` за 48 ч — сигнал **перезапустить** `python scripts/seed_municipalities.py` / `seed_microtoponyms.py` / `seed_hodonyms.py` (перед CalVer-тегом или когда в allowlist появились новые P31). Не дельта `daily.py`. JSON запроса в git не класть. Daily остаётся `kind=none`.
 
 Указ №326 / №522: `detector.kind=page_fingerprint`, курсор — MediaWiki lastrevid (или ETag), не SHA Wikipedia-хрома. Структурное изменение ФОИВ — ручной gate (`--manual-file`), не HTML→CSV. Без `--manual-file` cursor в catalog.yaml не патчится.
 
