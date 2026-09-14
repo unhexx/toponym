@@ -1,0 +1,128 @@
+from __future__ import annotations
+
+from pathlib import Path
+
+import pytest
+
+from scripts.lib.csvio import PLACES_HEADER, write_csv
+from scripts.lib.harvest import (
+    ALIAS_FILL,
+    SeedError,
+    incoming_deprecate,
+    incoming_for_upsert,
+    load_main_query,
+    merge_bindings,
+    queries_for_p31,
+    skip_ids,
+)
+
+
+def _place(**kwargs: str) -> dict[str, str]:
+    row = {key: "" for key in PLACES_HEADER}
+    row.update(kwargs)
+    return row
+
+
+def test_load_main_query_rejects_sparql_without_values(tmp_path: Path) -> None:
+    path = tmp_path / "no-values.sparql"
+    path.write_text("SELECT ?item WHERE { ?item wdt:P31 wd:Q515 . }\n", encoding="utf-8")
+    with pytest.raises(SeedError, match="VALUES"):
+        load_main_query(path)
+
+
+def test_load_main_query_accepts_values_without_hodonym_qid(tmp_path: Path) -> None:
+    path = tmp_path / "mun.sparql"
+    path.write_text(
+        "SELECT ?item WHERE {\n  VALUES ?type { wd:Q13626398 }\n}\n",
+        encoding="utf-8",
+    )
+    query = load_main_query(path)
+    assert "Q13626398" in query
+    assert "VALUES" in query
+
+
+def test_queries_for_p31_moves_last() -> None:
+    query = "SELECT ?item WHERE {\n  VALUES ?type { wd:Q1 wd:Q2 wd:Q3 }\n}"
+    split = queries_for_p31(query, last=("Q3",))
+    assert [qid for qid, _typed in split] == ["Q1", "Q2", "Q3"]
+    empty_last = queries_for_p31(query, last=())
+    assert [qid for qid, _typed in empty_last] == ["Q1", "Q2", "Q3"]
+
+
+def test_merge_bindings_extra_scalars_and_qid_sets() -> None:
+    rows = [
+        {
+            "item": "http://www.wikidata.org/entity/Q1",
+            "ru": "Район",
+            "type": "http://www.wikidata.org/entity/Q2198484",
+            "oktmo": "92701000",
+            "dissolved": "2020-01-01T00:00:00Z",
+            "replaced": "http://www.wikidata.org/entity/Q2",
+        },
+        {
+            "item": "Q1",
+            "p31": "wd:Q60849925",
+            "replaced": "wd:Q3",
+            "oktmo": "999",
+        },
+    ]
+    merged = merge_bindings(
+        rows,
+        extra_scalars=("oktmo", "dissolved"),
+        extra_qid_sets=("replaced", "p31"),
+    )
+    rec = merged["Q1"]
+    assert rec["oktmo"] == "92701000"
+    assert rec["dissolved"].startswith("2020-01-01")
+    assert rec["p31"] == {"Q2198484", "Q60849925"}
+    assert rec["replaced"] == {"Q2", "Q3"}
+
+
+def test_incoming_for_upsert_alias_fill_wd() -> None:
+    mapped = {
+        "id": "local:mun:kazan-go",
+        "wd": "Q12167762",
+        "lat": "55.8",
+        "name_ru": "новое",
+    }
+    existing = {
+        "id": "local:mun:kazan-go",
+        "wd": "",
+        "lat": "55.7",
+        "name_ru": "Казань",
+    }
+    inc = incoming_for_upsert(mapped, existing, fill=ALIAS_FILL)
+    assert inc is not None
+    assert inc["id"] == "local:mun:kazan-go"
+    assert inc["wd"] == "Q12167762"
+    assert "lat" not in inc
+    assert "name_ru" not in inc
+
+
+def test_incoming_deprecate_canon_id() -> None:
+    row = incoming_deprecate("local:mun:kazan-go", "wd:Q9", "2026-09-14")
+    assert row == {
+        "id": "local:mun:kazan-go",
+        "status": "deprecated",
+        "updated_at": "2026-09-14",
+        "replaced_by": "wd:Q9",
+    }
+    empty = incoming_deprecate("wd:Q1", "", "2026-09-14")
+    assert "replaced_by" not in empty
+
+
+def test_skip_ids_missing_files_and_resource_name(tmp_path: Path) -> None:
+    curated = tmp_path / "data" / "curated"
+    curated.mkdir(parents=True)
+    write_csv(
+        curated / "cities-major.csv",
+        PLACES_HEADER,
+        [_place(id="wd:Q649", wd="Q649", name_ru="Москва")],
+    )
+    rels = (
+        Path("data/curated/cities-major.csv"),
+        Path("data/curated/agoronyms.csv"),
+    )
+    out = skip_ids(tmp_path, rels)
+    assert out["Q649"] == "cities-major"
+    assert "agoronyms" not in out.values()
