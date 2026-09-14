@@ -81,7 +81,7 @@ def test_seed_counts() -> None:
     assert len(oros) >= 25
     assert len(foiv) >= 69
     assert len(other) >= 10
-    assert len(mun) >= 20
+    assert len(mun) >= 500
     assert len(hod) >= 10000
     assert len(micro) >= 12
     assert len(drom) >= 1
