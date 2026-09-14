@@ -5,6 +5,9 @@
 
 ## [Unreleased]
 
+### Changed
+- SPARQL/upsert хелперы годонимов вынесены в [`scripts/lib/harvest.py`](scripts/lib/harvest.py) (параметры `required`/`last`/`specs`/`rels`/`fill`). CLI и stdout `python scripts/seed_hodonyms.py` те же; канон не трогали.
+
 ## [2026.09.16] - 2026-09-16
 
 Реестр годонимов Wikidata. Теги `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14` и `2026.09.15` не двигались.
