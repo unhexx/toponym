@@ -169,6 +169,8 @@ def test_wikidata_mapping_points_and_no_sparql_dump() -> None:
     )
     assert "seed_hodonyms.py" in payload["notes"]
     assert "seed_municipalities.py" in payload["notes"]
+    assert "sync.py" in payload["notes"]
+    assert "VALUES" in payload["notes"] or "values" in notes
     assert "Q628179" in payload["notes"]
     assert "polygon" not in payload["fields"].values()
     assert "geojson" not in {v.casefold() for v in payload["fields"].values()}

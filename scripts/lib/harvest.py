@@ -22,6 +22,7 @@ import requests
 from scripts.lib.csvio import dump_csv_bytes, read_csv
 from scripts.lib.declensions import DECLENSIONS_HEADER
 from scripts.lib.detectors import USER_AGENT
+from scripts.lib.invariants import yo_to_e
 from scripts.lib.upsert import DEFAULT_MAX_VENDOR_BYTES, too_large
 
 SPARQL_ENDPOINT = "https://query.wikidata.org/sparql"
@@ -32,8 +33,19 @@ HOP_QUERY = """SELECT DISTINCT ?item ?subj ?iso WHERE {
   FILTER(STRSTARTS(?iso, "RU-"))
 }
 """
+KNOWN_IDS_QUERY = """SELECT DISTINCT ?item ?ru ?en ?lat ?lon ?gn ?oktmo WHERE {
+  VALUES ?item { %s }
+  OPTIONAL { ?item rdfs:label ?ru FILTER(LANG(?ru) = "ru") }
+  OPTIONAL { ?item rdfs:label ?en FILTER(LANG(?en) = "en") }
+  OPTIONAL { ?item p:P625/psv:P625 [ wikibase:geoLatitude ?lat; wikibase:geoLongitude ?lon ] }
+  OPTIONAL { ?item wdt:P1566 ?gn }
+  OPTIONAL { ?item wdt:P764 ?oktmo }
+}
+"""
 FILL_IF_EMPTY = ("lat", "lon", "geonames", "name_en", "admin1", "parent_id", "name_yo")
 ALIAS_FILL = ("wd", "lat", "lon", "geonames", "name_en")
+KNOWN_FILL = ("lat", "lon", "geonames", "name_en", "oktmo", "wd", "name_yo")
+KNOWN_IDS_BATCH = 80
 _VALUES_TYPE = re.compile(r"VALUES\s+\?type\s*\{([^}]+)\}", re.IGNORECASE | re.DOTALL)
 _WD_QID = re.compile(r"wd:(Q\d+)", re.IGNORECASE)
 _QID_SET_ALIASES = {
@@ -81,6 +93,10 @@ def qid_from_uri(value: str) -> str:
     if len(text) > 1 and text[0] in {"Q", "q"} and text[1:].isdigit():
         return "Q" + text[1:]
     return ""
+
+
+def qid_of_place(row: dict[str, str]) -> str:
+    return qid_from_uri(row.get("wd") or "") or qid_from_uri(row.get("id") or "")
 
 
 def format_coord(value: str) -> str:
@@ -432,6 +448,76 @@ def hop_unresolved(
                 hopped += 1
         time.sleep(0.15)
     return hopped
+
+
+def collect_known_qids(root: Path, rels: tuple[str, ...] | list[str]) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for rel in rels:
+        path = root / rel
+        if not path.is_file():
+            continue
+        _header, rows = read_csv(path)
+        for row in rows:
+            qid = qid_of_place(row)
+            if qid and qid not in seen:
+                seen.add(qid)
+                out.append(qid)
+    return out
+
+
+def known_ids_queries(
+    qids: list[str], batch_size: int = KNOWN_IDS_BATCH
+) -> list[str]:
+    if not qids:
+        return []
+    size = max(1, int(batch_size))
+    out: list[str] = []
+    for offset in range(0, len(qids), size):
+        values = " ".join(f"wd:{qid}" for qid in qids[offset : offset + size])
+        out.append(KNOWN_IDS_QUERY % values)
+    return out
+
+
+def fetch_known_ids(
+    session: requests.Session,
+    qids: list[str],
+    batch_size: int = KNOWN_IDS_BATCH,
+    timeout: int = 60,
+) -> dict[str, dict[str, Any]]:
+    queries = known_ids_queries(qids, batch_size)
+    if not queries:
+        return {}
+    out: dict[str, dict[str, Any]] = {}
+    total = len(queries)
+    for index, query in enumerate(queries):
+        if index == 0 or (index % 10 == 0):
+            print(f"known-ids {index}/{total}", file=sys.stderr)
+        rows = sparql_csv(session, query, timeout=timeout)
+        extra = merge_bindings(rows, extra_scalars=("oktmo",))
+        for qid, rec in extra.items():
+            out.setdefault(qid, rec)
+        time.sleep(0.15)
+    return out
+
+
+def mapped_known_fields(rec: dict[str, Any]) -> dict[str, str]:
+    qid = str(rec.get("qid") or "")
+    ru_raw = str(rec.get("ru") or "").strip()
+    name_yo = ""
+    if ru_raw and ru_raw != yo_to_e(ru_raw):
+        name_yo = ru_raw
+    oktmo = "".join(ch for ch in str(rec.get("oktmo") or "") if ch.isdigit())
+    return {
+        "id": f"wd:{qid}" if qid else "",
+        "name_en": str(rec.get("en") or ""),
+        "name_yo": name_yo,
+        "lat": str(rec.get("lat") or ""),
+        "lon": str(rec.get("lon") or ""),
+        "wd": qid,
+        "geonames": str(rec.get("gn") or ""),
+        "oktmo": oktmo,
+    }
 
 
 def utc_today() -> str:

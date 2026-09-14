@@ -12,6 +12,7 @@
 - Реестр МО Wikidata в [`data/curated/municipalities.csv`](data/curated/municipalities.csv): P31 городской округ Q13626398, муниципальный округ Q3350075, район Q2198484 / Q60849925, внутригородское Q27587207, городское поселение Q2661988, сельское поселение Q634099 (все сели). Около 21.6 тыс. строк, не ОКТМО/ГАР и не все МО России (Росстат 01.01.2026 = 13 698).
 
 ### Changed
+- [`scripts/sync.py`](scripts/sync.py) `--source wikidata --apply`: SPARQL `VALUES` по известным Q-id **всех** seed-таблиц (города, МО, годонимы, микротопонимы, …), fill-if-empty `lat`/`lon`/`geonames`/`oktmo`/`name_en`. Новые Q-id не вставляет. `detector.kind=none` не флипает daily. JSON запроса в git не кладётся.
 - SPARQL/upsert хелперы годонимов вынесены в [`scripts/lib/harvest.py`](scripts/lib/harvest.py) (параметры `required`/`last`/`specs`/`rels`/`fill`). CLI и stdout `python scripts/seed_hodonyms.py` те же; канон не трогали.
 - [`data/mappings/wikidata.yaml`](data/mappings/wikidata.yaml) — `class_map` и списки `municipality_p31` / `microtoponym_p31` для harvest МО и микротопонимов.
 - [`docs/USAGE.md`](docs/USAGE.md) §3.1 и [`docs/taxonomy.md`](docs/taxonomy.md): муниципалитеты и микротопонимы больше не «десятки», а harvest Wikidata (не полный ОКТМО / не ГКГН).
