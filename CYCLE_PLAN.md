@@ -1,4 +1,4 @@
-# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`, `2026.09.15`, `2026.09.16`)
+# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`, `2026.09.15`, `2026.09.16`, `2026.09.17`)
 
 Исполняемый план циклов. Детали интерфейсов: `docs/design/2026-09-09-v1-local-registries.md`.
 Спека: `TASK_SPECIFICATION.md`. ADR: `LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`.
@@ -78,8 +78,9 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | MICRO-WD | Wikidata harvest микротопонимов (не ГКГН) | `data/micro-wikidata-harvest` | SPARQL + `seed_microtoponyms.py`; extras сохранены; DEC-SEED-005 | COMPLETE |
 | WD-SYNC | known-ids SPARQL в `sync.py` для всех Wikidata seed-таблиц | `feat/sync-known-ids` | VALUES по известным Q-id; fill-if-empty; `kind=none`; без массовой вставки | COMPLETE |
 | HOD-WD-MUN | parent hop годонимов после реестра МО | `data/hodonyms-mun-parents` | iso:RU-* → город/МО по P131*; Wikidata, не ФИАС | COMPLETE |
+| REL-2026.09.17 | annotated CalVer `2026.09.17` | `chore/release-2026.09.17` | harvest МО/микротопонимов Wikidata; теги `2026.09.11`–`2026.09.16` не двигались | COMPLETE |
 
-A–L COMPLETE на `main`. Annotated CalVer `2026.09.16` на `main`. Теги `2026.09.11`–`2026.09.16` не двигать. HOD-WD / MUN-WD / MICRO-WD — harvest Wikidata, не ФИАС/ОКТМО/ГКГН.
+A–L COMPLETE на `main`. Annotated CalVer `2026.09.17` на `main`. Теги `2026.09.11`–`2026.09.16` не двигать. HOD-WD / MUN-WD / MICRO-WD — harvest Wikidata, не ФИАС/ОКТМО/ГКГН.
 
 ## Definition of Done v1
 

@@ -5,11 +5,16 @@
 
 ## [Unreleased]
 
+## [2026.09.17] - 2026-09-17
+
+Harvest МО и микротопонимов Wikidata. Теги `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`, `2026.09.15` и `2026.09.16` не двигались.
+
 ### Added
 - CLI `python scripts/seed_municipalities.py` и SPARQL-указатель [`data/raw/wikidata/municipalities-ru.sparql`](data/raw/wikidata/municipalities-ru.sparql) (P31 МО Wikidata, не ОКТМО/ГАР).
 - CLI `python scripts/seed_microtoponyms.py` и SPARQL-указатель [`data/raw/wikidata/microtoponyms-ru.sparql`](data/raw/wikidata/microtoponyms-ru.sparql) (парк/пещера/овраг/урочище/поле Wikidata, не ГКГН).
 - Реестр микротопонимов Wikidata в [`data/curated/microtoponyms.csv`](data/curated/microtoponyms.csv): parks+caves+овраг+урочище+поле, плюс 17 курируемых extras (леса, бархан, Провал) не как массовые классы. Около 890 строк, не ГКГН и не все микротопонимы России.
 - Реестр МО Wikidata в [`data/curated/municipalities.csv`](data/curated/municipalities.csv): P31 городской округ Q13626398, муниципальный округ Q3350075, район Q2198484 / Q60849925, внутригородское Q27587207, городское поселение Q2661988, сельское поселение Q634099 (все сели). Около 21.6 тыс. строк, не ОКТМО/ГАР и не все МО России (Росстат 01.01.2026 = 13 698).
+- Образ `ghcr.io/unhexx/toponym:2026.09.17` (и `:CalVer`) публикуется CI на push в `main`. `compose.yaml` пинит этот тег.
 
 ### Changed
 - Перезапуск [`scripts/seed_hodonyms.py`](scripts/seed_hodonyms.py) после реестра МО: улицы с P131* на район/округ получают `parent_id` (Wikidata, не ФИАС). Около 920 parent=МО, iso-родители почти ушли; покрытие по-прежнему Wikidata, не все улицы России.
@@ -167,7 +172,8 @@ Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-S
 - GeoNames id: Москва `524901`, Волга `472776`.
 - Склонения: `review=gold` / `needs_review` (не boolean).
 
-[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.16...HEAD
+[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.17...HEAD
+[2026.09.17]: https://github.com/unhexx/toponym/releases/tag/2026.09.17
 [2026.09.16]: https://github.com/unhexx/toponym/releases/tag/2026.09.16
 [2026.09.15]: https://github.com/unhexx/toponym/releases/tag/2026.09.15
 [2026.09.14]: https://github.com/unhexx/toponym/releases/tag/2026.09.14
