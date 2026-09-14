@@ -29,6 +29,7 @@ from scripts.lib.harvest import (  # noqa: E402
     SeedError,
     declension_stub,
     dump_csv_bytes_or_raise,
+    fetch_located,
     format_coord,
     hop_unresolved,
     incoming_for_upsert,
@@ -37,6 +38,7 @@ from scripts.lib.harvest import (  # noqa: E402
     merge_bindings,
     p31_from_query,
     qid_from_uri,
+    qid_of_place,
     read_table,
     resolve_parent,
     sparql_csv,
@@ -77,6 +79,7 @@ __all__ = [
     "map_hodonym",
     "merge_bindings",
     "p31_from_query",
+    "parent_upgrade",
     "qid_from_uri",
     "queries_for_p31",
     "resolve_parent",
@@ -116,6 +119,15 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 def is_square_name(name: str) -> bool:
     return "площадь" in (name or "").casefold()
+
+
+def parent_upgrade(old: str, new: str) -> bool:
+    """iso:RU-* (or empty) may yield to a city/МО now in the parent index."""
+    if not new or new == old:
+        return False
+    if not old:
+        return True
+    return old.startswith("iso:") and not new.startswith("iso:")
 
 
 def load_main_query(path: Path) -> str:
@@ -196,7 +208,17 @@ def apply_harvest(
         if rid.startswith("gn:"):
             counts.skipped_other += 1
             continue
-        inc = incoming_for_upsert(mapped, by_id.get(rid))
+        existing = by_id.get(rid)
+        inc = incoming_for_upsert(mapped, existing)
+        if existing is not None and parent_upgrade(
+            existing.get("parent_id") or "", mapped.get("parent_id") or ""
+        ):
+            if inc is None:
+                inc = {"id": rid}
+            inc["parent_id"] = mapped["parent_id"]
+            if mapped.get("admin1"):
+                inc["admin1"] = mapped["admin1"]
+            inc["updated_at"] = today
         if inc is None:
             continue
         incoming.append(inc)
@@ -265,7 +287,40 @@ def harvest(
     if hop and from_json is None:
         if session is None:
             session = build_session()
+        iso_qids: list[str] = []
+        for row in existing_places:
+            if not (row.get("parent_id") or "").startswith("iso:"):
+                continue
+            qid = qid_of_place(row)
+            if not qid:
+                continue
+            iso_qids.append(qid)
+            rec = records.setdefault(
+                qid,
+                {
+                    "qid": qid,
+                    "ru": row.get("name_yo") or row.get("name_ru") or "",
+                    "en": row.get("name_en") or "",
+                    "lat": row.get("lat") or "",
+                    "lon": row.get("lon") or "",
+                    "gn": row.get("geonames") or "",
+                    "located": set(),
+                    "iso": set(),
+                },
+            )
+            if not rec.get("ru"):
+                rec["ru"] = row.get("name_yo") or row.get("name_ru") or ""
+            admin1 = (row.get("admin1") or "").strip()
+            if admin1.startswith("RU-"):
+                rec["iso"].add(admin1)
         counts.hopped = hop_unresolved(session, records, index, hop_batch)
+        extra = fetch_located(session, iso_qids, hop_batch)
+        for qid, rec in extra.items():
+            target = records.get(qid)
+            if target is None:
+                continue
+            target["located"].update(rec["located"])
+            target["iso"].update(rec["iso"])
     places, decls, applied = apply_harvest(
         records,
         index=index,

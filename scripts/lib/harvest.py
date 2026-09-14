@@ -42,6 +42,12 @@ KNOWN_IDS_QUERY = """SELECT DISTINCT ?item ?ru ?en ?lat ?lon ?gn ?oktmo WHERE {
   OPTIONAL { ?item wdt:P764 ?oktmo }
 }
 """
+LOCATED_QUERY = """SELECT DISTINCT ?item ?located ?iso WHERE {
+  VALUES ?item { %s }
+  ?item wdt:P131* ?located .
+  OPTIONAL { ?located wdt:P300 ?iso FILTER(STRSTARTS(?iso, "RU-")) }
+}
+"""
 FILL_IF_EMPTY = ("lat", "lon", "geonames", "name_en", "admin1", "parent_id", "name_yo")
 ALIAS_FILL = ("wd", "lat", "lon", "geonames", "name_en")
 KNOWN_FILL = ("lat", "lon", "geonames", "name_en", "oktmo", "wd", "name_yo")
@@ -448,6 +454,48 @@ def hop_unresolved(
                 hopped += 1
         time.sleep(0.15)
     return hopped
+
+
+def fetch_located(
+    session: requests.Session,
+    qids: list[str],
+    batch_size: int,
+) -> dict[str, dict[str, Any]]:
+    """P131* ancestors so a harvested район can parent a street in a settlement."""
+    if not qids:
+        return {}
+    size = max(1, int(batch_size))
+    out: dict[str, dict[str, Any]] = {}
+    total = len(qids)
+    for offset in range(0, total, size):
+        if offset == 0 or ((offset // size) % 10 == 0):
+            print(f"p131 {offset}/{total}", file=sys.stderr)
+        chunk = qids[offset : offset + size]
+        values = " ".join(f"wd:{qid}" for qid in chunk)
+        try:
+            rows = sparql_csv(session, LOCATED_QUERY % values, timeout=60)
+        except SeedError as exc:
+            print(f"p131 fail offset={offset} {exc}", file=sys.stderr)
+            continue
+        extra = merge_bindings(rows)
+        for qid, rec in extra.items():
+            target = out.setdefault(
+                qid,
+                {
+                    "qid": qid,
+                    "ru": "",
+                    "en": "",
+                    "lat": "",
+                    "lon": "",
+                    "gn": "",
+                    "located": set(),
+                    "iso": set(),
+                },
+            )
+            target["located"].update(rec["located"])
+            target["iso"].update(rec["iso"])
+        time.sleep(0.15)
+    return out
 
 
 def collect_known_qids(root: Path, rels: tuple[str, ...] | list[str]) -> list[str]:

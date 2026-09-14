@@ -4,6 +4,7 @@ from pathlib import Path
 
 from scripts.lib.csvio import PLACES_HEADER, read_csv, write_csv
 from scripts.lib.declensions import DECLENSIONS_HEADER
+from scripts.lib.harvest import ParentHit, ParentIndex
 from scripts.seed_hodonyms import (
     apply_harvest,
     format_coord,
@@ -16,6 +17,7 @@ from scripts.seed_hodonyms import (
     map_hodonym,
     merge_bindings,
     p31_from_query,
+    parent_upgrade,
     qid_from_uri,
     queries_for_p31,
     resolve_parent,
@@ -83,6 +85,59 @@ def test_merge_and_parent_city_beats_region() -> None:
     both = resolve_parent(index, {"Q649", "Q1697"}, {"RU-MOS"})
     assert both is not None
     assert both[0] == "wd:Q649"
+
+
+def test_parent_upgrade_iso_to_municipality() -> None:
+    assert parent_upgrade("iso:RU-TA", "wd:Q12167762") is True
+    assert parent_upgrade("", "wd:Q12167762") is True
+    assert parent_upgrade("wd:Q649", "wd:Q12167762") is False
+    assert parent_upgrade("iso:RU-TA", "iso:RU-ME") is False
+    assert parent_upgrade("wd:Q12167762", "wd:Q12167762") is False
+
+    index = ParentIndex()
+    index.by_wd["Q88"] = ParentHit(id="wd:Q88", admin1="RU-TA", rank=1)
+    index.by_iso["RU-TA"] = ParentHit(id="iso:RU-TA", admin1="RU-TA", rank=2)
+    records = {
+        "Q9": {
+            "qid": "Q9",
+            "ru": "Ленина улица",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "located": {"Q88"},
+            "iso": {"RU-TA"},
+        }
+    }
+    existing = [
+        _place(
+            id="wd:Q9",
+            id_scheme="wikidata",
+            type_id="hodonym",
+            name_ru="Ленина улица",
+            parent_id="iso:RU-TA",
+            admin1="RU-TA",
+            wd="Q9",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-11",
+            notes="keep",
+        )
+    ]
+    places, _decls, counts = apply_harvest(
+        records,
+        index=index,
+        existing_places=existing,
+        existing_decls=[],
+        today="2026-09-14",
+        other_ids=set(),
+    )
+    assert counts.inserted == 0
+    assert counts.updated == 1
+    assert places[0]["parent_id"] == "wd:Q88"
+    assert places[0]["notes"] == "keep"
+    assert places[0]["name_ru"] == "Ленина улица"
+    assert places[0]["updated_at"] == "2026-09-14"
 
 
 def test_map_hodonym_yo_and_stable_id() -> None:
