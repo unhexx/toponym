@@ -9,6 +9,7 @@ from scripts.lib.harvest import (
     ALIAS_FILL,
     KNOWN_FILL,
     KNOWN_IDS_QUERY,
+    LOCATED_QUERY,
     SeedError,
     collect_known_qids,
     incoming_deprecate,
@@ -180,6 +181,8 @@ def test_known_ids_queries_batches_values() -> None:
     assert "%s" not in queries[0]
     assert "VALUES ?item { %s }" in KNOWN_IDS_QUERY
     assert known_ids_queries([]) == []
+    assert "VALUES ?item { %s }" in LOCATED_QUERY
+    assert "wdt:P131*" in LOCATED_QUERY
 
 
 def test_mapped_known_fields_fill_tuple() -> None:
