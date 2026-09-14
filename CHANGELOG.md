@@ -15,6 +15,7 @@
 - SPARQL/upsert хелперы годонимов вынесены в [`scripts/lib/harvest.py`](scripts/lib/harvest.py) (параметры `required`/`last`/`specs`/`rels`/`fill`). CLI и stdout `python scripts/seed_hodonyms.py` те же; канон не трогали.
 - [`data/mappings/wikidata.yaml`](data/mappings/wikidata.yaml) — `class_map` и списки `municipality_p31` / `microtoponym_p31` для harvest МО и микротопонимов.
 - [`docs/USAGE.md`](docs/USAGE.md) §3.1 и [`docs/taxonomy.md`](docs/taxonomy.md): муниципалитеты и микротопонимы больше не «десятки», а harvest Wikidata (не полный ОКТМО / не ГКГН).
+- Онтология: DEC-SEED-004 (МО Wikidata) и DEC-SEED-005 (микротопонимы Wikidata); DEC-SEED-001 остаётся `accepted`. Daily 48ч SPARQL — сигнал перезапустить `seed_*.py`, не дельта `daily.py`.
 
 ## [2026.09.16] - 2026-09-16
 

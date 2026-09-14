@@ -73,8 +73,11 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | HOD-WD | Wikidata harvest годонимов (P31 Q79007, P17 Q159) | `feature/hodonyms-wikidata-harvest` | SPARQL + `seed_hodonyms.py` upsert `wd:Q`; покрытие Wikidata задокументировано; без ГАР | COMPLETE |
 | HOD-WD-P31 | SPARQL годонимов: бульвар/проспект/переулок/набережная | `feature/hodonyms-p31-types` | VALUES P31 из `wikidata.yaml`; harvest по одному типу; upsert `wd:Q`; без ГАР | COMPLETE |
 | REL-2026.09.16 | annotated CalVer `2026.09.16` | `chore/release-2026.09.16` | реестр годонимов Wikidata (~15 тыс.); теги `2026.09.11`–`2026.09.15` не двигались | COMPLETE |
+| HARVEST-LIB | SPARQL/upsert хелперы в `scripts/lib/harvest.py` | `refactor/harvest-lib` | параметризованные required/last/specs/rels/fill; stdout годонимов тот же | COMPLETE |
+| MUN-WD | Wikidata harvest МО (не ОКТМО/ГАР) | `data/mun-wikidata-harvest` | SPARQL + `seed_municipalities.py`; покрытие Wikidata; DEC-SEED-004 | COMPLETE |
+| MICRO-WD | Wikidata harvest микротопонимов (не ГКГН) | `data/micro-wikidata-harvest` | SPARQL + `seed_microtoponyms.py`; extras сохранены; DEC-SEED-005 | COMPLETE |
 
-A–L COMPLETE на `main`. Annotated CalVer `2026.09.16` на `main`. Теги `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14` и `2026.09.15` не двигать. HOD-WD / HOD-WD-P31 — реестр улиц из Wikidata (улица/бульвар/проспект/переулок/набережная), не ФИАС.
+A–L COMPLETE на `main`. Annotated CalVer `2026.09.16` на `main`. Теги `2026.09.11`–`2026.09.16` не двигать. HOD-WD / MUN-WD / MICRO-WD — harvest Wikidata, не ФИАС/ОКТМО/ГКГН.
 
 ## Definition of Done v1
 

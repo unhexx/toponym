@@ -149,6 +149,10 @@ def test_usage_guide_covers_search_and_declensions() -> None:
     assert "DEC-SEED-001" in text
     assert "DEC-SEED-002" in text
     assert "DEC-SEED-003" in text
+    assert "DEC-SEED-004" in text
+    assert "DEC-SEED-005" in text
+    assert "seed_municipalities.py" in text
+    assert "seed_microtoponyms.py" in text
     assert "Тверской" in text
     assert "queue.csv" in text
     assert "declensions_queue.py" in text
@@ -178,7 +182,11 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
     assert "municipalities.csv" in before_loop2
     assert "DEC-SEED-001" in before_loop2
     assert "DEC-SEED-003" in before_loop2
+    assert "DEC-SEED-004" in before_loop2
+    assert "DEC-SEED-005" in before_loop2
     assert "seed_hodonyms.py" in before_loop2
+    assert "seed_municipalities.py" in before_loop2
+    assert "seed_microtoponyms.py" in before_loop2
     assert "PACKAGE_VERSION" in before_loop2
 
 
