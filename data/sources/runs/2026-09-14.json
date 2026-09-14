@@ -1,7 +1,7 @@
 {
-  "as_of": "2026-09-14T03:12:00Z",
-  "changed_count": 0,
-  "error_count": 2,
+  "as_of": "2026-09-14T11:16:23Z",
+  "changed_count": 1,
+  "error_count": 4,
   "sources": [
     {
       "id": "gkgn-opendata",
@@ -23,10 +23,10 @@
     },
     {
       "id": "geonames-ru",
-      "changed": false,
-      "reason": "mods-2026-09-13 RU A,P,H,T,L: 1 row gn=12847873 Zimnik H/STM; no apply (no .venv, DEC-GN-001 known_ids_only); cursor left 2026-09-12",
+      "changed": true,
+      "reason": "1 RU row in mods",
       "cursor_old": "2026-09-12",
-      "cursor_new": "2026-09-12",
+      "cursor_new": "2026-09-13",
       "error": false
     },
     {
@@ -64,18 +64,20 @@
     {
       "id": "mfursov-russian-cities",
       "changed": false,
-      "reason": "нет коммитов since 2026-09-13",
+      "reason": "github_commits HTTP 403",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": true
     },
     {
       "id": "nickyx3-settlements",
       "changed": false,
-      "reason": "нет коммитов since 2026-09-13",
+      "reason": "github_commits HTTP 403",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": true
     },
     {
       "id": "wikidata",
@@ -89,5 +91,5 @@
   "records_upserted": 0,
   "records_deprecated": 0,
   "commit": null,
-  "check_exit": null
+  "check_exit": 2
 }
