@@ -8,4 +8,6 @@
 
 Годонимы: `hodonyms-ru.sparql` (P31 улица Q79007 / бульвар Q54114 / проспект Q628179 / переулок Q1251403 / набережная Q537127, P17=Россия Q159, без площадей Q174782). Выгрузка JSON/CSV в git не кладётся; upsert в `data/curated/hodonyms.csv` — `python scripts/seed_hodonyms.py` по `wd:Q…` (запрос по одному P31). Parent — P131 на курируемый город/субъект или P131* до ISO `RU-*`; без родителя строка пропускается. Это покрытие Wikidata, не ФИАС и не все улицы России.
 
+Муниципалитеты: `municipalities-ru.sparql` (P31 городской округ Q13626398 / муниципальный округ Q3350075 / муниципальный район Q2198484 и Q60849925 / внутригородское МО Q27587207 / городское поселение Q2661988 / сельское поселение Q634099, P17=Россия Q159). Выгрузка JSON/CSV в git не кладётся; upsert в `data/curated/municipalities.csv` — `python scripts/seed_municipalities.py` по `wd:Q…` (запрос по одному P31). Это покрытие Wikidata, не ОКТМО/ГАР и не все МО России.
+
 Маппинг полей: [`data/mappings/wikidata.yaml`](../../mappings/wikidata.yaml) (Q-id → `wd`, P625 → `lat`/`lon`; delete_policy=pointer).
