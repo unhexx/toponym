@@ -7,6 +7,7 @@
 
 ### Added
 - CLI `python scripts/seed_municipalities.py` и SPARQL-указатель [`data/raw/wikidata/municipalities-ru.sparql`](data/raw/wikidata/municipalities-ru.sparql) (P31 МО Wikidata, не ОКТМО/ГАР).
+- CLI `python scripts/seed_microtoponyms.py` и SPARQL-указатель [`data/raw/wikidata/microtoponyms-ru.sparql`](data/raw/wikidata/microtoponyms-ru.sparql) (парк/пещера/овраг/урочище/поле Wikidata, не ГКГН). Канон `microtoponyms.csv` пока 17 строк; массовый harvest — отдельным прогоном.
 - Реестр МО Wikidata в [`data/curated/municipalities.csv`](data/curated/municipalities.csv): P31 городской округ Q13626398, муниципальный округ Q3350075, район Q2198484 / Q60849925, внутригородское Q27587207, городское поселение Q2661988, сельское поселение Q634099 (все сели). Около 21.6 тыс. строк, не ОКТМО/ГАР и не все МО России (Росстат 01.01.2026 = 13 698).
 
 ### Changed

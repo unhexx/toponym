@@ -8,6 +8,7 @@ import jsonschema
 import yaml
 
 from scripts.seed_hodonyms import load_main_query, p31_from_query
+from scripts.seed_microtoponyms import load_main_query as load_micro_query
 from scripts.seed_municipalities import load_main_query as load_mun_query
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -162,6 +163,10 @@ def test_wikidata_mapping_points_and_no_sparql_dump() -> None:
     assert payload["filter"]["hodonym_p31"] == p31_from_query(load_main_query(sparql))
     mun_sparql = ROOT / "data" / "raw" / "wikidata" / "municipalities-ru.sparql"
     assert payload["filter"]["municipality_p31"] == p31_from_query(load_mun_query(mun_sparql))
+    micro_sparql = ROOT / "data" / "raw" / "wikidata" / "microtoponyms-ru.sparql"
+    assert payload["filter"]["microtoponym_p31"] == p31_from_query(
+        load_micro_query(micro_sparql)
+    )
     assert "seed_hodonyms.py" in payload["notes"]
     assert "seed_municipalities.py" in payload["notes"]
     assert "Q628179" in payload["notes"]

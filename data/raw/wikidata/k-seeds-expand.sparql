@@ -27,3 +27,5 @@
 # и scripts/seed_hodonyms.py. Не вендорить SPARQL JSON.
 # Harvest МО Wikidata — data/raw/wikidata/municipalities-ru.sparql
 # и scripts/seed_municipalities.py. Не вендорить SPARQL JSON.
+# Harvest микротопонимов Wikidata — data/raw/wikidata/microtoponyms-ru.sparql
+# и scripts/seed_microtoponyms.py. Не вендорить SPARQL JSON.

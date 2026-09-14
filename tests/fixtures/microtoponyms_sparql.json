@@ -1,0 +1,46 @@
+[
+  {
+    "item": "http://www.wikidata.org/entity/Q90002001",
+    "ru": "Тестовый овраг",
+    "en": "Test Ravine",
+    "located": "http://www.wikidata.org/entity/Q649",
+    "iso": "RU-MOW"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q1643788",
+    "ru": "Капова пещера",
+    "en": "Kapova Cave",
+    "lat": "53.044444",
+    "lon": "57.063889",
+    "gn": "553029",
+    "located": "http://www.wikidata.org/entity/Q5710",
+    "iso": "RU-BA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90002002",
+    "ru": "Тестовый парк",
+    "en": "Test Park",
+    "located": "http://www.wikidata.org/entity/Q649",
+    "iso": "RU-MOW"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q43105",
+    "ru": "Эльбрус",
+    "en": "Mount Elbrus",
+    "located": "http://www.wikidata.org/entity/Q5207",
+    "iso": "RU-KB"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90002003",
+    "ru": "Бездомное урочище",
+    "en": "No Parent Urochishche",
+    "located": "http://www.wikidata.org/entity/Q1"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90002004",
+    "ru": "Зелёное поле",
+    "en": "Zelyonoye Field",
+    "located": "http://www.wikidata.org/entity/Q1697",
+    "iso": "RU-MOS"
+  }
+]
