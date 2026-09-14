@@ -27,7 +27,17 @@ from scripts.lib.detectors import (  # noqa: E402
     utcnow,
     yesterday_utc,
 )
-from scripts.lib.places import load_place_relpaths  # noqa: E402
+from scripts.lib.harvest import (  # noqa: E402
+    KNOWN_FILL,
+    KNOWN_IDS_BATCH,
+    SeedError,
+    collect_known_qids,
+    fetch_known_ids,
+    incoming_for_upsert,
+    mapped_known_fields,
+    qid_of_place,
+)
+from scripts.lib.places import load_index_relpaths, load_place_relpaths  # noqa: E402
 from scripts.lib.upsert import (  # noqa: E402
     DEFAULT_MAX_VENDOR_BYTES,
     UpsertCounts,
@@ -203,6 +213,80 @@ def sync_ukase(
     return counts
 
 
+def sync_wikidata(
+    source: dict[str, Any],
+    *,
+    root: Path,
+    apply: bool,
+    session: requests.Session,
+    today: str,
+    cursor: str | None = None,
+    batch_size: int = KNOWN_IDS_BATCH,
+) -> UpsertCounts:
+    rels = load_index_relpaths(root)
+    qids = collect_known_qids(root, rels)
+    try:
+        records = fetch_known_ids(session, qids, batch_size=batch_size)
+    except SeedError as exc:
+        raise SyncError(str(exc)) from exc
+
+    tables: list[tuple[Path, list[str], list[dict[str, str]]]] = []
+    by_qid: dict[str, list[tuple[int, dict[str, str]]]] = {}
+    for rel in rels:
+        path = root / rel
+        if not path.is_file():
+            continue
+        header, rows = read_csv(path)
+        table_i = len(tables)
+        tables.append((path, header, rows))
+        for row in rows:
+            qid = qid_of_place(row)
+            if qid:
+                by_qid.setdefault(qid, []).append((table_i, row))
+
+    incoming_by_table: dict[int, list[dict[str, str]]] = {}
+    total = UpsertCounts()
+    for qid, rec in records.items():
+        hits = by_qid.get(qid) or []
+        if not hits:
+            total.skipped_unmapped += 1
+            continue
+        mapped = mapped_known_fields(rec)
+        for table_i, existing in hits:
+            mapped_row = dict(mapped)
+            mapped_row["id"] = existing["id"]
+            inc = incoming_for_upsert(mapped_row, existing, fill=KNOWN_FILL)
+            if inc is None:
+                continue
+            inc["updated_at"] = today
+            incoming_by_table.setdefault(table_i, []).append(inc)
+
+    for table_i, (path, header, rows) in enumerate(tables):
+        have = {row.get("id") for row in rows if row.get("id")}
+        incoming = [
+            inc for inc in incoming_by_table.get(table_i, []) if inc.get("id") in have
+        ]
+        if not incoming:
+            continue
+        new_rows, counts = upsert_rows(rows, incoming, header=header)
+        if counts.inserted:
+            raise SyncError(f"{path}: known-ids SPARQL не вставляет новые id")
+        total.add(counts)
+        if apply:
+            write_csv(path, header, new_rows)
+
+    if apply:
+        kwargs: dict[str, str] = {"checked_at": today}
+        if cursor is not None:
+            kwargs["cursor"] = cursor
+        patch_catalog_source(
+            root / "data" / "sources" / "catalog.yaml",
+            source["id"],
+            **kwargs,
+        )
+    return total
+
+
 def sync_pointer(
     source: dict[str, Any],
     *,
@@ -253,6 +337,17 @@ def sync_source(
             root=root,
             apply=apply,
             manual_file=manual_file,
+            today=today,
+            cursor=cursor,
+        )
+    if source_id == "wikidata":
+        if session is None:
+            raise SyncError("wikidata: нет HTTP-сессии")
+        return sync_wikidata(
+            source,
+            root=root,
+            apply=apply,
+            session=session,
             today=today,
             cursor=cursor,
         )

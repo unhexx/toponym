@@ -7,11 +7,17 @@ import pytest
 from scripts.lib.csvio import PLACES_HEADER, write_csv
 from scripts.lib.harvest import (
     ALIAS_FILL,
+    KNOWN_FILL,
+    KNOWN_IDS_QUERY,
     SeedError,
+    collect_known_qids,
     incoming_deprecate,
     incoming_for_upsert,
+    known_ids_queries,
     load_main_query,
+    mapped_known_fields,
     merge_bindings,
+    qid_of_place,
     queries_for_p31,
     skip_ids,
 )
@@ -126,3 +132,75 @@ def test_skip_ids_missing_files_and_resource_name(tmp_path: Path) -> None:
     out = skip_ids(tmp_path, rels)
     assert out["Q649"] == "cities-major"
     assert "agoronyms" not in out.values()
+
+
+def test_collect_known_qids_unifies_tables(tmp_path: Path) -> None:
+    curated = tmp_path / "data" / "curated"
+    curated.mkdir(parents=True)
+    write_csv(
+        curated / "cities-major.csv",
+        PLACES_HEADER,
+        [_place(id="wd:Q649", wd="", name_ru="Москва")],
+    )
+    write_csv(
+        curated / "municipalities.csv",
+        PLACES_HEADER,
+        [_place(id="local:mun:kazan-go", wd="Q12167762", name_ru="Казань")],
+    )
+    write_csv(
+        curated / "hodonyms.csv",
+        PLACES_HEADER,
+        [_place(id="wd:Q1644209", wd="Q1644209", name_ru="Тверская улица")],
+    )
+    write_csv(
+        curated / "microtoponyms.csv",
+        PLACES_HEADER,
+        [_place(id="wd:Q22698", wd="Q22698", name_ru="парк")],
+    )
+    rels = (
+        "data/curated/cities-major.csv",
+        "data/curated/municipalities.csv",
+        "data/curated/hodonyms.csv",
+        "data/curated/microtoponyms.csv",
+        "data/curated/missing.csv",
+    )
+    qids = collect_known_qids(tmp_path, rels)
+    assert qids == ["Q649", "Q12167762", "Q1644209", "Q22698"]
+    assert qid_of_place({"id": "local:mun:x", "wd": "Q1"}) == "Q1"
+
+
+def test_known_ids_queries_batches_values() -> None:
+    queries = known_ids_queries(["Q1", "Q2", "Q3"], batch_size=2)
+    assert len(queries) == 2
+    assert "VALUES ?item { wd:Q1 wd:Q2 }" in queries[0]
+    assert "VALUES ?item { wd:Q3 }" in queries[1]
+    assert "P625" in queries[0]
+    assert "P1566" in queries[0]
+    assert "P764" in queries[0]
+    assert "%s" not in queries[0]
+    assert "VALUES ?item { %s }" in KNOWN_IDS_QUERY
+    assert known_ids_queries([]) == []
+
+
+def test_mapped_known_fields_fill_tuple() -> None:
+    rec = {
+        "qid": "Q649",
+        "ru": "Москва",
+        "en": "Moscow",
+        "lat": "55.75",
+        "lon": "37.61",
+        "gn": "524901",
+        "oktmo": "45 000 000",
+    }
+    mapped = mapped_known_fields(rec)
+    assert mapped["id"] == "wd:Q649"
+    assert mapped["wd"] == "Q649"
+    assert mapped["geonames"] == "524901"
+    assert mapped["oktmo"] == "45000000"
+    assert "name_ru" not in mapped
+    existing = {"id": "wd:Q649", "lat": "55.7", "geonames": "", "name_en": ""}
+    inc = incoming_for_upsert(mapped, existing, fill=KNOWN_FILL)
+    assert inc is not None
+    assert "lat" not in inc
+    assert inc["geonames"] == "524901"
+    assert inc["name_en"] == "Moscow"

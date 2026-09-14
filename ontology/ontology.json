@@ -214,7 +214,7 @@
       "path": "data/mappings/wikidata.yaml",
       "catalog_id": "wikidata",
       "pointer": true,
-      "notes": "Daily SPARQL только по известным Q-id; harvest — seed_hodonyms.py / seed_municipalities.py / seed_microtoponyms.py. P625 точки, не полигоны (DEC-GEO-001)."
+      "notes": "sync.py SPARQL VALUES по известным Q-id всех seed-таблиц; harvest — seed_hodonyms.py / seed_municipalities.py / seed_microtoponyms.py. Daily kind=none. P625 точки, не полигоны (DEC-GEO-001)."
     },
     {
       "id": "CHK-DETECTOR",

@@ -13,3 +13,5 @@
 Микротопонимы: `microtoponyms-ru.sparql` (P31 урочище Q1434274 / Q125505344, овраг Q1361400, поле Q188869, пещера Q35509, парк Q22698, P17=Россия Q159; без леса Q4421 и ущелья Q2042028). Выгрузка JSON/CSV в git не кладётся; upsert в `data/curated/microtoponyms.csv` — `python scripts/seed_microtoponyms.py` по `wd:Q…`. Это покрытие Wikidata, не ГКГН.
 
 Маппинг полей: [`data/mappings/wikidata.yaml`](../../mappings/wikidata.yaml) (Q-id → `wd`, P625 → `lat`/`lon`; delete_policy=pointer).
+
+Known-ids: `python scripts/sync.py --source wikidata --apply` — SPARQL `VALUES` по уже известным Q-id всех seed-таблиц (не только МО/микро), fill-if-empty; JSON/CSV в git не кладётся. Daily `kind=none` это не зовёт.

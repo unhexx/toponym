@@ -1,0 +1,18 @@
+updated: 2026-09-09
+sources:
+  - id: wikidata
+    url: https://query.wikidata.org/
+    license: CC0
+    vendor: false
+    checked_at: 2026-09-08
+    detector:
+      kind: none
+      note: SPARQL по уже известным Q-id; не массовый дамп
+  - id: fias-gar
+    url: https://fias.nalog.ru/
+    license: official-open-data
+    vendor: false
+    checked_at: 2026-09-09
+    detector:
+      kind: http_head
+watchlist_github: []
