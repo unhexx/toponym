@@ -8,6 +8,7 @@ import jsonschema
 import yaml
 
 from scripts.seed_hodonyms import load_main_query, p31_from_query
+from scripts.seed_municipalities import load_main_query as load_mun_query
 
 ROOT = Path(__file__).resolve().parents[1]
 MAPPINGS_DIR = ROOT / "data" / "mappings"
@@ -120,6 +121,19 @@ def test_wikidata_mapping_points_and_no_sparql_dump() -> None:
     assert payload["class_map"]["Q1251403"] == "hodonym"
     assert payload["class_map"]["Q537127"] == "hodonym"
     assert payload["class_map"]["Q174782"] == "agoronym"
+    assert payload["class_map"]["Q13626398"] == "municipality"
+    assert payload["class_map"]["Q3350075"] == "municipality"
+    assert payload["class_map"]["Q2198484"] == "municipality"
+    assert payload["class_map"]["Q60849925"] == "municipality"
+    assert payload["class_map"]["Q2661988"] == "municipality"
+    assert payload["class_map"]["Q634099"] == "municipality"
+    assert payload["class_map"]["Q27587207"] == "municipality"
+    assert payload["class_map"]["Q1434274"] == "microtoponym"
+    assert payload["class_map"]["Q125505344"] == "microtoponym"
+    assert payload["class_map"]["Q1361400"] == "microtoponym"
+    assert payload["class_map"]["Q188869"] == "microtoponym"
+    assert payload["class_map"]["Q35509"] == "microtoponym"
+    assert payload["class_map"]["Q22698"] == "microtoponym"
     assert payload["filter"]["hodonym_p31"] == [
         "Q79007",
         "Q54114",
@@ -127,9 +141,29 @@ def test_wikidata_mapping_points_and_no_sparql_dump() -> None:
         "Q1251403",
         "Q537127",
     ]
+    assert payload["filter"]["municipality_p31"] == [
+        "Q13626398",
+        "Q3350075",
+        "Q2198484",
+        "Q60849925",
+        "Q27587207",
+        "Q2661988",
+        "Q634099",
+    ]
+    assert payload["filter"]["microtoponym_p31"] == [
+        "Q1434274",
+        "Q125505344",
+        "Q1361400",
+        "Q188869",
+        "Q35509",
+        "Q22698",
+    ]
     sparql = ROOT / "data" / "raw" / "wikidata" / "hodonyms-ru.sparql"
     assert payload["filter"]["hodonym_p31"] == p31_from_query(load_main_query(sparql))
+    mun_sparql = ROOT / "data" / "raw" / "wikidata" / "municipalities-ru.sparql"
+    assert payload["filter"]["municipality_p31"] == p31_from_query(load_mun_query(mun_sparql))
     assert "seed_hodonyms.py" in payload["notes"]
+    assert "seed_municipalities.py" in payload["notes"]
     assert "Q628179" in payload["notes"]
     assert "polygon" not in payload["fields"].values()
     assert "geojson" not in {v.casefold() for v in payload["fields"].values()}

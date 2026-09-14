@@ -18,7 +18,19 @@ class_map:
   Q537127: hodonym
   Q174782: agoronym
   Q34442: dromonym
-  Q13626398: municipality
+  Q13626398: municipality   # urban okrug
+  Q3350075: municipality    # municipal okrug
+  Q2198484: municipality    # municipal district
+  Q60849925: municipality   # municipal district in Russia
+  Q2661988: municipality    # urban settlement (МО, not пгт)
+  Q634099: municipality     # rural settlement
+  Q27587207: municipality   # intra-urban of federal city
+  Q1434274: microtoponym    # урочище / agronym
+  Q125505344: microtoponym
+  Q1361400: microtoponym    # овраг
+  Q188869: microtoponym     # поле
+  Q35509: microtoponym      # пещера
+  Q22698: microtoponym      # парк
 filter:
   P17: Q159
   known_ids_only: true
@@ -28,13 +40,30 @@ filter:
     - Q628179
     - Q1251403
     - Q537127
+  municipality_p31:
+    - Q13626398
+    - Q3350075
+    - Q2198484
+    - Q60849925
+    - Q27587207
+    - Q2661988
+    - Q634099
+  microtoponym_p31:
+    - Q1434274
+    - Q125505344
+    - Q1361400
+    - Q188869
+    - Q35509
+    - Q22698
 delete_policy: pointer
 notes: >
   Указатель, не дамп SPARQL: daily-запросы только по уже известным Q-id из
   curated (VALUES), результат в git не кладётся. Массовая вставка улиц —
   scripts/seed_hodonyms.py (P31 улица Q79007 / бульвар Q54114 / проспект
   Q628179 / переулок Q1251403 / набережная Q537127, P17=Q159, не ГАР/ФИАС;
-  покрытие Wikidata, не «все улицы России»). Q-id → колонка wd; ru/en label →
+  покрытие Wikidata, не «все улицы России»). МО — scripts/seed_municipalities.py
+  (P31 городской округ / муниципальный округ / район / поселение / внутригородское,
+  не ОКТМО/ГАР и не все МО России). Q-id → колонка wd; ru/en label →
   name_ru/name_en; P625 → lat/lon как точки (DEC-GEO-001, без полигонов/GeoJSON).
   P1566/P764 стыкуют geonames/oktmo на существующей строке; insert gn:{id}
   запрещён (DEC-GN-001). detector.kind=none.

@@ -5,8 +5,12 @@
 
 ## [Unreleased]
 
+### Added
+- CLI `python scripts/seed_municipalities.py` и SPARQL-указатель [`data/raw/wikidata/municipalities-ru.sparql`](data/raw/wikidata/municipalities-ru.sparql) (P31 МО Wikidata, не ОКТМО/ГАР). Канон `municipalities.csv` пока 27 строк; массовый harvest — отдельным прогоном.
+
 ### Changed
 - SPARQL/upsert хелперы годонимов вынесены в [`scripts/lib/harvest.py`](scripts/lib/harvest.py) (параметры `required`/`last`/`specs`/`rels`/`fill`). CLI и stdout `python scripts/seed_hodonyms.py` те же; канон не трогали.
+- [`data/mappings/wikidata.yaml`](data/mappings/wikidata.yaml) — `class_map` и списки `municipality_p31` / `microtoponym_p31` для harvest МО и микротопонимов.
 
 ## [2026.09.16] - 2026-09-16
 

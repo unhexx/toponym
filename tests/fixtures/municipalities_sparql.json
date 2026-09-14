@@ -1,0 +1,93 @@
+[
+  {
+    "item": "http://www.wikidata.org/entity/Q90001001",
+    "type": "http://www.wikidata.org/entity/Q13626398",
+    "ru": "Городской округ Тестовый",
+    "en": "Test Urban Okrug",
+    "lat": "55.8",
+    "lon": "49.1",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90001002",
+    "type": "http://www.wikidata.org/entity/Q2198484",
+    "ru": "Тестовый район",
+    "en": "Test District",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90001003",
+    "type": "http://www.wikidata.org/entity/Q2661988",
+    "ru": "Тестовое городское поселение",
+    "en": "Test Urban Settlement",
+    "located": "http://www.wikidata.org/entity/Q90001002"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90001004",
+    "type": "http://www.wikidata.org/entity/Q2198484",
+    "ru": "Упразднённый район",
+    "en": "Abolished District",
+    "dissolved": "2020-01-01T00:00:00Z",
+    "replaced": "http://www.wikidata.org/entity/Q90001005",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90001004",
+    "replaced": "http://www.wikidata.org/entity/Q5481"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90001005",
+    "type": "http://www.wikidata.org/entity/Q3350075",
+    "ru": "Тестовый муниципальный округ",
+    "en": "Test Municipal Okrug",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q12167762",
+    "type": "http://www.wikidata.org/entity/Q13626398",
+    "ru": "городской округ Казань",
+    "en": "Kazan Urban Okrug",
+    "oktmo": "92701000",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q12167762",
+    "oktmo": "92701000000"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90001010",
+    "type": "http://www.wikidata.org/entity/Q13626398",
+    "ru": "Округ без родителя",
+    "en": "No Parent Okrug",
+    "located": "http://www.wikidata.org/entity/Q1"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90001011",
+    "type": "http://www.wikidata.org/entity/Q27587207",
+    "ru": "Внутригородское МО Тестовое",
+    "en": "Test Intra-urban",
+    "located": "http://www.wikidata.org/entity/Q649",
+    "iso": "RU-MOW"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90001012",
+    "type": "http://www.wikidata.org/entity/Q13626398",
+    "ru": "Городской округ Зелёный",
+    "en": "Zelyony Urban Okrug",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q900",
+    "type": "http://www.wikidata.org/entity/Q13626398",
+    "ru": "Казань",
+    "en": "Kazan",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  }
+]
