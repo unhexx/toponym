@@ -45,6 +45,25 @@ def _copy_csv(src: Path, dest: Path) -> None:
     write_csv(dest, header, rows)
 
 
+def _kazan_row(**kwargs: str) -> dict[str, str]:
+    row = _place(
+        id="local:mun:kazan-go",
+        id_scheme="local",
+        type_id="municipality",
+        name_ru="городской округ Казань",
+        name_en="Kazan Urban Okrug",
+        parent_id="iso:RU-TA",
+        admin1="RU-TA",
+        oktmo="92701000",
+        status="active",
+        source_id="wikidata",
+        updated_at="2026-09-11",
+        notes="муниципальное образование города Казань; ойконим wd:Q900",
+    )
+    row.update(kwargs)
+    return row
+
+
 def test_sparql_municipalities_file_is_pointer() -> None:
     text = SPARQL.read_text(encoding="utf-8")
     for qid in (
@@ -151,7 +170,7 @@ def test_apply_harvest_two_pass_alias_skip_new_p576(tmp_path: Path) -> None:
     curated = tmp_path / "data" / "curated"
     curated.mkdir(parents=True)
     _copy_csv(ROOT / "data/curated/regions.csv", curated / "regions.csv")
-    _copy_csv(ROOT / "data/curated/municipalities.csv", curated / "municipalities.csv")
+    write_csv(curated / "municipalities.csv", PLACES_HEADER, [_kazan_row()])
     write_csv(
         curated / "cities-major.csv",
         PLACES_HEADER,
@@ -204,7 +223,7 @@ def test_cli_from_json_writes_tmp(tmp_path: Path, capsys) -> None:
     decl.mkdir(parents=True)
     raw.mkdir(parents=True)
     _copy_csv(ROOT / "data/curated/regions.csv", curated / "regions.csv")
-    _copy_csv(ROOT / "data/curated/municipalities.csv", curated / "municipalities.csv")
+    write_csv(curated / "municipalities.csv", PLACES_HEADER, [_kazan_row()])
     write_csv(decl / "municipalities.csv", DECLENSIONS_HEADER, [])
     write_csv(
         curated / "cities-major.csv",
@@ -239,7 +258,7 @@ def test_cli_from_json_writes_tmp(tmp_path: Path, capsys) -> None:
     assert "wd:Q12167762" not in by_id
     assert "wd:Q900" not in by_id
     assert "wd:Q90001004" not in by_id
-    assert len(read_csv(ROOT / "data/curated/municipalities.csv")[1]) == 27
+    assert len(read_csv(ROOT / "data/curated/municipalities.csv")[1]) >= 500
 
 
 def test_cli_oktmo_11digit_alias(tmp_path: Path) -> None:
@@ -248,7 +267,7 @@ def test_cli_oktmo_11digit_alias(tmp_path: Path) -> None:
     curated.mkdir(parents=True)
     decl.mkdir(parents=True)
     _copy_csv(ROOT / "data/curated/regions.csv", curated / "regions.csv")
-    _copy_csv(ROOT / "data/curated/municipalities.csv", curated / "municipalities.csv")
+    write_csv(curated / "municipalities.csv", PLACES_HEADER, [_kazan_row()])
     write_csv(decl / "municipalities.csv", DECLENSIONS_HEADER, [])
     payload = [
         {
@@ -286,23 +305,26 @@ def test_cli_deprecate_replaced_by(tmp_path: Path) -> None:
     curated.mkdir(parents=True)
     decl.mkdir(parents=True)
     _copy_csv(ROOT / "data/curated/regions.csv", curated / "regions.csv")
-    _header, mun = read_csv(ROOT / "data/curated/municipalities.csv")
-    mun.append(
-        _place(
-            id="wd:Q90001004",
-            id_scheme="wikidata",
-            type_id="municipality",
-            name_ru="Упраздненный район",
-            parent_id="iso:RU-TA",
-            admin1="RU-TA",
-            wd="Q90001004",
-            status="active",
-            source_id="wikidata",
-            updated_at="2026-09-11",
-            notes="keep notes",
-        )
+    write_csv(
+        curated / "municipalities.csv",
+        PLACES_HEADER,
+        [
+            _kazan_row(),
+            _place(
+                id="wd:Q90001004",
+                id_scheme="wikidata",
+                type_id="municipality",
+                name_ru="Упраздненный район",
+                parent_id="iso:RU-TA",
+                admin1="RU-TA",
+                wd="Q90001004",
+                status="active",
+                source_id="wikidata",
+                updated_at="2026-09-11",
+                notes="keep notes",
+            ),
+        ],
     )
-    write_csv(curated / "municipalities.csv", _header, mun)
     write_csv(decl / "municipalities.csv", DECLENSIONS_HEADER, [])
     code = main(
         [
@@ -332,11 +354,11 @@ def test_cli_deprecate_local_wd(tmp_path: Path) -> None:
     curated.mkdir(parents=True)
     decl.mkdir(parents=True)
     _copy_csv(ROOT / "data/curated/regions.csv", curated / "regions.csv")
-    _header, mun = read_csv(ROOT / "data/curated/municipalities.csv")
-    for row in mun:
-        if row["id"] == "local:mun:kazan-go":
-            row["wd"] = "Q12167762"
-    write_csv(curated / "municipalities.csv", _header, mun)
+    write_csv(
+        curated / "municipalities.csv",
+        PLACES_HEADER,
+        [_kazan_row(wd="Q12167762")],
+    )
     write_csv(decl / "municipalities.csv", DECLENSIONS_HEADER, [])
     payload = [
         {
@@ -383,11 +405,13 @@ def test_harvest_from_json_no_network() -> None:
     assert counts.incoming >= 8
     assert any(row["id"] == "local:mun:kazan-go" for row in places)
     assert any(row["id"] == "wd:Q90001002" for row in places)
-    assert len(read_csv(ROOT / "data/curated/municipalities.csv")[1]) == 27
+    assert len(read_csv(ROOT / "data/curated/municipalities.csv")[1]) >= 500
 
 
-def test_canon_municipalities_still_27() -> None:
+def test_canon_municipalities_harvested() -> None:
     _header, rows = read_csv(ROOT / "data/curated/municipalities.csv")
-    assert len(rows) == 27
-    assert any(row["id"] == "local:mun:kazan-go" for row in rows)
+    assert len(rows) >= 500
+    kazan = next(row for row in rows if row["id"] == "local:mun:kazan-go")
+    assert kazan["wd"].startswith("Q")
+    assert "wd:" + kazan["wd"] not in {row["id"] for row in rows}
     assert all(row["type_id"] == "municipality" for row in rows)
