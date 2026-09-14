@@ -143,7 +143,11 @@ def test_parent_index_mun_before_region_no_cities() -> None:
 
 def test_apply_harvest_two_pass_alias_skip_new_p576(tmp_path: Path) -> None:
     rows = load_rows_from_json(FIXTURE)
-    records = merge_bindings(rows, extra_scalars=("oktmo", "dissolved"), extra_qid_sets=("replaced", "p31"))
+    records = merge_bindings(
+        rows,
+        extra_scalars=("oktmo", "dissolved"),
+        extra_qid_sets=("replaced", "p31"),
+    )
     curated = tmp_path / "data" / "curated"
     curated.mkdir(parents=True)
     _copy_csv(ROOT / "data/curated/regions.csv", curated / "regions.csv")
@@ -207,7 +211,8 @@ def test_cli_from_json_writes_tmp(tmp_path: Path, capsys) -> None:
         PLACES_HEADER,
         [_place(id="wd:Q900", wd="Q900", name_ru="Казань", type_id="city")],
     )
-    (raw / "municipalities-ru.sparql").write_text(SPARQL.read_text(encoding="utf-8"), encoding="utf-8")
+    sparql_text = SPARQL.read_text(encoding="utf-8")
+    (raw / "municipalities-ru.sparql").write_text(sparql_text, encoding="utf-8")
     code = main(
         [
             "--root",
