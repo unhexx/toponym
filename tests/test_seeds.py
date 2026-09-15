@@ -86,7 +86,7 @@ def test_seed_counts() -> None:
     assert len(micro) >= 100
     assert len(drom) >= 1
     assert len(vil) >= 1
-    assert len(ago) >= 1
+    assert len(ago) >= 100
 
 
 def test_declension_ids_may_repeat() -> None:

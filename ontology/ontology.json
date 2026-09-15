@@ -483,6 +483,20 @@
       "summary": "Реестр городов растёт upsert-ом по wd:Q-id из Wikidata (P31 city/town in Russia Q7930989, P17=Q159; не generic Q515 и не pop≥100k). SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не все 1126 городов России (ruwiki 13.05.2026) и не полный ОКТМО; без Крыма/новых субъектов. Имя файла cities-major историческое."
     },
     {
+      "id": "DEC-SEED-008",
+      "type": "Decision",
+      "title": "Площади из Wikidata SPARQL, не ОМК УМ Москвы",
+      "status": "accepted",
+      "date": "2026-09-15",
+      "refs": [
+        "data/curated/agoronyms.csv",
+        "data/raw/wikidata/agoronyms-ru.sparql",
+        "scripts/seed_agoronyms.py",
+        "data/mappings/wikidata.yaml"
+      ],
+      "summary": "Реестр площадей растёт upsert-ом по wd:Q-id из Wikidata (P31 square Q174782, P17=Q159). SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не все площади России и не ОМК УМ Москвы. Годонимы в skip-set; Красная площадь сохранена FILL_IF_EMPTY."
+    },
+    {
       "id": "DEC-P1-001",
       "type": "Decision",
       "title": "P1 не дробить на P1a–e",
