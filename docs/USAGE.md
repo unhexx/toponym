@@ -115,8 +115,12 @@ curl -sSG http://127.0.0.1:8099/v1/records --data-urlencode 'id=wd:Q626'   # В�
 
 ---
 
-## 3.1. Муниципалитеты, улицы, микротопонимы
+## 3.1. Муниципалитеты, улицы, микротопонимы, города
 
+Города (DEC-SEED-006) — реестр Wikidata (CC0): P31=Q7930989 (city/town in Russia), P17=Q159,
+upsert по `wd:Q…`. Это не все 1 126 городов России (ruwiki 13.05.2026) и не полный ОКТМО;
+без Крыма/новых субъектов. SPARQL JSON в git нет. Имя файла `cities-major` историческое.
+Массовая вставка — `python scripts/seed_cities.py` (не `daily.py`).
 Муниципалитеты (DEC-SEED-004) — реестр МО Wikidata (CC0): P31 городской округ / муниципальный округ / район /
 поселение / внутригородское (Q13626398, Q3350075, Q2198484, Q60849925, Q27587207, Q2661988,
 Q634099), P17=Q159, upsert по `wd:Q…`. Это не ОКТМО/ГАР и не все МО России; SPARQL JSON в git нет.
@@ -131,6 +135,7 @@ Q634099), P17=Q159, upsert по `wd:Q…`. Это не ОКТМО/ГАР и не
 
 | Таблица | Сколько строк | Примеры |
 |---|---|---|
+| `data/curated/cities-major.csv` | тысячи (Wikidata Q7930989, не Росстат) | Москва, Самара, Тобольск |
 | `data/curated/municipalities.csv` | тысячи (Wikidata, не ОКТМО) | городской округ Самара, городской округ город Уфа |
 | `data/curated/hodonyms.csv` | тысячи (Wikidata, не ФИАС) | Тверская улица, Арбат, Невский проспект |
 | `data/curated/microtoponyms.csv` | сотни (Wikidata, не ГКГН) | Синий камень, Капова пещера, Нескучный сад |
@@ -186,7 +191,7 @@ curl -sSG http://127.0.0.1:8099/v1/declensions --data-urlencode 'id=wd:Q626'
 | Файл | Что там |
 |---|---|
 | `data/declensions/regions.csv` | округа и субъекты |
-| `data/declensions/cities-major.csv` | крупные города |
+| `data/declensions/cities-major.csv` | города (Wikidata P31=Q7930989) |
 | `data/declensions/hydronyms-major.csv` | гидронимы (Волга, Дон — gold) |
 | `data/declensions/oronyms-major.csv` | оронимы |
 | `data/declensions/municipalities.csv` | муниципалитеты |
@@ -263,7 +268,7 @@ grep -h '^foiv:mvd,' data/declensions/agencies.csv
 Канон читается как обычный CSV. Сервер не обязателен.
 
 ```bash
-# все крупные города
+# города Wikidata P31=Q7930989 (не все 1 126 городов России)
 # data/curated/cities-major.csv
 
 # субъекты
@@ -301,7 +306,8 @@ sqlite3 knowledge/registry.db \
 
 ## 6. Что есть в каноне, чего нет
 
-Есть: 8 федеральных округов, 89 субъектов, крупные города, крупные гидронимы и оронимы,
+Есть: 8 федеральных округов, 89 субъектов, города Wikidata P31=Q7930989
+(не все 1 126 городов России и не Росстат; DEC-SEED-006), крупные гидронимы и оронимы,
 ФОИВ и смежные ведомства, золотые склонения к части из них,
 реестр муниципалитетов, годонимов и микротопонимов Wikidata (исторический малый сид DEC-SEED-001) и дромонимов / сёл / площадей (DEC-SEED-002; не ГАР).
 
