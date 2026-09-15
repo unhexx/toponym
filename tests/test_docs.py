@@ -207,6 +207,7 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
     assert "seed_cities.py" in before_loop2
     assert "seed_agoronyms.py" in before_loop2
     assert "seed_dromonyms.py" in before_loop2
+    assert "seed_villages.py" in before_loop2
     assert "PACKAGE_VERSION" in before_loop2
 
 

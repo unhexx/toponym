@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Harvest Russian municipal formations from Wikidata into municipalities.csv.
+"""Harvest Russian villages and пгт from Wikidata into villages.csv.
 
-Coverage is Wikidata P31 in the municipality allowlist, P17=Q159, not OKTMO/GAR.
+Coverage is Wikidata P31=Q15078955 (пгт) then P31=Q532 (village), P17=Q159,
+not GKGN and not census rural SNP. Hamlets Q5084 are out (10 MiB gate).
 SPARQL JSON/CSV is not vendored; optional --from-csv/--from-json is a cache
 outside git. Daily sync stays known_ids_only (wikidata.yaml).
 """
@@ -27,7 +28,6 @@ from scripts.lib.harvest import (  # noqa: E402
     ALIAS_FILL,
     FILL_IF_EMPTY,
     HarvestCounts,
-    ParentHit,
     ParentIndex,
     SeedError,
     declension_stub,
@@ -44,7 +44,6 @@ from scripts.lib.harvest import (  # noqa: E402
     read_table,
     region_wd_qids,
     resolve_parent,
-    shard_query,
     sparql_csv,
     utc_today,
 )
@@ -56,15 +55,18 @@ from scripts.lib.invariants import yo_to_e  # noqa: E402
 from scripts.lib.upsert import upsert_rows  # noqa: E402
 
 ROOT = _ROOT
-SPARQL_PATH = Path("data/raw/wikidata/municipalities-ru.sparql")
+SPARQL_PATH = Path("data/raw/wikidata/villages-ru.sparql")
+VIL_REL = Path("data/curated/villages.csv")
+DECL_REL = Path("data/declensions/villages.csv")
 MUN_REL = Path("data/curated/municipalities.csv")
-DECL_REL = Path("data/declensions/municipalities.csv")
+CITIES_REL = Path("data/curated/cities-major.csv")
 REGIONS_REL = Path("data/curated/regions.csv")
-MUN_SPECS: tuple[tuple[Path, int], ...] = (
+VIL_SPECS: tuple[tuple[Path, int], ...] = (
     (MUN_REL, 0),
-    (REGIONS_REL, 1),
+    (CITIES_REL, 1),
+    (REGIONS_REL, 2),
 )
-MUN_SKIP_RELS = (
+VIL_SKIP_RELS = (
     Path("data/curated/federal-districts.csv"),
     Path("data/curated/regions.csv"),
     Path("data/curated/cities-major.csv"),
@@ -73,40 +75,35 @@ MUN_SKIP_RELS = (
     Path("data/curated/hodonyms.csv"),
     Path("data/curated/microtoponyms.csv"),
     Path("data/curated/dromonyms.csv"),
-    Path("data/curated/villages.csv"),
     Path("data/curated/agoronyms.csv"),
+    Path("data/curated/municipalities.csv"),
     Path("data/curated/agencies-foiv.csv"),
     Path("data/curated/agencies-other.csv"),
 )
-PASS1_P31 = frozenset(
-    {"Q13626398", "Q3350075", "Q2198484", "Q60849925", "Q27587207"}
-)
-PASS2_P31 = frozenset({"Q2661988", "Q634099"})
-ALL_P31 = PASS1_P31 | PASS2_P31
+PASS1_P31 = frozenset({"Q15078955"})
+PASS2_P31 = frozenset({"Q532"})
+ALLOWED_P31 = PASS1_P31 | PASS2_P31
 EXTRA_SCALARS = ("oktmo", "dissolved")
 EXTRA_QID_SETS = ("replaced", "p31")
 HOP_BATCH = 80
-SHARD_WALL_SEC = 600
 __all__ = [
-    "MUN_SKIP_RELS",
-    "MUN_SPECS",
+    "VIL_SKIP_RELS",
+    "VIL_SPECS",
     "apply_harvest",
     "harvest",
     "load_main_query",
     "load_parent_index",
     "main",
-    "map_municipality",
+    "map_village",
     "oktmo_digits",
-    "oktmo_lookup_keys",
     "p31_from_query",
     "queries_for_p31",
-    "shard_query",
 ]
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Сиды МО из Wikidata SPARQL (не ГАР; не полный ОКТМО)"
+        description="Сиды сёл и пгт из Wikidata SPARQL (не ГКГН; без хуторов Q5084)"
     )
     parser.add_argument("--root", default=str(ROOT), help="корень репозитория")
     parser.add_argument(
@@ -135,7 +132,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--types",
         default="",
-        help="подмножество P31 через запятую (Q13626398,Q3350075)",
+        help="подмножество P31 через запятую (Q15078955,Q532)",
     )
     parser.add_argument(
         "--shard-by-region",
@@ -163,36 +160,28 @@ def parse_types(raw: str) -> frozenset[str] | None:
 
 
 def load_main_query(path: Path) -> str:
-    return load_main_query_required(path, required=("SELECT", "VALUES", "?type"))
+    return load_main_query_required(
+        path, required=("SELECT", "VALUES", "?type", "Q15078955", "Q532")
+    )
 
 
 def queries_for_p31(query: str) -> list[tuple[str, str]]:
-    return queries_for_p31_last(query, last=("Q634099",))
+    return queries_for_p31_last(query, last=("Q532",))
 
 
 def load_parent_index(root: Path) -> ParentIndex:
-    return load_parent_index_specs(root, MUN_SPECS)
+    return load_parent_index_specs(root, VIL_SPECS)
 
 
 def skip_ids(root: Path) -> dict[str, str]:
-    return skip_ids_rels(root, MUN_SKIP_RELS)
+    return skip_ids_rels(root, VIL_SKIP_RELS)
 
 
 def oktmo_digits(value: str) -> str:
     return "".join(ch for ch in (value or "") if ch.isdigit())
 
 
-def oktmo_lookup_keys(code: str) -> list[str]:
-    digits = oktmo_digits(code)
-    if not digits:
-        return []
-    keys = [digits]
-    if len(digits) == 11 and digits[8:] == "000":
-        keys.append(digits[:8])
-    return keys
-
-
-def map_municipality(
+def map_village(
     rec: dict[str, Any],
     parent: tuple[str, str],
     today: str,
@@ -206,7 +195,7 @@ def map_municipality(
         {
             "id": f"wd:{qid}",
             "id_scheme": "wikidata",
-            "type_id": "municipality",
+            "type_id": "village",
             "name_ru": name_ru,
             "name_yo": name_yo,
             "name_en": str(rec.get("en") or ""),
@@ -230,32 +219,8 @@ def _p31(rec: dict[str, Any]) -> set[str]:
     return {str(item) for item in raw}
 
 
-def _index_oktmo(index: dict[str, list[dict[str, str]]], row: dict[str, str]) -> None:
-    rid = (row.get("id") or "").strip()
-    if not rid:
-        return
-    for key in oktmo_lookup_keys(row.get("oktmo") or ""):
-        bucket = index.setdefault(key, [])
-        if all(item.get("id") != rid for item in bucket):
-            bucket.append(row)
-
-
-def _oktmo_hits(
-    index: dict[str, list[dict[str, str]]], code: str
-) -> list[dict[str, str]]:
-    hits: list[dict[str, str]] = []
-    seen: set[str] = set()
-    for key in oktmo_lookup_keys(code):
-        for row in index.get(key, []):
-            rid = row.get("id") or ""
-            if rid and rid not in seen:
-                hits.append(row)
-                seen.add(rid)
-    return hits
-
-
 def _prefer_replaced_by(
-    replaced: set[str], known_ids: set[str], mun_ids: set[str]
+    replaced: set[str], known_ids: set[str], vil_ids: set[str]
 ) -> str:
     hits: list[str] = []
     for raw in replaced:
@@ -266,11 +231,11 @@ def _prefer_replaced_by(
             ident = f"wd:{qid}"
         else:
             continue
-        if ident in known_ids or ident in mun_ids:
+        if ident in known_ids or ident in vil_ids:
             hits.append(ident)
     if not hits:
         return ""
-    preferred = [ident for ident in hits if ident in mun_ids]
+    preferred = [ident for ident in hits if ident in vil_ids]
     return preferred[0] if preferred else hits[0]
 
 
@@ -295,8 +260,6 @@ def apply_harvest(
     today: str,
     skip_map: dict[str, str],
     known_ids: set[str],
-    hop_session: requests.Session | None = None,
-    hop_batch: int = HOP_BATCH,
 ) -> tuple[list[dict[str, str]], list[dict[str, str]], HarvestCounts]:
     counts = HarvestCounts(incoming=len(records))
     original_ids = {row.get("id") for row in existing_places if row.get("id")}
@@ -306,93 +269,62 @@ def apply_harvest(
         wd = (row.get("wd") or "").strip()
         if wd.startswith("Q"):
             by_wd.setdefault(wd, row)
-    oktmo_index: dict[str, list[dict[str, str]]] = {}
-    for row in existing_places:
-        _index_oktmo(oktmo_index, row)
-    mun_ids = set(original_ids)
-    for qid, rec in records.items():
-        if qid in skip_map:
-            continue
-        if _p31(rec) & ALL_P31:
-            mun_ids.add(f"wd:{qid}")
+    vil_ids = set(original_ids)
     incoming: list[dict[str, str]] = []
     new_places: list[dict[str, str]] = []
 
-    def accept(inc: dict[str, str] | None, mapped: dict[str, str] | None) -> None:
-        if mapped is not None:
-            rid = mapped["id"]
-            by_id[rid] = mapped
-            wd = (mapped.get("wd") or "").strip()
-            if wd.startswith("Q"):
-                by_wd.setdefault(wd, mapped)
-            _index_oktmo(oktmo_index, mapped)
-            mun_ids.add(rid)
-            if rid not in original_ids and rid not in {place["id"] for place in new_places}:
-                new_places.append(mapped)
-        if inc is None:
-            return
-        incoming.append(inc)
-
-    def process(qid: str, rec: dict[str, Any]) -> dict[str, str] | None:
+    def process(qid: str, rec: dict[str, Any]) -> None:
         ru = str(rec.get("ru") or "").strip()
         if not ru:
             counts.skipped_other += 1
-            return None
+            return
         if qid in skip_map:
             counts.skipped_overlap += 1
             print(f"skip overlap wd:{qid} table={skip_map[qid]}", file=sys.stderr)
-            return None
+            return
         status, existing = _lookup_existing(qid, by_id, by_wd)
         if status == "overlap":
             counts.skipped_overlap += 1
-            print(f"skip overlap wd:{qid} table=municipalities", file=sys.stderr)
-            return None
+            print(f"skip overlap wd:{qid} table=villages", file=sys.stderr)
+            return
         dissolved = bool(str(rec.get("dissolved") or "").strip())
         if dissolved and existing is None:
             counts.skipped_other += 1
-            return None
+            return
         if dissolved and existing is not None:
             replaced = _prefer_replaced_by(
                 {str(item) for item in (rec.get("replaced") or set())},
                 known_ids,
-                mun_ids,
+                vil_ids,
             )
-            accept(incoming_deprecate(existing["id"], replaced, today), None)
-            return None
-        parent = resolve_parent(index, rec.get("located") or set(), rec.get("iso") or set())
+            incoming.append(incoming_deprecate(existing["id"], replaced, today))
+            return
+        parent = resolve_parent(
+            index, rec.get("located") or set(), rec.get("iso") or set()
+        )
         if parent is None:
             counts.skipped_parent += 1
-            return None
-        mapped = map_municipality(rec, parent, today)
+            return
+        mapped = map_village(rec, parent, today)
         if mapped["id"].startswith("gn:"):
             counts.skipped_other += 1
-            return None
+            return
         if existing is not None:
-            others = [
-                hit
-                for hit in _oktmo_hits(oktmo_index, mapped["oktmo"])
-                if hit.get("id") != existing.get("id")
-            ]
-            if others:
-                counts.skipped_overlap += 1
-                print(f"skip overlap wd:{qid} table=municipalities", file=sys.stderr)
-                return None
             mapped["id"] = existing["id"]
             fill = ALIAS_FILL if existing["id"].startswith("local:") else FILL_IF_EMPTY
-            accept(incoming_for_upsert(mapped, existing, fill=fill), mapped)
-            return mapped
-        hits = _oktmo_hits(oktmo_index, mapped["oktmo"])
-        if len(hits) >= 2:
-            counts.skipped_overlap += 1
-            print(f"skip overlap wd:{qid} table=municipalities", file=sys.stderr)
-            return None
-        if len(hits) == 1:
-            alias = hits[0]
-            mapped["id"] = alias["id"]
-            accept(incoming_for_upsert(mapped, alias, fill=ALIAS_FILL), mapped)
-            return mapped
-        accept(incoming_for_upsert(mapped, None, fill=FILL_IF_EMPTY), mapped)
-        return mapped
+            inc = incoming_for_upsert(mapped, existing, fill=fill)
+            if inc is not None:
+                incoming.append(inc)
+            return
+        inc = incoming_for_upsert(mapped, None, fill=FILL_IF_EMPTY)
+        if inc is None:
+            return
+        incoming.append(inc)
+        new_places.append(mapped)
+        rid = mapped["id"]
+        by_id[rid] = mapped
+        by_wd.setdefault(qid, mapped)
+        vil_ids.add(rid)
 
     pass1 = {qid: rec for qid, rec in records.items() if _p31(rec) & PASS1_P31}
     pass2 = {
@@ -403,18 +335,8 @@ def apply_harvest(
     for qid, rec in records.items():
         if qid not in pass1 and qid not in pass2:
             counts.skipped_other += 1
-
-    if hop_session is not None:
-        counts.hopped += hop_unresolved(hop_session, records, index, hop_batch)
     for qid, rec in pass1.items():
-        mapped = process(qid, rec)
-        if mapped is None:
-            continue
-        index.by_wd.setdefault(
-            qid, ParentHit(id=mapped["id"], admin1=mapped.get("admin1") or "", rank=0)
-        )
-    if hop_session is not None:
-        counts.hopped += hop_unresolved(hop_session, records, index, hop_batch)
+        process(qid, rec)
     for qid, rec in pass2.items():
         process(qid, rec)
 
@@ -427,7 +349,7 @@ def apply_harvest(
     for place in new_places:
         if place["id"] in original_ids:
             continue
-        stub = declension_stub(place, type_code="municipality")
+        stub = declension_stub(place, type_code="village")
         key = (stub["id"], stub["lemma"])
         if key in decl_seen:
             continue
@@ -449,23 +371,6 @@ def _filter_types(
     return {qid: rec for qid, rec in records.items() if _p31(rec) & types}
 
 
-def _fetch_sharded(
-    session: requests.Session,
-    p31: str,
-    typed: str,
-    root: Path,
-    started: float,
-) -> list[dict[str, str]]:
-    return fetch_sharded(
-        session,
-        typed,
-        region_wd_qids(root),
-        wall_sec=SHARD_WALL_SEC,
-        p31=p31,
-        started=started,
-    )
-
-
 def _fetch_p31(
     session: requests.Session,
     p31: str,
@@ -475,7 +380,8 @@ def _fetch_p31(
     force_shard: bool,
     started: float,
 ) -> list[dict[str, str]]:
-    if not force_shard:
+    always_shard = force_shard or p31 == "Q532"
+    if not always_shard:
         for _attempt in range(2):
             print(f"sparql P31={p31}", file=sys.stderr)
             try:
@@ -486,7 +392,14 @@ def _fetch_p31(
             print(f"sparql P31={p31} rows={len(chunk)}", file=sys.stderr)
             return chunk
     print(f"sparql P31={p31} shard-by-region", file=sys.stderr)
-    return _fetch_sharded(session, p31, typed, root, started)
+    return fetch_sharded(
+        session,
+        typed,
+        region_wd_qids(root),
+        wall_sec=0,
+        p31=p31,
+        started=started,
+    )
 
 
 def harvest(
@@ -501,12 +414,12 @@ def harvest(
     shard_by_region: bool = False,
     session: requests.Session | None = None,
 ) -> tuple[list[dict[str, str]], list[dict[str, str]], HarvestCounts, list[str], list[str]]:
-    place_header, existing_places = read_table(root / MUN_REL, PLACES_HEADER)
+    place_header, existing_places = read_table(root / VIL_REL, PLACES_HEADER)
     decl_header, existing_decls = read_table(root / DECL_REL, DECLENSIONS_HEADER)
     if place_header and place_header != PLACES_HEADER:
-        raise SeedError(f"municipalities.csv: заголовок {place_header}")
+        raise SeedError(f"villages.csv: заголовок {place_header}")
     if decl_header and decl_header != DECLENSIONS_HEADER:
-        raise SeedError(f"declensions/municipalities.csv: заголовок {decl_header}")
+        raise SeedError(f"declensions/villages.csv: заголовок {decl_header}")
     index = load_parent_index(root)
     skip_map = skip_ids(root)
     started = time.monotonic()
@@ -541,6 +454,7 @@ def harvest(
                 errors.append(f"{p31}: {exc}")
                 print(f"sparql P31={p31} fail {exc}", file=sys.stderr)
                 continue
+            print(f"sparql P31={p31} rows={len(chunk)}", file=sys.stderr)
             for row in chunk:
                 if not row.get("type") and not row.get("p31"):
                     row["type"] = f"http://www.wikidata.org/entity/{p31}"
@@ -563,9 +477,11 @@ def harvest(
         wd = (row.get("wd") or "").strip()
         if wd.startswith("Q"):
             known_ids.add(f"wd:{wd}")
-    do_hop = hop and from_json is None
-    if do_hop and session is None:
-        session = build_session()
+    hopped = 0
+    if hop and from_json is None:
+        if session is None:
+            session = build_session()
+        hopped = hop_unresolved(session, records, index, hop_batch)
     places, decls, applied = apply_harvest(
         records,
         index=index,
@@ -574,12 +490,11 @@ def harvest(
         today=today,
         skip_map=skip_map,
         known_ids=known_ids,
-        hop_session=session if do_hop else None,
-        hop_batch=hop_batch,
     )
-    place_payload = dump_csv_bytes_or_raise(PLACES_HEADER, places, "municipalities.csv")
+    applied.hopped = hopped
+    place_payload = dump_csv_bytes_or_raise(PLACES_HEADER, places, "villages.csv")
     decl_payload = dump_csv_bytes_or_raise(
-        DECLENSIONS_HEADER, decls, "declensions/municipalities.csv"
+        DECLENSIONS_HEADER, decls, "declensions/villages.csv"
     )
     applied.bytes_places = len(place_payload)
     applied.bytes_decl = len(decl_payload)
@@ -604,7 +519,7 @@ def main(argv: list[str] | None = None) -> int:
             shard_by_region=args.shard_by_region,
         )
         if not args.dry_run:
-            write_csv(root / MUN_REL, place_header, places)
+            write_csv(root / VIL_REL, place_header, places)
             write_csv(root / DECL_REL, decl_header, decls)
     except SeedError as exc:
         print(str(exc), file=sys.stderr)

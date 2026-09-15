@@ -13,6 +13,7 @@ import math
 import re
 import sys
 import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -52,6 +53,7 @@ FILL_IF_EMPTY = ("lat", "lon", "geonames", "name_en", "admin1", "parent_id", "na
 ALIAS_FILL = ("wd", "lat", "lon", "geonames", "name_en")
 KNOWN_FILL = ("lat", "lon", "geonames", "name_en", "oktmo", "wd", "name_yo")
 KNOWN_IDS_BATCH = 80
+REGIONS_REL = Path("data/curated/regions.csv")
 _VALUES_TYPE = re.compile(r"VALUES\s+\?type\s*\{([^}]+)\}", re.IGNORECASE | re.DOTALL)
 _WD_QID = re.compile(r"wd:(Q\d+)", re.IGNORECASE)
 _QID_SET_ALIASES = {
@@ -420,6 +422,81 @@ def sparql_csv(session: requests.Session, query: str, timeout: int = 90) -> list
             raise SeedError(f"SPARQL error: {text[:300]}")
         return list(csv.DictReader(io.StringIO(text)))
     raise last or SeedError("SPARQL: нет ответа")
+
+
+def shard_query(query: str, region_qid: str) -> str:
+    match = _VALUES_TYPE.search(query)
+    if match is None:
+        raise SeedError("SPARQL: нет VALUES ?type для шарда")
+    inject = (
+        match.group(0)
+        + f"\n  VALUES ?subj {{ wd:{region_qid} }}\n  ?item wdt:P131* ?subj ."
+    )
+    return query[: match.start()] + inject + query[match.end() :]
+
+
+def region_wd_qids(root: Path, rel: Path = REGIONS_REL) -> list[str]:
+    path = root / rel
+    if not path.is_file():
+        return []
+    _header, rows = read_csv(path)
+    qids: list[str] = []
+    seen: set[str] = set()
+    for row in rows:
+        wd = (row.get("wd") or "").strip()
+        if wd.startswith("Q") and wd not in seen:
+            qids.append(wd)
+            seen.add(wd)
+    return qids
+
+
+def fetch_sharded(
+    session: requests.Session | None,
+    typed: str,
+    region_qids: list[str],
+    *,
+    wall_sec: float = 0,
+    timeout: int = 60,
+    p31: str = "",
+    started: float | None = None,
+    fetch: Callable[[str], list[dict[str, str]]] | None = None,
+) -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    failed = 0
+    if started is None:
+        started = time.monotonic()
+
+    def default_fetch(region_qid: str) -> list[dict[str, str]]:
+        if session is None:
+            raise SeedError("SPARQL: нет сессии для шарда")
+        return sparql_csv(
+            session, shard_query(typed, region_qid), timeout=timeout
+        )
+
+    getter = fetch if fetch is not None else default_fetch
+    for region_qid in region_qids:
+        if wall_sec > 0 and time.monotonic() - started > wall_sec:
+            print(
+                f"sparql partial: {p31} shards failed={failed}",
+                file=sys.stderr,
+            )
+            break
+        try:
+            chunk = getter(region_qid)
+        except SeedError:
+            failed += 1
+            if fetch is None:
+                time.sleep(0.4)
+            continue
+        rows.extend(chunk)
+        if fetch is None:
+            time.sleep(0.4)
+    if failed:
+        print(
+            f"sparql partial: {p31} shards failed={failed}",
+            file=sys.stderr,
+        )
+    return rows
 
 
 def hop_unresolved(

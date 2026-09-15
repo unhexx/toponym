@@ -1,0 +1,80 @@
+[
+  {
+    "item": "http://www.wikidata.org/entity/Q90006001",
+    "type": "http://www.wikidata.org/entity/Q15078955",
+    "ru": "Тестовый пгт",
+    "en": "Test PGT",
+    "lat": "55.8",
+    "lon": "49.1",
+    "oktmo": "92701000",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90006002",
+    "type": "http://www.wikidata.org/entity/Q532",
+    "ru": "Тестовое село",
+    "en": "Test Village",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90006003",
+    "type": "http://www.wikidata.org/entity/Q532",
+    "ru": "Село без родителя",
+    "en": "No Parent Village",
+    "located": "http://www.wikidata.org/entity/Q1"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90006004",
+    "type": "http://www.wikidata.org/entity/Q532",
+    "ru": "Перекрытие с городом",
+    "en": "Overlap Village",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90006005",
+    "type": "http://www.wikidata.org/entity/Q532",
+    "ru": "Упразднённое новое",
+    "en": "Abolished New",
+    "dissolved": "2020-01-01T00:00:00Z",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90006006",
+    "type": "http://www.wikidata.org/entity/Q532",
+    "ru": "Старое село",
+    "en": "Old Village",
+    "dissolved": "2021-03-01T00:00:00Z",
+    "replaced": "http://www.wikidata.org/entity/Q90006001",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90006007",
+    "type": "http://www.wikidata.org/entity/Q5084",
+    "ru": "Хутор не грузим",
+    "en": "Hamlet Skip",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q894049",
+    "type": "http://www.wikidata.org/entity/Q532",
+    "ru": "Бородино",
+    "en": "Borodino",
+    "gn": "572278",
+    "located": "http://www.wikidata.org/entity/Q1697",
+    "iso": "RU-MOS"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90006008",
+    "type": "http://www.wikidata.org/entity/Q532",
+    "ru": "Зелёная деревня",
+    "en": "Zelyonaya Derevnya",
+    "located": "http://www.wikidata.org/entity/Q1697",
+    "iso": "RU-MOS"
+  }
+]
