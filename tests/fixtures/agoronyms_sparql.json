@@ -1,0 +1,44 @@
+[
+  {
+    "item": "http://www.wikidata.org/entity/Q90004001",
+    "type": "http://www.wikidata.org/entity/Q174782",
+    "ru": "Тестовая площадь",
+    "en": "Test Square",
+    "lat": "55.75",
+    "lon": "37.62",
+    "located": "http://www.wikidata.org/entity/Q649",
+    "iso": "RU-MOW"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q41116",
+    "type": "http://www.wikidata.org/entity/Q174782",
+    "ru": "Красная площадь",
+    "en": "Red Square",
+    "gn": "6295575",
+    "located": "http://www.wikidata.org/entity/Q649",
+    "iso": "RU-MOW"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90004002",
+    "type": "http://www.wikidata.org/entity/Q174782",
+    "ru": "Площадь без родителя",
+    "en": "No Parent Square",
+    "located": "http://www.wikidata.org/entity/Q1"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90004003",
+    "type": "http://www.wikidata.org/entity/Q174782",
+    "ru": "Зелёная площадь",
+    "en": "Zelyonaya Square",
+    "located": "http://www.wikidata.org/entity/Q656",
+    "iso": "RU-SPE"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90004004",
+    "type": "http://www.wikidata.org/entity/Q174782",
+    "ru": "Перекрытие с улицей",
+    "en": "Overlap Square",
+    "located": "http://www.wikidata.org/entity/Q649",
+    "iso": "RU-MOW"
+  }
+]
