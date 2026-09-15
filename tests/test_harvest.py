@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import time
 from pathlib import Path
 
 import pytest
@@ -12,6 +13,7 @@ from scripts.lib.harvest import (
     LOCATED_QUERY,
     SeedError,
     collect_known_qids,
+    fetch_sharded,
     incoming_deprecate,
     incoming_for_upsert,
     known_ids_queries,
@@ -20,6 +22,8 @@ from scripts.lib.harvest import (
     merge_bindings,
     qid_of_place,
     queries_for_p31,
+    region_wd_qids,
+    shard_query,
     skip_ids,
 )
 
@@ -207,3 +211,53 @@ def test_mapped_known_fields_fill_tuple() -> None:
     assert "lat" not in inc
     assert inc["geonames"] == "524901"
     assert inc["name_en"] == "Moscow"
+
+
+def test_shard_query_injects_region_values() -> None:
+    query = "SELECT ?item WHERE {\n  VALUES ?type { wd:Q532 }\n  ?item wdt:P31 ?type .\n}"
+    sharded = shard_query(query, "Q5481")
+    assert "VALUES ?type { wd:Q532 }" in sharded
+    assert "VALUES ?subj { wd:Q5481 }" in sharded
+    assert "?item wdt:P131* ?subj" in sharded
+    with pytest.raises(SeedError, match="VALUES"):
+        shard_query("SELECT ?item WHERE { ?item wdt:P31 wd:Q532 . }", "Q5481")
+
+
+def test_region_wd_qids_all_subjects() -> None:
+    root = Path(__file__).resolve().parents[1]
+    qids = region_wd_qids(root)
+    assert len(qids) == 89
+    assert all(qid.startswith("Q") for qid in qids)
+    assert len(set(qids)) == 89
+
+
+def test_fetch_sharded_wall_sec_zero_visits_all() -> None:
+    seen: list[str] = []
+
+    def fake_fetch(region_qid: str) -> list[dict[str, str]]:
+        seen.append(region_qid)
+        return []
+
+    qids = [f"Q{i}" for i in range(89)]
+    rows = fetch_sharded(
+        None, "SELECT ?item WHERE { VALUES ?type { wd:Q532 } }", qids,
+        wall_sec=0, fetch=fake_fetch,
+    )
+    assert rows == []
+    assert seen == qids
+
+
+def test_fetch_sharded_wall_sec_stops_early() -> None:
+    seen: list[str] = []
+
+    def fake_fetch(region_qid: str) -> list[dict[str, str]]:
+        seen.append(region_qid)
+        time.sleep(0.02)
+        return []
+
+    qids = [f"Q{i}" for i in range(89)]
+    fetch_sharded(
+        None, "SELECT ?item WHERE { VALUES ?type { wd:Q532 } }", qids,
+        wall_sec=0.001, fetch=fake_fetch,
+    )
+    assert 0 < len(seen) < 89

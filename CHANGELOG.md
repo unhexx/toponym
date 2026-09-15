@@ -10,6 +10,7 @@
 - CLI `python scripts/seed_cities.py` (P31=Q7930989, P17=Q159; hop P131*; без Крыма/новых субъектов).
 - CLI `python scripts/seed_agoronyms.py` (P31=Q174782, P17=Q159; годонимы в skip-set).
 - CLI `python scripts/seed_dromonyms.py` (P31=Q34442 + Q728937 ruwiki, P17=Q159; не ПП № 928).
+- CLI `python scripts/seed_villages.py` (пгт Q15078955, затем село Q532; шарды субъектов `wall_sec=0`; хутора Q5084 нет).
 - Реестр городов Wikidata в [`data/curated/cities-major.csv`](data/curated/cities-major.csv): P31 city/town in Russia Q7930989, P17=Q159. Около 1.1 тыс. строк, не все 1 126 городов России (ruwiki 13.05.2026) и не полный ОКТМО; без Крыма/новых субъектов. Имя файла историческое.
 - Реестр площадей Wikidata в [`data/curated/agoronyms.csv`](data/curated/agoronyms.csv): P31=Q174782, P17=Q159. Около 540 строк, не все площади России и не ОМК УМ Москвы. Красная площадь сохранена.
 - Реестр дорог и ЖД Wikidata в [`data/curated/dromonyms.csv`](data/curated/dromonyms.csv): P31=Q34442 и Q728937 ruwiki, P17=Q159. Около 630 строк, не перечень федеральных трасс ПП № 928 и не OSM. Транссиб и БАМ сохранены.
@@ -19,6 +20,7 @@
 - [`docs/USAGE.md`](docs/USAGE.md) §3.1 и [`docs/taxonomy.md`](docs/taxonomy.md): `cities-major` больше не сид pop≥100k, а harvest Wikidata Q7930989 (не Росстат).
 - [`docs/USAGE.md`](docs/USAGE.md) §3.2: площади больше не «малые сиды», а harvest Wikidata Q174782 (не ОМК УМ Москвы).
 - [`docs/USAGE.md`](docs/USAGE.md) §3.2: дромонимы больше не «малые сиды», а harvest Wikidata Q34442/Q728937 (не ПП № 928, не OSM).
+- [`scripts/lib/harvest.py`](scripts/lib/harvest.py): `shard_query` / `fetch_sharded` / `region_wd_qids`. `wall_sec=0` обходит все 89 субъектов; `seed_municipalities.py` зовёт с `wall_sec=600`.
 - Онтология: DEC-SEED-006 (города Wikidata), DEC-SEED-008 (площади Wikidata), DEC-SEED-009 (дороги/ЖД Wikidata); DEC-SEED-001/002 остаются `accepted`.
 
 ## [2026.09.17] - 2026-09-17
