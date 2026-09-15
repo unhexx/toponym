@@ -1,0 +1,41 @@
+[
+  {
+    "item": "http://www.wikidata.org/entity/Q90005001",
+    "type": "http://www.wikidata.org/entity/Q34442",
+    "ru": "Тестовая трасса",
+    "en": "Test Highway",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q58767",
+    "type": "http://www.wikidata.org/entity/Q728937",
+    "ru": "Транссибирская магистраль",
+    "en": "Trans-Siberian railway",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90005002",
+    "type": "http://www.wikidata.org/entity/Q34442",
+    "ru": "Дорога без родителя",
+    "en": "No Parent Road",
+    "located": "http://www.wikidata.org/entity/Q1"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90005003",
+    "type": "http://www.wikidata.org/entity/Q728937",
+    "ru": "Зелёная железная дорога",
+    "en": "Zelyonaya Railway",
+    "located": "http://www.wikidata.org/entity/Q1697",
+    "iso": "RU-MOS"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90005004",
+    "type": "http://www.wikidata.org/entity/Q34442",
+    "ru": "Перекрытие с улицей",
+    "en": "Overlap Road",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  }
+]
