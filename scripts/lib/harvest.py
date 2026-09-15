@@ -88,6 +88,8 @@ class HarvestCounts:
     hopped: int = 0
     deprecated: int = 0
     skipped_overlap: int = 0
+    bytes_places: int = 0
+    bytes_decl: int = 0
 
 
 def qid_from_uri(value: str) -> str:

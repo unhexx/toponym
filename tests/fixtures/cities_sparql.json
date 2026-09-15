@@ -1,0 +1,71 @@
+[
+  {
+    "item": "http://www.wikidata.org/entity/Q90003001",
+    "type": "http://www.wikidata.org/entity/Q7930989",
+    "ru": "Тестоград",
+    "en": "Testograd",
+    "lat": "55.8",
+    "lon": "49.1",
+    "oktmo": "92701000",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90003010",
+    "type": "http://www.wikidata.org/entity/Q7930989",
+    "ru": "Город с заметкой",
+    "en": "Noted City",
+    "gn": "123456",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90003002",
+    "type": "http://www.wikidata.org/entity/Q7930989",
+    "ru": "Город без родителя",
+    "en": "No Parent City",
+    "located": "http://www.wikidata.org/entity/Q1"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90003003",
+    "type": "http://www.wikidata.org/entity/Q7930989",
+    "ru": "Симферополь-тест",
+    "en": "Simferopol Test",
+    "located": "http://www.wikidata.org/entity/Q15966495"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90003004",
+    "type": "http://www.wikidata.org/entity/Q7930989",
+    "ru": "Упразднённый город",
+    "en": "Abolished City",
+    "dissolved": "2020-01-01T00:00:00Z",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90003005",
+    "type": "http://www.wikidata.org/entity/Q7930989",
+    "ru": "Зелёный Город",
+    "en": "Zelyony Gorod",
+    "located": "http://www.wikidata.org/entity/Q1697",
+    "iso": "RU-MOS"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90003006",
+    "type": "http://www.wikidata.org/entity/Q7930989",
+    "ru": "Перекрытие",
+    "en": "Overlap City",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90003007",
+    "type": "http://www.wikidata.org/entity/Q7930989",
+    "ru": "Старый город",
+    "en": "Old City",
+    "dissolved": "2021-03-01T00:00:00Z",
+    "replaced": "http://www.wikidata.org/entity/Q90003001",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  }
+]
