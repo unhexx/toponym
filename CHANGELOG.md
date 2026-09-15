@@ -5,6 +5,12 @@
 
 ## [Unreleased]
 
+### Added
+- SPARQL-указатели Wikidata для городов, сёл/пгт, площадей, дорог/ЖД, гидронимов и оронимов: [`cities-ru.sparql`](data/raw/wikidata/cities-ru.sparql), [`villages-ru.sparql`](data/raw/wikidata/villages-ru.sparql), [`agoronyms-ru.sparql`](data/raw/wikidata/agoronyms-ru.sparql), [`dromonyms-ru.sparql`](data/raw/wikidata/dromonyms-ru.sparql), [`hydronyms-ru.sparql`](data/raw/wikidata/hydronyms-ru.sparql), [`oronyms-ru.sparql`](data/raw/wikidata/oronyms-ru.sparql). JSON/CSV запроса в git не кладётся; канон CSV не трогали.
+
+### Changed
+- [`data/mappings/wikidata.yaml`](data/mappings/wikidata.yaml) — `class_map` и списки `city_p31` / `village_p31` / `agoronym_p31` / `dromonym_p31` / `hydronym_p31` / `oronym_p31` (P31 Wikidata, не Росстат/ГКГН). Хутора Q5084 в карте есть, в harvest VALUES нет.
+
 ## [2026.09.17] - 2026-09-17
 
 Harvest МО и микротопонимов Wikidata. Теги `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`, `2026.09.15` и `2026.09.16` не двигались.
