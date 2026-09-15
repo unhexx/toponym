@@ -8,12 +8,15 @@
 ### Added
 - SPARQL-указатели Wikidata для городов, сёл/пгт, площадей, дорог/ЖД, гидронимов и оронимов: [`cities-ru.sparql`](data/raw/wikidata/cities-ru.sparql), [`villages-ru.sparql`](data/raw/wikidata/villages-ru.sparql), [`agoronyms-ru.sparql`](data/raw/wikidata/agoronyms-ru.sparql), [`dromonyms-ru.sparql`](data/raw/wikidata/dromonyms-ru.sparql), [`hydronyms-ru.sparql`](data/raw/wikidata/hydronyms-ru.sparql), [`oronyms-ru.sparql`](data/raw/wikidata/oronyms-ru.sparql). JSON/CSV запроса в git не кладётся.
 - CLI `python scripts/seed_cities.py` (P31=Q7930989, P17=Q159; hop P131*; без Крыма/новых субъектов).
+- CLI `python scripts/seed_agoronyms.py` (P31=Q174782, P17=Q159; годонимы в skip-set).
 - Реестр городов Wikidata в [`data/curated/cities-major.csv`](data/curated/cities-major.csv): P31 city/town in Russia Q7930989, P17=Q159. Около 1.1 тыс. строк, не все 1 126 городов России (ruwiki 13.05.2026) и не полный ОКТМО; без Крыма/новых субъектов. Имя файла историческое.
+- Реестр площадей Wikidata в [`data/curated/agoronyms.csv`](data/curated/agoronyms.csv): P31=Q174782, P17=Q159. Около 540 строк, не все площади России и не ОМК УМ Москвы. Красная площадь сохранена.
 
 ### Changed
 - [`data/mappings/wikidata.yaml`](data/mappings/wikidata.yaml) — `class_map` и списки `city_p31` / `village_p31` / `agoronym_p31` / `dromonym_p31` / `hydronym_p31` / `oronym_p31` (P31 Wikidata, не Росстат/ГКГН). Хутора Q5084 в карте есть, в harvest VALUES нет.
 - [`docs/USAGE.md`](docs/USAGE.md) §3.1 и [`docs/taxonomy.md`](docs/taxonomy.md): `cities-major` больше не сид pop≥100k, а harvest Wikidata Q7930989 (не Росстат).
-- Онтология: DEC-SEED-006 (города Wikidata); DEC-SEED-001 остаётся `accepted`.
+- [`docs/USAGE.md`](docs/USAGE.md) §3.2: площади больше не «малые сиды», а harvest Wikidata Q174782 (не ОМК УМ Москвы).
+- Онтология: DEC-SEED-006 (города Wikidata), DEC-SEED-008 (площади Wikidata); DEC-SEED-001/002 остаются `accepted`.
 
 ## [2026.09.17] - 2026-09-17
 

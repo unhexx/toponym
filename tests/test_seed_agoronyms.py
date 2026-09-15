@@ -191,7 +191,7 @@ def test_cli_from_json_writes_tmp(tmp_path: Path, capsys) -> None:
     assert "wd:Q90004004" not in by_id
     assert by_id["wd:Q41116"]["notes"].startswith("пример types.csv")
     assert by_id["wd:Q90004003"]["type_id"] == "agoronym"
-    assert len(read_csv(ROOT / "data/curated/agoronyms.csv")[1]) == 5
+    assert len(read_csv(ROOT / "data/curated/agoronyms.csv")[1]) >= 100
 
 
 def test_harvest_from_json_no_network() -> None:
@@ -209,12 +209,12 @@ def test_harvest_from_json_no_network() -> None:
     assert any(row["id"] == "wd:Q41116" for row in places)
     assert any(row["id"] == "wd:Q90004001" for row in places)
     assert not any(row["id"] == "wd:Q90004002" for row in places)
-    assert len(read_csv(ROOT / "data/curated/agoronyms.csv")[1]) == 5
+    assert len(read_csv(ROOT / "data/curated/agoronyms.csv")[1]) >= 100
 
 
-def test_canon_agoronyms_still_seed() -> None:
+def test_canon_agoronyms_harvested() -> None:
     _header, rows = read_csv(ROOT / "data/curated/agoronyms.csv")
-    assert len(rows) == 5
+    assert len(rows) >= 100
     assert any(row["id"] == "wd:Q41116" for row in rows)
     assert any(row["name_ru"] == "Красная площадь" for row in rows)
     assert all(row["type_id"] == "agoronym" for row in rows)

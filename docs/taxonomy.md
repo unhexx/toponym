@@ -26,6 +26,8 @@
 
 Годонимы (DEC-SEED-003): `data/curated/hodonyms.csv` — улицы Wikidata (P31=Q79007 / Q54114 / Q628179 / Q1251403 / Q537127, P17=Q159), upsert по `wd:Q…`. Покрытие источника, не ФИАС и не все улицы России.
 
-Дромонимы / сёла / площади (DEC-SEED-002): `data/curated/dromonyms.csv`, `villages.csv`, `agoronyms.csv`. Улица ≠ площадь.
+Площади (DEC-SEED-008): `data/curated/agoronyms.csv` — Wikidata P31=Q174782, P17=Q159; не все площади России и не ОМК УМ Москвы. Улица ≠ площадь.
+
+Дромонимы / сёла (DEC-SEED-002): `data/curated/dromonyms.csv`, `villages.csv`. Улица ≠ площадь.
 
 Полная таблица типов: `data/curated/types.csv`.
