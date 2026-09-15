@@ -28,6 +28,8 @@
 
 Площади (DEC-SEED-008): `data/curated/agoronyms.csv` — Wikidata P31=Q174782, P17=Q159; не все площади России и не ОМК УМ Москвы. Улица ≠ площадь.
 
-Дромонимы / сёла (DEC-SEED-002): `data/curated/dromonyms.csv`, `villages.csv`. Улица ≠ площадь.
+Дромонимы (DEC-SEED-009): `data/curated/dromonyms.csv` — Wikidata P31=Q34442 (road) и Q728937 (railway, ruwiki), P17=Q159; не перечень федеральных трасс ПП № 928 и не OSM.
+
+Сёла (DEC-SEED-002): `data/curated/villages.csv`. Улица ≠ площадь.
 
 Полная таблица типов: `data/curated/types.csv`.
