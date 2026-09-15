@@ -1,0 +1,42 @@
+# Hydronyms in Russia from Wikidata, CC0.
+# P31: lake Q23397 (ru-label), river Q4022 with ruwiki sitelink. P17 = Russia (Q159).
+# Seas Q165 stay in the seed via FILL_IF_EMPTY, not this VALUES.
+# Not GKGN (~176.8k named rivers) and not all 62845 Wikidata rivers.
+# seed_hydronyms.py runs this once per VALUES type. Do not vendor SPARQL JSON/CSV.
+
+SELECT DISTINCT ?item ?type ?ru ?en ?lat ?lon ?gn ?oktmo ?located ?iso ?dissolved ?replaced WHERE {
+  VALUES ?type { wd:Q23397 wd:Q4022 }
+  ?item wdt:P31 ?type .
+  ?item wdt:P17 wd:Q159 .
+  ?item rdfs:label ?ru FILTER(LANG(?ru) = "ru")
+  OPTIONAL { ?item rdfs:label ?en FILTER(LANG(?en) = "en") }
+  OPTIONAL { ?item p:P625/psv:P625 [ wikibase:geoLatitude ?lat; wikibase:geoLongitude ?lon ] }
+  OPTIONAL { ?item wdt:P1566 ?gn }
+  OPTIONAL { ?item wdt:P764 ?oktmo }
+  OPTIONAL { ?item wdt:P131 ?located }
+  OPTIONAL { ?located wdt:P300 ?iso FILTER(STRSTARTS(?iso, "RU-")) }
+  OPTIONAL { ?item wdt:P576 ?dissolved }
+  OPTIONAL { ?item wdt:P1366 ?replaced }
+  FILTER(?type != wd:Q4022 || EXISTS {
+    ?sitelink schema:about ?item ; schema:isPartOf <https://ru.wikipedia.org/> .
+  })
+}
+
+# Parent hop for items whose P131 is not in curated regions.
+# scripts/seed_hydronyms.py подставляет VALUES ?item { wd:Q… }. Не гонять без VALUES.
+# SELECT DISTINCT ?item ?subj ?iso WHERE {
+#   VALUES ?item { wd:Q626 }
+#   ?item wdt:P131* ?subj .
+#   ?subj wdt:P300 ?iso .
+#   FILTER(STRSTARTS(?iso, "RU-"))
+# }
+
+# Optional region shard after SPARQL timeouts on Q4022. wall_sec=0 — все 89 субъектов.
+# VALUES ?subj { wd:Q… } — один wd из data/curated/regions.csv. Не вендорить результат.
+# SELECT DISTINCT ?item ?type ?ru ?en ?lat ?lon ?gn ?oktmo ?located ?iso ?dissolved ?replaced WHERE {
+#   VALUES ?type { wd:Q4022 }
+#   VALUES ?subj { wd:Q5481 }
+#   ?item wdt:P131* ?subj .
+#   ?item wdt:P31 ?type .
+#   ?item wdt:P17 wd:Q159 .
+# }

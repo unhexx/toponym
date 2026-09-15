@@ -1,0 +1,43 @@
+# Villages and urban-type settlements (пгт) in Russia from Wikidata, CC0.
+# P31: пгт Q15078955, village Q532. P17 = Russia (Q159).
+# Hamlets Q5084 are out (exceed 10 MiB). Not GKGN and not census rural SNP.
+# seed_villages.py runs this once per VALUES type. Do not vendor SPARQL JSON/CSV.
+
+SELECT DISTINCT ?item ?type ?ru ?en ?lat ?lon ?gn ?oktmo ?located ?iso ?dissolved ?replaced WHERE {
+  VALUES ?type { wd:Q15078955 wd:Q532 }
+  ?item wdt:P31 ?type .
+  ?item wdt:P17 wd:Q159 .
+  ?item rdfs:label ?ru FILTER(LANG(?ru) = "ru")
+  OPTIONAL { ?item rdfs:label ?en FILTER(LANG(?en) = "en") }
+  OPTIONAL { ?item p:P625/psv:P625 [ wikibase:geoLatitude ?lat; wikibase:geoLongitude ?lon ] }
+  OPTIONAL { ?item wdt:P1566 ?gn }
+  OPTIONAL { ?item wdt:P764 ?oktmo }
+  OPTIONAL { ?item wdt:P131 ?located }
+  OPTIONAL { ?located wdt:P300 ?iso FILTER(STRSTARTS(?iso, "RU-")) }
+  OPTIONAL { ?item wdt:P576 ?dissolved }
+  OPTIONAL { ?item wdt:P1366 ?replaced }
+}
+
+# Fallback if dump_csv_bytes_or_raise fires on Q532: type-guarded ruwiki sitelink.
+# FILTER(?type != wd:Q532 || EXISTS {
+#   ?sitelink schema:about ?item ; schema:isPartOf <https://ru.wikipedia.org/> .
+# })
+
+# Parent hop for items whose P131 is not in curated municipalities/cities/regions.
+# scripts/seed_villages.py подставляет VALUES ?item { wd:Q… }. Не гонять без VALUES.
+# SELECT DISTINCT ?item ?subj ?iso WHERE {
+#   VALUES ?item { wd:Q15078955 }
+#   ?item wdt:P131* ?subj .
+#   ?subj wdt:P300 ?iso .
+#   FILTER(STRSTARTS(?iso, "RU-"))
+# }
+
+# Optional region shard after SPARQL timeouts on Q532. wall_sec=0 — все 89 субъектов.
+# VALUES ?subj { wd:Q… } — один wd из data/curated/regions.csv. Не вендорить результат.
+# SELECT DISTINCT ?item ?type ?ru ?en ?lat ?lon ?gn ?oktmo ?located ?iso ?dissolved ?replaced WHERE {
+#   VALUES ?type { wd:Q532 }
+#   VALUES ?subj { wd:Q5481 }
+#   ?item wdt:P131* ?subj .
+#   ?item wdt:P31 ?type .
+#   ?item wdt:P17 wd:Q159 .
+# }

@@ -7,6 +7,7 @@ from pathlib import Path
 import jsonschema
 import yaml
 
+from scripts.lib.harvest import load_main_query as load_harvest_query
 from scripts.seed_hodonyms import load_main_query, p31_from_query
 from scripts.seed_microtoponyms import load_main_query as load_micro_query
 from scripts.seed_municipalities import load_main_query as load_mun_query
@@ -122,6 +123,18 @@ def test_wikidata_mapping_points_and_no_sparql_dump() -> None:
     assert payload["class_map"]["Q1251403"] == "hodonym"
     assert payload["class_map"]["Q537127"] == "hodonym"
     assert payload["class_map"]["Q174782"] == "agoronym"
+    assert payload["class_map"]["Q7930989"] == "city"
+    assert payload["class_map"]["Q15078955"] == "village"
+    assert payload["class_map"]["Q5084"] == "village"
+    assert payload["class_map"]["Q728937"] == "dromonym"
+    assert payload["class_map"]["Q4022"] == "potamonym"
+    assert payload["class_map"]["Q23397"] == "limnonym"
+    assert payload["class_map"]["Q165"] == "hydronym"
+    assert payload["class_map"]["Q8502"] == "oronym"
+    assert payload["class_map"]["Q46831"] == "oronym"
+    assert payload["class_map"]["Q8072"] == "oronym"
+    assert payload["class_map"]["Q23442"] == "insulonym"
+    assert payload["class_map"]["Q34763"] == "insulonym"
     assert payload["class_map"]["Q13626398"] == "municipality"
     assert payload["class_map"]["Q3350075"] == "municipality"
     assert payload["class_map"]["Q2198484"] == "municipality"
@@ -159,6 +172,18 @@ def test_wikidata_mapping_points_and_no_sparql_dump() -> None:
         "Q35509",
         "Q22698",
     ]
+    assert payload["filter"]["city_p31"] == ["Q7930989"]
+    assert payload["filter"]["village_p31"] == ["Q15078955", "Q532"]
+    assert payload["filter"]["agoronym_p31"] == ["Q174782"]
+    assert payload["filter"]["dromonym_p31"] == ["Q34442", "Q728937"]
+    assert payload["filter"]["hydronym_p31"] == ["Q23397", "Q4022"]
+    assert payload["filter"]["oronym_p31"] == [
+        "Q8502",
+        "Q46831",
+        "Q8072",
+        "Q23442",
+        "Q34763",
+    ]
     sparql = ROOT / "data" / "raw" / "wikidata" / "hodonyms-ru.sparql"
     assert payload["filter"]["hodonym_p31"] == p31_from_query(load_main_query(sparql))
     mun_sparql = ROOT / "data" / "raw" / "wikidata" / "municipalities-ru.sparql"
@@ -178,6 +203,48 @@ def test_wikidata_mapping_points_and_no_sparql_dump() -> None:
     assert "dec-geo-001" in notes
     assert "sparql" in notes
     assert "dump" in notes or "дамп" in payload["notes"].casefold()
+
+
+def test_wikidata_coverage_sparql_pointers_match_p31_filters() -> None:
+    payload = _load_yaml(MAPPINGS_DIR / "wikidata.yaml")
+    raw = ROOT / "data" / "raw" / "wikidata"
+    skeleton = (
+        "VALUES ?type",
+        "Q159",
+        "?item rdfs:label ?ru",
+        "P625",
+        "P1566",
+        "P764",
+        "P131",
+        "P576",
+        "P1366",
+    )
+    specs = (
+        ("cities-ru.sparql", "city_p31", None),
+        ("villages-ru.sparql", "village_p31", None),
+        ("agoronyms-ru.sparql", "agoronym_p31", None),
+        ("dromonyms-ru.sparql", "dromonym_p31", "Q728937"),
+        ("hydronyms-ru.sparql", "hydronym_p31", "Q4022"),
+        ("oronyms-ru.sparql", "oronym_p31", None),
+    )
+    for name, filter_key, guard_qid in specs:
+        path = raw / name
+        text = path.read_text(encoding="utf-8")
+        assert path.stat().st_size < 10_000, name
+        assert "не вендор" in text.casefold() or "do not vendor" in text.casefold(), name
+        query = load_harvest_query(path)
+        for needle in skeleton:
+            assert needle in query, f"{name}: {needle}"
+        assert payload["filter"][filter_key] == p31_from_query(query), name
+        if guard_qid is None:
+            continue
+        assert f"FILTER(?type != wd:{guard_qid}" in query, name
+        assert "schema:isPartOf <https://ru.wikipedia.org/>" in query, name
+    villages = load_harvest_query(raw / "villages-ru.sparql")
+    assert "Q5084" not in villages
+    assert "Q5084" in (raw / "villages-ru.sparql").read_text(encoding="utf-8")
+    hydronyms = load_harvest_query(raw / "hydronyms-ru.sparql")
+    assert "Q165" not in p31_from_query(hydronyms)
 
 
 def test_geonames_notes_mention_no_insert() -> None:

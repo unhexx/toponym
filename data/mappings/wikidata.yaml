@@ -10,7 +10,10 @@ fields:
   P764: oktmo
 class_map:
   Q515: city
+  Q7930989: city            # city/town in Russia
   Q532: village
+  Q15078955: village        # пгт — oikonym, villages.csv
+  Q5084: village            # hamlet — mapped for skip/docs, not harvested
   Q79007: hodonym
   Q54114: hodonym
   Q628179: hodonym
@@ -18,6 +21,15 @@ class_map:
   Q537127: hodonym
   Q174782: agoronym
   Q34442: dromonym
+  Q728937: dromonym         # railway
+  Q4022: potamonym
+  Q23397: limnonym
+  Q165: hydronym
+  Q8502: oronym
+  Q46831: oronym
+  Q8072: oronym
+  Q23442: insulonym
+  Q34763: insulonym
   Q13626398: municipality   # urban okrug
   Q3350075: municipality    # municipal okrug
   Q2198484: municipality    # municipal district
@@ -55,6 +67,25 @@ filter:
     - Q188869
     - Q35509
     - Q22698
+  city_p31:
+    - Q7930989
+  village_p31:
+    - Q15078955
+    - Q532
+  agoronym_p31:
+    - Q174782
+  dromonym_p31:
+    - Q34442
+    - Q728937
+  hydronym_p31:
+    - Q23397
+    - Q4022
+  oronym_p31:
+    - Q8502
+    - Q46831
+    - Q8072
+    - Q23442
+    - Q34763
 delete_policy: pointer
 notes: >
   Указатель, не дамп SPARQL: python scripts/sync.py --source wikidata --apply
@@ -69,4 +100,9 @@ notes: >
   район / поселение / внутригородское, не ОКТМО/ГАР и не все МО России).
   Q-id → колонка wd; ru/en label → name_ru/name_en; P625 → lat/lon как точки
   (DEC-GEO-001, без полигонов/GeoJSON). P1566/P764 стыкуют geonames/oktmo на
-  существующей строке; insert gn:{id} запрещён (DEC-GN-001).
+  существующей строке; insert gn:{id} запрещён (DEC-GN-001). Allowlist P31
+  городов Q7930989 (не pop≥100k и не все 1126 городов России, ruwiki), сёл
+  Q15078955/Q532 без хуторов Q5084 (не ГКГН), площадей Q174782, дорог Q34442
+  и ЖД Q728937 ruwiki (не ПП № 928), гидронимов Q23397/Q4022 ruwiki (не ГКГН),
+  оронимов Q8502/Q46831/Q8072/Q23442/Q34763. Указатели data/raw/wikidata/*-ru.sparql;
+  JSON/CSV запроса в git не кладётся.

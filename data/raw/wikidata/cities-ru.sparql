@@ -1,0 +1,30 @@
+# Cities in Russia from Wikidata, CC0.
+# P31 = city/town in Russia (Q7930989). P17 = Russia (Q159).
+# Not generic Q515 and not pop≥100k — that historical pointer is cities-major.sparql.
+# Coverage is Wikidata only — not all 1126 cities of Russia (ruwiki 13.05.2026) and not OKTMO.
+# seed_cities.py runs this once per VALUES type. Do not vendor SPARQL JSON/CSV.
+# Skip of Crimea / new subjects is in the CLI (LOCAL_SUBJECT_IDS), not this query.
+
+SELECT DISTINCT ?item ?type ?ru ?en ?lat ?lon ?gn ?oktmo ?located ?iso ?dissolved ?replaced WHERE {
+  VALUES ?type { wd:Q7930989 }
+  ?item wdt:P31 ?type .
+  ?item wdt:P17 wd:Q159 .
+  ?item rdfs:label ?ru FILTER(LANG(?ru) = "ru")
+  OPTIONAL { ?item rdfs:label ?en FILTER(LANG(?en) = "en") }
+  OPTIONAL { ?item p:P625/psv:P625 [ wikibase:geoLatitude ?lat; wikibase:geoLongitude ?lon ] }
+  OPTIONAL { ?item wdt:P1566 ?gn }
+  OPTIONAL { ?item wdt:P764 ?oktmo }
+  OPTIONAL { ?item wdt:P131 ?located }
+  OPTIONAL { ?located wdt:P300 ?iso FILTER(STRSTARTS(?iso, "RU-")) }
+  OPTIONAL { ?item wdt:P576 ?dissolved }
+  OPTIONAL { ?item wdt:P1366 ?replaced }
+}
+
+# Parent hop for items whose P131 is not in curated regions.
+# scripts/seed_cities.py подставляет VALUES ?item { wd:Q… }. Не гонять без VALUES.
+# SELECT DISTINCT ?item ?subj ?iso WHERE {
+#   VALUES ?item { wd:Q649 }
+#   ?item wdt:P131* ?subj .
+#   ?subj wdt:P300 ?iso .
+#   FILTER(STRSTARTS(?iso, "RU-"))
+# }

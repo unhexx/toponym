@@ -29,3 +29,10 @@
 # и scripts/seed_municipalities.py. Не вендорить SPARQL JSON.
 # Harvest микротопонимов Wikidata — data/raw/wikidata/microtoponyms-ru.sparql
 # и scripts/seed_microtoponyms.py. Не вендорить SPARQL JSON.
+# Harvest городов — data/raw/wikidata/cities-ru.sparql (P31 Q7930989, не pop≥100k).
+# Harvest сёл/пгт — villages-ru.sparql (Q15078955 / Q532; без хуторов Q5084).
+# Harvest площадей — agoronyms-ru.sparql (Q174782).
+# Harvest дорог/ЖД — dromonyms-ru.sparql (Q34442 / Q728937 ruwiki; не ПП № 928).
+# Harvest гидронимов — hydronyms-ru.sparql (озёра Q23397, реки Q4022 ruwiki).
+# Harvest оронимов — oronyms-ru.sparql (Q8502 / Q46831 / Q8072 / Q23442 / Q34763).
+# Не вендорить SPARQL JSON.
