@@ -250,7 +250,7 @@ def test_cli_from_json_writes_tmp(tmp_path: Path, capsys) -> None:
     assert by_id["wd:Q90003005"]["type_id"] == "city"
     _dh, decls = read_csv(decl / "cities-major.csv")
     assert any(row["id"] == "wd:Q90003001" and row["review"] == "needs_review" for row in decls)
-    assert len(read_csv(ROOT / "data/curated/cities-major.csv")[1]) == 197
+    assert len(read_csv(ROOT / "data/curated/cities-major.csv")[1]) >= 800
 
 
 def test_harvest_from_json_no_network() -> None:
@@ -269,11 +269,12 @@ def test_harvest_from_json_no_network() -> None:
     assert any(row["id"] == "wd:Q649" for row in places)
     assert any(row["id"] == "wd:Q90003001" for row in places)
     assert not any(row["id"] == "wd:Q90003003" for row in places)
-    assert len(read_csv(ROOT / "data/curated/cities-major.csv")[1]) == 197
+    assert len(read_csv(ROOT / "data/curated/cities-major.csv")[1]) >= 800
 
 
-def test_canon_cities_major_still_seed() -> None:
+def test_canon_cities_major_harvested() -> None:
     _header, rows = read_csv(ROOT / "data/curated/cities-major.csv")
-    assert len(rows) == 197
+    assert len(rows) >= 800
     assert any(row["id"] == "wd:Q649" for row in rows)
+    assert any(row["name_ru"] == "Самара" for row in rows)
     assert all(row["type_id"] == "city" for row in rows)

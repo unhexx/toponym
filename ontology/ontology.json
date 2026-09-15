@@ -469,6 +469,20 @@
       "summary": "Реестр микротопонимов растёт upsert-ом по wd:Q-id из Wikidata (P31 урочище Q1434274/Q125505344, овраг Q1361400, поле Q188869, пещера Q35509, парк Q22698; P17=Q159; без леса Q4421 и ущелья Q2042028). Курируемые extras (леса, бархан, Провал) не как массовые классы. SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не ГКГН и не все микротопонимы России."
     },
     {
+      "id": "DEC-SEED-006",
+      "type": "Decision",
+      "title": "Города из Wikidata SPARQL, не Росстат",
+      "status": "accepted",
+      "date": "2026-09-15",
+      "refs": [
+        "data/curated/cities-major.csv",
+        "data/raw/wikidata/cities-ru.sparql",
+        "scripts/seed_cities.py",
+        "data/mappings/wikidata.yaml"
+      ],
+      "summary": "Реестр городов растёт upsert-ом по wd:Q-id из Wikidata (P31 city/town in Russia Q7930989, P17=Q159; не generic Q515 и не pop≥100k). SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не все 1126 городов России (ruwiki 13.05.2026) и не полный ОКТМО; без Крыма/новых субъектов. Имя файла cities-major историческое."
+    },
+    {
       "id": "DEC-P1-001",
       "type": "Decision",
       "title": "P1 не дробить на P1a–e",

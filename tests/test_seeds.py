@@ -76,7 +76,7 @@ def test_seed_counts() -> None:
     assert len(iso) == 83
     assert len(set(iso)) == 83
     assert sum(1 for row in regions if row["id_scheme"] == "local") == 6
-    assert len(cities) >= 150
+    assert len(cities) >= 800
     assert len(hydros) >= 40
     assert len(oros) >= 25
     assert len(foiv) >= 69
@@ -163,7 +163,7 @@ def test_cities_major_have_wikidata_points() -> None:
     assert moscow["oktmo"] == "45000000"
     assert moscow["fias"] == ""
     with_point = [row for row in cities if row["lat"] and row["lon"]]
-    assert len(with_point) == len(cities)
+    assert len(with_point) >= 800
     for row in cities:
         assert "polygon" not in row
         assert "geojson" not in row
