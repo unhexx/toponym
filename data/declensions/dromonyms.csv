@@ -5,3 +5,624 @@ wd:Q1635333,dromonym,М-4 «Дон»,,,mixed_phrase,always,М-4 «Дон»,,,,,,
 wd:Q1365529,dromonym,Р256 «Чуйский тракт»,,,mixed_phrase,always,Р256 «Чуйский тракт»,,,,,,,needs_review,manual
 wd:Q377967,dromonym,Байкало-Амурская магистраль,,,mixed_phrase,always,Байкало-Амурская магистраль,,,,,,,needs_review,manual
 wd:Q590408,dromonym,Кольцевая автомобильная дорога вокруг Санкт-Петербурга,,,mixed_phrase,always,Кольцевая автомобильная дорога вокруг Санкт-Петербурга,,,,,,,needs_review,manual
+wd:Q2535163,dromonym,Европейский маршрут E119,,,mixed_phrase,always,Европейский маршрут E119,,,,,,,needs_review,wikidata
+wd:Q3444696,dromonym,Европейский маршрут E93,,,mixed_phrase,always,Европейский маршрут E93,,,,,,,needs_review,wikidata
+wd:Q53828736,dromonym,Европейский маршрут E591,,,mixed_phrase,always,Европейский маршрут E591,,,,,,,needs_review,wikidata
+wd:Q3505559,dromonym,Бабиновская дорога,,,mixed_phrase,always,Бабиновская дорога,,,,,,,needs_review,wikidata
+wd:Q2591325,dromonym,Амурская колесная дорога,Амурская колёсная дорога,,mixed_phrase,always,Амурская колесная дорога,,,,,,,needs_review,wikidata
+wd:Q4056212,dromonym,Автодорога Киров — Котлас — Архангельск,,,mixed_phrase,always,Автодорога Киров — Котлас — Архангельск,,,,,,,needs_review,wikidata
+wd:Q2575132,dromonym,Европейский маршрут E381,,,mixed_phrase,always,Европейский маршрут E381,,,,,,,needs_review,wikidata
+wd:Q4056216,dromonym,Симферополь — Евпатория,,,mixed_phrase,always,Симферополь — Евпатория,,,,,,,needs_review,wikidata
+wd:Q4114393,dromonym,Военно-Ахтынская дорога,,,mixed_phrase,always,Военно-Ахтынская дорога,,,,,,,needs_review,wikidata
+wd:Q4092937,dromonym,Большой Черкасский тракт,,,mixed_phrase,always,Большой Черкасский тракт,,,,,,,needs_review,wikidata
+wd:Q2753896,dromonym,Азиатский маршрут AH4,,,mixed_phrase,always,Азиатский маршрут AH4,,,,,,,needs_review,wikidata
+wd:Q2813842,dromonym,Азиатский маршрут AH8,,,mixed_phrase,always,Азиатский маршрут AH8,,,,,,,needs_review,wikidata
+wd:Q48948156,dromonym,Челябинский тракт,,,mixed_phrase,always,Челябинский тракт,,,,,,,needs_review,wikidata
+wd:Q4075551,dromonym,Байкальский тракт,,,mixed_phrase,always,Байкальский тракт,,,,,,,needs_review,wikidata
+wd:Q2625376,dromonym,Европейский маршрут E125,,,mixed_phrase,always,Европейский маршрут E125,,,,,,,needs_review,wikidata
+wd:Q4238290,dromonym,Красноармейское шоссе,,,mixed_phrase,always,Красноармейское шоссе,,,,,,,needs_review,wikidata
+wd:Q4262465,dromonym,Липецкая кольцевая автомобильная дорога,,,mixed_phrase,always,Липецкая кольцевая автомобильная дорога,,,,,,,needs_review,wikidata
+wd:Q2465523,dromonym,Северная широтная магистраль,,,mixed_phrase,always,Северная широтная магистраль,,,,,,,needs_review,wikidata
+wd:Q2283567,dromonym,Европейский маршрут E101,,,mixed_phrase,always,Европейский маршрут E101,,,,,,,needs_review,wikidata
+wd:Q2387562,dromonym,Владимирский тракт,,,mixed_phrase,always,Владимирский тракт,,,,,,,needs_review,wikidata
+wd:Q2164023,dromonym,Транскавказская автомагистраль,,,mixed_phrase,always,Транскавказская автомагистраль,,,,,,,needs_review,wikidata
+wd:Q327162,dromonym,Европейский маршрут E40,,,mixed_phrase,always,Европейский маршрут E40,,,,,,,needs_review,wikidata
+wd:Q111988106,dromonym,03К-001,,,mixed_phrase,always,03К-001,,,,,,,needs_review,wikidata
+wd:Q48953477,dromonym,Бабихинский волок,,,mixed_phrase,always,Бабихинский волок,,,,,,,needs_review,wikidata
+wd:Q110319436,dromonym,Ялтинское кольцо,,,mixed_phrase,always,Ялтинское кольцо,,,,,,,needs_review,wikidata
+wd:Q101018028,dromonym,Сибиряковский тракт,,,mixed_phrase,always,Сибиряковский тракт,,,,,,,needs_review,wikidata
+wd:Q110319532,dromonym,Юго-Восточный обход Симферополя,,,mixed_phrase,always,Юго-Восточный обход Симферополя,,,,,,,needs_review,wikidata
+wd:Q106519552,dromonym,Азиатский маршрут AH9,,,mixed_phrase,always,Азиатский маршрут AH9,,,,,,,needs_review,wikidata
+wd:Q4386303,dromonym,Р119,,,mixed_phrase,always,Р119,,,,,,,needs_review,wikidata
+wd:Q4386410,dromonym,Р72 (автодорога),,,mixed_phrase,always,Р72 (автодорога),,,,,,,needs_review,wikidata
+wd:Q322164,dromonym,Европейский маршрут E22,,,mixed_phrase,always,Европейский маршрут E22,,,,,,,needs_review,wikidata
+wd:Q4386354,dromonym,Р244 (автодорога),,,mixed_phrase,always,Р244 (автодорога),,,,,,,needs_review,wikidata
+wd:Q138783484,dromonym,Дорога сакуровой рощи,,,mixed_phrase,always,Дорога сакуровой рощи,,,,,,,needs_review,wikidata
+wd:Q1165682,dromonym,Европейский маршрут E95,,,mixed_phrase,always,Европейский маршрут E95,,,,,,,needs_review,wikidata
+wd:Q687438,dromonym,Европейский маршрут E50,,,mixed_phrase,always,Европейский маршрут E50,,,,,,,needs_review,wikidata
+wd:Q138783490,dromonym,Окраинная дорога исторического дендрария,,,mixed_phrase,always,Окраинная дорога исторического дендрария,,,,,,,needs_review,wikidata
+wd:Q77652154,dromonym,Пятерочка,Пятёрочка,,mixed_phrase,always,Пятерочка,,,,,,,needs_review,wikidata
+wd:Q4386326,dromonym,Р193,,,mixed_phrase,always,Р193,,,,,,,needs_review,wikidata
+wd:Q105825444,dromonym,А160,,,mixed_phrase,always,А160,,,,,,,needs_review,wikidata
+wd:Q138783460,dromonym,Северная дорога,,,mixed_phrase,always,Северная дорога,,,,,,,needs_review,wikidata
+wd:Q108773013,dromonym,Обход Хабаровска,,,mixed_phrase,always,Обход Хабаровска,,,,,,,needs_review,wikidata
+wd:Q2078255,dromonym,Европейский маршрут E127,,,mixed_phrase,always,Европейский маршрут E127,,,,,,,needs_review,wikidata
+wd:Q19907349,dromonym,Р438,,,mixed_phrase,always,Р438,,,,,,,needs_review,wikidata
+wd:Q7129507,dromonym,Панъевропейский транспортный коридор № 9,,,mixed_phrase,always,Панъевропейский транспортный коридор № 9,,,,,,,needs_review,wikidata
+wd:Q28666180,dromonym,Тракт Медынь — Гжатск,,,mixed_phrase,always,Тракт Медынь — Гжатск,,,,,,,needs_review,wikidata
+wd:Q4397383,dromonym,Романовское шоссе,,,mixed_phrase,always,Романовское шоссе,,,,,,,needs_review,wikidata
+wd:Q12146466,dromonym,94К-4,,,mixed_phrase,always,94К-4,,,,,,,needs_review,wikidata
+wd:Q2110667,dromonym,Транссибирская автомагистраль,,,mixed_phrase,always,Транссибирская автомагистраль,,,,,,,needs_review,wikidata
+wd:Q12973946,dromonym,Азиатский маршрут AH30,,,mixed_phrase,always,Азиатский маршрут AH30,,,,,,,needs_review,wikidata
+wd:Q15972937,dromonym,Азиатское Шоссе 82,,,mixed_phrase,always,Азиатское Шоссе 82,,,,,,,needs_review,wikidata
+wd:Q4412469,dromonym,Северо-Западная хорда,,,mixed_phrase,always,Северо-Западная хорда,,,,,,,needs_review,wikidata
+wd:Q4386389,dromonym,Р404,,,mixed_phrase,always,Р404,,,,,,,needs_review,wikidata
+wd:Q4386343,dromonym,Р228,,,mixed_phrase,always,Р228,,,,,,,needs_review,wikidata
+wd:Q4386366,dromonym,Р329 (автодорога),,,mixed_phrase,always,Р329 (автодорога),,,,,,,needs_review,wikidata
+wd:Q4412001,dromonym,Север — Юг,,,mixed_phrase,always,Север — Юг,,,,,,,needs_review,wikidata
+wd:Q4298359,dromonym,Мичуринское шоссе,,,mixed_phrase,always,Мичуринское шоссе,,,,,,,needs_review,wikidata
+wd:Q4512584,dromonym,Чердынская дорога,,,mixed_phrase,always,Чердынская дорога,,,,,,,needs_review,wikidata
+wd:Q1995013,dromonym,Европейский маршрут E262,,,mixed_phrase,always,Европейский маршрут E262,,,,,,,needs_review,wikidata
+wd:Q1375799,dromonym,Европейский маршрут E117,,,mixed_phrase,always,Европейский маршрут E117,,,,,,,needs_review,wikidata
+wd:Q987346,dromonym,Европейский маршрут E20,,,mixed_phrase,always,Европейский маршрут E20,,,,,,,needs_review,wikidata
+wd:Q948601,dromonym,Сибирский тракт,,,mixed_phrase,always,Сибирский тракт,,,,,,,needs_review,wikidata
+wd:Q1127824,dromonym,Автодорога Н-19,,,mixed_phrase,always,Автодорога Н-19,,,,,,,needs_review,wikidata
+wd:Q1321545,dromonym,Европейский маршрут E105,,,mixed_phrase,always,Европейский маршрут E105,,,,,,,needs_review,wikidata
+wd:Q1821054,dromonym,Европейский маршрут E123,,,mixed_phrase,always,Европейский маршрут E123,,,,,,,needs_review,wikidata
+wd:Q784392,dromonym,Европейский маршрут E97,,,mixed_phrase,always,Европейский маршрут E97,,,,,,,needs_review,wikidata
+wd:Q1476440,dromonym,Р257 «Енисей»,,,mixed_phrase,always,Р257 «Енисей»,,,,,,,needs_review,wikidata
+wd:Q841694,dromonym,Автодорога Красноперекопск — Симферополь,,,mixed_phrase,always,Автодорога Красноперекопск — Симферополь,,,,,,,needs_review,wikidata
+wd:Q609635,dromonym,Азиатский маршрут AH7,,,mixed_phrase,always,Азиатский маршрут AH7,,,,,,,needs_review,wikidata
+wd:Q493937,dromonym,Азиатский маршрут AH6,,,mixed_phrase,always,Азиатский маршрут AH6,,,,,,,needs_review,wikidata
+wd:Q289474,dromonym,Европейский маршрут E38,,,mixed_phrase,always,Европейский маршрут E38,,,,,,,needs_review,wikidata
+wd:Q649131,dromonym,Европейский маршрут E121,,,mixed_phrase,always,Европейский маршрут E121,,,,,,,needs_review,wikidata
+wd:Q693049,dromonym,Европейский маршрут E391,,,mixed_phrase,always,Европейский маршрут E391,,,,,,,needs_review,wikidata
+wd:Q918092,dromonym,Европейский маршрут E77,,,mixed_phrase,always,Европейский маршрут E77,,,,,,,needs_review,wikidata
+wd:Q314656,dromonym,Европейский маршрут E28,,,mixed_phrase,always,Европейский маршрут E28,,,,,,,needs_review,wikidata
+wd:Q180384,dromonym,Европейский маршрут E58,,,mixed_phrase,always,Европейский маршрут E58,,,,,,,needs_review,wikidata
+wd:Q140363740,dromonym,А295,,,mixed_phrase,always,А295,,,,,,,needs_review,wikidata
+wd:Q140363750,dromonym,А298,,,mixed_phrase,always,А298,,,,,,,needs_review,wikidata
+wd:Q266050,dromonym,Азиатский маршрут AH3,,,mixed_phrase,always,Азиатский маршрут AH3,,,,,,,needs_review,wikidata
+wd:Q120143496,dromonym,Европейский маршрут E119 в России,,,mixed_phrase,always,Европейский маршрут E119 в России,,,,,,,needs_review,wikidata
+wd:Q123484625,dromonym,41К-939,,,mixed_phrase,always,41К-939,,,,,,,needs_review,wikidata
+wd:Q140364168,dromonym,А321,,,mixed_phrase,always,А321,,,,,,,needs_review,wikidata
+wd:Q123482365,dromonym,А189 (автодорога),,,mixed_phrase,always,А189 (автодорога),,,,,,,needs_review,wikidata
+wd:Q113138123,dromonym,46К-5031,,,mixed_phrase,always,46К-5031,,,,,,,needs_review,wikidata
+wd:Q280078,dromonym,А322,,,mixed_phrase,always,А322,,,,,,,needs_review,wikidata
+wd:Q124260434,dromonym,Р207,,,mixed_phrase,always,Р207,,,,,,,needs_review,wikidata
+wd:Q160249,dromonym,Европейский маршрут E30,,,mixed_phrase,always,Европейский маршрут E30,,,,,,,needs_review,wikidata
+wd:Q279469,dromonym,А161 (автодорога),,,mixed_phrase,always,А161 (автодорога),,,,,,,needs_review,wikidata
+wd:Q120143475,dromonym,Европейский маршрут E101 в России,,,mixed_phrase,always,Европейский маршрут E101 в России,,,,,,,needs_review,wikidata
+wd:Q120720807,dromonym,Р229,,,mixed_phrase,always,Р229,,,,,,,needs_review,wikidata
+wd:Q279426,dromonym,А146,,,mixed_phrase,always,А146,,,,,,,needs_review,wikidata
+wd:Q140363883,dromonym,А361,,,mixed_phrase,always,А361,,,,,,,needs_review,wikidata
+wd:Q140357306,dromonym,А159,,,mixed_phrase,always,А159,,,,,,,needs_review,wikidata
+wd:Q120166413,dromonym,А123,,,mixed_phrase,always,А123,,,,,,,needs_review,wikidata
+wd:Q124260450,dromonym,Р208,,,mixed_phrase,always,Р208,,,,,,,needs_review,wikidata
+wd:Q114295756,dromonym,А401,,,mixed_phrase,always,А401,,,,,,,needs_review,wikidata
+wd:Q1476453,dromonym,Р-254 «Иртыш»,,,mixed_phrase,always,Р-254 «Иртыш»,,,,,,,needs_review,wikidata
+wd:Q65128183,dromonym,Северный объезд,,,mixed_phrase,always,Северный объезд,,,,,,,needs_review,wikidata
+wd:Q1023551,dromonym,Р-255 «Сибирь»,,,mixed_phrase,always,Р-255 «Сибирь»,,,,,,,needs_review,wikidata
+wd:Q4386317,dromonym,Р158,,,mixed_phrase,always,Р158,,,,,,,needs_review,wikidata
+wd:Q4056214,dromonym,04К-029 Саяны,,,mixed_phrase,always,04К-029 Саяны,,,,,,,needs_review,wikidata
+wd:Q4053859,dromonym,А216,,,mixed_phrase,always,А216,,,,,,,needs_review,wikidata
+wd:Q4053847,dromonym,Западный объезд Волгограда,,,mixed_phrase,always,Западный объезд Волгограда,,,,,,,needs_review,wikidata
+wd:Q4053853,dromonym,А181 (автодорога),,,mixed_phrase,always,А181 (автодорога),,,,,,,needs_review,wikidata
+wd:Q4053843,dromonym,Р120,,,mixed_phrase,always,Р120,,,,,,,needs_review,wikidata
+wd:Q4053852,dromonym,А165,,,mixed_phrase,always,А165,,,,,,,needs_review,wikidata
+wd:Q4053851,dromonym,А333,,,mixed_phrase,always,А333,,,,,,,needs_review,wikidata
+wd:Q4053862,dromonym,А340,,,mixed_phrase,always,А340,,,,,,,needs_review,wikidata
+wd:Q279424,dromonym,Р-298,,,mixed_phrase,always,Р-298,,,,,,,needs_review,wikidata
+wd:Q640189,dromonym,А240,,,mixed_phrase,always,А240,,,,,,,needs_review,wikidata
+wd:Q279509,dromonym,А184,,,mixed_phrase,always,А184,,,,,,,needs_review,wikidata
+wd:Q279451,dromonym,Р216,,,mixed_phrase,always,Р216,,,,,,,needs_review,wikidata
+wd:Q483149,dromonym,Анабар (автодорога),,,mixed_phrase,always,Анабар (автодорога),,,,,,,needs_review,wikidata
+wd:Q279379,dromonym,А114,,,mixed_phrase,always,А114,,,,,,,needs_review,wikidata
+wd:Q279484,dromonym,А350,,,mixed_phrase,always,А350,,,,,,,needs_review,wikidata
+wd:Q279931,dromonym,А229,,,mixed_phrase,always,А229,,,,,,,needs_review,wikidata
+wd:Q18407148,dromonym,Охотский тракт,,,mixed_phrase,always,Охотский тракт,,,,,,,needs_review,wikidata
+wd:Q2036761,dromonym,А375,,,mixed_phrase,always,А375,,,,,,,needs_review,wikidata
+wd:Q2110161,dromonym,А217 «Приморское полукольцо»,,,mixed_phrase,always,А217 «Приморское полукольцо»,,,,,,,needs_review,wikidata
+wd:Q25395726,dromonym,Р215,,,mixed_phrase,always,Р215,,,,,,,needs_review,wikidata
+wd:Q18398609,dromonym,Р440,,,mixed_phrase,always,Р440,,,,,,,needs_review,wikidata
+wd:Q19908039,dromonym,Улан-Удэ — Заиграево — Кижинга — Хоринск,,,mixed_phrase,always,Улан-Удэ — Заиграево — Кижинга — Хоринск,,,,,,,needs_review,wikidata
+wd:Q21644145,dromonym,Р436,,,mixed_phrase,always,Р436,,,,,,,needs_review,wikidata
+wd:Q16690174,dromonym,Р490,,,mixed_phrase,always,Р490,,,,,,,needs_review,wikidata
+wd:Q28667832,dromonym,Р243,,,mixed_phrase,always,Р243,,,,,,,needs_review,wikidata
+wd:Q19916527,dromonym,Шергино — Заречье,,,mixed_phrase,always,Шергино — Заречье,,,,,,,needs_review,wikidata
+wd:Q21641793,dromonym,Монды — Орлик,,,mixed_phrase,always,Монды — Орлик,,,,,,,needs_review,wikidata
+wd:Q16681404,dromonym,Новокузнецкая Кольцевая Автомобильная Дорога,,,mixed_phrase,always,Новокузнецкая Кольцевая Автомобильная Дорога,,,,,,,needs_review,wikidata
+wd:Q1375790,dromonym,Европейский маршрут E115,,,mixed_phrase,always,Европейский маршрут E115,,,,,,,needs_review,wikidata
+wd:Q1478066,dromonym,А331 «Вилюй»,,,mixed_phrase,always,А331 «Вилюй»,,,,,,,needs_review,wikidata
+wd:Q4330135,dromonym,Обход города Вологды,,,mixed_phrase,always,Обход города Вологды,,,,,,,needs_review,wikidata
+wd:Q4386403,dromonym,А-391,,,mixed_phrase,always,А-391,,,,,,,needs_review,wikidata
+wd:Q4386405,dromonym,А-392,,,mixed_phrase,always,А-392,,,,,,,needs_review,wikidata
+wd:Q4386330,dromonym,Р1 (автодорога),,,mixed_phrase,always,Р1 (автодорога),,,,,,,needs_review,wikidata
+wd:Q1881018,dromonym,Р258 «Байкал»,,,mixed_phrase,always,Р258 «Байкал»,,,,,,,needs_review,wikidata
+wd:Q4330138,dromonym,Обход города Иркутска,,,mixed_phrase,always,Обход города Иркутска,,,,,,,needs_review,wikidata
+wd:Q4386375,dromonym,А215,,,mixed_phrase,always,А215,,,,,,,needs_review,wikidata
+wd:Q1880896,dromonym,Р260,,,mixed_phrase,always,Р260,,,,,,,needs_review,wikidata
+wd:Q4386390,dromonym,Енисейский тракт,,,mixed_phrase,always,Енисейский тракт,,,,,,,needs_review,wikidata
+wd:Q4386394,dromonym,Р419 (автодорога),,,mixed_phrase,always,Р419 (автодорога),,,,,,,needs_review,wikidata
+wd:Q4386409,dromonym,А119,,,mixed_phrase,always,А119,,,,,,,needs_review,wikidata
+wd:Q97658769,dromonym,А122,,,mixed_phrase,always,А122,,,,,,,needs_review,wikidata
+wd:Q110319248,dromonym,А376,,,mixed_phrase,always,А376,,,,,,,needs_review,wikidata
+wd:Q79061284,dromonym,Амга,,,mixed_phrase,always,Амга,,,,,,,needs_review,wikidata
+wd:Q140357262,dromonym,А156,,,mixed_phrase,always,А156,,,,,,,needs_review,wikidata
+wd:Q132181153,dromonym,Обход Волгограда,,,mixed_phrase,always,Обход Волгограда,,,,,,,needs_review,wikidata
+wd:Q128111889,dromonym,Нижний Новгород — Шахунья — Яранск,,,mixed_phrase,always,Нижний Новгород — Шахунья — Яранск,,,,,,,needs_review,wikidata
+wd:Q140352468,dromonym,А134,,,mixed_phrase,always,А134,,,,,,,needs_review,wikidata
+wd:Q111661537,dromonym,А-371,,,mixed_phrase,always,А-371,,,,,,,needs_review,wikidata
+wd:Q114295617,dromonym,А393,,,mixed_phrase,always,А393,,,,,,,needs_review,wikidata
+wd:Q279455,dromonym,Военно-Сухумская дорога,,,mixed_phrase,always,Военно-Сухумская дорога,,,,,,,needs_review,wikidata
+wd:Q28860093,dromonym,Широтная магистраль скоростного движения,,,mixed_phrase,always,Широтная магистраль скоростного движения,,,,,,,needs_review,wikidata
+wd:Q30888627,dromonym,Наро-Фоминская платная дорога,,,mixed_phrase,always,Наро-Фоминская платная дорога,,,,,,,needs_review,wikidata
+wd:Q4146453,dromonym,41К-008,,,mixed_phrase,always,41К-008,,,,,,,needs_review,wikidata
+wd:Q4169300,dromonym,А148 «Дублер Курортного проспекта»,А148 «Дублёр Курортного проспекта»,,mixed_phrase,always,А148 «Дублер Курортного проспекта»,,,,,,,needs_review,wikidata
+wd:Q4125452,dromonym,А133,,,mixed_phrase,always,А133,,,,,,,needs_review,wikidata
+wd:Q4138592,dromonym,Гимры-Чирката (автодорога),,,mixed_phrase,always,Гимры-Чирката (автодорога),,,,,,,needs_review,wikidata
+wd:Q6458921,dromonym,А134,,,mixed_phrase,always,А134,,,,,,,needs_review,wikidata
+wd:Q4470799,dromonym,Улаганский тракт,,,mixed_phrase,always,Улаганский тракт,,,,,,,needs_review,wikidata
+wd:Q4056215,dromonym,Автодорога Полярный — Ленинградский,,,mixed_phrase,always,Автодорога Полярный — Ленинградский,,,,,,,needs_review,wikidata
+wd:Q4056336,dromonym,Автомобильная дорога Иультин — Эгвекинот,,,mixed_phrase,always,Автомобильная дорога Иультин — Эгвекинот,,,,,,,needs_review,wikidata
+wd:Q4053844,dromonym,86К-10,,,mixed_phrase,always,86К-10,,,,,,,needs_review,wikidata
+wd:Q4053860,dromonym,А212,,,mixed_phrase,always,А212,,,,,,,needs_review,wikidata
+wd:Q59820509,dromonym,Европейский маршрут E95 в России,,,mixed_phrase,always,Европейский маршрут E95 в России,,,,,,,needs_review,wikidata
+wd:Q59722850,dromonym,Европейский маршрут E50 в России,,,mixed_phrase,always,Европейский маршрут E50 в России,,,,,,,needs_review,wikidata
+wd:Q55659224,dromonym,Р188 (автодорога),,,mixed_phrase,always,Р188 (автодорога),,,,,,,needs_review,wikidata
+wd:Q57418024,dromonym,Колыма — Омсукчан — Омолон — Анадырь,,,mixed_phrase,always,Колыма — Омсукчан — Омолон — Анадырь,,,,,,,needs_review,wikidata
+wd:Q59846777,dromonym,Европейский маршрут E105 в России,,,mixed_phrase,always,Европейский маршрут E105 в России,,,,,,,needs_review,wikidata
+wd:Q56307516,dromonym,Киевское шоссе (Ленинградская область),,,mixed_phrase,always,Киевское шоссе (Ленинградская область),,,,,,,needs_review,wikidata
+wd:Q56196382,dromonym,Европейский маршрут E30 в России,,,mixed_phrase,always,Европейский маршрут E30 в России,,,,,,,needs_review,wikidata
+wd:Q56195629,dromonym,Европейский маршрут E22 в России,,,mixed_phrase,always,Европейский маршрут E22 в России,,,,,,,needs_review,wikidata
+wd:Q60851863,dromonym,Р132 «Золотое кольцо»,,,mixed_phrase,always,Р132 «Золотое кольцо»,,,,,,,needs_review,wikidata
+wd:Q56753513,dromonym,Юго-Восточная хорда,,,mixed_phrase,always,Юго-Восточная хорда,,,,,,,needs_review,wikidata
+wd:Q4053831,dromonym,28К-0576,,,mixed_phrase,always,28К-0576,,,,,,,needs_review,wikidata
+wd:Q4053834,dromonym,А-120 «Санкт-петербургское южное полукольцо»,,,mixed_phrase,always,А-120 «Санкт-петербургское южное полукольцо»,,,,,,,needs_review,wikidata
+wd:Q4053841,dromonym,А136,,,mixed_phrase,always,А136,,,,,,,needs_review,wikidata
+wd:Q28667739,dromonym,А135,,,mixed_phrase,always,А135,,,,,,,needs_review,wikidata
+wd:Q2137859,dromonym,Европейский маршрут E592,,,mixed_phrase,always,Европейский маршрут E592,,,,,,,needs_review,wikidata
+wd:Q15781103,dromonym,А154,,,mixed_phrase,always,А154,,,,,,,needs_review,wikidata
+wd:Q19916025,dromonym,Фряновское шоссе,,,mixed_phrase,always,Фряновское шоссе,,,,,,,needs_review,wikidata
+wd:Q21639959,dromonym,Итум-Кали — Шатили,,,mixed_phrase,always,Итум-Кали — Шатили,,,,,,,needs_review,wikidata
+wd:Q16671692,dromonym,Лихачевское шоссе,Лихачёвское шоссе,,mixed_phrase,always,Лихачевское шоссе,,,,,,,needs_review,wikidata
+wd:Q16695721,dromonym,Северный обход Одинцова,,,mixed_phrase,always,Северный обход Одинцова,,,,,,,needs_review,wikidata
+wd:Q16541190,dromonym,А-158,,,mixed_phrase,always,А-158,,,,,,,needs_review,wikidata
+wd:Q4533931,dromonym,Южная рокада,,,mixed_phrase,always,Южная рокада,,,,,,,needs_review,wikidata
+wd:Q7491187,dromonym,А305 (автодорога),,,mixed_phrase,always,А305 (автодорога),,,,,,,needs_review,wikidata
+wd:Q4395438,dromonym,Рогачевское шоссе,Рогачёвское шоссе,,mixed_phrase,always,Рогачевское шоссе,,,,,,,needs_review,wikidata
+wd:Q4386368,dromonym,Екатеринбург — Тюмень,,,mixed_phrase,always,Екатеринбург — Тюмень,,,,,,,needs_review,wikidata
+wd:Q4386385,dromonym,Р402,,,mixed_phrase,always,Р402,,,,,,,needs_review,wikidata
+wd:Q4386427,dromonym,Р92,,,mixed_phrase,always,Р92,,,,,,,needs_review,wikidata
+wd:Q4386370,dromonym,Р354,,,mixed_phrase,always,Р354,,,,,,,needs_review,wikidata
+wd:Q4386369,dromonym,Р352 (автодорога),,,mixed_phrase,always,Р352 (автодорога),,,,,,,needs_review,wikidata
+wd:Q4386408,dromonym,Р56,,,mixed_phrase,always,Р56,,,,,,,needs_review,wikidata
+wd:Q4386401,dromonym,Р47 (автодорога),,,mixed_phrase,always,Р47 (автодорога),,,,,,,needs_review,wikidata
+wd:Q626244,dromonym,Четвертое транспортное кольцо,Четвёртое транспортное кольцо,,mixed_phrase,always,Четвертое транспортное кольцо,,,,,,,needs_review,wikidata
+wd:Q746156,dromonym,Европейский маршрут E017,,,mixed_phrase,always,Европейский маршрут E017,,,,,,,needs_review,wikidata
+wd:Q279420,dromonym,А142,,,mixed_phrase,always,А142,,,,,,,needs_review,wikidata
+wd:Q279411,dromonym,Р21 «Кола»,,,mixed_phrase,always,Р21 «Кола»,,,,,,,needs_review,wikidata
+wd:Q279458,dromonym,А157,,,mixed_phrase,always,А157,,,,,,,needs_review,wikidata
+wd:Q279387,dromonym,А-121 «Сортавала»,,,mixed_phrase,always,А-121 «Сортавала»,,,,,,,needs_review,wikidata
+wd:Q279472,dromonym,А162,,,mixed_phrase,always,А162,,,,,,,needs_review,wikidata
+wd:Q279476,dromonym,А163,,,mixed_phrase,always,А163,,,,,,,needs_review,wikidata
+wd:Q279445,dromonym,А151,,,mixed_phrase,always,А151,,,,,,,needs_review,wikidata
+wd:Q279344,dromonym,А106 «Рублево-Успенское шоссе»,А106 «Рублёво-Успенское шоссе»,,mixed_phrase,always,А106 «Рублево-Успенское шоссе»,,,,,,,needs_review,wikidata
+wd:Q280046,dromonym,А161,,,mixed_phrase,always,А161,,,,,,,needs_review,wikidata
+wd:Q4327607,dromonym,Носовихинское шоссе,,,mixed_phrase,always,Носовихинское шоссе,,,,,,,needs_review,wikidata
+wd:Q4386353,dromonym,Пермь — Екатеринбург,,,mixed_phrase,always,Пермь — Екатеринбург,,,,,,,needs_review,wikidata
+wd:Q4386311,dromonym,Р151,,,mixed_phrase,always,Р151,,,,,,,needs_review,wikidata
+wd:Q4386356,dromonym,Бугульма - Теплое,Бугульма - Тёплое,,mixed_phrase,always,Бугульма - Теплое,,,,,,,needs_review,wikidata
+wd:Q4386320,dromonym,Р178,,,mixed_phrase,always,Р178,,,,,,,needs_review,wikidata
+wd:Q4386347,dromonym,Р240 (автодорога Казань — Самара),,,mixed_phrase,always,Р240 (автодорога Казань — Самара),,,,,,,needs_review,wikidata
+wd:Q4386351,dromonym,Р239,,,mixed_phrase,always,Р239,,,,,,,needs_review,wikidata
+wd:Q4386349,dromonym,Р240,,,mixed_phrase,always,Р240,,,,,,,needs_review,wikidata
+wd:Q4386363,dromonym,Р316 (автодорога),,,mixed_phrase,always,Р316 (автодорога),,,,,,,needs_review,wikidata
+wd:Q4386364,dromonym,Р322 (автодорога),,,mixed_phrase,always,Р322 (автодорога),,,,,,,needs_review,wikidata
+wd:Q4363401,dromonym,Пироговское шоссе,,,mixed_phrase,always,Пироговское шоссе,,,,,,,needs_review,wikidata
+wd:Q4421566,dromonym,А181 «Скандинавия»,,,mixed_phrase,always,А181 «Скандинавия»,,,,,,,needs_review,wikidata
+wd:Q140365409,dromonym,А111,,,mixed_phrase,always,А111,,,,,,,needs_review,wikidata
+wd:Q140365393,dromonym,А110,,,mixed_phrase,always,А110,,,,,,,needs_review,wikidata
+wd:Q140364143,dromonym,А305,,,mixed_phrase,always,А305,,,,,,,needs_review,wikidata
+wd:Q140352507,dromonym,А135,,,mixed_phrase,always,А135,,,,,,,needs_review,wikidata
+wd:Q140343671,dromonym,А103 «Щелковское шоссе»,А103 «Щёлковское шоссе»,,mixed_phrase,always,А103 «Щелковское шоссе»,,,,,,,needs_review,wikidata
+wd:Q140351695,dromonym,А112,,,mixed_phrase,always,А112,,,,,,,needs_review,wikidata
+wd:Q140364263,dromonym,А384,,,mixed_phrase,always,А384,,,,,,,needs_review,wikidata
+wd:Q114127353,dromonym,Северный обход Ростова-на-Дону,,,mixed_phrase,always,Северный обход Ростова-на-Дону,,,,,,,needs_review,wikidata
+wd:Q949370,dromonym,Р-23,,,mixed_phrase,always,Р-23,,,,,,,needs_review,wikidata
+wd:Q1880947,dromonym,А300,,,mixed_phrase,always,А300,,,,,,,needs_review,wikidata
+wd:Q1880958,dromonym,А320,,,mixed_phrase,always,А320,,,,,,,needs_review,wikidata
+wd:Q1880842,dromonym,А180 «Нарва»,,,mixed_phrase,always,А180 «Нарва»,,,,,,,needs_review,wikidata
+wd:Q1848985,dromonym,М-5 «Урал»,,,mixed_phrase,always,М-5 «Урал»,,,,,,,needs_review,wikidata
+wd:Q1455081,dromonym,А147,,,mixed_phrase,always,А147,,,,,,,needs_review,wikidata
+wd:Q1573369,dromonym,А-290,,,mixed_phrase,always,А-290,,,,,,,needs_review,wikidata
+wd:Q104760619,dromonym,Р241,,,mixed_phrase,always,Р241,,,,,,,needs_review,wikidata
+wd:Q111661524,dromonym,А153,,,mixed_phrase,always,А153,,,,,,,needs_review,wikidata
+wd:Q1880899,dromonym,М-1 «Беларусь»,,,mixed_phrase,always,М-1 «Беларусь»,,,,,,,needs_review,wikidata
+wd:Q1527326,dromonym,А310,,,mixed_phrase,always,А310,,,,,,,needs_review,wikidata
+wd:Q1342857,dromonym,Военно-Грузинская дорога,,,mixed_phrase,always,Военно-Грузинская дорога,,,,,,,needs_review,wikidata
+wd:Q1259260,dromonym,Третье транспортное кольцо,,,mixed_phrase,always,Третье транспортное кольцо,,,,,,,needs_review,wikidata
+wd:Q1880904,dromonym,Р280 «Новороссия»,,,mixed_phrase,always,Р280 «Новороссия»,,,,,,,needs_review,wikidata
+wd:Q48948153,dromonym,Арамильский тракт,,,mixed_phrase,always,Арамильский тракт,,,,,,,needs_review,wikidata
+wd:Q28667730,dromonym,А132,,,mixed_phrase,always,А132,,,,,,,needs_review,wikidata
+wd:Q48948175,dromonym,Режевской тракт,,,mixed_phrase,always,Режевской тракт,,,,,,,needs_review,wikidata
+wd:Q4288300,dromonym,Международное шоссе,,,mixed_phrase,always,Международное шоссе,,,,,,,needs_review,wikidata
+wd:Q4360240,dromonym,Петергофская дорога,,,mixed_phrase,always,Петергофская дорога,,,,,,,needs_review,wikidata
+wd:Q4174301,dromonym,Екатеринбургская кольцевая автомобильная дорога,,,mixed_phrase,always,Екатеринбургская кольцевая автомобильная дорога,,,,,,,needs_review,wikidata
+wd:Q4123873,dromonym,Волоколамское шоссе,,,mixed_phrase,always,Волоколамское шоссе,,,,,,,needs_review,wikidata
+wd:Q4186593,dromonym,Западный скоростной диаметр,,,mixed_phrase,always,Западный скоростной диаметр,,,,,,,needs_review,wikidata
+wd:Q4086802,dromonym,Билярский тракт,,,mixed_phrase,always,Билярский тракт,,,,,,,needs_review,wikidata
+wd:Q110319364,dromonym,Р355,,,mixed_phrase,always,Р355,,,,,,,needs_review,wikidata
+wd:Q110319226,dromonym,А289,,,mixed_phrase,always,А289,,,,,,,needs_review,wikidata
+wd:Q110319380,dromonym,Р177 «Поветлужье»,,,mixed_phrase,always,Р177 «Поветлужье»,,,,,,,needs_review,wikidata
+wd:Q109742982,dromonym,Калужская кольцевая автомобильная дорога,,,mixed_phrase,always,Калужская кольцевая автомобильная дорога,,,,,,,needs_review,wikidata
+wd:Q109743147,dromonym,Южный обход Калуги,,,mixed_phrase,always,Южный обход Калуги,,,,,,,needs_review,wikidata
+wd:Q109743193,dromonym,Северный обход Калуги,,,mixed_phrase,always,Северный обход Калуги,,,,,,,needs_review,wikidata
+wd:Q279338,dromonym,А104,,,mixed_phrase,always,А104,,,,,,,needs_review,wikidata
+wd:Q279335,dromonym,А130,,,mixed_phrase,always,А130,,,,,,,needs_review,wikidata
+wd:Q141455629,dromonym,Южный вьезд в парк Коломенское,,,mixed_phrase,always,Южный вьезд в парк Коломенское,,,,,,,needs_review,wikidata
+wd:Q279353,dromonym,А109 «Ильинское шоссе»,,,mixed_phrase,always,А109 «Ильинское шоссе»,,,,,,,needs_review,wikidata
+wd:Q16690137,dromonym,Р105,,,mixed_phrase,always,Р105,,,,,,,needs_review,wikidata
+wd:Q4534048,dromonym,Южное шоссе (Ленинградская область),,,mixed_phrase,always,Южное шоссе (Ленинградская область),,,,,,,needs_review,wikidata
+wd:Q16690144,dromonym,Р123,,,mixed_phrase,always,Р123,,,,,,,needs_review,wikidata
+wd:Q4388589,dromonym,Разинское шоссе,,,mixed_phrase,always,Разинское шоссе,,,,,,,needs_review,wikidata
+wd:Q136559595,dromonym,А138,,,mixed_phrase,always,А138,,,,,,,needs_review,wikidata
+wd:Q16690148,dromonym,Р124,,,mixed_phrase,always,Р124,,,,,,,needs_review,wikidata
+wd:Q13689975,dromonym,Шереметьевское шоссе,,,mixed_phrase,always,Шереметьевское шоссе,,,,,,,needs_review,wikidata
+wd:Q96371202,dromonym,А164,,,mixed_phrase,always,А164,,,,,,,needs_review,wikidata
+wd:Q114125882,dromonym,А167,,,mixed_phrase,always,А167,,,,,,,needs_review,wikidata
+wd:Q107351763,dromonym,Восточный обход Ростова-на-Дону,,,mixed_phrase,always,Восточный обход Ростова-на-Дону,,,,,,,needs_review,wikidata
+wd:Q65138924,dromonym,Бузнаса нух,,,mixed_phrase,always,Бузнаса нух,,,,,,,needs_review,wikidata
+wd:Q50875,dromonym,Гатчина - Ополье,,,mixed_phrase,always,Гатчина - Ополье,,,,,,,needs_review,wikidata
+wd:Q111586900,dromonym,Нижняя Дорога,,,mixed_phrase,always,Нижняя Дорога,,,,,,,needs_review,wikidata
+wd:Q4386308,dromonym,Лотта,,,mixed_phrase,always,Лотта,,,,,,,needs_review,wikidata
+wd:Q4386307,dromonym,Р125 (автодорога),,,mixed_phrase,always,Р125 (автодорога),,,,,,,needs_review,wikidata
+wd:Q4386355,dromonym,Р245 (автодорога),,,mixed_phrase,always,Р245 (автодорога),,,,,,,needs_review,wikidata
+wd:Q131302679,dromonym,Пролетарская улица (Калуга),,,mixed_phrase,always,Пролетарская улица (Калуга),,,,,,,needs_review,wikidata
+wd:Q4386298,dromonym,Р10,,,mixed_phrase,always,Р10,,,,,,,needs_review,wikidata
+wd:Q4228743,dromonym,Колтушское шоссе,,,mixed_phrase,always,Колтушское шоссе,,,,,,,needs_review,wikidata
+wd:Q4508748,dromonym,Чемальский тракт,,,mixed_phrase,always,Чемальский тракт,,,,,,,needs_review,wikidata
+wd:Q131160155,dromonym,Улица Красная Гора (Калуга),,,mixed_phrase,always,Улица Красная Гора (Калуга),,,,,,,needs_review,wikidata
+wd:Q131413379,dromonym,Улица Белинского (Воронеж),,,mixed_phrase,always,Улица Белинского (Воронеж),,,,,,,needs_review,wikidata
+wd:Q4112807,dromonym,Вишняковское шоссе,,,mixed_phrase,always,Вишняковское шоссе,,,,,,,needs_review,wikidata
+wd:Q131388136,dromonym,Улица Жилина (Воронеж),,,mixed_phrase,always,Улица Жилина (Воронеж),,,,,,,needs_review,wikidata
+wd:Q131301963,dromonym,Улица Беляева (Калуга),,,mixed_phrase,always,Улица Беляева (Калуга),,,,,,,needs_review,wikidata
+wd:Q131407205,dromonym,Первомайская улица (Воронеж),,,mixed_phrase,always,Первомайская улица (Воронеж),,,,,,,needs_review,wikidata
+wd:Q131362367,dromonym,Улица Труда (Калуга),,,mixed_phrase,always,Улица Труда (Калуга),,,,,,,needs_review,wikidata
+wd:Q131403688,dromonym,Улица Коммунаров (Воронеж),,,mixed_phrase,always,Улица Коммунаров (Воронеж),,,,,,,needs_review,wikidata
+wd:Q131409832,dromonym,Улица Эртеля,,,mixed_phrase,always,Улица Эртеля,,,,,,,needs_review,wikidata
+wd:Q4258934,dromonym,Леоновское шоссе,,,mixed_phrase,always,Леоновское шоссе,,,,,,,needs_review,wikidata
+wd:Q131292347,dromonym,Набережная улица (Калуга),,,mixed_phrase,always,Набережная улица (Калуга),,,,,,,needs_review,wikidata
+wd:Q131382547,dromonym,Улица Летчика Замкина,Улица Лётчика Замкина,,mixed_phrase,always,Улица Летчика Замкина,,,,,,,needs_review,wikidata
+wd:Q4330455,dromonym,Объездное шоссе (Балашиха),,,mixed_phrase,always,Объездное шоссе (Балашиха),,,,,,,needs_review,wikidata
+wd:Q130472805,dromonym,Улица Луначарского (Калуга),,,mixed_phrase,always,Улица Луначарского (Калуга),,,,,,,needs_review,wikidata
+wd:Q41633901,dromonym,Улица Худякова (Казань),,,mixed_phrase,always,Улица Худякова (Казань),,,,,,,needs_review,wikidata
+wd:Q130317499,dromonym,Улица Ленина (Калуга),,,mixed_phrase,always,Улица Ленина (Калуга),,,,,,,needs_review,wikidata
+wd:Q131425579,dromonym,Улица Свердлова,,,mixed_phrase,always,Улица Свердлова,,,,,,,needs_review,wikidata
+wd:Q31444555,dromonym,Астрономическая улица,,,mixed_phrase,always,Астрономическая улица,,,,,,,needs_review,wikidata
+wd:Q131447395,dromonym,Батуринская улица (Воронеж),,,mixed_phrase,always,Батуринская улица (Воронеж),,,,,,,needs_review,wikidata
+wd:Q115130326,dromonym,Улица Карла Маркса (Хабаровск),,,mixed_phrase,always,Улица Карла Маркса (Хабаровск),,,,,,,needs_review,wikidata
+wd:Q29886630,dromonym,улица Степана Разина,,,mixed_phrase,always,улица Степана Разина,,,,,,,needs_review,wikidata
+wd:Q41793798,dromonym,Спартаковская улица,,,mixed_phrase,always,Спартаковская улица,,,,,,,needs_review,wikidata
+wd:Q130487639,dromonym,Улица Баррикад,,,mixed_phrase,always,Улица Баррикад,,,,,,,needs_review,wikidata
+wd:Q41634352,dromonym,Улица Касаткина (Казань),,,mixed_phrase,always,Улица Касаткина (Казань),,,,,,,needs_review,wikidata
+wd:Q131421941,dromonym,Улица Фрунзе (Воронеж),,,mixed_phrase,always,Улица Фрунзе (Воронеж),,,,,,,needs_review,wikidata
+wd:Q30139761,dromonym,улица Право-Булачная,,,mixed_phrase,always,улица Право-Булачная,,,,,,,needs_review,wikidata
+wd:Q110342154,dromonym,Улица Дзержинского (Владимир),,,mixed_phrase,always,Улица Дзержинского (Владимир),,,,,,,needs_review,wikidata
+wd:Q125577518,dromonym,Ионинская улица,,,mixed_phrase,always,Ионинская улица,,,,,,,needs_review,wikidata
+wd:Q130388095,dromonym,Улица Плеханова (Калуга),,,mixed_phrase,always,Улица Плеханова (Калуга),,,,,,,needs_review,wikidata
+wd:Q79407270,dromonym,Улица Лермонтова,,,mixed_phrase,always,Улица Лермонтова,,,,,,,needs_review,wikidata
+wd:Q110216691,dromonym,"Сибирский тракт, участок в 1,2 км (Дебесы)","Сибирский тракт, участок в 1,2 км (Дебёсы)",,mixed_phrase,always,"Сибирский тракт, участок в 1,2 км (Дебесы)",,,,,,,needs_review,wikidata
+wd:Q107587016,dromonym,Улица Золотухи,,,mixed_phrase,always,Улица Золотухи,,,,,,,needs_review,wikidata
+wd:Q137848773,dromonym,Маяковского Улица,,,mixed_phrase,always,Маяковского Улица,,,,,,,needs_review,wikidata
+wd:Q115978535,dromonym,Улица Освобождения Труда,,,mixed_phrase,always,Улица Освобождения Труда,,,,,,,needs_review,wikidata
+wd:Q28706522,dromonym,Улица Адмирала Фадеева (Севастополь),,,mixed_phrase,always,Улица Адмирала Фадеева (Севастополь),,,,,,,needs_review,wikidata
+wd:Q130392616,dromonym,Улица Гагарина (Калуга),,,mixed_phrase,always,Улица Гагарина (Калуга),,,,,,,needs_review,wikidata
+wd:Q107561670,dromonym,Улица Загонова,,,mixed_phrase,always,Улица Загонова,,,,,,,needs_review,wikidata
+wd:Q85552097,dromonym,"Электросталь, улица Корешкова",,,mixed_phrase,always,"Электросталь, улица Корешкова",,,,,,,needs_review,wikidata
+wd:Q86668841,dromonym,Южный обход Подольска,,,mixed_phrase,always,Южный обход Подольска,,,,,,,needs_review,wikidata
+wd:Q130381927,dromonym,Улица Суворова (Калуга),,,mixed_phrase,always,Улица Суворова (Калуга),,,,,,,needs_review,wikidata
+wd:Q50382257,dromonym,Наки Исанбета улица,,,mixed_phrase,always,Наки Исанбета улица,,,,,,,needs_review,wikidata
+wd:Q50382002,dromonym,Краснококшайская улица,,,mixed_phrase,always,Краснококшайская улица,,,,,,,needs_review,wikidata
+wd:Q108377351,dromonym,Полевой проезд,,,mixed_phrase,always,Полевой проезд,,,,,,,needs_review,wikidata
+wd:Q108911870,dromonym,Улица Достоевского,,,mixed_phrase,always,Улица Достоевского,,,,,,,needs_review,wikidata
+wd:Q50383156,dromonym,улица Энгельса,,,mixed_phrase,always,улица Энгельса,,,,,,,needs_review,wikidata
+wd:Q84599143,dromonym,Набережная Корнилова,,,mixed_phrase,always,Набережная Корнилова,,,,,,,needs_review,wikidata
+wd:Q115899541,dromonym,Улица Таранченко,,,mixed_phrase,always,Улица Таранченко,,,,,,,needs_review,wikidata
+wd:Q123708078,dromonym,улица Алексея Тупицына,,,mixed_phrase,always,улица Алексея Тупицына,,,,,,,needs_review,wikidata
+wd:Q131439148,dromonym,Улица Герцена (Воронеж),,,mixed_phrase,always,Улица Герцена (Воронеж),,,,,,,needs_review,wikidata
+wd:Q130384999,dromonym,Улица Достоевского (Калуга),,,mixed_phrase,always,Улица Достоевского (Калуга),,,,,,,needs_review,wikidata
+wd:Q40793775,dromonym,улица Сибгата Хакима,,,mixed_phrase,always,улица Сибгата Хакима,,,,,,,needs_review,wikidata
+wd:Q115961561,dromonym,Улица Софьи Перовской (Воронеж),,,mixed_phrase,always,Улица Софьи Перовской (Воронеж),,,,,,,needs_review,wikidata
+wd:Q279393,dromonym,А128 (автодорога),,,mixed_phrase,always,А128 (автодорога),,,,,,,needs_review,wikidata
+wd:Q20571923,dromonym,улица Чернышевского,,,mixed_phrase,always,улица Чернышевского,,,,,,,needs_review,wikidata
+wd:Q85606546,dromonym,Электросталь. Улица 1-я Поселковая,,,mixed_phrase,always,Электросталь. Улица 1-я Поселковая,,,,,,,needs_review,wikidata
+wd:Q59140476,dromonym,Черноморское — Евпатория (автодорога),,,mixed_phrase,always,Черноморское — Евпатория (автодорога),,,,,,,needs_review,wikidata
+wd:Q130546806,dromonym,Октябрьская улица (Калуга),,,mixed_phrase,always,Октябрьская улица (Калуга),,,,,,,needs_review,wikidata
+wd:Q138952249,dromonym,Улица Окулова (Пермь),,,mixed_phrase,always,Улица Окулова (Пермь),,,,,,,needs_review,wikidata
+wd:Q141447797,dromonym,Нам,,,mixed_phrase,always,Нам,,,,,,,needs_review,wikidata
+wd:Q130570626,dromonym,Улица Дарвина (Калуга),,,mixed_phrase,always,Улица Дарвина (Калуга),,,,,,,needs_review,wikidata
+wd:Q65301124,dromonym,Улица Азина,,,mixed_phrase,always,Улица Азина,,,,,,,needs_review,wikidata
+wd:Q28667857,dromonym,А291 «Таврида»,,,mixed_phrase,always,А291 «Таврида»,,,,,,,needs_review,wikidata
+wd:Q4534165,dromonym,Южный обход Нижнего Новгорода,,,mixed_phrase,always,Южный обход Нижнего Новгорода,,,,,,,needs_review,wikidata
+wd:Q131139729,dromonym,Знаменская улица (Калуга),,,mixed_phrase,always,Знаменская улица (Калуга),,,,,,,needs_review,wikidata
+wd:Q127969393,dromonym,28К-1185,,,mixed_phrase,always,28К-1185,,,,,,,needs_review,wikidata
+wd:Q120478525,dromonym,Манштейновская дорога,,,mixed_phrase,always,Манштейновская дорога,,,,,,,needs_review,wikidata
+wd:Q105080649,dromonym,Алупкинское шоссе,,,mixed_phrase,always,Алупкинское шоссе,,,,,,,needs_review,wikidata
+wd:Q130587517,dromonym,Улица Карпова (Калуга),,,mixed_phrase,always,Улица Карпова (Калуга),,,,,,,needs_review,wikidata
+wd:Q130614012,dromonym,Улица Космонавта Пацаева (Калуга),,,mixed_phrase,always,Улица Космонавта Пацаева (Калуга),,,,,,,needs_review,wikidata
+wd:Q97694878,dromonym,Набережная 1 Мая,,,mixed_phrase,always,Набережная 1 Мая,,,,,,,needs_review,wikidata
+wd:Q41794342,dromonym,улица Туфана Миннуллина,,,mixed_phrase,always,улица Туфана Миннуллина,,,,,,,needs_review,wikidata
+wd:Q130504084,dromonym,Улица Гоголя (Калуга),,,mixed_phrase,always,Улица Гоголя (Калуга),,,,,,,needs_review,wikidata
+wd:Q61368503,dromonym,Старое Севастопольское шоссе,,,mixed_phrase,always,Старое Севастопольское шоссе,,,,,,,needs_review,wikidata
+wd:Q131080713,dromonym,Улица Фридриха Энгельса,,,mixed_phrase,always,Улица Фридриха Энгельса,,,,,,,needs_review,wikidata
+wd:Q4076470,dromonym,Балашихинское шоссе,,,mixed_phrase,always,Балашихинское шоссе,,,,,,,needs_review,wikidata
+wd:Q130941533,dromonym,Воробьевская улица (Калуга),Воробьёвская улица (Калуга),,mixed_phrase,always,Воробьевская улица (Калуга),,,,,,,needs_review,wikidata
+wd:Q113675054,dromonym,Кинешемское шоссе,,,mixed_phrase,always,Кинешемское шоссе,,,,,,,needs_review,wikidata
+wd:Q130557525,dromonym,Улица Огарева (Калуга),Улица Огарёва (Калуга),,mixed_phrase,always,Улица Огарева (Калуга),,,,,,,needs_review,wikidata
+wd:Q65301239,dromonym,улица Артема Айдинова,улица Артёма Айдинова,,mixed_phrase,always,улица Артема Айдинова,,,,,,,needs_review,wikidata
+wd:Q4089168,dromonym,Богашевский тракт,Богашёвский тракт,,mixed_phrase,always,Богашевский тракт,,,,,,,needs_review,wikidata
+wd:Q130526349,dromonym,Улица Дзержинского (Калуга),,,mixed_phrase,always,Улица Дзержинского (Калуга),,,,,,,needs_review,wikidata
+wd:Q60053934,dromonym,Черноморское — Воинка (автодорога),,,mixed_phrase,always,Черноморское — Воинка (автодорога),,,,,,,needs_review,wikidata
+wd:Q130719267,dromonym,Гостинорядский переулок (Калуга),,,mixed_phrase,always,Гостинорядский переулок (Калуга),,,,,,,needs_review,wikidata
+wd:Q130552112,dromonym,Улица Космонавта Волкова (Калуга),,,mixed_phrase,always,Улица Космонавта Волкова (Калуга),,,,,,,needs_review,wikidata
+wd:Q130631817,dromonym,Улица Кропоткина (Калуга),,,mixed_phrase,always,Улица Кропоткина (Калуга),,,,,,,needs_review,wikidata
+wd:Q30330501,dromonym,улица Курашова,,,mixed_phrase,always,улица Курашова,,,,,,,needs_review,wikidata
+wd:Q104511680,dromonym,Грушевка — Судак (автодорога),,,mixed_phrase,always,Грушевка — Судак (автодорога),,,,,,,needs_review,wikidata
+wd:Q130604465,dromonym,Улица Воронина (Калуга),,,mixed_phrase,always,Улица Воронина (Калуга),,,,,,,needs_review,wikidata
+wd:Q113260041,dromonym,Сипайловская улица,,,mixed_phrase,always,Сипайловская улица,,,,,,,needs_review,wikidata
+wd:Q50385544,dromonym,Театральная улица,,,mixed_phrase,always,Театральная улица,,,,,,,needs_review,wikidata
+wd:Q12076164,dromonym,35К-003 (автодорога),,,mixed_phrase,always,35К-003 (автодорога),,,,,,,needs_review,wikidata
+wd:Q29843906,dromonym,Улица Николаева (Казань),,,mixed_phrase,always,Улица Николаева (Казань),,,,,,,needs_review,wikidata
+wd:Q105314678,dromonym,Раздольное — Евпатория (автодорога),,,mixed_phrase,always,Раздольное — Евпатория (автодорога),,,,,,,needs_review,wikidata
+wd:Q130402134,dromonym,Улица Рокоссовского (Волгоград),,,mixed_phrase,always,Улица Рокоссовского (Волгоград),,,,,,,needs_review,wikidata
+wd:Q91916726,dromonym,Полевая улица (Королев),Полевая улица (Королёв),,mixed_phrase,always,Полевая улица (Королев),,,,,,,needs_review,wikidata
+wd:Q127700181,dromonym,Салла,,,mixed_phrase,always,Салла,,,,,,,needs_review,wikidata
+wd:Q105460631,dromonym,Северное — Войково (автодорога),,,mixed_phrase,always,Северное — Войково (автодорога),,,,,,,needs_review,wikidata
+wd:Q55658518,dromonym,Восточный выезд Уфы,,,mixed_phrase,always,Восточный выезд Уфы,,,,,,,needs_review,wikidata
+wd:Q131154506,dromonym,Улица Добровольского (Калуга),,,mixed_phrase,always,Улица Добровольского (Калуга),,,,,,,needs_review,wikidata
+wd:Q4053842,dromonym,А130 (автодорога),,,mixed_phrase,always,А130 (автодорога),,,,,,,needs_review,wikidata
+wd:Q130707294,dromonym,Улица Чебышева (Калуга),,,mixed_phrase,always,Улица Чебышева (Калуга),,,,,,,needs_review,wikidata
+wd:Q51902478,dromonym,Бахчисарай — Ялта (автодорога),,,mixed_phrase,always,Бахчисарай — Ялта (автодорога),,,,,,,needs_review,wikidata
+wd:Q131119560,dromonym,Воскресенский переулок (Калуга),,,mixed_phrase,always,Воскресенский переулок (Калуга),,,,,,,needs_review,wikidata
+wd:Q130492189,dromonym,Улица Герцена (Калуга),,,mixed_phrase,always,Улица Герцена (Калуга),,,,,,,needs_review,wikidata
+wd:Q126118759,dromonym,Майская улица (Ижевск),,,mixed_phrase,always,Майская улица (Ижевск),,,,,,,needs_review,wikidata
+wd:Q24935737,dromonym,Казанский тракт,,,mixed_phrase,always,Казанский тракт,,,,,,,needs_review,wikidata
+wd:Q29876946,dromonym,Улица Груздева,,,mixed_phrase,always,Улица Груздева,,,,,,,needs_review,wikidata
+wd:Q140357149,dromonym,Старое Краснополянское шоссе,,,mixed_phrase,always,Старое Краснополянское шоссе,,,,,,,needs_review,wikidata
+wd:Q4057605,dromonym,Адлер — Красная Поляна,,,mixed_phrase,always,Адлер — Красная Поляна,,,,,,,needs_review,wikidata
+wd:Q110319469,dromonym,Восточный обвод Тулы,,,mixed_phrase,always,Восточный обвод Тулы,,,,,,,needs_review,wikidata
+wd:Q127771317,dromonym,Серебрянка,,,mixed_phrase,always,Серебрянка,,,,,,,needs_review,wikidata
+wd:Q131108653,dromonym,Донинское шоссе,,,mixed_phrase,always,Донинское шоссе,,,,,,,needs_review,wikidata
+wd:Q78116211,dromonym,Улицы города Электросталь,,,mixed_phrase,always,Улицы города Электросталь,,,,,,,needs_review,wikidata
+wd:Q56547793,dromonym,Алексеевское шоссе,,,mixed_phrase,always,Алексеевское шоссе,,,,,,,needs_review,wikidata
+wd:Q130870105,dromonym,Улица Никитина (Калуга),,,mixed_phrase,always,Улица Никитина (Калуга),,,,,,,needs_review,wikidata
+wd:Q50377715,dromonym,улица Герцена,,,mixed_phrase,always,улица Герцена,,,,,,,needs_review,wikidata
+wd:Q29882177,dromonym,Малая Красная улица,,,mixed_phrase,always,Малая Красная улица,,,,,,,needs_review,wikidata
+wd:Q29882186,dromonym,Улица Галактионова (Казань),,,mixed_phrase,always,Улица Галактионова (Казань),,,,,,,needs_review,wikidata
+wd:Q130772346,dromonym,Старообрядческий переулок (Калуга),,,mixed_phrase,always,Старообрядческий переулок (Калуга),,,,,,,needs_review,wikidata
+wd:Q28667838,dromonym,35А-002,,,mixed_phrase,always,35А-002,,,,,,,needs_review,wikidata
+wd:Q29918587,dromonym,улица Щапова,,,mixed_phrase,always,улица Щапова,,,,,,,needs_review,wikidata
+wd:Q50382893,dromonym,Столярова улица,,,mixed_phrase,always,Столярова улица,,,,,,,needs_review,wikidata
+wd:Q41793801,dromonym,Старая улица,,,mixed_phrase,always,Старая улица,,,,,,,needs_review,wikidata
+wd:Q279430,dromonym,А149,,,mixed_phrase,always,А149,,,,,,,needs_review,wikidata
+wd:Q130809577,dromonym,Воскресенская улица (Калуга),,,mixed_phrase,always,Воскресенская улица (Калуга),,,,,,,needs_review,wikidata
+wd:Q88329272,dromonym,Европейский маршрут E105 в Крыму,,,mixed_phrase,always,Европейский маршрут E105 в Крыму,,,,,,,needs_review,wikidata
+wd:Q130648405,dromonym,Улица Карла Маркса (Калуга),,,mixed_phrase,always,Улица Карла Маркса (Калуга),,,,,,,needs_review,wikidata
+wd:Q42093108,dromonym,улица Сары Садыковой,,,mixed_phrase,always,улица Сары Садыковой,,,,,,,needs_review,wikidata
+wd:Q22117593,dromonym,Московская кольцевая железная дорога,,,mixed_phrase,always,Московская кольцевая железная дорога,,,,,,,needs_review,wikidata
+wd:Q104598084,dromonym,Мологский ход,,,mixed_phrase,always,Мологский ход,,,,,,,needs_review,wikidata
+wd:Q19908090,dromonym,Виданская узкоколейная железная дорога,,,mixed_phrase,always,Виданская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q19908092,dromonym,Болховская узкоколейная железная дорога,,,mixed_phrase,always,Болховская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q65125083,dromonym,Железная дорога Нарын 1 — Газимурский Завод,,,mixed_phrase,always,Железная дорога Нарын 1 — Газимурский Завод,,,,,,,needs_review,wikidata
+wd:Q63928373,dromonym,Линия МЦД-4,,,mixed_phrase,always,Линия МЦД-4,,,,,,,needs_review,wikidata
+wd:Q86685593,dromonym,Зеленый Дол — Яранск,Зелёный Дол — Яранск,,mixed_phrase,always,Зеленый Дол — Яранск,,,,,,,needs_review,wikidata
+wd:Q21641706,dromonym,Митьковская соединительная ветвь,,,mixed_phrase,always,Митьковская соединительная ветвь,,,,,,,needs_review,wikidata
+wd:Q60851376,dromonym,ВСМ Екатеринбург — Челябинск,,,mixed_phrase,always,ВСМ Екатеринбург — Челябинск,,,,,,,needs_review,wikidata
+wd:Q48948573,dromonym,Путиловская ветвь,,,mixed_phrase,always,Путиловская ветвь,,,,,,,needs_review,wikidata
+wd:Q24932656,dromonym,Узкоколейная железная дорога Боровичского комбината строительных материалов,,,mixed_phrase,always,Узкоколейная железная дорога Боровичского комбината строительных материалов,,,,,,,needs_review,wikidata
+wd:Q19614344,dromonym,ВСМ Пекин — Москва,,,mixed_phrase,always,ВСМ Пекин — Москва,,,,,,,needs_review,wikidata
+wd:Q16709442,dromonym,Узкоколейная железная дорога ГМК «Дальполиметалл»,,,mixed_phrase,always,Узкоколейная железная дорога ГМК «Дальполиметалл»,,,,,,,needs_review,wikidata
+wd:Q16709444,dromonym,Узкоколейная железная дорога Никольского стекольного завода,,,mixed_phrase,always,Узкоколейная железная дорога Никольского стекольного завода,,,,,,,needs_review,wikidata
+wd:Q16709450,dromonym,Узкоколейная железная дорога Рославльского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Рославльского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q52063418,dromonym,Верхне-Волжская железная дорога,,,mixed_phrase,always,Верхне-Волжская железная дорога,,,,,,,needs_review,wikidata
+wd:Q19909604,dromonym,Килемарская железная дорога,,,mixed_phrase,always,Килемарская железная дорога,,,,,,,needs_review,wikidata
+wd:Q16709453,dromonym,Узкоколейная железная дорога Чапаевского силикатного завода,,,mixed_phrase,always,Узкоколейная железная дорога Чапаевского силикатного завода,,,,,,,needs_review,wikidata
+wd:Q56295796,dromonym,Южно-Сибирская магистраль,,,mixed_phrase,always,Южно-Сибирская магистраль,,,,,,,needs_review,wikidata
+wd:Q16710039,dromonym,Унженская железная дорога,,,mixed_phrase,always,Унженская железная дорога,,,,,,,needs_review,wikidata
+wd:Q97661565,dromonym,Курско-Харьково-Азовская железная дорога,,,mixed_phrase,always,Курско-Харьково-Азовская железная дорога,,,,,,,needs_review,wikidata
+wd:Q65127798,dromonym,Линия МЦД-5,,,mixed_phrase,always,Линия МЦД-5,,,,,,,needs_review,wikidata
+wd:Q48941532,dromonym,Южная портовая ветвь,,,mixed_phrase,always,Южная портовая ветвь,,,,,,,needs_review,wikidata
+wd:Q65127804,dromonym,Линия МЦД-3,,,mixed_phrase,always,Линия МЦД-3,,,,,,,needs_review,wikidata
+wd:Q48941950,dromonym,Астрахань — Кизляр,,,mixed_phrase,always,Астрахань — Кизляр,,,,,,,needs_review,wikidata
+wd:Q4076435,dromonym,Балахнинско-Шуйская сеть узкоколейных железных дорог,,,mixed_phrase,always,Балахнинско-Шуйская сеть узкоколейных железных дорог,,,,,,,needs_review,wikidata
+wd:Q4277528,dromonym,Малая Юго-Восточная железная дорога,,,mixed_phrase,always,Малая Юго-Восточная железная дорога,,,,,,,needs_review,wikidata
+wd:Q1858010,dromonym,Амурская железная дорога,,,mixed_phrase,always,Амурская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4178737,dromonym,Железная дорога Черусти — Уршель,,,mixed_phrase,always,Железная дорога Черусти — Уршель,,,,,,,needs_review,wikidata
+wd:Q4178827,dromonym,Железнодорожная линия Выборг — Вещево,,,mixed_phrase,always,Железнодорожная линия Выборг — Вещево,,,,,,,needs_review,wikidata
+wd:Q4159411,dromonym,Детская Восточно-Сибирская железная дорога,,,mixed_phrase,always,Детская Восточно-Сибирская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4469796,dromonym,Узкоколейная железная дорога Керженского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Керженского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q4533985,dromonym,Южно-Сахалинская детская железная дорога,,,mixed_phrase,always,Южно-Сахалинская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4178823,dromonym,Дорошиха — Васильевский Мох,,,mixed_phrase,always,Дорошиха — Васильевский Мох,,,,,,,needs_review,wikidata
+wd:Q4411101,dromonym,Свободненская детская железная дорога,,,mixed_phrase,always,Свободненская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q19916050,dromonym,Хандагатайская узкоколейная железная дорога,,,mixed_phrase,always,Хандагатайская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q148083,dromonym,Царскосельская железная дорога,,,mixed_phrase,always,Царскосельская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4089937,dromonym,Бодайбинская железная дорога,,,mixed_phrase,always,Бодайбинская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4178834,dromonym,Железнодорожная линия Полуночное — Обская-2,,,mixed_phrase,always,Железнодорожная линия Полуночное — Обская-2,,,,,,,needs_review,wikidata
+wd:Q4276886,dromonym,Малая Западно-Сибирская железная дорога,,,mixed_phrase,always,Малая Западно-Сибирская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4061877,dromonym,Алексеевская соединительная линия,,,mixed_phrase,always,Алексеевская соединительная линия,,,,,,,needs_review,wikidata
+wd:Q4230188,dromonym,Комсомольская узкоколейная железная дорога,,,mixed_phrase,always,Комсомольская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4090835,dromonym,Бологое-Полоцкая железнодорожная линия,,,mixed_phrase,always,Бологое-Полоцкая железнодорожная линия,,,,,,,needs_review,wikidata
+wd:Q4248044,dromonym,Курганская детская железная дорога,,,mixed_phrase,always,Курганская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4469820,dromonym,Узкоколейная железная дорога завода «Капролактам»,,,mixed_phrase,always,Узкоколейная железная дорога завода «Капролактам»,,,,,,,needs_review,wikidata
+wd:Q559037,dromonym,Трансмонгольская железная дорога,,,mixed_phrase,always,Трансмонгольская железная дорога,,,,,,,needs_review,wikidata
+wd:Q1548805,dromonym,Большое кольцо Московской железной дороги,,,mixed_phrase,always,Большое кольцо Московской железной дороги,,,,,,,needs_review,wikidata
+wd:Q2380992,dromonym,Рийхимяки — Санкт-Петербург,,,mixed_phrase,always,Рийхимяки — Санкт-Петербург,,,,,,,needs_review,wikidata
+wd:Q4378680,dromonym,Приморская Санкт-Петербург-Сестрорецкая железная дорога,,,mixed_phrase,always,Приморская Санкт-Петербург-Сестрорецкая железная дорога,,,,,,,needs_review,wikidata
+wd:Q4178813,dromonym,Железнодорожная ветка Мытищи — Пирогово,,,mixed_phrase,always,Железнодорожная ветка Мытищи — Пирогово,,,,,,,needs_review,wikidata
+wd:Q4082072,dromonym,Белкомур,,,mixed_phrase,always,Белкомур,,,,,,,needs_review,wikidata
+wd:Q4178826,dromonym,Железнодорожная линия Курагино — Кызыл,,,mixed_phrase,always,Железнодорожная линия Курагино — Кызыл,,,,,,,needs_review,wikidata
+wd:Q4219237,dromonym,Кемеровская детская железная дорога,,,mixed_phrase,always,Кемеровская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4324577,dromonym,Детская железная дорога,,,mixed_phrase,always,Детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4469810,dromonym,Узкоколейная железная дорога Пешеланского гипсового завода,,,mixed_phrase,always,Узкоколейная железная дорога Пешеланского гипсового завода,,,,,,,needs_review,wikidata
+wd:Q4146162,dromonym,Горьковское направление Московской железной дороги,,,mixed_phrase,always,Горьковское направление Московской железной дороги,,,,,,,needs_review,wikidata
+wd:Q4479077,dromonym,Уфимская детская железная дорога,,,mixed_phrase,always,Уфимская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4277320,dromonym,Ростовская детская железная дорога,,,mixed_phrase,always,Ростовская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4469812,dromonym,Узкоколейная железная дорога Ранцевского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Ранцевского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q2474581,dromonym,Выборг — Йоэнсуу,,,mixed_phrase,always,Выборг — Йоэнсуу,,,,,,,needs_review,wikidata
+wd:Q2049418,dromonym,Баскунчакская железная дорога,,,mixed_phrase,always,Баскунчакская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4112156,dromonym,Висимо-Уткинская узкоколейная железная дорога,,,mixed_phrase,always,Висимо-Уткинская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4538927,dromonym,Ярославское направление Московской железной дороги,,,mixed_phrase,always,Ярославское направление Московской железной дороги,,,,,,,needs_review,wikidata
+wd:Q4406346,dromonym,Самаро-Златоустовская железная дорога,,,mixed_phrase,always,Самаро-Златоустовская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4350921,dromonym,Переславская железная дорога,,,mixed_phrase,always,Переславская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4465080,dromonym,Тула-Лихвинская узкоколейная железная дорога,,,mixed_phrase,always,Тула-Лихвинская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4402675,dromonym,Рязанское направление Московской железной дороги,,,mixed_phrase,always,Рязанское направление Московской железной дороги,,,,,,,needs_review,wikidata
+wd:Q4178896,dromonym,железнодорожная линия Сталинград — Владимировка,,,mixed_phrase,always,железнодорожная линия Сталинград — Владимировка,,,,,,,needs_review,wikidata
+wd:Q4419659,dromonym,Симкинская узкоколейная железная дорога,,,mixed_phrase,always,Симкинская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4186354,dromonym,Заонежская железная дорога,,,mixed_phrase,always,Заонежская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4239222,dromonym,Красноярская детская железная дорога,,,mixed_phrase,always,Красноярская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4186489,dromonym,Западно-Уральская железная дорога,,,mixed_phrase,always,Западно-Уральская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4335664,dromonym,Ораниенбаумская электрическая линия,,,mixed_phrase,always,Ораниенбаумская электрическая линия,,,,,,,needs_review,wikidata
+wd:Q4402567,dromonym,Ряжско-Моршанская железная дорога,,,mixed_phrase,always,Ряжско-Моршанская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4179017,dromonym,Железнодорожный транспорт в Чувашии,,,mixed_phrase,always,Железнодорожный транспорт в Чувашии,,,,,,,needs_review,wikidata
+wd:Q4404352,dromonym,Савеловское направление Московской железной дороги,Савёловское направление Московской железной дороги,,mixed_phrase,always,Савеловское направление Московской железной дороги,,,,,,,needs_review,wikidata
+wd:Q4412071,dromonym,Северная Пальмира (поезд),,,mixed_phrase,always,Северная Пальмира (поезд),,,,,,,needs_review,wikidata
+wd:Q4469822,dromonym,Узкоколейная железная дорога кооператива Вертикаль,,,mixed_phrase,always,Узкоколейная железная дорога кооператива Вертикаль,,,,,,,needs_review,wikidata
+wd:Q4469824,dromonym,Узкоколейная железная дорога на Южном входном моле Калининградского морского канала,,,mixed_phrase,always,Узкоколейная железная дорога на Южном входном моле Калининградского морского канала,,,,,,,needs_review,wikidata
+wd:Q4248871,dromonym,Курско-Харьково-Севастопольская железная дорога,,,mixed_phrase,always,Курско-Харьково-Севастопольская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4304341,dromonym,Московско-Виндавская железная дорога,,,mixed_phrase,always,Московско-Виндавская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4469791,dromonym,Узкоколейная железная дорога Бельниковского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Бельниковского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q4341281,dromonym,Павелецкое направление Московской железной дороги,,,mixed_phrase,always,Павелецкое направление Московской железной дороги,,,,,,,needs_review,wikidata
+wd:Q4215071,dromonym,Каринская узкоколейная железная дорога,,,mixed_phrase,always,Каринская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4469794,dromonym,Узкоколейная железная дорога Заплюсского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Заплюсского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q4469798,dromonym,Узкоколейная железная дорога Кучукского сульфатного комбината,,,mixed_phrase,always,Узкоколейная железная дорога Кучукского сульфатного комбината,,,,,,,needs_review,wikidata
+wd:Q4187056,dromonym,Запрудовская железнодорожная ветка,,,mixed_phrase,always,Запрудовская железнодорожная ветка,,,,,,,needs_review,wikidata
+wd:Q11888003,dromonym,Петербурго-Вологодская железная дорога,,,mixed_phrase,always,Петербурго-Вологодская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4207854,dromonym,Казанское направление Московской железной дороги,,,mixed_phrase,always,Казанское направление Московской железной дороги,,,,,,,needs_review,wikidata
+wd:Q4178848,dromonym,Железнодорожная линия Улак — Эльга,,,mixed_phrase,always,Железнодорожная линия Улак — Эльга,,,,,,,needs_review,wikidata
+wd:Q16673702,dromonym,Малая Тюменская детская железная дорога,,,mixed_phrase,always,Малая Тюменская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4469813,dromonym,Узкоколейная железная дорога Ронгинского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Ронгинского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q4185126,dromonym,Залазнинская УЖД,,,mixed_phrase,always,Залазнинская УЖД,,,,,,,needs_review,wikidata
+wd:Q4178843,dromonym,Санкт-Петербург — Москва,,,mixed_phrase,always,Санкт-Петербург — Москва,,,,,,,needs_review,wikidata
+wd:Q4411814,dromonym,Кола — Никель,,,mixed_phrase,always,Кола — Никель,,,,,,,needs_review,wikidata
+wd:Q4248874,dromonym,Курское направление Московской железной дороги,,,mixed_phrase,always,Курское направление Московской железной дороги,,,,,,,needs_review,wikidata
+wd:Q4402670,dromonym,Рязанско-Владимирская узкоколейная железная дорога,,,mixed_phrase,always,Рязанско-Владимирская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4220266,dromonym,Киевское направление Московской железной дороги,,,mixed_phrase,always,Киевское направление Московской железной дороги,,,,,,,needs_review,wikidata
+wd:Q4394582,dromonym,Рижское направление Московской железной дороги,,,mixed_phrase,always,Рижское направление Московской железной дороги,,,,,,,needs_review,wikidata
+wd:Q4424999,dromonym,Смоленское направление Московской железной дороги,,,mixed_phrase,always,Смоленское направление Московской железной дороги,,,,,,,needs_review,wikidata
+wd:Q97663505,dromonym,Сахалинский мост,,,mixed_phrase,always,Сахалинский мост,,,,,,,needs_review,wikidata
+wd:Q948458,dromonym,Трансполярная магистраль,,,mixed_phrase,always,Трансполярная магистраль,,,,,,,needs_review,wikidata
+wd:Q138862451,dromonym,Сучанская узкоколейная железная дорога,,,mixed_phrase,always,Сучанская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q802921,dromonym,Обская — Бованенково — Карская,,,mixed_phrase,always,Обская — Бованенково — Карская,,,,,,,needs_review,wikidata
+wd:Q45023988,dromonym,Пижемская узкоколейная железная дорога,,,mixed_phrase,always,Пижемская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q60972526,dromonym,Липаковская узкоколейная железная дорога,,,mixed_phrase,always,Липаковская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q21666352,dromonym,Узкоколейная железная дорога Альцевского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Альцевского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q1421980,dromonym,Турксиб,,,mixed_phrase,always,Турксиб,,,,,,,needs_review,wikidata
+wd:Q86677112,dromonym,Западно-Карельская магистраль,,,mixed_phrase,always,Западно-Карельская магистраль,,,,,,,needs_review,wikidata
+wd:Q56307791,dromonym,Соединительная ветвь,,,mixed_phrase,always,Соединительная ветвь,,,,,,,needs_review,wikidata
+wd:Q4533970,dromonym,Южно-Кузбасская ветвь Западно-Сибирской железной дороги,,,mixed_phrase,always,Южно-Кузбасская ветвь Западно-Сибирской железной дороги,,,,,,,needs_review,wikidata
+wd:Q11853491,dromonym,Янисъярви — Лодейное Поле,,,mixed_phrase,always,Янисъярви — Лодейное Поле,,,,,,,needs_review,wikidata
+wd:Q16651532,dromonym,Павловск — Великий Новгород,,,mixed_phrase,always,Павловск — Великий Новгород,,,,,,,needs_review,wikidata
+wd:Q18694277,dromonym,Маткаселькя — Суоярви,,,mixed_phrase,always,Маткаселькя — Суоярви,,,,,,,needs_review,wikidata
+wd:Q18682183,dromonym,Зеленогорск — Приморск — Выборг,,,mixed_phrase,always,Зеленогорск — Приморск — Выборг,,,,,,,needs_review,wikidata
+wd:Q4460370,dromonym,Томская железнодорожная ветвь,,,mixed_phrase,always,Томская железнодорожная ветвь,,,,,,,needs_review,wikidata
+wd:Q4301736,dromonym,Монзенская железная дорога,,,mixed_phrase,always,Монзенская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4090837,dromonym,Бологое — Псков,,,mixed_phrase,always,Бологое — Псков,,,,,,,needs_review,wikidata
+wd:Q4178830,dromonym,Железнодорожная линия Лосево — Каменногорск,,,mixed_phrase,always,Железнодорожная линия Лосево — Каменногорск,,,,,,,needs_review,wikidata
+wd:Q4178820,dromonym,Алтайская — Бийск,,,mixed_phrase,always,Алтайская — Бийск,,,,,,,needs_review,wikidata
+wd:Q4178847,dromonym,Угловка — Боровичи,,,mixed_phrase,always,Угловка — Боровичи,,,,,,,needs_review,wikidata
+wd:Q1996024,dromonym,Санкт-Петербург — Хийтола,,,mixed_phrase,always,Санкт-Петербург — Хийтола,,,,,,,needs_review,wikidata
+wd:Q4469827,dromonym,Узкоколейная железная дорога торфопредприятия «Ларьян»,,,mixed_phrase,always,Узкоколейная железная дорога торфопредприятия «Ларьян»,,,,,,,needs_review,wikidata
+wd:Q4469818,dromonym,Узкоколейная железная дорога Тесовского транспортного управления,Узкоколейная железная дорога Тёсовского транспортного управления,,mixed_phrase,always,Узкоколейная железная дорога Тесовского транспортного управления,,,,,,,needs_review,wikidata
+wd:Q16653838,dromonym,Зеленниковская узкоколейная железная дорога,,,mixed_phrase,always,Зеленниковская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4469799,dromonym,Узкоколейная железная дорога Кушаверского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Кушаверского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q16709358,dromonym,Удимская узкоколейная железная дорога,,,mixed_phrase,always,Удимская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4469826,dromonym,Узкоколейная железная дорога торфопредприятия «Гладкое»,,,mixed_phrase,always,Узкоколейная железная дорога торфопредприятия «Гладкое»,,,,,,,needs_review,wikidata
+wd:Q4469793,dromonym,Узкоколейная железная дорога Гусевского ППЖТ,,,mixed_phrase,always,Узкоколейная железная дорога Гусевского ППЖТ,,,,,,,needs_review,wikidata
+wd:Q4244411,dromonym,Кудемская узкоколейная железная дорога,,,mixed_phrase,always,Кудемская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4308171,dromonym,Муромская железная дорога,,,mixed_phrase,always,Муромская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4328463,dromonym,Нюбская узкоколейная железная дорога,,,mixed_phrase,always,Нюбская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4082781,dromonym,Белоручейская узкоколейная железная дорога,,,mixed_phrase,always,Белоручейская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q1751620,dromonym,Санкт-Петербург — Мурманск,,,mixed_phrase,always,Санкт-Петербург — Мурманск,,,,,,,needs_review,wikidata
+wd:Q59417131,dromonym,Железная дорога Балтийского завода,,,mixed_phrase,always,Железная дорога Балтийского завода,,,,,,,needs_review,wikidata
+wd:Q27527083,dromonym,Узкоколейная железная дорога Шарьинского музея леса,,,mixed_phrase,always,Узкоколейная железная дорога Шарьинского музея леса,,,,,,,needs_review,wikidata
+wd:Q113359244,dromonym,Санкт-Петербург — Витебск,,,mixed_phrase,always,Санкт-Петербург — Витебск,,,,,,,needs_review,wikidata
+wd:Q4178842,dromonym,Самара — Жигулевское море — Сызрань,Самара — Жигулёвское море — Сызрань,,mixed_phrase,always,Самара — Жигулевское море — Сызрань,,,,,,,needs_review,wikidata
+wd:Q248647,dromonym,Кольская железная дорога,,,mixed_phrase,always,Кольская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4178729,dromonym,Железная дорога Нял — Заозерск,Железная дорога Нял — Заозёрск,,mixed_phrase,always,Железная дорога Нял — Заозерск,,,,,,,needs_review,wikidata
+wd:Q4469801,dromonym,Узкоколейная железная дорога Мокеиха-Зыбинского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Мокеиха-Зыбинского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q4178822,dromonym,Бологое — Рыбинск,,,mixed_phrase,always,Бологое — Рыбинск,,,,,,,needs_review,wikidata
+wd:Q21639406,dromonym,Узуново — Рыбное,,,mixed_phrase,always,Узуново — Рыбное,,,,,,,needs_review,wikidata
+wd:Q19909429,dromonym,Мытищи — Фрязево,,,mixed_phrase,always,Мытищи — Фрязево,,,,,,,needs_review,wikidata
+wd:Q109746679,dromonym,Софрино — Красноармейск,,,mixed_phrase,always,Софрино — Красноармейск,,,,,,,needs_review,wikidata
+wd:Q4166698,dromonym,Дорога Мужества,,,mixed_phrase,always,Дорога Мужества,,,,,,,needs_review,wikidata
+wd:Q4469800,dromonym,Узкоколейная железная дорога Мещерского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Мещерского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q30888736,dromonym,Куберле — Морозовск,,,mixed_phrase,always,Куберле — Морозовск,,,,,,,needs_review,wikidata
+wd:Q19868882,dromonym,железнодорожная линия в обход Украины,,,mixed_phrase,always,железнодорожная линия в обход Украины,,,,,,,needs_review,wikidata
+wd:Q4178809,dromonym,Енисей — Дивногорск,,,mixed_phrase,always,Енисей — Дивногорск,,,,,,,needs_review,wikidata
+wd:Q4178818,dromonym,Абакан — Тайшет,,,mixed_phrase,always,Абакан — Тайшет,,,,,,,needs_review,wikidata
+wd:Q4073369,dromonym,Ачинско-Минусинская железная дорога,,,mixed_phrase,always,Ачинско-Минусинская железная дорога,,,,,,,needs_review,wikidata
+wd:Q1856579,dromonym,Норильская железная дорога,,,mixed_phrase,always,Норильская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4412422,dromonym,Северный широтный ход,,,mixed_phrase,always,Северный широтный ход,,,,,,,needs_review,wikidata
+wd:Q481698,dromonym,Амуро-Якутская железнодорожная магистраль,,,mixed_phrase,always,Амуро-Якутская железнодорожная магистраль,,,,,,,needs_review,wikidata
+wd:Q163706,dromonym,Кругобайкальская железная дорога,,,mixed_phrase,always,Кругобайкальская железная дорога,,,,,,,needs_review,wikidata
+wd:Q113566513,dromonym,Тихоокеанская железная дорога,,,mixed_phrase,always,Тихоокеанская железная дорога,,,,,,,needs_review,wikidata
+wd:Q123484583,dromonym,Железнодорожная линия Нижний Бестях — речной порт,,,mixed_phrase,always,Железнодорожная линия Нижний Бестях — речной порт,,,,,,,needs_review,wikidata
+wd:Q28667842,dromonym,Линия в аэропорт,,,mixed_phrase,always,Линия в аэропорт,,,,,,,needs_review,wikidata
+wd:Q24933815,dromonym,Багерово — Вышестеблиевская,,,mixed_phrase,always,Багерово — Вышестеблиевская,,,,,,,needs_review,wikidata
+wd:Q19615521,dromonym,Пермь — Соликамск,,,mixed_phrase,always,Пермь — Соликамск,,,,,,,needs_review,wikidata
+wd:Q12142789,dromonym,Постольская узкоколейная железная дорога,,,mixed_phrase,always,Постольская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4178829,dromonym,Лихославль — Вязьма,,,mixed_phrase,always,Лихославль — Вязьма,,,,,,,needs_review,wikidata
+wd:Q803499,dromonym,Комсомольск-на-Амуре — Дежневка,Комсомольск-на-Амуре — Дежнёвка,,mixed_phrase,always,Комсомольск-на-Амуре — Дежневка,,,,,,,needs_review,wikidata
+wd:Q801896,dromonym,Барановский — Хасан,,,mixed_phrase,always,Барановский — Хасан,,,,,,,needs_review,wikidata
+wd:Q4178722,dromonym,Ижевск — Балезино,,,mixed_phrase,always,Ижевск — Балезино,,,,,,,needs_review,wikidata
+wd:Q4178844,dromonym,Торжок — Соблаго,,,mixed_phrase,always,Торжок — Соблаго,,,,,,,needs_review,wikidata
+wd:Q16673660,dromonym,Малая Забайкальская железная дорога,,,mixed_phrase,always,Малая Забайкальская железная дорога,,,,,,,needs_review,wikidata
+wd:Q16709446,dromonym,Узкоколейная железная дорога Опаринского ЛПХ,,,mixed_phrase,always,Узкоколейная железная дорога Опаринского ЛПХ,,,,,,,needs_review,wikidata
+wd:Q20746047,dromonym,Кобринская узкоколейная железная дорога,,,mixed_phrase,always,Кобринская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4469795,dromonym,Узкоколейная железная дорога Дымного торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Дымного торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q4469819,dromonym,Узкоколейная железная дорога Шахтерского погрузочно-транспортного управления,Узкоколейная железная дорога Шахтёрского погрузочно-транспортного управления,,mixed_phrase,always,Узкоколейная железная дорога Шахтерского погрузочно-транспортного управления,,,,,,,needs_review,wikidata
+wd:Q4469806,dromonym,Узкоколейная железная дорога Отворского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Отворского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q4060510,dromonym,Алапаевская узкоколейная железная дорога,,,mixed_phrase,always,Алапаевская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4068331,dromonym,Апшеронская узкоколейная железная дорога,,,mixed_phrase,always,Апшеронская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4178731,dromonym,Железная дорога Оха — Москальво,,,mixed_phrase,always,Железная дорога Оха — Москальво,,,,,,,needs_review,wikidata
+wd:Q658072,dromonym,Узкоколейная железная дорога Пищальского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Пищальского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q724841,dromonym,Узкоколейная железная дорога Гороховского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Гороховского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q24937900,dromonym,Лунданская узкоколейная железная дорога,,,mixed_phrase,always,Лунданская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q30890335,dromonym,Нижегородская городская электричка,,,mixed_phrase,always,Нижегородская городская электричка,,,,,,,needs_review,wikidata
+wd:Q4178831,dromonym,Овинище — Весьегонск,,,mixed_phrase,always,Овинище — Весьегонск,,,,,,,needs_review,wikidata
+wd:Q1351775,dromonym,Горьковская железная дорога,,,mixed_phrase,always,Горьковская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4207712,dromonym,Казанская детская железная дорога,,,mixed_phrase,always,Казанская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q32977992,dromonym,Московская детская железная дорога,,,mixed_phrase,always,Московская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4169493,dromonym,Дубовско-Качалинская железная дорога,,,mixed_phrase,always,Дубовско-Качалинская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4146142,dromonym,Горьковская детская железная дорога имени М. Горького,,,mixed_phrase,always,Горьковская детская железная дорога имени М. Горького,,,,,,,needs_review,wikidata
+wd:Q4412317,dromonym,Северный внутригородской железнодорожный ход,,,mixed_phrase,always,Северный внутригородской железнодорожный ход,,,,,,,needs_review,wikidata
+wd:Q97440423,dromonym,Авнюгская узкоколейная железная дорога,,,mixed_phrase,always,Авнюгская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4178812,dromonym,Кривандино — Рязановка,,,mixed_phrase,always,Кривандино — Рязановка,,,,,,,needs_review,wikidata
+wd:Q4469816,dromonym,Узкоколейная железная дорога Тверского комбината строительных материалов № 2,,,mixed_phrase,always,Узкоколейная железная дорога Тверского комбината строительных материалов № 2,,,,,,,needs_review,wikidata
+wd:Q4277530,dromonym,Малая Южно-Уральская железная дорога,,,mixed_phrase,always,Малая Южно-Уральская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4373619,dromonym,Вырица — Поселок,Вырица — Посёлок,,mixed_phrase,always,Вырица — Поселок,,,,,,,needs_review,wikidata
+wd:Q16651537,dromonym,Победино — Первомайское,,,mixed_phrase,always,Победино — Первомайское,,,,,,,needs_review,wikidata
+wd:Q4469792,dromonym,Узкоколейная железная дорога Васильевского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Васильевского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q16709448,dromonym,Узкоколейная железная дорога Поронайск — Трудовое,,,mixed_phrase,always,Узкоколейная железная дорога Поронайск — Трудовое,,,,,,,needs_review,wikidata
+wd:Q4469808,dromonym,Узкоколейная железная дорога Оха — Ноглики,,,mixed_phrase,always,Узкоколейная железная дорога Оха — Ноглики,,,,,,,needs_review,wikidata
+wd:Q4469805,dromonym,Узкоколейная железная дорога ОАО «Шатурторф»,,,mixed_phrase,always,Узкоколейная железная дорога ОАО «Шатурторф»,,,,,,,needs_review,wikidata
+wd:Q4166767,dromonym,Дорога Победы,,,mixed_phrase,always,Дорога Победы,,,,,,,needs_review,wikidata
+wd:Q4530867,dromonym,Электрозаводская железнодорожная ветка,,,mixed_phrase,always,Электрозаводская железнодорожная ветка,,,,,,,needs_review,wikidata
+wd:Q18682223,dromonym,Ляскельская узкоколейная железная дорога,,,mixed_phrase,always,Ляскельская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4241655,dromonym,Кронштадтская крепостная железная дорога,,,mixed_phrase,always,Кронштадтская крепостная железная дорога,,,,,,,needs_review,wikidata
+wd:Q16651550,dromonym,Железнодорожная ветка Голицыно — Звенигород,,,mixed_phrase,always,Железнодорожная ветка Голицыно — Звенигород,,,,,,,needs_review,wikidata
+wd:Q16665352,dromonym,Конецгорская узкоколейная железная дорога,,,mixed_phrase,always,Конецгорская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4277239,dromonym,Приволжская детская железная дорога,,,mixed_phrase,always,Приволжская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4469797,dromonym,Узкоколейная железная дорога Кимрского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Кимрского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q4469814,dromonym,Узкоколейная железная дорога Солотчинского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Солотчинского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q4265685,dromonym,Лойгинская узкоколейная железная дорога,,,mixed_phrase,always,Лойгинская узкоколейная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4336167,dromonym,Оренбургская детская железная дорога,,,mixed_phrase,always,Оренбургская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4469809,dromonym,Узкоколейная железная дорога Пельгорского торфопредприятия,,,mixed_phrase,always,Узкоколейная железная дорога Пельгорского торфопредприятия,,,,,,,needs_review,wikidata
+wd:Q4350930,dromonym,Переславский железнодорожный музей,,,mixed_phrase,always,Переславский железнодорожный музей,,,,,,,needs_review,wikidata
+wd:Q4469811,dromonym,Узкоколейная железная дорога Поронайск — Тихменево,,,mixed_phrase,always,Узкоколейная железная дорога Поронайск — Тихменево,,,,,,,needs_review,wikidata
+wd:Q4538828,dromonym,Ярославская детская железная дорога,,,mixed_phrase,always,Ярославская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4276831,dromonym,Малая Дальневосточная железная дорога,,,mixed_phrase,always,Малая Дальневосточная железная дорога,,,,,,,needs_review,wikidata
+wd:Q4277319,dromonym,Малая Северо-Кавказская железная дорога имени В. В. Терешковой,,,mixed_phrase,always,Малая Северо-Кавказская железная дорога имени В. В. Терешковой,,,,,,,needs_review,wikidata
+wd:Q4348466,dromonym,Пензенская детская железная дорога,,,mixed_phrase,always,Пензенская детская железная дорога,,,,,,,needs_review,wikidata
+wd:Q4277312,dromonym,Малая Свердловская железная дорога имени Н. А. Островского,,,mixed_phrase,always,Малая Свердловская железная дорога имени Н. А. Островского,,,,,,,needs_review,wikidata

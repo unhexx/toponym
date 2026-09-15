@@ -497,6 +497,20 @@
       "summary": "Реестр площадей растёт upsert-ом по wd:Q-id из Wikidata (P31 square Q174782, P17=Q159). SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не все площади России и не ОМК УМ Москвы. Годонимы в skip-set; Красная площадь сохранена FILL_IF_EMPTY."
     },
     {
+      "id": "DEC-SEED-009",
+      "type": "Decision",
+      "title": "Дороги и ЖД из Wikidata SPARQL, не ПП № 928",
+      "status": "accepted",
+      "date": "2026-09-15",
+      "refs": [
+        "data/curated/dromonyms.csv",
+        "data/raw/wikidata/dromonyms-ru.sparql",
+        "scripts/seed_dromonyms.py",
+        "data/mappings/wikidata.yaml"
+      ],
+      "summary": "Реестр дромонимов растёт upsert-ом по wd:Q-id из Wikidata (P31 road Q34442 и railway Q728937 с ruwiki sitelink, P17=Q159). SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не перечень федеральных трасс ПП № 928 и не OSM. Транссиб/БАМ сохранены FILL_IF_EMPTY."
+    },
+    {
       "id": "DEC-P1-001",
       "type": "Decision",
       "title": "P1 не дробить на P1a–e",

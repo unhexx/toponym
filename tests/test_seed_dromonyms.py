@@ -195,7 +195,7 @@ def test_cli_from_json_writes_tmp(tmp_path: Path, capsys) -> None:
     assert "wd:Q90005004" not in by_id
     assert by_id["wd:Q58767"]["notes"].startswith("пример types.csv")
     assert by_id["wd:Q90005003"]["type_id"] == "dromonym"
-    assert len(read_csv(ROOT / "data/curated/dromonyms.csv")[1]) == 6
+    assert len(read_csv(ROOT / "data/curated/dromonyms.csv")[1]) >= 50
 
 
 def test_harvest_from_json_no_network() -> None:
@@ -213,12 +213,12 @@ def test_harvest_from_json_no_network() -> None:
     assert any(row["id"] == "wd:Q58767" for row in places)
     assert any(row["id"] == "wd:Q90005001" for row in places)
     assert not any(row["id"] == "wd:Q90005002" for row in places)
-    assert len(read_csv(ROOT / "data/curated/dromonyms.csv")[1]) == 6
+    assert len(read_csv(ROOT / "data/curated/dromonyms.csv")[1]) >= 50
 
 
-def test_canon_dromonyms_still_seed() -> None:
+def test_canon_dromonyms_harvested() -> None:
     _header, rows = read_csv(ROOT / "data/curated/dromonyms.csv")
-    assert len(rows) == 6
+    assert len(rows) >= 50
     assert any(row["id"] == "wd:Q58767" for row in rows)
     assert any(row["abbr"] == "Транссиб" for row in rows)
     assert any(row["abbr"] == "БАМ" for row in rows)
