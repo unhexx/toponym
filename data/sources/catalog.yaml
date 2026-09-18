@@ -1,4 +1,4 @@
-updated: "2026-09-17"
+updated: "2026-09-18"
 sources:
 - id: gkgn-opendata
   url: https://rosreestr.gov.ru/opendata/7706560536svedeniyaizgosudarstvennogokatalogageograficheskikhnazvaniy/
@@ -26,8 +26,8 @@ sources:
   license: CC-BY-4.0
   vendor: false
   max_vendor_bytes: 10485760
-  checked_at: "2026-09-17"
-  cursor: "2026-09-16"
+  checked_at: "2026-09-18"
+  cursor: "2026-09-17"
   detector:
     kind: http_dated
     urls:
