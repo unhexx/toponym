@@ -6,7 +6,7 @@ sources:
   vendor: false
   blocking: false
   max_vendor_bytes: 10485760
-  checked_at: "2026-09-16"
+  checked_at: "2026-09-20"
   detector:
     kind: http_head
     urls:
@@ -17,7 +17,7 @@ sources:
   vendor: false
   blocking: false
   max_vendor_bytes: 10485760
-  checked_at: "2026-09-16"
+  checked_at: "2026-09-20"
   detector:
     kind: http_head
     note: указатель; полный ГАР не вендорится

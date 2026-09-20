@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-09-20T06:18:30Z",
+  "as_of": "2026-09-20T10:18:36Z",
   "changed_count": 0,
   "error_count": 2,
   "sources": [
@@ -24,7 +24,7 @@
     {
       "id": "geonames-ru",
       "changed": false,
-      "reason": "0 RU rows in mods/deletes-2026-09-19.txt",
+      "reason": "0 RU rows in mods",
       "cursor_old": "2026-09-18",
       "cursor_new": "2026-09-18",
       "error": false
@@ -32,7 +32,7 @@
     {
       "id": "ukase-326",
       "changed": false,
-      "reason": "тот же MediaWiki last-modified 2026-09-17; cursor 141625080",
+      "reason": "тот же MediaWiki rev",
       "cursor_old": "141625080",
       "cursor_new": "141625080",
       "error": false
@@ -40,7 +40,7 @@
     {
       "id": "hflabs-region",
       "changed": false,
-      "reason": "нет коммитов since 2026-09-16",
+      "reason": "нет коммитов since 2026-09-20",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -48,7 +48,7 @@
     {
       "id": "hflabs-city",
       "changed": false,
-      "reason": "нет коммитов since 2026-09-16",
+      "reason": "нет коммитов since 2026-09-20",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -56,7 +56,7 @@
     {
       "id": "epogrebnyak-ru-cities",
       "changed": false,
-      "reason": "нет коммитов since 2026-09-16",
+      "reason": "нет коммитов since 2026-09-20",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -64,7 +64,7 @@
     {
       "id": "mfursov-russian-cities",
       "changed": false,
-      "reason": "нет коммитов since 2026-09-16",
+      "reason": "нет коммитов since 2026-09-20",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -72,7 +72,7 @@
     {
       "id": "nickyx3-settlements",
       "changed": false,
-      "reason": "нет коммитов since 2026-09-16",
+      "reason": "нет коммитов since 2026-09-20",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
