@@ -176,6 +176,12 @@ curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Синий'
 Массовая вставка — `python scripts/seed_villages.py` (не `daily.py`).
 `type_id=village` и у пгт. Бородино / Вёшенская сохранены.
 
+Гидронимы — массовая вставка `python scripts/seed_hydronyms.py` (не `daily.py`):
+P31 озеро Q23397 и река Q4022 с ruwiki sitelink, P17=Q159; моря Q165 остаются
+FILL_IF_EMPTY и не входят в SPARQL VALUES. Один SELECT; при too_large/timeout
+входящие реки отбрасываются, озёра и моря остаются. Это не ГКГН и не полный
+список рек Wikidata. Волга и Дон — gold.
+
 | Таблица | Сколько строк | Примеры |
 |---|---|---|
 | `data/curated/agoronyms.csv` | сотни (Wikidata Q174782, не ОМК УМ) | Красная площадь, Дворцовая площадь |

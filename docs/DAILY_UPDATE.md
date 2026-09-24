@@ -127,7 +127,7 @@ chore(data): daily refresh YYYY-MM-DD (0 records)
 
 GitHub watchlist из `catalog.yaml` (`watchlist_github`): commits since `checked_at`. Это повод занести источник в `notes` журнала, а не копировать чужие CSV.
 
-Wikidata: SPARQL `P17=Q159` за 48 ч — сигнал **перезапустить** `python scripts/seed_municipalities.py` / `seed_microtoponyms.py` / `seed_hodonyms.py` / `seed_cities.py` / `seed_agoronyms.py` / `seed_dromonyms.py` / `seed_villages.py` (перед CalVer-тегом или когда в allowlist появились новые P31). Не дельта `daily.py`. JSON запроса в git не класть. Daily остаётся `kind=none`.
+Wikidata: SPARQL `P17=Q159` за 48 ч — сигнал **перезапустить** `python scripts/seed_municipalities.py` / `seed_microtoponyms.py` / `seed_hodonyms.py` / `seed_cities.py` / `seed_agoronyms.py` / `seed_dromonyms.py` / `seed_villages.py` / `seed_hydronyms.py` (перед CalVer-тегом или когда в allowlist появились новые P31). Не дельта `daily.py`. JSON запроса в git не класть. Daily остаётся `kind=none`.
 
 `python scripts/sync.py --source wikidata --apply` — SPARQL `VALUES` по уже известным Q-id **всех** Wikidata seed-таблиц (города, субъекты, годонимы, МО, микротопонимы, агентства, …); пустые `lat`/`lon`/`geonames`/`oktmo`/`name_en`. Новые Q-id не вставляет. Daily `kind=none` это не вызывает.
 
