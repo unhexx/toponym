@@ -260,7 +260,18 @@ def test_required_city_fixtures() -> None:
         for row in _read_csv(ROOT / "data/curated/regions.csv")[1]
         if row["iso"]
     }
-    assert all(row["admin1"] in iso_subjects for row in cities)
+    for row in cities:
+        admin1 = row["admin1"]
+        if not admin1:
+            assert not (row.get("parent_id") or ""), row["id"]
+            continue
+        assert admin1 in iso_subjects, row["id"]
+    by_id = {row["id"]: row for row in cities}
+    assert by_id["wd:Q2477836"]["name_ru"] == "Хаджи-Тархан"
+    assert by_id["wd:Q2477836"]["parent_id"] == ""
+    assert by_id["wd:Q2477836"]["admin1"] == ""
+    assert by_id["wd:Q55658728"]["parent_id"] == ""
+    assert by_id["wd:Q55658728"]["admin1"] == ""
 
 
 def test_oikonym_example_is_moscow() -> None:
