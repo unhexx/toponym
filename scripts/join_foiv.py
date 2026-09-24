@@ -46,7 +46,7 @@ ALLOWED_P31 = frozenset({"Q4481741", "Q4481675", "Q14944295"})
 BLOCKED_P31 = frozenset({"Q4481793", "Q4481792"})
 JOIN_FILL = ("wd", "name_en")
 EXTRA_QID_SETS = ("p31",)
-EXTRA_SCALARS = ("short",)
+EXTRA_SCALARS = ("short", "dissolved")
 FOIV_N = 69
 __all__ = [
     "ALLOWED_P31",
@@ -107,7 +107,12 @@ def match_records(
     records: dict[str, dict[str, Any]],
     existing: list[dict[str, str]],
 ) -> dict[str, str]:
-    """Map existing FOIV id → Wikidata Q-id. Unique name/abbr only."""
+    """Map existing FOIV id → Wikidata Q-id. Unique name/abbr only.
+
+    A second live Q-id for the same FOIV blacklists that id for the rest
+    of the pass (the stale qid_to_foiv entry is dropped). Non-empty
+    dissolved is skipped before the name match.
+    """
     key_to_ids: dict[str, set[str]] = {}
     for row in existing:
         rid = (row.get("id") or "").strip()
@@ -119,10 +124,13 @@ def match_records(
                 key_to_ids.setdefault(key, set()).add(rid)
     foiv_to_qid: dict[str, str] = {}
     qid_to_foiv: dict[str, str] = {}
+    blocked: set[str] = set()
     for qid, rec in records.items():
         if _p31(rec) & BLOCKED_P31:
             continue
         if not (_p31(rec) & ALLOWED_P31):
+            continue
+        if str(rec.get("dissolved") or "").strip():
             continue
         hits: set[str] = set()
         for raw in (rec.get("ru"), rec.get("short")):
@@ -135,8 +143,13 @@ def match_records(
         if len(hits) != 1:
             continue
         foiv_id = next(iter(hits))
+        if foiv_id in blocked:
+            continue
         if foiv_id in foiv_to_qid and foiv_to_qid[foiv_id] != qid:
-            foiv_to_qid.pop(foiv_id, None)
+            stale = foiv_to_qid.pop(foiv_id)
+            if qid_to_foiv.get(stale) == foiv_id:
+                qid_to_foiv.pop(stale, None)
+            blocked.add(foiv_id)
             continue
         if qid in qid_to_foiv and qid_to_foiv[qid] != foiv_id:
             continue
