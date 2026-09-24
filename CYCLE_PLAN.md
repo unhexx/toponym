@@ -46,11 +46,11 @@
 | P19-DEPLOY | min first-run / update | `feature/P19-deploy` | README: первый запуск `docker compose up --build`; обновление `git pull && docker compose up --build`; хост venv + serve.py | COMPLETE |
 | P20-CHANGELOG | Unreleased USAGE + min-update | `feature/P20-changelog` | CHANGELOG Unreleased датирует USAGE и `git pull && docker compose up --build`; тег `2026.09.11` не двигается | COMPLETE |
 
-## Next release (после `2026.09.11`)
+## Очередь после `2026.09.11` (закрыта)
 
-Non-goals v1 → явные строки. Исполнять **по одному** PENDING. Канон v1 не переписывать.
+Non-goals v1 → явные строки. Канон v1 не переписывать.
 Keep-out закрывается онтологией `DEC-*` в `ontology/ontology.json` (формат только Outpost).
-Основной build-слайс — **K** (малые сиды МО / годонимов / микротопонимов). Дампы >10 МБ, полный ГАР/`RU.zip` — вне git.
+Слайс **K** и harvest Wikidata после него закрыты тегом `2026.09.24`. Дампы >10 МБ, полный ГАР/`RU.zip` — вне git. Текущий канон — не «малые сиды».
 
 | ID | Слайс | Ветка | Acceptance | Status |
 |---|---|---|---|---|
