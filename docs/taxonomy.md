@@ -30,6 +30,6 @@
 
 Дромонимы (DEC-SEED-009): `data/curated/dromonyms.csv` — Wikidata P31=Q34442 (road) и Q728937 (railway, ruwiki), P17=Q159; не перечень федеральных трасс ПП № 928 и не OSM.
 
-Сёла (DEC-SEED-002): `data/curated/villages.csv`. Улица ≠ площадь.
+Сёла и пгт (DEC-SEED-007): `data/curated/villages.csv` — Wikidata P31=Q15078955 (пгт) и Q532 (village), P17=Q159; не ГКГН и не все сельские населённые пункты России (Росстат). Хутора Q5084 нет. `type_id=village` и у пгт.
 
 Полная таблица типов: `data/curated/types.csv`.

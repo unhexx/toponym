@@ -248,7 +248,7 @@ def test_cli_from_json_writes_tmp(tmp_path: Path, capsys) -> None:
     assert by_id["wd:Q894049"]["notes"].startswith("пример types.csv")
     assert by_id["wd:Q90006006"]["status"] == "deprecated"
     assert by_id["wd:Q90006008"]["type_id"] == "village"
-    assert len(read_csv(ROOT / "data/curated/villages.csv")[1]) == 4
+    assert len(read_csv(ROOT / "data/curated/villages.csv")[1]) >= 5000
 
 
 def test_harvest_from_json_no_network() -> None:
@@ -267,12 +267,13 @@ def test_harvest_from_json_no_network() -> None:
     assert any(row["id"] == "wd:Q894049" for row in places)
     assert any(row["id"] == "wd:Q90006001" for row in places)
     assert not any(row["id"] == "wd:Q90006007" for row in places)
-    assert len(read_csv(ROOT / "data/curated/villages.csv")[1]) == 4
+    assert len(read_csv(ROOT / "data/curated/villages.csv")[1]) >= 5000
 
 
-def test_canon_villages_still_seed() -> None:
+def test_canon_villages_harvested() -> None:
     _header, rows = read_csv(ROOT / "data/curated/villages.csv")
-    assert len(rows) == 4
+    assert len(rows) >= 5000
     assert any(row["id"] == "wd:Q894049" for row in rows)
     assert any(row["name_ru"] == "Бородино" for row in rows)
+    assert any(row["name_ru"] == "Вешенская" for row in rows)
     assert all(row["type_id"] == "village" for row in rows)
