@@ -1,4 +1,4 @@
-# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`, `2026.09.15`, `2026.09.16`, `2026.09.17`)
+# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`, `2026.09.15`, `2026.09.16`, `2026.09.17`, `2026.09.24`)
 
 Исполняемый план циклов. Детали интерфейсов: `docs/design/2026-09-09-v1-local-registries.md`.
 Спека: `TASK_SPECIFICATION.md`. ADR: `LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`.
@@ -88,8 +88,9 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | FOIV-WD | Join Wikidata на ФОИВ, не harvest | `data/foiv-wikidata-join` | P31 Q4481741 / Q4481675 / Q14944295; 0/69 CSV не пишет; не все ФОИВ России (Wikidata); DEC-SEED-012 | COMPLETE |
 | WD-KNOWN | known-ids SPARQL без вставки | `feat/sync-known-ids-rest` | `sync.py --source wikidata --apply`; `inserted=0`; daily `kind=none`; DEC-SEED-013 | COMPLETE |
 | DOCS-HONEST | Честное покрытие в онтологии, плане и USAGE | `docs/coverage-honesty` | «не все X России» только рядом с Wikidata, Росстат или ГКГН; DEC-SEED-012/013 | COMPLETE |
+| REL-2026.09.24 | annotated CalVer `2026.09.24` | `chore/release-2026.09.24` | города/сёла/гидро/оро Wikidata, join ФОИВ, known-ids `inserted=0`; теги `2026.09.11`–`2026.09.17` не двигались | COMPLETE |
 
-A–L COMPLETE на `main`. Annotated CalVer `2026.09.17` на `main`. Теги `2026.09.11`–`2026.09.17` не двигать. Города, сёла/пгт, площади, дороги, гидронимы и оронимы — harvest Wikidata, не Росстат/ГКГН/ПП № 928 и не «все X России». ФОИВ — join `wd`, не harvest. `sync.py --source wikidata` не вставляет новые Q-id (`inserted=0`); daily остаётся `kind=none`.
+A–L COMPLETE на `main`. Annotated CalVer `2026.09.24` на `main`. Теги `2026.09.11`–`2026.09.17` не двигать. Города, сёла/пгт, площади, дороги, гидронимы и оронимы — harvest Wikidata, не Росстат/ГКГН/ПП № 928 и не «все X России». ФОИВ — join `wd`, не harvest. `sync.py --source wikidata` не вставляет новые Q-id (`inserted=0`); daily остаётся `kind=none`.
 
 ## Definition of Done v1
 

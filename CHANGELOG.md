@@ -5,6 +5,10 @@
 
 ## [Unreleased]
 
+## [2026.09.24] - 2026-09-24
+
+Города, сёла и пгт, гидронимы и оронимы Wikidata; join ФОИВ; known-ids без вставки. Теги `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`, `2026.09.15`, `2026.09.16` и `2026.09.17` не двигались.
+
 ### Added
 - SPARQL-указатели Wikidata для городов, сёл/пгт, площадей, дорог/ЖД, гидронимов и оронимов: [`cities-ru.sparql`](data/raw/wikidata/cities-ru.sparql), [`villages-ru.sparql`](data/raw/wikidata/villages-ru.sparql), [`agoronyms-ru.sparql`](data/raw/wikidata/agoronyms-ru.sparql), [`dromonyms-ru.sparql`](data/raw/wikidata/dromonyms-ru.sparql), [`hydronyms-ru.sparql`](data/raw/wikidata/hydronyms-ru.sparql), [`oronyms-ru.sparql`](data/raw/wikidata/oronyms-ru.sparql). JSON/CSV запроса в git не кладётся.
 - CLI `python scripts/seed_cities.py` (P31=Q7930989, P17=Q159; hop P131*; без Крыма/новых субъектов).
@@ -20,7 +24,8 @@
 - Реестр сёл и пгт Wikidata в [`data/curated/villages.csv`](data/curated/villages.csv): P31=Q15078955 (пгт) и Q532 (village), P17=Q159. Около 33 тыс. строк, не ГКГН и не все сельские населённые пункты России (Росстат). Хутора Q5084 нет; `type_id=village` и у пгт. Бородино и Вёшенская сохранены.
 - Реестр гидронимов Wikidata в [`data/curated/hydronyms-major.csv`](data/curated/hydronyms-major.csv): P31 озеро Q23397 и река Q4022 ruwiki, P17=Q159. Около 26 тыс. строк, не ГКГН и не все реки России. Моря Q165 сохранены FILL_IF_EMPTY; Волга и Дон — gold.
 - Реестр оронимов Wikidata в [`data/curated/oronyms-major.csv`](data/curated/oronyms-major.csv): P31 гора Q8502, хребет Q46831, вулкан Q8072, остров Q23442, полуостров Q34763, P17=Q159. Около 13 тыс. строк, не ГКГН и не все горы России. Остров/полуостров — `insulonym`. Эльбрус, Уральские горы и Сахалин сохранены.
-- Join Wikidata на [`data/curated/agencies-foiv.csv`](data/curated/agencies-foiv.csv): 57 из 69 строк получили `wd` (P31 Q4481741/Q4481675/Q14944295). Не harvest: 69 `foiv:{slug}`, `source_id=ukase-326`. Не все ФОИВ России.
+- Join Wikidata на [`data/curated/agencies-foiv.csv`](data/curated/agencies-foiv.csv): 57 из 69 строк получили `wd` (P31 Q4481741/Q4481675/Q14944295). Не harvest: 69 `foiv:{slug}`, `source_id=ukase-326`. Не все ФОИВ России (Wikidata).
+- Образ `ghcr.io/unhexx/toponym:2026.09.24` (и `:CalVer`) публикуется CI на push в `main`. `compose.yaml` пинит этот тег.
 
 ### Changed
 - [`scripts/sync.py`](scripts/sync.py) `--source wikidata`: known-ids SPARQL `VALUES` по уже известным Q-id сёл, гидронимов, оронимов, площадей и дромонимов (как и городов/МО/годонимов/агентств). `inserted=0`: неизвестные Q-id из SPARQL не вставляет. Daily `kind=none`.
@@ -203,7 +208,8 @@ Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-S
 - GeoNames id: Москва `524901`, Волга `472776`.
 - Склонения: `review=gold` / `needs_review` (не boolean).
 
-[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.17...HEAD
+[Unreleased]: https://github.com/unhexx/toponym/compare/2026.09.24...HEAD
+[2026.09.24]: https://github.com/unhexx/toponym/releases/tag/2026.09.24
 [2026.09.17]: https://github.com/unhexx/toponym/releases/tag/2026.09.17
 [2026.09.16]: https://github.com/unhexx/toponym/releases/tag/2026.09.16
 [2026.09.15]: https://github.com/unhexx/toponym/releases/tag/2026.09.15
