@@ -163,6 +163,7 @@ def test_usage_guide_covers_search_and_declensions() -> None:
     assert "seed_dromonyms.py" in text
     assert "seed_villages.py" in text
     assert "seed_hydronyms.py" in text
+    assert "seed_oronyms.py" in text
     assert "Q7930989" in text
     assert "Q174782" in text
     assert "Q34442" in text
@@ -171,6 +172,8 @@ def test_usage_guide_covers_search_and_declensions() -> None:
     assert "Q532" in text
     assert "Q23397" in text
     assert "Q4022" in text
+    assert "Q8502" in text
+    assert "Q46831" in text
     assert "не все 1 126 городов России" in text
     assert "не все площади России" in text
     assert "не ГКГН" in text
@@ -220,6 +223,7 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
     assert "seed_dromonyms.py" in before_loop2
     assert "seed_villages.py" in before_loop2
     assert "seed_hydronyms.py" in before_loop2
+    assert "seed_oronyms.py" in before_loop2
     assert "PACKAGE_VERSION" in before_loop2
 
 
