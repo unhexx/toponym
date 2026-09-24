@@ -111,6 +111,113 @@ def test_map_oronym_yo_oktmo_and_stable_id() -> None:
     assert row["source_id"] == "wikidata"
 
 
+def test_apply_harvest_clears_bogus_adygea_parent() -> None:
+    records = {
+        "Q9100001": {
+            "qid": "Q9100001",
+            "ru": "Гора без родителя",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "oktmo": "",
+            "located": set(),
+            "iso": set(),
+            "p31": {"Q8502"},
+            "replaced": set(),
+            "dissolved": "",
+        },
+        "Q9100002": {
+            "qid": "Q9100002",
+            "ru": "Гора в Татарстане",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "oktmo": "",
+            "located": set(),
+            "iso": {"RU-TA"},
+            "p31": {"Q8502"},
+            "replaced": set(),
+            "dissolved": "",
+        },
+        "Q9100003": {
+            "qid": "Q9100003",
+            "ru": "Гора в Адыгее",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "oktmo": "",
+            "located": set(),
+            "iso": {"RU-AD"},
+            "p31": {"Q8502"},
+            "replaced": set(),
+            "dissolved": "",
+        },
+    }
+    index = load_parent_index(ROOT)
+    existing = [
+        _place(
+            id="wd:Q9100001",
+            id_scheme="wikidata",
+            type_id="oronym",
+            name_ru="Гора без родителя",
+            wd="Q9100001",
+            parent_id="iso:RU-AD",
+            admin1="RU-AD",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+            notes="keep notes",
+        ),
+        _place(
+            id="wd:Q9100002",
+            id_scheme="wikidata",
+            type_id="oronym",
+            name_ru="Гора в Татарстане",
+            wd="Q9100002",
+            parent_id="iso:RU-AD",
+            admin1="RU-AD",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+        ),
+        _place(
+            id="wd:Q9100003",
+            id_scheme="wikidata",
+            type_id="oronym",
+            name_ru="Гора в Адыгее",
+            wd="Q9100003",
+            parent_id="iso:RU-AD",
+            admin1="RU-AD",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+        ),
+    ]
+    places, _decls, counts = apply_harvest(
+        records,
+        index=index,
+        existing_places=existing,
+        existing_decls=[],
+        today="2026-09-24",
+        skip_map={},
+        known_ids={row["id"] for row in existing},
+    )
+    by_id = {row["id"]: row for row in places}
+    assert by_id["wd:Q9100001"]["parent_id"] == ""
+    assert by_id["wd:Q9100001"]["admin1"] == ""
+    assert by_id["wd:Q9100001"]["notes"] == "keep notes"
+    assert by_id["wd:Q9100002"]["parent_id"] == "iso:RU-TA"
+    assert by_id["wd:Q9100002"]["admin1"] == "RU-TA"
+    assert by_id["wd:Q9100003"]["parent_id"] == "iso:RU-AD"
+    assert by_id["wd:Q9100003"]["admin1"] == "RU-AD"
+    assert counts.updated == 2
+    assert counts.inserted == 0
+    assert len(places) == 3
+
+
 def test_apply_harvest_empty_parent_keeps_gold_skips_lake() -> None:
     rows = load_rows_from_json(FIXTURE)
     records = merge_bindings(

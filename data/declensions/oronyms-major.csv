@@ -13267,3 +13267,673 @@ wd:Q2084527,insulonym,Керченский полуостров,,,mixed_phrase,a
 wd:Q715179,insulonym,полуостров Муравьева-Амурского,полуостров Муравьёва-Амурского,,mixed_phrase,always,полуостров Муравьева-Амурского,,,,,,,needs_review,wikidata
 wd:Q4371024,insulonym,Полуостров Янковского,,,mixed_phrase,always,Полуостров Янковского,,,,,,,needs_review,wikidata
 wd:Q49333371,insulonym,Мартыний,,,mixed_phrase,always,Мартыний,,,,,,,needs_review,wikidata
+wd:Q4185998,oronym,Замри-гора,,,mixed_phrase,always,Замри-гора,,,,,,,needs_review,wikidata
+wd:Q4203660,oronym,Исакова гора,,,mixed_phrase,always,Исакова гора,,,,,,,needs_review,wikidata
+wd:Q102735341,oronym,Шагибуа (гора),,,mixed_phrase,always,Шагибуа (гора),,,,,,,needs_review,wikidata
+wd:Q102669037,oronym,Ташмурун (Ишимбайский район),,,mixed_phrase,always,Ташмурун (Ишимбайский район),,,,,,,needs_review,wikidata
+wd:Q102807816,oronym,"Язгыюрт (гора, Ишимбайский район)",,,mixed_phrase,always,"Язгыюрт (гора, Ишимбайский район)",,,,,,,needs_review,wikidata
+wd:Q105869493,oronym,Висячий камень (Уфа),,,mixed_phrase,always,Висячий камень (Уфа),,,,,,,needs_review,wikidata
+wd:Q102179232,oronym,Карагас (гора),,,mixed_phrase,always,Карагас (гора),,,,,,,needs_review,wikidata
+wd:Q102694869,oronym,Уртамурун (Ишимбайский район),,,mixed_phrase,always,Уртамурун (Ишимбайский район),,,,,,,needs_review,wikidata
+wd:Q101086127,oronym,Баля,,,mixed_phrase,always,Баля,,,,,,,needs_review,wikidata
+wd:Q125398443,oronym,Абараш-Баш,,,mixed_phrase,always,Абараш-Баш,,,,,,,needs_review,wikidata
+wd:Q101297572,oronym,Серебряный камень,,,mixed_phrase,always,Серебряный камень,,,,,,,needs_review,wikidata
+wd:Q21640094,oronym,Караул-тау,,,mixed_phrase,always,Караул-тау,,,,,,,needs_review,wikidata
+wd:Q4427300,oronym,Соколовая гора,,,mixed_phrase,always,Соколовая гора,,,,,,,needs_review,wikidata
+wd:Q31683805,oronym,Гора Лысая,,,mixed_phrase,always,Гора Лысая,,,,,,,needs_review,wikidata
+wd:Q124369416,oronym,Крестовая,,,mixed_phrase,always,Крестовая,,,,,,,needs_review,wikidata
+wd:Q4778372,oronym,Анюйский вулкан,,,mixed_phrase,always,Анюйский вулкан,,,,,,,needs_review,wikidata
+wd:Q31581972,oronym,Гора Табанды,,,mixed_phrase,always,Гора Табанды,,,,,,,needs_review,wikidata
+wd:Q31582862,oronym,Гора Маилихох,,,mixed_phrase,always,Гора Маилихох,,,,,,,needs_review,wikidata
+wd:Q31584943,oronym,Гора Верхний Зуб,,,mixed_phrase,always,Гора Верхний Зуб,,,,,,,needs_review,wikidata
+wd:Q31560994,oronym,Гора Малый Тхач,,,mixed_phrase,always,Гора Малый Тхач,,,,,,,needs_review,wikidata
+wd:Q31562764,oronym,Гора Лыолбар,,,mixed_phrase,always,Гора Лыолбар,,,,,,,needs_review,wikidata
+wd:Q31545776,oronym,Гора Верхний Джинал,,,mixed_phrase,always,Гора Верхний Джинал,,,,,,,needs_review,wikidata
+wd:Q31586258,oronym,Гора Пустасхыл,,,mixed_phrase,always,Гора Пустасхыл,,,,,,,needs_review,wikidata
+wd:Q31596025,oronym,Гора Зегдан,,,mixed_phrase,always,Гора Зегдан,,,,,,,needs_review,wikidata
+wd:Q31562677,oronym,Гора Кызылкол,,,mixed_phrase,always,Гора Кызылкол,,,,,,,needs_review,wikidata
+wd:Q31244904,oronym,Гора Помидор,,,mixed_phrase,always,Гора Помидор,,,,,,,needs_review,wikidata
+wd:Q31598239,oronym,Гора Соболинка,,,mixed_phrase,always,Гора Соболинка,,,,,,,needs_review,wikidata
+wd:Q31565999,oronym,Гора Острый Шпиль,,,mixed_phrase,always,Гора Острый Шпиль,,,,,,,needs_review,wikidata
+wd:Q31545213,oronym,Гора Южный Домбай-Ульген,,,mixed_phrase,always,Гора Южный Домбай-Ульген,,,,,,,needs_review,wikidata
+wd:Q6937086,oronym,Муоткавара,,,mixed_phrase,always,Муоткавара,,,,,,,needs_review,wikidata
+wd:Q31563437,oronym,Гора Николай Гора,,,mixed_phrase,always,Гора Николай Гора,,,,,,,needs_review,wikidata
+wd:Q31559423,oronym,Гора Годобери,,,mixed_phrase,always,Гора Годобери,,,,,,,needs_review,wikidata
+wd:Q2631355,oronym,Северо-Байкальское нагорье,,,mixed_phrase,always,Северо-Байкальское нагорье,,,,,,,needs_review,wikidata
+wd:Q31564298,oronym,Гора Маньянгтумп,,,mixed_phrase,always,Гора Маньянгтумп,,,,,,,needs_review,wikidata
+wd:Q31584244,oronym,Гора Шепси,,,mixed_phrase,always,Гора Шепси,,,,,,,needs_review,wikidata
+wd:Q31577595,oronym,Гора Баев Бугор,,,mixed_phrase,always,Гора Баев Бугор,,,,,,,needs_review,wikidata
+wd:Q31563469,oronym,Гора Щель,,,mixed_phrase,always,Гора Щель,,,,,,,needs_review,wikidata
+wd:Q31559163,oronym,Гора Перевальская,,,mixed_phrase,always,Гора Перевальская,,,,,,,needs_review,wikidata
+wd:Q31598474,oronym,Гора Шулигда,,,mixed_phrase,always,Гора Шулигда,,,,,,,needs_review,wikidata
+wd:Q31570465,oronym,Борзонти,,,mixed_phrase,always,Борзонти,,,,,,,needs_review,wikidata
+wd:Q31560499,oronym,Гора Дзаге-Бариз,,,mixed_phrase,always,Гора Дзаге-Бариз,,,,,,,needs_review,wikidata
+wd:Q31454349,oronym,Гора Сапун,,,mixed_phrase,always,Гора Сапун,,,,,,,needs_review,wikidata
+wd:Q31613133,oronym,Гора Утес,,,mixed_phrase,always,Гора Утес,,,,,,,needs_review,wikidata
+wd:Q31591741,oronym,Гора Корумтайга,,,mixed_phrase,always,Гора Корумтайга,,,,,,,needs_review,wikidata
+wd:Q31632401,oronym,Гора Каменушка,,,mixed_phrase,always,Гора Каменушка,,,,,,,needs_review,wikidata
+wd:Q31589722,oronym,Гора Большой Аталык,,,mixed_phrase,always,Гора Большой Аталык,,,,,,,needs_review,wikidata
+wd:Q31598397,oronym,Гора Синяя,,,mixed_phrase,always,Гора Синяя,,,,,,,needs_review,wikidata
+wd:Q31596592,oronym,Гора Водопад,,,mixed_phrase,always,Гора Водопад,,,,,,,needs_review,wikidata
+wd:Q31561009,oronym,Гора Казачий Пикет,,,mixed_phrase,always,Гора Казачий Пикет,,,,,,,needs_review,wikidata
+wd:Q31570041,oronym,Гора Хубиара,,,mixed_phrase,always,Гора Хубиара,,,,,,,needs_review,wikidata
+wd:Q31588150,oronym,Гора Хаспург,,,mixed_phrase,always,Гора Хаспург,,,,,,,needs_review,wikidata
+wd:Q31596517,oronym,Гора Высокая,,,mixed_phrase,always,Гора Высокая,,,,,,,needs_review,wikidata
+wd:Q31577532,oronym,Гора Асбестная,,,mixed_phrase,always,Гора Асбестная,,,,,,,needs_review,wikidata
+wd:Q31611902,oronym,Гора Холодная,,,mixed_phrase,always,Гора Холодная,,,,,,,needs_review,wikidata
+wd:Q31584162,oronym,Гора Прогонная,,,mixed_phrase,always,Гора Прогонная,,,,,,,needs_review,wikidata
+wd:Q31565065,oronym,Гора Бондер-Бугор,,,mixed_phrase,always,Гора Бондер-Бугор,,,,,,,needs_review,wikidata
+wd:Q31698012,oronym,Гора Конская Голова,,,mixed_phrase,always,Гора Конская Голова,,,,,,,needs_review,wikidata
+wd:Q31584759,oronym,Гора Ярота,,,mixed_phrase,always,Гора Ярота,,,,,,,needs_review,wikidata
+wd:Q31589675,oronym,Гора Большой Коль-Тайга,,,mixed_phrase,always,Гора Большой Коль-Тайга,,,,,,,needs_review,wikidata
+wd:Q31589007,oronym,Гора Эред-Ундер,,,mixed_phrase,always,Гора Эред-Ундер,,,,,,,needs_review,wikidata
+wd:Q31240926,oronym,Гора Кипрейная Сопка,,,mixed_phrase,always,Гора Кипрейная Сопка,,,,,,,needs_review,wikidata
+wd:Q31561186,oronym,Гора Эквецопко,,,mixed_phrase,always,Гора Эквецопко,,,,,,,needs_review,wikidata
+wd:Q31598264,oronym,Гора Снежная,,,mixed_phrase,always,Гора Снежная,,,,,,,needs_review,wikidata
+wd:Q31562467,oronym,Гора Айлянчбаши,,,mixed_phrase,always,Гора Айлянчбаши,,,,,,,needs_review,wikidata
+wd:Q31563501,oronym,Гора Колокольня,,,mixed_phrase,always,Гора Колокольня,,,,,,,needs_review,wikidata
+wd:Q31563453,oronym,Гора Взныч,,,mixed_phrase,always,Гора Взныч,,,,,,,needs_review,wikidata
+wd:Q31561958,oronym,Гора Мезмай,,,mixed_phrase,always,Гора Мезмай,,,,,,,needs_review,wikidata
+wd:Q31581763,oronym,Гора Сакмуил,,,mixed_phrase,always,Гора Сакмуил,,,,,,,needs_review,wikidata
+wd:Q31568689,oronym,Гора Тунтне,,,mixed_phrase,always,Гора Тунтне,,,,,,,needs_review,wikidata
+wd:Q31591756,oronym,Гора Таскыл Первый,,,mixed_phrase,always,Гора Таскыл Первый,,,,,,,needs_review,wikidata
+wd:Q31561926,oronym,Гора Матазык,,,mixed_phrase,always,Гора Матазык,,,,,,,needs_review,wikidata
+wd:Q31582780,oronym,Гора Большой Урал,,,mixed_phrase,always,Гора Большой Урал,,,,,,,needs_review,wikidata
+wd:Q31633072,oronym,Гора Ужурская,,,mixed_phrase,always,Гора Ужурская,,,,,,,needs_review,wikidata
+wd:Q31584342,oronym,Гора Магишо,,,mixed_phrase,always,Гора Магишо,,,,,,,needs_review,wikidata
+wd:Q12551040,oronym,Синие Горы,,,mixed_phrase,always,Синие Горы,,,,,,,needs_review,wikidata
+wd:Q31586503,oronym,Гора Пендирмапе,,,mixed_phrase,always,Гора Пендирмапе,,,,,,,needs_review,wikidata
+wd:Q31611890,oronym,Гора Видная,,,mixed_phrase,always,Гора Видная,,,,,,,needs_review,wikidata
+wd:Q4300587,oronym,Молодецкий курган,,,mixed_phrase,always,Молодецкий курган,,,,,,,needs_review,wikidata
+wd:Q31599465,oronym,Гора Пилахта,,,mixed_phrase,always,Гора Пилахта,,,,,,,needs_review,wikidata
+wd:Q31613108,oronym,Гора Каменушка,,,mixed_phrase,always,Гора Каменушка,,,,,,,needs_review,wikidata
+wd:Q31569523,oronym,Гора Кодорис-Мта,,,mixed_phrase,always,Гора Кодорис-Мта,,,,,,,needs_review,wikidata
+wd:Q31562451,oronym,Гора Бабухгел,,,mixed_phrase,always,Гора Бабухгел,,,,,,,needs_review,wikidata
+wd:Q31572645,oronym,Гора Буква,,,mixed_phrase,always,Гора Буква,,,,,,,needs_review,wikidata
+wd:Q31587388,oronym,Гора Курум-Тайга,,,mixed_phrase,always,Гора Курум-Тайга,,,,,,,needs_review,wikidata
+wd:Q31564315,oronym,Гора Печерьяталяхчахль,,,mixed_phrase,always,Гора Печерьяталяхчахль,,,,,,,needs_review,wikidata
+wd:Q31583798,oronym,Гора Джарлам,,,mixed_phrase,always,Гора Джарлам,,,,,,,needs_review,wikidata
+wd:Q31564281,oronym,Гора Хальтумп,,,mixed_phrase,always,Гора Хальтумп,,,,,,,needs_review,wikidata
+wd:Q31588641,oronym,Гора Камень,,,mixed_phrase,always,Гора Камень,,,,,,,needs_review,wikidata
+wd:Q31586407,oronym,Гора Пирамида,,,mixed_phrase,always,Гора Пирамида,,,,,,,needs_review,wikidata
+wd:Q31586112,oronym,Гора Самджир,,,mixed_phrase,always,Гора Самджир,,,,,,,needs_review,wikidata
+wd:Q31563485,oronym,Гора Баркалова,,,mixed_phrase,always,Гора Баркалова,,,,,,,needs_review,wikidata
+wd:Q31593523,oronym,Гора Степрузь,,,mixed_phrase,always,Гора Степрузь,,,,,,,needs_review,wikidata
+wd:Q31569424,oronym,Гора Оритскалас-Цвери,,,mixed_phrase,always,Гора Оритскалас-Цвери,,,,,,,needs_review,wikidata
+wd:Q31599450,oronym,Гора Плато,,,mixed_phrase,always,Гора Плато,,,,,,,needs_review,wikidata
+wd:Q31593767,oronym,Гора Шульгина,,,mixed_phrase,always,Гора Шульгина,,,,,,,needs_review,wikidata
+wd:Q31611915,oronym,Гора Колва,,,mixed_phrase,always,Гора Колва,,,,,,,needs_review,wikidata
+wd:Q55657145,oronym,Альбаган,,,mixed_phrase,always,Альбаган,,,,,,,needs_review,wikidata
+wd:Q31650518,oronym,Гора Лысая,,,mixed_phrase,always,Гора Лысая,,,,,,,needs_review,wikidata
+wd:Q31688510,oronym,Гора Лысая,,,mixed_phrase,always,Гора Лысая,,,,,,,needs_review,wikidata
+wd:Q135267248,oronym,Лысая гора,,,mixed_phrase,always,Лысая гора,,,,,,,needs_review,wikidata
+wd:Q125500948,oronym,Большой Аваляк,,,mixed_phrase,always,Большой Аваляк,,,,,,,needs_review,wikidata
+wd:Q31635702,oronym,Гора Лысая,,,mixed_phrase,always,Гора Лысая,,,,,,,needs_review,wikidata
+wd:Q16628513,oronym,Бутачиха,,,mixed_phrase,always,Бутачиха,,,,,,,needs_review,wikidata
+wd:Q31635935,oronym,Сопка Лысая,,,mixed_phrase,always,Сопка Лысая,,,,,,,needs_review,wikidata
+wd:Q31650801,oronym,Гора Лысая,,,mixed_phrase,always,Гора Лысая,,,,,,,needs_review,wikidata
+wd:Q31657788,oronym,Гора Лысая,,,mixed_phrase,always,Гора Лысая,,,,,,,needs_review,wikidata
+wd:Q31635578,oronym,Гора Лысая,,,mixed_phrase,always,Гора Лысая,,,,,,,needs_review,wikidata
+wd:Q4420556,oronym,Синюха (гора Колыванского хребта),,,mixed_phrase,always,Синюха (гора Колыванского хребта),,,,,,,needs_review,wikidata
+wd:Q124308387,oronym,Соготах-Тас,,,mixed_phrase,always,Соготах-Тас,,,,,,,needs_review,wikidata
+wd:Q31628399,oronym,Гора Петра,,,mixed_phrase,always,Гора Петра,,,,,,,needs_review,wikidata
+wd:Q31523777,oronym,Курушлюк,,,mixed_phrase,always,Курушлюк,,,,,,,needs_review,wikidata
+wd:Q31617277,oronym,Гора Снегурка,,,mixed_phrase,always,Гора Снегурка,,,,,,,needs_review,wikidata
+wd:Q31617326,oronym,Гора Скальная,,,mixed_phrase,always,Гора Скальная,,,,,,,needs_review,wikidata
+wd:Q4156258,oronym,Деавгай,,,mixed_phrase,always,Деавгай,,,,,,,needs_review,wikidata
+wd:Q31558594,oronym,Метико,,,mixed_phrase,always,Метико,,,,,,,needs_review,wikidata
+wd:Q31628439,oronym,Гора Пограничная,,,mixed_phrase,always,Гора Пограничная,,,,,,,needs_review,wikidata
+wd:Q31645382,oronym,Ухиндаг,,,mixed_phrase,always,Ухиндаг,,,,,,,needs_review,wikidata
+wd:Q31628307,oronym,Гора Туман,,,mixed_phrase,always,Гора Туман,,,,,,,needs_review,wikidata
+wd:Q31624240,oronym,Гора Коряга,,,mixed_phrase,always,Гора Коряга,,,,,,,needs_review,wikidata
+wd:Q31628385,oronym,Гора Шестакова,,,mixed_phrase,always,Гора Шестакова,,,,,,,needs_review,wikidata
+wd:Q24931284,oronym,Марков Камень,,,mixed_phrase,always,Марков Камень,,,,,,,needs_review,wikidata
+wd:Q37802389,oronym,Гора Тетя,Гора Тётя,,mixed_phrase,always,Гора Тетя,,,,,,,needs_review,wikidata
+wd:Q31622826,oronym,Гора Наседкина,,,mixed_phrase,always,Гора Наседкина,,,,,,,needs_review,wikidata
+wd:Q31623725,oronym,Гора Левинсона-Лессинга,,,mixed_phrase,always,Гора Левинсона-Лессинга,,,,,,,needs_review,wikidata
+wd:Q31618565,oronym,Гора Зуб,,,mixed_phrase,always,Гора Зуб,,,,,,,needs_review,wikidata
+wd:Q31617576,oronym,Крепость Гора,,,mixed_phrase,always,Крепость Гора,,,,,,,needs_review,wikidata
+wd:Q31617302,oronym,Гора Крутая,,,mixed_phrase,always,Гора Крутая,,,,,,,needs_review,wikidata
+wd:Q31625938,oronym,Гора Ферсмана,,,mixed_phrase,always,Гора Ферсмана,,,,,,,needs_review,wikidata
+wd:Q31628335,oronym,Гора Ожидания,,,mixed_phrase,always,Гора Ожидания,,,,,,,needs_review,wikidata
+wd:Q4097333,oronym,Брык,,,mixed_phrase,always,Брык,,,,,,,needs_review,wikidata
+wd:Q21645789,oronym,Экитебе,Экитёбе,,mixed_phrase,always,Экитебе,,,,,,,needs_review,wikidata
+wd:Q31628118,oronym,Гора Колун,,,mixed_phrase,always,Гора Колун,,,,,,,needs_review,wikidata
+wd:Q31617381,oronym,Гора Желтяк,,,mixed_phrase,always,Гора Желтяк,,,,,,,needs_review,wikidata
+wd:Q31628282,oronym,Гора Бажова,,,mixed_phrase,always,Гора Бажова,,,,,,,needs_review,wikidata
+wd:Q31617420,oronym,Гора Нагая,,,mixed_phrase,always,Гора Нагая,,,,,,,needs_review,wikidata
+wd:Q31628145,oronym,Гора Подсолнечная,,,mixed_phrase,always,Гора Подсолнечная,,,,,,,needs_review,wikidata
+wd:Q31622739,oronym,Вулкан Немо,,,mixed_phrase,always,Вулкан Немо,,,,,,,needs_review,wikidata
+wd:Q31617267,oronym,Гора Стланиковая,,,mixed_phrase,always,Гора Стланиковая,,,,,,,needs_review,wikidata
+wd:Q31617257,oronym,Гора Левина,,,mixed_phrase,always,Гора Левина,,,,,,,needs_review,wikidata
+wd:Q31617355,oronym,Гора Круглая,,,mixed_phrase,always,Гора Круглая,,,,,,,needs_review,wikidata
+wd:Q134308377,oronym,Ирита,,,mixed_phrase,always,Ирита,,,,,,,needs_review,wikidata
+wd:Q31628372,oronym,Гора Крыжановского,,,mixed_phrase,always,Гора Крыжановского,,,,,,,needs_review,wikidata
+wd:Q31617394,oronym,Гора Смежная,,,mixed_phrase,always,Гора Смежная,,,,,,,needs_review,wikidata
+wd:Q31628425,oronym,Гора Верблюд,,,mixed_phrase,always,Гора Верблюд,,,,,,,needs_review,wikidata
+wd:Q20092238,oronym,Рагдан,,,mixed_phrase,always,Рагдан,,,,,,,needs_review,wikidata
+wd:Q31235882,oronym,Гора Солдатская,,,mixed_phrase,always,Гора Солдатская,,,,,,,needs_review,wikidata
+wd:Q31617602,oronym,Гора Ольховка,,,mixed_phrase,always,Гора Ольховка,,,,,,,needs_review,wikidata
+wd:Q16686310,oronym,Маяк Шангина,,,mixed_phrase,always,Маяк Шангина,,,,,,,needs_review,wikidata
+wd:Q31620903,oronym,Гора Сигнальная,,,mixed_phrase,always,Гора Сигнальная,,,,,,,needs_review,wikidata
+wd:Q2093713,oronym,Гора Рудакова,,,mixed_phrase,always,Гора Рудакова,,,,,,,needs_review,wikidata
+wd:Q31617444,oronym,Гора Лисичка,,,mixed_phrase,always,Гора Лисичка,,,,,,,needs_review,wikidata
+wd:Q31625742,oronym,Гора Голая,,,mixed_phrase,always,Гора Голая,,,,,,,needs_review,wikidata
+wd:Q86677385,oronym,гора Гасфорта,,,mixed_phrase,always,гора Гасфорта,,,,,,,needs_review,wikidata
+wd:Q31626827,oronym,Гора Бритва,,,mixed_phrase,always,Гора Бритва,,,,,,,needs_review,wikidata
+wd:Q31617289,oronym,Гора Каминистая,,,mixed_phrase,always,Гора Каминистая,,,,,,,needs_review,wikidata
+wd:Q31617552,oronym,Гора Овальная,,,mixed_phrase,always,Гора Овальная,,,,,,,needs_review,wikidata
+wd:Q31623737,oronym,Гора Левашова,,,mixed_phrase,always,Гора Левашова,,,,,,,needs_review,wikidata
+wd:Q4535038,oronym,Юрма (гора),,,mixed_phrase,always,Юрма (гора),,,,,,,needs_review,wikidata
+wd:Q31617614,oronym,Гора Двугорбая,,,mixed_phrase,always,Гора Двугорбая,,,,,,,needs_review,wikidata
+wd:Q31238614,oronym,Гора Экономическая,,,mixed_phrase,always,Гора Экономическая,,,,,,,needs_review,wikidata
+wd:Q31617343,oronym,Гора Сизая,,,mixed_phrase,always,Гора Сизая,,,,,,,needs_review,wikidata
+wd:Q31623841,oronym,Гора Лагерная,,,mixed_phrase,always,Гора Лагерная,,,,,,,needs_review,wikidata
+wd:Q31617538,oronym,Гора Мрачная,,,mixed_phrase,always,Гора Мрачная,,,,,,,needs_review,wikidata
+wd:Q31617314,oronym,Гора Незаматная,,,mixed_phrase,always,Гора Незаматная,,,,,,,needs_review,wikidata
+wd:Q4329310,oronym,Облачная,,,mixed_phrase,always,Облачная,,,,,,,needs_review,wikidata
+wd:Q31623544,oronym,Гора Маканруши,,,mixed_phrase,always,Гора Маканруши,,,,,,,needs_review,wikidata
+wd:Q31627663,oronym,Гора Анциферова,,,mixed_phrase,always,Гора Анциферова,,,,,,,needs_review,wikidata
+wd:Q31625072,oronym,Гора Кедрач,,,mixed_phrase,always,Гора Кедрач,,,,,,,needs_review,wikidata
+wd:Q31628321,oronym,Гора Пустынная,,,mixed_phrase,always,Гора Пустынная,,,,,,,needs_review,wikidata
+wd:Q119931208,oronym,Бессонова,,,mixed_phrase,always,Бессонова,,,,,,,needs_review,wikidata
+wd:Q31619395,oronym,Гора Вернадского,,,mixed_phrase,always,Гора Вернадского,,,,,,,needs_review,wikidata
+wd:Q31617524,oronym,Гора Шляпка,,,mixed_phrase,always,Гора Шляпка,,,,,,,needs_review,wikidata
+wd:Q31617368,oronym,Гора Ковтун,,,mixed_phrase,always,Гора Ковтун,,,,,,,needs_review,wikidata
+wd:Q31624125,oronym,Гора Козыревского,,,mixed_phrase,always,Гора Козыревского,,,,,,,needs_review,wikidata
+wd:Q31617468,oronym,Гора Хмара,,,mixed_phrase,always,Гора Хмара,,,,,,,needs_review,wikidata
+wd:Q132733440,oronym,Студенческая,,,mixed_phrase,always,Студенческая,,,,,,,needs_review,wikidata
+wd:Q31621043,oronym,Гора Шелихова,,,mixed_phrase,always,Гора Шелихова,,,,,,,needs_review,wikidata
+wd:Q31628360,oronym,Гора Заваритского,,,mixed_phrase,always,Гора Заваритского,,,,,,,needs_review,wikidata
+wd:Q31619372,oronym,Гора Ветреная,,,mixed_phrase,always,Гора Ветреная,,,,,,,needs_review,wikidata
+wd:Q31546681,oronym,Таклик,,,mixed_phrase,always,Таклик,,,,,,,needs_review,wikidata
+wd:Q31618069,oronym,Гора Сомма,,,mixed_phrase,always,Гора Сомма,,,,,,,needs_review,wikidata
+wd:Q31617990,oronym,Гора Платформа,,,mixed_phrase,always,Гора Платформа,,,,,,,needs_review,wikidata
+wd:Q31617432,oronym,Гора Куропатка,,,mixed_phrase,always,Гора Куропатка,,,,,,,needs_review,wikidata
+wd:Q31617455,oronym,Гора Краснуха,,,mixed_phrase,always,Гора Краснуха,,,,,,,needs_review,wikidata
+wd:Q31617564,oronym,Гора Конусная,,,mixed_phrase,always,Гора Конусная,,,,,,,needs_review,wikidata
+wd:Q4068473,oronym,Аракульские Шиханы,,,mixed_phrase,always,Аракульские Шиханы,,,,,,,needs_review,wikidata
+wd:Q31628411,oronym,Гора Асырмиртар,,,mixed_phrase,always,Гора Асырмиртар,,,,,,,needs_review,wikidata
+wd:Q31625222,oronym,Гора Каменник,,,mixed_phrase,always,Гора Каменник,,,,,,,needs_review,wikidata
+wd:Q4160658,oronym,Джуфудаг,,,mixed_phrase,always,Джуфудаг,,,,,,,needs_review,wikidata
+wd:Q31626225,oronym,Гора Дождевая,,,mixed_phrase,always,Гора Дождевая,,,,,,,needs_review,wikidata
+wd:Q31628466,oronym,Гора Кратерная,,,mixed_phrase,always,Гора Кратерная,,,,,,,needs_review,wikidata
+wd:Q31617407,oronym,Гора Соколик,,,mixed_phrase,always,Гора Соколик,,,,,,,needs_review,wikidata
+wd:Q31523675,oronym,Каланых-Кая,,,mixed_phrase,always,Каланых-Кая,,,,,,,needs_review,wikidata
+wd:Q31623303,oronym,Гора Мазаровича,,,mixed_phrase,always,Гора Мазаровича,,,,,,,needs_review,wikidata
+wd:Q31617510,oronym,Гора Кривая,,,mixed_phrase,always,Гора Кривая,,,,,,,needs_review,wikidata
+wd:Q31628159,oronym,Гора Крутая,,,mixed_phrase,always,Гора Крутая,,,,,,,needs_review,wikidata
+wd:Q31627517,oronym,Гора Арсеньева,,,mixed_phrase,always,Гора Арсеньева,,,,,,,needs_review,wikidata
+wd:Q2956016,oronym,Заозерная,Заозёрная,,mixed_phrase,always,Заозерная,,,,,,,needs_review,wikidata
+wd:Q105954715,oronym,Бахмур,,,mixed_phrase,always,Бахмур,,,,,,,needs_review,wikidata
+wd:Q12076542,oronym,Авинда,,,mixed_phrase,always,Авинда,,,,,,,needs_review,wikidata
+wd:Q37796573,oronym,Наглейнгын,Наглёйнгын,,mixed_phrase,always,Наглейнгын,,,,,,,needs_review,wikidata
+wd:Q4270648,oronym,Лысая гора,,,mixed_phrase,always,Лысая гора,,,,,,,needs_review,wikidata
+wd:Q19911098,oronym,Мшатка-Кая,,,mixed_phrase,always,Мшатка-Кая,,,,,,,needs_review,wikidata
+wd:Q20093478,oronym,Ставри-Кая,,,mixed_phrase,always,Ставри-Кая,,,,,,,needs_review,wikidata
+wd:Q31577847,oronym,Гора Суяме,,,mixed_phrase,always,Гора Суяме,,,,,,,needs_review,wikidata
+wd:Q101803110,oronym,Будалашбаш,,,mixed_phrase,always,Будалашбаш,,,,,,,needs_review,wikidata
+wd:Q97277981,oronym,Большая Тастуба,,,mixed_phrase,always,Большая Тастуба,,,,,,,needs_review,wikidata
+wd:Q16192999,oronym,Шан-Кая,,,mixed_phrase,always,Шан-Кая,,,,,,,needs_review,wikidata
+wd:Q31240227,oronym,Мореиз,,,mixed_phrase,always,Мореиз,,,,,,,needs_review,wikidata
+wd:Q4250294,oronym,Куштау,,,mixed_phrase,always,Куштау,,,,,,,needs_review,wikidata
+wd:Q12109744,oronym,Кечит-Вермез,,,mixed_phrase,always,Кечит-Вермез,,,,,,,needs_review,wikidata
+wd:Q109383205,oronym,Светелка,Светёлка,,mixed_phrase,always,Светелка,,,,,,,needs_review,wikidata
+wd:Q4521411,oronym,Шахтау,,,mixed_phrase,always,Шахтау,,,,,,,needs_review,wikidata
+wd:Q31521702,oronym,Шуври-Кая,,,mixed_phrase,always,Шуври-Кая,,,,,,,needs_review,wikidata
+wd:Q25420800,oronym,Ай-Валенти,,,mixed_phrase,always,Ай-Валенти,,,,,,,needs_review,wikidata
+wd:Q31562661,oronym,Кызылкая,,,mixed_phrase,always,Кызылкая,,,,,,,needs_review,wikidata
+wd:Q12081148,oronym,Басман,,,mixed_phrase,always,Басман,,,,,,,needs_review,wikidata
+wd:Q4534744,oronym,Юрактау,,,mixed_phrase,always,Юрактау,,,,,,,needs_review,wikidata
+wd:Q28048803,oronym,"Чалпан (гора, Хакасия, Таштыпский район)",,,mixed_phrase,always,"Чалпан (гора, Хакасия, Таштыпский район)",,,,,,,needs_review,wikidata
+wd:Q3846231,oronym,Демир-Капу,,,mixed_phrase,always,Демир-Капу,,,,,,,needs_review,wikidata
+wd:Q12167839,oronym,Крестовая гора,,,mixed_phrase,always,Крестовая гора,,,,,,,needs_review,wikidata
+wd:Q18405288,oronym,Хаялар,,,mixed_phrase,always,Хаялар,,,,,,,needs_review,wikidata
+wd:Q97211462,oronym,Сыын-Чурээ,,,mixed_phrase,always,Сыын-Чурээ,,,,,,,needs_review,wikidata
+wd:Q21635352,oronym,Акмурун,,,mixed_phrase,always,Акмурун,,,,,,,needs_review,wikidata
+wd:Q4446852,oronym,Сууллар Мыраан,,,mixed_phrase,always,Сууллар Мыраан,,,,,,,needs_review,wikidata
+wd:Q47498763,oronym,Ай-Йори,,,mixed_phrase,always,Ай-Йори,,,,,,,needs_review,wikidata
+wd:Q28667256,oronym,Бужур,,,mixed_phrase,always,Бужур,,,,,,,needs_review,wikidata
+wd:Q31804209,oronym,Сугут-Оба,,,mixed_phrase,always,Сугут-Оба,,,,,,,needs_review,wikidata
+wd:Q56421887,oronym,Лысая сопка,,,mixed_phrase,always,Лысая сопка,,,,,,,needs_review,wikidata
+wd:Q22947721,oronym,Верхний Джинал,,,mixed_phrase,always,Верхний Джинал,,,,,,,needs_review,wikidata
+wd:Q4462219,oronym,Тратау,,,mixed_phrase,always,Тратау,,,,,,,needs_review,wikidata
+wd:Q97662369,oronym,Нархие-Куарта,,,mixed_phrase,always,Нархие-Куарта,,,,,,,needs_review,wikidata
+wd:Q31558658,oronym,Шунудаг,,,mixed_phrase,always,Шунудаг,,,,,,,needs_review,wikidata
+wd:Q4069444,oronym,Аркаултау,,,mixed_phrase,always,Аркаултау,,,,,,,needs_review,wikidata
+wd:Q101452294,oronym,"Караул сагыл""(гора)",,,mixed_phrase,always,"Караул сагыл""(гора)",,,,,,,needs_review,wikidata
+wd:Q4129518,oronym,Высотная гора,,,mixed_phrase,always,Высотная гора,,,,,,,needs_review,wikidata
+wd:Q21656297,oronym,Соухаузкая,,,mixed_phrase,always,Соухаузкая,,,,,,,needs_review,wikidata
+wd:Q21635589,oronym,Апись,,,mixed_phrase,always,Апись,,,,,,,needs_review,wikidata
+wd:Q101452730,oronym,Эярлитау,,,mixed_phrase,always,Эярлитау,,,,,,,needs_review,wikidata
+wd:Q12089200,oronym,Вигла,,,mixed_phrase,always,Вигла,,,,,,,needs_review,wikidata
+wd:Q4338691,oronym,"Острая (гора, Камчатский край)",,,mixed_phrase,always,"Острая (гора, Камчатский край)",,,,,,,needs_review,wikidata
+wd:Q31662487,oronym,Гора Искеюрт,,,mixed_phrase,always,Гора Искеюрт,,,,,,,needs_review,wikidata
+wd:Q31558113,oronym,Варанды-Корт,,,mixed_phrase,always,Варанды-Корт,,,,,,,needs_review,wikidata
+wd:Q2990529,oronym,Ксудач,,,mixed_phrase,always,Ксудач,,,,,,,needs_review,wikidata
+wd:Q25394736,oronym,Аргаюко,,,mixed_phrase,always,Аргаюко,,,,,,,needs_review,wikidata
+wd:Q31588514,oronym,Карагош,,,mixed_phrase,always,Карагош,,,,,,,needs_review,wikidata
+wd:Q3459310,oronym,гора Чурляниса,,,mixed_phrase,always,гора Чурляниса,,,,,,,needs_review,wikidata
+wd:Q24935935,oronym,Хазнибаши,,,mixed_phrase,always,Хазнибаши,,,,,,,needs_review,wikidata
+wd:Q31694749,oronym,Гора Сестра,,,mixed_phrase,always,Гора Сестра,,,,,,,needs_review,wikidata
+wd:Q30888647,oronym,Корт-Тляпа,,,mixed_phrase,always,Корт-Тляпа,,,,,,,needs_review,wikidata
+wd:Q105950730,oronym,Ауш тау,,,mixed_phrase,always,Ауш тау,,,,,,,needs_review,wikidata
+wd:Q28967346,oronym,Вожминский массив,,,mixed_phrase,always,Вожминский массив,,,,,,,needs_review,wikidata
+wd:Q31523069,oronym,Таш-Джарган (гора),,,mixed_phrase,always,Таш-Джарган (гора),,,,,,,needs_review,wikidata
+wd:Q4081652,oronym,Белая гора (Веселые горы),Белая гора (Весёлые горы),,mixed_phrase,always,Белая гора (Веселые горы),,,,,,,needs_review,wikidata
+wd:Q2330184,oronym,Думная гора,,,mixed_phrase,always,Думная гора,,,,,,,needs_review,wikidata
+wd:Q32361145,oronym,Соколиный Камень,,,mixed_phrase,always,Соколиный Камень,,,,,,,needs_review,wikidata
+wd:Q4199608,oronym,Ильина Гора (Краснопрудская волость),,,mixed_phrase,always,Ильина Гора (Краснопрудская волость),,,,,,,needs_review,wikidata
+wd:Q4074606,oronym,Бабырган (гора),,,mixed_phrase,always,Бабырган (гора),,,,,,,needs_review,wikidata
+wd:Q136457676,oronym,Грыця,,,mixed_phrase,always,Грыця,,,,,,,needs_review,wikidata
+wd:Q136167887,oronym,Бучина (гора),,,mixed_phrase,always,Бучина (гора),,,,,,,needs_review,wikidata
+wd:Q18682864,oronym,Гора Вирнимя,,,mixed_phrase,always,Гора Вирнимя,,,,,,,needs_review,wikidata
+wd:Q829207,oronym,Берутарубе,,,mixed_phrase,always,Берутарубе,,,,,,,needs_review,wikidata
+wd:Q2475029,oronym,Благодать,,,mixed_phrase,always,Благодать,,,,,,,needs_review,wikidata
+wd:Q130741985,oronym,Бор-Кая,,,mixed_phrase,always,Бор-Кая,,,,,,,needs_review,wikidata
+wd:Q31549211,oronym,Гора Мысхако,,,mixed_phrase,always,Гора Мысхако,,,,,,,needs_review,wikidata
+wd:Q37802886,oronym,Гора Веселая,Гора Весёлая,,mixed_phrase,always,Гора Веселая,,,,,,,needs_review,wikidata
+wd:Q21644555,oronym,Старик-Камень,,,mixed_phrase,always,Старик-Камень,,,,,,,needs_review,wikidata
+wd:Q108687429,oronym,Юки-Тепе (1025),,,mixed_phrase,always,Юки-Тепе (1025),,,,,,,needs_review,wikidata
+wd:Q31545500,oronym,Вотлама,,,mixed_phrase,always,Вотлама,,,,,,,needs_review,wikidata
+wd:Q136126171,oronym,Кок-Таш (гора),,,mixed_phrase,always,Кок-Таш (гора),,,,,,,needs_review,wikidata
+wd:Q31655609,oronym,Гора Голая,,,mixed_phrase,always,Гора Голая,,,,,,,needs_review,wikidata
+wd:Q21644554,oronym,Старик-Камень,,,mixed_phrase,always,Старик-Камень,,,,,,,needs_review,wikidata
+wd:Q18682672,oronym,Шуорт,,,mixed_phrase,always,Шуорт,,,,,,,needs_review,wikidata
+wd:Q4453953,oronym,Телевизионная,,,mixed_phrase,always,Телевизионная,,,,,,,needs_review,wikidata
+wd:Q31584801,oronym,Высокая гора,,,mixed_phrase,always,Высокая гора,,,,,,,needs_review,wikidata
+wd:Q133696599,oronym,Якяляпяя,,,mixed_phrase,always,Якяляпяя,,,,,,,needs_review,wikidata
+wd:Q31582796,oronym,Гора Уйташ,,,mixed_phrase,always,Гора Уйташ,,,,,,,needs_review,wikidata
+wd:Q4477702,oronym,Усинский курган,,,mixed_phrase,always,Усинский курган,,,,,,,needs_review,wikidata
+wd:Q21643861,oronym,Петра Гронского,,,mixed_phrase,always,Петра Гронского,,,,,,,needs_review,wikidata
+wd:Q54016619,oronym,гора Лазарева,,,mixed_phrase,always,гора Лазарева,,,,,,,needs_review,wikidata
+wd:Q20621480,oronym,Кайджаны,,,mixed_phrase,always,Кайджаны,,,,,,,needs_review,wikidata
+wd:Q4417397,oronym,Серебрянский Камень,,,mixed_phrase,always,Серебрянский Камень,,,,,,,needs_review,wikidata
+wd:Q4143416,oronym,гора Варгина,,,mixed_phrase,always,гора Варгина,,,,,,,needs_review,wikidata
+wd:Q124804496,oronym,Голый Шпиль,,,mixed_phrase,always,Голый Шпиль,,,,,,,needs_review,wikidata
+wd:Q18660531,oronym,Лейпатунтури,,,mixed_phrase,always,Лейпатунтури,,,,,,,needs_review,wikidata
+wd:Q25420799,oronym,Эндек (гора),,,mixed_phrase,always,Эндек (гора),,,,,,,needs_review,wikidata
+wd:Q117312990,oronym,Тазтау,,,mixed_phrase,always,Тазтау,,,,,,,needs_review,wikidata
+wd:Q19615348,oronym,Ежовая,,,mixed_phrase,always,Ежовая,,,,,,,needs_review,wikidata
+wd:Q19916675,oronym,Юрьев Камень,,,mixed_phrase,always,Юрьев Камень,,,,,,,needs_review,wikidata
+wd:Q21644405,oronym,Синяя гора,,,mixed_phrase,always,Синяя гора,,,,,,,needs_review,wikidata
+wd:Q137399116,oronym,Нургуш,,,mixed_phrase,always,Нургуш,,,,,,,needs_review,wikidata
+wd:Q4074654,oronym,Писаница «Бага-Заря»,,,mixed_phrase,always,Писаница «Бага-Заря»,,,,,,,needs_review,wikidata
+wd:Q21644706,oronym,Три Брата,,,mixed_phrase,always,Три Брата,,,,,,,needs_review,wikidata
+wd:Q2067068,oronym,гора Азов,,,mixed_phrase,always,гора Азов,,,,,,,needs_review,wikidata
+wd:Q4508272,oronym,Чекерил,,,mixed_phrase,always,Чекерил,,,,,,,needs_review,wikidata
+wd:Q28667076,oronym,Нуйкорт,,,mixed_phrase,always,Нуйкорт,,,,,,,needs_review,wikidata
+wd:Q18070814,oronym,Кольцо,,,mixed_phrase,always,Кольцо,,,,,,,needs_review,wikidata
+wd:Q4124267,oronym,Волчиха,,,mixed_phrase,always,Волчиха,,,,,,,needs_review,wikidata
+wd:Q4334232,oronym,Ольховая (гора),,,mixed_phrase,always,Ольховая (гора),,,,,,,needs_review,wikidata
+wd:Q41667019,oronym,Парпачский гребень,,,mixed_phrase,always,Парпачский гребень,,,,,,,needs_review,wikidata
+wd:Q16647208,oronym,Дыроватый Камень,,,mixed_phrase,always,Дыроватый Камень,,,,,,,needs_review,wikidata
+wd:Q24931730,oronym,Шабровские каменные палатки,,,mixed_phrase,always,Шабровские каменные палатки,,,,,,,needs_review,wikidata
+wd:Q21843651,oronym,Каменная гора,,,mixed_phrase,always,Каменная гора,,,,,,,needs_review,wikidata
+wd:Q4409445,oronym,Сахарная (гора),,,mixed_phrase,always,Сахарная (гора),,,,,,,needs_review,wikidata
+wd:Q3653214,oronym,Зекара,,,mixed_phrase,always,Зекара,,,,,,,needs_review,wikidata
+wd:Q2073028,oronym,Кемаль-Эгерек,,,mixed_phrase,always,Кемаль-Эгерек,,,,,,,needs_review,wikidata
+wd:Q1517833,oronym,Ай-Петри,,,mixed_phrase,always,Ай-Петри,,,,,,,needs_review,wikidata
+wd:Q1784850,oronym,Корватунтури,,,mixed_phrase,always,Корватунтури,,,,,,,needs_review,wikidata
+wd:Q124883843,oronym,Извоз,,,mixed_phrase,always,Извоз,,,,,,,needs_review,wikidata
+wd:Q4199065,oronym,Иконостас (скала),,,mixed_phrase,always,Иконостас (скала),,,,,,,needs_review,wikidata
+wd:Q4501593,oronym,Хрони (гора),,,mixed_phrase,always,Хрони (гора),,,,,,,needs_review,wikidata
+wd:Q11871926,oronym,Кивитунтури,,,mixed_phrase,always,Кивитунтури,,,,,,,needs_review,wikidata
+wd:Q65299647,oronym,Карабашская гора,,,mixed_phrase,always,Карабашская гора,,,,,,,needs_review,wikidata
+wd:Q4332472,oronym,Окатьева гора,,,mixed_phrase,always,Окатьева гора,,,,,,,needs_review,wikidata
+wd:Q28666611,oronym,Кашкабаш,,,mixed_phrase,always,Кашкабаш,,,,,,,needs_review,wikidata
+wd:Q4143441,oronym,Гора Чумбылат,,,mixed_phrase,always,Гора Чумбылат,,,,,,,needs_review,wikidata
+wd:Q136649120,oronym,Джанык-Бет,,,mixed_phrase,always,Джанык-Бет,,,,,,,needs_review,wikidata
+wd:Q31395784,oronym,Ташкалак (гора),,,mixed_phrase,always,Ташкалак (гора),,,,,,,needs_review,wikidata
+wd:Q4287492,oronym,Медведь-Камень,,,mixed_phrase,always,Медведь-Камень,,,,,,,needs_review,wikidata
+wd:Q21843372,oronym,Дыроватик,,,mixed_phrase,always,Дыроватик,,,,,,,needs_review,wikidata
+wd:Q24084370,oronym,Лысая гора,,,mixed_phrase,always,Лысая гора,,,,,,,needs_review,wikidata
+wd:Q31618143,oronym,Гора Брусничная,,,mixed_phrase,always,Гора Брусничная,,,,,,,needs_review,wikidata
+wd:Q31618169,oronym,Гора Борзова,,,mixed_phrase,always,Гора Борзова,,,,,,,needs_review,wikidata
+wd:Q31618452,oronym,Гора Три Сестры,,,mixed_phrase,always,Гора Три Сестры,,,,,,,needs_review,wikidata
+wd:Q31617104,oronym,Гора Землепроходец,,,mixed_phrase,always,Гора Землепроходец,,,,,,,needs_review,wikidata
+wd:Q31618095,oronym,Гора Казарма,,,mixed_phrase,always,Гора Казарма,,,,,,,needs_review,wikidata
+wd:Q31242927,oronym,Гора Крутая,,,mixed_phrase,always,Гора Крутая,,,,,,,needs_review,wikidata
+wd:Q30891166,oronym,Лысая,,,mixed_phrase,always,Лысая,,,,,,,needs_review,wikidata
+wd:Q140565031,oronym,Форос (гора),,,mixed_phrase,always,Форос (гора),,,,,,,needs_review,wikidata
+wd:Q31451215,oronym,Гора Гарь,,,mixed_phrase,always,Гора Гарь,,,,,,,needs_review,wikidata
+wd:Q31521304,oronym,Кубалач,,,mixed_phrase,always,Кубалач,,,,,,,needs_review,wikidata
+wd:Q4073355,oronym,Ачигсырт,,,mixed_phrase,always,Ачигсырт,,,,,,,needs_review,wikidata
+wd:Q31617078,oronym,Гора Угловая,,,mixed_phrase,always,Гора Угловая,,,,,,,needs_review,wikidata
+wd:Q31242933,oronym,Гора Сивуха,,,mixed_phrase,always,Гора Сивуха,,,,,,,needs_review,wikidata
+wd:Q31618043,oronym,Гора Бирюкова,,,mixed_phrase,always,Гора Бирюкова,,,,,,,needs_review,wikidata
+wd:Q31618082,oronym,Гора Литвинова,,,mixed_phrase,always,Гора Литвинова,,,,,,,needs_review,wikidata
+wd:Q31625352,oronym,Гора Ирина,,,mixed_phrase,always,Гора Ирина,,,,,,,needs_review,wikidata
+wd:Q31451533,oronym,Гора Крутая,,,mixed_phrase,always,Гора Крутая,,,,,,,needs_review,wikidata
+wd:Q3367071,oronym,Голец-Торная группа,,,mixed_phrase,always,Голец-Торная группа,,,,,,,needs_review,wikidata
+wd:Q31451264,oronym,Гора Шаткого,,,mixed_phrase,always,Гора Шаткого,,,,,,,needs_review,wikidata
+wd:Q31618119,oronym,Гора Константин,,,mixed_phrase,always,Гора Константин,,,,,,,needs_review,wikidata
+wd:Q31617200,oronym,Гора Береговая,,,mixed_phrase,always,Гора Береговая,,,,,,,needs_review,wikidata
+wd:Q31242921,oronym,Гора Струве,,,mixed_phrase,always,Гора Струве,,,,,,,needs_review,wikidata
+wd:Q31618219,oronym,Гора Гриб,,,mixed_phrase,always,Гора Гриб,,,,,,,needs_review,wikidata
+wd:Q31617188,oronym,Гора Ягодная,,,mixed_phrase,always,Гора Ягодная,,,,,,,needs_review,wikidata
+wd:Q4077939,oronym,Барафтау,,,mixed_phrase,always,Барафтау,,,,,,,needs_review,wikidata
+wd:Q2601631,oronym,Грозный хребет,,,mixed_phrase,always,Грозный хребет,,,,,,,needs_review,wikidata
+wd:Q31618231,oronym,Гора Десантная,,,mixed_phrase,always,Гора Десантная,,,,,,,needs_review,wikidata
+wd:Q31451235,oronym,Гора Дюрозан,,,mixed_phrase,always,Гора Дюрозан,,,,,,,needs_review,wikidata
+wd:Q136513822,oronym,Чардаклык,,,mixed_phrase,always,Чардаклык,,,,,,,needs_review,wikidata
+wd:Q31242939,oronym,Гора Шар,,,mixed_phrase,always,Гора Шар,,,,,,,needs_review,wikidata
+wd:Q4129246,oronym,"Высокая (гора, Уруп)",,,mixed_phrase,always,"Высокая (гора, Уруп)",,,,,,,needs_review,wikidata
+wd:Q31617150,oronym,Гора Правая,,,mixed_phrase,always,Гора Правая,,,,,,,needs_review,wikidata
+wd:Q31454234,oronym,Гора Мышкина,,,mixed_phrase,always,Гора Мышкина,,,,,,,needs_review,wikidata
+wd:Q31449911,oronym,Гора Яга,,,mixed_phrase,always,Гора Яга,,,,,,,needs_review,wikidata
+wd:Q31451289,oronym,Гора Облыселая,,,mixed_phrase,always,Гора Облыселая,,,,,,,needs_review,wikidata
+wd:Q31451241,oronym,Гора Краюха,,,mixed_phrase,always,Гора Краюха,,,,,,,needs_review,wikidata
+wd:Q31454232,oronym,Гора Острая,,,mixed_phrase,always,Гора Острая,,,,,,,needs_review,wikidata
+wd:Q140571019,oronym,Челяби-Яурн-Бели,,,mixed_phrase,always,Челяби-Яурн-Бели,,,,,,,needs_review,wikidata
+wd:Q4159763,oronym,Джалган (гора),,,mixed_phrase,always,Джалган (гора),,,,,,,needs_review,wikidata
+wd:Q31618464,oronym,Гора Бригантина,,,mixed_phrase,always,Гора Бригантина,,,,,,,needs_review,wikidata
+wd:Q31617213,oronym,Гора Овражная,,,mixed_phrase,always,Гора Овражная,,,,,,,needs_review,wikidata
+wd:Q136488867,oronym,Бакла (гора),,,mixed_phrase,always,Бакла (гора),,,,,,,needs_review,wikidata
+wd:Q136647103,oronym,Беш-Кош,,,mixed_phrase,always,Беш-Кош,,,,,,,needs_review,wikidata
+wd:Q31454235,oronym,Гора Личкова,,,mixed_phrase,always,Гора Личкова,,,,,,,needs_review,wikidata
+wd:Q1321881,oronym,Немо,,,mixed_phrase,always,Немо,,,,,,,needs_review,wikidata
+wd:Q25394370,oronym,Курортная,,,mixed_phrase,always,Курортная,,,,,,,needs_review,wikidata
+wd:Q31242915,oronym,Гора Косая,,,mixed_phrase,always,Гора Косая,,,,,,,needs_review,wikidata
+wd:Q31618156,oronym,Гора Кабан,,,mixed_phrase,always,Гора Кабан,,,,,,,needs_review,wikidata
+wd:Q16699811,oronym,Замана (гора),,,mixed_phrase,always,Замана (гора),,,,,,,needs_review,wikidata
+wd:Q18405780,oronym,Город-Макит,,,mixed_phrase,always,Город-Макит,,,,,,,needs_review,wikidata
+wd:Q31451270,oronym,Гора Борисяка,,,mixed_phrase,always,Гора Борисяка,,,,,,,needs_review,wikidata
+wd:Q31451228,oronym,Гора Баркова,,,mixed_phrase,always,Гора Баркова,,,,,,,needs_review,wikidata
+wd:Q31618244,oronym,Гора Оскаленная,,,mixed_phrase,always,Гора Оскаленная,,,,,,,needs_review,wikidata
+wd:Q31617042,oronym,Гора Сабля,,,mixed_phrase,always,Гора Сабля,,,,,,,needs_review,wikidata
+wd:Q31617225,oronym,Гора Междуречная,,,mixed_phrase,always,Гора Междуречная,,,,,,,needs_review,wikidata
+wd:Q31451526,oronym,Гора Ломоносова,,,mixed_phrase,always,Гора Ломоносова,,,,,,,needs_review,wikidata
+wd:Q31243422,oronym,Гора Ивао,,,mixed_phrase,always,Гора Ивао,,,,,,,needs_review,wikidata
+wd:Q31628534,oronym,Гора Осыпная,,,mixed_phrase,always,Гора Осыпная,,,,,,,needs_review,wikidata
+wd:Q31449979,oronym,Аога Мине,,,mixed_phrase,always,Аога Мине,,,,,,,needs_review,wikidata
+wd:Q31617177,oronym,Гора Плоская,,,mixed_phrase,always,Гора Плоская,,,,,,,needs_review,wikidata
+wd:Q31618029,oronym,Гора Витковского,,,mixed_phrase,always,Гора Витковского,,,,,,,needs_review,wikidata
+wd:Q4426992,oronym,Сокол,,,mixed_phrase,always,Сокол,,,,,,,needs_review,wikidata
+wd:Q31451223,oronym,Гора Сара,,,mixed_phrase,always,Гора Сара,,,,,,,needs_review,wikidata
+wd:Q31451256,oronym,Гора Архангельского,,,mixed_phrase,always,Гора Архангельского,,,,,,,needs_review,wikidata
+wd:Q31627678,oronym,Гора Антипина,,,mixed_phrase,always,Гора Антипина,,,,,,,needs_review,wikidata
+wd:Q31451249,oronym,Гора Треножник,,,mixed_phrase,always,Гора Треножник,,,,,,,needs_review,wikidata
+wd:Q34919312,oronym,Гора Гроб,,,mixed_phrase,always,Гора Гроб,,,,,,,needs_review,wikidata
+wd:Q31616123,oronym,Гора Хатимень,,,mixed_phrase,always,Гора Хатимень,,,,,,,needs_review,wikidata
+wd:Q134319033,oronym,Бечку (гора),,,mixed_phrase,always,Бечку (гора),,,,,,,needs_review,wikidata
+wd:Q31618003,oronym,Гора Речная,,,mixed_phrase,always,Гора Речная,,,,,,,needs_review,wikidata
+wd:Q31618206,oronym,Гора Обойма,,,mixed_phrase,always,Гора Обойма,,,,,,,needs_review,wikidata
+wd:Q31618016,oronym,Гора Каврайского,,,mixed_phrase,always,Гора Каврайского,,,,,,,needs_review,wikidata
+wd:Q136645225,oronym,Шулдан-Бурун,,,mixed_phrase,always,Шулдан-Бурун,,,,,,,needs_review,wikidata
+wd:Q37801959,oronym,Гора Трехглавая,Гора Трёхглавая,,mixed_phrase,always,Гора Трехглавая,,,,,,,needs_review,wikidata
+wd:Q31617091,oronym,Гора Зеленая,,,mixed_phrase,always,Гора Зеленая,,,,,,,needs_review,wikidata
+wd:Q281565,oronym,Группа Ломоносова,,,mixed_phrase,always,Группа Ломоносова,,,,,,,needs_review,wikidata
+wd:Q31617054,oronym,Гора Узкая,,,mixed_phrase,always,Гора Узкая,,,,,,,needs_review,wikidata
+wd:Q31451277,oronym,Гора Средняя,,,mixed_phrase,always,Гора Средняя,,,,,,,needs_review,wikidata
+wd:Q140563368,oronym,Шабурла,,,mixed_phrase,always,Шабурла,,,,,,,needs_review,wikidata
+wd:Q4211934,oronym,Камышинские уши,,,mixed_phrase,always,Камышинские уши,,,,,,,needs_review,wikidata
+wd:Q31553473,oronym,Четласский Камень,,,mixed_phrase,always,Четласский Камень,,,,,,,needs_review,wikidata
+wd:Q31242945,oronym,Гора Шабалина,,,mixed_phrase,always,Гора Шабалина,,,,,,,needs_review,wikidata
+wd:Q31621972,oronym,Гора Петра Шмидта,,,mixed_phrase,always,Гора Петра Шмидта,,,,,,,needs_review,wikidata
+wd:Q31617115,oronym,Гора Смирнова,,,mixed_phrase,always,Гора Смирнова,,,,,,,needs_review,wikidata
+wd:Q31451283,oronym,Гора Павлова,,,mixed_phrase,always,Гора Павлова,,,,,,,needs_review,wikidata
+wd:Q134309106,oronym,Памбук-Кая,,,mixed_phrase,always,Памбук-Кая,,,,,,,needs_review,wikidata
+wd:Q31617029,oronym,Гора Кольчужная,,,mixed_phrase,always,Гора Кольчужная,,,,,,,needs_review,wikidata
+wd:Q31617235,oronym,Гора Моховая,,,mixed_phrase,always,Гора Моховая,,,,,,,needs_review,wikidata
+wd:Q31617246,oronym,Гора Приречная,,,mixed_phrase,always,Гора Приречная,,,,,,,needs_review,wikidata
+wd:Q2665341,oronym,Малакатын-Тас,,,mixed_phrase,always,Малакатын-Тас,,,,,,,needs_review,wikidata
+wd:Q23942339,oronym,Мурунский массив,,,mixed_phrase,always,Мурунский массив,,,,,,,needs_review,wikidata
+wd:Q31665639,oronym,Гора Лысая,,,mixed_phrase,always,Гора Лысая,,,,,,,needs_review,wikidata
+wd:Q1076304,oronym,Берилл,,,mixed_phrase,always,Берилл,,,,,,,needs_review,wikidata
+wd:Q31602892,oronym,Эвота,,,mixed_phrase,always,Эвота,,,,,,,needs_review,wikidata
+wd:Q2122089,oronym,Кет-Кап,,,mixed_phrase,always,Кет-Кап,,,,,,,needs_review,wikidata
+wd:Q1953957,oronym,Мус-Хая,,,mixed_phrase,always,Мус-Хая,,,,,,,needs_review,wikidata
+wd:Q31610196,oronym,Гора Голец,,,mixed_phrase,always,Гора Голец,,,,,,,needs_review,wikidata
+wd:Q31657719,oronym,Гора Малиновая,,,mixed_phrase,always,Гора Малиновая,,,,,,,needs_review,wikidata
+wd:Q31689186,oronym,Гора Линейная Изба,,,mixed_phrase,always,Гора Линейная Изба,,,,,,,needs_review,wikidata
+wd:Q136463145,oronym,Парсук-Кая,,,mixed_phrase,always,Парсук-Кая,,,,,,,needs_review,wikidata
+wd:Q31638010,oronym,Гора Водораздельная,,,mixed_phrase,always,Гора Водораздельная,,,,,,,needs_review,wikidata
+wd:Q31552611,oronym,Гора Гогутай,,,mixed_phrase,always,Гора Гогутай,,,,,,,needs_review,wikidata
+wd:Q31637972,oronym,Гора Двухгорбая,,,mixed_phrase,always,Гора Двухгорбая,,,,,,,needs_review,wikidata
+wd:Q31637998,oronym,Гора Ожидающая,,,mixed_phrase,always,Гора Ожидающая,,,,,,,needs_review,wikidata
+wd:Q31600317,oronym,Гора Медвежья,,,mixed_phrase,always,Гора Медвежья,,,,,,,needs_review,wikidata
+wd:Q31555822,oronym,Гора Пухгарти-Ком,,,mixed_phrase,always,Гора Пухгарти-Ком,,,,,,,needs_review,wikidata
+wd:Q31645631,oronym,Гора Турачик,,,mixed_phrase,always,Гора Турачик,,,,,,,needs_review,wikidata
+wd:Q31601956,oronym,Гора Кастрюк,,,mixed_phrase,always,Гора Кастрюк,,,,,,,needs_review,wikidata
+wd:Q31608938,oronym,Гора Грельтэ,,,mixed_phrase,always,Гора Грельтэ,,,,,,,needs_review,wikidata
+wd:Q31660853,oronym,Гора Олы,,,mixed_phrase,always,Гора Олы,,,,,,,needs_review,wikidata
+wd:Q55659898,oronym,Чистоп (гора),,,mixed_phrase,always,Чистоп (гора),,,,,,,needs_review,wikidata
+wd:Q31637844,oronym,Гора Спорная,,,mixed_phrase,always,Гора Спорная,,,,,,,needs_review,wikidata
+wd:Q31677708,oronym,Гора Аршан,,,mixed_phrase,always,Гора Аршан,,,,,,,needs_review,wikidata
+wd:Q31676605,oronym,Гора Дабан-Табагор,,,mixed_phrase,always,Гора Дабан-Табагор,,,,,,,needs_review,wikidata
+wd:Q31549076,oronym,Гора Неройка,,,mixed_phrase,always,Гора Неройка,,,,,,,needs_review,wikidata
+wd:Q31689158,oronym,Гора Межевая,,,mixed_phrase,always,Гора Межевая,,,,,,,needs_review,wikidata
+wd:Q31676219,oronym,Гора Голец Бугутуй,,,mixed_phrase,always,Гора Голец Бугутуй,,,,,,,needs_review,wikidata
+wd:Q31650372,oronym,Гора Буланак,,,mixed_phrase,always,Гора Буланак,,,,,,,needs_review,wikidata
+wd:Q31548442,oronym,Гора Педы,,,mixed_phrase,always,Гора Педы,,,,,,,needs_review,wikidata
+wd:Q31556673,oronym,Гора Дамхурц,,,mixed_phrase,always,Гора Дамхурц,,,,,,,needs_review,wikidata
+wd:Q31603621,oronym,Гора Черского,,,mixed_phrase,always,Гора Черского,,,,,,,needs_review,wikidata
+wd:Q31550321,oronym,Гора Кылыч-Каракая,,,mixed_phrase,always,Гора Кылыч-Каракая,,,,,,,needs_review,wikidata
+wd:Q31604586,oronym,Гора Богомольная,,,mixed_phrase,always,Гора Богомольная,,,,,,,needs_review,wikidata
+wd:Q31605072,oronym,Гора Дабата,,,mixed_phrase,always,Гора Дабата,,,,,,,needs_review,wikidata
+wd:Q31664548,oronym,Гора Тумэн,,,mixed_phrase,always,Гора Тумэн,,,,,,,needs_review,wikidata
+wd:Q31676623,oronym,Гора Орсо,,,mixed_phrase,always,Гора Орсо,,,,,,,needs_review,wikidata
+wd:Q31549650,oronym,Гора Малый Домбай-Ульген,,,mixed_phrase,always,Гора Малый Домбай-Ульген,,,,,,,needs_review,wikidata
+wd:Q31553790,oronym,Гора Буульген,,,mixed_phrase,always,Гора Буульген,,,,,,,needs_review,wikidata
+wd:Q31552685,oronym,Гора Гадыл,,,mixed_phrase,always,Гора Гадыл,,,,,,,needs_review,wikidata
+wd:Q31637959,oronym,Гора Балаза,,,mixed_phrase,always,Гора Балаза,,,,,,,needs_review,wikidata
+wd:Q31676641,oronym,Гора Хирхаг,,,mixed_phrase,always,Гора Хирхаг,,,,,,,needs_review,wikidata
+wd:Q31677028,oronym,Гора Худан-Цаган,,,mixed_phrase,always,Гора Худан-Цаган,,,,,,,needs_review,wikidata
+wd:Q31689132,oronym,Гора Ульма,,,mixed_phrase,always,Гора Ульма,,,,,,,needs_review,wikidata
+wd:Q31637947,oronym,Гора Кабанья,,,mixed_phrase,always,Гора Кабанья,,,,,,,needs_review,wikidata
+wd:Q108829697,oronym,Гапсельга,,,mixed_phrase,always,Гапсельга,,,,,,,needs_review,wikidata
+wd:Q31618552,oronym,Гора Зуб,,,mixed_phrase,always,Гора Зуб,,,,,,,needs_review,wikidata
+wd:Q137786625,oronym,Известная,,,mixed_phrase,always,Известная,,,,,,,needs_review,wikidata
+wd:Q31637922,oronym,Гора Орлиная,,,mixed_phrase,always,Гора Орлиная,,,,,,,needs_review,wikidata
+wd:Q31637910,oronym,Гора Граничная,,,mixed_phrase,always,Гора Граничная,,,,,,,needs_review,wikidata
+wd:Q134390123,oronym,Арды-Кая,,,mixed_phrase,always,Арды-Кая,,,,,,,needs_review,wikidata
+wd:Q139591794,oronym,Агыс-Хыр,,,mixed_phrase,always,Агыс-Хыр,,,,,,,needs_review,wikidata
+wd:Q31603078,oronym,Гора Джалакан,,,mixed_phrase,always,Гора Джалакан,,,,,,,needs_review,wikidata
+wd:Q31645838,oronym,Гора Каракол,,,mixed_phrase,always,Гора Каракол,,,,,,,needs_review,wikidata
+wd:Q136487062,oronym,Эльх-Кая,,,mixed_phrase,always,Эльх-Кая,,,,,,,needs_review,wikidata
+wd:Q112222397,oronym,Тез-Баир,,,mixed_phrase,always,Тез-Баир,,,,,,,needs_review,wikidata
+wd:Q31556624,oronym,Гора Маркопидж,,,mixed_phrase,always,Гора Маркопидж,,,,,,,needs_review,wikidata
+wd:Q31645772,oronym,Гора Загриха,,,mixed_phrase,always,Гора Загриха,,,,,,,needs_review,wikidata
+wd:Q31548033,oronym,Гора Птыш,,,mixed_phrase,always,Гора Птыш,,,,,,,needs_review,wikidata
+wd:Q31550678,oronym,Гора Козы-Хох,,,mixed_phrase,always,Гора Козы-Хох,,,,,,,needs_review,wikidata
+wd:Q31649872,oronym,Гора Касатинская,,,mixed_phrase,always,Гора Касатинская,,,,,,,needs_review,wikidata
+wd:Q134082644,oronym,Сондоба,,,mixed_phrase,always,Сондоба,,,,,,,needs_review,wikidata
+wd:Q31609032,oronym,Гора Уныман-Барон,,,mixed_phrase,always,Гора Уныман-Барон,,,,,,,needs_review,wikidata
+wd:Q31689169,oronym,Гора Дегдеюони,,,mixed_phrase,always,Гора Дегдеюони,,,,,,,needs_review,wikidata
+wd:Q31661110,oronym,Гора Ороченский Камень,,,mixed_phrase,always,Гора Ороченский Камень,,,,,,,needs_review,wikidata
+wd:Q31660687,oronym,Гора Цоболго,,,mixed_phrase,always,Гора Цоболго,,,,,,,needs_review,wikidata
+wd:Q31637985,oronym,Гора Плоская,,,mixed_phrase,always,Гора Плоская,,,,,,,needs_review,wikidata
+wd:Q31689145,oronym,Гора Одиночка,,,mixed_phrase,always,Гора Одиночка,,,,,,,needs_review,wikidata
+wd:Q31663329,oronym,Гора Самалкикит,,,mixed_phrase,always,Гора Самалкикит,,,,,,,needs_review,wikidata
+wd:Q31552954,oronym,Гора Джаловчат,,,mixed_phrase,always,Гора Джаловчат,,,,,,,needs_review,wikidata
+wd:Q31602272,oronym,Гора Ибыхен,,,mixed_phrase,always,Гора Ибыхен,,,,,,,needs_review,wikidata
+wd:Q31637832,oronym,Гора Угловая,,,mixed_phrase,always,Гора Угловая,,,,,,,needs_review,wikidata
+wd:Q134406501,oronym,Построфиль,,,mixed_phrase,always,Построфиль,,,,,,,needs_review,wikidata
+wd:Q31637883,oronym,Гора Маяк,,,mixed_phrase,always,Гора Маяк,,,,,,,needs_review,wikidata
+wd:Q31620543,oronym,Гора Сунтар-Хаята,,,mixed_phrase,always,Гора Сунтар-Хаята,,,,,,,needs_review,wikidata
+wd:Q31637870,oronym,Гора Крутая,,,mixed_phrase,always,Гора Крутая,,,,,,,needs_review,wikidata
+wd:Q31552910,oronym,Гора Джантуган,,,mixed_phrase,always,Гора Джантуган,,,,,,,needs_review,wikidata
+wd:Q31674567,oronym,Гора Худан,,,mixed_phrase,always,Гора Худан,,,,,,,needs_review,wikidata
+wd:Q31548611,oronym,Гора Ойкачахл,,,mixed_phrase,always,Гора Ойкачахл,,,,,,,needs_review,wikidata
+wd:Q31548666,oronym,Гора Отортен,,,mixed_phrase,always,Гора Отортен,,,,,,,needs_review,wikidata
+wd:Q31554811,oronym,Гора Алибекбаши,,,mixed_phrase,always,Гора Алибекбаши,,,,,,,needs_review,wikidata
+wd:Q134389274,oronym,Апалы,,,mixed_phrase,always,Апалы,,,,,,,needs_review,wikidata
+wd:Q31551779,oronym,Гора Караугом,,,mixed_phrase,always,Гора Караугом,,,,,,,needs_review,wikidata
+wd:Q31674717,oronym,Гора Медвежья,,,mixed_phrase,always,Гора Медвежья,,,,,,,needs_review,wikidata
+wd:Q31638527,oronym,Гора Дубняковая,,,mixed_phrase,always,Гора Дубняковая,,,,,,,needs_review,wikidata
+wd:Q31677096,oronym,Гора Тапхар,,,mixed_phrase,always,Гора Тапхар,,,,,,,needs_review,wikidata
+wd:Q31603913,oronym,Гора Быдыр,,,mixed_phrase,always,Гора Быдыр,,,,,,,needs_review,wikidata
+wd:Q31637896,oronym,Гора Радовая,,,mixed_phrase,always,Гора Радовая,,,,,,,needs_review,wikidata
+wd:Q31557545,oronym,Гора Лонжекорт,,,mixed_phrase,always,Гора Лонжекорт,,,,,,,needs_review,wikidata
+wd:Q31638022,oronym,Гора Осиновая,,,mixed_phrase,always,Гора Осиновая,,,,,,,needs_review,wikidata
+wd:Q84082826,oronym,Ай-Георгий,,,mixed_phrase,always,Ай-Георгий,,,,,,,needs_review,wikidata
+wd:Q31689201,oronym,Гора Близкая,,,mixed_phrase,always,Гора Близкая,,,,,,,needs_review,wikidata
+wd:Q31638050,oronym,Гора Кабанья Сопка,,,mixed_phrase,always,Гора Кабанья Сопка,,,,,,,needs_review,wikidata
+wd:Q31637857,oronym,Гора Ореховая,,,mixed_phrase,always,Гора Ореховая,,,,,,,needs_review,wikidata
+wd:Q31601577,oronym,Гора Хоректа,,,mixed_phrase,always,Гора Хоректа,,,,,,,needs_review,wikidata
+wd:Q31603830,oronym,Голец Быстринский,,,mixed_phrase,always,Голец Быстринский,,,,,,,needs_review,wikidata
+wd:Q31686311,oronym,Гора Саля,,,mixed_phrase,always,Гора Саля,,,,,,,needs_review,wikidata
+wd:Q31638036,oronym,Гора Васильева,,,mixed_phrase,always,Гора Васильева,,,,,,,needs_review,wikidata
+wd:Q31692810,oronym,Лазаревская,,,mixed_phrase,always,Лазаревская,,,,,,,needs_review,wikidata
+wd:Q31690630,oronym,Гора Лысая,,,mixed_phrase,always,Гора Лысая,,,,,,,needs_review,wikidata
+wd:Q31682591,oronym,Гора Лысая,,,mixed_phrase,always,Гора Лысая,,,,,,,needs_review,wikidata
+wd:Q31690518,oronym,Сопка Лысая,,,mixed_phrase,always,Сопка Лысая,,,,,,,needs_review,wikidata
+wd:Q25383532,oronym,Гора Рудановского,,,mixed_phrase,always,Гора Рудановского,,,,,,,needs_review,wikidata
+wd:Q376407,oronym,Кошка,,,mixed_phrase,always,Кошка,,,,,,,needs_review,wikidata
+wd:Q1140086,oronym,Ушковский,,,mixed_phrase,always,Ушковский,,,,,,,needs_review,wikidata
+wd:Q2042338,oronym,"Митридат (гора, Керчь)",,,mixed_phrase,always,"Митридат (гора, Керчь)",,,,,,,needs_review,wikidata
+wd:Q31689459,oronym,Гора Бабушкина,,,mixed_phrase,always,Гора Бабушкина,,,,,,,needs_review,wikidata
+wd:Q31690035,oronym,Гора Долма,,,mixed_phrase,always,Гора Долма,,,,,,,needs_review,wikidata
+wd:Q122724061,oronym,гора Улутау (Аскаровский сельсовет),,,mixed_phrase,always,гора Улутау (Аскаровский сельсовет),,,,,,,needs_review,wikidata
+wd:Q31689927,oronym,Гора Большой Ключ,,,mixed_phrase,always,Гора Большой Ключ,,,,,,,needs_review,wikidata
+wd:Q131359124,oronym,Чукша,,,mixed_phrase,always,Чукша,,,,,,,needs_review,wikidata
+wd:Q13667705,oronym,Либекир,,,mixed_phrase,always,Либекир,,,,,,,needs_review,wikidata
+wd:Q4336568,oronym,Орлиное Гнездо (сопка),,,mixed_phrase,always,Орлиное Гнездо (сопка),,,,,,,needs_review,wikidata
+wd:Q31690000,oronym,Гора Сырая,,,mixed_phrase,always,Гора Сырая,,,,,,,needs_review,wikidata
+wd:Q34917722,oronym,Гора Березовая Сопка,Гора Берёзовая Сопка,,mixed_phrase,always,Гора Березовая Сопка,,,,,,,needs_review,wikidata
+wd:Q31689873,oronym,Гора Вилюйка,,,mixed_phrase,always,Гора Вилюйка,,,,,,,needs_review,wikidata
+wd:Q34918991,oronym,Гора Дуругу,,,mixed_phrase,always,Гора Дуругу,,,,,,,needs_review,wikidata
+wd:Q122724413,oronym,гора Улутау (Нигаматовский сельсовет),,,mixed_phrase,always,гора Улутау (Нигаматовский сельсовет),,,,,,,needs_review,wikidata
+wd:Q116381652,oronym,Гора Альян,,,mixed_phrase,always,Гора Альян,,,,,,,needs_review,wikidata
+wd:Q31689655,oronym,Гора Ветречная,,,mixed_phrase,always,Гора Ветречная,,,,,,,needs_review,wikidata
+wd:Q31689709,oronym,Гора Встречная,,,mixed_phrase,always,Гора Встречная,,,,,,,needs_review,wikidata
+wd:Q106910910,oronym,Сухая гора,,,mixed_phrase,always,Сухая гора,,,,,,,needs_review,wikidata
+wd:Q20625349,oronym,Час,,,mixed_phrase,always,Час,,,,,,,needs_review,wikidata
+wd:Q137796064,oronym,Краснояр,,,mixed_phrase,always,Краснояр,,,,,,,needs_review,wikidata
+wd:Q15981404,oronym,Морчека,,,mixed_phrase,always,Морчека,,,,,,,needs_review,wikidata
+wd:Q34918938,oronym,Гора Даусу,,,mixed_phrase,always,Гора Даусу,,,,,,,needs_review,wikidata
+wd:Q37798270,oronym,Гора Перенесенная,Гора Перенесённая,,mixed_phrase,always,Гора Перенесенная,,,,,,,needs_review,wikidata
+wd:Q31689536,oronym,Гора Годовщина,,,mixed_phrase,always,Гора Годовщина,,,,,,,needs_review,wikidata
+wd:Q31571538,oronym,Нартия,,,mixed_phrase,always,Нартия,,,,,,,needs_review,wikidata
+wd:Q31689680,oronym,Гора Отдельная,,,mixed_phrase,always,Гора Отдельная,,,,,,,needs_review,wikidata
+wd:Q31689983,oronym,Гора Барак,,,mixed_phrase,always,Гора Барак,,,,,,,needs_review,wikidata
+wd:Q34919373,oronym,Гора Иглядей-Тей-Кеу,,,mixed_phrase,always,Гора Иглядей-Тей-Кеу,,,,,,,needs_review,wikidata
+wd:Q110692128,oronym,Гора Крузенштерна,,,mixed_phrase,always,Гора Крузенштерна,,,,,,,needs_review,wikidata
+wd:Q16631898,oronym,Воскресенская гора,,,mixed_phrase,always,Воскресенская гора,,,,,,,needs_review,wikidata
+wd:Q31689488,oronym,Гора Невидная,,,mixed_phrase,always,Гора Невидная,,,,,,,needs_review,wikidata
+wd:Q31689963,oronym,Гора Тахало,,,mixed_phrase,always,Гора Тахало,,,,,,,needs_review,wikidata
+wd:Q31689641,oronym,Гора Приграничная,,,mixed_phrase,always,Гора Приграничная,,,,,,,needs_review,wikidata
+wd:Q122724354,oronym,гора Улутау (Биляловский сельсовет),,,mixed_phrase,always,гора Улутау (Биляловский сельсовет),,,,,,,needs_review,wikidata
+wd:Q31689599,oronym,Гора Пестрая,,,mixed_phrase,always,Гора Пестрая,,,,,,,needs_review,wikidata
+wd:Q37803553,oronym,Гора Зуб Софриджу,,,mixed_phrase,always,Гора Зуб Софриджу,,,,,,,needs_review,wikidata
+wd:Q4143971,oronym,"Горелая (гора, Мурманск)",,,mixed_phrase,always,"Горелая (гора, Мурманск)",,,,,,,needs_review,wikidata
+wd:Q31690018,oronym,Гора Зельта,,,mixed_phrase,always,Гора Зельта,,,,,,,needs_review,wikidata
+wd:Q31689586,oronym,Гора Верхние Балазы,,,mixed_phrase,always,Гора Верхние Балазы,,,,,,,needs_review,wikidata
+wd:Q31690198,oronym,Гора Шестак,,,mixed_phrase,always,Гора Шестак,,,,,,,needs_review,wikidata
+wd:Q19916853,oronym,Татар-Хабурга,,,mixed_phrase,always,Татар-Хабурга,,,,,,,needs_review,wikidata
+wd:Q31689523,oronym,Гора Вторая Амба,,,mixed_phrase,always,Гора Вторая Амба,,,,,,,needs_review,wikidata
+wd:Q31689945,oronym,Гора Алмазная,,,mixed_phrase,always,Гора Алмазная,,,,,,,needs_review,wikidata
+wd:Q37798673,oronym,Пугачева гора,Пугачёва гора,,mixed_phrase,always,Пугачева гора,,,,,,,needs_review,wikidata
+wd:Q2637105,oronym,Холодильник,,,mixed_phrase,always,Холодильник,,,,,,,needs_review,wikidata
+wd:Q31689667,oronym,Гора Столбовая,,,mixed_phrase,always,Гора Столбовая,,,,,,,needs_review,wikidata
+wd:Q31689836,oronym,Гора Тучная,,,mixed_phrase,always,Гора Тучная,,,,,,,needs_review,wikidata
+wd:Q31689547,oronym,Гора Плоская,,,mixed_phrase,always,Гора Плоская,,,,,,,needs_review,wikidata
+wd:Q4126817,oronym,Воттоваара,,,mixed_phrase,always,Воттоваара,,,,,,,needs_review,wikidata
+wd:Q37803573,oronym,Гора Зун-Черная,Гора Зун-Чёрная,,mixed_phrase,always,Гора Зун-Черная,,,,,,,needs_review,wikidata
+wd:Q31689475,oronym,Гора Октябрьская,,,mixed_phrase,always,Гора Октябрьская,,,,,,,needs_review,wikidata
+wd:Q31689909,oronym,Гора Острая,,,mixed_phrase,always,Гора Острая,,,,,,,needs_review,wikidata
+wd:Q20096162,oronym,Шарха,,,mixed_phrase,always,Шарха,,,,,,,needs_review,wikidata
+wd:Q24934695,oronym,Гора святой Марии,,,mixed_phrase,always,Гора святой Марии,,,,,,,needs_review,wikidata
+wd:Q31689613,oronym,Гора Приморская,,,mixed_phrase,always,Гора Приморская,,,,,,,needs_review,wikidata
+wd:Q34917527,oronym,Гора Березовая,Гора Берёзовая,,mixed_phrase,always,Гора Березовая,,,,,,,needs_review,wikidata
+wd:Q31689856,oronym,Гора Буктар,,,mixed_phrase,always,Гора Буктар,,,,,,,needs_review,wikidata
+wd:Q31689626,oronym,Гора Малая,,,mixed_phrase,always,Гора Малая,,,,,,,needs_review,wikidata
+wd:Q37793488,oronym,Гора Мантанел,Гора Мантанёл,,mixed_phrase,always,Гора Мантанел,,,,,,,needs_review,wikidata
+wd:Q24937862,oronym,Гора Догээ,,,mixed_phrase,always,Гора Догээ,,,,,,,needs_review,wikidata
+wd:Q31689764,oronym,Гора Осенняя,,,mixed_phrase,always,Гора Осенняя,,,,,,,needs_review,wikidata
+wd:Q122724242,oronym,гора Улутау (Халиловский сельсовет),,,mixed_phrase,always,гора Улутау (Халиловский сельсовет),,,,,,,needs_review,wikidata
+wd:Q31689500,oronym,Гора Тигровая,,,mixed_phrase,always,Гора Тигровая,,,,,,,needs_review,wikidata
+wd:Q12081362,oronym,Баш-Пармак,,,mixed_phrase,always,Баш-Пармак,,,,,,,needs_review,wikidata
+wd:Q124256416,oronym,Янтуру,,,mixed_phrase,always,Янтуру,,,,,,,needs_review,wikidata
+wd:Q7699967,oronym,Зейтин-Кош,,,mixed_phrase,always,Зейтин-Кош,,,,,,,needs_review,wikidata
+wd:Q4506915,oronym,Чалбаш (гора),,,mixed_phrase,always,Чалбаш (гора),,,,,,,needs_review,wikidata
+wd:Q23971310,oronym,Науджидза,,,mixed_phrase,always,Науджидза,,,,,,,needs_review,wikidata
+wd:Q31689692,oronym,Гора Видная,,,mixed_phrase,always,Гора Видная,,,,,,,needs_review,wikidata
+wd:Q133460075,oronym,Тиенпяянтунтури,,,mixed_phrase,always,Тиенпяянтунтури,,,,,,,needs_review,wikidata
+wd:Q31689559,oronym,Гора Дебери,,,mixed_phrase,always,Гора Дебери,,,,,,,needs_review,wikidata
+wd:Q4072819,oronym,Афонтова гора,,,mixed_phrase,always,Афонтова гора,,,,,,,needs_review,wikidata
+wd:Q31689802,oronym,Гора Заречная,,,mixed_phrase,always,Гора Заречная,,,,,,,needs_review,wikidata
+wd:Q115574982,oronym,Липницкая,,,mixed_phrase,always,Липницкая,,,,,,,needs_review,wikidata
+wd:Q34920174,oronym,Гора Краевая,Гора Краёвая,,mixed_phrase,always,Гора Краевая,,,,,,,needs_review,wikidata
+wd:Q4134770,oronym,Гезлам,,,mixed_phrase,always,Гезлам,,,,,,,needs_review,wikidata
+wd:Q122724177,oronym,гора Улутау (Давлетовский сельсовет),,,mixed_phrase,always,гора Улутау (Давлетовский сельсовет),,,,,,,needs_review,wikidata
+wd:Q31547852,oronym,Сабик,,,mixed_phrase,always,Сабик,,,,,,,needs_review,wikidata
+wd:Q31689784,oronym,Гора Уступчатая,,,mixed_phrase,always,Гора Уступчатая,,,,,,,needs_review,wikidata
+wd:Q34917644,oronym,Гора Березовая,Гора Берёзовая,,mixed_phrase,always,Гора Березовая,,,,,,,needs_review,wikidata
+wd:Q34920281,oronym,Гора Кулактау,,,mixed_phrase,always,Гора Кулактау,,,,,,,needs_review,wikidata
+wd:Q21644134,oronym,Пшеничная,,,mixed_phrase,always,Пшеничная,,,,,,,needs_review,wikidata
+wd:Q31689572,oronym,Гора Блудная,,,mixed_phrase,always,Гора Блудная,,,,,,,needs_review,wikidata
+wd:Q31549867,oronym,Гора Лысая,,,mixed_phrase,always,Гора Лысая,,,,,,,needs_review,wikidata
+wd:Q133403296,oronym,Хармаятунтури,,,mixed_phrase,always,Хармаятунтури,,,,,,,needs_review,wikidata
+wd:Q31689727,oronym,Гора Гроза,,,mixed_phrase,always,Гора Гроза,,,,,,,needs_review,wikidata
+wd:Q31690052,oronym,Гора Острая,,,mixed_phrase,always,Гора Острая,,,,,,,needs_review,wikidata
+wd:Q31689345,oronym,Гора Лилипут,,,mixed_phrase,always,Гора Лилипут,,,,,,,needs_review,wikidata
+wd:Q31689384,oronym,Гора Мария,,,mixed_phrase,always,Гора Мария,,,,,,,needs_review,wikidata
+wd:Q31689358,oronym,Гора Дедова,,,mixed_phrase,always,Гора Дедова,,,,,,,needs_review,wikidata
+wd:Q31689400,oronym,Гора Нароот,,,mixed_phrase,always,Гора Нароот,,,,,,,needs_review,wikidata
+wd:Q31689228,oronym,Гора Сактымар,,,mixed_phrase,always,Гора Сактымар,,,,,,,needs_review,wikidata
+wd:Q31689274,oronym,Гора Фартовая,,,mixed_phrase,always,Гора Фартовая,,,,,,,needs_review,wikidata
+wd:Q31689243,oronym,Гора Доступная,,,mixed_phrase,always,Гора Доступная,,,,,,,needs_review,wikidata
+wd:Q31689415,oronym,Гора Амба,,,mixed_phrase,always,Гора Амба,,,,,,,needs_review,wikidata
+wd:Q31689371,oronym,Гора Солдатская,,,mixed_phrase,always,Гора Солдатская,,,,,,,needs_review,wikidata
+wd:Q31689303,oronym,Гора Катан,,,mixed_phrase,always,Гора Катан,,,,,,,needs_review,wikidata
+wd:Q31689445,oronym,Гора Клин,,,mixed_phrase,always,Гора Клин,,,,,,,needs_review,wikidata
+wd:Q31689318,oronym,Гора Пограничная,,,mixed_phrase,always,Гора Пограничная,,,,,,,needs_review,wikidata
+wd:Q31689260,oronym,Гора Походная,,,mixed_phrase,always,Гора Походная,,,,,,,needs_review,wikidata
+wd:Q31689431,oronym,Гора Завидная,,,mixed_phrase,always,Гора Завидная,,,,,,,needs_review,wikidata
+wd:Q31697977,oronym,Тохтинский Хребет,,,mixed_phrase,always,Тохтинский Хребет,,,,,,,needs_review,wikidata
+wd:Q31689288,oronym,Гора Скат,,,mixed_phrase,always,Гора Скат,,,,,,,needs_review,wikidata
+wd:Q31689332,oronym,Гора Пихтовая,,,mixed_phrase,always,Гора Пихтовая,,,,,,,needs_review,wikidata
+wd:Q31689214,oronym,Гора Верховье Матая,,,mixed_phrase,always,Гора Верховье Матая,,,,,,,needs_review,wikidata
+wd:Q31697994,oronym,Гора Обрыв,,,mixed_phrase,always,Гора Обрыв,,,,,,,needs_review,wikidata
+wd:Q130323968,oronym,Иондаса,,,mixed_phrase,always,Иондаса,,,,,,,needs_review,wikidata
+wd:Q4279803,oronym,Мамбет (скала),,,mixed_phrase,always,Мамбет (скала),,,,,,,needs_review,wikidata
+wd:Q745231,oronym,Победа,,,mixed_phrase,always,Победа,,,,,,,needs_review,wikidata
+wd:Q3653322,oronym,Шихан,,,mixed_phrase,always,Шихан,,,,,,,needs_review,wikidata
+wd:Q62519123,oronym,Саржематы (гора),,,mixed_phrase,always,Саржематы (гора),,,,,,,needs_review,wikidata
+wd:Q4247515,oronym,Купол Трех Озер,Купол Трёх Озёр,,mixed_phrase,always,Купол Трех Озер,,,,,,,needs_review,wikidata
+wd:Q21636337,oronym,Большое Псеушхо,,,mixed_phrase,always,Большое Псеушхо,,,,,,,needs_review,wikidata
+wd:Q28666669,oronym,Урушевы,,,mixed_phrase,always,Урушевы,,,,,,,needs_review,wikidata
+wd:Q4129254,oronym,"Высокая (гора, Урал)",,,mixed_phrase,always,"Высокая (гора, Урал)",,,,,,,needs_review,wikidata
+wd:Q4249850,oronym,Куцай,,,mixed_phrase,always,Куцай,,,,,,,needs_review,wikidata
+wd:Q16375592,oronym,Сахарисмта,,,mixed_phrase,always,Сахарисмта,,,,,,,needs_review,wikidata
+wd:Q32361031,oronym,Шизе,,,mixed_phrase,always,Шизе,,,,,,,needs_review,wikidata
+wd:Q4099585,oronym,Бурин-Хан,,,mixed_phrase,always,Бурин-Хан,,,,,,,needs_review,wikidata
+wd:Q102076683,oronym,Липовая гора,,,mixed_phrase,always,Липовая гора,,,,,,,needs_review,wikidata
+wd:Q18399744,oronym,Косотур,,,mixed_phrase,always,Косотур,,,,,,,needs_review,wikidata
+wd:Q21644320,oronym,Сарай-Гора,,,mixed_phrase,always,Сарай-Гора,,,,,,,needs_review,wikidata
+wd:Q110975324,oronym,"Митридат (гора, Феодосия)",,,mixed_phrase,always,"Митридат (гора, Феодосия)",,,,,,,needs_review,wikidata
+wd:Q13667707,oronym,Голобокий Чурок,,,mixed_phrase,always,Голобокий Чурок,,,,,,,needs_review,wikidata
+wd:Q21644046,oronym,Почепсуха,,,mixed_phrase,always,Почепсуха,,,,,,,needs_review,wikidata
+wd:Q108829702,oronym,Мальгора,,,mixed_phrase,always,Мальгора,,,,,,,needs_review,wikidata
+wd:Q4350578,oronym,Перемиловская высота,,,mixed_phrase,always,Перемиловская высота,,,,,,,needs_review,wikidata
+wd:Q2386387,oronym,Табожок,,,mixed_phrase,always,Табожок,,,,,,,needs_review,wikidata
+wd:Q133518317,oronym,Накас,,,mixed_phrase,always,Накас,,,,,,,needs_review,wikidata
+wd:Q31585700,oronym,Талдуайр,,,mixed_phrase,always,Талдуайр,,,,,,,needs_review,wikidata
+wd:Q39085187,oronym,Кызлартау,,,mixed_phrase,always,Кызлартау,,,,,,,needs_review,wikidata
+wd:Q24932143,oronym,Джаниикту,,,mixed_phrase,always,Джаниикту,,,,,,,needs_review,wikidata
+wd:Q30890510,oronym,Алтуд,,,mixed_phrase,always,Алтуд,,,,,,,needs_review,wikidata
+wd:Q21645205,oronym,Хутако,,,mixed_phrase,always,Хутако,,,,,,,needs_review,wikidata
+wd:Q28667251,oronym,Нашахалам,,,mixed_phrase,always,Нашахалам,,,,,,,needs_review,wikidata
+wd:Q112584892,oronym,Сосновая гора,,,mixed_phrase,always,Сосновая гора,,,,,,,needs_review,wikidata
+wd:Q21639524,oronym,Забытая,,,mixed_phrase,always,Забытая,,,,,,,needs_review,wikidata
+wd:Q4060140,oronym,Актуру,,,mixed_phrase,always,Актуру,,,,,,,needs_review,wikidata
+wd:Q4273730,oronym,Маашейбаш,,,mixed_phrase,always,Маашейбаш,,,,,,,needs_review,wikidata
+wd:Q19721720,oronym,Иикту,,,mixed_phrase,always,Иикту,,,,,,,needs_review,wikidata
+wd:Q62071510,oronym,Крестовая,,,mixed_phrase,always,Крестовая,,,,,,,needs_review,wikidata
+wd:Q13667719,oronym,Убиньсу,,,mixed_phrase,always,Убиньсу,,,,,,,needs_review,wikidata
+wd:Q113486245,oronym,Никольская гора,,,mixed_phrase,always,Никольская гора,,,,,,,needs_review,wikidata
+wd:Q24932744,oronym,Пхахуаза,,,mixed_phrase,always,Пхахуаза,,,,,,,needs_review,wikidata
+wd:Q3001283,oronym,Корона Алтая,,,mixed_phrase,always,Корона Алтая,,,,,,,needs_review,wikidata
+wd:Q19916211,oronym,Целовальникова гора,,,mixed_phrase,always,Целовальникова гора,,,,,,,needs_review,wikidata
+wd:Q108109307,oronym,Харама Хайата,,,mixed_phrase,always,Харама Хайата,,,,,,,needs_review,wikidata
+wd:Q21645689,oronym,Шаред,,,mixed_phrase,always,Шаред,,,,,,,needs_review,wikidata
+wd:Q125906738,oronym,Лысая гора,,,mixed_phrase,always,Лысая гора,,,,,,,needs_review,wikidata
+wd:Q117485920,oronym,Плоская,,,mixed_phrase,always,Плоская,,,,,,,needs_review,wikidata
+wd:Q20073423,oronym,Измолос,,,mixed_phrase,always,Измолос,,,,,,,needs_review,wikidata
+wd:Q18408438,oronym,Индюк,,,mixed_phrase,always,Индюк,,,,,,,needs_review,wikidata
+wd:Q13667700,oronym,Папай (гора),,,mixed_phrase,always,Папай (гора),,,,,,,needs_review,wikidata
+wd:Q2470386,oronym,Аю-Даг,,,mixed_phrase,always,Аю-Даг,,,,,,,needs_review,wikidata
+wd:Q134777013,oronym,Пихтовый гребень,,,mixed_phrase,always,Пихтовый гребень,,,,,,,needs_review,wikidata
+wd:Q125454343,oronym,Песчанка,,,mixed_phrase,always,Песчанка,,,,,,,needs_review,wikidata
