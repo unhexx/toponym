@@ -539,6 +539,20 @@
       "summary": "Реестр гидронимов растёт upsert-ом по wd:Q-id из Wikidata (один SELECT: P31 озеро Q23397 и река Q4022 с ruwiki sitelink, P17=Q159; моря Q165 не в VALUES, FILL_IF_EMPTY). При too_large/timeout входящие реки отбрасываются, озёра и моря остаются. SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не ГКГН и не все реки России. Волга/Дон сохранены gold."
     },
     {
+      "id": "DEC-SEED-011",
+      "type": "Decision",
+      "title": "Оронимы из Wikidata SPARQL, не ГКГН",
+      "status": "accepted",
+      "date": "2026-09-24",
+      "refs": [
+        "data/curated/oronyms-major.csv",
+        "data/raw/wikidata/oronyms-ru.sparql",
+        "scripts/seed_oronyms.py",
+        "data/mappings/wikidata.yaml"
+      ],
+      "summary": "Реестр оронимов растёт upsert-ом по wd:Q-id из Wikidata (P31 гора Q8502, хребет Q46831, вулкан Q8072, остров Q23442, полуостров Q34763, P17=Q159; остров/полуостров — insulonym). Запрос по одному VALUES-типу. SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не ГКГН и не все горы России. Эльбрус, Уральские горы и Сахалин сохранены."
+    },
+    {
       "id": "DEC-P1-001",
       "type": "Decision",
       "title": "P1 не дробить на P1a–e",

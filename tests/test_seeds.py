@@ -78,7 +78,7 @@ def test_seed_counts() -> None:
     assert sum(1 for row in regions if row["id_scheme"] == "local") == 6
     assert len(cities) >= 800
     assert len(hydros) >= 500
-    assert len(oros) >= 25
+    assert len(oros) >= 5000
     assert len(foiv) >= 69
     assert len(other) >= 10
     assert len(mun) >= 500

@@ -34,4 +34,6 @@
 
 Гидронимы (DEC-SEED-010): `data/curated/hydronyms-major.csv` — Wikidata P31=Q23397 (озеро) и Q4022 (река, ruwiki), P17=Q159; моря Q165 не в VALUES. Не ГКГН и не все реки России. Волга/Дон — gold.
 
+Оронимы (DEC-SEED-011): `data/curated/oronyms-major.csv` — Wikidata P31 гора Q8502, хребет Q46831, вулкан Q8072, остров Q23442, полуостров Q34763, P17=Q159; остров/полуостров — `insulonym`. Не ГКГН и не все горы России. Эльбрус / Уральские горы / Сахалин сохранены.
+
 Полная таблица типов: `data/curated/types.csv`.

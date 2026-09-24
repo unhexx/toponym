@@ -21,7 +21,6 @@ from scripts.seed_oronyms import (
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE = ROOT / "tests" / "fixtures" / "oronyms_sparql.json"
 SPARQL = ROOT / "data" / "raw" / "wikidata" / "oronyms-ru.sparql"
-CANON_N = 34
 
 
 def _place(**kwargs: str) -> dict[str, str]:
@@ -298,7 +297,7 @@ def test_cli_from_json_writes_tmp(tmp_path: Path, capsys) -> None:
     assert by_id["wd:Q90008006"]["status"] == "deprecated"
     assert by_id["wd:Q90008007"]["type_id"] == "insulonym"
     assert by_id["wd:Q90008009"]["type_id"] == "oronym"
-    assert len(read_csv(ROOT / "data/curated/oronyms-major.csv")[1]) == CANON_N
+    assert len(read_csv(ROOT / "data/curated/oronyms-major.csv")[1]) >= 5000
 
 
 def test_harvest_from_json_no_network() -> None:
@@ -319,7 +318,7 @@ def test_harvest_from_json_no_network() -> None:
     assert any(row["id"] == "wd:Q90008001" for row in places)
     assert any(row["id"] == "wd:Q90008002" for row in places)
     assert not any(row["id"] == "wd:Q90008008" for row in places)
-    assert len(read_csv(ROOT / "data/curated/oronyms-major.csv")[1]) == CANON_N
+    assert len(read_csv(ROOT / "data/curated/oronyms-major.csv")[1]) >= 5000
 
 
 def test_harvest_live_per_type(monkeypatch, tmp_path: Path) -> None:
@@ -384,9 +383,9 @@ def test_harvest_live_per_type(monkeypatch, tmp_path: Path) -> None:
     assert by_id["wd:Q7792"]["type_id"] == "insulonym"
 
 
-def test_canon_oronyms_not_grown() -> None:
+def test_canon_oronyms_harvested() -> None:
     _header, rows = read_csv(ROOT / "data/curated/oronyms-major.csv")
-    assert len(rows) == CANON_N
+    assert len(rows) >= 5000
     assert any(row["id"] == "wd:Q43105" and row["name_ru"] == "Эльбрус" for row in rows)
     assert any(row["id"] == "wd:Q35600" and row["name_ru"] == "Уральские горы" for row in rows)
     assert any(row["id"] == "wd:Q7792" and row["type_id"] == "insulonym" for row in rows)
