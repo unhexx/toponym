@@ -169,6 +169,85 @@ def map_dromonym(
     return row
 
 
+# Ложный родитель из несвязанного OPTIONAL: меньший iso или Москва.
+BOGUS_PARENTS = frozenset({"iso:RU-AD", "wd:Q649"})
+
+
+def _candidate_rows(
+    index: ParentIndex,
+    located: set[str],
+    isos: set[str],
+) -> list[tuple[int, str, str]]:
+    """Тот же порядок, что у resolve_parent, но без выбора одного id."""
+    ranked: list[tuple[int, str, str]] = []
+    for qid in located:
+        hit = index.by_wd.get(qid)
+        if hit:
+            ranked.append((hit.rank, hit.id, hit.admin1))
+    if ranked:
+        ranked.sort()
+        if ranked[0][0] <= 1:
+            return ranked
+    for iso in isos:
+        hit = index.by_iso.get(iso)
+        if hit:
+            ranked.append((hit.rank, hit.id, hit.admin1))
+    ranked.sort()
+    return ranked
+
+
+def _same_rank_tie(ranked: list[tuple[int, str, str]]) -> bool:
+    if not ranked:
+        return False
+    best = ranked[0][0]
+    return len({item[1] for item in ranked if item[0] == best}) > 1
+
+
+def _merge_parent_refresh(
+    inc: dict[str, str] | None,
+    mapped: dict[str, str],
+    existing: dict[str, str],
+) -> dict[str, str] | None:
+    """Снять или сменить parent, если новый разбор не совпал с CSV.
+
+    Fill-if-empty не затирает ложные iso:RU-AD и wd:Q649.
+    """
+    if (existing.get("id") or "").startswith("local:"):
+        return inc
+    parent_id = mapped.get("parent_id") or ""
+    admin1 = mapped.get("admin1") or ""
+    if parent_id == (existing.get("parent_id") or "") and admin1 == (existing.get("admin1") or ""):
+        return inc
+    if inc is None:
+        inc = {"id": mapped["id"]}
+    inc["parent_id"] = parent_id
+    inc["admin1"] = admin1
+    inc["updated_at"] = mapped.get("updated_at") or ""
+    return inc
+
+
+def _parent_for_refresh(
+    existing: dict[str, str] | None,
+    resolved: tuple[str, str] | None,
+) -> tuple[str, str] | None:
+    """Пустой parent у уже записанной дороги, если разбор не дал одного родителя.
+
+    Ложные iso:RU-AD и wd:Q649 снимаются. Несколько субъектов одного ранга
+    не схлопываются в меньший iso. Уже выбранный неложный родитель не
+    подменяется. Новая дорога без одного родителя по-прежнему пропускается.
+    """
+    if existing is None or (existing.get("id") or "").startswith("local:"):
+        return resolved
+    old = (existing.get("parent_id") or "", existing.get("admin1") or "")
+    if resolved is None:
+        if old[0] in BOGUS_PARENTS:
+            return ("", "")
+        return old
+    if old[0] and old[0] not in BOGUS_PARENTS and old[0] != resolved[0]:
+        return old
+    return resolved
+
+
 def apply_harvest(
     records: dict[str, dict[str, Any]],
     *,
@@ -192,9 +271,17 @@ def apply_harvest(
             counts.skipped_overlap += 1
             print(f"skip overlap wd:{qid} table={skip_map[qid]}", file=sys.stderr)
             continue
-        parent = resolve_parent(
-            index, rec.get("located") or set(), rec.get("iso") or set()
-        )
+        existing = by_id.get(f"wd:{qid}")
+        located = rec.get("located") or set()
+        isos = rec.get("iso") or set()
+        ranked = _candidate_rows(index, located, isos)
+        resolved = None if _same_rank_tie(ranked) else resolve_parent(index, located, isos)
+        if resolved is None and (
+            existing is None or (existing.get("id") or "").startswith("local:")
+        ):
+            counts.skipped_parent += 1
+            continue
+        parent = _parent_for_refresh(existing, resolved)
         if parent is None:
             counts.skipped_parent += 1
             continue
@@ -202,13 +289,18 @@ def apply_harvest(
         if mapped["id"].startswith("gn:"):
             counts.skipped_other += 1
             continue
-        existing = by_id.get(mapped["id"])
-        inc = incoming_for_upsert(mapped, existing)
+        if existing is not None:
+            mapped["id"] = existing["id"]
+            inc = incoming_for_upsert(mapped, existing)
+            inc = _merge_parent_refresh(inc, mapped, existing)
+            if inc is not None:
+                incoming.append(inc)
+            continue
+        inc = incoming_for_upsert(mapped, None)
         if inc is None:
             continue
         incoming.append(inc)
-        if mapped["id"] not in by_id:
-            new_places.append(mapped)
+        new_places.append(mapped)
     places, upsert_counts = upsert_rows(existing_places, incoming, header=PLACES_HEADER)
     counts.inserted = upsert_counts.inserted
     counts.updated = upsert_counts.updated

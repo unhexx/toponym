@@ -524,8 +524,10 @@ def test_dva_seed_types_and_parents() -> None:
         assert parent in union_ids, (row["id"], parent)
     for row in drom:
         parent = row["parent_id"]
-        if parent:
-            assert parent in union_ids, (row["id"], parent)
+        if not parent:
+            assert not (row.get("admin1") or ""), row["id"]
+            continue
+        assert parent in union_ids, (row["id"], parent)
     assert all(not row["id"].startswith("gn:") for row in (*drom, *vil, *ago))
     assert all(row["source_id"] == "wikidata" for row in (*drom, *vil, *ago))
 
