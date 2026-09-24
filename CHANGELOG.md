@@ -33,6 +33,8 @@
 - [`docs/USAGE.md`](docs/USAGE.md) §3.2 и [`docs/taxonomy.md`](docs/taxonomy.md): оронимы больше не «крупный сид», а harvest Wikidata Q8502/Q46831/Q8072/Q23442/Q34763 (не ГКГН).
 - [`scripts/lib/harvest.py`](scripts/lib/harvest.py): `shard_query` / `fetch_sharded` / `region_wd_qids`. `wall_sec=0` обходит все 89 субъектов; `seed_municipalities.py` зовёт с `wall_sec=600`.
 - Онтология: DEC-SEED-006 (города Wikidata), DEC-SEED-007 (сёла/пгт Wikidata), DEC-SEED-008 (площади Wikidata), DEC-SEED-009 (дороги/ЖД Wikidata), DEC-SEED-010 (гидронимы Wikidata), DEC-SEED-011 (оронимы Wikidata); DEC-SEED-001/002 остаются `accepted`.
+- Онтология: DEC-SEED-012 (ФОИВ — join Wikidata, не harvest, не все ФОИВ России) и DEC-SEED-013 (`sync.py --source wikidata` known-ids, `inserted=0`, daily `kind=none`).
+- [`CYCLE_PLAN.md`](CYCLE_PLAN.md) и [`docs/USAGE.md`](docs/USAGE.md): покрытие городов, сёл, гидронимов и оронимов — Wikidata, не Росстат/ГКГН и не «все X России». Формула «не все X России» стоит в одном предложении с Wikidata, Росстатом или ГКГН.
 
 ## [2026.09.17] - 2026-09-17
 

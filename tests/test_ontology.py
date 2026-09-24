@@ -59,6 +59,8 @@ REQUIRED_IDS = {
     "DEC-SEED-009",
     "DEC-SEED-010",
     "DEC-SEED-011",
+    "DEC-SEED-012",
+    "DEC-SEED-013",
     "DEC-P1-001",
 }
 
@@ -208,6 +210,19 @@ def test_required_entities_present() -> None:
     assert "Q8502" in summary and "Q46831" in summary
     assert "wikidata" in summary.casefold()
     assert "гкгн" in summary.casefold()
+    assert by_id["DEC-SEED-012"]["type"] == "Decision"
+    assert by_id["DEC-SEED-012"]["status"] == "accepted"
+    summary = by_id["DEC-SEED-012"]["summary"]
+    assert "Q4481741" in summary and "wikidata" in summary.casefold()
+    assert "harvest" in summary.casefold()
+    assert "0/69" in summary
+    assert by_id["DEC-SEED-013"]["type"] == "Decision"
+    assert by_id["DEC-SEED-013"]["status"] == "accepted"
+    summary = by_id["DEC-SEED-013"]["summary"]
+    assert "inserted=0" in summary
+    assert "kind=none" in summary
+    assert "wikidata" in summary.casefold()
+    assert "росстат" in summary.casefold() or "гкгн" in summary.casefold()
 
 
 def test_keep_out_decisions_cover_a_to_l() -> None:
