@@ -1,4 +1,4 @@
-# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`, `2026.09.15`, `2026.09.16`, `2026.09.17`, `2026.09.24`)
+# CYCLE_PLAN.md — toponym (v1 `2026.09.09`, loop 2 `2026.09.11`, `2026.09.12`, `2026.09.13`, `2026.09.14`, `2026.09.15`, `2026.09.16`, `2026.09.17`, `2026.09.24`, `2026.09.25`)
 
 Исполняемый план циклов. Детали интерфейсов: `docs/design/2026-09-09-v1-local-registries.md`.
 Спека: `TASK_SPECIFICATION.md`. ADR: `LOCAL_REGISTRIES_DESIGN_AND_ROADMAP.md`.
@@ -89,8 +89,9 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | WD-KNOWN | known-ids SPARQL без вставки | `feat/sync-known-ids-rest` | `sync.py --source wikidata --apply`; `inserted=0`; daily `kind=none`; DEC-SEED-013 | COMPLETE |
 | DOCS-HONEST | Честное покрытие в онтологии, плане и USAGE | `docs/coverage-honesty` | «не все X России» только рядом с Wikidata, Росстат или ГКГН; DEC-SEED-012/013 | COMPLETE |
 | REL-2026.09.24 | annotated CalVer `2026.09.24` | `chore/release-2026.09.24` | города/сёла/гидро/оро Wikidata, join ФОИВ, known-ids `inserted=0`; теги `2026.09.11`–`2026.09.17` не двигались | COMPLETE |
+| REL-2026.09.25 | annotated CalVer `2026.09.25` | `chore/release-2026.09.25` | пустой родитель вместо ложной Адыгеи и Москвы; ФОИВ `wd` 57 из 69; теги `2026.09.11`–`2026.09.24` не двигались | COMPLETE |
 
-A–L COMPLETE на `main`. Annotated CalVer `2026.09.24` на `main`. Теги `2026.09.11`–`2026.09.17` не двигать. Города, сёла/пгт, площади, дороги, гидронимы и оронимы — harvest Wikidata, не Росстат/ГКГН/ПП № 928 и не «все X России». ФОИВ — join `wd`, не harvest. `sync.py --source wikidata` не вставляет новые Q-id (`inserted=0`); daily остаётся `kind=none`.
+A–L COMPLETE на `main`. Annotated CalVer `2026.09.25` на `main`. Теги `2026.09.11`–`2026.09.24` не двигать. Города, сёла/пгт, площади, дороги, гидронимы и оронимы — harvest Wikidata, не Росстат/ГКГН/ПП № 928 и не «все X России». ФОИВ — join `wd`, не harvest. `sync.py --source wikidata` не вставляет новые Q-id (`inserted=0`); daily остаётся `kind=none`. Объект без одного P131 — пустой `parent_id`, не `iso:RU-AD` и не Москва.
 
 ## Definition of Done v1
 
