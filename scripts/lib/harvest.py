@@ -515,12 +515,27 @@ def hop_unresolved(
     hopped = 0
     size = max(1, batch_size)
     total = len(pending)
+
+    def hop_chunk(qids: list[str]) -> list[dict[str, str]]:
+        values = " ".join(f"wd:{qid}" for qid in qids)
+        try:
+            return sparql_csv(session, HOP_QUERY % values, timeout=90)
+        except SeedError as exc:
+            if len(qids) == 1:
+                print(f"hop fail {qids[0]} {exc}", file=sys.stderr)
+                return []
+            mid = max(1, len(qids) // 2)
+            print(f"hop split {len(qids)} {exc}", file=sys.stderr)
+            left = hop_chunk(qids[:mid])
+            time.sleep(0.15)
+            right = hop_chunk(qids[mid:])
+            return left + right
+
     for offset in range(0, total, size):
         if offset == 0 or ((offset // size) % 10 == 0):
             print(f"hop {offset}/{total}", file=sys.stderr)
         chunk = pending[offset : offset + size]
-        values = " ".join(f"wd:{qid}" for qid in chunk)
-        rows = sparql_csv(session, HOP_QUERY % values, timeout=60)
+        rows = hop_chunk(chunk)
         extra = merge_bindings(rows)
         for qid, rec in extra.items():
             target = records.get(qid)
