@@ -193,8 +193,15 @@ def test_usage_guide_covers_search_and_declensions() -> None:
     assert "villages.csv" in text
     assert "agoronyms.csv" in text
     assert "Красная площадь" in text
+    assert "Красная площадь (Курск)" in text
+    assert "Хаджи-Тархан" in text
     assert "Бородино" in text
     assert "Транссиб" in text
+    assert "А159" in text
+    changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert "Выгрузка ещё не перегонялась" not in changelog
+    assert "Хаджи-Тархан" in changelog
+    assert "57 из 69" in changelog
 
 
 def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
