@@ -89,6 +89,7 @@ ALLOWED_P31 = frozenset(TYPE_BY_P31)
 EXTRA_SCALARS = ("oktmo", "dissolved")
 EXTRA_QID_SETS = ("replaced", "p31")
 HOP_BATCH = 80
+GOLD_PARENT_IDS = frozenset({"wd:Q626", "wd:Q1229"})
 __all__ = [
     "HYDRO_SKIP_RELS",
     "HYDRO_SPECS",
@@ -280,6 +281,31 @@ def _prefer_replaced_by(
     return preferred[0] if preferred else hits[0]
 
 
+def _merge_parent_refresh(
+    inc: dict[str, str] | None,
+    mapped: dict[str, str],
+    existing: dict[str, str],
+) -> dict[str, str] | None:
+    """Снять или сменить parent, если новый разбор не совпал с CSV.
+
+    Fill-if-empty не затирает ложный iso:RU-AD. Волга и Дон не двигаются.
+    """
+    if (existing.get("id") or "").startswith("local:"):
+        return inc
+    if (existing.get("id") or "") in GOLD_PARENT_IDS:
+        return inc
+    parent_id = mapped.get("parent_id") or ""
+    admin1 = mapped.get("admin1") or ""
+    if parent_id == (existing.get("parent_id") or "") and admin1 == (existing.get("admin1") or ""):
+        return inc
+    if inc is None:
+        inc = {"id": mapped["id"]}
+    inc["parent_id"] = parent_id
+    inc["admin1"] = admin1
+    inc["updated_at"] = mapped.get("updated_at") or ""
+    return inc
+
+
 def _lookup_existing(
     qid: str,
     by_id: dict[str, dict[str, str]],
@@ -354,6 +380,7 @@ def apply_harvest(
             mapped["id"] = existing["id"]
             fill = ALIAS_FILL if existing["id"].startswith("local:") else FILL_IF_EMPTY
             inc = incoming_for_upsert(mapped, existing, fill=fill)
+            inc = _merge_parent_refresh(inc, mapped, existing)
             if inc is not None:
                 incoming.append(inc)
             continue

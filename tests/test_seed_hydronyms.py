@@ -130,6 +130,142 @@ def test_drop_incoming_rivers_keeps_lakes() -> None:
     assert not too_large_or_timeout(SeedError("SPARQL HTTP 400: syntax"))
 
 
+def test_apply_harvest_clears_bogus_adygea_keeps_volga_don() -> None:
+    records = {
+        "Q9100101": {
+            "qid": "Q9100101",
+            "ru": "Озеро без родителя",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "oktmo": "",
+            "located": set(),
+            "iso": set(),
+            "p31": {"Q23397"},
+            "replaced": set(),
+            "dissolved": "",
+        },
+        "Q9100102": {
+            "qid": "Q9100102",
+            "ru": "Река в Татарстане",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "oktmo": "",
+            "located": set(),
+            "iso": {"RU-TA"},
+            "p31": {"Q4022"},
+            "replaced": set(),
+            "dissolved": "",
+        },
+        "Q626": {
+            "qid": "Q626",
+            "ru": "Волга",
+            "en": "Volga",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "oktmo": "",
+            "located": set(),
+            "iso": set(),
+            "p31": {"Q4022"},
+            "replaced": set(),
+            "dissolved": "",
+        },
+        "Q1229": {
+            "qid": "Q1229",
+            "ru": "Дон",
+            "en": "Don",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "oktmo": "",
+            "located": set(),
+            "iso": {"RU-AD"},
+            "p31": {"Q4022"},
+            "replaced": set(),
+            "dissolved": "",
+        },
+    }
+    index = load_parent_index(ROOT)
+    existing = [
+        _place(
+            id="wd:Q9100101",
+            id_scheme="wikidata",
+            type_id="limnonym",
+            name_ru="Озеро без родителя",
+            wd="Q9100101",
+            parent_id="iso:RU-AD",
+            admin1="RU-AD",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+            notes="keep notes",
+        ),
+        _place(
+            id="wd:Q9100102",
+            id_scheme="wikidata",
+            type_id="potamonym",
+            name_ru="Река в Татарстане",
+            wd="Q9100102",
+            parent_id="iso:RU-AD",
+            admin1="RU-AD",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+        ),
+        _place(
+            id="wd:Q626",
+            id_scheme="wikidata",
+            type_id="potamonym",
+            name_ru="Волга",
+            wd="Q626",
+            parent_id="iso:RU-CU",
+            admin1="RU-CU",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-09",
+            notes="keep notes",
+        ),
+        _place(
+            id="wd:Q1229",
+            id_scheme="wikidata",
+            type_id="potamonym",
+            name_ru="Дон",
+            wd="Q1229",
+            parent_id="iso:RU-LIP",
+            admin1="RU-LIP",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-09",
+        ),
+    ]
+    places, _decls, counts = apply_harvest(
+        records,
+        index=index,
+        existing_places=existing,
+        existing_decls=[],
+        today="2026-09-24",
+        skip_map={},
+        known_ids={row["id"] for row in existing},
+    )
+    by_id = {row["id"]: row for row in places}
+    assert by_id["wd:Q9100101"]["parent_id"] == ""
+    assert by_id["wd:Q9100101"]["admin1"] == ""
+    assert by_id["wd:Q9100101"]["notes"] == "keep notes"
+    assert by_id["wd:Q9100102"]["parent_id"] == "iso:RU-TA"
+    assert by_id["wd:Q9100102"]["admin1"] == "RU-TA"
+    assert by_id["wd:Q626"]["parent_id"] == "iso:RU-CU"
+    assert by_id["wd:Q626"]["admin1"] == "RU-CU"
+    assert by_id["wd:Q626"]["notes"] == "keep notes"
+    assert by_id["wd:Q1229"]["parent_id"] == "iso:RU-LIP"
+    assert by_id["wd:Q1229"]["admin1"] == "RU-LIP"
+    assert counts.inserted == 0
+    assert len(places) == 4
+
+
 def test_apply_harvest_empty_parent_keeps_gold_skips_sea() -> None:
     rows = load_rows_from_json(FIXTURE)
     records = merge_bindings(
