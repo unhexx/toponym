@@ -5,6 +5,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- SPARQL `*-ru.sparql`: код ISO (`P300`, `RU-*`) вложен в `OPTIONAL` по `P131`. Объект без родителя больше не склеивается со всеми субъектами. Выгрузка ещё не перегонялась.
+
 ### Changed
 - README и [`docs/SOURCES.md`](docs/SOURCES.md): Wikidata в каноне — harvest мест, не «сиды». [`CYCLE_PLAN.md`](CYCLE_PLAN.md): очередь после `2026.09.11` закрыта тегом `2026.09.24`.
 

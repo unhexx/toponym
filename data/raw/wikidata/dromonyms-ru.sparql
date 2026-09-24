@@ -12,8 +12,7 @@ SELECT DISTINCT ?item ?type ?ru ?en ?lat ?lon ?gn ?oktmo ?located ?iso ?dissolve
   OPTIONAL { ?item p:P625/psv:P625 [ wikibase:geoLatitude ?lat; wikibase:geoLongitude ?lon ] }
   OPTIONAL { ?item wdt:P1566 ?gn }
   OPTIONAL { ?item wdt:P764 ?oktmo }
-  OPTIONAL { ?item wdt:P131 ?located }
-  OPTIONAL { ?located wdt:P300 ?iso FILTER(STRSTARTS(?iso, "RU-")) }
+  OPTIONAL { ?item wdt:P131 ?located . OPTIONAL { ?located wdt:P300 ?iso FILTER(STRSTARTS(?iso, "RU-")) } }
   OPTIONAL { ?item wdt:P576 ?dissolved }
   OPTIONAL { ?item wdt:P1366 ?replaced }
   FILTER(?type != wd:Q728937 || EXISTS {
