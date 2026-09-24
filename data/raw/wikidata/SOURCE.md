@@ -14,4 +14,4 @@
 
 Маппинг полей: [`data/mappings/wikidata.yaml`](../../mappings/wikidata.yaml) (Q-id → `wd`, P625 → `lat`/`lon`; delete_policy=pointer).
 
-Known-ids: `python scripts/sync.py --source wikidata --apply` — SPARQL `VALUES` по уже известным Q-id всех seed-таблиц (не только МО/микро), fill-if-empty; JSON/CSV в git не кладётся. Daily `kind=none` это не зовёт.
+Known-ids: `python scripts/sync.py --source wikidata --apply` — SPARQL `VALUES` по уже известным Q-id всех seed-таблиц (города, сёла/пгт, гидронимы, оронимы, площади, дороги/ЖД, годонимы, МО, микротопонимы, агентства), fill-if-empty; `inserted=0`, новые Q-id не вставляет. JSON/CSV в git не кладётся. Daily `kind=none` это не зовёт.

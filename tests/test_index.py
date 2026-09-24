@@ -49,6 +49,10 @@ def test_place_relpaths_exclude_agencies() -> None:
     assert index == expected_index
     assert "data/curated/municipalities.csv" in places
     assert "data/curated/dromonyms.csv" in places
+    assert "data/curated/villages.csv" in places
+    assert "data/curated/hydronyms-major.csv" in places
+    assert "data/curated/oronyms-major.csv" in places
+    assert "data/curated/agoronyms.csv" in places
     assert "data/curated/agencies-foiv.csv" not in places
     assert "data/curated/agencies-other.csv" not in places
     assert "data/curated/types.csv" not in places
@@ -57,6 +61,11 @@ def test_place_relpaths_exclude_agencies() -> None:
     assert not any(path.startswith("data/declensions/") for path in index)
     assert "data/curated/agencies-foiv.csv" in index
     assert "data/curated/agencies-other.csv" in index
+    assert "data/curated/villages.csv" in index
+    assert "data/curated/hydronyms-major.csv" in index
+    assert "data/curated/oronyms-major.csv" in index
+    assert "data/curated/agoronyms.csv" in index
+    assert "data/curated/dromonyms.csv" in index
 
 
 def _write_tmp_package(tmp_path: Path) -> Path:

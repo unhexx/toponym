@@ -26,6 +26,7 @@ from scripts.lib.harvest import (
     shard_query,
     skip_ids,
 )
+from scripts.lib.places import load_index_relpaths
 
 
 def _place(**kwargs: str) -> dict[str, str]:
@@ -162,16 +163,86 @@ def test_collect_known_qids_unifies_tables(tmp_path: Path) -> None:
         PLACES_HEADER,
         [_place(id="wd:Q22698", wd="Q22698", name_ru="парк")],
     )
+    write_csv(
+        curated / "villages.csv",
+        PLACES_HEADER,
+        [_place(id="wd:Q894049", wd="Q894049", name_ru="Бородино")],
+    )
+    write_csv(
+        curated / "hydronyms-major.csv",
+        PLACES_HEADER,
+        [_place(id="wd:Q626", wd="Q626", name_ru="Волга")],
+    )
+    write_csv(
+        curated / "oronyms-major.csv",
+        PLACES_HEADER,
+        [_place(id="wd:Q43105", wd="", name_ru="Эльбрус")],
+    )
+    write_csv(
+        curated / "agoronyms.csv",
+        PLACES_HEADER,
+        [_place(id="wd:Q41116", wd="Q41116", name_ru="Красная площадь")],
+    )
+    write_csv(
+        curated / "dromonyms.csv",
+        PLACES_HEADER,
+        [_place(id="wd:Q58767", wd="Q58767", name_ru="Транссиб")],
+    )
+    write_csv(
+        curated / "agencies-foiv.csv",
+        PLACES_HEADER,
+        [_place(id="foiv:mvd", wd="Q1192838", name_ru="МВД")],
+    )
     rels = (
         "data/curated/cities-major.csv",
         "data/curated/municipalities.csv",
         "data/curated/hodonyms.csv",
         "data/curated/microtoponyms.csv",
+        "data/curated/villages.csv",
+        "data/curated/hydronyms-major.csv",
+        "data/curated/oronyms-major.csv",
+        "data/curated/agoronyms.csv",
+        "data/curated/dromonyms.csv",
+        "data/curated/agencies-foiv.csv",
         "data/curated/missing.csv",
     )
     qids = collect_known_qids(tmp_path, rels)
-    assert qids == ["Q649", "Q12167762", "Q1644209", "Q22698"]
+    assert qids == [
+        "Q649",
+        "Q12167762",
+        "Q1644209",
+        "Q22698",
+        "Q894049",
+        "Q626",
+        "Q43105",
+        "Q41116",
+        "Q58767",
+        "Q1192838",
+    ]
     assert qid_of_place({"id": "local:mun:x", "wd": "Q1"}) == "Q1"
+    assert qid_of_place({"id": "foiv:mvd", "wd": "Q1192838"}) == "Q1192838"
+
+
+def test_collect_known_qids_canon_includes_new_harvests() -> None:
+    root = Path(__file__).resolve().parents[1]
+    rels = load_index_relpaths(root)
+    for rel in (
+        "data/curated/villages.csv",
+        "data/curated/hydronyms-major.csv",
+        "data/curated/oronyms-major.csv",
+        "data/curated/agoronyms.csv",
+        "data/curated/dromonyms.csv",
+        "data/curated/agencies-foiv.csv",
+    ):
+        assert rel in rels
+    qids = set(collect_known_qids(root, rels))
+    assert "Q894049" in qids
+    assert "Q626" in qids
+    assert "Q43105" in qids
+    assert "Q41116" in qids
+    assert "Q58767" in qids
+    assert "Q1192838" in qids
+    assert "Q649" in qids
 
 
 def test_known_ids_queries_batches_values() -> None:

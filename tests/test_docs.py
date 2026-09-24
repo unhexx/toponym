@@ -230,6 +230,7 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
     assert "seed_hydronyms.py" in before_loop2
     assert "seed_oronyms.py" in before_loop2
     assert "join_foiv.py" in before_loop2
+    assert "inserted=0" in before_loop2
     assert "PACKAGE_VERSION" in before_loop2
 
 
