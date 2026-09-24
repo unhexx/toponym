@@ -13,8 +13,7 @@ SELECT DISTINCT ?item ?ru ?en ?lat ?lon ?gn ?located ?iso WHERE {
   OPTIONAL { ?item rdfs:label ?en FILTER(LANG(?en) = "en") }
   OPTIONAL { ?item p:P625/psv:P625 [ wikibase:geoLatitude ?lat; wikibase:geoLongitude ?lon ] }
   OPTIONAL { ?item wdt:P1566 ?gn }
-  OPTIONAL { ?item wdt:P131 ?located }
-  OPTIONAL { ?located wdt:P300 ?iso FILTER(STRSTARTS(?iso, "RU-")) }
+  OPTIONAL { ?item wdt:P131 ?located . OPTIONAL { ?located wdt:P300 ?iso FILTER(STRSTARTS(?iso, "RU-")) } }
 }
 
 # Parent hop for items whose P131 is not in curated cities/municipalities/regions.

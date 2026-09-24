@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import time
 from pathlib import Path
 
@@ -332,3 +333,90 @@ def test_fetch_sharded_wall_sec_stops_early() -> None:
         wall_sec=0.001, fetch=fake_fetch,
     )
     assert 0 < len(seen) < 89
+
+
+_P131_LOCATED = re.compile(r"\?item\s+wdt:P131\s+\?located\b")
+_P300_ISO = re.compile(r"\?located\s+wdt:P300\s+\?iso\b")
+_RU_SPARQL = (
+    "oronyms-ru.sparql",
+    "hydronyms-ru.sparql",
+    "cities-ru.sparql",
+    "agoronyms-ru.sparql",
+    "dromonyms-ru.sparql",
+    "villages-ru.sparql",
+    "foiv-ru.sparql",
+    "hodonyms-ru.sparql",
+    "municipalities-ru.sparql",
+    "microtoponyms-ru.sparql",
+)
+_NESTED_P131_ISO = (
+    'OPTIONAL { ?item wdt:P131 ?located . '
+    'OPTIONAL { ?located wdt:P300 ?iso FILTER(STRSTARTS(?iso, "RU-")) } }'
+)
+_SIBLING_P131_ISO = """SELECT DISTINCT ?item ?located ?iso WHERE {
+  VALUES ?type { wd:Q1 }
+  OPTIONAL { ?item wdt:P131 ?located }
+  OPTIONAL { ?located wdt:P300 ?iso FILTER(STRSTARTS(?iso, "RU-")) }
+}
+"""
+
+
+def _optional_span(query: str, inner_at: int) -> tuple[int, int]:
+    opt = query.rfind("OPTIONAL", 0, inner_at)
+    if opt < 0:
+        raise AssertionError("нет OPTIONAL вокруг P131")
+    brace = query.find("{", opt)
+    if brace < 0 or brace > inner_at:
+        raise AssertionError("OPTIONAL без группы")
+    depth = 0
+    for index in range(brace, len(query)):
+        char = query[index]
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return brace, index
+    raise AssertionError("незакрытый OPTIONAL")
+
+
+def p300_nested_in_p131(query: str) -> bool:
+    """P300 по ?located обязан быть внутри OPTIONAL P131, а не соседним.
+
+    Соседний OPTIONAL оставляет ?located несвязанным и склеивает объект
+    без родителя со всеми субъектами RU-*.
+    """
+    located = _P131_LOCATED.search(query)
+    isos = list(_P300_ISO.finditer(query))
+    if located is None or not isos:
+        return False
+    brace, end = _optional_span(query, located.start())
+    depth_located = query[: located.start()].count("{") - query[: located.start()].count("}")
+    for iso in isos:
+        if not (brace < iso.start() < end):
+            return False
+        depth_iso = query[: iso.start()].count("{") - query[: iso.start()].count("}")
+        if depth_iso <= depth_located:
+            return False
+    return True
+
+
+def unbound_iso_cross_product(query: str, iso_subjects: list[str]) -> list[str]:
+    """Сколько ISO получит объект без P131. Вложенный OPTIONAL — ноль."""
+    if p300_nested_in_p131(query):
+        return []
+    if _P300_ISO.search(query):
+        return list(iso_subjects)
+    return []
+
+
+def test_ru_sparql_nests_iso_inside_p131_optional() -> None:
+    raw = Path(__file__).resolve().parents[1] / "data" / "raw" / "wikidata"
+    subjects = ["RU-AD", "RU-MOW", "RU-MOS"]
+    assert unbound_iso_cross_product(_SIBLING_P131_ISO, subjects) == subjects
+    assert not p300_nested_in_p131(_SIBLING_P131_ISO)
+    for name in _RU_SPARQL:
+        query = load_main_query(raw / name)
+        assert _NESTED_P131_ISO in query, name
+        assert p300_nested_in_p131(query), name
+        assert unbound_iso_cross_product(query, subjects) == [], name
