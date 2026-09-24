@@ -210,6 +210,53 @@ def _prefer_replaced_by(
     return preferred[0] if preferred else hits[0]
 
 
+# Ложный родитель из несвязанного OPTIONAL: меньший iso или Москва.
+BOGUS_PARENTS = frozenset({"iso:RU-AD", "wd:Q649"})
+
+
+def _merge_parent_refresh(
+    inc: dict[str, str] | None,
+    mapped: dict[str, str],
+    existing: dict[str, str],
+) -> dict[str, str] | None:
+    """Записать parent из разбора, если fill-if-empty его не трогает."""
+    if (existing.get("id") or "").startswith("local:"):
+        return inc
+    parent_id = mapped.get("parent_id") or ""
+    admin1 = mapped.get("admin1") or ""
+    if parent_id == (existing.get("parent_id") or "") and admin1 == (existing.get("admin1") or ""):
+        return inc
+    if inc is None:
+        inc = {"id": mapped["id"]}
+    inc["parent_id"] = parent_id
+    inc["admin1"] = admin1
+    inc["updated_at"] = mapped.get("updated_at") or ""
+    return inc
+
+
+def _parent_for_refresh(
+    existing: dict[str, str] | None,
+    resolved: tuple[str, str] | None,
+    *,
+    truly_parentless: bool,
+) -> tuple[str, str] | None:
+    """Пустой parent только у уже записанного города без P131.
+
+    Несколько iso одного ранга не заменяют субъект, который уже не Адыгея и не Москва.
+    Новый город без родителя по-прежнему пропускается.
+    """
+    if existing is None or (existing.get("id") or "").startswith("local:"):
+        return resolved
+    old = (existing.get("parent_id") or "", existing.get("admin1") or "")
+    if resolved is None:
+        if truly_parentless and old[0] in BOGUS_PARENTS:
+            return ("", "")
+        return old
+    if old[0] and old[0] not in BOGUS_PARENTS and old[0] != resolved[0]:
+        return old
+    return resolved
+
+
 def _lookup_existing(
     qid: str,
     by_id: dict[str, dict[str, str]],
@@ -270,8 +317,18 @@ def apply_harvest(
             )
             incoming.append(incoming_deprecate(existing["id"], replaced, today))
             continue
-        parent = resolve_parent(
-            index, rec.get("located") or set(), rec.get("iso") or set()
+        located = rec.get("located") or set()
+        isos = rec.get("iso") or set()
+        resolved = resolve_parent(index, located, isos)
+        if resolved is None and (
+            existing is None or (existing.get("id") or "").startswith("local:")
+        ):
+            counts.skipped_parent += 1
+            continue
+        parent = _parent_for_refresh(
+            existing,
+            resolved,
+            truly_parentless=not located and not isos,
         )
         if parent is None:
             counts.skipped_parent += 1
@@ -287,6 +344,7 @@ def apply_harvest(
             mapped["id"] = existing["id"]
             fill = ALIAS_FILL if existing["id"].startswith("local:") else FILL_IF_EMPTY
             inc = incoming_for_upsert(mapped, existing, fill=fill)
+            inc = _merge_parent_refresh(inc, mapped, existing)
             if inc is not None:
                 incoming.append(inc)
             continue

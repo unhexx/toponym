@@ -183,6 +183,176 @@ def test_apply_harvest_parent_overlap_crimea_and_notes() -> None:
     assert all(row["review"] != "gold" for row in decls)
 
 
+def test_apply_harvest_clears_bogus_adygea_keeps_real_parent() -> None:
+    records = {
+        "Q9100201": {
+            "qid": "Q9100201",
+            "ru": "Город без родителя",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "oktmo": "",
+            "located": set(),
+            "iso": set(),
+            "p31": {"Q7930989"},
+            "replaced": set(),
+            "dissolved": "",
+        },
+        "Q9100202": {
+            "qid": "Q9100202",
+            "ru": "Город в Татарстане",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "oktmo": "",
+            "located": set(),
+            "iso": {"RU-TA"},
+            "p31": {"Q7930989"},
+            "replaced": set(),
+            "dissolved": "",
+        },
+        "Q9100203": {
+            "qid": "Q9100203",
+            "ru": "Новый без родителя",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "oktmo": "",
+            "located": set(),
+            "iso": set(),
+            "p31": {"Q7930989"},
+            "replaced": set(),
+            "dissolved": "",
+        },
+    }
+    index = load_parent_index(ROOT)
+    existing = [
+        _place(
+            id="wd:Q9100201",
+            id_scheme="wikidata",
+            type_id="city",
+            name_ru="Город без родителя",
+            wd="Q9100201",
+            parent_id="iso:RU-AD",
+            admin1="RU-AD",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+            notes="keep notes",
+        ),
+        _place(
+            id="wd:Q9100202",
+            id_scheme="wikidata",
+            type_id="city",
+            name_ru="Город в Татарстане",
+            wd="Q9100202",
+            parent_id="iso:RU-AD",
+            admin1="RU-AD",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+        ),
+    ]
+    places, _decls, counts = apply_harvest(
+        records,
+        index=index,
+        existing_places=existing,
+        existing_decls=[],
+        today="2026-09-24",
+        skip_map={},
+        known_ids={row["id"] for row in existing},
+    )
+    by_id = {row["id"]: row for row in places}
+    assert by_id["wd:Q9100201"]["parent_id"] == ""
+    assert by_id["wd:Q9100201"]["admin1"] == ""
+    assert by_id["wd:Q9100201"]["notes"] == "keep notes"
+    assert by_id["wd:Q9100202"]["parent_id"] == "iso:RU-TA"
+    assert by_id["wd:Q9100202"]["admin1"] == "RU-TA"
+    assert "wd:Q9100203" not in by_id
+    assert counts.skipped_parent >= 1
+    assert counts.inserted == 0
+    assert len(places) == 2
+
+
+def test_apply_harvest_keeps_specific_subject_over_lexicographic_iso() -> None:
+    records = {
+        "Q9100204": {
+            "qid": "Q9100204",
+            "ru": "Город двух субъектов",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "oktmo": "",
+            "located": set(),
+            "iso": {"RU-CHE", "RU-SVE"},
+            "p31": {"Q7930989"},
+            "replaced": set(),
+            "dissolved": "",
+        },
+        "Q9100205": {
+            "qid": "Q9100205",
+            "ru": "Город с районом",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "oktmo": "",
+            "located": {"Q109985990"},
+            "iso": set(),
+            "p31": {"Q7930989"},
+            "replaced": set(),
+            "dissolved": "",
+        },
+    }
+    index = load_parent_index(ROOT)
+    existing = [
+        _place(
+            id="wd:Q9100204",
+            id_scheme="wikidata",
+            type_id="city",
+            name_ru="Город двух субъектов",
+            wd="Q9100204",
+            parent_id="iso:RU-SVE",
+            admin1="RU-SVE",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-11",
+        ),
+        _place(
+            id="wd:Q9100205",
+            id_scheme="wikidata",
+            type_id="city",
+            name_ru="Город с районом",
+            wd="Q9100205",
+            parent_id="iso:RU-MOS",
+            admin1="RU-MOS",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-11",
+        ),
+    ]
+    places, _decls, counts = apply_harvest(
+        records,
+        index=index,
+        existing_places=existing,
+        existing_decls=[],
+        today="2026-09-24",
+        skip_map={},
+        known_ids={row["id"] for row in existing},
+    )
+    by_id = {row["id"]: row for row in places}
+    assert by_id["wd:Q9100204"]["parent_id"] == "iso:RU-SVE"
+    assert by_id["wd:Q9100204"]["admin1"] == "RU-SVE"
+    assert by_id["wd:Q9100204"]["updated_at"] == "2026-09-11"
+    assert by_id["wd:Q9100205"]["parent_id"] == "iso:RU-MOS"
+    assert by_id["wd:Q9100205"]["admin1"] == "RU-MOS"
+    assert counts.inserted == 0
+
+
 def test_cli_from_json_writes_tmp(tmp_path: Path, capsys) -> None:
     curated = tmp_path / "data" / "curated"
     decl = tmp_path / "data" / "declensions"
