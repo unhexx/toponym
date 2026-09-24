@@ -223,3 +223,165 @@ def test_canon_dromonyms_harvested() -> None:
     assert any(row["abbr"] == "Транссиб" for row in rows)
     assert any(row["abbr"] == "БАМ" for row in rows)
     assert all(row["type_id"] == "dromonym" for row in rows)
+    transsib = next(row for row in rows if row["id"] == "wd:Q58767")
+    assert transsib["abbr"] == "Транссиб"
+    assert transsib["notes"].startswith("пример types.csv")
+    assert transsib["parent_id"] != "iso:RU-AD"
+    assert transsib["admin1"] != "RU-AD"
+    bam = next(row for row in rows if row["abbr"] == "БАМ")
+    assert bam["id"] == "wd:Q377967"
+
+
+def test_apply_harvest_clears_bogus_adygea_keeps_real() -> None:
+    records = {
+        "Q9100501": {
+            "qid": "Q9100501",
+            "ru": "Дорога без родителя",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "located": set(),
+            "iso": set(),
+        },
+        "Q9100502": {
+            "qid": "Q9100502",
+            "ru": "Дорога в Татарстане",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "located": set(),
+            "iso": {"RU-TA"},
+        },
+        "Q9100503": {
+            "qid": "Q9100503",
+            "ru": "Дорога в Адыгее",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "located": set(),
+            "iso": {"RU-AD"},
+        },
+        "Q9100504": {
+            "qid": "Q9100504",
+            "ru": "Дорога нескольких субъектов",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "located": set(),
+            "iso": {"RU-AD", "RU-TA"},
+        },
+        "Q9100505": {
+            "qid": "Q9100505",
+            "ru": "Новая без родителя",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "located": set(),
+            "iso": set(),
+        },
+        "Q9100506": {
+            "qid": "Q9100506",
+            "ru": "Дорога в Подмосковье",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "located": set(),
+            "iso": {"RU-AD", "RU-MOS"},
+        },
+    }
+    index = load_parent_index(ROOT)
+    existing = [
+        _place(
+            id="wd:Q9100501",
+            id_scheme="wikidata",
+            type_id="dromonym",
+            name_ru="Дорога без родителя",
+            wd="Q9100501",
+            parent_id="iso:RU-AD",
+            admin1="RU-AD",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+            notes="keep notes",
+            abbr="Транссиб",
+        ),
+        _place(
+            id="wd:Q9100502",
+            id_scheme="wikidata",
+            type_id="dromonym",
+            name_ru="Дорога в Татарстане",
+            wd="Q9100502",
+            parent_id="iso:RU-AD",
+            admin1="RU-AD",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+        ),
+        _place(
+            id="wd:Q9100503",
+            id_scheme="wikidata",
+            type_id="dromonym",
+            name_ru="Дорога в Адыгее",
+            wd="Q9100503",
+            parent_id="iso:RU-AD",
+            admin1="RU-AD",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+        ),
+        _place(
+            id="wd:Q9100504",
+            id_scheme="wikidata",
+            type_id="dromonym",
+            name_ru="Дорога нескольких субъектов",
+            wd="Q9100504",
+            parent_id="iso:RU-AD",
+            admin1="RU-AD",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+        ),
+        _place(
+            id="wd:Q9100506",
+            id_scheme="wikidata",
+            type_id="dromonym",
+            name_ru="Дорога в Подмосковье",
+            wd="Q9100506",
+            parent_id="iso:RU-MOS",
+            admin1="RU-MOS",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+        ),
+    ]
+    places, _decls, counts = apply_harvest(
+        records,
+        index=index,
+        existing_places=existing,
+        existing_decls=[],
+        today="2026-09-24",
+        skip_map={},
+    )
+    by_id = {row["id"]: row for row in places}
+    assert by_id["wd:Q9100501"]["parent_id"] == ""
+    assert by_id["wd:Q9100501"]["admin1"] == ""
+    assert by_id["wd:Q9100501"]["notes"] == "keep notes"
+    assert by_id["wd:Q9100501"]["abbr"] == "Транссиб"
+    assert by_id["wd:Q9100502"]["parent_id"] == "iso:RU-TA"
+    assert by_id["wd:Q9100502"]["admin1"] == "RU-TA"
+    assert by_id["wd:Q9100503"]["parent_id"] == "iso:RU-AD"
+    assert by_id["wd:Q9100503"]["admin1"] == "RU-AD"
+    assert by_id["wd:Q9100504"]["parent_id"] == ""
+    assert by_id["wd:Q9100504"]["admin1"] == ""
+    assert by_id["wd:Q9100506"]["parent_id"] == "iso:RU-MOS"
+    assert by_id["wd:Q9100506"]["admin1"] == "RU-MOS"
+    assert "wd:Q9100505" not in by_id
+    assert counts.skipped_parent >= 1
+    assert counts.inserted == 0
+    assert len(places) == 5
