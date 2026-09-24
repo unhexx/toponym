@@ -525,6 +525,20 @@
       "summary": "Реестр дромонимов растёт upsert-ом по wd:Q-id из Wikidata (P31 road Q34442 и railway Q728937 с ruwiki sitelink, P17=Q159). SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не перечень федеральных трасс ПП № 928 и не OSM. Транссиб/БАМ сохранены FILL_IF_EMPTY."
     },
     {
+      "id": "DEC-SEED-010",
+      "type": "Decision",
+      "title": "Гидронимы из Wikidata SPARQL, не ГКГН",
+      "status": "accepted",
+      "date": "2026-09-24",
+      "refs": [
+        "data/curated/hydronyms-major.csv",
+        "data/raw/wikidata/hydronyms-ru.sparql",
+        "scripts/seed_hydronyms.py",
+        "data/mappings/wikidata.yaml"
+      ],
+      "summary": "Реестр гидронимов растёт upsert-ом по wd:Q-id из Wikidata (один SELECT: P31 озеро Q23397 и река Q4022 с ruwiki sitelink, P17=Q159; моря Q165 не в VALUES, FILL_IF_EMPTY). При too_large/timeout входящие реки отбрасываются, озёра и моря остаются. SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не ГКГН и не все реки России. Волга/Дон сохранены gold."
+    },
+    {
       "id": "DEC-P1-001",
       "type": "Decision",
       "title": "P1 не дробить на P1a–e",

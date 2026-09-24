@@ -176,17 +176,19 @@ curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Синий'
 Массовая вставка — `python scripts/seed_villages.py` (не `daily.py`).
 `type_id=village` и у пгт. Бородино / Вёшенская сохранены.
 
-Гидронимы — массовая вставка `python scripts/seed_hydronyms.py` (не `daily.py`):
-P31 озеро Q23397 и река Q4022 с ruwiki sitelink, P17=Q159; моря Q165 остаются
-FILL_IF_EMPTY и не входят в SPARQL VALUES. Один SELECT; при too_large/timeout
-входящие реки отбрасываются, озёра и моря остаются. Это не ГКГН и не полный
-список рек Wikidata. Волга и Дон — gold.
+Гидронимы (DEC-SEED-010) — реестр Wikidata (CC0): P31 озеро Q23397 и река Q4022
+с ruwiki sitelink, P17=Q159, upsert по `wd:Q…`. Моря Q165 остаются FILL_IF_EMPTY
+и не входят в SPARQL VALUES. Один SELECT; при too_large/timeout входящие реки
+отбрасываются, озёра и моря остаются. Это не ГКГН и не все реки России.
+SPARQL JSON в git нет. Массовая вставка — `python scripts/seed_hydronyms.py`
+(не `daily.py`). Волга и Дон — gold.
 
 | Таблица | Сколько строк | Примеры |
 |---|---|---|
 | `data/curated/agoronyms.csv` | сотни (Wikidata Q174782, не ОМК УМ) | Красная площадь, Дворцовая площадь |
 | `data/curated/dromonyms.csv` | сотни (Wikidata Q34442 / Q728937 ruwiki, не ПП № 928) | Транссибирская магистраль (Транссиб), М11 «Нева» |
 | `data/curated/villages.csv` | десятки тысяч (Wikidata Q15078955/Q532, не ГКГН) | Бородино, Вешенская |
+| `data/curated/hydronyms-major.csv` | десятки тысяч (Wikidata Q23397 / Q4022 ruwiki, не ГКГН) | Волга, Дон, Байкал |
 
 ```bash
 curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Транссиб'
@@ -329,8 +331,9 @@ sqlite3 knowledge/registry.db \
 ## 6. Что есть в каноне, чего нет
 
 Есть: 8 федеральных округов, 89 субъектов, города Wikidata P31=Q7930989
-(не все 1 126 городов России и не Росстат; DEC-SEED-006), крупные гидронимы и оронимы,
-ФОИВ и смежные ведомства, золотые склонения к части из них,
+(не все 1 126 городов России и не Росстат; DEC-SEED-006),
+гидронимы Wikidata P31=Q23397 / Q4022 ruwiki (не ГКГН и не все реки России; DEC-SEED-010),
+крупные оронимы, ФОИВ и смежные ведомства, золотые склонения к части из них,
 реестр муниципалитетов, годонимов и микротопонимов Wikidata (исторический малый сид DEC-SEED-001),
 площадей Wikidata P31=Q174782 (не все площади России; DEC-SEED-008),
 дорог и ЖД Wikidata P31=Q34442 / Q728937 ruwiki (не перечень федеральных трасс ПП № 928 и не OSM; DEC-SEED-009)
