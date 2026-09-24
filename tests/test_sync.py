@@ -14,6 +14,7 @@ import scripts.sync as sync_mod
 from scripts.lib.csvio import PLACES_HEADER, read_csv, write_csv
 from scripts.lib.harvest import SPARQL_ENDPOINT
 from scripts.lib.places import AGENCIES_SCHEMA, PLACES_SCHEMA
+from scripts.lib.upsert import UpsertCounts
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 FIXED_NOW = datetime(2026, 9, 9, 10, 0, 0, tzinfo=UTC)
@@ -129,6 +130,31 @@ def _prepare_wikidata_root(tmp_path: Path) -> Path:
                 "schema": PLACES_SCHEMA,
             },
             {
+                "name": "villages",
+                "path": "data/curated/villages.csv",
+                "schema": PLACES_SCHEMA,
+            },
+            {
+                "name": "hydronyms-major",
+                "path": "data/curated/hydronyms-major.csv",
+                "schema": PLACES_SCHEMA,
+            },
+            {
+                "name": "oronyms-major",
+                "path": "data/curated/oronyms-major.csv",
+                "schema": PLACES_SCHEMA,
+            },
+            {
+                "name": "agoronyms",
+                "path": "data/curated/agoronyms.csv",
+                "schema": PLACES_SCHEMA,
+            },
+            {
+                "name": "dromonyms",
+                "path": "data/curated/dromonyms.csv",
+                "schema": PLACES_SCHEMA,
+            },
+            {
                 "name": "agencies-foiv",
                 "path": "data/curated/agencies-foiv.csv",
                 "schema": AGENCIES_SCHEMA,
@@ -204,6 +230,81 @@ def _prepare_wikidata_root(tmp_path: Path) -> Path:
         ],
     )
     write_csv(
+        tmp_path / "data/curated/villages.csv",
+        PLACES_HEADER,
+        [
+            _place(
+                id="wd:Q894049",
+                id_scheme="wikidata",
+                type_id="village",
+                name_ru="Бородино",
+                wd="Q894049",
+                source_id="wikidata",
+                status="active",
+            )
+        ],
+    )
+    write_csv(
+        tmp_path / "data/curated/hydronyms-major.csv",
+        PLACES_HEADER,
+        [
+            _place(
+                id="wd:Q626",
+                id_scheme="wikidata",
+                type_id="potamonym",
+                name_ru="Волга",
+                wd="Q626",
+                source_id="wikidata",
+                status="active",
+            )
+        ],
+    )
+    write_csv(
+        tmp_path / "data/curated/oronyms-major.csv",
+        PLACES_HEADER,
+        [
+            _place(
+                id="wd:Q43105",
+                id_scheme="wikidata",
+                type_id="oronym",
+                name_ru="Эльбрус",
+                wd="Q43105",
+                source_id="wikidata",
+                status="active",
+            )
+        ],
+    )
+    write_csv(
+        tmp_path / "data/curated/agoronyms.csv",
+        PLACES_HEADER,
+        [
+            _place(
+                id="wd:Q41116",
+                id_scheme="wikidata",
+                type_id="agoronym",
+                name_ru="Красная площадь",
+                wd="Q41116",
+                source_id="wikidata",
+                status="active",
+            )
+        ],
+    )
+    write_csv(
+        tmp_path / "data/curated/dromonyms.csv",
+        PLACES_HEADER,
+        [
+            _place(
+                id="wd:Q58767",
+                id_scheme="wikidata",
+                type_id="dromonym",
+                name_ru="Транссибирская магистраль",
+                wd="Q58767",
+                source_id="wikidata",
+                status="active",
+            )
+        ],
+    )
+    write_csv(
         tmp_path / "data/curated/agencies-foiv.csv",
         PLACES_HEADER,
         [
@@ -250,6 +351,38 @@ def _bindings() -> dict[str, dict[str, str]]:
             "en": "Neskuchny Garden",
             "gn": "123",
         },
+        "Q894049": {
+            "ru": "Бородино",
+            "en": "Borodino",
+            "lat": "55.526",
+            "lon": "35.821",
+            "gn": "572438",
+        },
+        "Q626": {
+            "ru": "Волга",
+            "en": "Volga",
+            "lat": "45.7",
+            "lon": "47.9",
+            "gn": "472756",
+        },
+        "Q43105": {
+            "ru": "Эльбрус",
+            "en": "Elbrus",
+            "lat": "43.355",
+            "lon": "42.439",
+            "gn": "563532",
+        },
+        "Q41116": {
+            "ru": "Красная площадь",
+            "en": "Red Square",
+            "lat": "55.7539",
+            "lon": "37.6208",
+        },
+        "Q58767": {
+            "ru": "Транссибирская магистраль",
+            "en": "Trans-Siberian Railway",
+            "gn": "2013346",
+        },
         "Q2114322": {
             "ru": "МВД России",
             "en": "Ministry of Internal Affairs",
@@ -284,7 +417,7 @@ def test_sync_wikidata_fills_empty_across_all_seed_tables(
     assert code == 0
     report = json.loads(capsys.readouterr().out)
     assert report["inserted"] == 0
-    assert report["updated"] >= 4
+    assert report["updated"] >= 9
     assert report["skipped_unmapped"] == 1
     assert report["deprecated"] == 0
 
@@ -314,6 +447,31 @@ def test_sync_wikidata_fills_empty_across_all_seed_tables(
     assert micro[0]["geonames"] == "123"
     assert micro[0]["name_en"] == "Neskuchny Garden"
 
+    _h, villages = read_csv(root / "data/curated/villages.csv")
+    assert villages[0]["id"] == "wd:Q894049"
+    assert villages[0]["name_en"] == "Borodino"
+    assert villages[0]["geonames"] == "572438"
+    assert villages[0]["name_ru"] == "Бородино"
+
+    _h, hydro = read_csv(root / "data/curated/hydronyms-major.csv")
+    assert hydro[0]["id"] == "wd:Q626"
+    assert hydro[0]["name_en"] == "Volga"
+    assert hydro[0]["geonames"] == "472756"
+
+    _h, oro = read_csv(root / "data/curated/oronyms-major.csv")
+    assert oro[0]["id"] == "wd:Q43105"
+    assert oro[0]["name_en"] == "Elbrus"
+    assert oro[0]["geonames"] == "563532"
+
+    _h, ago = read_csv(root / "data/curated/agoronyms.csv")
+    assert ago[0]["id"] == "wd:Q41116"
+    assert ago[0]["name_en"] == "Red Square"
+
+    _h, dro = read_csv(root / "data/curated/dromonyms.csv")
+    assert dro[0]["id"] == "wd:Q58767"
+    assert dro[0]["name_en"] == "Trans-Siberian Railway"
+    assert dro[0]["geonames"] == "2013346"
+
     _h, agencies = read_csv(root / "data/curated/agencies-foiv.csv")
     assert agencies[0]["id"] == "foiv:mvd"
     assert agencies[0]["name_en"] == "Ministry of Internal Affairs"
@@ -328,10 +486,26 @@ def test_sync_wikidata_fills_empty_across_all_seed_tables(
         str(call["kwargs"].get("params", {}).get("query") or "") for call in session.calls
     ]
     joined = " ".join(queries)
-    for qid in ("Q649", "Q12167762", "Q1644209", "Q22698", "Q2114322"):
+    for qid in (
+        "Q649",
+        "Q12167762",
+        "Q1644209",
+        "Q22698",
+        "Q894049",
+        "Q626",
+        "Q43105",
+        "Q41116",
+        "Q58767",
+        "Q2114322",
+    ):
         assert f"wd:{qid}" in joined
     assert "VALUES ?item" in joined
-    assert not any(row["id"] == "wd:Q99999999" for row in (*cities, *mun, *hod, *micro, *agencies))
+    canon = (*cities, *mun, *hod, *micro, *villages, *hydro, *oro, *ago, *dro, *agencies)
+    assert not any(row["id"] == "wd:Q99999999" for row in canon)
+    assert len(cities) == 1
+    assert len(villages) == 1
+    assert len(hydro) == 1
+    assert len(oro) == 1
 
 
 def test_sync_wikidata_dry_run_does_not_write(
@@ -349,6 +523,27 @@ def test_sync_wikidata_dry_run_does_not_write(
     assert report["updated"] >= 1
     assert (root / "data/curated/cities-major.csv").read_bytes() == before
     assert (root / "data/sources/catalog.yaml").read_bytes() == catalog_before
+
+
+def test_sync_wikidata_refuses_insert(
+    tmp_path: Path, monkeypatch, capsys
+) -> None:
+    root = _prepare_wikidata_root(tmp_path)
+    session = FakeSession(_wikidata_handler(_bindings()))
+    _patch_sync(monkeypatch, root, session)
+
+    def fake_upsert(existing, incoming, *, header, **kwargs):
+        return existing, UpsertCounts(inserted=1)
+
+    monkeypatch.setattr(sync_mod, "upsert_rows", fake_upsert)
+    cities_before = (root / "data/curated/cities-major.csv").read_bytes()
+    villages_before = (root / "data/curated/villages.csv").read_bytes()
+    code = sync_mod.main(["--source", "wikidata", "--apply"])
+    assert code == 2
+    err = capsys.readouterr().err
+    assert "не вставляет" in err
+    assert (root / "data/curated/cities-major.csv").read_bytes() == cities_before
+    assert (root / "data/curated/villages.csv").read_bytes() == villages_before
 
 
 def test_sync_wikidata_sparql_error_exit_2(

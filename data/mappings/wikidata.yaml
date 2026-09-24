@@ -94,8 +94,9 @@ delete_policy: pointer
 notes: >
   Указатель, не дамп SPARQL: python scripts/sync.py --source wikidata --apply
   ходит SPARQL VALUES по уже известным Q-id из всех seed-таблиц (города,
-  субъекты, годонимы, МО, микротопонимы, агентства и остальные curated с wd),
-  заполняет пустые lat/lon/geonames/oktmo/name_en/wd; новые Q-id не вставляет.
+  сёла/пгт, гидронимы, оронимы, площади, дороги/ЖД, годонимы, МО,
+  микротопонимы, агентства и остальные curated с wd), заполняет пустые
+  lat/lon/geonames/oktmo/name_en/wd; новые Q-id не вставляет (inserted=0).
   JSON/CSV запроса в git не кладётся. detector.kind=none — daily changed не
   флипает. Массовая вставка улиц — scripts/seed_hodonyms.py (P31 улица Q79007 /
   бульвар Q54114 / проспект Q628179 / переулок Q1251403 / набережная Q537127,

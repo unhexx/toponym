@@ -196,6 +196,10 @@ def test_wikidata_mapping_points_and_no_sparql_dump() -> None:
     assert "seed_municipalities.py" in payload["notes"]
     assert "sync.py" in payload["notes"]
     assert "VALUES" in payload["notes"] or "values" in notes
+    assert "inserted=0" in notes
+    assert "сёл" in payload["notes"] or "villages" in notes
+    assert "гидроним" in payload["notes"] or "hydronym" in notes
+    assert "ороним" in payload["notes"] or "oronym" in notes
     assert "Q628179" in payload["notes"]
     assert "polygon" not in payload["fields"].values()
     assert "geojson" not in {v.casefold() for v in payload["fields"].values()}

@@ -129,7 +129,7 @@ GitHub watchlist из `catalog.yaml` (`watchlist_github`): commits since `checke
 
 Wikidata: SPARQL `P17=Q159` за 48 ч — сигнал **перезапустить** `python scripts/seed_municipalities.py` / `seed_microtoponyms.py` / `seed_hodonyms.py` / `seed_cities.py` / `seed_agoronyms.py` / `seed_dromonyms.py` / `seed_villages.py` / `seed_hydronyms.py` / `seed_oronyms.py` (перед CalVer-тегом или когда в allowlist появились новые P31). Не дельта `daily.py`. JSON запроса в git не класть. Daily остаётся `kind=none`.
 
-`python scripts/sync.py --source wikidata --apply` — SPARQL `VALUES` по уже известным Q-id **всех** Wikidata seed-таблиц (города, субъекты, годонимы, МО, микротопонимы, агентства, …); пустые `lat`/`lon`/`geonames`/`oktmo`/`name_en`. Новые Q-id не вставляет. Daily `kind=none` это не вызывает.
+`python scripts/sync.py --source wikidata --apply` — SPARQL `VALUES` по уже известным Q-id **всех** Wikidata seed-таблиц (города, сёла/пгт, гидронимы, оронимы, площади, дороги/ЖД, годонимы, МО, микротопонимы, агентства, …); пустые `lat`/`lon`/`geonames`/`oktmo`/`name_en`. Новые Q-id не вставляет (`inserted=0`). Daily `kind=none` это не вызывает.
 
 Join `wd` на ФОИВ — `python scripts/join_foiv.py` (не `daily.py`): P31 министерство Q4481741 / служба Q4481675 / агентство Q14944295, не Q4481793/Q4481792. 0/69 совпадений не пишет CSV.
 

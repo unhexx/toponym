@@ -23,6 +23,7 @@
 - Join Wikidata на [`data/curated/agencies-foiv.csv`](data/curated/agencies-foiv.csv): 57 из 69 строк получили `wd` (P31 Q4481741/Q4481675/Q14944295). Не harvest: 69 `foiv:{slug}`, `source_id=ukase-326`. Не все ФОИВ России.
 
 ### Changed
+- [`scripts/sync.py`](scripts/sync.py) `--source wikidata`: known-ids SPARQL `VALUES` по уже известным Q-id сёл, гидронимов, оронимов, площадей и дромонимов (как и городов/МО/годонимов/агентств). `inserted=0`: неизвестные Q-id из SPARQL не вставляет. Daily `kind=none`.
 - [`data/mappings/wikidata.yaml`](data/mappings/wikidata.yaml) — `class_map` и списки `city_p31` / `village_p31` / `agoronym_p31` / `dromonym_p31` / `hydronym_p31` / `oronym_p31` (P31 Wikidata, не Росстат/ГКГН). Хутора Q5084 в карте есть, в harvest VALUES нет.
 - [`docs/USAGE.md`](docs/USAGE.md) §3.1 и [`docs/taxonomy.md`](docs/taxonomy.md): `cities-major` больше не сид pop≥100k, а harvest Wikidata Q7930989 (не Росстат).
 - [`docs/USAGE.md`](docs/USAGE.md) §3.2: площади больше не «малые сиды», а harvest Wikidata Q174782 (не ОМК УМ Москвы).
