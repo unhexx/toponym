@@ -16,6 +16,7 @@
 - Реестр площадей Wikidata в [`data/curated/agoronyms.csv`](data/curated/agoronyms.csv): P31=Q174782, P17=Q159. Около 540 строк, не все площади России и не ОМК УМ Москвы. Красная площадь сохранена.
 - Реестр дорог и ЖД Wikidata в [`data/curated/dromonyms.csv`](data/curated/dromonyms.csv): P31=Q34442 и Q728937 ruwiki, P17=Q159. Около 630 строк, не перечень федеральных трасс ПП № 928 и не OSM. Транссиб и БАМ сохранены.
 - Реестр сёл и пгт Wikidata в [`data/curated/villages.csv`](data/curated/villages.csv): P31=Q15078955 (пгт) и Q532 (village), P17=Q159. Около 33 тыс. строк, не ГКГН и не все сельские населённые пункты России (Росстат). Хутора Q5084 нет; `type_id=village` и у пгт. Бородино и Вёшенская сохранены.
+- Реестр гидронимов Wikidata в [`data/curated/hydronyms-major.csv`](data/curated/hydronyms-major.csv): P31 озеро Q23397 и река Q4022 ruwiki, P17=Q159. Около 26 тыс. строк, не ГКГН и не все реки России. Моря Q165 сохранены FILL_IF_EMPTY; Волга и Дон — gold.
 
 ### Changed
 - [`data/mappings/wikidata.yaml`](data/mappings/wikidata.yaml) — `class_map` и списки `city_p31` / `village_p31` / `agoronym_p31` / `dromonym_p31` / `hydronym_p31` / `oronym_p31` (P31 Wikidata, не Росстат/ГКГН). Хутора Q5084 в карте есть, в harvest VALUES нет.
@@ -23,8 +24,9 @@
 - [`docs/USAGE.md`](docs/USAGE.md) §3.2: площади больше не «малые сиды», а harvest Wikidata Q174782 (не ОМК УМ Москвы).
 - [`docs/USAGE.md`](docs/USAGE.md) §3.2: дромонимы больше не «малые сиды», а harvest Wikidata Q34442/Q728937 (не ПП № 928, не OSM).
 - [`docs/USAGE.md`](docs/USAGE.md) §3.2: сёла/пгт больше не «малые сиды», а harvest Wikidata Q15078955/Q532 (не ГКГН, не Росстат).
+- [`docs/USAGE.md`](docs/USAGE.md) §3.2 и [`docs/taxonomy.md`](docs/taxonomy.md): гидронимы больше не «крупный сид», а harvest Wikidata Q23397/Q4022 (не ГКГН).
 - [`scripts/lib/harvest.py`](scripts/lib/harvest.py): `shard_query` / `fetch_sharded` / `region_wd_qids`. `wall_sec=0` обходит все 89 субъектов; `seed_municipalities.py` зовёт с `wall_sec=600`.
-- Онтология: DEC-SEED-006 (города Wikidata), DEC-SEED-007 (сёла/пгт Wikidata), DEC-SEED-008 (площади Wikidata), DEC-SEED-009 (дороги/ЖД Wikidata); DEC-SEED-001/002 остаются `accepted`.
+- Онтология: DEC-SEED-006 (города Wikidata), DEC-SEED-007 (сёла/пгт Wikidata), DEC-SEED-008 (площади Wikidata), DEC-SEED-009 (дороги/ЖД Wikidata), DEC-SEED-010 (гидронимы Wikidata); DEC-SEED-001/002 остаются `accepted`.
 
 ## [2026.09.17] - 2026-09-17
 

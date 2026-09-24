@@ -318,7 +318,7 @@ def test_cli_from_json_writes_tmp(tmp_path: Path, capsys) -> None:
     assert by_id["wd:Q166"]["type_id"] == "hydronym"
     assert by_id["wd:Q90007006"]["status"] == "deprecated"
     assert by_id["wd:Q90007007"]["type_id"] == "limnonym"
-    assert len(read_csv(ROOT / "data/curated/hydronyms-major.csv")[1]) >= 40
+    assert len(read_csv(ROOT / "data/curated/hydronyms-major.csv")[1]) >= 500
 
 
 def test_harvest_from_json_no_network() -> None:
@@ -338,7 +338,7 @@ def test_harvest_from_json_no_network() -> None:
     assert any(row["id"] == "wd:Q90007001" for row in places)
     assert any(row["id"] == "wd:Q90007002" for row in places)
     assert not any(row["id"] == "wd:Q90007008" for row in places)
-    assert len(read_csv(ROOT / "data/curated/hydronyms-major.csv")[1]) >= 40
+    assert len(read_csv(ROOT / "data/curated/hydronyms-major.csv")[1]) >= 500
 
 
 def test_harvest_live_one_select(monkeypatch, tmp_path: Path) -> None:
@@ -455,9 +455,69 @@ def test_harvest_timeout_drops_incoming_rivers(monkeypatch, tmp_path: Path) -> N
     assert by_id["wd:Q166"]["type_id"] == "hydronym"
 
 
-def test_canon_hydronyms_seed() -> None:
+def test_dump_too_large_drops_incoming_rivers(monkeypatch, tmp_path: Path) -> None:
+    curated = tmp_path / "data" / "curated"
+    decl = tmp_path / "data" / "declensions"
+    raw = tmp_path / "data" / "raw" / "wikidata"
+    curated.mkdir(parents=True)
+    decl.mkdir(parents=True)
+    raw.mkdir(parents=True)
+    _copy_csv(ROOT / "data/curated/regions.csv", curated / "regions.csv")
+    write_csv(curated / "cities-major.csv", PLACES_HEADER, [])
+    write_csv(
+        curated / "hydronyms-major.csv",
+        PLACES_HEADER,
+        [
+            _volga(),
+            _place(
+                id="wd:Q166",
+                id_scheme="wikidata",
+                type_id="hydronym",
+                name_ru="Черное море",
+                wd="Q166",
+                status="active",
+                source_id="wikidata",
+                updated_at="2026-09-09",
+            ),
+        ],
+    )
+    write_csv(decl / "hydronyms-major.csv", DECLENSIONS_HEADER, [])
+    (raw / "hydronyms-ru.sparql").write_text(
+        SPARQL.read_text(encoding="utf-8"), encoding="utf-8"
+    )
+    from scripts.lib.harvest import dump_csv_bytes_or_raise as real_dump
+
+    seen = {"n": 0}
+
+    def fake_dump(header, rows, label):
+        seen["n"] += 1
+        if seen["n"] == 1 and label == "hydronyms-major.csv":
+            raise SeedError(
+                f"{label} 99999999 байт > 10485760 (не вендорить дамп)"
+            )
+        return real_dump(header, rows, label)
+
+    monkeypatch.setattr("scripts.seed_hydronyms.dump_csv_bytes_or_raise", fake_dump)
+    places, _decls, _counts, _ph, _dh = harvest(
+        root=tmp_path,
+        today="2026-09-15",
+        from_json=FIXTURE,
+        from_csv=None,
+        hop=False,
+        hop_batch=80,
+        session=None,
+    )
+    by_id = {row["id"]: row for row in places}
+    assert "wd:Q90007002" not in by_id
+    assert by_id["wd:Q90007001"]["type_id"] == "limnonym"
+    assert by_id["wd:Q626"]["name_ru"] == "Волга"
+    assert by_id["wd:Q166"]["type_id"] == "hydronym"
+    assert seen["n"] >= 3
+
+
+def test_canon_hydronyms_harvested() -> None:
     _header, rows = read_csv(ROOT / "data/curated/hydronyms-major.csv")
-    assert len(rows) >= 40
+    assert len(rows) >= 500
     assert any(row["id"] == "wd:Q626" and row["name_ru"] == "Волга" for row in rows)
     assert any(row["id"] == "wd:Q1229" and row["name_ru"] == "Дон" for row in rows)
     assert any(row["id"] == "wd:Q5513" and row["type_id"] == "limnonym" for row in rows)

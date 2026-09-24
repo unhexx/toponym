@@ -32,4 +32,6 @@
 
 Сёла и пгт (DEC-SEED-007): `data/curated/villages.csv` — Wikidata P31=Q15078955 (пгт) и Q532 (village), P17=Q159; не ГКГН и не все сельские населённые пункты России (Росстат). Хутора Q5084 нет. `type_id=village` и у пгт.
 
+Гидронимы (DEC-SEED-010): `data/curated/hydronyms-major.csv` — Wikidata P31=Q23397 (озеро) и Q4022 (река, ruwiki), P17=Q159; моря Q165 не в VALUES. Не ГКГН и не все реки России. Волга/Дон — gold.
+
 Полная таблица типов: `data/curated/types.csv`.
