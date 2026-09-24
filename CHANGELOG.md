@@ -11,6 +11,7 @@
 - CLI `python scripts/seed_agoronyms.py` (P31=Q174782, P17=Q159; годонимы в skip-set).
 - CLI `python scripts/seed_dromonyms.py` (P31=Q34442 + Q728937 ruwiki, P17=Q159; не ПП № 928).
 - CLI `python scripts/seed_villages.py` (пгт Q15078955, затем село Q532; шарды субъектов `wall_sec=0`; хутора Q5084 нет).
+- CLI `python scripts/seed_hydronyms.py` (озёра Q23397 + реки Q4022 ruwiki, P17=Q159; один SELECT; при too_large/timeout входящие реки отбрасываются, озёра и моря остаются; моря Q165 — FILL_IF_EMPTY, не VALUES; не ГКГН).
 - Реестр городов Wikidata в [`data/curated/cities-major.csv`](data/curated/cities-major.csv): P31 city/town in Russia Q7930989, P17=Q159. Около 1.1 тыс. строк, не все 1 126 городов России (ruwiki 13.05.2026) и не полный ОКТМО; без Крыма/новых субъектов. Имя файла историческое.
 - Реестр площадей Wikidata в [`data/curated/agoronyms.csv`](data/curated/agoronyms.csv): P31=Q174782, P17=Q159. Около 540 строк, не все площади России и не ОМК УМ Москвы. Красная площадь сохранена.
 - Реестр дорог и ЖД Wikidata в [`data/curated/dromonyms.csv`](data/curated/dromonyms.csv): P31=Q34442 и Q728937 ruwiki, P17=Q159. Около 630 строк, не перечень федеральных трасс ПП № 928 и не OSM. Транссиб и БАМ сохранены.

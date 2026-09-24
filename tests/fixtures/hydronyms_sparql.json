@@ -1,0 +1,89 @@
+[
+  {
+    "item": "http://www.wikidata.org/entity/Q90007001",
+    "type": "http://www.wikidata.org/entity/Q23397",
+    "ru": "Тестовое озеро",
+    "en": "Test Lake",
+    "lat": "55.8",
+    "lon": "49.1",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90007002",
+    "type": "http://www.wikidata.org/entity/Q4022",
+    "ru": "Река без субъекта",
+    "en": "No Parent River",
+    "located": "http://www.wikidata.org/entity/Q1"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90007003",
+    "type": "http://www.wikidata.org/entity/Q4022",
+    "ru": "",
+    "en": "No Label River"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90007004",
+    "type": "http://www.wikidata.org/entity/Q23397",
+    "ru": "Перекрытие с городом",
+    "en": "Overlap Lake",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90007005",
+    "type": "http://www.wikidata.org/entity/Q4022",
+    "ru": "Упразднённая новая",
+    "en": "Abolished New",
+    "dissolved": "2020-01-01T00:00:00Z",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90007006",
+    "type": "http://www.wikidata.org/entity/Q4022",
+    "ru": "Старая река",
+    "en": "Old River",
+    "dissolved": "2021-03-01T00:00:00Z",
+    "replaced": "http://www.wikidata.org/entity/Q90007001",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90007007",
+    "type": "http://www.wikidata.org/entity/Q23397",
+    "ru": "Зелёное озеро",
+    "en": "Zelyonoye Lake",
+    "located": "http://www.wikidata.org/entity/Q1697",
+    "iso": "RU-MOS"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90007008",
+    "type": "http://www.wikidata.org/entity/Q165",
+    "ru": "Море не из VALUES",
+    "en": "Sea Skip",
+    "located": "http://www.wikidata.org/entity/Q5481",
+    "iso": "RU-TA"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q626",
+    "type": "http://www.wikidata.org/entity/Q4022",
+    "ru": "Волга",
+    "en": "Volga",
+    "gn": "472776"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q1229",
+    "type": "http://www.wikidata.org/entity/Q4022",
+    "ru": "Дон",
+    "en": "Don",
+    "gn": "565361"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q5513",
+    "type": "http://www.wikidata.org/entity/Q23397",
+    "ru": "Байкал",
+    "en": "Lake Baikal",
+    "gn": "2026982"
+  }
+]
