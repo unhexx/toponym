@@ -218,3 +218,141 @@ def test_canon_agoronyms_harvested() -> None:
     assert any(row["id"] == "wd:Q41116" for row in rows)
     assert any(row["name_ru"] == "Красная площадь" for row in rows)
     assert all(row["type_id"] == "agoronym" for row in rows)
+    red = next(row for row in rows if row["id"] == "wd:Q41116")
+    assert red["parent_id"] == "wd:Q649"
+    assert red["admin1"] == "RU-MOW"
+    kursk = next(row for row in rows if row["id"] == "wd:Q13668718")
+    assert kursk["name_ru"] == "Красная площадь (Курск)"
+    assert kursk["parent_id"] != "wd:Q649"
+    assert kursk["admin1"] != "RU-MOW"
+
+
+def test_apply_harvest_clears_bogus_moscow_keeps_real() -> None:
+    records = {
+        "Q9100401": {
+            "qid": "Q9100401",
+            "ru": "Площадь без родителя",
+            "en": "",
+            "lat": "51.73",
+            "lon": "36.19",
+            "gn": "",
+            "located": set(),
+            "iso": set(),
+        },
+        "Q9100402": {
+            "qid": "Q9100402",
+            "ru": "Площадь в Курске",
+            "en": "",
+            "lat": "51.73",
+            "lon": "36.19",
+            "gn": "",
+            "located": set(),
+            "iso": {"RU-KRS"},
+        },
+        "Q9100403": {
+            "qid": "Q9100403",
+            "ru": "Площадь в Москве",
+            "en": "",
+            "lat": "55.75",
+            "lon": "37.62",
+            "gn": "",
+            "located": {"Q649"},
+            "iso": {"RU-MOW"},
+        },
+        "Q9100404": {
+            "qid": "Q9100404",
+            "ru": "Новая без родителя",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "located": set(),
+            "iso": set(),
+        },
+        "Q9100405": {
+            "qid": "Q9100405",
+            "ru": "Площадь в Петербурге",
+            "en": "",
+            "lat": "",
+            "lon": "",
+            "gn": "",
+            "located": set(),
+            "iso": {"RU-AD", "RU-SPE"},
+        },
+    }
+    index = load_parent_index(ROOT)
+    existing = [
+        _place(
+            id="wd:Q9100401",
+            id_scheme="wikidata",
+            type_id="agoronym",
+            name_ru="Площадь без родителя",
+            wd="Q9100401",
+            parent_id="wd:Q649",
+            admin1="RU-MOW",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+            notes="keep notes",
+        ),
+        _place(
+            id="wd:Q9100402",
+            id_scheme="wikidata",
+            type_id="agoronym",
+            name_ru="Площадь в Курске",
+            wd="Q9100402",
+            parent_id="wd:Q649",
+            admin1="RU-MOW",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+        ),
+        _place(
+            id="wd:Q9100403",
+            id_scheme="wikidata",
+            type_id="agoronym",
+            name_ru="Площадь в Москве",
+            wd="Q9100403",
+            parent_id="wd:Q649",
+            admin1="RU-MOW",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+            notes="moscow stays",
+        ),
+        _place(
+            id="wd:Q9100405",
+            id_scheme="wikidata",
+            type_id="agoronym",
+            name_ru="Площадь в Петербурге",
+            wd="Q9100405",
+            parent_id="wd:Q656",
+            admin1="RU-SPE",
+            status="active",
+            source_id="wikidata",
+            updated_at="2026-09-17",
+        ),
+    ]
+    places, _decls, counts = apply_harvest(
+        records,
+        index=index,
+        existing_places=existing,
+        existing_decls=[],
+        today="2026-09-24",
+        skip_map={},
+    )
+    by_id = {row["id"]: row for row in places}
+    assert by_id["wd:Q9100401"]["parent_id"] == ""
+    assert by_id["wd:Q9100401"]["admin1"] == ""
+    assert by_id["wd:Q9100401"]["notes"] == "keep notes"
+    assert by_id["wd:Q9100402"]["parent_id"] == "iso:RU-KRS"
+    assert by_id["wd:Q9100402"]["admin1"] == "RU-KRS"
+    assert by_id["wd:Q9100403"]["parent_id"] == "wd:Q649"
+    assert by_id["wd:Q9100403"]["admin1"] == "RU-MOW"
+    assert by_id["wd:Q9100403"]["notes"] == "moscow stays"
+    assert by_id["wd:Q9100405"]["parent_id"] == "wd:Q656"
+    assert by_id["wd:Q9100405"]["admin1"] == "RU-SPE"
+    assert "wd:Q9100404" not in by_id
+    assert counts.skipped_parent >= 1
+    assert counts.inserted == 0
+    assert len(places) == 4

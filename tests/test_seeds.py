@@ -512,9 +512,15 @@ def test_dva_seed_types_and_parents() -> None:
         "data/curated/agencies-other.csv",
     ):
         union_ids.update(row["id"] for row in _read_csv(ROOT / rel)[1])
-    for row in (*vil, *ago):
+    for row in vil:
         parent = row["parent_id"]
         assert parent, row["id"]
+        assert parent in union_ids, (row["id"], parent)
+    for row in ago:
+        parent = row["parent_id"]
+        if not parent:
+            assert not (row.get("admin1") or ""), row["id"]
+            continue
         assert parent in union_ids, (row["id"], parent)
     for row in drom:
         parent = row["parent_id"]
