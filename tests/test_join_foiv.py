@@ -6,6 +6,8 @@ import pytest
 
 from scripts.join_foiv import (
     ALLOWED_P31,
+    EXTRA_QID_SETS,
+    EXTRA_SCALARS,
     apply_join,
     join_foiv,
     load_main_query,
@@ -111,6 +113,68 @@ def test_match_records_name_abbr_skips_blocked_and_other_p31() -> None:
     assert matched["foiv:mvd"] == "Q2114337"
     assert matched["foiv:svr"] == "Q863254"
     assert "foiv:mod" not in matched
+
+
+def test_match_records_three_hits_blacklist_and_skip_dissolved() -> None:
+    rows = [
+        {
+            "item": "http://www.wikidata.org/entity/Q1",
+            "type": "http://www.wikidata.org/entity/Q4481741",
+            "ru": "Министерство внутренних дел Российской Федерации",
+        },
+        {
+            "item": "http://www.wikidata.org/entity/Q2",
+            "type": "http://www.wikidata.org/entity/Q4481741",
+            "ru": "Министерство внутренних дел Российской Федерации",
+        },
+        {
+            "item": "http://www.wikidata.org/entity/Q3",
+            "type": "http://www.wikidata.org/entity/Q4481741",
+            "short": "МВД",
+        },
+        {
+            "item": "http://www.wikidata.org/entity/Q4",
+            "type": "http://www.wikidata.org/entity/Q4481741",
+            "ru": "Служба внешней разведки Российской Федерации",
+            "dissolved": "2001-01-01T00:00:00Z",
+        },
+        {
+            "item": "http://www.wikidata.org/entity/Q5",
+            "type": "http://www.wikidata.org/entity/Q4481675",
+            "ru": "Служба внешней разведки Российской Федерации",
+        },
+        {
+            "item": "http://www.wikidata.org/entity/Q6",
+            "type": "http://www.wikidata.org/entity/Q4481741",
+            "ru": "Министерство обороны Российской Федерации",
+            "dissolved": "1992-01-01T00:00:00Z",
+        },
+    ]
+    assert "dissolved" in EXTRA_SCALARS
+    records = merge_bindings(
+        rows, extra_scalars=EXTRA_SCALARS, extra_qid_sets=EXTRA_QID_SETS
+    )
+    existing = [
+        _mvd(),
+        _place(
+            id="foiv:svr",
+            id_scheme="foiv",
+            name_ru="Служба внешней разведки Российской Федерации",
+            abbr="СВР",
+        ),
+        _place(
+            id="foiv:mod",
+            id_scheme="foiv",
+            name_ru="Министерство обороны Российской Федерации",
+            abbr="Минобороны",
+        ),
+    ]
+    matched = match_records(records, existing)
+    assert "foiv:mvd" not in matched
+    assert matched["foiv:svr"] == "Q5"
+    assert "foiv:mod" not in matched
+    assert "Q1" not in matched.values()
+    assert "Q3" not in matched.values()
 
 
 def test_apply_join_fills_wd_keeps_id_and_notes() -> None:
