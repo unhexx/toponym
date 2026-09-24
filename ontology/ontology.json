@@ -553,6 +553,32 @@
       "summary": "Реестр оронимов растёт upsert-ом по wd:Q-id из Wikidata (P31 гора Q8502, хребет Q46831, вулкан Q8072, остров Q23442, полуостров Q34763, P17=Q159; остров/полуостров — insulonym). Запрос по одному VALUES-типу. SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не ГКГН и не все горы России. Эльбрус, Уральские горы и Сахалин сохранены."
     },
     {
+      "id": "DEC-SEED-012",
+      "type": "Decision",
+      "title": "ФОИВ: join Wikidata, не harvest",
+      "status": "accepted",
+      "date": "2026-09-24",
+      "refs": [
+        "data/curated/agencies-foiv.csv",
+        "data/raw/wikidata/foiv-ru.sparql",
+        "scripts/join_foiv.py"
+      ],
+      "summary": "Колонка wd на существующих 69 строках foiv:{slug} (P31 министерство Q4481741, служба Q4481675, агентство Q14944295; не Q4481793/Q4481792; P17=Q159). source_id остаётся ukase-326. 0/69 совпадений CSV не пишет. Это не harvest и не все ФОИВ России (Wikidata). Daily — kind=none."
+    },
+    {
+      "id": "DEC-SEED-013",
+      "type": "Decision",
+      "title": "known-ids SPARQL не вставляет новые Q-id",
+      "status": "accepted",
+      "date": "2026-09-24",
+      "refs": [
+        "scripts/sync.py",
+        "data/mappings/wikidata.yaml",
+        "data/sources/catalog.yaml"
+      ],
+      "summary": "sync.py --source wikidata --apply берёт SPARQL VALUES только по уже известным Q-id (города, сёла, гидронимы, оронимы, площади, дромонимы, МО, годонимы, агентства). inserted=0: неизвестный Q-id строкой не становится. Daily wikidata kind=none и этот запрос не запускает. Покрытие остаётся Wikidata, не Росстат и не ГКГН."
+    },
+    {
       "id": "DEC-P1-001",
       "type": "Decision",
       "title": "P1 не дробить на P1a–e",

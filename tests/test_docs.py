@@ -157,6 +157,10 @@ def test_usage_guide_covers_search_and_declensions() -> None:
     assert "DEC-SEED-009" in text
     assert "DEC-SEED-010" in text
     assert "DEC-SEED-011" in text
+    assert "DEC-SEED-012" in text
+    assert "DEC-SEED-013" in text
+    assert "inserted" in text
+    assert "kind=none" in text
     assert "seed_municipalities.py" in text
     assert "seed_microtoponyms.py" in text
     assert "seed_cities.py" in text
@@ -220,6 +224,9 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
     assert "DEC-SEED-009" in before_loop2
     assert "DEC-SEED-010" in before_loop2
     assert "DEC-SEED-011" in before_loop2
+    assert "DEC-SEED-012" in before_loop2
+    assert "DEC-SEED-013" in before_loop2
+    assert "не все X России" in before_loop2
     assert "seed_hodonyms.py" in before_loop2
     assert "seed_municipalities.py" in before_loop2
     assert "seed_microtoponyms.py" in before_loop2
@@ -237,6 +244,12 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
 def test_cycle_plan_dod_counts_datapackage_resources() -> None:
     text = (ROOT / "CYCLE_PLAN.md").read_text(encoding="utf-8")
     assert "25 resources" in text
+    assert "DEC-SEED-012" in text
+    assert "DEC-SEED-013" in text
+    assert "inserted=0" in text
+    assert "не все реки России" in text
+    assert "не все горы России" in text
+    assert "kind=none" in text
     assert "11 resources" not in text
     assert "14 resources" not in text
     assert "19 resources" not in text

@@ -79,8 +79,17 @@ Keep-out закрывается онтологией `DEC-*` в `ontology/ontolo
 | WD-SYNC | known-ids SPARQL в `sync.py` для всех Wikidata seed-таблиц | `feat/sync-known-ids` | VALUES по известным Q-id; fill-if-empty; `kind=none`; без массовой вставки | COMPLETE |
 | HOD-WD-MUN | parent hop годонимов после реестра МО | `data/hodonyms-mun-parents` | iso:RU-* → город/МО по P131*; Wikidata, не ФИАС | COMPLETE |
 | REL-2026.09.17 | annotated CalVer `2026.09.17` | `chore/release-2026.09.17` | harvest МО/микротопонимов Wikidata; теги `2026.09.11`–`2026.09.16` не двигались | COMPLETE |
+| CITY-WD | Города Wikidata Q7930989, не Росстат | `data/cities-wikidata` | `seed_cities.py`; не все 1 126 городов России (Wikidata, не Росстат); DEC-SEED-006 | COMPLETE |
+| AGOR-WD | Площади Wikidata Q174782 | `data/agoronyms-wikidata` | не все площади России (Wikidata); DEC-SEED-008 | COMPLETE |
+| DROM-WD | Дороги и ЖД Wikidata, не ПП № 928 | `data/dromonyms-wikidata` | Q34442 / Q728937 ruwiki; не OSM; DEC-SEED-009 | COMPLETE |
+| VIL-WD | Сёла и пгт Wikidata, не ГКГН | `data/villages-wikidata` | Q15078955 / Q532; хутора Q5084 нет; `type_id=village`; не все СНП России (Wikidata, не Росстат/ГКГН); DEC-SEED-007 | COMPLETE |
+| HYDRO-WD | Гидронимы Wikidata, не ГКГН | `data/hydronyms-wikidata` | Q23397 / Q4022 ruwiki; не все реки России (Wikidata, не ГКГН); Волга/Дон gold; DEC-SEED-010 | COMPLETE |
+| ORO-WD | Оронимы Wikidata, не ГКГН | `data/oronyms-wikidata` | Q8502 / Q46831 / Q8072 / Q23442 / Q34763; не все горы России (Wikidata, не ГКГН); DEC-SEED-011 | COMPLETE |
+| FOIV-WD | Join Wikidata на ФОИВ, не harvest | `data/foiv-wikidata-join` | P31 Q4481741 / Q4481675 / Q14944295; 0/69 CSV не пишет; не все ФОИВ России (Wikidata); DEC-SEED-012 | COMPLETE |
+| WD-KNOWN | known-ids SPARQL без вставки | `feat/sync-known-ids-rest` | `sync.py --source wikidata --apply`; `inserted=0`; daily `kind=none`; DEC-SEED-013 | COMPLETE |
+| DOCS-HONEST | Честное покрытие в онтологии, плане и USAGE | `docs/coverage-honesty` | «не все X России» только рядом с Wikidata, Росстат или ГКГН; DEC-SEED-012/013 | COMPLETE |
 
-A–L COMPLETE на `main`. Annotated CalVer `2026.09.17` на `main`. Теги `2026.09.11`–`2026.09.16` не двигать. HOD-WD / MUN-WD / MICRO-WD — harvest Wikidata, не ФИАС/ОКТМО/ГКГН.
+A–L COMPLETE на `main`. Annotated CalVer `2026.09.17` на `main`. Теги `2026.09.11`–`2026.09.17` не двигать. Города, сёла/пгт, площади, дороги, гидронимы и оронимы — harvest Wikidata, не Росстат/ГКГН/ПП № 928 и не «все X России». ФОИВ — join `wd`, не harvest. `sync.py --source wikidata` не вставляет новые Q-id (`inserted=0`); daily остаётся `kind=none`.
 
 ## Definition of Done v1
 
