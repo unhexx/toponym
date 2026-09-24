@@ -79,7 +79,8 @@ def test_seed_counts() -> None:
     assert len(cities) >= 800
     assert len(hydros) >= 500
     assert len(oros) >= 5000
-    assert len(foiv) >= 69
+    assert len(foiv) == 69
+    assert sum(1 for row in foiv if (row.get("wd") or "").startswith("Q")) >= 1
     assert len(other) >= 10
     assert len(mun) >= 500
     assert len(hod) >= 10000

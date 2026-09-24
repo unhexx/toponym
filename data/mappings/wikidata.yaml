@@ -86,6 +86,10 @@ filter:
     - Q8072
     - Q23442
     - Q34763
+  foiv_p31:
+    - Q4481741
+    - Q4481675
+    - Q14944295
 delete_policy: pointer
 notes: >
   Указатель, не дамп SPARQL: python scripts/sync.py --source wikidata --apply
@@ -104,5 +108,7 @@ notes: >
   городов Q7930989 (не pop≥100k и не все 1126 городов России, ruwiki), сёл
   Q15078955/Q532 без хуторов Q5084 (не ГКГН), площадей Q174782, дорог Q34442
   и ЖД Q728937 ruwiki (не ПП № 928), гидронимов Q23397/Q4022 ruwiki (не ГКГН),
-  оронимов Q8502/Q46831/Q8072/Q23442/Q34763. Указатели data/raw/wikidata/*-ru.sparql;
-  JSON/CSV запроса в git не кладётся.
+  оронимов Q8502/Q46831/Q8072/Q23442/Q34763. Join ФОИВ — scripts/join_foiv.py
+  (P31 Q4481741/Q4481675/Q14944295, не Q4481793/Q4481792): заполняет wd на
+  существующих foiv:{slug}, новые строки не вставляет; 0/69 не пишет.
+  Указатели data/raw/wikidata/*-ru.sparql; JSON/CSV запроса в git не кладётся.

@@ -1,0 +1,22 @@
+# Federal executive bodies (FOIV) in Russia from Wikidata, CC0.
+# Join onto existing agencies-foiv.csv (ukase-326), not a harvest of new rows.
+# P31: ministry Q4481741, federal service Q4481675, federal agency Q14944295.
+# NOT Q4481793 / Q4481792. P17 = Russia (Q159).
+# scripts/join_foiv.py: 0/69 matches does not write. Do not vendor SPARQL JSON/CSV.
+
+SELECT DISTINCT ?item ?type ?ru ?en ?short ?lat ?lon ?gn ?oktmo ?located ?iso ?dissolved ?replaced WHERE {
+  VALUES ?type { wd:Q4481741 wd:Q4481675 wd:Q14944295 }
+  ?item wdt:P31 ?type .
+  ?item wdt:P17 wd:Q159 .
+  FILTER(?type NOT IN (wd:Q4481793, wd:Q4481792))
+  ?item rdfs:label ?ru FILTER(LANG(?ru) = "ru")
+  OPTIONAL { ?item rdfs:label ?en FILTER(LANG(?en) = "en") }
+  OPTIONAL { ?item wdt:P1813 ?short FILTER(LANG(?short) = "ru") }
+  OPTIONAL { ?item p:P625/psv:P625 [ wikibase:geoLatitude ?lat; wikibase:geoLongitude ?lon ] }
+  OPTIONAL { ?item wdt:P1566 ?gn }
+  OPTIONAL { ?item wdt:P764 ?oktmo }
+  OPTIONAL { ?item wdt:P131 ?located }
+  OPTIONAL { ?located wdt:P300 ?iso FILTER(STRSTARTS(?iso, "RU-")) }
+  OPTIONAL { ?item wdt:P576 ?dissolved }
+  OPTIONAL { ?item wdt:P1366 ?replaced }
+}
