@@ -13,12 +13,14 @@
 - CLI `python scripts/seed_villages.py` (пгт Q15078955, затем село Q532; шарды субъектов `wall_sec=0`; хутора Q5084 нет).
 - CLI `python scripts/seed_hydronyms.py` (озёра Q23397 + реки Q4022 ruwiki, P17=Q159; один SELECT; при too_large/timeout входящие реки отбрасываются, озёра и моря остаются; моря Q165 — FILL_IF_EMPTY, не VALUES; не ГКГН).
 - CLI `python scripts/seed_oronyms.py` (гора Q8502, хребет Q46831, вулкан Q8072, остров Q23442, полуостров Q34763, P17=Q159; по одному VALUES-типу; не ГКГН).
+- CLI `python scripts/join_foiv.py` — join Wikidata Q-id на существующие ФОИВ (P31 Q4481741/Q4481675/Q14944295, не Q4481793/Q4481792, P17=Q159). Не harvest: `foiv:{slug}` и `source_id=ukase-326` остаются; 0/69 совпадений не пишет.
 - Реестр городов Wikidata в [`data/curated/cities-major.csv`](data/curated/cities-major.csv): P31 city/town in Russia Q7930989, P17=Q159. Около 1.1 тыс. строк, не все 1 126 городов России (ruwiki 13.05.2026) и не полный ОКТМО; без Крыма/новых субъектов. Имя файла историческое.
 - Реестр площадей Wikidata в [`data/curated/agoronyms.csv`](data/curated/agoronyms.csv): P31=Q174782, P17=Q159. Около 540 строк, не все площади России и не ОМК УМ Москвы. Красная площадь сохранена.
 - Реестр дорог и ЖД Wikidata в [`data/curated/dromonyms.csv`](data/curated/dromonyms.csv): P31=Q34442 и Q728937 ruwiki, P17=Q159. Около 630 строк, не перечень федеральных трасс ПП № 928 и не OSM. Транссиб и БАМ сохранены.
 - Реестр сёл и пгт Wikidata в [`data/curated/villages.csv`](data/curated/villages.csv): P31=Q15078955 (пгт) и Q532 (village), P17=Q159. Около 33 тыс. строк, не ГКГН и не все сельские населённые пункты России (Росстат). Хутора Q5084 нет; `type_id=village` и у пгт. Бородино и Вёшенская сохранены.
 - Реестр гидронимов Wikidata в [`data/curated/hydronyms-major.csv`](data/curated/hydronyms-major.csv): P31 озеро Q23397 и река Q4022 ruwiki, P17=Q159. Около 26 тыс. строк, не ГКГН и не все реки России. Моря Q165 сохранены FILL_IF_EMPTY; Волга и Дон — gold.
 - Реестр оронимов Wikidata в [`data/curated/oronyms-major.csv`](data/curated/oronyms-major.csv): P31 гора Q8502, хребет Q46831, вулкан Q8072, остров Q23442, полуостров Q34763, P17=Q159. Около 13 тыс. строк, не ГКГН и не все горы России. Остров/полуостров — `insulonym`. Эльбрус, Уральские горы и Сахалин сохранены.
+- Join Wikidata на [`data/curated/agencies-foiv.csv`](data/curated/agencies-foiv.csv): 57 из 69 строк получили `wd` (P31 Q4481741/Q4481675/Q14944295). Не harvest: 69 `foiv:{slug}`, `source_id=ukase-326`. Не все ФОИВ России.
 
 ### Changed
 - [`data/mappings/wikidata.yaml`](data/mappings/wikidata.yaml) — `class_map` и списки `city_p31` / `village_p31` / `agoronym_p31` / `dromonym_p31` / `hydronym_p31` / `oronym_p31` (P31 Wikidata, не Росстат/ГКГН). Хутора Q5084 в карте есть, в harvest VALUES нет.

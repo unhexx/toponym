@@ -226,6 +226,7 @@ def test_wikidata_coverage_sparql_pointers_match_p31_filters() -> None:
         ("dromonyms-ru.sparql", "dromonym_p31", "Q728937"),
         ("hydronyms-ru.sparql", "hydronym_p31", "Q4022"),
         ("oronyms-ru.sparql", "oronym_p31", None),
+        ("foiv-ru.sparql", "foiv_p31", None),
     )
     for name, filter_key, guard_qid in specs:
         path = raw / name

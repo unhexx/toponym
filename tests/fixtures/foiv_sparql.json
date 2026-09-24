@@ -1,0 +1,40 @@
+[
+  {
+    "item": "http://www.wikidata.org/entity/Q2114337",
+    "type": "http://www.wikidata.org/entity/Q4481741",
+    "ru": "Министерство внутренних дел Российской Федерации",
+    "en": "Ministry of Internal Affairs",
+    "short": "МВД России"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q863254",
+    "type": "http://www.wikidata.org/entity/Q4481675",
+    "ru": "Служба внешней разведки Российской Федерации",
+    "en": "Foreign Intelligence Service",
+    "short": "СВР"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90009001",
+    "type": "http://www.wikidata.org/entity/Q4481741",
+    "ru": "Ведомство без пары",
+    "en": "No Match Ministry"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90009002",
+    "type": "http://www.wikidata.org/entity/Q23397",
+    "ru": "Министерство внутренних дел Российской Федерации",
+    "en": "Lake Disguised"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90009003",
+    "type": "http://www.wikidata.org/entity/Q4481793",
+    "ru": "Министерство обороны Российской Федерации",
+    "en": "Blocked type"
+  },
+  {
+    "item": "http://www.wikidata.org/entity/Q90009004",
+    "type": "http://www.wikidata.org/entity/Q14944295",
+    "ru": "",
+    "en": "No Label"
+  }
+]
