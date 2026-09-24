@@ -483,6 +483,20 @@
       "summary": "Реестр городов растёт upsert-ом по wd:Q-id из Wikidata (P31 city/town in Russia Q7930989, P17=Q159; не generic Q515 и не pop≥100k). SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не все 1126 городов России (ruwiki 13.05.2026) и не полный ОКТМО; без Крыма/новых субъектов. Имя файла cities-major историческое."
     },
     {
+      "id": "DEC-SEED-007",
+      "type": "Decision",
+      "title": "Сёла и пгт из Wikidata SPARQL, не ГКГН",
+      "status": "accepted",
+      "date": "2026-09-24",
+      "refs": [
+        "data/curated/villages.csv",
+        "data/raw/wikidata/villages-ru.sparql",
+        "scripts/seed_villages.py",
+        "data/mappings/wikidata.yaml"
+      ],
+      "summary": "Реестр сёл и пгт растёт upsert-ом по wd:Q-id из Wikidata (P31 urban-type settlement Q15078955, затем village Q532, P17=Q159; хутора Q5084 нет). type_id=village и у пгт. SPARQL JSON не вендорится. Daily — kind=none. Покрытие Wikidata, не ГКГН и не все сельские населённые пункты России (Росстат). Бородино/Вёшенская сохранены FILL_IF_EMPTY."
+    },
+    {
       "id": "DEC-SEED-008",
       "type": "Decision",
       "title": "Площади из Wikidata SPARQL, не ОМК УМ Москвы",

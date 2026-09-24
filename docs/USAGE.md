@@ -157,6 +157,8 @@ curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Синий'
 
 ## 3.2. Дромонимы, сёла, площади
 
+Типы `dromonym` / `village` / `agoronym` уже были в `types.csv` (исторический DEC-SEED-002).
+
 Площади (DEC-SEED-008) — реестр Wikidata (CC0): P31=Q174782, P17=Q159, upsert по `wd:Q…`.
 Это не все площади России и не ОМК УМ Москвы. SPARQL JSON в git нет.
 Массовая вставка — `python scripts/seed_agoronyms.py` (не `daily.py`).
@@ -168,13 +170,17 @@ curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Синий'
 Массовая вставка — `python scripts/seed_dromonyms.py` (не `daily.py`).
 Транссиб / БАМ / М11 сохранены.
 
-Сёла — малые сиды (DEC-SEED-002), не ГАР. Типы уже были в `types.csv`.
+Сёла и пгт (DEC-SEED-007) — реестр Wikidata (CC0): P31=Q15078955 (пгт) и P31=Q532
+(village), P17=Q159, upsert по `wd:Q…`. Это не ГКГН и не все сельские населённые
+пункты России (Росстат). Хутора Q5084 нет. SPARQL JSON в git нет.
+Массовая вставка — `python scripts/seed_villages.py` (не `daily.py`).
+`type_id=village` и у пгт. Бородино / Вёшенская сохранены.
 
 | Таблица | Сколько строк | Примеры |
 |---|---|---|
 | `data/curated/agoronyms.csv` | сотни (Wikidata Q174782, не ОМК УМ) | Красная площадь, Дворцовая площадь |
 | `data/curated/dromonyms.csv` | сотни (Wikidata Q34442 / Q728937 ruwiki, не ПП № 928) | Транссибирская магистраль (Транссиб), М11 «Нева» |
-| `data/curated/villages.csv` | сид (DEC-SEED-002) | Бородино, Вешенская |
+| `data/curated/villages.csv` | десятки тысяч (Wikidata Q15078955/Q532, не ГКГН) | Бородино, Вешенская |
 
 ```bash
 curl -sSG http://127.0.0.1:8099/v1/search --data-urlencode 'q=Транссиб'
@@ -322,7 +328,7 @@ sqlite3 knowledge/registry.db \
 реестр муниципалитетов, годонимов и микротопонимов Wikidata (исторический малый сид DEC-SEED-001),
 площадей Wikidata P31=Q174782 (не все площади России; DEC-SEED-008),
 дорог и ЖД Wikidata P31=Q34442 / Q728937 ruwiki (не перечень федеральных трасс ПП № 928 и не OSM; DEC-SEED-009)
-и сёл (DEC-SEED-002; не ГАР).
+и сёл/пгт Wikidata P31=Q15078955 / Q532 (не ГКГН и не все сельские населённые пункты России; DEC-SEED-007).
 
 Нет в этом релизе: полный ГАР/ФИАС, GeoNames `RU.zip`, полный список улиц и МО,
 склонения **каждого** ойконима (только золотые/черновые таблицы выше),

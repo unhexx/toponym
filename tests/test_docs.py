@@ -152,6 +152,7 @@ def test_usage_guide_covers_search_and_declensions() -> None:
     assert "DEC-SEED-004" in text
     assert "DEC-SEED-005" in text
     assert "DEC-SEED-006" in text
+    assert "DEC-SEED-007" in text
     assert "DEC-SEED-008" in text
     assert "DEC-SEED-009" in text
     assert "seed_municipalities.py" in text
@@ -159,12 +160,16 @@ def test_usage_guide_covers_search_and_declensions() -> None:
     assert "seed_cities.py" in text
     assert "seed_agoronyms.py" in text
     assert "seed_dromonyms.py" in text
+    assert "seed_villages.py" in text
     assert "Q7930989" in text
     assert "Q174782" in text
     assert "Q34442" in text
     assert "Q728937" in text
+    assert "Q15078955" in text
+    assert "Q532" in text
     assert "не все 1 126 городов России" in text
     assert "не все площади России" in text
+    assert "не ГКГН" in text
     assert "ПП № 928" in text
     assert "Тверской" in text
     assert "queue.csv" in text
@@ -199,6 +204,7 @@ def test_changelog_unreleased_mentions_usage_and_min_update() -> None:
     assert "DEC-SEED-004" in before_loop2
     assert "DEC-SEED-005" in before_loop2
     assert "DEC-SEED-006" in before_loop2
+    assert "DEC-SEED-007" in before_loop2
     assert "DEC-SEED-008" in before_loop2
     assert "DEC-SEED-009" in before_loop2
     assert "seed_hodonyms.py" in before_loop2
