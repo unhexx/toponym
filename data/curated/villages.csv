@@ -1,8 +1,8 @@
 id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
-wd:Q894049,wikidata,village,Бородино,,Borodino,,iso:RU-MOS,RU-MOS,55.526944,35.821111,Q894049,572278,,,,active,,wikidata,,2026-09-12,"пример types.csv; деревня, Можайский округ; не город Бородино"
-wd:Q2637584,wikidata,village,Вешенская,Вёшенская,Vyoshenskaya,,iso:RU-ROS,RU-ROS,49.627222,41.726111,Q2637584,473998,,,,active,,wikidata,,2026-09-12,"станица, Шолоховский район"
-wd:Q681521,wikidata,village,Холмогоры,,Kholmogory,,iso:RU-ARK,RU-ARK,64.225000,41.650000,Q681521,549748,,,,active,,wikidata,,2026-09-12,село
-wd:Q4231436,wikidata,village,Константиново,,Konstantinovo,,iso:RU-RYA,RU-RYA,54.864722,39.600556,Q4231436,545288,,,,active,,wikidata,,2026-09-12,"село, Рыбновский район"
+wd:Q894049,wikidata,village,Бородино,,Borodino,,iso:RU-MOS,RU-MOS,55.526944,35.821111,Q894049,572278,,46633404101,,active,,wikidata,,2026-09-25,"пример types.csv; деревня, Можайский округ; не город Бородино"
+wd:Q2637584,wikidata,village,Вешенская,Вёшенская,Vyoshenskaya,,iso:RU-ROS,RU-ROS,49.627222,41.726111,Q2637584,473998,,60659410101,,active,,wikidata,,2026-09-25,"станица, Шолоховский район"
+wd:Q681521,wikidata,village,Холмогоры,,Kholmogory,,iso:RU-ARK,RU-ARK,64.225000,41.650000,Q681521,549748,,11656460101,,active,,wikidata,,2026-09-25,село
+wd:Q4231436,wikidata,village,Константиново,,Konstantinovo,,iso:RU-RYA,RU-RYA,54.864722,39.600556,Q4231436,545288,,61627436106,,active,,wikidata,,2026-09-25,"село, Рыбновский район"
 wd:Q4333102,wikidata,village,Октябрьский,,,,iso:RU-AL,RU-AL,54.99166667,61.475,Q4333102,,,,,active,,wikidata,,2026-09-15,
 wd:Q4239557,wikidata,village,Красный Октябрь,,Krasnyy Oktyabr',,iso:RU-AL,RU-AL,56.11666667,38.88333333,Q4239557,541549,,,,active,,wikidata,,2026-09-15,
 wd:Q16690980,wikidata,village,Районы Сочи,,Greater Sochi administrative division,,iso:RU-AL,RU-AL,,,Q16690980,,,,,active,,wikidata,,2026-09-15,
@@ -7965,7 +7965,7 @@ wd:Q4518178,wikidata,village,Чурачики,,,,wd:Q21843418,RU-CU,55.21277778,
 wd:Q4517436,wikidata,village,Чуварлеи,,,,wd:Q21196438,RU-CU,54.85916667,46.4925,Q4517436,,,97603490101,,active,,wikidata,,2026-09-15,
 wd:Q4149903,wikidata,village,Гришино,,Grishino,,wd:Q21195011,RU-CU,55.47888889,47.885,Q4149903,,,97658415106,,active,,wikidata,,2026-09-15,
 wd:Q3894059,wikidata,village,Яльчики,,Yalchiki,,iso:RU-CU,RU-CU,55.16169,48.00602,Q3894059,,,97655440101,,active,,wikidata,,2026-09-15,
-wd:Q11027835,wikidata,village,Аттиково,,,,wd:Q4072286,RU-CU,55.774006,48.124807,Q11027835,,,97619410101,,active,,wikidata,,2026-09-15,
+wd:Q11027835,wikidata,village,Аттиково,,Atticovo,,wd:Q4072286,RU-CU,55.774006,48.124807,Q11027835,,,97619410101,,active,,wikidata,,2026-09-25,
 wd:Q4403438,wikidata,village,Сабанчино,,,,wd:Q19837491,RU-CU,55.157269,47.903237,Q4403438,,,97655435101,,active,,wikidata,,2026-09-15,
 wd:Q4518314,wikidata,village,Чутеево,,Chuteevo,,wd:Q21196454,RU-CU,55.39388889,47.8275,Q4518314,,,97658435101,,active,,wikidata,,2026-09-15,
 wd:Q4255510,wikidata,village,Лащ-Таяба,,Lashch-Tayaba,,wd:Q4255511,RU-CU,55.02666667,47.99555556,Q4255510,,,97655420101,,active,,wikidata,,2026-09-15,
@@ -14053,7 +14053,7 @@ wd:Q21344775,wikidata,village,Чуровичи,,Churovichi,,wd:Q2534592,RU-BRY,5
 wd:Q21344743,wikidata,village,Чернооково,,Chernookovo,,wd:Q4204452,RU-BRY,52.403089,32.434087,Q21344743,,,15628420141,,active,,wikidata,,2026-09-15,
 wd:Q21343263,wikidata,village,Сенное,,Sennoe,,wd:Q4163575,RU-BRY,,,Q21343263,,,15648412131,,active,,wikidata,,2026-09-15,
 wd:Q21343108,wikidata,village,Ружное,,,,wd:Q4391665,RU-BRY,,,Q21343108,,,15624444146,,active,,wikidata,,2026-09-15,
-wd:Q21343134,wikidata,village,Рябчовск,,,,wd:Q4535123,RU-BRY,,,Q21343134,,,15656470251,,active,,wikidata,,2026-09-15,
+wd:Q21343134,wikidata,village,Рябчовск,,Ryabchovsk,,wd:Q4535123,RU-BRY,52.8144,33.9714,Q21343134,500272,,15656470251,,active,,wikidata,,2026-09-25,
 wd:Q21343241,wikidata,village,Семеновка,Семёновка,,,wd:Q4082271,RU-BRY,,,Q21343241,,,15636404126,,active,,wikidata,,2026-09-15,
 wd:Q21343244,wikidata,village,Семеновка,Семёновка,,,wd:Q4125720,RU-BRY,,,Q21343244,,,15646408131,,active,,wikidata,,2026-09-15,
 wd:Q21343199,wikidata,village,Себекин,,,,wd:Q4520665,RU-BRY,,,Q21343199,,,15646444166,,active,,wikidata,,2026-09-15,

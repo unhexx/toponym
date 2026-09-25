@@ -1,6 +1,6 @@
 id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
 wd:Q649,wikidata,city,Москва,,Moscow,,iso:RU-MOW,RU-MOW,55.750556,37.617500,Q649,524901,,45000000,,active,,wikidata,,2026-09-11,
-wd:Q656,wikidata,city,Санкт-Петербург,,Saint Petersburg,,iso:RU-SPE,RU-SPE,59.950000,30.316667,Q656,,,40000000,,active,,wikidata,,2026-09-11,
+wd:Q656,wikidata,city,Санкт-Петербург,,Saint Petersburg,,iso:RU-SPE,RU-SPE,59.950000,30.316667,Q656,498817,,40000000,,active,,wikidata,,2026-09-25,
 wd:Q883,wikidata,city,Новосибирск,,Novosibirsk,,iso:RU-NVS,RU-NVS,55.033333,82.916667,Q883,1496747,,50701000001,,active,,wikidata,,2026-09-11,
 wd:Q887,wikidata,city,Екатеринбург,,Yekaterinburg,,iso:RU-SVE,RU-SVE,56.835556,60.612778,Q887,1486209,,65701000001,,active,,wikidata,,2026-09-11,
 wd:Q900,wikidata,city,Казань,,Kazan,,iso:RU-TA,RU-TA,55.790833,49.114444,Q900,551487,,92701000001,,active,,wikidata,,2026-09-11,

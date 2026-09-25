@@ -1,5 +1,5 @@
 id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
-wd:Q4420279,wikidata,microtoponym,Синий камень,,Blue Stone,,iso:RU-YAR,RU-YAR,,,Q4420279,,,,,active,,wikidata,,2026-09-11,Синь-камень у Плещеева озера; не дамп ГАР
+wd:Q4420279,wikidata,microtoponym,Синий камень,,Blue Stone,,iso:RU-YAR,RU-YAR,56.78416667,38.82416667,Q4420279,,,,,active,,wikidata,,2026-09-25,Синь-камень у Плещеева озера; не дамп ГАР
 local:micro:sinie-kamni,local,microtoponym,урочище Синие камни,,Sinie kamni urochishche,,iso:RU-ORE,RU-ORE,,,,,,,,active,,gkgn-opendata,,2026-09-11,пример types.csv; Тюльганский район; без дампа ГАР/ГКГН
 wd:Q3896098,wikidata,microtoponym,Серебряный Бор,,Serebryany Bor,,wd:Q649,RU-MOW,55.780500,37.416200,Q3896098,,,,,active,,wikidata,,2026-09-12,местность / парк в Москве; не дамп ГАР
 wd:Q3162344,wikidata,microtoponym,Нескучный сад,,Neskuchny Garden,,wd:Q649,RU-MOW,55.716111,37.588056,Q3162344,,,,,active,,wikidata,,2026-09-12,
