@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-09-25T00:28:59Z",
+  "as_of": "2026-09-25T10:51:02Z",
   "changed_count": 0,
   "error_count": 2,
   "sources": [
@@ -40,7 +40,7 @@
     {
       "id": "hflabs-region",
       "changed": false,
-      "reason": "нет коммитов since 2026-09-24",
+      "reason": "нет коммитов since 2026-09-25",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -48,7 +48,7 @@
     {
       "id": "hflabs-city",
       "changed": false,
-      "reason": "нет коммитов since 2026-09-24",
+      "reason": "нет коммитов since 2026-09-25",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -56,7 +56,7 @@
     {
       "id": "epogrebnyak-ru-cities",
       "changed": false,
-      "reason": "нет коммитов since 2026-09-24",
+      "reason": "нет коммитов since 2026-09-25",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -64,7 +64,7 @@
     {
       "id": "mfursov-russian-cities",
       "changed": false,
-      "reason": "нет коммитов since 2026-09-24",
+      "reason": "нет коммитов since 2026-09-25",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -72,7 +72,7 @@
     {
       "id": "nickyx3-settlements",
       "changed": false,
-      "reason": "нет коммитов since 2026-09-24",
+      "reason": "нет коммитов since 2026-09-25",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
