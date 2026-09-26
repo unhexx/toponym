@@ -1,0 +1,93 @@
+{
+  "as_of": "2026-09-26T06:03:41Z",
+  "changed_count": 0,
+  "error_count": 2,
+  "sources": [
+    {
+      "id": "gkgn-opendata",
+      "changed": false,
+      "reason": "http_head timeout/no reliable headers; pointer only",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": true,
+      "blocking": false
+    },
+    {
+      "id": "fias-gar",
+      "changed": false,
+      "reason": "http_head timeout/no reliable headers; pointer only",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": true,
+      "blocking": false
+    },
+    {
+      "id": "geonames-ru",
+      "changed": false,
+      "reason": "10 RU A,P,H,T,L rows in modifications-2026-09-25.txt; no checkout/.venv, sync not applied; cursor left 2026-09-18",
+      "cursor_old": "2026-09-18",
+      "cursor_new": "2026-09-18",
+      "error": false
+    },
+    {
+      "id": "ukase-326",
+      "changed": false,
+      "reason": "тот же MediaWiki rev",
+      "cursor_old": "141625080",
+      "cursor_new": "141625080",
+      "error": false
+    },
+    {
+      "id": "hflabs-region",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-25",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "hflabs-city",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-25",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "epogrebnyak-ru-cities",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-25",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "mfursov-russian-cities",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-25",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "nickyx3-settlements",
+      "changed": false,
+      "reason": "нет коммитов since 2026-09-25",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    },
+    {
+      "id": "wikidata",
+      "changed": false,
+      "reason": "kind=none",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    }
+  ],
+  "records_upserted": 0,
+  "records_deprecated": 0,
+  "commit": null,
+  "check_exit": "missing"
+}
