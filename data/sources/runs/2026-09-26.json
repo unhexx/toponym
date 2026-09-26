@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-09-26T06:03:41Z",
-  "changed_count": 0,
+  "as_of": "2026-09-26T10:31:48Z",
+  "changed_count": 1,
   "error_count": 2,
   "sources": [
     {
@@ -23,10 +23,10 @@
     },
     {
       "id": "geonames-ru",
-      "changed": false,
-      "reason": "10 RU A,P,H,T,L rows in modifications-2026-09-25.txt; no checkout/.venv, sync not applied; cursor left 2026-09-18",
+      "changed": true,
+      "reason": "10 RU rows in mods",
       "cursor_old": "2026-09-18",
-      "cursor_new": "2026-09-18",
+      "cursor_new": "2026-09-25",
       "error": false
     },
     {
@@ -89,5 +89,5 @@
   "records_upserted": 0,
   "records_deprecated": 0,
   "commit": null,
-  "check_exit": "missing"
+  "check_exit": 10
 }
