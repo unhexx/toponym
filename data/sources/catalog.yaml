@@ -27,7 +27,7 @@ sources:
   vendor: false
   max_vendor_bytes: 10485760
   checked_at: "2026-10-17"
-  cursor: "2026-10-12"
+  cursor: "2026-10-16"
   detector:
     kind: http_dated
     urls:
