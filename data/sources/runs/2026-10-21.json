@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-10-21T06:14:41Z",
-  "changed_count": 1,
+  "as_of": "2026-10-21T10:51:02Z",
+  "changed_count": 0,
   "error_count": 2,
   "sources": [
     {
@@ -23,9 +23,9 @@
     },
     {
       "id": "geonames-ru",
-      "changed": true,
-      "reason": "50 RU rows in mods",
-      "cursor_old": "2026-10-18",
+      "changed": false,
+      "reason": "cursor already 2026-10-20",
+      "cursor_old": "2026-10-20",
       "cursor_new": "2026-10-20",
       "error": false
     },
@@ -86,8 +86,8 @@
       "error": false
     }
   ],
-  "records_upserted": 50,
+  "records_upserted": 0,
   "records_deprecated": 0,
   "commit": null,
-  "check_exit": 10
+  "check_exit": 0
 }
