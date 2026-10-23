@@ -3256,7 +3256,7 @@ wd:Q13207140,wikidata,potamonym,Сывоя,,Syvoya,,iso:RU-VLG,RU-VLG,60.6497222
 wd:Q20580669,wikidata,potamonym,Большой Песьяк,,Bolshoy Pesyak,,iso:RU-VLG,RU-VLG,59.82055556,43.48472222,Q20580669,,,,,active,,wikidata,,2026-09-24,
 wd:Q18409228,wikidata,limnonym,Круглое озеро,,,,,,44.61111111,136.2125,Q18409228,,,,,active,,wikidata,,2026-09-24,
 wd:Q31751262,wikidata,limnonym,Сосновое озеро,,,,,,55.6601,57.86519,Q31751262,,,,,active,,wikidata,,2026-09-24,
-wd:Q16653355,wikidata,limnonym,Зародище,,Ozero Zarodishche,,,,56.30555556,28.9925,Q16653355,7080872,,,,active,,wikidata,,2026-09-24,
+wd:Q16653355,wikidata,limnonym,Зародище,,Ozero Zarodishche,,,,56.30528,28.9921,Q16653355,7080872,,,,active,,wikidata,2026-10-22,2026-10-23,coords from geonames-ru
 wd:Q30890536,wikidata,potamonym,Первомайка,,,,,,57.6756,66.1708,Q30890536,,,,,active,,wikidata,,2026-09-24,
 wd:Q18399435,wikidata,potamonym,Андрюшкина,,,,,,58.52,85.23083333,Q18399435,,,,,active,,wikidata,,2026-09-24,
 wd:Q18409285,wikidata,potamonym,Талда,,Talda,,,,54.12861111,87.09194444,Q18409285,,,,,active,,wikidata,,2026-09-24,
@@ -4261,7 +4261,7 @@ wd:Q37926388,wikidata,limnonym,Озеро Черемухово,Озеро Чер
 wd:Q37927471,wikidata,limnonym,Озеро Эялин-Ярви,,,,,,63.12888889,31.67,Q37927471,563387,,,,active,,wikidata,,2026-09-24,
 wd:Q37927419,wikidata,limnonym,Озеро Дыкта,,,,,,50.81194444,103.67611111,Q37927419,7909556,,,,active,,wikidata,,2026-09-24,
 wd:Q37927375,wikidata,limnonym,Озеро Дубровное,,,,,,56.57972222,63.87861111,Q37927375,8070405,,,,active,,wikidata,,2026-09-24,
-wd:Q37926806,wikidata,limnonym,Озеро Черное,Озеро Чёрное,,,,,56.07138889,28.99138889,Q37926806,7081020,,,,active,,wikidata,,2026-09-24,
+wd:Q37926806,wikidata,limnonym,Озеро Черное,Озеро Чёрное,,,,,56.07156,28.98444,Q37926806,7081020,,,,active,,wikidata,2026-10-22,2026-10-23,coords from geonames-ru
 wd:Q37926563,wikidata,limnonym,Чистое озеро,,Chistoe Lake,,,,54.64416667,75.6,Q37926563,7664113,,,,active,,wikidata,,2026-09-24,
 wd:Q37927353,wikidata,limnonym,Озеро Дреговское,,,,,,56.10388889,30.935,Q37927353,7598367,,,,active,,wikidata,,2026-09-24,
 wd:Q37927450,wikidata,limnonym,Озеро Эльбаккуль,,,,,,55.82638889,54.07638889,Q37927450,864662,,,,active,,wikidata,,2026-09-24,
@@ -5612,7 +5612,7 @@ wd:Q37936163,wikidata,limnonym,Озеро Моховое,,,,,,53.54944444,59.861
 wd:Q37938297,wikidata,limnonym,Озеро Островское,,,,,,67.81666667,32.71555556,Q37938297,514046,,,,active,,wikidata,,2026-09-24,
 wd:Q37938322,wikidata,limnonym,Озеро Остяцкое,,,,,,58.4425,71.36083333,Q37938322,7575668,,,,active,,wikidata,,2026-09-24,
 wd:Q37966671,wikidata,limnonym,Озеро Шелеховское,,Ozero Shelekhovskoye,,,,56.57305556,30.8875,Q37966671,7597992,,,,active,,wikidata,,2026-09-24,
-wd:Q37966779,wikidata,limnonym,Озеро Уклейнское,,Ozero Ukleynskoye,,,,56.19416667,29.03972222,Q37966779,7599093,,,,active,,wikidata,,2026-09-24,
+wd:Q37966779,wikidata,limnonym,Озеро Уклейнское,,Ozero Ukleynskoye,,,,56.19442,29.03965,Q37966779,7599093,,,,active,,wikidata,2026-10-22,2026-10-23,coords from geonames-ru
 wd:Q37966787,wikidata,limnonym,Озеро Зуино,,Ozero Zuino,,,,56.00416667,29.30833333,Q37966787,7599258,,,,active,,wikidata,,2026-09-24,
 wd:Q37922870,wikidata,limnonym,Озеро Артыколь,,,,,,51.1725,59.01833333,Q37922870,453656,,,,active,,wikidata,,2026-09-24,
 wd:Q37936124,wikidata,limnonym,Озеро Могильное Третье,,,,,,55.92194444,65.16138889,Q37936124,1542920,,,,active,,wikidata,,2026-09-24,
@@ -5697,7 +5697,7 @@ wd:Q37939554,wikidata,limnonym,Озеро Плоское,,,,,,55.76,68.74666667,
 wd:Q37966367,wikidata,limnonym,Озеро Терехинское,,Ozero Terekhinskoye,,,,56.815,74.315,Q37966367,7556023,,,,active,,wikidata,,2026-09-24,
 wd:Q37966577,wikidata,limnonym,Озеро Згонское,,Ozero Zgonskoye,,,,58.72416667,37.60472222,Q37966577,7591462,,,,active,,wikidata,,2026-09-24,
 wd:Q37966457,wikidata,limnonym,Озеро Сосновое,,Ozero Sosnovoye,,,,59.29472222,76.02944444,Q37966457,7579108,,,,active,,wikidata,,2026-09-24,
-wd:Q37939605,wikidata,limnonym,Озеро Пневно,Озеро Пнёвно,,,,,56.16166667,29.0525,Q37939605,7599096,,,,active,,wikidata,,2026-09-24,
+wd:Q37939605,wikidata,limnonym,Озеро Пневно,Озеро Пнёвно,,,,,56.16253,29.05254,Q37939605,7599096,,,,active,,wikidata,2026-10-22,2026-10-23,coords from geonames-ru
 wd:Q37939697,wikidata,limnonym,Озеро Подманок Первый,,,,,,45.97388889,43.32833333,Q37939697,805071,,,,active,,wikidata,,2026-09-24,
 wd:Q37939752,wikidata,limnonym,Озеро Погерьявр,,,,,,67.91472222,38.54638889,Q37939752,507866,,,,active,,wikidata,,2026-09-24,
 wd:Q37966363,wikidata,limnonym,Озеро Северное,,Ozero Severnoye,,,,56.43277778,72.83305556,Q37966363,7555611,,,,active,,wikidata,,2026-09-24,
@@ -19284,7 +19284,7 @@ wd:Q3030863,wikidata,potamonym,Ук,,Uk,,iso:RU-TYU,RU-TYU,56.5561,67.0526,Q3030
 wd:Q517023,wikidata,potamonym,Кабак,,Kabak,,iso:RU-KDA,RU-KDA,44.199236,38.888886,Q517023,805077,,,,active,,wikidata,,2026-09-24,
 wd:Q237826,wikidata,potamonym,Сайкваж,,Saykvazh,,iso:RU-ARK,RU-ARK,61.13555556,46.83833333,Q237826,,,,,active,,wikidata,,2026-09-24,
 wd:Q1746480,wikidata,potamonym,Малая Куонамка,,Malaya Kuonamka,,iso:RU-SA,RU-SA,70.77138889,113.33819444,Q1746480,2020497,,,,active,,wikidata,,2026-09-24,
-wd:Q485406,wikidata,potamonym,Бузат,,Buzat,,iso:RU-BA,RU-BA,53.2298,54.7155,Q485406,8306527,,,,active,,wikidata,,2026-09-24,
+wd:Q485406,wikidata,potamonym,Бузат,,Buzat,,iso:RU-BA,RU-BA,53.23005,54.71619,Q485406,8306527,,,,active,,wikidata,2026-10-22,2026-10-23,coords from geonames-ru
 wd:Q1746529,wikidata,potamonym,Малая Сосьва,,Malaya Sosva,,iso:RU-KHM,RU-KHM,63.17611111,64.41222222,Q1746529,1499891,,,,active,,wikidata,,2026-09-24,
 wd:Q485530,wikidata,potamonym,Малый Менеуз,,Maly Meneuz,,iso:RU-BA,RU-BA,53.9307,54.2329,Q485530,8306533,,,,active,,wikidata,,2026-09-24,
 wd:Q237738,wikidata,potamonym,Соргель,Соргёль,Sorgyol,,iso:RU-ARK,RU-ARK,61.0372,48.4541,Q237738,,,,,active,,wikidata,,2026-09-24,
@@ -19695,7 +19695,7 @@ wd:Q3458989,wikidata,potamonym,Айсоим,,Aysoim,,iso:RU-KHM,RU-KHM,64.24,66.
 wd:Q3726239,wikidata,potamonym,Айга,,Ayga,,iso:RU-TYU,RU-TYU,57.2207,66.2544,Q3726239,,,,,active,,wikidata,,2026-09-24,
 wd:Q1120394,wikidata,limnonym,Кокора,,Kokora,,iso:RU-KYA,RU-KYA,73,101.06666667,Q1120394,2021914,,,,active,,wikidata,,2026-09-24,
 wd:Q238605,wikidata,potamonym,Лабазная,,Labaznaya,,iso:RU-ARK,RU-ARK,61.36166667,47.98666667,Q238605,,,,,active,,wikidata,,2026-09-24,
-wd:Q756185,wikidata,potamonym,Уязытамак,,Uyazy-Tamak,,iso:RU-BA,RU-BA,54.36216,53.40966,Q756185,8305502,,,,active,,wikidata,,2026-09-24,
+wd:Q756185,wikidata,potamonym,Уязытамак,,Uyazy-Tamak,,iso:RU-BA,RU-BA,54.36346,53.40963,Q756185,8305502,,,,active,,wikidata,2026-10-22,2026-10-23,coords from geonames-ru
 wd:Q238740,wikidata,potamonym,Семирецкая,,Semiretskaya,,iso:RU-ARK,RU-ARK,61.47,47.20444444,Q238740,826726,,,,active,,wikidata,,2026-09-24,
 wd:Q238441,wikidata,potamonym,Сазондъель,Сазондъёль,Sazondyol,,iso:RU-ARK,RU-ARK,62.4925,49.2261,Q238441,,,,,active,,wikidata,,2026-09-24,
 wd:Q879450,wikidata,potamonym,Берелех,Бёрёлёх,Byoryolyokh,,iso:RU-SA,RU-SA,70.98472222,149.03333333,Q879450,2126746,,,,active,,wikidata,,2026-09-24,
@@ -20298,7 +20298,7 @@ wd:Q3722880,wikidata,potamonym,Аршалы,,Arshaly,,iso:RU-ORE,RU-ORE,51.49416
 wd:Q3722876,wikidata,potamonym,Малая Майгашта,,Malaya Maygashta,,iso:RU-BA,RU-BA,53.52277778,58.34638889,Q3722876,873692,,,,active,,wikidata,,2026-09-24,
 wd:Q3722661,wikidata,potamonym,Алабайталка,,Albaytalka,,iso:RU-ORE,RU-ORE,51.53944444,56.53694444,Q3722661,,,,,active,,wikidata,,2026-09-24,
 wd:Q3722818,wikidata,potamonym,Муелды,,Mueldy,,iso:RU-ORE,RU-ORE,51.20166667,56.49305556,Q3722818,,,,,active,,wikidata,,2026-09-24,
-wd:Q3722666,wikidata,potamonym,Мунча,,Muncha,,iso:RU-BA,RU-BA,52.2275,58.655,Q3722666,6268853,,,,active,,wikidata,,2026-09-24,
+wd:Q3722666,wikidata,potamonym,Мунча,,Muncha,,iso:RU-BA,RU-BA,52.22682,58.65446,Q3722666,6268853,,,,active,,wikidata,2026-10-22,2026-10-23,coords from geonames-ru
 wd:Q3722670,wikidata,potamonym,Сувлыузяк,,Suvlyozek,,iso:RU-BA,RU-BA,53.01555556,58.55722222,Q3722670,,,,,active,,wikidata,,2026-09-24,
 wd:Q3722636,wikidata,potamonym,Тай-Маништы,,Tay-Manishty,,iso:RU-BA,RU-BA,53.379165,58.213078,Q3722636,,,,,active,,wikidata,,2026-09-24,
 wd:Q3722862,wikidata,potamonym,Тулубай,,Tulubay,,iso:RU-BA,RU-BA,52.30361,58.63806,Q3722862,6268855,,,,active,,wikidata,,2026-09-24,
@@ -20374,7 +20374,7 @@ wd:Q4053751,wikidata,potamonym,Елмас,Ёлмас,Yolmas,,iso:RU-ARK,RU-ARK,6
 wd:Q3722379,wikidata,potamonym,Атавка,,Atavka,,iso:RU-BA,RU-BA,55.46853,57.71826,Q3722379,580437,,,,active,,wikidata,,2026-09-24,
 wd:Q4053798,wikidata,potamonym,Екканъеган,Ёкканъёган,Yokhkanyogan,,iso:RU-KHM,RU-KHM,61.265,78.4453,Q4053798,,,,,active,,wikidata,,2026-09-24,
 wd:Q3722545,wikidata,potamonym,Аскыш,,Askish,,iso:RU-BA,RU-BA,55.8796,56.6203,Q3722545,863029,,,,active,,wikidata,,2026-09-24,
-wd:Q3722407,wikidata,potamonym,Карагай,,Karagay,,iso:RU-BA,RU-BA,55.90944444,59.23472222,Q3722407,8059300,,,,active,,wikidata,,2026-09-24,
+wd:Q3722407,wikidata,potamonym,Карагай,,Karagay,,iso:RU-BA,RU-BA,55.9097,59.23422,Q3722407,8059300,,,,active,,wikidata,2026-10-22,2026-10-23,coords from geonames-ru
 wd:Q3722391,wikidata,potamonym,Большой Кутюм,,Bolshoy Kutyum,,iso:RU-BA,RU-BA,55.61392,57.51372,Q3722391,538156,,,,active,,wikidata,,2026-09-24,
 wd:Q3722327,wikidata,potamonym,Медянка,,Medyanka,,iso:RU-BA,RU-BA,55.69583333,57.10138889,Q3722327,,,,,active,,wikidata,,2026-09-24,
 wd:Q4053796,wikidata,potamonym,Ехомъеган,Ёхомъёган,Yegam-Yugon,,iso:RU-KHM,RU-KHM,63.974622,68.672896,Q4053796,1486230,,,,active,,wikidata,,2026-09-24,
@@ -24227,7 +24227,7 @@ wd:Q4380117,wikidata,potamonym,Ушья,,,,iso:RU-KHM,RU-KHM,59.909,64.0211,Q438
 wd:Q4449536,wikidata,potamonym,Наримановский Лог,,Narimanovsky Log,,iso:RU-KHM,RU-KHM,61.372,68.8376,Q4449536,,,,,active,,wikidata,,2026-09-24,
 wd:Q4449456,wikidata,potamonym,Картехтенгсоим,,Kartekhtengsoim,,iso:RU-KHM,RU-KHM,64.0431,66.5055,Q4449456,,,,,active,,wikidata,,2026-09-24,
 wd:Q4380510,wikidata,potamonym,Лофтура,,Loftura,,iso:RU-ARK,RU-ARK,66.252313,44.875932,Q4380510,534540,,,,active,,wikidata,,2026-09-24,
-wd:Q4449379,wikidata,potamonym,Тавашла,,Tavashla,,iso:RU-BA,RU-BA,53.8676,53.5957,Q4449379,7590717,,,,active,,wikidata,,2026-09-24,
+wd:Q4449379,wikidata,potamonym,Тавашла,,Tavashla,,iso:RU-BA,RU-BA,53.86842,53.59473,Q4449379,7590717,,,,active,,wikidata,2026-10-22,2026-10-23,coords from geonames-ru
 wd:Q4449401,wikidata,potamonym,Тавла,,Tavla,,iso:RU-BA,RU-BA,52.78916667,58.05277778,Q4449401,6268696,,,,active,,wikidata,,2026-09-24,
 wd:Q4449383,wikidata,potamonym,Тава,,Tava,,iso:RU-KHM,RU-KHM,59.9613,68.7939,Q4449383,,,,,active,,wikidata,,2026-09-24,
 wd:Q4449549,wikidata,potamonym,Таганрог,,Taganrog,,iso:RU-KYA,RU-KYA,55.42527778,88.85611111,Q4449549,,,,,active,,wikidata,,2026-09-24,
@@ -29672,7 +29672,7 @@ wd:Q16655085,wikidata,limnonym,Идрия,,Idriya,,iso:RU-PSK,RU-PSK,56.32333333
 wd:Q16274448,wikidata,limnonym,Битинское,,Bitinskoe,,iso:RU-PSK,RU-PSK,58.48583333,28.90444444,Q16274448,7611150,,,,active,,wikidata,,2026-09-24,
 wd:Q16653051,wikidata,limnonym,Залосемье,,Zalosemye,,iso:RU-PSK,RU-PSK,56.3625,28.40833333,Q16653051,,,,,active,,wikidata,,2026-09-24,
 wd:Q16684324,wikidata,limnonym,Паинское озеро,,Painskoye Lake,,iso:RU-PSK,RU-PSK,56.71888889,28.16055556,Q16684324,7080445,,,,active,,wikidata,,2026-09-24,
-wd:Q16645346,wikidata,limnonym,Долосцы,,Dolostsy,,iso:RU-PSK,RU-PSK,56.06694444,28.73361111,Q16645346,7081028,,,,active,,wikidata,,2026-09-24,
+wd:Q16645346,wikidata,limnonym,Долосцы,,Dolostsy,,iso:RU-PSK,RU-PSK,56.06858,28.73498,Q16645346,7081028,,,,active,,wikidata,2026-10-22,2026-10-23,coords from geonames-ru
 wd:Q4511795,wikidata,limnonym,Ченое,,Chenoe,,iso:RU-PSK,RU-PSK,56.54361111,29.52611111,Q4511795,,,,,active,,wikidata,,2026-09-24,
 wd:Q121359380,wikidata,limnonym,Малый Окунец,,Maly Okunets,,iso:RU-PSK,RU-PSK,55.72101,29.505256,Q121359380,,,,,active,,wikidata,,2026-09-24,
 wd:Q16673810,wikidata,limnonym,Малое Олбито,,Maloe Olbito,,iso:RU-PSK,RU-PSK,56.191,28.696,Q16673810,,,,,active,,wikidata,,2026-09-24,
@@ -30792,7 +30792,7 @@ wd:Q4426836,wikidata,limnonym,Соинское озеро,,Soinskoe,,iso:RU-PSK,
 wd:Q4338981,wikidata,limnonym,"Островня (озеро, Бежаницкий район)",,Ostrovnya,,iso:RU-PSK,RU-PSK,56.80666667,29.35805556,Q4338981,514074,,,,active,,wikidata,,2026-09-24,
 wd:Q4446702,wikidata,limnonym,Сусельницкое озеро,,Suselnitskoe,,iso:RU-PSK,RU-PSK,57.3025,30.33694444,Q4446702,486005,,,,active,,wikidata,,2026-09-24,
 wd:Q4244493,wikidata,limnonym,"Кудо (озеро, Глубоковская волость)",,Kudo-Voskresenskoe,,iso:RU-PSK,RU-PSK,56.70055556,28.99,Q4244493,539867,,,,active,,wikidata,,2026-09-24,
-wd:Q4416214,wikidata,limnonym,Сенница,,Lake Sennitsa,,iso:RU-PSK,RU-PSK,55.82964,30.38647,Q4416214,621006,,,,active,,wikidata,,2026-09-24,
+wd:Q4416214,wikidata,limnonym,Сенница,,Lake Sennitsa,,iso:RU-PSK,RU-PSK,55.82983,30.38661,Q4416214,621006,,,,active,,wikidata,2026-10-22,2026-10-23,coords from geonames-ru
 wd:Q4469544,wikidata,limnonym,Удрай Большой,,Udray Bolshoy,,iso:RU-PSK,RU-PSK,56.28722222,29.94527778,Q4469544,7598992,,,,active,,wikidata,,2026-09-24,
 wd:Q4244392,wikidata,limnonym,Кудеверское озеро,,Kudeverskoe,,iso:RU-PSK,RU-PSK,56.68388889,29.45916667,Q4244392,539899,,,,active,,wikidata,,2026-09-24,
 wd:Q4372988,wikidata,limnonym,Пореченское озеро,,Porechenskoe,,iso:RU-PSK,RU-PSK,56.11111111,30.48916667,Q4372988,7598353,,,,active,,wikidata,,2026-09-24,
@@ -31801,7 +31801,7 @@ wd:Q4140153,wikidata,limnonym,"Глубокое (озеро Глембочино
 wd:Q37957245,wikidata,limnonym,Спасское озеро,,Spasskoye Lake,,iso:RU-NGR,RU-NGR,58.94861111,32.52194444,Q37957245,489749,,,,active,,wikidata,,2026-09-24,
 wd:Q4141172,wikidata,limnonym,Годовник (озеро),,Godovnik,,iso:RU-PSK,RU-PSK,58.8441064,28.681397,Q4141172,7611041,,,,active,,wikidata,,2026-09-24,
 wd:Q37939636,wikidata,limnonym,Почуга,,Pochuga,,iso:RU-PSK,RU-PSK,58.36,29.12111111,Q37939636,7351488,,,,active,,wikidata,,2026-09-24,
-wd:Q4125974,wikidata,limnonym,Ворохобское озеро,,Vorokhobskoe,,iso:RU-PSK,RU-PSK,56.00666667,30.42055556,Q4125974,822453,,,,active,,wikidata,,2026-09-24,
+wd:Q4125974,wikidata,limnonym,Ворохобское озеро,,Vorokhobskoe,,iso:RU-PSK,RU-PSK,56.00589,30.4208,Q4125974,822453,,,,active,,wikidata,2026-10-22,2026-10-23,coords from geonames-ru
 wd:Q37930731,wikidata,limnonym,Коробожа,,Korobozha,,iso:RU-NGR,RU-NGR,58.64527778,34.50277778,Q37930731,544713,,,,active,,wikidata,,2026-09-24,
 wd:Q4175462,wikidata,limnonym,Еменец (озеро),,Emenets,,iso:RU-PSK,RU-PSK,55.92555556,29.87888889,Q4175462,467547,,,,active,,wikidata,,2026-09-24,
 wd:Q4097070,wikidata,limnonym,Бронье,,Bronye,,iso:RU-PSK,RU-PSK,56.17527778,28.30444444,Q4097070,7080963,,,,active,,wikidata,,2026-09-24,
