@@ -1,7 +1,7 @@
 id,id_scheme,type_id,name_ru,name_yo,name_en,abbr,parent_id,admin1,lat,lon,wd,geonames,fias,oktmo,iso,status,replaced_by,source_id,source_rev,updated_at,notes
 wd:Q649,wikidata,city,Москва,,Moscow,,iso:RU-MOW,RU-MOW,55.750556,37.617500,Q649,524901,,45000000,,active,,wikidata,,2026-09-11,
 wd:Q656,wikidata,city,Санкт-Петербург,,Saint Petersburg,,iso:RU-SPE,RU-SPE,59.93863,30.31413,Q656,498817,,40000000,,active,,wikidata,2026-10-20,2026-10-21,coords from geonames-ru
-wd:Q883,wikidata,city,Новосибирск,,Novosibirsk,,iso:RU-NVS,RU-NVS,55.033333,82.916667,Q883,1496747,,50701000001,,active,,wikidata,,2026-09-11,
+wd:Q883,wikidata,city,Новосибирск,,Novosibirsk,,iso:RU-NVS,RU-NVS,55.02259,82.93175,Q883,1496747,,50701000001,,active,,wikidata,2026-10-28,2026-10-29,coords from geonames-ru
 wd:Q887,wikidata,city,Екатеринбург,,Yekaterinburg,,iso:RU-SVE,RU-SVE,56.835556,60.612778,Q887,1486209,,65701000001,,active,,wikidata,,2026-09-11,
 wd:Q900,wikidata,city,Казань,,Kazan,,iso:RU-TA,RU-TA,55.790833,49.114444,Q900,551487,,92701000001,,active,,wikidata,,2026-09-11,
 wd:Q891,wikidata,city,Нижний Новгород,,Nizhny Novgorod,,iso:RU-NIZ,RU-NIZ,56.326944,44.007500,Q891,520555,,22701000001,,active,,wikidata,,2026-09-11,
@@ -179,7 +179,7 @@ wd:Q104232,wikidata,city,Ачинск,,Achinsk,,iso:RU-KYA,RU-KYA,56.281667,90.5
 wd:Q144345,wikidata,city,Канск,,Kansk,,iso:RU-KYA,RU-KYA,56.200000,95.700000,Q144345,1504682,,04720000001,,active,,wikidata,,2026-09-11,
 wd:Q133838,wikidata,city,Воткинск,,Votkinsk,,iso:RU-UD,RU-UD,57.050000,54.000000,Q133838,471430,,94710000001,,active,,wikidata,,2026-09-11,
 wd:Q134433,wikidata,city,Глазов,,Glazov,,iso:RU-UD,RU-UD,58.133333,52.650000,Q134433,561347,,94720000001,,active,,wikidata,,2026-09-11,
-wd:Q139743,wikidata,city,Зеленодольск,,Zelenodolsk,,iso:RU-TA,RU-TA,55.850000,48.516667,Q139743,463835,,92628101001,,active,,wikidata,,2026-09-11,
+wd:Q139743,wikidata,city,Зеленодольск,,Zelenodolsk,,iso:RU-TA,RU-TA,55.84376,48.51784,Q139743,463835,,92628101001,,active,,wikidata,2026-10-28,2026-10-29,coords from geonames-ru
 wd:Q103789,wikidata,city,Арзамас,,Arzamas,,iso:RU-NIZ,RU-NIZ,55.383333,43.800000,Q103789,580724,,22703000001,,active,,wikidata,,2026-09-11,
 wd:Q14657,wikidata,city,Выборг,,Vyborg,,iso:RU-LEN,RU-LEN,60.710556,28.749722,Q14657,470546,,41615101001,,active,,wikidata,,2026-09-11,
 wd:Q133529,wikidata,city,Воркута,,Vorkuta,,iso:RU-KO,RU-KO,67.500000,64.033333,Q133529,1486910,,87710000001,,active,,wikidata,,2026-09-11,
