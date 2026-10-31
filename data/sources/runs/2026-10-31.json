@@ -1,30 +1,30 @@
 {
-  "as_of": "2026-10-31T06:16:30Z",
+  "as_of": "2026-10-31T11:26:39Z",
   "changed_count": 0,
-  "error_count": 0,
+  "error_count": 2,
   "sources": [
     {
       "id": "gkgn-opendata",
       "changed": false,
-      "reason": "check.py отсутствует; no local checkout/.venv",
+      "reason": "http_head timeout/no reliable headers; pointer only",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false,
+      "error": true,
       "blocking": false
     },
     {
       "id": "fias-gar",
       "changed": false,
-      "reason": "check.py отсутствует; no local checkout/.venv",
+      "reason": "http_head timeout/no reliable headers; pointer only",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false,
+      "error": true,
       "blocking": false
     },
     {
       "id": "geonames-ru",
       "changed": false,
-      "reason": "check.py отсутствует; no local checkout/.venv; cursor remains 2026-10-29",
+      "reason": "0 RU rows in mods",
       "cursor_old": "2026-10-29",
       "cursor_new": "2026-10-29",
       "error": false
@@ -32,7 +32,7 @@
     {
       "id": "ukase-326",
       "changed": false,
-      "reason": "check.py отсутствует; no local checkout/.venv",
+      "reason": "тот же MediaWiki rev",
       "cursor_old": "141625080",
       "cursor_new": "141625080",
       "error": false
@@ -40,7 +40,7 @@
     {
       "id": "hflabs-region",
       "changed": false,
-      "reason": "check.py отсутствует; no local checkout/.venv",
+      "reason": "нет коммитов since 2026-10-31",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -48,7 +48,7 @@
     {
       "id": "hflabs-city",
       "changed": false,
-      "reason": "check.py отсутствует; no local checkout/.venv",
+      "reason": "нет коммитов since 2026-10-31",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -56,7 +56,7 @@
     {
       "id": "epogrebnyak-ru-cities",
       "changed": false,
-      "reason": "check.py отсутствует; no local checkout/.venv",
+      "reason": "нет коммитов since 2026-10-31",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -64,7 +64,7 @@
     {
       "id": "mfursov-russian-cities",
       "changed": false,
-      "reason": "check.py отсутствует; no local checkout/.venv",
+      "reason": "нет коммитов since 2026-10-31",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -72,7 +72,7 @@
     {
       "id": "nickyx3-settlements",
       "changed": false,
-      "reason": "check.py отсутствует; no local checkout/.venv",
+      "reason": "нет коммитов since 2026-10-31",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -80,7 +80,7 @@
     {
       "id": "wikidata",
       "changed": false,
-      "reason": "kind=none; check.py отсутствует",
+      "reason": "kind=none",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -89,5 +89,5 @@
   "records_upserted": 0,
   "records_deprecated": 0,
   "commit": null,
-  "check_exit": "missing"
+  "check_exit": 0
 }
