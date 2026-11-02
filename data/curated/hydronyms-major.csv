@@ -6288,7 +6288,7 @@ wd:Q37938456,wikidata,limnonym,Озеро Паганай,,,,,,56.23388889,76.558
 wd:Q37938431,wikidata,limnonym,Озеро Пьягвешное,,,,,,59.1225,36.14,Q37938431,7591923,,,,active,,wikidata,,2026-09-24,
 wd:Q37938555,wikidata,limnonym,Озеро Паннеерьто,,,,,,65.51583333,77.59555556,Q37938555,1539443,,,,active,,wikidata,,2026-09-24,
 wd:Q37938533,wikidata,limnonym,Озеро Панькин Ильмень,,,,,,47.50166667,47.00194444,Q37938533,7438200,,,,active,,wikidata,,2026-09-24,
-wd:Q37937571,wikidata,limnonym,Озеро Обалыколь,,,,,,50.93916667,60.7225,Q37937571,1496416,,,,active,,wikidata,,2026-09-24,
+wd:Q37937571,wikidata,limnonym,Озеро Обалыколь,,,,,,50.93917,60.7225,Q37937571,1496416,,,,active,,wikidata,2026-11-01,2026-11-02,coords from geonames-ru
 wd:Q37938505,wikidata,limnonym,Озеро Палочное,,,,,,55.265,65.82138889,Q37938505,1543293,,,,active,,wikidata,,2026-09-24,
 wd:Q37939292,wikidata,limnonym,Озеро Пикалево,Озеро Пикалёво,,,,,64.53083333,38.84416667,Q37939292,8071529,,,,active,,wikidata,,2026-09-24,
 wd:Q37939391,wikidata,limnonym,Озеро Писяты,,,,,,66.67611111,57.29472222,Q37939391,863055,,,,active,,wikidata,,2026-09-24,
@@ -8747,7 +8747,7 @@ wd:Q235873,wikidata,potamonym,Ньюшор,,Nyushor,,iso:RU-KO,RU-KO,61.6224,54.
 wd:Q1090145,wikidata,potamonym,Кукай,,Kukay,,iso:RU-PER,RU-PER,59.9975,57.80027778,Q1090145,,,,,active,,wikidata,,2026-09-24,
 wd:Q615083,wikidata,potamonym,Сосьва,,Sosva,,iso:RU-SVE,RU-SVE,59.55021,62.33286,Q615083,1491265,,,,active,,wikidata,,2026-09-24,
 wd:Q1090155,wikidata,potamonym,Песьяна,,Pesyana,,iso:RU-PER,RU-PER,57.21694444,55.87972222,Q1090155,,,,,active,,wikidata,,2026-09-24,
-wd:Q210870,wikidata,potamonym,Уфа,,Ufa,,iso:RU-BA,RU-BA,54.6772,55.9894,Q210870,479560,,,,active,,wikidata,,2026-09-24,
+wd:Q210870,wikidata,potamonym,Уфа,,Ufa,,iso:RU-BA,RU-BA,54.6777,55.9902,Q210870,479560,,,,active,,wikidata,2026-11-01,2026-11-02,coords from geonames-ru
 wd:Q588242,wikidata,potamonym,Тура,,Tura,,iso:RU-SVE,RU-SVE,57.2114,66.9531,Q588242,1488955,,,,active,,wikidata,,2026-09-24,
 wd:Q1090107,wikidata,potamonym,Чепеченка,,Chepechenka,,iso:RU-PER,RU-PER,60.63333333,55.21666667,Q1090107,569407,,,,active,,wikidata,,2026-09-24,
 wd:Q602698,wikidata,potamonym,Пушма,,Pushma,,iso:RU-KIR,RU-KIR,60.27305556,47.05166667,Q602698,503955,,,,active,,wikidata,,2026-09-24,
