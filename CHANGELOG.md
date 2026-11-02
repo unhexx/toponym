@@ -6,6 +6,7 @@
 ## [Unreleased]
 
 ### Changed
+- Daily 2026-11-02: GeoNames mods (2026-11-01) обновил координаты/даты у 3 уже существующих строк (гидронимы Уфа и Озеро Обалыколь, регион Оренбургская область) — upsert 3, deprecate 0. Курсор `geonames-ru` → `2026-11-01`. Новых id нет (DEC-GN-001).
 - Daily 2026-10-02: GeoNames mods обновил координаты села Крым (`wd:Q4242873`, GeoNames `540259`) — upsert 1, deprecate 0. Курсор `geonames-ru` → `2026-10-01`.
 - Known-ids Wikidata заполнил пустые `lat`/`lon` у 161 уже существующих строк (`inserted=0`): все 89 субъектов и 8 федеральных округов, 12 ФОИВ, а также отдельные города, сёла, улицы, гидронимы, оронимы, муниципалитеты и один микротопоним. У Санкт-Петербурга появился GeoNames `498817`. Новых Q-id нет. Это не Росстат и не ГКГН.
 
@@ -18,6 +19,7 @@
 - Повторная выгрузка родителей (Wikidata, не ГКГН и не Росстат). Нет одного разрешённого P131 — пустой `parent_id` и пустой `admin1`, не ложная Адыгея и не Москва по сортировке id. Оронимы: в Адыгее 5 (Фишт, Оштен, Пшеха-Су, Ассара, Скалистый хребет). Гидронимы: в Адыгее 50, среди них Кубань; Волга и Дон не двигались. Города: Хаджи-Тархан и Ожск без родителя; Майкоп и Адыгейск остаются. Площади: Красная площадь (Курск) без родителя; Красная площадь в Москве — `wd:Q649`. Дороги: Транссиб без одного субъекта (пустой parent, аббревиатура на месте); А159 остаётся в Адыгее; БАМ — Амурская область. Сёла не перегонялись: parent уже был. ФОИВ: `wd` по-прежнему 57 из 69.
 
 ### Changed
+- Daily 2026-11-02: GeoNames mods (2026-11-01) обновил координаты/даты у 3 уже существующих строк (гидронимы Уфа и Озеро Обалыколь, регион Оренбургская область) — upsert 3, deprecate 0. Курсор `geonames-ru` → `2026-11-01`. Новых id нет (DEC-GN-001).
 - README и [`docs/SOURCES.md`](docs/SOURCES.md): Wikidata в каноне — harvest мест, не «сиды». [`CYCLE_PLAN.md`](CYCLE_PLAN.md): очередь после `2026.09.11` закрыта тегом `2026.09.24`.
 - [`docs/USAGE.md`](docs/USAGE.md): пустой родитель у объекта без одного P131 описан явно. Покрытие то же: Wikidata, не Росстат и не ГКГН, не все горы, реки, города, площади или дороги России.
 - Образ `ghcr.io/unhexx/toponym:2026.09.25` (и `:CalVer`) публикуется CI на push в `main`. `compose.yaml` пинит этот тег.
@@ -45,6 +47,7 @@
 - Образ `ghcr.io/unhexx/toponym:2026.09.24` (и `:CalVer`) публикуется CI на push в `main`. `compose.yaml` пинит этот тег.
 
 ### Changed
+- Daily 2026-11-02: GeoNames mods (2026-11-01) обновил координаты/даты у 3 уже существующих строк (гидронимы Уфа и Озеро Обалыколь, регион Оренбургская область) — upsert 3, deprecate 0. Курсор `geonames-ru` → `2026-11-01`. Новых id нет (DEC-GN-001).
 - [`scripts/sync.py`](scripts/sync.py) `--source wikidata`: known-ids SPARQL `VALUES` по уже известным Q-id сёл, гидронимов, оронимов, площадей и дромонимов (как и городов/МО/годонимов/агентств). `inserted=0`: неизвестные Q-id из SPARQL не вставляет. Daily `kind=none`.
 - [`data/mappings/wikidata.yaml`](data/mappings/wikidata.yaml) — `class_map` и списки `city_p31` / `village_p31` / `agoronym_p31` / `dromonym_p31` / `hydronym_p31` / `oronym_p31` (P31 Wikidata, не Росстат/ГКГН). Хутора Q5084 в карте есть, в harvest VALUES нет.
 - [`docs/USAGE.md`](docs/USAGE.md) §3.1 и [`docs/taxonomy.md`](docs/taxonomy.md): `cities-major` больше не сид pop≥100k, а harvest Wikidata Q7930989 (не Росстат).
@@ -70,6 +73,7 @@ Harvest МО и микротопонимов Wikidata. Теги `2026.09.11`, `2
 - Образ `ghcr.io/unhexx/toponym:2026.09.17` (и `:CalVer`) публикуется CI на push в `main`. `compose.yaml` пинит этот тег.
 
 ### Changed
+- Daily 2026-11-02: GeoNames mods (2026-11-01) обновил координаты/даты у 3 уже существующих строк (гидронимы Уфа и Озеро Обалыколь, регион Оренбургская область) — upsert 3, deprecate 0. Курсор `geonames-ru` → `2026-11-01`. Новых id нет (DEC-GN-001).
 - Перезапуск [`scripts/seed_hodonyms.py`](scripts/seed_hodonyms.py) после реестра МО: улицы с P131* на район/округ получают `parent_id` (Wikidata, не ФИАС). Около 920 parent=МО, iso-родители почти ушли; покрытие по-прежнему Wikidata, не все улицы России.
 - [`scripts/sync.py`](scripts/sync.py) `--source wikidata --apply`: SPARQL `VALUES` по известным Q-id **всех** seed-таблиц (города, МО, годонимы, микротопонимы, …), fill-if-empty `lat`/`lon`/`geonames`/`oktmo`/`name_en`. Новые Q-id не вставляет. `detector.kind=none` не флипает daily. JSON запроса в git не кладётся.
 - SPARQL/upsert хелперы годонимов вынесены в [`scripts/lib/harvest.py`](scripts/lib/harvest.py) (параметры `required`/`last`/`specs`/`rels`/`fill`). CLI и stdout `python scripts/seed_hodonyms.py` те же; канон не трогали.
@@ -86,6 +90,7 @@ Harvest МО и микротопонимов Wikidata. Теги `2026.09.11`, `2
 - Образ `ghcr.io/unhexx/toponym:2026.09.16` (и `:CalVer`) публикуется CI на push в `main`. `compose.yaml` пинит этот тег.
 
 ### Changed
+- Daily 2026-11-02: GeoNames mods (2026-11-01) обновил координаты/даты у 3 уже существующих строк (гидронимы Уфа и Озеро Обалыколь, регион Оренбургская область) — upsert 3, deprecate 0. Курсор `geonames-ru` → `2026-11-01`. Новых id нет (DEC-GN-001).
 - [`data/curated/hodonyms.csv`](data/curated/hodonyms.csv) — уже не демо-сиды DEC-SEED-001, а таблица улиц Wikidata. Daily-синк по-прежнему `known_ids_only`. Склонения новых строк — `review=needs_review`, без pymorphy.
 - Harvest годонимов берёт все P31 из маппинга, не только улицу: бульвар Q54114, проспект Q628179, переулок Q1251403, набережная Q537127. SPARQL — `VALUES ?type`; `seed_hodonyms.py` гоняет типы по одному (таймаут улицы не съедает остальные). Покрытие по-прежнему Wikidata, не ФИАС.
 
@@ -94,6 +99,7 @@ Harvest МО и микротопонимов Wikidata. Теги `2026.09.11`, `2
 Витрина README и оглавление документации. Теги `2026.09.11`, `2026.09.12`, `2026.09.13` и `2026.09.14` не двигались.
 
 ### Changed
+- Daily 2026-11-02: GeoNames mods (2026-11-01) обновил координаты/даты у 3 уже существующих строк (гидронимы Уфа и Озеро Обалыколь, регион Оренбургская область) — upsert 3, deprecate 0. Курсор `geonames-ru` → `2026-11-01`. Новых id нет (DEC-GN-001).
 - README — витрина: схемы mermaid, полный каталог документации, бейджи, автор Evgeniy Chistyakov / Unhandled Exception (DAO EXCEPTION EXPERT). Оглавление — `docs/README.md`. `CITATION.cff` и `pyproject.toml` authors/urls.
 
 ### Added
@@ -131,6 +137,7 @@ Daily-драйвер, честные курсоры и журнал. Теги `2
 - Daily: таймаут `http_head` у указателей (Росреестр/ФИАС) больше не даёт `check.py` код 2 и не блокирует GeoNames. Журнал `data/sources/runs/` пишется и при коде 2; `workflow_dispatch` — `--ref main`, не `main~`.
 
 ### Changed
+- Daily 2026-11-02: GeoNames mods (2026-11-01) обновил координаты/даты у 3 уже существующих строк (гидронимы Уфа и Озеро Обалыколь, регион Оренбургская область) — upsert 3, deprecate 0. Курсор `geonames-ru` → `2026-11-01`. Новых id нет (DEC-GN-001).
 - Списки CSV мест — только `load_place_relpaths` / `load_index_relpaths`, без модульных `__getattr__`.
 - Daily: `scripts/daily.py` ведёт check → sync только changed → validate/index → журнал с `UpsertCounts` → stamp на no-op. `.github/workflows/daily.yml` — install, запуск драйвера, commit-if-diff.
 - Ручная приёмка высокочастотных склонений в `gold`: 15 городов-миллионников плюс Тольятти/Улан-Удэ (нескл.) и Ярославль, Саратов, Иркутск, Владивосток, Томск, Тюмень; творительный Воронежа — **Воронежем**. Аббревиатуры КС РФ, ВС РФ, АП, Совбез, Генпрокуратура, СК России, Банк России, ЦИК России, Счётная палата. Норма в `source` (`Розенталь; Грамота.ру`). Остаток городов/полных имён ФОИВ — `needs_review`. Фикстуры DECLENSIONS.md не переписывались.
@@ -161,6 +168,7 @@ Next-release A–L на `main`. Annotated tag `2026.09.12`.
 - Обновление Compose-ящика одной строкой: `git pull && docker compose up --build`.
 
 ### Changed
+- Daily 2026-11-02: GeoNames mods (2026-11-01) обновил координаты/даты у 3 уже существующих строк (гидронимы Уфа и Озеро Обалыколь, регион Оренбургская область) — upsert 3, deprecate 0. Курсор `geonames-ru` → `2026-11-01`. Новых id нет (DEC-GN-001).
 - `name_yo`: инвентаризация канона по Wikidata ru-label / P1448 / P1705 (CC0). Заполнены только имена, где ё в самом каноне: Орёл, Щёлково, Артём, Королёв, Киселёвск, Чёрное море; плюс норма ФОИВ (молодёжи, Счётная палата). Алиасы не копировались. `validate.py` сверяет `name_ru` = ё→е от `name_yo`.
 - Колонка `geonames` дозаполнена по Wikidata P1566 на существующих строках (города/гидро/оро/субъекты); неоднозначные Q-id пропущены. Insert `gn:{id}` по-прежнему запрещён (DEC-GN-001).
 - `cities-major.csv`: `lat`/`lon` из Wikidata P625 (CC0) и `oktmo` из P764 для всех 197 строк; `fias` пуст (нет CC0 GUID без дампа ГАР). Полигоны не добавлялись (DEC-GEO-001).
@@ -192,6 +200,7 @@ Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-S
 - Решение `DEC-SERVE-001`: stdlib HTTP, не Datasette/FastAPI и не посторонний стек.
 
 ### Changed
+- Daily 2026-11-02: GeoNames mods (2026-11-01) обновил координаты/даты у 3 уже существующих строк (гидронимы Уфа и Озеро Обалыколь, регион Оренбургская область) — upsert 3, deprecate 0. Курсор `geonames-ru` → `2026-11-01`. Новых id нет (DEC-GN-001).
 - Дизайн v1 описывает выпущенный контур (P0–P9, geonames Москва `524901` / Волга `472776`), а не «следующий цикл P6».
 
 ### Fixed
@@ -220,6 +229,7 @@ Loopback JSON-поиск и Docker Compose-ящик на `127.0.0.1:8099` (DEC-S
 - Пятиминутный старт в README.
 
 ### Changed
+- Daily 2026-11-02: GeoNames mods (2026-11-01) обновил координаты/даты у 3 уже существующих строк (гидронимы Уфа и Озеро Обалыколь, регион Оренбургская область) — upsert 3, deprecate 0. Курсор `geonames-ru` → `2026-11-01`. Новых id нет (DEC-GN-001).
 - Каталог источников: обязательные `vendor` и `detector.kind`.
 - В `types.csv` у `oikonym` восстановлены `example_ru=Москва` и класс GeoNames `P`.
 - GeoNames id: Москва `524901`, Волга `472776`.
