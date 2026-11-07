@@ -1,28 +1,30 @@
 {
-  "as_of": "2026-11-07T06:25:00Z",
+  "as_of": "2026-11-07T12:07:31Z",
   "changed_count": 0,
-  "error_count": 0,
+  "error_count": 2,
   "sources": [
     {
       "id": "gkgn-opendata",
       "changed": false,
-      "reason": "http_head pointer only (manual check)",
+      "reason": "http_head timeout/no reliable headers; pointer only",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": false
     },
     {
       "id": "fias-gar",
       "changed": false,
-      "reason": "http_head pointer only (manual check)",
+      "reason": "http_head timeout/no reliable headers; pointer only",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": false
     },
     {
       "id": "geonames-ru",
       "changed": false,
-      "reason": "0 RU rows in mods-2026-11-06",
+      "reason": "0 RU rows in mods",
       "cursor_old": "2026-11-03",
       "cursor_new": "2026-11-03",
       "error": false
@@ -30,7 +32,7 @@
     {
       "id": "ukase-326",
       "changed": false,
-      "reason": "page_fingerprint no structural change detected",
+      "reason": "тот же MediaWiki rev",
       "cursor_old": "141625080",
       "cursor_new": "141625080",
       "error": false
@@ -38,7 +40,7 @@
     {
       "id": "hflabs-region",
       "changed": false,
-      "reason": "нет коммитов since checked_at",
+      "reason": "нет коммитов since 2026-11-06",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -46,7 +48,7 @@
     {
       "id": "hflabs-city",
       "changed": false,
-      "reason": "нет коммитов since checked_at",
+      "reason": "нет коммитов since 2026-11-06",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -54,7 +56,7 @@
     {
       "id": "epogrebnyak-ru-cities",
       "changed": false,
-      "reason": "нет коммитов since checked_at",
+      "reason": "нет коммитов since 2026-11-06",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -62,7 +64,7 @@
     {
       "id": "mfursov-russian-cities",
       "changed": false,
-      "reason": "нет коммитов since checked_at",
+      "reason": "нет коммитов since 2026-11-06",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
@@ -70,7 +72,7 @@
     {
       "id": "nickyx3-settlements",
       "changed": false,
-      "reason": "нет коммитов since checked_at",
+      "reason": "нет коммитов since 2026-11-06",
       "cursor_old": "",
       "cursor_new": "",
       "error": false
