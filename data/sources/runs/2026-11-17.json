@@ -1,0 +1,98 @@
+{
+  "as_of": "2026-11-17T06:12:40Z",
+  "changed_count": 0,
+  "error_count": 7,
+  "sources": [
+    {
+      "id": "gkgn-opendata",
+      "changed": false,
+      "reason": "http_head timeout/no reliable headers; pointer only",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": true,
+      "blocking": false
+    },
+    {
+      "id": "fias-gar",
+      "changed": false,
+      "reason": "http_head timeout/no reliable headers; pointer only",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": true,
+      "blocking": false
+    },
+    {
+      "id": "geonames-ru",
+      "changed": false,
+      "reason": "0 RU rows in mods",
+      "cursor_old": "2026-11-12",
+      "cursor_new": "2026-11-12",
+      "error": false
+    },
+    {
+      "id": "ukase-326",
+      "changed": false,
+      "reason": "тот же MediaWiki rev",
+      "cursor_old": "141625080",
+      "cursor_new": "141625080",
+      "error": false
+    },
+    {
+      "id": "hflabs-region",
+      "changed": false,
+      "reason": "github_commits HTTP 403",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": true,
+      "blocking": true
+    },
+    {
+      "id": "hflabs-city",
+      "changed": false,
+      "reason": "github_commits HTTP 403",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": true,
+      "blocking": true
+    },
+    {
+      "id": "epogrebnyak-ru-cities",
+      "changed": false,
+      "reason": "github_commits HTTP 403",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": true,
+      "blocking": true
+    },
+    {
+      "id": "mfursov-russian-cities",
+      "changed": false,
+      "reason": "github_commits HTTP 403",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": true,
+      "blocking": true
+    },
+    {
+      "id": "nickyx3-settlements",
+      "changed": false,
+      "reason": "github_commits HTTP 403",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": true,
+      "blocking": true
+    },
+    {
+      "id": "wikidata",
+      "changed": false,
+      "reason": "kind=none",
+      "cursor_old": "",
+      "cursor_new": "",
+      "error": false
+    }
+  ],
+  "records_upserted": 0,
+  "records_deprecated": 0,
+  "commit": null,
+  "check_exit": 2
+}
