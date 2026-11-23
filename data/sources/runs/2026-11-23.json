@@ -1,7 +1,7 @@
 {
-  "as_of": "2026-11-23T06:30:00Z",
-  "changed_count": 0,
-  "error_count": 2,
+  "as_of": "2026-11-23T16:52:42Z",
+  "changed_count": 1,
+  "error_count": 7,
   "sources": [
     {
       "id": "gkgn-opendata",
@@ -23,10 +23,10 @@
     },
     {
       "id": "geonames-ru",
-      "changed": false,
-      "reason": "0 RU rows in mods",
+      "changed": true,
+      "reason": "5 RU rows in mods",
       "cursor_old": "2026-11-19",
-      "cursor_new": "2026-11-19",
+      "cursor_new": "2026-11-22",
       "error": false
     },
     {
@@ -40,42 +40,47 @@
     {
       "id": "hflabs-region",
       "changed": false,
-      "reason": "нет коммитов since 2026-11-22",
+      "reason": "github_commits HTTP 403",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": true
     },
     {
       "id": "hflabs-city",
       "changed": false,
-      "reason": "нет коммитов since 2026-11-22",
+      "reason": "github_commits HTTP 403",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": true
     },
     {
       "id": "epogrebnyak-ru-cities",
       "changed": false,
-      "reason": "нет коммитов since 2026-11-22",
+      "reason": "github_commits HTTP 403",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": true
     },
     {
       "id": "mfursov-russian-cities",
       "changed": false,
-      "reason": "нет коммитов since 2026-11-22",
+      "reason": "github_commits HTTP 403",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": true
     },
     {
       "id": "nickyx3-settlements",
       "changed": false,
-      "reason": "нет коммитов since 2026-11-22",
+      "reason": "github_commits HTTP 403",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": true
     },
     {
       "id": "wikidata",
@@ -89,5 +94,5 @@
   "records_upserted": 0,
   "records_deprecated": 0,
   "commit": null,
-  "check_exit": 0
+  "check_exit": 2
 }
