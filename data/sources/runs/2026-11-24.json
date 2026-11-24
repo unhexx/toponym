@@ -1,7 +1,7 @@
 {
-  "as_of": "2026-11-24T06:16:53Z",
+  "as_of": "2026-11-24T16:43:25Z",
   "changed_count": 0,
-  "error_count": 2,
+  "error_count": 7,
   "sources": [
     {
       "id": "gkgn-opendata",
@@ -40,42 +40,47 @@
     {
       "id": "hflabs-region",
       "changed": false,
-      "reason": "нет коммитов since 2026-11-23",
+      "reason": "github_commits HTTP 403",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": true
     },
     {
       "id": "hflabs-city",
       "changed": false,
-      "reason": "нет коммитов since 2026-11-23",
+      "reason": "github_commits HTTP 403",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": true
     },
     {
       "id": "epogrebnyak-ru-cities",
       "changed": false,
-      "reason": "нет коммитов since 2026-11-23",
+      "reason": "github_commits HTTP 403",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": true
     },
     {
       "id": "mfursov-russian-cities",
       "changed": false,
-      "reason": "нет коммитов since 2026-11-23",
+      "reason": "github_commits HTTP 403",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": true
     },
     {
       "id": "nickyx3-settlements",
       "changed": false,
-      "reason": "нет коммитов since 2026-11-23",
+      "reason": "github_commits HTTP 403",
       "cursor_old": "",
       "cursor_new": "",
-      "error": false
+      "error": true,
+      "blocking": true
     },
     {
       "id": "wikidata",
@@ -89,5 +94,5 @@
   "records_upserted": 0,
   "records_deprecated": 0,
   "commit": null,
-  "check_exit": 0
+  "check_exit": 2
 }
