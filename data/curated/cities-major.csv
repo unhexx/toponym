@@ -50,7 +50,7 @@ wd:Q5206,wikidata,city,Ставрополь,,Stavropol,,iso:RU-STA,RU-STA,45.050
 wd:Q95449,wikidata,city,Магнитогорск,,Magnitogorsk,,iso:RU-CHE,RU-CHE,53.383333,59.033333,Q95449,532288,,75738000001,,active,,wikidata,,2026-09-11,
 wd:Q2288,wikidata,city,Тверь,,Tver,,iso:RU-TVE,RU-TVE,56.857828,35.921928,Q2288,480060,,28701000001,,active,,wikidata,,2026-09-11,
 wd:Q2630,wikidata,city,Иваново,,Ivanovo,,iso:RU-IVA,RU-IVA,57.000000,41.000000,Q2630,555312,,24701000001,,active,,wikidata,,2026-09-11,
-wd:Q2801,wikidata,city,Брянск,,Bryansk,,iso:RU-BRY,RU-BRY,53.242500,34.366667,Q2801,571476,,15701000001,,active,,wikidata,,2026-09-11,
+wd:Q2801,wikidata,city,Брянск,,Bryansk,,iso:RU-BRY,RU-BRY,53.27096,34.32143,Q2801,571476,,15701000001,,active,,wikidata,2026-11-24,2026-11-25,coords from geonames-ru
 wd:Q3323,wikidata,city,Белгород,,Belgorod,,iso:RU-BEL,RU-BEL,50.600000,36.600000,Q3323,578072,,14701000001,,active,,wikidata,,2026-09-11,
 wd:Q183002,wikidata,city,Сургут,,Surgut,,iso:RU-KHM,RU-KHM,61.250000,73.433333,Q183002,1490624,,71876000001,,active,,wikidata,,2026-09-11,
 wd:Q2684,wikidata,city,Владимир,,Vladimir,,iso:RU-VLA,RU-VLA,56.128611,40.405833,Q2684,473247,,17701000001,,active,,wikidata,,2026-09-11,
@@ -60,7 +60,7 @@ wd:Q1851,wikidata,city,Архангельск,,Arkhangelsk,,iso:RU-ARK,RU-ARK,64
 wd:Q2837,wikidata,city,Калуга,,Kaluga,,iso:RU-KLU,RU-KLU,54.533333,36.266667,Q2837,553915,,29701000001,,active,,wikidata,,2026-09-11,
 wd:Q2337,wikidata,city,Смоленск,,Smolensk,,iso:RU-SMO,RU-SMO,54.782778,32.045278,Q2337,491687,,66701000001,,active,,wikidata,,2026-09-11,
 wd:Q98995,wikidata,city,Волжский,,Volzhsky,,iso:RU-VGG,RU-VGG,48.783333,44.766667,Q98995,472231,,18710000001,,active,,wikidata,,2026-09-11,
-wd:Q13379,wikidata,city,Курган,,Kurgan,,iso:RU-KGN,RU-KGN,55.440833,65.341111,Q13379,1501321,,37701000001,,active,,wikidata,,2026-09-11,
+wd:Q13379,wikidata,city,Курган,,Kurgan,,iso:RU-KGN,RU-KGN,55.44905,65.34344,Q13379,1501321,,37701000001,,active,,wikidata,2026-11-24,2026-11-25,coords from geonames-ru
 wd:Q2144,wikidata,city,Череповец,,Cherepovets,,iso:RU-VLG,RU-VLG,59.133333,37.916667,Q2144,569223,,19730000001,,active,,wikidata,,2026-09-11,
 wd:Q5239,wikidata,city,Владикавказ,,Vladikavkaz,,iso:RU-SE,RU-SE,43.040000,44.677500,Q5239,473249,,90701000001,,active,,wikidata,,2026-09-11,
 wd:Q5196,wikidata,city,Грозный,,Grozny,,iso:RU-CE,RU-CE,43.312500,45.698611,Q5196,558418,,96701000001,,active,,wikidata,,2026-09-11,
